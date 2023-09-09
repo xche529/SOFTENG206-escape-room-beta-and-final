@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="756.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="119.0" layoutY="42.0" prefHeight="88.0" prefWidth="362.0" />
+      <Label layoutX="291.0" layoutY="102.0" prefHeight="50.0" prefWidth="212.0" text="You Won!!" textAlignment="CENTER">
+         <font>
+            <Font size="46.0" />
+         </font>
+      </Label>
+      <Label layoutX="309.0" layoutY="268.0" text="You escaped!! Good Job!" />
+   </children>
+</Pane>

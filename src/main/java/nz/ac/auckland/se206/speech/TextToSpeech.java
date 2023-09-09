@@ -1,5 +1,6 @@
 package nz.ac.auckland.se206.speech;
 
+import javafx.concurrent.Task;
 import javax.speech.AudioException;
 import javax.speech.Central;
 import javax.speech.EngineException;
@@ -78,17 +79,29 @@ public class TextToSpeech {
    * @param sentence A string to speak.
    */
   public void speak(final String sentence) {
-    if (sentence == null) {
-      throw new IllegalArgumentException("Text cannot be null.");
-    }
 
-    try {
-      synthesizer.resume();
-      synthesizer.speakPlainText(sentence, null);
-      synthesizer.waitEngineState(Synthesizer.QUEUE_EMPTY);
-    } catch (final AudioException | InterruptedException e) {
-      throw new TextToSpeechException(e.getMessage());
-    }
+    Task<Void> speakTask =
+        new Task<Void>() {
+          @Override
+          protected Void call() throws Exception {
+            if (sentence == null) {
+              throw new IllegalArgumentException("Text cannot be null.");
+            }
+
+            try {
+              synthesizer.resume();
+              synthesizer.speakPlainText(sentence, null);
+              synthesizer.waitEngineState(Synthesizer.QUEUE_EMPTY);
+            } catch (final AudioException | InterruptedException e) {
+              throw new TextToSpeechException(e.getMessage());
+            }
+            return null;
+          }
+        };
+
+    Thread speakThread = new Thread(speakTask);
+    speakThread.setDaemon(true);
+    speakThread.start();
   }
 
   /** Sleeps a while to add some pause between sentences. */
