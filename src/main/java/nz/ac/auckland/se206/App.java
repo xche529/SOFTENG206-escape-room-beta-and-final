@@ -46,7 +46,7 @@ public class App extends Application {
   public void start(final Stage stage) throws IOException {
     Parent root = loadFxml("room");
 
-    SceneManager.addUi(AppUi.ENDWON, loadFxml("endScreenWon"));
+    SceneManager.addUi(AppUi.END_WON, loadFxml("endScreenWon"));
     SceneManager.addUi(AppUi.END_LOST, App.loadFxml("endScreenLost"));
     SceneManager.addUi(AppUi.ROOM, App.loadFxml("room"));
     SceneManager.addUi(AppUi.OFFICE, App.loadFxml("officeScene"));

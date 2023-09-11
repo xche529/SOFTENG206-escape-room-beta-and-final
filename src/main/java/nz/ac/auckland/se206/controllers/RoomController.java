@@ -275,7 +275,7 @@ public class RoomController {
     if (digitOneInt == 0 && digitTwoInt == 1 && digitThreeInt == 9 && digitFourInt == 2) {
       Scene scene = openButton.getScene();
       GameState.isWon = true;
-      scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.ENDWON));
+      scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.END_WON));
     } else {
       showDialog("Wrong combination", "Try again", "The padlock did not open.");
     }

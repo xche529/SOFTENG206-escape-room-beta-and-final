@@ -1,7 +1,10 @@
 package nz.ac.auckland.se206.controllers;
 
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.shape.Rectangle;
+import nz.ac.auckland.se206.SceneManager;
+import nz.ac.auckland.se206.SceneManager.AppUi;
 
 public class OfficeController {
 
@@ -37,49 +40,61 @@ public class OfficeController {
 
   @FXML
   private void deskDrawersMouseEntered() {
-    //TODO make enlarged drawer visable
+    // TODO make enlarged drawer visable
     System.out.println("deskDrawersEntered");
   }
 
   @FXML
   private void deskDrawersMouseExited() {
-    //TODO make enlarged drawer not visable
+    // TODO make enlarged drawer not visable
     System.out.println("deskDrawersExited");
   }
 
   @FXML
   private void binMouseEntered() {
-    //TODO make enlarged bin visable
+    // TODO make enlarged bin visable
     System.out.println("binEntered");
   }
 
   @FXML
   private void binMouseExited() {
-    //TODO make enlarged bin not visable
+    // TODO make enlarged bin not visable
     System.out.println("binExited");
   }
 
   @FXML
   private void blackBoardMouseEntered() {
-    //TODO make enlarged blackboard visable
+    // TODO make enlarged blackboard visable
     System.out.println("blackBoardEntered");
   }
 
   @FXML
   private void blackBoardMouseExited() {
-    //TODO make enlarged blackboard not visable
+    // TODO make enlarged blackboard not visable
     System.out.println("blackBoardExited");
   }
 
   @FXML
   private void phoneMouseEntered() {
-    //TODO make enlarged phone visable
+    // TODO make enlarged phone visable
     System.out.println("phoneEntered");
   }
 
   @FXML
   private void phoneMouseExited() {
-    //TODO make enlarged phone not visable
+    // TODO make enlarged phone not visable
     System.out.println("phoneExited");
+  }
+
+  @FXML
+  private void goToRoom() {
+    Scene scene = bin.getScene();
+    scene.setRoot(SceneManager.getUiRoot(AppUi.ROOM));
+  }
+
+  @FXML
+  private void goToCafeteria() {
+    Scene scene = bin.getScene();
+    scene.setRoot(SceneManager.getUiRoot(AppUi.CAFETERIA));
   }
 }
