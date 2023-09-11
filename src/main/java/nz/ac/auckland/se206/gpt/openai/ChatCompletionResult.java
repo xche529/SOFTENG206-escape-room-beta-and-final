@@ -34,6 +34,8 @@ public class ChatCompletionResult {
      * @return the chat message
      */
     public ChatMessage getChatMessage() {
+      System.out.println(getUsagePromptTokens());
+      System.out.println(getUsageCompletionTokens());
       return message;
     }
 
