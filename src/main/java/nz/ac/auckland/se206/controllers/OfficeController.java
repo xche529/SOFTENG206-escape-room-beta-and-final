@@ -2,6 +2,7 @@ package nz.ac.auckland.se206.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
@@ -19,22 +20,22 @@ public class OfficeController {
   }
 
   @FXML
-  private void deskDrawersClicked() {
+  private void clickDeskDrawers(MouseEvent event) {
     System.out.println("deskDrawersClicked");
   }
 
   @FXML
-  private void binClicked() {
+  private void clickBin(MouseEvent event) {
     System.out.println("binClicked");
   }
 
   @FXML
-  private void blackBoardClicked() {
+  private void clickBlackboard(MouseEvent event) {
     System.out.println("blackBoardClicked");
   }
 
   @FXML
-  private void phoneClicked() {
+  private void clickPhone(MouseEvent event) {
     System.out.println("phoneClicked");
   }
 
