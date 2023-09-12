@@ -6,7 +6,7 @@
 <?import javafx.scene.shape.Rectangle?>
 
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="403.0" prefWidth="742.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="403.0" prefWidth="742.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.cafeteriaController">
    <children>
       <ImageView fitHeight="409.0" fitWidth="742.0" layoutX="-67.0" layoutY="3.0" pickOnBounds="true">
          <image>
