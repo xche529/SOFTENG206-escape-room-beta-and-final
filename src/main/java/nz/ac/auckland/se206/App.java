@@ -50,6 +50,7 @@ public class App extends Application {
     SceneManager.addUi(AppUi.END_LOST, App.loadFxml("endScreenLost"));
     SceneManager.addUi(AppUi.ROOM, App.loadFxml("room"));
     SceneManager.addUi(AppUi.OFFICE, App.loadFxml("officeScene"));
+    SceneManager.addUi(AppUi.CAFETERIA, App.loadFxml("cafeteria"));
 
     scene = new Scene(SceneManager.getUiRoot(AppUi.ROOM), 756, 468);
     stage.setScene(scene);

@@ -1,6 +1,7 @@
 package nz.ac.auckland.se206.controllers;
 
 import javafx.fxml.FXML;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
@@ -25,7 +26,7 @@ public class cafeteriaController {
    * @throws ApiProxyException
    */
   @FXML
-  private void clickVendingMachine() {
+  private void onClickVendingMachine(MouseEvent event) {
     // TODO: add code to handle click on vending machine
   }
 
@@ -35,7 +36,7 @@ public class cafeteriaController {
    * @throws ApiProxyException
    */
   @FXML
-  private void clickPictureWithSafe() {
+  private void onClickPaintingWithSafe(MouseEvent event) {
     // TODO: add code to handle click on picture with safe
   }
 
@@ -45,7 +46,7 @@ public class cafeteriaController {
    * @throws ApiProxyException
    */
   @FXML
-  private void clickPictureWithoutSafe() {
+  private void onClickPaintingWithoutSafe(MouseEvent event) {
     // TODO: add code to handle click on picture without safe
   }
 
@@ -60,22 +61,22 @@ public class cafeteriaController {
   }
 
   @FXML
-  private void pictureWithSafeMouseEntered() {
+  private void paintingWithSafeMouseEntered() {
     // TODO
   }
 
   @FXML
-  private void pictureWithSafeMouseExited() {
+  private void paintingWithSafeMouseExited() {
     // TODO
   }
 
   @FXML
-  private void pictureWithoutSafeMouseEntered() {
+  private void paintingWithoutSafeMouseEntered() {
     // TODO
   }
 
   @FXML
-  private void pictureWithoutSafeMouseExited() {
+  private void paintingWithoutSafeMouseExited() {
     // TODO
   }
 }
