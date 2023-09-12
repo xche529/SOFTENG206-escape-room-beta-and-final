@@ -7,7 +7,9 @@ public class SceneManager {
 
   public enum AppUi {
     ROOM,
-    ENDWON,
+    OFFICE,
+    CAFETERIA,
+    END_WON,
     END_LOST
   }
 
