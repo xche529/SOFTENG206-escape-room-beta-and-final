@@ -1,8 +1,11 @@
 package nz.ac.auckland.se206.controllers;
 
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
+import nz.ac.auckland.se206.SceneManager;
+import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class cafeteriaController {
@@ -78,5 +81,17 @@ public class cafeteriaController {
   @FXML
   private void paintingWithoutSafeMouseExited() {
     // TODO
+  }
+
+    @FXML
+  private void goToOffice() {
+    Scene scene = vendingMachine.getScene();
+    scene.setRoot(SceneManager.getUiRoot(AppUi.OFFICE));
+  }
+
+    @FXML
+  private void goToRoom() {
+    Scene scene = vendingMachine.getScene();
+    scene.setRoot(SceneManager.getUiRoot(AppUi.ROOM));
   }
 }
