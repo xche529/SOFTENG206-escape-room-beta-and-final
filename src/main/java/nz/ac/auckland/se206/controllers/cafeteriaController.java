@@ -6,12 +6,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
-import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class cafeteriaController {
 
-  @FXML private Rectangle pictureWithSafe;
-  @FXML private Rectangle pictureWithoutSafe;
+  @FXML private Rectangle paintingWithSafe;
+  @FXML private Rectangle paintingWithoutSafe;
   @FXML private Rectangle vendingMachine;
 
   /**
@@ -19,8 +18,10 @@ public class cafeteriaController {
    *
    * @throws ApiProxyException
    */
+  @FXML
   private void initialize() {
     // TODO: set visability of all required items
+    System.out.println("cafeteriaController initialized");
   }
 
   /**
@@ -83,15 +84,15 @@ public class cafeteriaController {
     // TODO
   }
 
-    @FXML
+  @FXML
   private void goToOffice() {
-    Scene scene = vendingMachine.getScene();
+    Scene scene = paintingWithSafe.getScene();
     scene.setRoot(SceneManager.getUiRoot(AppUi.OFFICE));
   }
 
-    @FXML
+  @FXML
   private void goToRoom() {
-    Scene scene = vendingMachine.getScene();
+    Scene scene = paintingWithSafe.getScene();
     scene.setRoot(SceneManager.getUiRoot(AppUi.ROOM));
   }
 }
