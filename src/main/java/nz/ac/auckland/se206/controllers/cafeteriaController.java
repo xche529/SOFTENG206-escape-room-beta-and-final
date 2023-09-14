@@ -7,7 +7,7 @@ import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 
-public class cafeteriaController {
+public class CafeteriaController {
 
   @FXML private Rectangle paintingWithSafe;
   @FXML private Rectangle paintingWithoutSafe;
