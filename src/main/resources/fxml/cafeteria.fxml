@@ -5,16 +5,25 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="403.0" prefWidth="742.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.cafeteriaController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="403.0" prefWidth="742.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.CafeteriaController">
    <children>
       <ImageView fitHeight="409.0" fitWidth="742.0" layoutY="-3.0" pickOnBounds="true">
          <image>
             <Image url="@../images/cafeteria.jpg" />
          </image>
       </ImageView>
-      <Rectangle id="paintingWithSafe" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="107.0" layoutX="371.0" layoutY="95.0" onMouseClicked="#onClickPaintingWithSafe" onMouseEntered="#paintingWithSafeMouseEntered" onMouseExited="#paintingWithSafeMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="74.0" />
-      <Rectangle id="paintingWithoutSafe" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="107.0" layoutX="649.0" layoutY="99.0" onMouseClicked="#onClickPaintingWithoutSafe" onMouseEntered="#paintingWithoutSafeMouseEntered" onMouseExited="#paintingWithoutSafeMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="82.0" />
-      <Rectangle id="vendingMachine" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="159.0" layoutX="266.0" layoutY="206.0" onMouseClicked="#onClickVendingMachine" onMouseEntered="#vendingMachineMouseEntered" onMouseExited="#vendingMachineMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="82.0" />
+      <Rectangle id="paintingWithSafe" fx:id="paintingWithSafe" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="107.0" layoutX="371.0" layoutY="95.0" onMouseClicked="#onClickPaintingWithSafe" onMouseEntered="#paintingWithSafeMouseEntered" onMouseExited="#paintingWithSafeMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="74.0" />
+      <Rectangle id="paintingWithoutSafe" fx:id="paintingWithoutSafe" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="107.0" layoutX="649.0" layoutY="99.0" onMouseClicked="#onClickPaintingWithoutSafe" onMouseEntered="#paintingWithoutSafeMouseEntered" onMouseExited="#paintingWithoutSafeMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="82.0" />
+      <Rectangle id="vendingMachine" fx:id="vendingMachine" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="159.0" layoutX="266.0" layoutY="206.0" onMouseClicked="#onClickVendingMachine" onMouseEntered="#vendingMachineMouseEntered" onMouseExited="#vendingMachineMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="82.0" />
+      <ImageView fitHeight="50.0" fitWidth="100.0" layoutX="653.0" layoutY="166.0" onMouseClicked="#goToOffice" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/redArrow.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="50.0" fitWidth="100.0" layoutY="166.0" onMouseClicked="#goToRoom" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+         <image>
+            <Image url="@../images/redArrow.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>

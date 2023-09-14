@@ -754,4 +754,16 @@ public class RoomController {
   private void onGoBack(ActionEvent event) throws ApiProxyException, IOException {
     chatPane.setVisible(false);
   }
+
+  @FXML
+  private void goToCafeteria() {
+    Scene scene = mirror.getScene();
+    scene.setRoot(SceneManager.getUiRoot(AppUi.CAFETERIA));
+  }
+
+  @FXML
+  private void goToOffice() {
+    Scene scene = mirror.getScene();
+    scene.setRoot(SceneManager.getUiRoot(AppUi.OFFICE));
+  }
 }

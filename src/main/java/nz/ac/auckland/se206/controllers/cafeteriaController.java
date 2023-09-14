@@ -1,14 +1,16 @@
 package nz.ac.auckland.se206.controllers;
 
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
-import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
+import nz.ac.auckland.se206.SceneManager;
+import nz.ac.auckland.se206.SceneManager.AppUi;
 
-public class cafeteriaController {
+public class CafeteriaController {
 
-  @FXML private Rectangle pictureWithSafe;
-  @FXML private Rectangle pictureWithoutSafe;
+  @FXML private Rectangle paintingWithSafe;
+  @FXML private Rectangle paintingWithoutSafe;
   @FXML private Rectangle vendingMachine;
 
   /**
@@ -16,8 +18,10 @@ public class cafeteriaController {
    *
    * @throws ApiProxyException
    */
+  @FXML
   private void initialize() {
     // TODO: set visability of all required items
+    System.out.println("cafeteriaController initialized");
   }
 
   /**
@@ -78,5 +82,17 @@ public class cafeteriaController {
   @FXML
   private void paintingWithoutSafeMouseExited() {
     // TODO
+  }
+
+  @FXML
+  private void goToOffice() {
+    Scene scene = paintingWithSafe.getScene();
+    scene.setRoot(SceneManager.getUiRoot(AppUi.OFFICE));
+  }
+
+  @FXML
+  private void goToRoom() {
+    Scene scene = paintingWithSafe.getScene();
+    scene.setRoot(SceneManager.getUiRoot(AppUi.ROOM));
   }
 }

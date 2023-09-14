@@ -309,5 +309,15 @@
             <Image url="@../images/newArrow.png" />
          </image>
       </ImageView>
+      <ImageView fitHeight="50.0" fitWidth="100.0" layoutX="653.0" layoutY="166.0" onMouseClicked="#goToCafeteria" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/redArrow.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="50.0" fitWidth="100.0" layoutY="166.0" onMouseClicked="#goToOffice" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+         <image>
+            <Image url="@../images/redArrow.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>
