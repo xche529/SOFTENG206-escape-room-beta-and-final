@@ -2,6 +2,7 @@ package nz.ac.auckland.se206.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.SceneManager;
@@ -12,6 +13,10 @@ public class CafeteriaController {
   @FXML private Rectangle paintingWithSafe;
   @FXML private Rectangle paintingWithoutSafe;
   @FXML private Rectangle vendingMachine;
+  @FXML private ImageView paintingWithSafeBig;
+  @FXML private ImageView paintingWithoutSafeBig;
+  @FXML private ImageView paintingWithSafeRotated;
+  @FXML private ImageView safe;
 
   /**
    * Initializes the cafeteria view, it is called when the room loads.
@@ -41,7 +46,8 @@ public class CafeteriaController {
    */
   @FXML
   private void onClickPaintingWithSafe(MouseEvent event) {
-    // TODO: add code to handle click on picture with safe
+    paintingWithSafeRotated.setVisible(true);
+    safe.setVisible(true);
   }
 
   /**
@@ -66,22 +72,22 @@ public class CafeteriaController {
 
   @FXML
   private void paintingWithSafeMouseEntered() {
-    // TODO
+    paintingWithSafeBig.setVisible(true);
   }
 
   @FXML
   private void paintingWithSafeMouseExited() {
-    // TODO
+    paintingWithSafeBig.setVisible(false);
   }
 
   @FXML
   private void paintingWithoutSafeMouseEntered() {
-    // TODO
+    paintingWithoutSafeBig.setVisible(true);
   }
 
   @FXML
   private void paintingWithoutSafeMouseExited() {
-    // TODO
+    paintingWithoutSafeBig.setVisible(false);
   }
 
   @FXML
