@@ -32,9 +32,14 @@
             <Image url="@../images/Pic2.png" />
          </image>
       </ImageView>
+      <ImageView fx:id="vendingMachineBig" fitHeight="169.0" fitWidth="103.0" layoutX="272.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/Vending.png" />
+         </image>
+      </ImageView>
       <Rectangle id="paintingWithSafe" fx:id="paintingWithSafe" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="97.0" layoutX="371.0" layoutY="99.0" onMouseClicked="#onClickPaintingWithSafe" onMouseEntered="#paintingWithSafeMouseEntered" onMouseExited="#paintingWithSafeMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="74.0" />
       <Rectangle id="paintingWithoutSafe" fx:id="paintingWithoutSafe" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="97.0" layoutX="649.0" layoutY="99.0" onMouseClicked="#onClickPaintingWithoutSafe" onMouseEntered="#paintingWithoutSafeMouseEntered" onMouseExited="#paintingWithoutSafeMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="82.0" />
-      <Rectangle id="vendingMachine" fx:id="vendingMachine" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="159.0" layoutX="266.0" layoutY="206.0" onMouseClicked="#onClickVendingMachine" onMouseEntered="#vendingMachineMouseEntered" onMouseExited="#vendingMachineMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="82.0" />
+      <Rectangle id="vendingMachine" fx:id="vendingMachine" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="160.0" layoutX="271.0" layoutY="205.0" onMouseClicked="#onClickVendingMachine" onMouseEntered="#vendingMachineMouseEntered" onMouseExited="#vendingMachineMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="98.0" />
       <ImageView fx:id="paintingWithSafeRotated" fitHeight="100.0" fitWidth="65.0" layoutX="377.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true" rotate="167.5" visible="false">
          <image>
             <Image url="@../images/Pic%201.png" />

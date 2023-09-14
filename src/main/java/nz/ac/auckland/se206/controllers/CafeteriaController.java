@@ -17,6 +17,7 @@ public class CafeteriaController {
   @FXML private ImageView paintingWithoutSafeBig;
   @FXML private ImageView paintingWithSafeRotated;
   @FXML private ImageView safe;
+  @FXML private ImageView vendingMachineBig;
 
   /**
    * Initializes the cafeteria view, it is called when the room loads.
@@ -62,12 +63,12 @@ public class CafeteriaController {
 
   @FXML
   private void vendingMachineMouseEntered() {
-    // TODO
+    vendingMachineBig.setVisible(true);
   }
 
   @FXML
   private void vendingMachineMouseExited() {
-    // TODO
+    vendingMachineBig.setVisible(false);
   }
 
   @FXML
