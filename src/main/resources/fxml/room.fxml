@@ -81,7 +81,7 @@
                   <Image url="@../images/Tap.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="sinkBig" fitHeight="132.0" fitWidth="129.0" layoutX="935.0" layoutY="315.0" visible="false">
+            <ImageView fx:id="sinkBig" fitHeight="125.0" fitWidth="121.0" layoutX="943.0" layoutY="322.0" visible="false">
                <image>
                   <Image url="@../images/Sink.png" />
                </image>
