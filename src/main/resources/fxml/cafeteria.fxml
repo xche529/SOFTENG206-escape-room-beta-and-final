@@ -12,12 +12,12 @@
             <Image url="@../images/cafeteria.jpg" />
          </image>
       </ImageView>
-      <ImageView fitHeight="50.0" fitWidth="100.0" layoutX="605.0" layoutY="202.0" onMouseClicked="#goToOffice" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="50.0" fitWidth="100.0" layoutX="544.0" layoutY="60.0" onMouseClicked="#goToOffice" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/redArrow.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="50.0" fitWidth="100.0" layoutY="166.0" onMouseClicked="#goToRoom" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+      <ImageView fitHeight="50.0" fitWidth="100.0" layoutX="8.0" layoutY="72.0" onMouseClicked="#goToRoom" pickOnBounds="true" preserveRatio="true" rotate="180.0">
          <image>
             <Image url="@../images/redArrow.png" />
          </image>

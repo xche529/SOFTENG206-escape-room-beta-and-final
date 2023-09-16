@@ -2,6 +2,7 @@ package nz.ac.auckland.se206.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.SceneManager;
@@ -13,6 +14,10 @@ public class OfficeController {
   @FXML private Rectangle bin;
   @FXML private Rectangle blackBoard;
   @FXML private Rectangle phone;
+  @FXML private ImageView binBig;
+  @FXML private ImageView blackBoardBig;
+  @FXML private ImageView phoneBig;
+  @FXML private ImageView deskDrawersBig;
 
   @FXML
   private void initialize() {
@@ -41,50 +46,42 @@ public class OfficeController {
 
   @FXML
   private void deskDrawersMouseEntered() {
-    // TODO make enlarged drawer visable
-    System.out.println("deskDrawersEntered");
+    deskDrawersBig.setVisible(true);
   }
 
   @FXML
   private void deskDrawersMouseExited() {
-    // TODO make enlarged drawer not visable
-    System.out.println("deskDrawersExited");
+    deskDrawersBig.setVisible(false);
   }
 
   @FXML
   private void binMouseEntered() {
-    // TODO make enlarged bin visable
-    System.out.println("binEntered");
+    binBig.setVisible(true);
   }
 
   @FXML
   private void binMouseExited() {
-    // TODO make enlarged bin not visable
-    System.out.println("binExited");
+    binBig.setVisible(false);
   }
 
   @FXML
   private void blackBoardMouseEntered() {
-    // TODO make enlarged blackboard visable
-    System.out.println("blackBoardEntered");
+    blackBoardBig.setVisible(true);
   }
 
   @FXML
   private void blackBoardMouseExited() {
-    // TODO make enlarged blackboard not visable
-    System.out.println("blackBoardExited");
+    blackBoardBig.setVisible(false);
   }
 
   @FXML
   private void phoneMouseEntered() {
-    // TODO make enlarged phone visable
-    System.out.println("phoneEntered");
+    phoneBig.setVisible(true);
   }
 
   @FXML
   private void phoneMouseExited() {
-    // TODO make enlarged phone not visable
-    System.out.println("phoneExited");
+    phoneBig.setVisible(false);
   }
 
   @FXML
