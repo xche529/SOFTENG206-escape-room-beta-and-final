@@ -153,7 +153,7 @@ public class RoomController {
                     textToSpeech.speak("thirty seconds remaining");
                   }
                 }));
-    timeline.setCycleCount(120);
+    timeline.setCycleCount(GameState.totalSeconds);
     timeline.setOnFinished(event -> handleTimerExpired());
     updateTimerLabel();
   }
@@ -755,7 +755,7 @@ public class RoomController {
     chatPane.setVisible(false);
   }
 
-  @FXML
+   @FXML
   private void goToCafeteria() {
     Scene scene = mirror.getScene();
     scene.setRoot(SceneManager.getUiRoot(AppUi.CAFETERIA));
