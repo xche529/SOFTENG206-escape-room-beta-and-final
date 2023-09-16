@@ -50,9 +50,9 @@ public class App extends Application {
     SceneManager.addUi(AppUi.END_LOST, App.loadFxml("endScreenLost"));
     SceneManager.addUi(AppUi.OFFICE, App.loadFxml("officeScene"));
     SceneManager.addUi(AppUi.CAFETERIA, App.loadFxml("cafeteria"));
-    SceneManager.addUi(AppUi.StartInterface, App.loadFxml("StartInterface"));
+    SceneManager.addUi(AppUi.START_INTERFACE, App.loadFxml("StartInterface"));
 
-    scene = new Scene(SceneManager.getUiRoot(AppUi.StartInterface), 756, 468);
+    scene = new Scene(SceneManager.getUiRoot(AppUi.START_INTERFACE), 742, 403);
     stage.setScene(scene);
     stage.show();
     root.requestFocus();

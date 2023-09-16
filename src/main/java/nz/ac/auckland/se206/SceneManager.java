@@ -11,7 +11,7 @@ public class SceneManager {
     CAFETERIA,
     END_WON,
     END_LOST,
-    StartInterface
+    START_INTERFACE
   }
 
   private static HashMap<AppUi, Parent> sceneMap = new HashMap<AppUi, Parent>();
