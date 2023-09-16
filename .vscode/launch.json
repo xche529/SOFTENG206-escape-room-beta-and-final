@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CreatePlayHistoryScript",
+            "request": "launch",
+            "mainClass": "nz.ac.auckland.se206.CreatePlayHistoryScript",
+            "projectName": "escaipe-room-beta-and-final"
+        },
+        {
+            "type": "java",
             "name": "App",
             "request": "launch",
             "mainClass": "nz.ac.auckland.se206.App",

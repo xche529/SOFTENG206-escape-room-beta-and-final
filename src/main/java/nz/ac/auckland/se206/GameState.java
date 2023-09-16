@@ -7,12 +7,22 @@ import javafx.scene.shape.Rectangle;
 /** Represents the state of the game. */
 public class GameState {
 
+  public static enum Difficulty {
+    EASY,
+    MEDIUM,
+    HARD
+  }
+
+  public static Difficulty difficulty = Difficulty.EASY;
+
   /** Indicates whether the riddle has been resolved. */
   private static final BooleanProperty isRiddleResolvedProperty = new SimpleBooleanProperty(false);
 
   public static boolean isWon = false;
 
   public static int secondsRemaining = 1000;
+
+  public static int totalSeconds = 120;
 
   public static Rectangle itemToChoose;
 

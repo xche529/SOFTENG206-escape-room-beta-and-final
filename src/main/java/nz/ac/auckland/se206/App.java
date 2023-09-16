@@ -47,11 +47,12 @@ public class App extends Application {
 
     SceneManager.addUi(AppUi.END_WON, loadFxml("endScreenWon"));
     SceneManager.addUi(AppUi.END_LOST, App.loadFxml("endScreenLost"));
-    SceneManager.addUi(AppUi.ROOM, App.loadFxml("room"));
     SceneManager.addUi(AppUi.OFFICE, App.loadFxml("officeScene"));
     SceneManager.addUi(AppUi.CAFETERIA, App.loadFxml("cafeteria"));
+    SceneManager.addUi(AppUi.START_INTERFACE, App.loadFxml("StartInterface"));
 
-    scene = new Scene(SceneManager.getUiRoot(AppUi.ROOM), 1113, 605);
+    scene = new Scene(SceneManager.getUiRoot(AppUi.START_INTERFACE), 1113, 605);
+  
     stage.setScene(scene);
     stage.show();
     SceneManager.getUiRoot(AppUi.ROOM).requestFocus();
