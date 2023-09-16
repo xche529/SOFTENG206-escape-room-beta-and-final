@@ -44,7 +44,6 @@ public class App extends Application {
    */
   @Override
   public void start(final Stage stage) throws IOException {
-    Parent root = loadFxml("room");
 
     SceneManager.addUi(AppUi.END_WON, loadFxml("endScreenWon"));
     SceneManager.addUi(AppUi.END_LOST, App.loadFxml("endScreenLost"));
@@ -55,6 +54,6 @@ public class App extends Application {
     scene = new Scene(SceneManager.getUiRoot(AppUi.ROOM), 742, 403);
     stage.setScene(scene);
     stage.show();
-    root.requestFocus();
+    SceneManager.getUiRoot(AppUi.ROOM).requestFocus();
   }
 }

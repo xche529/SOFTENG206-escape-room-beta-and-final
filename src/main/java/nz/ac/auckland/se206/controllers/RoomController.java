@@ -103,6 +103,8 @@ public class RoomController {
    */
   public void initialize() throws ApiProxyException {
 
+    System.out.println("Initialise!!!");
+
     // Getting random item to be used in the riddle
     Rectangle[] items = new Rectangle[] {vent, toiletPaper, toilet, mirror, towel, sink};
     Random randomChoose = new Random();
