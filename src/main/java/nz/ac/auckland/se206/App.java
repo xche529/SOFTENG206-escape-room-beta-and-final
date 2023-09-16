@@ -63,13 +63,16 @@ public class App extends Application {
       "tree", "lake", "walk", "blue", "pink",
       "dark", "rich", "cool", "warm", "wine",
       "fast", "slow", "love", "hate", "high",
-      "low", "open", "close", "rich", "poor"
+      "rope", "open", "close", "rich", "poor"
     };
 
     Random random = new Random();
     int randomIndex = random.nextInt(fourLetterWords.length);
 
-    GameState.codeWord = getCode(fourLetterWords[randomIndex]);
+    GameState.code = getCode(fourLetterWords[randomIndex]);
+
+    System.out.println(GameState.code);
+    System.out.println(fourLetterWords[randomIndex]);
 
     scene = new Scene(SceneManager.getUiRoot(AppUi.ROOM), 742, 403);
     stage.setScene(scene);
@@ -77,10 +80,22 @@ public class App extends Application {
     root.requestFocus();
   }
 
-  private int getCode(String string) {
-    for (int i = 1; i < 4; i++) {
-      if ("aku".contains(String.valueOf(string.charAt(i))))
-        ;
+  private String getCode(String string) {
+    String code = "";
+    String converterValues[] = {"jt", "aku", "bvl", "cmw", "dnx", "eoy", "fpz", "gq", "hr", "is"};
+    int digits[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+    for (int i = 0; i < 4; i++) {
+      char currentChar = string.charAt(i);
+      for (int j = 0; j < 9; j++) {
+        if (converterValues[j].contains(String.valueOf(currentChar))) {
+          code = code + digits[j];
+          break;
+        }
+      }
+      System.out.println(code);
     }
+
+    return code;
   }
 }
