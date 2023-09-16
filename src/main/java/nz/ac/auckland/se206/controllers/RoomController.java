@@ -23,6 +23,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
@@ -103,8 +104,6 @@ public class RoomController {
    */
   public void initialize() throws ApiProxyException {
 
-    System.out.println("Initialise!!!");
-
     // Getting random item to be used in the riddle
     Rectangle[] items = new Rectangle[] {vent, toiletPaper, toilet, mirror, towel, sink};
     Random randomChoose = new Random();
@@ -151,13 +150,16 @@ public class RoomController {
               }
             });
     timeline.play();
-    // Stage stage = (Stage) room.getScene().getWindow();
-    // stage.setOnCloseRequest(
-    //     event -> {
-    //       timeline.stop();
-    //       textToSpeech.terminate();
-    //       Platform.exit();
-    //     });
+    Platform.runLater(
+        () -> {
+          Stage stage = (Stage) room.getScene().getWindow();
+          stage.setOnCloseRequest(
+              event -> {
+                timeline.stop();
+                textToSpeech.terminate();
+                Platform.exit();
+              });
+        });
   }
 
   public void animateAllArrows() {
