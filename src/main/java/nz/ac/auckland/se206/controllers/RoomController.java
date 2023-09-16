@@ -23,7 +23,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
@@ -43,36 +42,24 @@ public class RoomController {
   @FXML private Rectangle vent;
   @FXML private Rectangle toiletPaper;
   @FXML private Rectangle toilet;
-  @FXML private Rectangle posters;
   @FXML private Rectangle sink;
-  @FXML private Rectangle bedsideTable;
   @FXML private Rectangle tap;
   @FXML private Rectangle mirror;
-  @FXML private Rectangle picture;
   @FXML private Rectangle towel;
-  @FXML private Rectangle window;
   @FXML private ImageView toiletBig;
   @FXML private ImageView toiletPaperBig;
   @FXML private ImageView doorBig;
   @FXML private ImageView ventBig;
-  @FXML private ImageView postersBig;
-  @FXML private ImageView bedsideTableBig;
   @FXML private ImageView sinkBig;
   @FXML private ImageView mirrorBig;
   @FXML private ImageView towelBig;
   @FXML private ImageView toiletArrow;
-  @FXML private ImageView postersArrow;
   @FXML private ImageView toiletPaperArrow;
   @FXML private ImageView ventArrow;
-  @FXML private ImageView bedsideTableArrow;
   @FXML private ImageView sinkArrow;
   @FXML private ImageView mirrorArrow;
   @FXML private ImageView towelArrow;
-  @FXML private ImageView windowArrow;
   @FXML private ImageView doorArrow;
-  @FXML private ImageView pictureArrow;
-  @FXML private ImageView windowBig;
-  @FXML private ImageView pictureBig;
   @FXML private Label timerLabel;
   @FXML private Pane converterPane;
   @FXML private Button exitViewButton;
@@ -106,7 +93,6 @@ public class RoomController {
   @FXML private Label questionInfoLabel;
 
   private Timeline timeline;
-  private Rectangle itemCode;
   private ChatCompletionRequest chatCompletionRequest;
   private TextToSpeech textToSpeech;
 
@@ -118,12 +104,6 @@ public class RoomController {
   public void initialize() throws ApiProxyException {
 
     // Getting random item to be used in the riddle
-    Rectangle[] itemsForWord = new Rectangle[] {bedsideTable, window, picture};
-    Random random = new Random();
-    int randomIndex = random.nextInt(itemsForWord.length);
-    this.itemCode = itemsForWord[randomIndex];
-
-    // Getting a random item to hide the chart behind
     Rectangle[] items = new Rectangle[] {vent, toiletPaper, toilet, mirror, towel, sink};
     Random randomChoose = new Random();
     int randomIndexChoose = randomChoose.nextInt(items.length);
@@ -156,19 +136,35 @@ public class RoomController {
     timeline.setCycleCount(120);
     timeline.setOnFinished(event -> handleTimerExpired());
     updateTimerLabel();
+
+    textToSpeech = new TextToSpeech();
+    textToSpeech.speak("Welcome to the room");
+    animateArrows(doorArrow);
+    GameState.isRiddleResolvedProperty()
+        .addListener(
+            (observable, oldValue, newValue) -> {
+              if (newValue) {
+                animateAllArrows();
+                guardSpeechPane.setVisible(true);
+              }
+            });
+    timeline.play();
+    // Stage stage = (Stage) room.getScene().getWindow();
+    // stage.setOnCloseRequest(
+    //     event -> {
+    //       timeline.stop();
+    //       textToSpeech.terminate();
+    //       Platform.exit();
+    //     });
   }
 
   public void animateAllArrows() {
     animateArrows(toiletArrow);
-    animateArrows(postersArrow);
     animateArrows(toiletPaperArrow);
     animateArrows(ventArrow);
-    animateArrows(bedsideTableArrow);
     animateArrows(sinkArrow);
     animateArrows(mirrorArrow);
     animateArrows(towelArrow);
-    animateArrows(windowArrow);
-    animateArrows(pictureArrow);
     animateArrows(doorArrowSmall);
     animateArrows(textBubbleArrow);
   }
@@ -184,30 +180,6 @@ public class RoomController {
     translateTransition.setAutoReverse(true);
     translateTransition.setCycleCount(Animation.INDEFINITE);
     translateTransition.play();
-  }
-
-  @FXML
-  private void onClickStartGame() {
-    textToSpeech = new TextToSpeech();
-    textToSpeech.speak("Welcome to the room");
-    animateArrows(doorArrow);
-    GameState.isRiddleResolvedProperty()
-        .addListener(
-            (observable, oldValue, newValue) -> {
-              if (newValue) {
-                animateAllArrows();
-                guardSpeechPane.setVisible(true);
-              }
-            });
-    timeline.play();
-    startPane.setVisible(false);
-    Stage stage = (Stage) startPane.getScene().getWindow();
-    stage.setOnCloseRequest(
-        event -> {
-          timeline.stop();
-          textToSpeech.terminate();
-          Platform.exit();
-        });
   }
 
   @FXML
@@ -386,30 +358,6 @@ public class RoomController {
   }
 
   @FXML
-  public void postersMouseEntered() {
-    if (GameState.isRiddleResolved()) {
-      postersBig.setOpacity(1);
-    }
-  }
-
-  @FXML
-  public void postersMouseExit() {
-    postersBig.setOpacity(0);
-  }
-
-  @FXML
-  public void bedsideTableMouseEntered() {
-    if (GameState.isRiddleResolved()) {
-      bedsideTableBig.setOpacity(1);
-    }
-  }
-
-  @FXML
-  public void bedsideTableMouseExit() {
-    bedsideTableBig.setOpacity(0);
-  }
-
-  @FXML
   public void sinkMouseEntered() {
     if (GameState.isRiddleResolved()) {
       sinkBig.setOpacity(1);
@@ -443,30 +391,6 @@ public class RoomController {
   @FXML
   public void towelMouseExit() {
     towelBig.setOpacity(0);
-  }
-
-  @FXML
-  public void windowMouseEntered() {
-    if (GameState.isRiddleResolved()) {
-      windowBig.setOpacity(1);
-    }
-  }
-
-  @FXML
-  public void windowMouseExit() {
-    windowBig.setOpacity(0);
-  }
-
-  @FXML
-  public void pictureMouseEntered() {
-    if (GameState.isRiddleResolved()) {
-      pictureBig.setOpacity(1);
-    }
-  }
-
-  @FXML
-  public void pictureMouseExit() {
-    pictureBig.setOpacity(0);
   }
 
   @FXML
@@ -587,55 +511,6 @@ public class RoomController {
             "You notice that scribbled on one side of the towel is the word " + "JAIL");
       } else {
         showDialog("Nothing!", "Towel", "Just a normal towel");
-      }
-    }
-  }
-
-  @FXML
-  public void clickBedsideTable(MouseEvent event) {
-    bedsideTableArrow.setOpacity(0);
-    if (GameState.isRiddleResolved()) {
-      if (itemCode == bedsideTable) {
-        converterPane.setVisible(true);
-
-      } else {
-        showDialog("Nothing!", "Bedside Table", "Nothing inside...");
-      }
-    }
-  }
-
-  @FXML
-  public void clickWindow(MouseEvent event) {
-    windowArrow.setOpacity(0);
-    if (GameState.isRiddleResolved()) {
-      if (itemCode == window) {
-        converterPane.setVisible(true);
-      } else {
-        showDialog("Nothing!", "Window", "Just a normal window");
-      }
-    }
-  }
-
-  @FXML
-  public void clickPicture(MouseEvent event) {
-    pictureArrow.setOpacity(0);
-    if (GameState.isRiddleResolved()) {
-      if (itemCode == picture) {
-        converterPane.setVisible(true);
-      } else {
-        showDialog("Nothing!", "Picture", "Just a normal picture");
-      }
-    }
-  }
-
-  @FXML
-  public void clickPosters(MouseEvent event) {
-    postersArrow.setOpacity(0);
-    if (GameState.isRiddleResolved()) {
-      if (itemCode == posters) {
-        converterPane.setVisible(true);
-      } else {
-        showDialog("Nothing!", "Posters", "Just some posters");
       }
     }
   }
