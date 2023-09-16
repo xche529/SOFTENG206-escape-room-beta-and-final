@@ -755,7 +755,7 @@ public class RoomController {
     chatPane.setVisible(false);
   }
 
-  @FXML
+   @FXML
   private void goToCafeteria() {
     Scene scene = mirror.getScene();
     scene.setRoot(SceneManager.getUiRoot(AppUi.CAFETERIA));

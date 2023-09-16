@@ -51,8 +51,9 @@ public class App extends Application {
     SceneManager.addUi(AppUi.ROOM, App.loadFxml("room"));
     SceneManager.addUi(AppUi.OFFICE, App.loadFxml("officeScene"));
     SceneManager.addUi(AppUi.CAFETERIA, App.loadFxml("cafeteria"));
+    SceneManager.addUi(AppUi.StartInterface, App.loadFxml("StartInterface"));
 
-    scene = new Scene(SceneManager.getUiRoot(AppUi.ROOM), 756, 468);
+    scene = new Scene(SceneManager.getUiRoot(AppUi.StartInterface), 756, 468);
     stage.setScene(scene);
     stage.show();
     root.requestFocus();
