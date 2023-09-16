@@ -41,7 +41,7 @@
                   <Image url="@../images/Door.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="doorArrow" fitHeight="125.0" fitWidth="89.0" layoutX="274.0" layoutY="24.0" visible="false">
+            <ImageView fx:id="doorArrow" fitHeight="125.0" fitWidth="89.0" layoutX="274.0" layoutY="24.0">
                <image>
                   <Image url="@../images/newArrow.png" />
                </image>
