@@ -1,6 +1,7 @@
 package nz.ac.auckland.se206;
 
 import java.io.IOException;
+import java.util.Random;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -52,9 +53,34 @@ public class App extends Application {
     SceneManager.addUi(AppUi.OFFICE, App.loadFxml("officeScene"));
     SceneManager.addUi(AppUi.CAFETERIA, App.loadFxml("cafeteria"));
 
+    String[] fourLetterWords = {
+      "back", "test", "idea", "star", "fire",
+      "hope", "moon", "work", "luck", "book",
+      "time", "game", "play", "hand", "code",
+      "true", "false", "life", "good", "home",
+      "keep", "mind", "park", "road", "bear",
+      "food", "rain", "snow", "song", "view",
+      "tree", "lake", "walk", "blue", "pink",
+      "dark", "rich", "cool", "warm", "wine",
+      "fast", "slow", "love", "hate", "high",
+      "low", "open", "close", "rich", "poor"
+    };
+
+    Random random = new Random();
+    int randomIndex = random.nextInt(fourLetterWords.length);
+
+    GameState.codeWord = getCode(fourLetterWords[randomIndex]);
+
     scene = new Scene(SceneManager.getUiRoot(AppUi.ROOM), 742, 403);
     stage.setScene(scene);
     stage.show();
     root.requestFocus();
+  }
+
+  private int getCode(String string) {
+    for (int i = 1; i < 4; i++) {
+      if ("aku".contains(String.valueOf(string.charAt(i))))
+        ;
+    }
   }
 }
