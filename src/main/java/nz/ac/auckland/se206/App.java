@@ -52,9 +52,8 @@ public class App extends Application {
     SceneManager.addUi(AppUi.START_INTERFACE, App.loadFxml("StartInterface"));
 
     scene = new Scene(SceneManager.getUiRoot(AppUi.START_INTERFACE), 1113, 605);
-  
     stage.setScene(scene);
     stage.show();
-    SceneManager.getUiRoot(AppUi.ROOM).requestFocus();
+    SceneManager.getUiRoot(AppUi.START_INTERFACE).requestFocus();
   }
 }
