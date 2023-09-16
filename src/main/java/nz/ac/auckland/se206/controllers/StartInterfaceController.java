@@ -26,6 +26,10 @@ public class StartInterfaceController {
     System.out.println("StartInterfaceController initialized");
   }
 
+  /*
+   * This method is invoked when the user clicks the "Start" button. It starts the game.
+   * It loads the room scene with user selected difficulty and play time.
+   */
   @FXML
   private void onStartGame(Event event) throws IOException {
     Button button = (Button) event.getSource();
@@ -35,12 +39,18 @@ public class StartInterfaceController {
     System.out.println("Game started");
   }
 
+  /*
+   * This method is invoked when the user clicks the "Exit" button. It exits the application.
+   */
   @FXML
   private void onExitGame(Event event) {
     System.out.println("Goodbye!");
     System.exit(0);
   }
 
+  /*
+   * This method is invoked when the user clicks any of the difficulty checkboxes.
+   */
   @FXML
   private void onSwitchDifficulty(Event event) {
     CheckBox checkBox = (CheckBox) event.getSource();
@@ -67,6 +77,9 @@ public class StartInterfaceController {
     }
   }
 
+  /*
+   * This method is invoked when the user clicks any of the play time checkboxes.
+   */
   @FXML
   private void onSetPlayTime(Event event) {
     CheckBox checkBox = (CheckBox) event.getSource();
