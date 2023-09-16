@@ -22,6 +22,8 @@ public class GameState {
 
   public static int secondsRemaining = 120;
 
+  public static int totalSeconds = 120;
+
   public static Rectangle itemToChoose;
 
   public static int questionsAsked = 0;
