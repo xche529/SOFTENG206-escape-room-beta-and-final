@@ -1,11 +1,13 @@
 package nz.ac.auckland.se206.controllers;
 
+import java.io.IOException;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.MenuButton;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
@@ -25,9 +27,10 @@ public class StartInterfaceController {
   }
 
   @FXML
-  private void onStartGame(Event event) {
+  private void onStartGame(Event event) throws IOException {
     Button button = (Button) event.getSource();
     Scene sceneButtonIsIn = button.getScene();
+    SceneManager.addUi(AppUi.ROOM, App.loadFxml("room"));
     sceneButtonIsIn.setRoot(SceneManager.getUiRoot(AppUi.ROOM));
     System.out.println("Game started");
   }

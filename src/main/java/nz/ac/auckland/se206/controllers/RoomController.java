@@ -153,7 +153,7 @@ public class RoomController {
                     textToSpeech.speak("thirty seconds remaining");
                   }
                 }));
-    timeline.setCycleCount(120);
+    timeline.setCycleCount(GameState.totalSeconds);
     timeline.setOnFinished(event -> handleTimerExpired());
     updateTimerLabel();
   }
