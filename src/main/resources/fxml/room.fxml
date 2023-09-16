@@ -198,7 +198,7 @@
             </Button>
          </children>
       </Pane>
-      <Pane fx:id="padlockPane" layoutX="33.0" layoutY="30.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="360.0" prefWidth="684.0" style="-fx-background-color: white;" visible="false">
+      <Pane fx:id="padlockPane" layoutX="33.0" layoutY="30.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="360.0" prefWidth="684.0" style="-fx-background-color: white;">
          <children>
             <Label fx:id="digitOne" layoutX="175.0" layoutY="175.0" prefHeight="42.0" prefWidth="33.0" text="0">
          <font>
@@ -283,7 +283,7 @@
             <Label fx:id="questionInfoLabel" layoutX="119.0" layoutY="289.0" text="You only get two questions! Use them wisely" visible="false" />
          </children>
       </Pane>
-      <Pane fx:id="startPane" layoutX="78.0" layoutY="32.0" prefHeight="351.0" prefWidth="600.0" style="-fx-background-color: white;">
+      <Pane fx:id="startPane" layoutX="78.0" layoutY="32.0" prefHeight="351.0" prefWidth="600.0" style="-fx-background-color: white;" visible="false">
          <children>
             <Button fx:id="startButton" layoutX="229.0" layoutY="255.0" mnemonicParsing="false" onAction="#onClickStartGame" prefHeight="53.0" prefWidth="142.0" text="Start Game" />
             <Text layoutX="58.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to the escAIpe room. You have been locked in a jail cell by an evil sheriff! You have 2 minutes to escape!" wrappingWidth="499.8835896435521">
