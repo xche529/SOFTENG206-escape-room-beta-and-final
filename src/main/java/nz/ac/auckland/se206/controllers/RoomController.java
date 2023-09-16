@@ -76,7 +76,6 @@ public class RoomController {
   @FXML private Rectangle textBubble;
   @FXML private ImageView bubbleBig;
   @FXML private Pane guardSpeechPane;
-  @FXML private ImageView textBubbleArrow;
   @FXML private Label overQuestionLimitLabel;
   @FXML private Label questionInfoLabel;
 
@@ -157,7 +156,6 @@ public class RoomController {
     animateArrows(mirrorArrow);
     animateArrows(towelArrow);
     animateArrows(doorArrowSmall);
-    animateArrows(textBubbleArrow);
   }
 
   public void animateArrows(ImageView arrow) {
@@ -431,7 +429,6 @@ public class RoomController {
 
   @FXML
   private void onTextBubbleClicked() throws ApiProxyException {
-    textBubbleArrow.setOpacity(0);
     chatPane.setVisible(true);
     questionInfoLabel.setVisible(true);
     chatCompletionRequest =
