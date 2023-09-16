@@ -12,7 +12,7 @@ public class GameState {
 
   public static boolean isWon = false;
 
-  public static int secondsRemaining = 120;
+  public static int secondsRemaining = 1000;
 
   public static Rectangle itemToChoose;
 
