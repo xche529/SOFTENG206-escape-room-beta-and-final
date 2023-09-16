@@ -17,7 +17,7 @@
    <children>
       <Pane prefHeight="605.0" prefWidth="1113.0">
          <children>
-            <ImageView fitHeight="605.0" fitWidth="1113.0">
+            <ImageView fitHeight="605.0" fitWidth="1113.0" layoutY="1.0">
                <image>
                   <Image url="@../images/prison_room.jpg" />
                </image>
@@ -31,21 +31,17 @@
                   </Label>
                </children>
             </HBox>
-            <Rectangle fx:id="toilet" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="89.0" layoutX="14.0" layoutY="372.0" onMouseClicked="#clickToilet" onMouseEntered="#toiletMouseEntered" onMouseExited="#toiletMouseExit" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="82.0" />
             <ImageView id="toiletBig" fx:id="toiletBig" fitHeight="125.0" fitWidth="89.0" layoutX="13.0" layoutY="361.0" visible="false">
                <image>
                   <Image url="@../images/Basin.png" />
                </image>
             </ImageView>
-            <Rectangle fx:id="toiletPaper" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="66.0" layoutX="87.0" layoutY="293.0" onMouseClicked="#clickToiletPaper" onMouseEntered="#toiletPaperMouseEntered" onMouseExited="#toiletPaperMouseExit" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="43.0" />
-            <Rectangle fx:id="door" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="442.0" layoutX="208.0" layoutY="51.0" onMouseClicked="#clickDoor" onMouseEntered="#doorMouseEntered" onMouseExited="#doorMouseExit" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="225.0" />
-            <Rectangle fx:id="towel" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="66.0" layoutX="1068.0" layoutY="327.0" onMouseClicked="#clickTowel" onMouseEntered="#towelMouseEntered" onMouseExited="#towelMouseExit" opacity="0.0" scaleX="1.5" scaleY="1.5" stroke="BLACK" strokeType="INSIDE" width="26.0" />
             <ImageView fx:id="doorBig" fitHeight="466.0" fitWidth="261.0" layoutX="189.0" layoutY="28.0" visible="false">
                <image>
                   <Image url="@../images/Door.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="doorArrow" fitHeight="125.0" fitWidth="89.0" layoutX="274.0" layoutY="24.0">
+            <ImageView fx:id="doorArrow" fitHeight="125.0" fitWidth="89.0" layoutX="274.0" layoutY="24.0" visible="false">
                <image>
                   <Image url="@../images/newArrow.png" />
                </image>
@@ -70,7 +66,6 @@
                   <Image url="@../images/Vent.png" />
                </image>
             </ImageView>
-            <Rectangle id="vent" fx:id="vent" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="79.0" layoutX="13.0" layoutY="94.0" onMouseClicked="#clickVent" onMouseEntered="#ventMouseEntered" onMouseExited="#ventMouseExit" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="91.0" />
             <ImageView fitHeight="50.0" fitWidth="100.0" layoutX="1025.0" layoutY="185.0" onMouseClicked="#goToCafeteria" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/redArrow.png" />
@@ -81,19 +76,17 @@
                   <Image url="@../images/Sink.png" />
                </image>
             </ImageView>
-            <Rectangle fx:id="sink" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="66.0" layoutX="948.0" layoutY="324.0" onMouseClicked="#clickSink" onMouseEntered="#sinkMouseEntered" onMouseExited="#sinkMouseExit" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="103.0" />
-            <Rectangle fx:id="mirror" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="140.0" layoutX="959.0" layoutY="175.0" onMouseClicked="#clickMirror" onMouseEntered="#mirrorMouseEntered" onMouseExited="#mirrorMouseExit" stroke="BLACK" strokeType="INSIDE" visible="false" width="87.0" />
-            <ImageView fx:id="mirrorBig" fitHeight="140.0" fitWidth="91.0" layoutX="957.0" layoutY="173.0" opacity="0.42">
+            <ImageView fx:id="mirrorBig" fitHeight="140.0" fitWidth="91.0" layoutX="957.0" layoutY="173.0" visible="false">
                <image>
                   <Image url="@../images/mirror.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="66.0" fitWidth="59.0" layoutX="970.0" layoutY="277.0">
+            <ImageView fitHeight="58.0" fitWidth="50.0" layoutX="975.0" layoutY="281.0">
                <image>
                   <Image url="@../images/Tap.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="towelBig" fitHeight="118.0" fitWidth="63.0" layoutX="1047.0" layoutY="307.0" opacity="0.0">
+            <ImageView fx:id="towelBig" fitHeight="118.0" fitWidth="63.0" layoutX="1047.0" layoutY="307.0" visible="false">
                <image>
                   <Image url="@../images/Towel.png" />
                </image>
@@ -128,6 +121,13 @@
                   <Image url="@../images/newArrow.png" />
                </image>
             </ImageView>
+            <Rectangle fx:id="toiletPaper" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="66.0" layoutX="87.0" layoutY="293.0" onMouseClicked="#clickToiletPaper" onMouseEntered="#toiletPaperMouseEntered" onMouseExited="#toiletPaperMouseExit" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="43.0" />
+            <Rectangle fx:id="toilet" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="89.0" layoutX="17.0" layoutY="373.0" onMouseClicked="#clickToilet" onMouseEntered="#toiletMouseEntered" onMouseExited="#toiletMouseExit" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="82.0" />
+            <Rectangle fx:id="door" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="442.0" layoutX="208.0" layoutY="51.0" onMouseClicked="#clickDoor" onMouseEntered="#doorMouseEntered" onMouseExited="#doorMouseExit" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="225.0" />
+            <Rectangle fx:id="towel" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="66.0" layoutX="1068.0" layoutY="327.0" onMouseClicked="#clickTowel" onMouseEntered="#towelMouseEntered" onMouseExited="#towelMouseExit" opacity="0.0" scaleX="1.5" scaleY="1.5" stroke="BLACK" strokeType="INSIDE" width="26.0" />
+            <Rectangle id="vent" fx:id="vent" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="79.0" layoutX="13.0" layoutY="94.0" onMouseClicked="#clickVent" onMouseEntered="#ventMouseEntered" onMouseExited="#ventMouseExit" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="91.0" />
+            <Rectangle fx:id="sink" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="66.0" layoutX="948.0" layoutY="324.0" onMouseClicked="#clickSink" onMouseEntered="#sinkMouseEntered" onMouseExited="#sinkMouseExit" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="103.0" />
+            <Rectangle fx:id="mirror" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="140.0" layoutX="959.0" layoutY="175.0" onMouseClicked="#clickMirror" onMouseEntered="#mirrorMouseEntered" onMouseExited="#mirrorMouseExit" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="87.0" />
          </children>
       </Pane>
       <Pane fx:id="guardSpeechPane" layoutX="470.0" layoutY="50.0" prefHeight="79.0" prefWidth="89.0" scaleX="1.5" scaleY="1.5" visible="false">

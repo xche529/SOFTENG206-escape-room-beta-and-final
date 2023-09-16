@@ -318,93 +318,93 @@ public class RoomController {
   @FXML
   public void toiletMouseEntered() {
     if (GameState.isRiddleResolved()) {
-      toiletBig.setOpacity(1);
+      toiletBig.setVisible(true);
     }
   }
 
   @FXML
   public void toiletMouseExit() {
-    toiletBig.setOpacity(0);
+    toiletBig.setVisible(false);
   }
 
   @FXML
   public void toiletPaperMouseEntered() {
     if (GameState.isRiddleResolved()) {
-      toiletPaperBig.setOpacity(1);
+      toiletPaperBig.setVisible(true);
     }
   }
 
   @FXML
   public void toiletPaperMouseExit() {
-    toiletPaperBig.setOpacity(0);
+    toiletPaperBig.setVisible(false);
   }
 
   @FXML
   public void doorMouseEntered() {
-    doorBig.setOpacity(1);
+    doorBig.setVisible(true);
   }
 
   @FXML
   public void doorMouseExit() {
-    doorBig.setOpacity(0);
+    doorBig.setVisible(false);
   }
 
   @FXML
   public void ventMouseEntered() {
     if (GameState.isRiddleResolved()) {
-      ventBig.setOpacity(1);
+      ventBig.setVisible(true);
     }
   }
 
   @FXML
   public void ventMouseExit() {
-    ventBig.setOpacity(0);
+    ventBig.setVisible(false);
   }
 
   @FXML
   public void sinkMouseEntered() {
     if (GameState.isRiddleResolved()) {
-      sinkBig.setOpacity(1);
+      sinkBig.setVisible(true);
     }
   }
 
   @FXML
   public void sinkMouseExit() {
-    sinkBig.setOpacity(0);
+    sinkBig.setVisible(false);
   }
 
   @FXML
   public void mirrorMouseEntered() {
     if (GameState.isRiddleResolved()) {
-      mirrorBig.setOpacity(1);
+      mirrorBig.setVisible(true);
     }
   }
 
   @FXML
   public void mirrorMouseExit() {
-    mirrorBig.setOpacity(0);
+    mirrorBig.setVisible(false);
   }
 
   @FXML
   public void towelMouseEntered() {
     if (GameState.isRiddleResolved()) {
-      towelBig.setOpacity(1);
+      towelBig.setVisible(true);
     }
   }
 
   @FXML
   public void towelMouseExit() {
-    towelBig.setOpacity(0);
+    towelBig.setVisible(false);
   }
 
   @FXML
   public void textBubbleMouseEntered() {
-    bubbleBig.setOpacity(1);
+    bubbleBig.setVisible(true);
   }
 
   @FXML
   public void textBubbleMouseExit() {
-    bubbleBig.setOpacity(0);
+    bubbleBig.setVisible(false);
   }
 
   /**
