@@ -264,7 +264,7 @@ public class CafeteriaController {
 
   public  void resetAnimation() {
     for (ImageView item : animationItems) {
-      item.setX(500);
+      item.setTranslateX(500);
     }
   }
 }

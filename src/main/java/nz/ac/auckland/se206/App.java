@@ -8,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.controllers.CafeteriaController;
-import nz.ac.auckland.se206.controllers.EndWonController;
 import nz.ac.auckland.se206.controllers.OfficeController;
 import nz.ac.auckland.se206.controllers.StartInterfaceController;
 
@@ -62,7 +61,6 @@ public class App extends Application {
     SceneManager.addUi(AppUi.START_INTERFACE, StartInterfaceLoader.load());
 
     CafeteriaController cafeteriaController = cafeteriaLoader.getController();
-    EndWonController endWonController = endScreenWonLoader.getController();
     OfficeController officeController = officeSceneLoader.getController();
     StartInterfaceController startInterfaceController = StartInterfaceLoader.getController();
 

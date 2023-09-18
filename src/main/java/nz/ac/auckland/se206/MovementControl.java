@@ -1,5 +1,9 @@
 package nz.ac.auckland.se206;
 
+import java.util.ArrayList;
+
+import javafx.animation.ParallelTransition;
+import javafx.animation.TranslateTransition;
 import javafx.scene.image.ImageView;
 
 /**
@@ -35,26 +39,21 @@ public class MovementControl {
   }
 
   public static void moveToLeft(
-      boolean isToLeft, int timeToMove, int distanceToMove, ImageView[] imageViews) {
-    int timesToMove = timeToMove * 120;
-    int distanceToMovePerIteration = distanceToMove / timesToMove;
-    Thread timerThread =
-        new Thread(
-            () -> {
-              for (int i = 0; i < timesToMove; i++) {
-                try {
-                  Thread.sleep(25 / 3);
-                  for (int j = 0; j < imageViews.length; j++)
-                    if (isToLeft == true) {
-                      imageViews[j].setX(imageViews[j].getX() - distanceToMovePerIteration);
-                    } else {
-                      imageViews[j].setX(imageViews[j].getX() + distanceToMovePerIteration);
-                    }
-                } catch (InterruptedException e) {
-                  e.printStackTrace();
-                }
-              }
-            });
-    timerThread.start();
+      boolean isToLeft, double timeToMove, int distanceToMove, ImageView[] imageViews) {
+        ArrayList<TranslateTransition> transitionsArray = new ArrayList<TranslateTransition>();
+        for (ImageView imageView : imageViews) {
+            TranslateTransition transition = new TranslateTransition();
+            transition.setNode(imageView);
+            transition.setDuration(javafx.util.Duration.seconds(timeToMove));
+            if (isToLeft == true) {
+                transition.setByX(-distanceToMove);
+            } else {
+                transition.setByX(distanceToMove);
+            }
+            transitionsArray.add(transition);
+        }
+        ParallelTransition parallelTransition = new ParallelTransition();
+        parallelTransition.getChildren().addAll(transitionsArray);
+        parallelTransition.play();
   }
 }

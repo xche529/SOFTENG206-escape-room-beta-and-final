@@ -23,7 +23,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.GameState;
@@ -208,7 +207,7 @@ public class RoomController {
 
   public  void resetAnimation() {
     for (ImageView item : animationItems) {
-      item.setX(500);
+      item.setTranslateX(500);
     }
   }
 
