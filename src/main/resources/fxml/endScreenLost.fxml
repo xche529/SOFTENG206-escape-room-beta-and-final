@@ -26,7 +26,7 @@
                   <Font size="72.0" />
                </font>
             </Label>
-            <Button fx:id="restartButton" layoutX="228.0" layoutY="328.0" mnemonicParsing="false" onMouseClicked="#goToStart" prefHeight="79.0" prefWidth="260.0" text="Try Again">
+            <Button fx:id="restartButton" layoutX="228.0" layoutY="328.0" mnemonicParsing="false" onMouseClicked="#onTryAgain" prefHeight="79.0" prefWidth="260.0" text="Try Again">
                <font>
                   <Font size="34.0" />
                </font>
