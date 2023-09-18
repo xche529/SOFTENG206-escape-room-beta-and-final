@@ -49,9 +49,8 @@ public class App extends Application {
     SceneManager.addUi(AppUi.ENDWON, loadFxml("endScreenWon"));
     SceneManager.addUi(AppUi.END_LOST, App.loadFxml("endScreenLost"));
     SceneManager.addUi(AppUi.ROOM, App.loadFxml("room"));
-    SceneManager.addUi(AppUi.DEMO, App.loadFxml("MovementControlDemo"));
 
-    scene = new Scene(SceneManager.getUiRoot(AppUi.DEMO), 900, 400);
+    scene = new Scene(SceneManager.getUiRoot(AppUi.ROOM), 900, 400);
     stage.setScene(scene);
     stage.show();
     root.requestFocus();
