@@ -81,8 +81,6 @@ public class RoomController {
   @FXML private Button exitViewButton;
   @FXML private Button openButton;
   @FXML private Button sendButton;
-  @FXML private Text speechBubbleOneText;
-  @FXML private Text speechBubbleTwoText;
   @FXML private TextArea chatTextArea;
   @FXML private TextField inputText;
   @FXML private ProgressIndicator chatProgress;
@@ -463,6 +461,16 @@ public class RoomController {
         new ChatCompletionRequest().setN(1).setTemperature(1).setTopP(0.5).setMaxTokens(100);
     ChatMessage userChatMessage = new ChatMessage("user", GptPromptEngineering.getGuardSetUp());
     runGpt(userChatMessage, lastMsg -> {});
+  }
+
+  @FXML
+  private void onSpeechBubbleOneClicked(){
+    System.out.println("Speech bubble one clicked");
+  }
+
+  @FXML
+  private void onSpeechBubbleTwoClicked(){
+    System.out.println("Speech bubble two clicked");
   }
 
   /**

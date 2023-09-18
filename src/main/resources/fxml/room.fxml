@@ -133,12 +133,12 @@
                   <Image url="@../images/newArrow.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="speechBubbleTwo" fitHeight="150.0" fitWidth="89.0" layoutX="797.0" layoutY="254.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="speechBubbleTwo" fitHeight="150.0" fitWidth="89.0" layoutX="797.0" layoutY="254.0" onMouseClicked="#onSpeechBubbleTwoClicked" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/speechBubble.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="speechBubbleOne" fitHeight="72.0" fitWidth="95.0" layoutX="661.0" layoutY="246.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="speechBubbleOne" fitHeight="72.0" fitWidth="95.0" layoutX="661.0" layoutY="246.0" onMouseClicked="#onSpeechBubbleOneClicked" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/speechBubble.png" />
                </image>
