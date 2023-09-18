@@ -8,9 +8,9 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="403.0" prefWidth="742.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.CafeteriaController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="605.0" prefWidth="1113.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.CafeteriaController">
    <children>
-      <ImageView fitHeight="409.0" fitWidth="742.0" layoutY="-3.0" pickOnBounds="true">
+      <ImageView fitHeight="605.0" fitWidth="1113.0" pickOnBounds="true">
          <image>
             <Image url="@../images/cafeteria.jpg" />
          </image>
@@ -25,34 +25,29 @@
             <Image url="@../images/redArrow.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="paintingWithSafeBig" fitHeight="107.0" fitWidth="82.0" layoutX="368.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="paintingWithSafeBig" fitHeight="107.0" fitWidth="82.0" layoutX="568.0" layoutY="164.0" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.5" visible="false">
          <image>
             <Image url="@../images/Pic%201.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="paintingWithoutSafeBig" fitHeight="107.0" fitWidth="82.0" layoutX="649.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="paintingWithoutSafeBig" fitHeight="107.0" fitWidth="82.0" layoutX="997.0" layoutY="169.0" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.5" visible="false">
          <image>
             <Image url="@../images/Pic2.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="vendingMachineBig" fitHeight="169.0" fitWidth="103.0" layoutX="272.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="vendingMachineBig" fitHeight="169.0" fitWidth="103.0" layoutX="435.0" layoutY="335.0" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.5" visible="false">
          <image>
             <Image url="@../images/Vending.png" />
          </image>
       </ImageView>
-      <Rectangle id="paintingWithoutSafe" fx:id="paintingWithoutSafe" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="97.0" layoutX="649.0" layoutY="99.0" onMouseClicked="#onClickPaintingWithoutSafe" onMouseEntered="#paintingWithoutSafeMouseEntered" onMouseExited="#paintingWithoutSafeMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="82.0" />
-      <Rectangle id="vendingMachine" fx:id="vendingMachine" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="160.0" layoutX="271.0" layoutY="205.0" onMouseClicked="#onClickVendingMachine" onMouseEntered="#vendingMachineMouseEntered" onMouseExited="#vendingMachineMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="98.0" />
-      <ImageView fx:id="paintingWithSafeRotated" fitHeight="100.0" fitWidth="65.0" layoutX="377.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true" rotate="167.5" visible="false">
-         <image>
-            <Image url="@../images/Pic%201.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="safe" fitHeight="93.0" fitWidth="71.0" layoutX="374.0" layoutY="101.0" onMouseClicked="#onSafeClick" visible="false">
+      <Rectangle id="paintingWithoutSafe" fx:id="paintingWithoutSafe" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="92.0" layoutX="996.0" layoutY="177.0" onMouseClicked="#onClickPaintingWithoutSafe" onMouseEntered="#paintingWithoutSafeMouseEntered" onMouseExited="#paintingWithoutSafeMouseExited" opacity="0.0" scaleX="1.5" scaleY="1.5" stroke="BLACK" strokeType="INSIDE" width="72.0" />
+      <Rectangle id="vendingMachine" fx:id="vendingMachine" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="160.0" layoutX="433.0" layoutY="342.0" onMouseClicked="#onClickVendingMachine" onMouseEntered="#vendingMachineMouseEntered" onMouseExited="#vendingMachineMouseExited" opacity="0.0" scaleX="1.5" scaleY="1.5" stroke="BLACK" strokeType="INSIDE" width="98.0" />
+      <ImageView fx:id="safe" fitHeight="93.0" fitWidth="71.0" layoutX="576.0" layoutY="178.0" onMouseClicked="#onSafeClick" onMouseEntered="#safeMouseEntered" scaleX="1.5" scaleY="1.5" visible="false">
          <image>
             <Image url="@../images/Safe.png" />
          </image>
       </ImageView>
-      <Rectangle id="paintingWithSafe" fx:id="paintingWithSafe" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="97.0" layoutX="371.0" layoutY="99.0" onMouseClicked="#onClickPaintingWithSafe" onMouseEntered="#paintingWithSafeMouseEntered" onMouseExited="#paintingWithSafeMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="74.0" />
+      <Rectangle id="paintingWithSafe" fx:id="paintingWithSafe" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="97.0" layoutX="571.0" layoutY="170.0" onMouseClicked="#onClickPaintingWithSafe" onMouseEntered="#paintingWithSafeMouseEntered" onMouseExited="#paintingWithSafeMouseExited" opacity="0.0" scaleX="1.5" scaleY="1.5" stroke="BLACK" strokeType="INSIDE" width="74.0" />
       <Pane fx:id="padlockPane" layoutX="43.0" layoutY="40.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="360.0" prefWidth="684.0" style="-fx-background-color: white;" visible="false">
          <children>
             <Label fx:id="digitOne" layoutX="175.0" layoutY="175.0" prefHeight="42.0" prefWidth="33.0" text="0">
@@ -128,5 +123,10 @@
             </Button>
          </children>
       </Pane>
+      <ImageView fx:id="safeBig" fitHeight="105.0" fitWidth="80.0" layoutX="580.0" layoutY="175.0" onMouseClicked="#onSafeClick" onMouseExited="#safeMouseExited" scaleX="1.5" scaleY="1.5" visible="false">
+         <image>
+            <Image url="@../images/Safe.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>
