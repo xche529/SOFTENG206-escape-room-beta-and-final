@@ -33,7 +33,7 @@ public class Safe {
 
     for (int i = 0; i < 4; i++) {
       char currentChar = string.charAt(i);
-      for (int j = 0; j < 9; j++) {
+      for (int j = 0; j < 10; j++) {
         if (converterValues[j].contains(String.valueOf(currentChar))) {
           code = code + digits[j];
           break;

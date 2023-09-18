@@ -191,12 +191,16 @@ public class CafeteriaController {
     int digitTwoInt = Integer.parseInt(digitTwo.getText());
     int digitThreeInt = Integer.parseInt(digitThree.getText());
     int digitFourInt = Integer.parseInt(digitFour.getText());
-    if (digitOneInt == 0 && digitTwoInt == 1 && digitThreeInt == 9 && digitFourInt == 2) {
+    int code = digitOneInt * 1000 + digitTwoInt * 100 + digitThreeInt * 10 + digitFourInt;
+    if (code == Integer.parseInt(GameState.code)) {
       Scene scene = openButton.getScene();
       GameState.isWon = true;
       scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.END_WON));
     } else {
-      showDialog("Wrong combination", "Try again", "The padlock did not open.");
+      showDialog(
+          "Wrong combination",
+          "Try again",
+          "The padlock did not open. " + GameState.codeWord + " " + GameState.code + " " + code);
     }
   }
 
