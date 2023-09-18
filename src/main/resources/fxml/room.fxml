@@ -155,25 +155,6 @@
             <Rectangle fx:id="textBubble" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="59.0" layoutX="24.0" layoutY="-6.0" onMouseClicked="#onTextBubbleClicked" onMouseEntered="#textBubbleMouseEntered" onMouseExited="#textBubbleMouseExit" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
          </children>
       </Pane>
-      <Pane fx:id="converterPane" layoutX="92.0" layoutY="64.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="324.0" prefWidth="559.0" style="-fx-background-color: white;" visible="false">
-         <children>
-            <ImageView fitHeight="186.0" fitWidth="459.0" layoutX="49.0" layoutY="71.0">
-               <image>
-                  <Image url="@../images/number_converter.png" />
-               </image>
-            </ImageView>
-            <Label layoutX="55.0" layoutY="23.0" text="You found this interesting chart... What could it mean?">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-            <Button fx:id="exitViewButton" layoutX="205.0" layoutY="266.0" mnemonicParsing="false" onAction="#onClickExitConverterView" prefHeight="40.0" prefWidth="103.0" text="Exit view">
-               <font>
-                  <Font size="19.0" />
-               </font>
-            </Button>
-         </children>
-      </Pane>
       <Pane fx:id="chatPane" layoutX="42.0" layoutY="25.0" prefHeight="360.0" prefWidth="656.0" style="-fx-background-color: white;" visible="false">
          <children>
             <TextArea fx:id="chatTextArea" layoutX="35.0" layoutY="32.0" prefHeight="251.0" prefWidth="449.0" wrapText="true" />

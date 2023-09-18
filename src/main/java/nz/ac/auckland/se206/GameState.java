@@ -30,6 +30,8 @@ public class GameState {
 
   public static Rectangle itemToChoose;
 
+  public static Rectangle itemWithCypher;
+
   public static int questionsAsked = 0;
 
   public static boolean isRiddleResolved() {
