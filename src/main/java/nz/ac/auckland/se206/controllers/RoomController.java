@@ -220,11 +220,6 @@ public class RoomController {
   }
 
   @FXML
-  private void onClickExitConverterView() {
-    converterPane.setVisible(false);
-  }
-
-  @FXML
   public void toiletMouseEntered() {
     if (GameState.isRiddleResolved()) {
       toiletBig.setVisible(true);
