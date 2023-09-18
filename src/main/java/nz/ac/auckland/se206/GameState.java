@@ -20,6 +20,10 @@ public class GameState {
 
   public static boolean isWon = false;
 
+  public static String code;
+
+  public static String codeWord;
+
   public static int secondsRemaining = 1000;
 
   public static int totalSeconds = 120;
