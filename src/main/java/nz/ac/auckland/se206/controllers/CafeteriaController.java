@@ -21,8 +21,8 @@ public class CafeteriaController {
   @FXML private Rectangle vendingMachine;
   @FXML private ImageView paintingWithSafeBig;
   @FXML private ImageView paintingWithoutSafeBig;
-  @FXML private ImageView paintingWithSafeRotated;
   @FXML private ImageView safe;
+  @FXML private ImageView safeBig;
   @FXML private ImageView vendingMachineBig;
   @FXML private Pane padlockPane;
   @FXML private ImageView digitOnePlus;
@@ -47,7 +47,6 @@ public class CafeteriaController {
   @FXML
   private void initialize() {
     // TODO: set visability of all required items
-    System.out.println("cafeteriaController initialized");
   }
 
   /**
@@ -67,7 +66,6 @@ public class CafeteriaController {
    */
   @FXML
   private void onClickPaintingWithSafe(MouseEvent event) {
-    paintingWithSafeRotated.setVisible(true);
     safe.setVisible(true);
     paintingWithSafe.setVisible(false);
   }
@@ -85,6 +83,17 @@ public class CafeteriaController {
   @FXML
   private void onSafeClick(MouseEvent event) {
     padlockPane.setVisible(true);
+    safeBig.setVisible(false);
+  }
+
+  @FXML
+  private void safeMouseEntered() {
+    safeBig.setVisible(true);
+  }
+
+  @FXML
+  private void safeMouseExited() {
+    safeBig.setVisible(false);
   }
 
   @FXML
