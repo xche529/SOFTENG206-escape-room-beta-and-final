@@ -23,4 +23,8 @@ public class SceneManager {
   public static Parent getUiRoot(AppUi ui) {
     return sceneMap.get(ui);
   }
+
+public static Object getInstance() {
+    return null;
+}
 }
