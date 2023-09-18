@@ -1,5 +1,7 @@
 package nz.ac.auckland.se206.controllers;
 
+import java.util.Random;
+
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -7,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
+import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 
@@ -25,7 +28,11 @@ public class OfficeController {
 
   @FXML
   private void initialize() {
-    System.out.println("OfficeController initialized");
+     // Getting random item to be used to hide the cypher
+    Rectangle[] items = new Rectangle[] {bin, phone, blackBoard, deskDrawers,};
+    Random randomChoose = new Random();
+    int randomIndexChoose = randomChoose.nextInt(items.length);
+    GameState.itemWithCypher = items[randomIndexChoose];
   }
 
   @FXML
@@ -35,22 +42,38 @@ public class OfficeController {
 
   @FXML
   private void clickDeskDrawers(MouseEvent event) {
-    System.out.println("deskDrawersClicked");
+    if (GameState.itemWithCypher == deskDrawers) {
+      cypherPane.setVisible(true);
+    } else {
+      System.out.println("deskDrawersClicked");
+    }
   }
 
   @FXML
   private void clickBin(MouseEvent event) {
-    System.out.println("binClicked");
+    if (GameState.itemWithCypher == bin) {
+      cypherPane.setVisible(true);
+    } else {
+      System.out.println("binClicked");
+    }
   }
 
   @FXML
   private void clickBlackboard(MouseEvent event) {
-    System.out.println("blackBoardClicked");
+    if (GameState.itemWithCypher == blackBoard) {
+      cypherPane.setVisible(true);
+    } else {
+      System.out.println("blackBoardClicked");
+    }
   }
 
   @FXML
   private void clickPhone(MouseEvent event) {
-    System.out.println("phoneClicked");
+    if (GameState.itemWithCypher == phone) {
+      cypherPane.setVisible(true);
+    } else {
+      System.out.println("phoneClicked");
+    }
   }
 
   @FXML
