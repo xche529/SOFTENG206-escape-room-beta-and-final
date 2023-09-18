@@ -2,8 +2,10 @@ package nz.ac.auckland.se206.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
@@ -18,10 +20,17 @@ public class OfficeController {
   @FXML private ImageView blackBoardBig;
   @FXML private ImageView phoneBig;
   @FXML private ImageView deskDrawersBig;
+  @FXML private Button exitVeiwButton;
+  @FXML private Pane cypherPane;
 
   @FXML
   private void initialize() {
     System.out.println("OfficeController initialized");
+  }
+
+  @FXML
+  private void onClickExitConverterView() {
+    cypherPane.setVisible(false);
   }
 
   @FXML
