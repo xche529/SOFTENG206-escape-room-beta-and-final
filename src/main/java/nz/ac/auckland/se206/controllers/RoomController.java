@@ -23,6 +23,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.GameState;
@@ -35,10 +36,17 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 import nz.ac.auckland.se206.speech.TextToSpeech;
+import nz.ac.auckland.se206.controllers.CafeteriaController;
+import nz.ac.auckland.se206.controllers.OfficeController;
 
 /** Controller class for the room view. */
 public class RoomController {
   @FXML private Pane room;
+  @FXML private Pane converterPane;
+  @FXML private Pane chatPane;
+  @FXML private Pane startPane;
+  @FXML private Pane guardSpeechPane;
+  @FXML private Rectangle textBubble;
   @FXML private Rectangle door;
   @FXML private Rectangle vent;
   @FXML private Rectangle toiletPaper;
@@ -61,27 +69,30 @@ public class RoomController {
   @FXML private ImageView mirrorArrow;
   @FXML private ImageView towelArrow;
   @FXML private ImageView doorArrow;
-  @FXML private Label timerLabel;
-  @FXML private Pane converterPane;
-  @FXML private Button exitViewButton;
-  @FXML private Button openButton;
-  @FXML private TextArea chatTextArea;
-  @FXML private TextField inputText;
-  @FXML private Button sendButton;
-  @FXML private Pane chatPane;
-  @FXML private Pane startPane;
   @FXML private ImageView doorArrowSmall;
-  @FXML private ProgressIndicator chatProgress;
-  @FXML private Label chatProgressLabel;
-  @FXML private Rectangle textBubble;
   @FXML private ImageView bubbleBig;
-  @FXML private Pane guardSpeechPane;
+  @FXML private ImageView prisonerOne;
+  @FXML private ImageView prisonerTwo;
+  @FXML private ImageView speechBubbleOne;
+  @FXML private ImageView speechBubbleTwo;
+  @FXML private Label timerLabel;
+  @FXML private Label chatProgressLabel;
   @FXML private Label overQuestionLimitLabel;
   @FXML private Label questionInfoLabel;
+  @FXML private Button exitViewButton;
+  @FXML private Button openButton;
+  @FXML private Button sendButton;
+  @FXML private Text speechBubbleOneText;
+  @FXML private Text speechBubbleTwoText;
+  @FXML private TextArea chatTextArea;
+  @FXML private TextField inputText;
+  @FXML private ProgressIndicator chatProgress;
 
   private Timeline timeline;
   private ChatCompletionRequest chatCompletionRequest;
   private TextToSpeech textToSpeech;
+  private OfficeController officeController = null;
+  private CafeteriaController cafeteriaController = null;
 
   /**
    * Initializes the room view, it is called when the room loads.
@@ -182,6 +193,14 @@ public class RoomController {
       Scene scene = door.getScene();
       scene.setRoot(SceneManager.getUiRoot(AppUi.END_LOST));
     }
+  }
+
+  public void setOfficeController(OfficeController officeController) {
+    this.officeController = officeController;
+  }
+
+  public void setCafeteriaController(CafeteriaController cafeteriaController) {
+    this.cafeteriaController = cafeteriaController;
   }
 
   /**

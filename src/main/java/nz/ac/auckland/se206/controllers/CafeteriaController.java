@@ -38,6 +38,16 @@ public class CafeteriaController {
   @FXML private Label digitThree;
   @FXML private Label digitFour;
   @FXML private Button openButton;
+  private OfficeController officeController;
+  private RoomController roomController;
+
+  public void setOfficeController(OfficeController officeController) {
+    this.officeController = officeController;
+  }
+
+  public void setRoomController(RoomController roomController) {
+    this.roomController = roomController;
+  }
 
   /**
    * Initializes the cafeteria view, it is called when the room loads.

@@ -23,6 +23,16 @@ public class OfficeController {
   @FXML private ImageView blackBoardBig;
   @FXML private ImageView phoneBig;
   @FXML private ImageView deskDrawersBig;
+  private CafeteriaController cafeteriaController;
+  private RoomController roomController;
+
+  public void setCafeteriaController(CafeteriaController cafeteriaController) {
+    this.cafeteriaController = cafeteriaController;
+  }
+
+  public void setRoomController(RoomController roomController) {
+    this.roomController = roomController;
+  }
   @FXML private Button exitVeiwButton;
   @FXML private Pane cypherPane;
 

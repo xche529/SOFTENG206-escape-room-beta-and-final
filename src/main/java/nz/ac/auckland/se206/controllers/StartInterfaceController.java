@@ -3,6 +3,7 @@ package nz.ac.auckland.se206.controllers;
 import java.io.IOException;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -34,7 +35,9 @@ public class StartInterfaceController {
   private void onStartGame(Event event) throws IOException {
     Button button = (Button) event.getSource();
     Scene sceneButtonIsIn = button.getScene();
-    SceneManager.addUi(AppUi.ROOM, App.loadFxml("room"));
+    FXMLLoader roomLoader = App.loadFxml("room");
+    SceneManager.addUi(AppUi.ROOM, roomLoader.load());
+    RoomController roomController = roomLoader.getController();
     sceneButtonIsIn.setRoot(SceneManager.getUiRoot(AppUi.ROOM));
     System.out.println("Game started");
   }
