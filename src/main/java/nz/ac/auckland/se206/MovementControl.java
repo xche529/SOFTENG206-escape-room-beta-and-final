@@ -36,14 +36,14 @@ public class MovementControl {
 
   public static void moveToLeft(
       boolean isToLeft, int timeToMove, int distanceToMove, ImageView[] imageViews) {
-    int timesToMove = timeToMove * 60;
+    int timesToMove = timeToMove * 120;
     int distanceToMovePerIteration = distanceToMove / timesToMove;
     Thread timerThread =
         new Thread(
             () -> {
               for (int i = 0; i < timesToMove; i++) {
                 try {
-                  Thread.sleep(50 / 3);
+                  Thread.sleep(25 / 3);
                   for (int j = 0; j < imageViews.length; j++)
                     if (isToLeft == true) {
                       imageViews[j].setX(imageViews[j].getX() - distanceToMovePerIteration);

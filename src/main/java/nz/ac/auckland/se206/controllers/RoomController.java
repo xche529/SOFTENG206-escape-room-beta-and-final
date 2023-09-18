@@ -27,6 +27,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.MovementControl;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.ChatMessage;
@@ -36,8 +37,6 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 import nz.ac.auckland.se206.speech.TextToSpeech;
-import nz.ac.auckland.se206.controllers.CafeteriaController;
-import nz.ac.auckland.se206.controllers.OfficeController;
 
 /** Controller class for the room view. */
 public class RoomController {
@@ -93,6 +92,7 @@ public class RoomController {
   private TextToSpeech textToSpeech;
   private OfficeController officeController = null;
   private CafeteriaController cafeteriaController = null;
+  private ImageView[] animationItems = null;
 
   /**
    * Initializes the room view, it is called when the room loads.
@@ -100,9 +100,10 @@ public class RoomController {
    * @throws ApiProxyException
    */
   public void initialize() throws ApiProxyException {
-
+    animationItems = new ImageView[] {prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo};
     // Getting random item to be used in the riddle
     Rectangle[] items = new Rectangle[] {vent, toiletPaper, toilet, mirror, towel, sink};
+    resetAnimation();
     Random randomChoose = new Random();
     int randomIndexChoose = randomChoose.nextInt(items.length);
     GameState.itemToChoose = items[randomIndexChoose];
@@ -201,6 +202,16 @@ public class RoomController {
 
   public void setCafeteriaController(CafeteriaController cafeteriaController) {
     this.cafeteriaController = cafeteriaController;
+  }
+
+  public void walkInAnimation() {
+    MovementControl.moveToLeft(true, 1, 500, animationItems);
+  }
+
+  public  void resetAnimation() {
+    for (ImageView item : animationItems) {
+      item.setX(500);
+    }
   }
 
   /**

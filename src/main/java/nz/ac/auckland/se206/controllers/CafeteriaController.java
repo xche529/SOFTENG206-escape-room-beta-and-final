@@ -144,8 +144,10 @@ public class CafeteriaController {
 
   @FXML
   private void goToRoom() {
+    roomController.resetAnimation();
     Scene scene = paintingWithSafe.getScene();
     scene.setRoot(SceneManager.getUiRoot(AppUi.ROOM));
+    roomController.walkInAnimation();
   }
 
   @FXML

@@ -21,6 +21,8 @@ public class StartInterfaceController {
   @FXML private CheckBox fourMin;
   @FXML private CheckBox sixMin;
   @FXML private MenuButton difficulty;
+  private CafeteriaController cafeteriaController;
+  private OfficeController officeController;
 
   @FXML
   private void initialize() {
@@ -31,6 +33,14 @@ public class StartInterfaceController {
    * This method is invoked when the user clicks the "Start" button. It starts the game.
    * It loads the room scene with user selected difficulty and play time.
    */
+  public void setOfficeController(OfficeController officeController) {
+    this.officeController = officeController;
+  }
+
+  public void setCafeteriaController(CafeteriaController cafeteriaController) {
+    this.cafeteriaController = cafeteriaController;
+  }
+
   @FXML
   private void onStartGame(Event event) throws IOException {
     Button button = (Button) event.getSource();
@@ -38,7 +48,10 @@ public class StartInterfaceController {
     FXMLLoader roomLoader = App.loadFxml("room");
     SceneManager.addUi(AppUi.ROOM, roomLoader.load());
     RoomController roomController = roomLoader.getController();
+    officeController.setRoomController(roomController);
+    cafeteriaController.setRoomController(roomController);
     sceneButtonIsIn.setRoot(SceneManager.getUiRoot(AppUi.ROOM));
+    roomController.walkInAnimation();
     System.out.println("Game started");
   }
 

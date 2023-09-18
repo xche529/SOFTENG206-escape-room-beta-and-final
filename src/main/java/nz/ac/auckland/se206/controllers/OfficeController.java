@@ -128,8 +128,10 @@ public class OfficeController {
 
   @FXML
   private void goToRoom() {
+    roomController.resetAnimation();
     Scene scene = bin.getScene();
     scene.setRoot(SceneManager.getUiRoot(AppUi.ROOM));
+    roomController.walkInAnimation();
   }
 
   @FXML

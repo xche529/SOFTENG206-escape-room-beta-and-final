@@ -10,7 +10,7 @@ import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.controllers.CafeteriaController;
 import nz.ac.auckland.se206.controllers.EndWonController;
 import nz.ac.auckland.se206.controllers.OfficeController;
-import nz.ac.auckland.se206.controllers.RoomController;
+import nz.ac.auckland.se206.controllers.StartInterfaceController;
 
 /**
  * This is the entry point of the JavaFX application, while you can change this class, it should
@@ -64,10 +64,12 @@ public class App extends Application {
     CafeteriaController cafeteriaController = cafeteriaLoader.getController();
     EndWonController endWonController = endScreenWonLoader.getController();
     OfficeController officeController = officeSceneLoader.getController();
+    StartInterfaceController startInterfaceController = StartInterfaceLoader.getController();
 
     cafeteriaController.setOfficeController(officeController);
     officeController.setCafeteriaController(cafeteriaController);
-
+    startInterfaceController.setOfficeController(officeController);
+    startInterfaceController.setCafeteriaController(cafeteriaController);
 
     Safe.getRandomCode();
 

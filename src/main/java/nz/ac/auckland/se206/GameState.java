@@ -26,6 +26,7 @@ public class GameState {
 
   public static int secondsRemaining = 1000;
 
+
   public static int totalSeconds = 120;
 
   public static Rectangle itemToChoose;
