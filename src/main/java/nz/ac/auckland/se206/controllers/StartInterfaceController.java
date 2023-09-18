@@ -50,6 +50,8 @@ public class StartInterfaceController {
     RoomController roomController = roomLoader.getController();
     officeController.setRoomController(roomController);
     cafeteriaController.setRoomController(roomController);
+    roomController.setCafeteriaController(cafeteriaController);
+    roomController.setOfficeController(officeController);
     sceneButtonIsIn.setRoot(SceneManager.getUiRoot(AppUi.ROOM));
     roomController.walkInAnimation();
     System.out.println("Game started");

@@ -67,5 +67,25 @@
             </Button>
          </children>
       </Pane>
+      <ImageView fx:id="prisonerTwo" fitHeight="242.0" fitWidth="119.0" layoutX="389.0" layoutY="356.0" pickOnBounds="true">
+         <image>
+            <Image url="@../images/Small%20poster.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="prisonerOne" fitHeight="262.0" fitWidth="121.0" layoutX="192.0" layoutY="335.0" pickOnBounds="true">
+         <image>
+            <Image url="@../images/Bin.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="speechBubbleOne" fitHeight="72.0" fitWidth="95.0" layoutX="297.0" layoutY="278.0" onMouseClicked="#onSpeechBubbleOneClicked" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/speechBubble.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="speechBubbleTwo" fitHeight="150.0" fitWidth="89.0" layoutX="478.0" layoutY="286.0" onMouseClicked="#onSpeechBubbleTwoClicked" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/speechBubble.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>

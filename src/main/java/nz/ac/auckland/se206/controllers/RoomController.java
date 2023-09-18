@@ -579,13 +579,17 @@ public class RoomController {
 
   @FXML
   private void goToCafeteria() {
+    cafeteriaController.resetAnimation();
     Scene scene = mirror.getScene();
     scene.setRoot(SceneManager.getUiRoot(AppUi.CAFETERIA));
+    cafeteriaController.walkInAnimation();
   }
 
   @FXML
   private void goToOffice() {
+    officeController.resetAnimation();
     Scene scene = mirror.getScene();
     scene.setRoot(SceneManager.getUiRoot(AppUi.OFFICE));
+    officeController.walkInAnimation();
   }
 }

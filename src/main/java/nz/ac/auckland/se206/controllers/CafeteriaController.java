@@ -10,6 +10,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.MovementControl;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
@@ -33,6 +34,10 @@ public class CafeteriaController {
   @FXML private ImageView digitThreeMinus;
   @FXML private ImageView digitFourPlus;
   @FXML private ImageView digitFourMinus;
+  @FXML private ImageView prisonerOne;
+  @FXML private ImageView prisonerTwo;
+  @FXML private ImageView speechBubbleOne;
+  @FXML private ImageView speechBubbleTwo;
   @FXML private Label digitOne;
   @FXML private Label digitTwo;
   @FXML private Label digitThree;
@@ -40,6 +45,7 @@ public class CafeteriaController {
   @FXML private Button openButton;
   private OfficeController officeController;
   private RoomController roomController;
+  private ImageView[] animationItems;
 
   public void setOfficeController(OfficeController officeController) {
     this.officeController = officeController;
@@ -56,6 +62,8 @@ public class CafeteriaController {
    */
   @FXML
   private void initialize() {
+        animationItems = new ImageView[] {prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo};
+
     // TODO: set visability of all required items
   }
 
@@ -138,8 +146,10 @@ public class CafeteriaController {
 
   @FXML
   private void goToOffice() {
+    officeController.resetAnimation();
     Scene scene = paintingWithSafe.getScene();
     scene.setRoot(SceneManager.getUiRoot(AppUi.OFFICE));
+    officeController.walkInAnimation();
   }
 
   @FXML
@@ -229,6 +239,16 @@ public class CafeteriaController {
   private void onClickExitPadlock() {
     padlockPane.setVisible(false);
   }
+  
+    @FXML
+  private void onSpeechBubbleOneClicked() {
+    System.out.println("Speech bubble one clicked");
+  }
+
+  @FXML
+  private void onSpeechBubbleTwoClicked() {
+    System.out.println("Speech bubble two clicked");
+  }
 
   private void showDialog(String title, String headerText, String message) {
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -236,5 +256,15 @@ public class CafeteriaController {
     alert.setHeaderText(headerText);
     alert.setContentText(message);
     alert.showAndWait();
+  }
+
+    public void walkInAnimation() {
+    MovementControl.moveToLeft(true, 1, 500, animationItems);
+  }
+
+  public  void resetAnimation() {
+    for (ImageView item : animationItems) {
+      item.setX(500);
+    }
   }
 }
