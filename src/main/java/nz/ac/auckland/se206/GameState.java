@@ -14,6 +14,8 @@ public class GameState {
 
   public static String code;
 
+  public static String codeWord;
+
   public static int secondsRemaining = 1000;
 
   public static Rectangle itemToChoose;

@@ -511,7 +511,7 @@ public class RoomController {
         showDialog(
             "Nice Job",
             "You found the item!",
-            "On the inside of the toilet is written the word " + "JAIL");
+            "On the inside of the toilet is written the word " + GameState.codeWord);
       } else {
         showDialog("Nothing!", "Toilet", "Just a normal toilet.");
       }
@@ -524,7 +524,9 @@ public class RoomController {
     if (GameState.isRiddleResolved()) {
       if (GameState.itemToChoose == toiletPaper) {
         showDialog(
-            "Nice Job", "You found the item!", "On the toilet paper is written the word " + "JAIL");
+            "Nice Job",
+            "You found the item!",
+            "On the toilet paper is written the word " + GameState.codeWord);
       } else {
         showDialog("Nothing!", "Toilet Paper", "Just a normal roll of toilet paper.");
       }
@@ -539,7 +541,8 @@ public class RoomController {
         showDialog(
             "Nice Job",
             "You found the item!",
-            "In the vent you notice a piece of paper, scribbled on one side is the word " + "JAIL");
+            "In the vent you notice a piece of paper, scribbled on one side is the word "
+                + GameState.codeWord);
       } else {
         showDialog("Nothing!", "Vent", "Just an empty vent");
       }
@@ -554,7 +557,7 @@ public class RoomController {
         showDialog(
             "Nice Job",
             "You found the item!",
-            "In the sink you notice scribbled on the side is the word " + "JAIL");
+            "In the sink you notice scribbled on the side is the word " + GameState.codeWord);
       } else {
         showDialog("Nothing!", "Sink", "Just an empty sink");
       }
@@ -569,7 +572,7 @@ public class RoomController {
         showDialog(
             "Nice Job",
             "You found the item!",
-            "On the mirror you notice a word written in ink: " + "JAIL");
+            "On the mirror you notice a word written in ink: " + GameState.codeWord);
       } else {
         showDialog("Nothing!", "Mirror", "Just a normal mirror");
       }
@@ -584,7 +587,7 @@ public class RoomController {
         showDialog(
             "Nice Job",
             "You found the item!",
-            "You notice that scribbled on one side of the towel is the word " + "JAIL");
+            "You notice that scribbled on one side of the towel is the word " + GameState.codeWord);
       } else {
         showDialog("Nothing!", "Towel", "Just a normal towel");
       }

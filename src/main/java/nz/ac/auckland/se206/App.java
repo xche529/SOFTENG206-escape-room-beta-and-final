@@ -1,7 +1,6 @@
 package nz.ac.auckland.se206;
 
 import java.io.IOException;
-import java.util.Random;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -53,49 +52,11 @@ public class App extends Application {
     SceneManager.addUi(AppUi.OFFICE, App.loadFxml("officeScene"));
     SceneManager.addUi(AppUi.CAFETERIA, App.loadFxml("cafeteria"));
 
-    String[] fourLetterWords = {
-      "back", "test", "idea", "star", "fire",
-      "hope", "moon", "work", "luck", "book",
-      "time", "game", "play", "hand", "code",
-      "true", "false", "life", "good", "home",
-      "keep", "mind", "park", "road", "bear",
-      "food", "rain", "snow", "song", "view",
-      "tree", "lake", "walk", "blue", "pink",
-      "dark", "rich", "cool", "warm", "wine",
-      "fast", "slow", "love", "hate", "high",
-      "rope", "open", "close", "rich", "poor"
-    };
-
-    Random random = new Random();
-    int randomIndex = random.nextInt(fourLetterWords.length);
-
-    GameState.code = getCode(fourLetterWords[randomIndex]);
-
-    System.out.println(GameState.code);
-    System.out.println(fourLetterWords[randomIndex]);
+    Safe.getRandomCode();
 
     scene = new Scene(SceneManager.getUiRoot(AppUi.ROOM), 742, 403);
     stage.setScene(scene);
     stage.show();
     root.requestFocus();
-  }
-
-  private String getCode(String string) {
-    String code = "";
-    String converterValues[] = {"jt", "aku", "bvl", "cmw", "dnx", "eoy", "fpz", "gq", "hr", "is"};
-    int digits[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-
-    for (int i = 0; i < 4; i++) {
-      char currentChar = string.charAt(i);
-      for (int j = 0; j < 9; j++) {
-        if (converterValues[j].contains(String.valueOf(currentChar))) {
-          code = code + digits[j];
-          break;
-        }
-      }
-      System.out.println(code);
-    }
-
-    return code;
   }
 }
