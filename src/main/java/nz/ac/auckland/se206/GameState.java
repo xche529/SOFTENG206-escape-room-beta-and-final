@@ -34,6 +34,12 @@ public class GameState {
 
   public static int questionsAsked = 0;
 
+public static boolean resetCafeteria = false;
+
+public static boolean resetOffice = false;
+
+public static boolean resetRoom = false;
+
   public static boolean isRiddleResolved() {
     return isRiddleResolvedProperty.get();
   }

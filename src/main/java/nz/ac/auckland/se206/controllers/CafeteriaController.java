@@ -204,6 +204,9 @@ public class CafeteriaController {
     if (code == Integer.parseInt(GameState.code)) {
       Scene scene = openButton.getScene();
       GameState.isWon = true;
+      GameState.resetCafeteria = true;
+      GameState.resetOffice = true;
+      GameState.resetRoom = true;
       scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.END_WON));
     } else {
       showDialog(
@@ -224,5 +227,21 @@ public class CafeteriaController {
     alert.setHeaderText(headerText);
     alert.setContentText(message);
     alert.showAndWait();
+  }
+
+  private void resetCafeteria() {
+    padlockPane.setVisible(false);
+    safe.setVisible(false);
+    paintingWithSafe.setVisible(true);
+    paintingWithoutSafe.setVisible(true);
+    vendingMachine.setVisible(true);
+    paintingWithSafeBig.setVisible(false);
+    paintingWithoutSafeBig.setVisible(false);
+    safeBig.setVisible(false);
+    vendingMachineBig.setVisible(false);
+    digitOne.setText("0");
+    digitTwo.setText("0");
+    digitThree.setText("0");
+    digitFour.setText("0");
   }
 }
