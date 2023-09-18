@@ -5,51 +5,51 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="403.0" prefWidth="742.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.OfficeController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="605.0" prefWidth="1113.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.OfficeController">
    <children>
-      <ImageView fitHeight="409.0" fitWidth="742.0" pickOnBounds="true">
+      <ImageView fitHeight="605.0" fitWidth="1113.0" pickOnBounds="true">
          <image>
             <Image url="@../images/wardensOffice.jpg" />
          </image>
       </ImageView>
-      <ImageView fitHeight="50.0" fitWidth="100.0" layoutX="641.0" layoutY="291.0" onMouseClicked="#goToRoom" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="50.0" fitWidth="100.0" layoutY="300.0" onMouseClicked="#goToCafeteria" pickOnBounds="true" preserveRatio="true" rotate="180.0">
          <image>
             <Image url="@../images/redArrow.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="50.0" fitWidth="100.0" layoutY="166.0" onMouseClicked="#goToCafeteria" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-         <image>
-            <Image url="@../images/redArrow.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="binBig" fitHeight="83.0" fitWidth="107.0" layoutX="62.0" layoutY="310.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="binBig" fitHeight="83.0" fitWidth="107.0" layoutX="100.0" layoutY="500.0" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.5" visible="false">
          <image>
             <Image url="@../images/Bin.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="blackBoardBig1" fitHeight="188.0" fitWidth="181.0" layoutX="574.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="blackBoardBig1" fitHeight="188.0" fitWidth="181.0" layoutX="905.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.5">
          <image>
             <Image url="@../images/Blackboard.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="blackBoardBig" fitHeight="204.0" fitWidth="183.0" layoutX="559.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="blackBoardBig" fitHeight="204.0" fitWidth="183.0" layoutX="886.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.5" visible="false">
          <image>
             <Image url="@../images/Blackboard.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="phoneBig" fitHeight="59.0" fitWidth="70.0" layoutX="387.0" layoutY="204.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="phoneBig" fitHeight="59.0" fitWidth="70.0" layoutX="598.0" layoutY="315.0" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.5" visible="false">
          <image>
             <Image url="@../images/Phone.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="deskDrawersBig" fitHeight="72.0" fitWidth="99.0" layoutX="437.0" layoutY="323.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="deskDrawersBig" fitHeight="72.0" fitWidth="99.0" layoutX="667.0" layoutY="496.0" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.5" visible="false">
          <image>
             <Image url="@../images/Draw.png" />
          </image>
       </ImageView>
-      <Rectangle id="deskDrawers" fx:id="deskDrawers" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="47.0" layoutX="440.0" layoutY="337.0" onMouseClicked="#clickDeskDrawers" onMouseEntered="#deskDrawersMouseEntered" onMouseExited="#deskDrawersMouseExited" opacity="0.0" rotate="-17.1" stroke="BLACK" strokeType="INSIDE" width="83.0" />
-      <Rectangle id="bin" fx:id="bin" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="75.0" layoutX="67.0" layoutY="318.0" onMouseClicked="#clickBin" onMouseEntered="#binMouseEntered" onMouseExited="#binMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="55.0" />
-      <Rectangle id="phone" fx:id="phone" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="59.0" layoutX="388.0" layoutY="199.0" onMouseClicked="#clickPhone" onMouseEntered="#phoneMouseEntered" onMouseExited="#phoneMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="57.0" />
-      <Rectangle id="blackBoard" fx:id="blackBoard" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="180.0" layoutX="575.0" layoutY="38.0" onMouseClicked="#clickBlackboard" onMouseEntered="#blackBoardMouseEntered" onMouseExited="#blackBoardMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="175.0" />
+      <Rectangle id="deskDrawers" fx:id="deskDrawers" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="47.0" layoutX="677.0" layoutY="503.0" onMouseClicked="#clickDeskDrawers" onMouseEntered="#deskDrawersMouseEntered" onMouseExited="#deskDrawersMouseExited" opacity="0.0" rotate="-10.0" scaleX="1.5" scaleY="1.5" stroke="BLACK" strokeType="INSIDE" width="83.0" />
+      <Rectangle id="bin" fx:id="bin" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="75.0" layoutX="111.0" layoutY="495.0" onMouseClicked="#clickBin" onMouseEntered="#binMouseEntered" onMouseExited="#binMouseExited" opacity="0.0" scaleX="1.2" scaleY="1.2" stroke="BLACK" strokeType="INSIDE" width="55.0" />
+      <Rectangle id="phone" fx:id="phone" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="59.0" layoutX="597.0" layoutY="305.0" onMouseClicked="#clickPhone" onMouseEntered="#phoneMouseEntered" onMouseExited="#phoneMouseExited" opacity="0.0" scaleX="1.2" scaleY="1.2" stroke="BLACK" strokeType="INSIDE" width="57.0" />
+      <Rectangle id="blackBoard" fx:id="blackBoard" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="180.0" layoutX="881.0" layoutY="107.0" onMouseClicked="#clickBlackboard" onMouseEntered="#blackBoardMouseEntered" onMouseExited="#blackBoardMouseExited" opacity="0.0" scaleX="1.5" scaleY="1.5" stroke="BLACK" strokeType="INSIDE" width="175.0" />
+      <ImageView fitHeight="50.0" fitWidth="100.0" layoutX="1030.0" layoutY="300.0" onMouseClicked="#goToRoom" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/redArrow.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>
