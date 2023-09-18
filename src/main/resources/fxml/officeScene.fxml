@@ -17,7 +17,7 @@
             <Image url="@../images/redArrow.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="binBig" fitHeight="83.0" fitWidth="107.0" layoutX="100.0" layoutY="500.0" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.5" visible="false">
+      <ImageView fx:id="binBig" fitHeight="71.0" fitWidth="55.0" layoutX="110.0" layoutY="494.0" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.5" visible="false">
          <image>
             <Image url="@../images/Bin.png" />
          </image>
