@@ -27,6 +27,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.GptAndTextAreaManager;
 import nz.ac.auckland.se206.MovementControl;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
@@ -103,6 +104,13 @@ public class RoomController {
    * @throws ApiProxyException
    */
   public void initialize() throws ApiProxyException {
+    // initialize fields in the GptAndTextAreaManager class
+    GptAndTextAreaManager.roomController = this;
+    GptAndTextAreaManager.roomChatDisplayBoard = chatDisplayBoard;
+    GptAndTextAreaManager.roomTypePromptText = typePromptText;
+    GptAndTextAreaManager.roomInputBox = inputBox;  
+    GptAndTextAreaManager.roomObjectiveDisplayBoard = objectiveDisplayBoard;
+
     animationItems = new ImageView[] {prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo};
     // Getting random item to be used in the riddle
     Rectangle[] items = new Rectangle[] {vent, toiletPaper, toilet, mirror, towel, sink};
@@ -112,12 +120,12 @@ public class RoomController {
     GameState.itemToChoose = items[randomIndexChoose];
 
     // Sending the initial request so the riddle is ready when the player enters the chat
-    chatCompletionRequest =
-        new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
-    ChatMessage userChatMessage =
-        new ChatMessage(
-            "user", GptPromptEngineering.getRiddleWithGivenWord(GameState.itemToChoose.getId()));
-    runGpt(userChatMessage, lastMsg -> {});
+    // chatCompletionRequest =
+    //     new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
+    // ChatMessage userChatMessage =
+    //     new ChatMessage(
+    //         "user", GptPromptEngineering.getRiddleWithGivenWord(GameState.itemToChoose.getId()));
+    // runGpt(userChatMessage, lastMsg -> {});
 
     // Setting up the timer timeline
     timeline =
@@ -480,7 +488,7 @@ public class RoomController {
     chatCompletionRequest =
         new ChatCompletionRequest().setN(1).setTemperature(1).setTopP(0.5).setMaxTokens(100);
     ChatMessage userChatMessage = new ChatMessage("user", GptPromptEngineering.getGuardSetUp());
-    runGpt(userChatMessage, lastMsg -> {});
+  //  runGpt(userChatMessage, lastMsg -> {});
   }
 
   @FXML
