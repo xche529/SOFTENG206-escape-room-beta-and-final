@@ -40,6 +40,8 @@ public static boolean resetOffice = false;
 
 public static boolean resetRoom = false;
 
+public static boolean gameFinishedCafeteria = false;
+
   public static boolean isRiddleResolved() {
     return isRiddleResolvedProperty.get();
   }

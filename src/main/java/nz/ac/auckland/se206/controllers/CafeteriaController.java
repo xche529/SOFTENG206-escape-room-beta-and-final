@@ -276,11 +276,14 @@ public class CafeteriaController {
   private void updateTimerLabel() {
     // TODO: add code to update timer label
     if (GameState.secondsRemaining == 0) {
-      Scene scene = vendingMachine.getScene();
-      GameState.resetCafeteria = true;
-      GameState.resetOffice = true;
-      GameState.resetRoom = true;
-      scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.END_LOST));
+      if (GameState.gameFinishedCafeteria) {
+        GameState.gameFinishedCafeteria = false;
+        Scene scene = vendingMachine.getScene();
+        GameState.resetCafeteria = true;
+        GameState.resetOffice = true;
+        GameState.resetRoom = true;
+        scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.END_LOST));
+      }
     }
   }
 }
