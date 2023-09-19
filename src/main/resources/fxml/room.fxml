@@ -179,7 +179,7 @@
          <children>
             <TextArea fx:id="chatTextArea" layoutX="35.0" layoutY="32.0" prefHeight="251.0" prefWidth="449.0" wrapText="true" />
     <TextField fx:id="inputText" layoutX="31.0" layoutY="314.0" prefHeight="26.0" prefWidth="435.0" />
-    <Button fx:id="sendButton" layoutX="496.0" layoutY="312.0" mnemonicParsing="false" onAction="#onSendMessage" text="Send" />
+    <Button fx:id="sendButton" layoutX="496.0" layoutY="312.0" mnemonicParsing="false" text="Send" />
     <Button layoutX="568.0" layoutY="312.0" mnemonicParsing="false" onAction="#onGoBack" text="Go Back" />
             <ProgressIndicator fx:id="chatProgress" layoutX="541.0" layoutY="219.0" prefHeight="63.0" prefWidth="47.0" progress="0.0" visible="false" />
             <Label fx:id="chatProgressLabel" layoutX="507.0" layoutY="172.0" text="The guard is thinking..." visible="false" />
@@ -187,13 +187,12 @@
             <Label fx:id="questionInfoLabel" layoutX="119.0" layoutY="289.0" text="You only get two questions! Use them wisely" visible="false" />
          </children>
       </Pane>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-      <TextArea fx:id="chatDisplayBoard" editable="false" layoutX="323.0" layoutY="605.0" prefHeight="195.0" prefWidth="563.0" wrapText="true">
+      <TextArea fx:id="chatDisplayBoard" editable="false" layoutX="324.0" layoutY="605.0" prefHeight="195.0" prefWidth="562.0" wrapText="true">
          <font>
             <Font size="21.0" />
          </font>
       </TextArea>
-      <TextArea fx:id="inputBox" layoutY="605.0" onKeyTyped="#onSetTypeHereFalse" prefHeight="154.0" prefWidth="324.0" wrapText="true">
+      <TextArea fx:id="inputBox" layoutY="605.0" onKeyTyped="#onSetPromptTextFalse" prefHeight="154.0" prefWidth="324.0" wrapText="true">
          <font>
             <Font size="21.0" />
          </font>
@@ -205,7 +204,7 @@
       </Text>
       <TextArea fx:id="objectiveDisplayBoard" layoutX="886.0" layoutY="656.0" prefHeight="141.0" prefWidth="225.0" />
       <Text fx:id="typePromptText" fill="#6b6b6b" layoutX="12.0" layoutY="625.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type your response here:" />
-      <Button fx:id="responseSubmitButton" layoutY="759.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="324.0" text="Submit">
+      <Button fx:id="responseSubmitButton" layoutY="759.0" mnemonicParsing="false" onAction="#onSubmitMessage" prefHeight="40.0" prefWidth="324.0" text="Submit">
          <font>
             <Font size="20.0" />
          </font>

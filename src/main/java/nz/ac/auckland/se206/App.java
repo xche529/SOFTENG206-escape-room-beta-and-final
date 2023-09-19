@@ -74,10 +74,10 @@ public class App extends Application {
 
     Safe.getRandomCode();
 
-    scene = new Scene(SceneManager.getUiRoot(AppUi.START_INTERFACE), 1113, 605);
+    scene = new Scene(SceneManager.getUiRoot(AppUi.START_INTERFACE), 1113, 800);
 
     stage.setScene(scene);
-    scene.setOnKeyPressed(event -> {
+    scene.addEventFilter(javafx.scene.input.KeyEvent.KEY_PRESSED, event -> {
       if (event.getCode() == KeyCode.LEFT) {
         scene.setRoot(SceneManager.switchRoom(true));
       }else if(event.getCode() == KeyCode.RIGHT) {
