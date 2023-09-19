@@ -1,6 +1,5 @@
 package nz.ac.auckland.se206;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import javafx.scene.Parent;
 import nz.ac.auckland.se206.controllers.CafeteriaController;
@@ -8,7 +7,7 @@ import nz.ac.auckland.se206.controllers.OfficeController;
 import nz.ac.auckland.se206.controllers.RoomController;
 
 public class SceneManager {
-  
+
   public static RoomController roomController;
   public static OfficeController officeController;
   public static CafeteriaController cafeteriaController;
@@ -25,42 +24,42 @@ public class SceneManager {
   static AppUi curretUi = AppUi.START_INTERFACE;
 
   static AppUi[] appUis = {
-    AppUi.ROOM,
-    AppUi.OFFICE,
-    AppUi.CAFETERIA,
+      AppUi.ROOM,
+      AppUi.OFFICE,
+      AppUi.CAFETERIA,
   };
 
   public static Parent switchRoom(boolean isToLeft) {
-    if(curretUi == AppUi.START_INTERFACE){
+    if (curretUi == AppUi.START_INTERFACE) {
       return getUiRoot(AppUi.START_INTERFACE);
     }
-    if(isToLeft){
+    if (isToLeft) {
       System.out.println("Moving to left");
-    }else{
+    } else {
       System.out.println("Moving to right");
     }
     int index = 0;
-    for(int i = 0; i < appUis.length; i++) {
+    for (int i = 0; i < appUis.length; i++) {
       if (curretUi == appUis[i]) {
         index = i;
       }
     }
-    if(index == 0 && isToLeft) { 
+    if (index == 0 && isToLeft) {
       index = appUis.length - 1;
-    }else if (isToLeft){
+    } else if (isToLeft) {
       index--;
-    }else if(index == appUis.length - 1 && !isToLeft) {
+    } else if (index == appUis.length - 1 && !isToLeft) {
       index = 0;
-    }else{
+    } else {
       index++;
     }
-    if(index == 0){
+    if (index == 0) {
       roomController.resetAnimation();
       roomController.walkInAnimation();
-    }else if(index == 1){
+    } else if (index == 1) {
       officeController.resetAnimation();
       officeController.walkInAnimation();
-    }else{
+    } else {
       cafeteriaController.resetAnimation();
       cafeteriaController.walkInAnimation();
     }
