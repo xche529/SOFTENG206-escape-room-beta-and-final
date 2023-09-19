@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane fx:id="room" focusTraversable="true" maxHeight="605.0" maxWidth="1113.0" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="605.0" prefWidth="1113.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
+<Pane fx:id="room" focusTraversable="true" maxHeight="800.0" maxWidth="1113.0" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="800.0" prefWidth="1113.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
    <children>
       <Pane prefHeight="605.0" prefWidth="1113.0">
          <children>
@@ -188,5 +188,27 @@
          </children>
       </Pane>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+      <TextArea fx:id="chatDisplayBoard" editable="false" layoutX="323.0" layoutY="605.0" prefHeight="195.0" prefWidth="563.0" wrapText="true">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </TextArea>
+      <TextArea fx:id="inputBox" layoutY="605.0" prefHeight="154.0" prefWidth="324.0" wrapText="true">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </TextArea>
+      <Text layoutX="925.0" layoutY="638.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current Objective:">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Text>
+      <TextArea fx:id="objectiveDisplayBoard" layoutX="886.0" layoutY="656.0" prefHeight="141.0" prefWidth="225.0" />
+      <Text fx:id="typePromptText" fill="#6b6b6b" layoutX="12.0" layoutY="625.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type your response here:" />
+      <Button fx:id="responseSubmitButton" layoutY="759.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="324.0" text="Submit">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
    </children>
 </Pane>

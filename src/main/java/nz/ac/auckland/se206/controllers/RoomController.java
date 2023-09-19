@@ -23,6 +23,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.GameState;
@@ -80,7 +81,12 @@ public class RoomController {
   @FXML private Button exitViewButton;
   @FXML private Button openButton;
   @FXML private Button sendButton;
+  @FXML private Button responseSubmitButton;
   @FXML private TextArea chatTextArea;
+  @FXML private TextArea inputBox;
+  @FXML private TextArea chatDisplayBoard;
+  @FXML private TextArea objectiveDisplayBoard;
+  @FXML private Text typePromptText;
   @FXML private TextField inputText;
   @FXML private ProgressIndicator chatProgress;
 
