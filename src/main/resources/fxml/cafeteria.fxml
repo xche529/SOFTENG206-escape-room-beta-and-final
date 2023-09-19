@@ -128,22 +128,22 @@
             <Image url="@../images/Safe.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="prisonerTwo" fitHeight="242.0" fitWidth="119.0" layoutX="651.0" layoutY="341.0" pickOnBounds="true">
+      <ImageView fx:id="prisonerTwo" fitHeight="305.0" fitWidth="147.0" layoutX="559.0" layoutY="303.0" pickOnBounds="true">
          <image>
-            <Image url="@../images/Small%20poster.png" />
+            <Image url="@../images/prisoner2.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="prisonerOne" fitHeight="240.0" fitWidth="123.0" layoutX="824.0" layoutY="360.0" pickOnBounds="true">
+      <ImageView fx:id="prisonerOne" fitHeight="312.0" fitWidth="163.0" layoutX="756.0" layoutY="296.0" pickOnBounds="true">
          <image>
-            <Image url="@../images/Bin.png" />
+            <Image url="@../images/prisoner1.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="speechBubbleOne" fitHeight="72.0" fitWidth="95.0" layoutX="759.0" layoutY="266.0" onMouseClicked="#onSpeechBubbleOneClicked" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="speechBubbleOne" fitHeight="72.0" fitWidth="95.0" layoutX="870.0" layoutY="246.0" onMouseClicked="#onSpeechBubbleOneClicked" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/speechBubble.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="speechBubbleTwo" fitHeight="150.0" fitWidth="89.0" layoutX="934.0" layoutY="267.0" onMouseClicked="#onSpeechBubbleTwoClicked" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="speechBubbleTwo" fitHeight="150.0" fitWidth="89.0" layoutX="651.0" layoutY="243.0" onMouseClicked="#onSpeechBubbleTwoClicked" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/speechBubble.png" />
          </image>

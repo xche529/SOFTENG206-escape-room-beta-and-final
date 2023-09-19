@@ -133,24 +133,24 @@
                   <Image url="@../images/newArrow.png" />
                </image>
             </ImageView>
+            <ImageView fx:id="prisonerTwo" fitHeight="309.0" fitWidth="148.0" layoutX="693.0" layoutY="300.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../images/prisoner2.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="prisonerOne" fitHeight="309.0" fitWidth="165.0" layoutX="494.0" layoutY="300.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../images/prisoner1.png" />
+               </image>
+            </ImageView>
             <ImageView fx:id="speechBubbleTwo" fitHeight="150.0" fitWidth="89.0" layoutX="797.0" layoutY="254.0" onMouseClicked="#onSpeechBubbleTwoClicked" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/speechBubble.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="speechBubbleOne" fitHeight="72.0" fitWidth="95.0" layoutX="661.0" layoutY="246.0" onMouseClicked="#onSpeechBubbleOneClicked" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="speechBubbleOne" fitHeight="72.0" fitWidth="95.0" layoutX="611.0" layoutY="253.0" onMouseClicked="#onSpeechBubbleOneClicked" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/speechBubble.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="prisonerTwo" fitHeight="242.0" fitWidth="119.0" layoutX="702.0" layoutY="326.0" pickOnBounds="true">
-               <image>
-                  <Image url="@../images/Small%20poster.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="prisonerOne" fitHeight="262.0" fitWidth="121.0" layoutX="557.0" layoutY="316.0" pickOnBounds="true">
-               <image>
-                  <Image url="@../images/Bin.png" />
                </image>
             </ImageView>
          </children>
