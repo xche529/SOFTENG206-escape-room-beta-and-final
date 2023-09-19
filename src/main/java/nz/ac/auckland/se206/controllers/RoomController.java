@@ -90,19 +90,8 @@ public class RoomController {
    */
   public void initialize() throws ApiProxyException {
 
-    // Getting random item to be used in the riddle
-    Rectangle[] items = new Rectangle[] {vent, toiletPaper, toilet, mirror, towel, sink};
-    Random randomChoose = new Random();
-    int randomIndexChoose = randomChoose.nextInt(items.length);
-    GameState.itemToChoose = items[randomIndexChoose];
-
-    // Sending the initial request so the riddle is ready when the player enters the chat
-    chatCompletionRequest =
-        new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
-    ChatMessage userChatMessage =
-        new ChatMessage(
-            "user", GptPromptEngineering.getRiddleWithGivenWord(GameState.itemToChoose.getId()));
-    runGpt(userChatMessage, lastMsg -> {});
+    itemToChoose();
+    prepareRiddle();
 
     // Setting up the timer timeline
     timeline =
@@ -146,6 +135,31 @@ public class RoomController {
                 Platform.exit();
               });
         });
+  }
+
+  /*
+   * This method prepares the riddle for the player to solve.
+   * 
+   * @throws ApiProxyException
+   */
+  private void prepareRiddle() throws ApiProxyException {
+    // Sending the initial request so the riddle is ready when the player enters the chat
+    chatCompletionRequest =
+        new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
+    ChatMessage userChatMessage =
+        new ChatMessage(
+            "user", GptPromptEngineering.getRiddleWithGivenWord(GameState.itemToChoose.getId()));
+    runGpt(userChatMessage, lastMsg -> {});
+  }
+
+  /*
+   * This method selects a random item to be used in the riddle.
+   */
+  private void itemToChoose() {
+    Rectangle[] items = new Rectangle[] {vent, toiletPaper, toilet, mirror, towel, sink};
+    Random randomChoose = new Random();
+    int randomIndexChoose = randomChoose.nextInt(items.length);
+    GameState.itemToChoose = items[randomIndexChoose];
   }
 
   public void animateAllArrows() {
