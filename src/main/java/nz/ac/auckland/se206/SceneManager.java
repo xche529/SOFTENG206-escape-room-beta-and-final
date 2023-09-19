@@ -1,9 +1,17 @@
 package nz.ac.auckland.se206;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import javafx.scene.Parent;
+import nz.ac.auckland.se206.controllers.CafeteriaController;
+import nz.ac.auckland.se206.controllers.OfficeController;
+import nz.ac.auckland.se206.controllers.RoomController;
 
 public class SceneManager {
+  
+  public static RoomController roomController;
+  public static OfficeController officeController;
+  public static CafeteriaController cafeteriaController;
 
   public enum AppUi {
     ROOM,
@@ -14,6 +22,51 @@ public class SceneManager {
     START_INTERFACE
   }
 
+  static AppUi curretUi = AppUi.START_INTERFACE;
+
+  static AppUi[] appUis = {
+    AppUi.ROOM,
+    AppUi.OFFICE,
+    AppUi.CAFETERIA,
+  };
+
+  public static Parent switchRoom(boolean isToLeft) {
+    if(curretUi == AppUi.START_INTERFACE){
+      return getUiRoot(AppUi.START_INTERFACE);
+    }
+    if(isToLeft){
+      System.out.println("Moving to left");
+    }else{
+      System.out.println("Moving to right");
+    }
+    int index = 0;
+    for(int i = 0; i < appUis.length; i++) {
+      if (curretUi == appUis[i]) {
+        index = i;
+      }
+    }
+    if(index == 0 && isToLeft) { 
+      index = appUis.length - 1;
+    }else if (isToLeft){
+      index--;
+    }else if(index == appUis.length - 1 && !isToLeft) {
+      index = 0;
+    }else{
+      index++;
+    }
+    if(index == 0){
+      roomController.resetAnimation();
+      roomController.walkInAnimation();
+    }else if(index == 1){
+      officeController.resetAnimation();
+      officeController.walkInAnimation();
+    }else{
+      cafeteriaController.resetAnimation();
+      cafeteriaController.walkInAnimation();
+    }
+    return getUiRoot(appUis[index]);
+  }
+
   private static HashMap<AppUi, Parent> sceneMap = new HashMap<AppUi, Parent>();
 
   public static void addUi(AppUi ui, Parent uiRoot) {
@@ -21,6 +74,7 @@ public class SceneManager {
   }
 
   public static Parent getUiRoot(AppUi ui) {
+    curretUi = ui;
     return sceneMap.get(ui);
   }
 }

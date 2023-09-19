@@ -26,6 +26,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.MovementControl;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.ChatMessage;
@@ -39,6 +40,11 @@ import nz.ac.auckland.se206.speech.TextToSpeech;
 /** Controller class for the room view. */
 public class RoomController {
   @FXML private Pane room;
+  @FXML private Pane converterPane;
+  @FXML private Pane chatPane;
+  @FXML private Pane startPane;
+  @FXML private Pane guardSpeechPane;
+  @FXML private Rectangle textBubble;
   @FXML private Rectangle door;
   @FXML private Rectangle vent;
   @FXML private Rectangle toiletPaper;
@@ -61,27 +67,29 @@ public class RoomController {
   @FXML private ImageView mirrorArrow;
   @FXML private ImageView towelArrow;
   @FXML private ImageView doorArrow;
-  @FXML private Label timerLabel;
-  @FXML private Pane converterPane;
-  @FXML private Button exitViewButton;
-  @FXML private Button openButton;
-  @FXML private TextArea chatTextArea;
-  @FXML private TextField inputText;
-  @FXML private Button sendButton;
-  @FXML private Pane chatPane;
-  @FXML private Pane startPane;
   @FXML private ImageView doorArrowSmall;
-  @FXML private ProgressIndicator chatProgress;
-  @FXML private Label chatProgressLabel;
-  @FXML private Rectangle textBubble;
   @FXML private ImageView bubbleBig;
-  @FXML private Pane guardSpeechPane;
+  @FXML private ImageView prisonerOne;
+  @FXML private ImageView prisonerTwo;
+  @FXML private ImageView speechBubbleOne;
+  @FXML private ImageView speechBubbleTwo;
+  @FXML private Label timerLabel;
+  @FXML private Label chatProgressLabel;
   @FXML private Label overQuestionLimitLabel;
   @FXML private Label questionInfoLabel;
+  @FXML private Button exitViewButton;
+  @FXML private Button openButton;
+  @FXML private Button sendButton;
+  @FXML private TextArea chatTextArea;
+  @FXML private TextField inputText;
+  @FXML private ProgressIndicator chatProgress;
 
   private Timeline timeline;
   private ChatCompletionRequest chatCompletionRequest;
   private TextToSpeech textToSpeech;
+  private OfficeController officeController = null;
+  private CafeteriaController cafeteriaController = null;
+  private ImageView[] animationItems = null;
 
   /**
    * Initializes the room view, it is called when the room loads.
@@ -89,9 +97,10 @@ public class RoomController {
    * @throws ApiProxyException
    */
   public void initialize() throws ApiProxyException {
-
+    animationItems = new ImageView[] {prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo};
     // Getting random item to be used in the riddle
     Rectangle[] items = new Rectangle[] {vent, toiletPaper, toilet, mirror, towel, sink};
+    resetAnimation();
     Random randomChoose = new Random();
     int randomIndexChoose = randomChoose.nextInt(items.length);
     GameState.itemToChoose = items[randomIndexChoose];
@@ -181,6 +190,24 @@ public class RoomController {
     if (!GameState.isWon) {
       Scene scene = door.getScene();
       scene.setRoot(SceneManager.getUiRoot(AppUi.END_LOST));
+    }
+  }
+
+  public void setOfficeController(OfficeController officeController) {
+    this.officeController = officeController;
+  }
+
+  public void setCafeteriaController(CafeteriaController cafeteriaController) {
+    this.cafeteriaController = cafeteriaController;
+  }
+
+  public void walkInAnimation() {
+    MovementControl.moveToLeft(true, 1, 500, animationItems);
+  }
+
+  public  void resetAnimation() {
+    for (ImageView item : animationItems) {
+      item.setTranslateX(500);
     }
   }
 
@@ -435,6 +462,16 @@ public class RoomController {
     runGpt(userChatMessage, lastMsg -> {});
   }
 
+  @FXML
+  private void onSpeechBubbleOneClicked(){
+    System.out.println("Speech bubble one clicked");
+  }
+
+  @FXML
+  private void onSpeechBubbleTwoClicked(){
+    System.out.println("Speech bubble two clicked");
+  }
+
   /**
    * Appends a chat message to the chat text area.
    *
@@ -541,13 +578,17 @@ public class RoomController {
 
   @FXML
   private void goToCafeteria() {
+    cafeteriaController.resetAnimation();
     Scene scene = mirror.getScene();
     scene.setRoot(SceneManager.getUiRoot(AppUi.CAFETERIA));
+    cafeteriaController.walkInAnimation();
   }
 
   @FXML
   private void goToOffice() {
+    officeController.resetAnimation();
     Scene scene = mirror.getScene();
     scene.setRoot(SceneManager.getUiRoot(AppUi.OFFICE));
+    officeController.walkInAnimation();
   }
 }

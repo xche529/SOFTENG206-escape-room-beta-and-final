@@ -1,7 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.util.Random;
-
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -10,6 +9,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.MovementControl;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 
@@ -23,13 +23,43 @@ public class OfficeController {
   @FXML private ImageView blackBoardBig;
   @FXML private ImageView phoneBig;
   @FXML private ImageView deskDrawersBig;
+  @FXML private ImageView prisonerOne;
+  @FXML private ImageView prisonerTwo;
+  @FXML private ImageView speechBubbleOne;
+  @FXML private ImageView speechBubbleTwo;
+  private CafeteriaController cafeteriaController;
+  private RoomController roomController;
+  private ImageView[] animationItems;
+
+  public void setCafeteriaController(CafeteriaController cafeteriaController) {
+    this.cafeteriaController = cafeteriaController;
+  }
+
+  public void setRoomController(RoomController roomController) {
+    this.roomController = roomController;
+  }
+
+  public void walkInAnimation() {
+    MovementControl.moveToLeft(false, 1, 500, animationItems);
+  }
+
+  public void resetAnimation() {
+    for (ImageView item : animationItems) {
+      item.setTranslateX(-500);
+    }
+  }
+
   @FXML private Button exitVeiwButton;
   @FXML private Pane cypherPane;
 
   @FXML
   private void initialize() {
-     // Getting random item to be used to hide the cypher
-    Rectangle[] items = new Rectangle[] {bin, phone, blackBoard, deskDrawers,};
+    animationItems = new ImageView[] {prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo};
+    // Getting random item to be used to hide the cypher
+    Rectangle[] items =
+        new Rectangle[] {
+          bin, phone, blackBoard, deskDrawers,
+        };
     Random randomChoose = new Random();
     int randomIndexChoose = randomChoose.nextInt(items.length);
     GameState.itemWithCypher = items[randomIndexChoose];
@@ -117,14 +147,28 @@ public class OfficeController {
   }
 
   @FXML
+  private void onSpeechBubbleOneClicked() {
+    System.out.println("Speech bubble one clicked");
+  }
+
+  @FXML
+  private void onSpeechBubbleTwoClicked() {
+    System.out.println("Speech bubble two clicked");
+  }
+
+  @FXML
   private void goToRoom() {
+    roomController.resetAnimation();
     Scene scene = bin.getScene();
     scene.setRoot(SceneManager.getUiRoot(AppUi.ROOM));
+    roomController.walkInAnimation();
   }
 
   @FXML
   private void goToCafeteria() {
+    cafeteriaController.resetAnimation();
     Scene scene = bin.getScene();
     scene.setRoot(SceneManager.getUiRoot(AppUi.CAFETERIA));
+    cafeteriaController.walkInAnimation();
   }
 }
