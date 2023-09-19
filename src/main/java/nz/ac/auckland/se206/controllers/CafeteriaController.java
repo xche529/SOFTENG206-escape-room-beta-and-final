@@ -5,11 +5,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.GptAndTextAreaManager;
 import nz.ac.auckland.se206.MovementControl;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
@@ -17,32 +20,69 @@ import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class CafeteriaController {
 
-  @FXML private Rectangle paintingWithSafe;
-  @FXML private Rectangle paintingWithoutSafe;
-  @FXML private Rectangle vendingMachine;
-  @FXML private ImageView paintingWithSafeBig;
-  @FXML private ImageView paintingWithoutSafeBig;
-  @FXML private ImageView safe;
-  @FXML private ImageView safeBig;
-  @FXML private ImageView vendingMachineBig;
-  @FXML private Pane padlockPane;
-  @FXML private ImageView digitOnePlus;
-  @FXML private ImageView digitOneMinus;
-  @FXML private ImageView digitTwoPlus;
-  @FXML private ImageView digitTwoMinus;
-  @FXML private ImageView digitThreePlus;
-  @FXML private ImageView digitThreeMinus;
-  @FXML private ImageView digitFourPlus;
-  @FXML private ImageView digitFourMinus;
-  @FXML private ImageView prisonerOne;
-  @FXML private ImageView prisonerTwo;
-  @FXML private ImageView speechBubbleOne;
-  @FXML private ImageView speechBubbleTwo;
-  @FXML private Label digitOne;
-  @FXML private Label digitTwo;
-  @FXML private Label digitThree;
-  @FXML private Label digitFour;
-  @FXML private Button openButton;
+  @FXML
+  private Rectangle paintingWithSafe;
+  @FXML
+  private Rectangle paintingWithoutSafe;
+  @FXML
+  private Rectangle vendingMachine;
+  @FXML
+  private ImageView paintingWithSafeBig;
+  @FXML
+  private ImageView paintingWithoutSafeBig;
+  @FXML
+  private ImageView safe;
+  @FXML
+  private ImageView safeBig;
+  @FXML
+  private ImageView vendingMachineBig;
+  @FXML
+  private Pane padlockPane;
+  @FXML
+  private ImageView digitOnePlus;
+  @FXML
+  private ImageView digitOneMinus;
+  @FXML
+  private ImageView digitTwoPlus;
+  @FXML
+  private ImageView digitTwoMinus;
+  @FXML
+  private ImageView digitThreePlus;
+  @FXML
+  private ImageView digitThreeMinus;
+  @FXML
+  private ImageView digitFourPlus;
+  @FXML
+  private ImageView digitFourMinus;
+  @FXML
+  private ImageView prisonerOne;
+  @FXML
+  private ImageView prisonerTwo;
+  @FXML
+  private ImageView speechBubbleOne;
+  @FXML
+  private ImageView speechBubbleTwo;
+  @FXML
+  private Label digitOne;
+  @FXML
+  private Label digitTwo;
+  @FXML
+  private Label digitThree;
+  @FXML
+  private Label digitFour;
+  @FXML
+  private Button openButton;
+  @FXML
+  private Button responseSubmitButton;
+  @FXML
+  private TextArea inputBox;
+  @FXML
+  private TextArea chatDisplayBoard;
+  @FXML
+  private TextArea objectiveDisplayBoard;
+  @FXML
+  private Text typePromptText;
+
   private OfficeController officeController;
   private RoomController roomController;
   private ImageView[] animationItems;
@@ -62,9 +102,31 @@ public class CafeteriaController {
    */
   @FXML
   private void initialize() {
-        animationItems = new ImageView[] {prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo};
+    GptAndTextAreaManager.cafeteriaController = this;
+    GptAndTextAreaManager.cafeteriaChatDisplayBoard = chatDisplayBoard;
+    GptAndTextAreaManager.cafeteriaTypePromptText = typePromptText;
+    GptAndTextAreaManager.cafeteriaInputBox = inputBox;
+    GptAndTextAreaManager.cafeteriaObjectiveDisplayBoard = objectiveDisplayBoard;
+
+    animationItems = new ImageView[] { prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo };
 
     // TODO: set visability of all required items
+  }
+
+  @FXML
+  public void onSetPromptTextFalse() {
+    typePromptText.setVisible(false);
+  }
+
+  @FXML
+  public void onSubmitMessage() {
+    String message = inputBox.getText();
+    if (message.isEmpty()) {
+      typePromptText.setVisible(true);
+      return;
+    } else {
+
+    }
   }
 
   /**
@@ -239,8 +301,8 @@ public class CafeteriaController {
   private void onClickExitPadlock() {
     padlockPane.setVisible(false);
   }
-  
-    @FXML
+
+  @FXML
   private void onSpeechBubbleOneClicked() {
     System.out.println("Speech bubble one clicked");
   }
@@ -258,11 +320,11 @@ public class CafeteriaController {
     alert.showAndWait();
   }
 
-    public void walkInAnimation() {
+  public void walkInAnimation() {
     MovementControl.moveToLeft(true, 1, 500, animationItems);
   }
 
-  public  void resetAnimation() {
+  public void resetAnimation() {
     for (ImageView item : animationItems) {
       item.setTranslateX(500);
     }
