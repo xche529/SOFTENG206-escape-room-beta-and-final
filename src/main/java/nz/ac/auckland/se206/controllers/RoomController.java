@@ -183,6 +183,8 @@ public class RoomController {
       GameState.resetCafeteria = true;
       GameState.resetOffice = true;
       GameState.resetRoom = true;
+      GameState.gameFinishedCafeteria = true;
+      GameState.gameFinishedOffice = true;
       scene.setRoot(SceneManager.getUiRoot(AppUi.END_LOST));
     }
   }

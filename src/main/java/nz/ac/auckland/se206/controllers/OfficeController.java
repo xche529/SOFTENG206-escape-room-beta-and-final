@@ -1,7 +1,8 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.util.Random;
-
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -9,6 +10,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
@@ -26,13 +28,20 @@ public class OfficeController {
   @FXML private Button exitVeiwButton;
   @FXML private Pane cypherPane;
 
+  private Timeline timeline;
+
   @FXML
   private void initialize() {
-     // Getting random item to be used to hide the cypher
-    Rectangle[] items = new Rectangle[] {bin, phone, blackBoard, deskDrawers,};
+    // Getting random item to be used to hide the cypher
+    Rectangle[] items =
+        new Rectangle[] {
+          bin, phone, blackBoard, deskDrawers,
+        };
     Random randomChoose = new Random();
     int randomIndexChoose = randomChoose.nextInt(items.length);
     GameState.itemWithCypher = items[randomIndexChoose];
+
+    resetchecker();
   }
 
   @FXML
@@ -127,4 +136,38 @@ public class OfficeController {
     Scene scene = bin.getScene();
     scene.setRoot(SceneManager.getUiRoot(AppUi.CAFETERIA));
   }
+
+  private void resetchecker() {
+    timeline =
+        new Timeline(
+            new KeyFrame(
+                Duration.seconds(1),
+                event -> {
+                  if (GameState.secondsRemaining >= 0) {
+                    updateTimerLabel();
+                  }
+                  if (GameState.secondsRemaining == 0) {
+                    if (GameState.gameFinishedOffice) {
+                      GameState.gameFinishedOffice = false;
+                      Scene scene = phone.getScene();
+                      GameState.resetCafeteria = true;
+                      GameState.resetOffice = true;
+                      GameState.resetRoom = true;
+                      scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.END_LOST));
+                    }
+                  }
+                  updateTimerLabel();
+                  if (GameState.resetOffice) {
+                    resetOffice();
+                    GameState.resetOffice = false;
+                  }
+                }));
+    timeline.setCycleCount(Timeline.INDEFINITE);
+    timeline.play();
+  }
+
+  private void updateTimerLabel() {
+  }
+
+  private void resetOffice() {}
 }

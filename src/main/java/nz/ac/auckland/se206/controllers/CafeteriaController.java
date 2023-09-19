@@ -1,6 +1,5 @@
 package nz.ac.auckland.se206.controllers;
 
-
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -263,6 +262,16 @@ public class CafeteriaController {
                   if (GameState.secondsRemaining >= 0) {
                     updateTimerLabel();
                   }
+                  if (GameState.secondsRemaining == 0) {
+                    if (GameState.gameFinishedCafeteria) {
+                      GameState.gameFinishedCafeteria = false;
+                      Scene scene = vendingMachine.getScene();
+                      GameState.resetCafeteria = true;
+                      GameState.resetOffice = true;
+                      GameState.resetRoom = true;
+                      scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.END_LOST));
+                    }
+                  }
                   updateTimerLabel();
                   if (GameState.resetCafeteria) {
                     resetCafeteria();
@@ -275,15 +284,5 @@ public class CafeteriaController {
 
   private void updateTimerLabel() {
     // TODO: add code to update timer label
-    if (GameState.secondsRemaining == 0) {
-      if (GameState.gameFinishedCafeteria) {
-        GameState.gameFinishedCafeteria = false;
-        Scene scene = vendingMachine.getScene();
-        GameState.resetCafeteria = true;
-        GameState.resetOffice = true;
-        GameState.resetRoom = true;
-        scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.END_LOST));
-      }
-    }
   }
 }
