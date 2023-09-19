@@ -1,5 +1,7 @@
 package nz.ac.auckland.se206.controllers;
 
+import java.util.Random;
+
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -73,6 +75,8 @@ public class CafeteriaController {
   private Pane paperPane;
   @FXML
   private Label collectPaperLabel;
+  @FXML
+  private Label numberLabel;
 
   private OfficeController officeController;
   private RoomController roomController;
@@ -94,6 +98,13 @@ public class CafeteriaController {
   @FXML
   private void initialize() {
     animationItems = new ImageView[] { prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo };
+    Random random = new Random();
+
+    System.out.println("-------------" + GameState.code);
+
+    // Generate a random 6-digit number
+    String phoneNumber = Integer.toString(random.nextInt(999999 - 100000 + 1) + 100000);
+    numberLabel.setText("027" + " " + phoneNumber.substring(0, 3) + " " + phoneNumber.substring(3, 6));
 
     // TODO: set visability of all required items
   }
