@@ -253,6 +253,21 @@ public class RoomController {
   }
 
   @FXML
+  public void onSetPromptTextFalse(){
+    typePromptText.setVisible(false);
+  }
+
+  @FXML
+  public void onSubmitMessage(){
+    String message = inputBox.getText();
+    if(message.isEmpty()){
+      typePromptText.setVisible(true);
+      return;
+    }else{
+      
+    }
+  }
+  @FXML
   public void toiletMouseEntered() {
     if (GameState.isRiddleResolved()) {
       toiletBig.setVisible(true);
