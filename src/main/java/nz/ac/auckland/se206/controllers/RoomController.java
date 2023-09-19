@@ -180,6 +180,9 @@ public class RoomController {
   private void handleTimerExpired() {
     if (!GameState.isWon) {
       Scene scene = door.getScene();
+      GameState.resetCafeteria = true;
+      GameState.resetOffice = true;
+      GameState.resetRoom = true;
       scene.setRoot(SceneManager.getUiRoot(AppUi.END_LOST));
     }
   }

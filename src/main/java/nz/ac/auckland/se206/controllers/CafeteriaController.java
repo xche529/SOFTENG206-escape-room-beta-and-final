@@ -1,5 +1,8 @@
 package nz.ac.auckland.se206.controllers;
 
+
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -9,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
@@ -39,6 +43,8 @@ public class CafeteriaController {
   @FXML private Label digitFour;
   @FXML private Button openButton;
 
+  private Timeline timeline;
+
   /**
    * Initializes the cafeteria view, it is called when the room loads.
    *
@@ -46,7 +52,7 @@ public class CafeteriaController {
    */
   @FXML
   private void initialize() {
-    // TODO: set visability of all required items
+    startResetThread();
   }
 
   /**
@@ -243,5 +249,28 @@ public class CafeteriaController {
     digitTwo.setText("0");
     digitThree.setText("0");
     digitFour.setText("0");
+  }
+
+  /*
+   * This method starts a thread that checks if the cafeteria needs to be reset.
+   */
+  private void startResetThread() {
+    timeline =
+        new Timeline(
+            new KeyFrame(
+                Duration.seconds(1),
+                event -> {
+                  updateTimerLabel();
+                  if (GameState.resetCafeteria) {
+                    resetCafeteria();
+                    GameState.resetCafeteria = false;
+                  }
+                }));
+    timeline.setCycleCount(Timeline.INDEFINITE);
+    timeline.play();
+  }
+
+  private void updateTimerLabel() {
+    // TODO: add code to update timer label
   }
 }

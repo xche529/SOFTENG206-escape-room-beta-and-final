@@ -103,8 +103,8 @@ public class StartInterfaceController {
       twoMin.setSelected(false);
       fourMin.setSelected(false);
       sixMin.setSelected(true);
-      GameState.secondsRemaining = 360;
-      GameState.totalSeconds = 360;
+      GameState.secondsRemaining = 30;
+      GameState.totalSeconds = 30;
       System.out.println("Play time change: 6 minutes");
     }
   }
