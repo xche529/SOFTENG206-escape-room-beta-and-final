@@ -48,6 +48,7 @@ public class StartInterfaceController {
     FXMLLoader roomLoader = App.loadFxml("room");
     SceneManager.addUi(AppUi.ROOM, roomLoader.load());
     RoomController roomController = roomLoader.getController();
+    SceneManager.roomController = roomController;
     officeController.setRoomController(roomController);
     cafeteriaController.setRoomController(roomController);
     roomController.setCafeteriaController(cafeteriaController);

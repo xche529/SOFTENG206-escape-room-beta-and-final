@@ -3,8 +3,15 @@ package nz.ac.auckland.se206;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javafx.scene.Parent;
+import nz.ac.auckland.se206.controllers.CafeteriaController;
+import nz.ac.auckland.se206.controllers.OfficeController;
+import nz.ac.auckland.se206.controllers.RoomController;
 
 public class SceneManager {
+  
+  public static RoomController roomController;
+  public static OfficeController officeController;
+  public static CafeteriaController cafeteriaController;
 
   public enum AppUi {
     ROOM,
@@ -46,6 +53,16 @@ public class SceneManager {
       index = 0;
     }else{
       index++;
+    }
+    if(index == 0){
+      roomController.resetAnimation();
+      roomController.walkInAnimation();
+    }else if(index == 1){
+      officeController.resetAnimation();
+      officeController.walkInAnimation();
+    }else{
+      cafeteriaController.resetAnimation();
+      cafeteriaController.walkInAnimation();
     }
     return getUiRoot(appUis[index]);
   }

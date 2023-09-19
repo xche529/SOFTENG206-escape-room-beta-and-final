@@ -65,6 +65,8 @@ public class App extends Application {
     OfficeController officeController = officeSceneLoader.getController();
     StartInterfaceController startInterfaceController = StartInterfaceLoader.getController();
 
+    SceneManager.cafeteriaController = cafeteriaController;
+    SceneManager.officeController = officeController;
     cafeteriaController.setOfficeController(officeController);
     officeController.setCafeteriaController(cafeteriaController);
     startInterfaceController.setOfficeController(officeController);
