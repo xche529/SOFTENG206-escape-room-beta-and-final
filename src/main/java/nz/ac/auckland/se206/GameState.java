@@ -20,6 +20,8 @@ public class GameState {
 
   public static boolean isWon = false;
 
+  public static boolean hasPaper;
+
   public static String code;
 
   public static String codeWord;
