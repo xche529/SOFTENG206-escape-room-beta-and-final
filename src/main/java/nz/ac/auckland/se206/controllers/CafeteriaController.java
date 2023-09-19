@@ -1,5 +1,7 @@
 package nz.ac.auckland.se206.controllers;
 
+import java.io.IOException;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -46,6 +48,7 @@ public class CafeteriaController {
 
   /**
    * Initializes the cafeteria view, it is called when the room loads.
+   * @throws IOException
    *
    * @throws ApiProxyException
    */
@@ -265,12 +268,16 @@ public class CafeteriaController {
                   if (GameState.secondsRemaining == 0) {
                     if (GameState.gameFinishedCafeteria) {
                       GameState.gameFinishedCafeteria = false;
-                      Scene scene = vendingMachine.getScene();
                       GameState.resetCafeteria = true;
                       GameState.resetOffice = true;
                       GameState.resetRoom = true;
-                      scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.END_LOST));
+                      try {
+                        Scene scene = vendingMachine.getScene();
+                        scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.END_LOST));
+                      } catch (NullPointerException e) {
+                      }
                     }
+
                   }
                   updateTimerLabel();
                   if (GameState.resetCafeteria) {

@@ -1,5 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
+import java.io.IOException;
 import java.util.Random;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -31,7 +32,7 @@ public class OfficeController {
   private Timeline timeline;
 
   @FXML
-  private void initialize() {
+  private void initialize() throws IOException {
     // Getting random item to be used to hide the cypher
     resetOffice();
     resetchecker();
@@ -130,7 +131,7 @@ public class OfficeController {
     scene.setRoot(SceneManager.getUiRoot(AppUi.CAFETERIA));
   }
 
-  private void resetchecker() {
+  private void resetchecker() throws IOException {
     timeline =
         new Timeline(
             new KeyFrame(
@@ -142,11 +143,15 @@ public class OfficeController {
                   if (GameState.secondsRemaining == 0) {
                     if (GameState.gameFinishedOffice) {
                       GameState.gameFinishedOffice = false;
-                      Scene scene = phone.getScene();
                       GameState.resetCafeteria = true;
                       GameState.resetOffice = true;
                       GameState.resetRoom = true;
-                      scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.END_LOST));
+                      try {
+                        Scene scene = phone.getScene();
+                        scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.END_LOST));
+                      } catch (NullPointerException e) {
+                      }
+
                     }
                   }
                   updateTimerLabel();
