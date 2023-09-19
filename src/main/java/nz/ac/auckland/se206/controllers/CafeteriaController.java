@@ -52,7 +52,7 @@ public class CafeteriaController {
    */
   @FXML
   private void initialize() {
-    startResetThread();
+    resetchecker();
   }
 
   /**
@@ -254,12 +254,15 @@ public class CafeteriaController {
   /*
    * This method starts a thread that checks if the cafeteria needs to be reset.
    */
-  private void startResetThread() {
+  private void resetchecker() {
     timeline =
         new Timeline(
             new KeyFrame(
                 Duration.seconds(1),
                 event -> {
+                  if (GameState.secondsRemaining >= 0) {
+                    updateTimerLabel();
+                  }
                   updateTimerLabel();
                   if (GameState.resetCafeteria) {
                     resetCafeteria();
@@ -272,5 +275,12 @@ public class CafeteriaController {
 
   private void updateTimerLabel() {
     // TODO: add code to update timer label
+    if (GameState.secondsRemaining == 0) {
+      Scene scene = vendingMachine.getScene();
+      GameState.resetCafeteria = true;
+      GameState.resetOffice = true;
+      GameState.resetRoom = true;
+      scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.END_LOST));
+    }
   }
 }
