@@ -193,7 +193,7 @@
             <Font size="21.0" />
          </font>
       </TextArea>
-      <TextArea fx:id="inputBox" layoutY="605.0" prefHeight="154.0" prefWidth="324.0" wrapText="true">
+      <TextArea fx:id="inputBox" layoutY="605.0" onKeyTyped="#onSetTypeHereFalse" prefHeight="154.0" prefWidth="324.0" wrapText="true">
          <font>
             <Font size="21.0" />
          </font>
