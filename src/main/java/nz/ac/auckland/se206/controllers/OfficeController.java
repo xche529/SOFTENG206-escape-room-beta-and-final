@@ -33,14 +33,7 @@ public class OfficeController {
   @FXML
   private void initialize() {
     // Getting random item to be used to hide the cypher
-    Rectangle[] items =
-        new Rectangle[] {
-          bin, phone, blackBoard, deskDrawers,
-        };
-    Random randomChoose = new Random();
-    int randomIndexChoose = randomChoose.nextInt(items.length);
-    GameState.itemWithCypher = items[randomIndexChoose];
-
+    resetOffice();
     resetchecker();
   }
 
@@ -169,5 +162,14 @@ public class OfficeController {
   private void updateTimerLabel() {
   }
 
-  private void resetOffice() {}
+  private void resetOffice() {
+    // Getting random item to be used to hide the cypher
+    Rectangle[] items =
+        new Rectangle[] {
+          bin, phone, blackBoard, deskDrawers,
+        };
+    Random randomChoose = new Random();
+    int randomIndexChoose = randomChoose.nextInt(items.length);
+    GameState.itemWithCypher = items[randomIndexChoose];
+  }
 }
