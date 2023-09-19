@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.controllers.CafeteriaController;
@@ -74,6 +75,13 @@ public class App extends Application {
     scene = new Scene(SceneManager.getUiRoot(AppUi.START_INTERFACE), 1113, 605);
 
     stage.setScene(scene);
+    scene.setOnKeyPressed(event -> {
+      if (event.getCode() == KeyCode.LEFT) {
+        scene.setRoot(SceneManager.switchRoom(true));
+      }else if(event.getCode() == KeyCode.RIGHT) {
+        scene.setRoot(SceneManager.switchRoom(false));
+      }
+    });
     stage.show();
     SceneManager.getUiRoot(AppUi.START_INTERFACE).requestFocus();
   }
