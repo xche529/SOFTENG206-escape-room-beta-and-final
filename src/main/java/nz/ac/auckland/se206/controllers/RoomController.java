@@ -87,8 +87,9 @@ public class RoomController {
    * Initializes the room view, it is called when the room loads.
    *
    * @throws ApiProxyException
+   * @throws IOException
    */
-  public void initialize() throws ApiProxyException {
+  public void initialize() throws ApiProxyException, IOException {
 
     itemToChoose();
     prepareRiddle();
@@ -135,11 +136,65 @@ public class RoomController {
                 Platform.exit();
               });
         });
+
+    resetchecker();
+  }
+
+  /*
+   * This method starts a thread that checks if the cafeteria needs to be reset.
+   * 
+   * @throws IOException
+   */
+
+  private void resetchecker() throws IOException {
+    timeline =
+        new Timeline(
+            new KeyFrame(
+                Duration.seconds(1),
+                event -> {
+                  if (GameState.secondsRemaining >= 0) {
+                    updateTimerLabel();
+                  }
+                  if (GameState.secondsRemaining == 0) {
+                    if (GameState.gameFinishedRoom){
+
+                      GameState.resetCafeteria = true;
+                      GameState.resetOffice = true;
+                      GameState.resetRoom = true;
+                      try {
+                        Scene scene = sink.getScene();
+                        scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.END_LOST));
+                      } catch (NullPointerException e) {
+                      }
+                    }
+                  }
+                  updateTimerLabel();
+                  if (GameState.resetRoom) {
+                    resetOffice();
+                    GameState.resetRoom = false;
+                  }
+                }));
+    timeline.setCycleCount(Timeline.INDEFINITE);
+    timeline.play();
+  }
+
+  private void resetOffice() {
+    itemToChoose();
+    toiletArrow.setOpacity(0);
+    toiletPaperArrow.setOpacity(0);
+    ventArrow.setOpacity(0);
+    sinkArrow.setOpacity(0);
+    mirrorArrow.setOpacity(0);
+    towelArrow.setOpacity(0);
+    doorArrowSmall.setOpacity(0);
+    guardSpeechPane.setVisible(false);
+    animateArrows(doorArrow);
+    GameState.setRiddleResolved(false);
   }
 
   /*
    * This method prepares the riddle for the player to solve.
-   * 
+   *
    * @throws ApiProxyException
    */
   private void prepareRiddle() throws ApiProxyException {
@@ -193,13 +248,13 @@ public class RoomController {
 
   private void handleTimerExpired() {
     if (!GameState.isWon) {
-      Scene scene = door.getScene();
       GameState.resetCafeteria = true;
       GameState.resetOffice = true;
       GameState.resetRoom = true;
       GameState.gameFinishedCafeteria = true;
       GameState.gameFinishedOffice = true;
-      scene.setRoot(SceneManager.getUiRoot(AppUi.END_LOST));
+      GameState.gameFinishedRoom = true;
+      // TODO: fix the error
     }
   }
 
