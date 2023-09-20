@@ -22,40 +22,40 @@ import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 public class OfficeController {
 
   @FXML
- 
+
   private Rectangle deskDrawers;
   @FXML
- 
+
   private Rectangle bin;
   @FXML
- 
+
   private Rectangle blackBoard;
   @FXML
- 
+
   private Rectangle phone;
   @FXML
- 
+
   private ImageView binBig;
   @FXML
- 
+
   private ImageView blackBoardBig;
   @FXML
- 
+
   private ImageView phoneBig;
   @FXML
- 
+
   private ImageView deskDrawersBig;
   @FXML
- 
+
   private ImageView prisonerOne;
   @FXML
- 
+
   private ImageView prisonerTwo;
   @FXML
- 
+
   private ImageView speechBubbleOne;
   @FXML
- 
+
   private ImageView speechBubbleTwo;
   @FXML
   private TextArea inputBox;
@@ -96,6 +96,24 @@ public class OfficeController {
   private ImageView crossBig;
   @FXML
   private Label numberLabel;
+  @FXML
+  private Pane inspectingBinPane;
+  @FXML
+  private Pane gamePane;
+  @FXML
+  private Pane blurringPane;
+  @FXML
+  private Pane thoughtBubblePane;
+  @FXML
+  private Text thoughtBubbleText;
+  @FXML
+  private ImageView binConverter;
+  @FXML
+  private Pane inspectingBlackBoardPane;
+  @FXML
+  private ImageView inspectingBlackBoardConverter;
+  @FXML
+  private ImageView inspectingBlackBoardEmpty;
 
   private CafeteriaController cafeteriaController;
   private RoomController roomController;
@@ -139,6 +157,7 @@ public class OfficeController {
       GptAndTextAreaManager.sendMessage(message);
     }
   }
+
   @FXML
   private void initialize() {
     GptAndTextAreaManager.officeController = this;
@@ -147,7 +166,7 @@ public class OfficeController {
     GptAndTextAreaManager.officeInputBox = inputBox;
     GptAndTextAreaManager.officeObjectiveDisplayBoard = objectiveDisplayBoard;
 
-    animationItems = new ImageView[] {  prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo  };
+    animationItems = new ImageView[] { prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo };
     // Getting random item to be used to hide the cypher
     Rectangle[] items = new Rectangle[] {
         bin, phone, blackBoard, deskDrawers,
@@ -186,20 +205,49 @@ public class OfficeController {
   }
 
   @FXML
+  void onClickInspectingBinPane() {
+    inspectingBinPane.setVisible(false);
+    blurringPane.setVisible(false);
+    thoughtBubblePane.setVisible(false);
+    binConverter.setVisible(false);
+  }
+
+  @FXML
   private void clickBin(MouseEvent event) {
     if (GameState.itemWithCypher == bin) {
-      cypherPane.setVisible(true);
+      inspectingBinPane.setVisible(true);
+      binConverter.setVisible(true);
+      thoughtBubblePane.setVisible(true);
+      blurringPane.setVisible(true);
+      thoughtBubbleText.setText("What's that piece of paper???");
     } else {
-      System.out.println("binClicked");
+      inspectingBinPane.setVisible(true);
+      blurringPane.setVisible(true);
+      thoughtBubblePane.setVisible(true);
+      thoughtBubbleText.setText("Hmm.. Nothing here...");
     }
+  }
+
+  @FXML
+  void onClickInspectingBlackBoardPane() {
+    inspectingBlackBoardPane.setVisible(false);
+    blurringPane.setVisible(false);
+    thoughtBubblePane.setVisible(false);
   }
 
   @FXML
   private void clickBlackboard(MouseEvent event) {
     if (GameState.itemWithCypher == blackBoard) {
-      cypherPane.setVisible(true);
+      inspectingBlackBoardPane.setVisible(true);
+      inspectingBlackBoardConverter.setVisible(true);
+      blurringPane.setVisible(true);
+      thoughtBubblePane.setVisible(true);
+      thoughtBubbleText.setText("What's that chart???");
     } else {
-      System.out.println("blackBoardClicked");
+      inspectingBlackBoardPane.setVisible(true);
+      blurringPane.setVisible(true);
+      thoughtBubblePane.setVisible(true);
+      thoughtBubbleText.setText("Hmm.. Nothing here...");
     }
   }
 
