@@ -54,6 +54,7 @@ public class StartInterfaceController {
     Scene sceneButtonIsIn = button.getScene();
     FXMLLoader roomLoader = App.loadFxml("room");
     SceneManager.addUi(AppUi.ROOM, roomLoader.load());
+    SceneManager.getUiRoot(AppUi.ROOM).getTransforms().add(App.scale);
     RoomController roomController = roomLoader.getController();
     SceneManager.roomController = roomController;
     officeController.setRoomController(roomController);
