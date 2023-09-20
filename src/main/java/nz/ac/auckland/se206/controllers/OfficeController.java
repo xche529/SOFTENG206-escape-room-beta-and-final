@@ -68,6 +68,8 @@ public class OfficeController {
   private Pane phonePane;
   @FXML
   private ImageView crossBig;
+  @FXML
+  private Label numberLabel;
 
   private CafeteriaController cafeteriaController;
   private RoomController roomController;
@@ -115,6 +117,7 @@ public class OfficeController {
             (observable, oldValue, newValue) -> {
               if (newValue) {
                 paperPane.setVisible(true);
+                numberLabel.setText(GameState.phoneNumber);
               }
             });
   }
@@ -466,7 +469,20 @@ public class OfficeController {
 
   @FXML
   private void onClickCall() {
-
+    if (currentDigit == 9) {
+      String phoneNumber = digitOne.getText() + digitTwo.getText() + digitThree.getText() + " "
+          + digitFour.getText() + digitFive.getText() + digitSix.getText() + " " + digitSeven.getText()
+          + digitEight.getText() + digitNine.getText();
+      if (phoneNumber.equals(GameState.phoneNumber)) {
+        GameState.isWon = true;
+        Scene scene = phonePane.getScene();
+        scene.setRoot(SceneManager.getUiRoot(AppUi.END_WON));
+      } else {
+        System.out.println("Wrong number");
+      }
+    } else {
+      System.out.println("Number is invalid");
+    }
   }
 
   @FXML

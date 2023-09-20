@@ -103,8 +103,9 @@ public class CafeteriaController {
     System.out.println("-------------" + GameState.code);
 
     // Generate a random 6-digit number
-    String phoneNumber = Integer.toString(random.nextInt(999999 - 100000 + 1) + 100000);
-    numberLabel.setText("027" + " " + phoneNumber.substring(0, 3) + " " + phoneNumber.substring(3, 6));
+    String phoneNumberInitial = Integer.toString(random.nextInt(999999 - 100000 + 1) + 100000);
+    GameState.phoneNumber = "027" + " " + phoneNumberInitial.substring(0, 3) + " " + phoneNumberInitial.substring(3, 6);
+    numberLabel.setText(GameState.phoneNumber);
 
     // TODO: set visability of all required items
   }
@@ -272,7 +273,7 @@ public class CafeteriaController {
       showDialog(
           "Wrong combination",
           "Try again",
-          "The padlock did not open. " + GameState.codeWord + " " + GameState.code + " " + code);
+          "The padlock did not open.");
     }
   }
 

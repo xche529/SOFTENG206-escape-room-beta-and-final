@@ -22,6 +22,8 @@ public class GameState {
 
   public static boolean isWon = false;
 
+  public static String phoneNumber;
+
   public static String code;
 
   public static String codeWord;
