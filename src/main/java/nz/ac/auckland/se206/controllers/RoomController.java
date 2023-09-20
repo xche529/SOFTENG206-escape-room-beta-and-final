@@ -321,6 +321,7 @@ public class RoomController {
   public void onSubmitMessage() throws ApiProxyException {
     String message = inputBox.getText();
     inputBox.clear();
+    typePromptText.setVisible(true);
     if (message.trim().isEmpty()) {
       typePromptText.setVisible(true);
       return;

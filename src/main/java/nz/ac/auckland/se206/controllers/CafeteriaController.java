@@ -15,6 +15,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GptAndTextAreaManager;
+import nz.ac.auckland.se206.GptAndTextAreaManager.Characters;
 import nz.ac.auckland.se206.MovementControl;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
@@ -154,13 +155,15 @@ public class CafeteriaController {
   }
 
   @FXML
-  public void onSubmitMessage() {
+  public void onSubmitMessage() throws ApiProxyException {
     String message = inputBox.getText();
-    if (message.isEmpty()) {
+    inputBox.clear();
+    typePromptText.setVisible(true);
+    if (message.trim().isEmpty()) {
       typePromptText.setVisible(true);
       return;
     } else {
-
+      GptAndTextAreaManager.sendMessage(message);
     }
   }
 
@@ -355,14 +358,15 @@ public class CafeteriaController {
 
   @FXML
   private void onSpeechBubbleOneClicked() {
+    GptAndTextAreaManager.displayTarget(Characters.PRISONER_ONE);
     System.out.println("Speech bubble one clicked");
   }
 
   @FXML
   private void onSpeechBubbleTwoClicked() {
+    GptAndTextAreaManager.displayTarget(Characters.PRISONER_TWO);
     System.out.println("Speech bubble two clicked");
   }
-
   private void showDialog(String title, String headerText, String message) {
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
     alert.setTitle(title);
