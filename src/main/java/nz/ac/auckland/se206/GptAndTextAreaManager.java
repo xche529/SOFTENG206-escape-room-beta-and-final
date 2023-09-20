@@ -9,6 +9,7 @@ import nz.ac.auckland.se206.controllers.CafeteriaController;
 import nz.ac.auckland.se206.controllers.OfficeController;
 import nz.ac.auckland.se206.controllers.RoomController;
 import nz.ac.auckland.se206.gpt.ChatMessage;
+import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
@@ -59,6 +60,15 @@ public class GptAndTextAreaManager {
      * 
      * @param chat the ChatCompletionRequest for the chat history
      */
+    public static void initialize() throws ApiProxyException {
+        sendMessage(GptPromptEngineering.getGuardSetUp());
+        currentCharacter = Characters.PRISONER_ONE;
+        sendMessage(GptPromptEngineering.getPrisonerOneSetUp());
+        currentCharacter = Characters.PRISONER_TWO;
+        sendMessage(GptPromptEngineering.getPrisonerTwoSetUp());
+        displayTarget(Characters.GUARD);
+    }
+
     private static String getMessageHistory(ChatCompletionRequest chat) {
         String result = "";
         List<ChatMessage> messages = chat.getMessages();
@@ -67,6 +77,7 @@ public class GptAndTextAreaManager {
             result += messages.get(i).getRole() + ": " + chat.getMessages().get(i).getContent() + "\n\n";
         }
         return result;
+
     }
 
     /*
@@ -82,21 +93,25 @@ public class GptAndTextAreaManager {
             currentCharacter = Characters.GUARD;
             prompt = "Type here to talk to the guard";
             chatHistory = getMessageHistory(guardChatCompletionRequest);
-            roomChatDisplayBoard.setText(chatHistory);
-            officeChatDisplayBoard.setText(chatHistory);
-            cafeteriaChatDisplayBoard.setText(chatHistory);
+            System.out.println("display Guard history");
         } else if (character == Characters.PRISONER_ONE) {
             currentCharacter = Characters.PRISONER_ONE;
             prompt = "Type here to talk to prisoner1";
             chatHistory = getMessageHistory(prisonerOneCompletionRequest);
+            System.out.println("display Prisoner1 history");
         } else {
             currentCharacter = Characters.PRISONER_TWO;
             prompt = "Type here to talk to prisoner2";
             chatHistory = getMessageHistory(prisonerTwoCompletionRequest);
+            System.out.println("display Prisoner2 history");
         }
+        
         roomTypePromptText.setText(prompt);
         officeTypePromptText.setText(prompt);
         cafeteriaTypePromptText.setText(prompt);
+        roomChatDisplayBoard.setText(chatHistory);
+        officeChatDisplayBoard.setText(chatHistory);
+        cafeteriaChatDisplayBoard.setText(chatHistory);
     }
 
     public static void sendMessage(String message) throws ApiProxyException {
