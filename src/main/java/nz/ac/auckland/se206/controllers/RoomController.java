@@ -142,7 +142,7 @@ public class RoomController {
   }
 
   /*
-   * This method starts a thread that checks if the cafeteria needs to be reset.
+   * This method starts a thread that checks if the room needs to be reset.
    * 
    * @throws IOException
    */

@@ -4,6 +4,7 @@ import java.io.IOException;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.MenuButton;
@@ -32,11 +33,19 @@ public class StartInterfaceController {
    */
   @FXML
   private void onStartGame(Event event) throws IOException {
+    if (!twoMin.isSelected() && !fourMin.isSelected() && !sixMin.isSelected()) {
+      showDialog("Invaild Inputs", "Please select a difficulty and time limit", "");
+      return;
+    }
     Button button = (Button) event.getSource();
     Scene sceneButtonIsIn = button.getScene();
     SceneManager.addUi(AppUi.ROOM, App.loadFxml("room"));
+
     sceneButtonIsIn.setRoot(SceneManager.getUiRoot(AppUi.ROOM));
     System.out.println("Game started");
+    twoMin.setSelected(false);
+    fourMin.setSelected(false);
+    sixMin.setSelected(false);
   }
 
   /*
@@ -46,6 +55,21 @@ public class StartInterfaceController {
   private void onExitGame(Event event) {
     System.out.println("Goodbye!");
     System.exit(0);
+  }
+
+  /**
+   * Displays a dialog box with the given title, header text, and message.
+   *
+   * @param title the title of the dialog box
+   * @param headerText the header text of the dialog box
+   * @param message the message content of the dialog box
+   */
+  private void showDialog(String title, String headerText, String message) {
+    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    alert.setTitle(title);
+    alert.setHeaderText(headerText);
+    alert.setContentText(message);
+    alert.showAndWait();
   }
 
   /*
@@ -103,8 +127,8 @@ public class StartInterfaceController {
       twoMin.setSelected(false);
       fourMin.setSelected(false);
       sixMin.setSelected(true);
-      GameState.secondsRemaining = 30;
-      GameState.totalSeconds = 30;
+      GameState.secondsRemaining = 360;
+      GameState.totalSeconds = 360;
       System.out.println("Play time change: 6 minutes");
     }
   }
