@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
@@ -87,5 +88,72 @@
             <Image url="@../images/speechBubble.png" />
          </image>
       </ImageView>
+      <Pane layoutX="37.0" layoutY="37.0" prefHeight="531.0" prefWidth="1035.0" style="-fx-background-color: white;">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="194.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="409.0" fitWidth="666.0" layoutX="160.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/Phone2.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="digitOne" layoutX="87.0" layoutY="33.0" prefHeight="71.0" prefWidth="33.0" text="_">
+               <font>
+                  <Font size="61.0" />
+               </font></Label>
+            <Label fx:id="digitTwo" layoutX="143.0" layoutY="33.0" prefHeight="71.0" prefWidth="33.0" text="_">
+               <font>
+                  <Font size="61.0" />
+               </font>
+            </Label>
+            <Label fx:id="digitThree" layoutX="199.0" layoutY="33.0" prefHeight="71.0" prefWidth="33.0" text="_">
+               <font>
+                  <Font size="61.0" />
+               </font>
+            </Label>
+            <Label fx:id="digitFour" layoutX="255.0" layoutY="33.0" prefHeight="71.0" prefWidth="33.0" text="_">
+               <font>
+                  <Font size="61.0" />
+               </font>
+            </Label>
+            <Label fx:id="digitFive" layoutX="311.0" layoutY="33.0" prefHeight="71.0" prefWidth="33.0" text="_">
+               <font>
+                  <Font size="61.0" />
+               </font>
+            </Label>
+            <Label fx:id="digitSix" layoutX="367.0" layoutY="33.0" prefHeight="71.0" prefWidth="33.0" text="_">
+               <font>
+                  <Font size="61.0" />
+               </font>
+            </Label>
+            <Label fx:id="digitNine" layoutX="535.0" layoutY="33.0" prefHeight="71.0" prefWidth="33.0" text="_">
+               <font>
+                  <Font size="61.0" />
+               </font>
+            </Label>
+            <Label fx:id="digitEight" layoutX="479.0" layoutY="33.0" prefHeight="71.0" prefWidth="33.0" text="_">
+               <font>
+                  <Font size="61.0" />
+               </font>
+            </Label>
+            <Label fx:id="digitSeven" layoutX="423.0" layoutY="33.0" prefHeight="71.0" prefWidth="33.0" text="_">
+               <font>
+                  <Font size="61.0" />
+               </font>
+            </Label>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="23.0" layoutX="564.0" layoutY="235.0" onMouseClicked="#onClickOne" onMouseEntered="#oneMouseEntered" onMouseExited="#oneMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="24.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="23.0" layoutX="529.0" layoutY="232.0" onMouseClicked="#onClickTwo" onMouseEntered="#twoMouseEntered" onMouseExited="#twoMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="24.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="23.0" layoutX="497.0" layoutY="244.0" onMouseClicked="#onClickThree" onMouseEntered="#threeMouseEntered" onMouseExited="#threeMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="24.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="26.0" layoutX="470.0" layoutY="264.0" onMouseClicked="#onClickFour" onMouseEntered="#fourMouseEntered" onMouseExited="#fourMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="24.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="23.0" layoutX="461.0" layoutY="295.0" onMouseClicked="#onClickFour" onMouseEntered="#fiveMouseEntered" onMouseExited="#fiveMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="24.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="23.0" layoutX="467.0" layoutY="328.0" onMouseClicked="#onClickSix" onMouseEntered="#sixMouseEntered" onMouseExited="#sixMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="28.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="23.0" layoutX="493.0" layoutY="350.0" onMouseClicked="#onClickSeven" onMouseEntered="#sevenMouseEntered" onMouseExited="#sevenMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="24.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="23.0" layoutX="528.0" layoutY="361.0" onMouseClicked="#onClickEight" onMouseEntered="#eightMouseEntered" onMouseExited="#eightMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="24.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="23.0" layoutX="562.0" layoutY="357.0" onMouseClicked="#onClickNine" onMouseEntered="#nineMouseEntered" onMouseExited="#nineMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="24.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="593.0" layoutY="338.0" onMouseClicked="#onClickZero" onMouseEntered="#zeroMouseEntered" onMouseExited="#zeroMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="24.0" />
+            <Button layoutX="762.0" layoutY="22.0" mnemonicParsing="false" onMouseClicked="#onClickClear" text="Clear" />
+            <Button layoutX="767.0" layoutY="56.0" mnemonicParsing="false" onMouseClicked="#onClickCall" text="Call" />
+            <Button layoutX="733.0" layoutY="89.0" mnemonicParsing="false" onMouseClicked="#onClickDelete" text="Delete Last Digit" />
+         </children>
+      </Pane>
    </children>
 </Pane>
