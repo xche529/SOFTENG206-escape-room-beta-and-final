@@ -28,82 +28,82 @@ import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 public class CafeteriaController {
 
   @FXML
- 
+
   private Rectangle paintingWithSafe;
   @FXML
- 
+
   private Rectangle paintingWithoutSafe;
   @FXML
- 
+
   private Rectangle vendingMachine;
   @FXML
- 
+
   private ImageView paintingWithSafeBig;
   @FXML
- 
+
   private ImageView paintingWithoutSafeBig;
   @FXML
- 
+
   private ImageView safe;
   @FXML
- 
+
   private ImageView safeBig;
   @FXML
- 
+
   private ImageView vendingMachineBig;
   @FXML
- 
+
   private Pane padlockPane;
   @FXML
- 
+
   private ImageView digitOnePlus;
   @FXML
- 
+
   private ImageView digitOneMinus;
   @FXML
- 
+
   private ImageView digitTwoPlus;
   @FXML
- 
+
   private ImageView digitTwoMinus;
   @FXML
- 
+
   private ImageView digitThreePlus;
   @FXML
- 
+
   private ImageView digitThreeMinus;
   @FXML
- 
+
   private ImageView digitFourPlus;
   @FXML
- 
+
   private ImageView digitFourMinus;
   @FXML
- 
+
   private ImageView prisonerOne;
   @FXML
- 
+
   private ImageView prisonerTwo;
   @FXML
- 
+
   private ImageView speechBubbleOne;
   @FXML
- 
+
   private ImageView speechBubbleTwo;
   @FXML
- 
+
   private Label digitOne;
   @FXML
- 
+
   private Label digitTwo;
   @FXML
- 
+
   private Label digitThree;
   @FXML
- 
+
   private Label digitFour;
   @FXML
- 
+
   private Button openButton;
   @FXML
   private Button responseSubmitButton;
@@ -154,6 +154,15 @@ public class CafeteriaController {
     GptAndTextAreaManager.cafeteriaObjectiveDisplayBoard = objectiveDisplayBoard;
 
     animationItems = new ImageView[] { prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo };
+
+    Random random = new Random();
+
+    // Generate a random 6-digit number
+    String phoneNumberInitial = Integer.toString(random.nextInt(999999 - 100000 + 1) + 100000);
+    GameState.phoneNumber = "027" + " " + phoneNumberInitial.substring(0, 3) + " " + phoneNumberInitial.substring(3, 6);
+    numberLabel.setText(GameState.phoneNumber);
+
+
   }
 
   @FXML
@@ -370,7 +379,6 @@ public class CafeteriaController {
     collectPaperLabel.setStyle("-fx-text-fill: black;");
   }
 
-
   @FXML
   private void onSpeechBubbleOneClicked() {
     GptAndTextAreaManager.displayTarget(Characters.PRISONER_ONE);
@@ -382,6 +390,7 @@ public class CafeteriaController {
     GptAndTextAreaManager.displayTarget(Characters.PRISONER_TWO);
     System.out.println("Speech bubble two clicked");
   }
+
   private void showDialog(String title, String headerText, String message) {
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
     alert.setTitle(title);
