@@ -341,13 +341,6 @@ public class CafeteriaController {
     int code = digitOneInt * 1000 + digitTwoInt * 100 + digitThreeInt * 10 + digitFourInt;
     if (code == Integer.parseInt(GameState.code)) {
 
-      Scene scene = openButton.getScene();
-      GameState.isWon = true;
-      GameState.resetCafeteria = true;
-      GameState.resetOffice = true;
-      GameState.resetRoom = true;
-      scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.END_WON));
-
       padlockPane.setVisible(false);
       paperPane.setVisible(true);
     } else {
