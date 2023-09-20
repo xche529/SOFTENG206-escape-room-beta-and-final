@@ -62,6 +62,12 @@ public class OfficeController {
   private Button exitVeiwButton;
   @FXML
   private Pane cypherPane;
+  @FXML
+  private Pane paperPane;
+  @FXML
+  private Pane phonePane;
+  @FXML
+  private ImageView crossBig;
 
   private CafeteriaController cafeteriaController;
   private RoomController roomController;
@@ -93,7 +99,7 @@ public class OfficeController {
     animationItems = new ImageView[] { prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo };
     // Getting random item to be used to hide the cypher
     Rectangle[] items = new Rectangle[] {
-        bin, phone, blackBoard, deskDrawers,
+        bin, blackBoard, deskDrawers,
     };
     Random randomChoose = new Random();
     int randomIndexChoose = randomChoose.nextInt(items.length);
@@ -103,6 +109,14 @@ public class OfficeController {
         digitOne, digitTwo, digitThree, digitFour, digitFive, digitSix, digitSeven, digitEight,
         digitNine
     };
+
+    GameState.hasPaperProperty()
+        .addListener(
+            (observable, oldValue, newValue) -> {
+              if (newValue) {
+                paperPane.setVisible(true);
+              }
+            });
   }
 
   @FXML
@@ -139,11 +153,7 @@ public class OfficeController {
 
   @FXML
   private void clickPhone(MouseEvent event) {
-    if (GameState.itemWithCypher == phone) {
-      cypherPane.setVisible(true);
-    } else {
-      System.out.println("phoneClicked");
-    }
+    phonePane.setVisible(true);
   }
 
   @FXML
@@ -430,5 +440,47 @@ public class OfficeController {
       digits[currentDigit].setText("0");
       currentDigit++;
     }
+  }
+
+  @FXML
+  private void onClickClear() {
+    digitOne.setText("_");
+    digitTwo.setText("_");
+    digitThree.setText("_");
+    digitFour.setText("_");
+    digitFive.setText("_");
+    digitSix.setText("_");
+    digitSeven.setText("_");
+    digitEight.setText("_");
+    digitNine.setText("_");
+    currentDigit = 0;
+  }
+
+  @FXML
+  private void onClickDelete() {
+    if (currentDigit > 0) {
+      digits[currentDigit - 1].setText("_");
+      currentDigit--;
+    }
+  }
+
+  @FXML
+  private void onClickCall() {
+
+  }
+
+  @FXML
+  private void onClickCross() {
+    phonePane.setVisible(false);
+  }
+
+  @FXML
+  private void crossMouseEntered() {
+    crossBig.setVisible(true);
+  }
+
+  @FXML
+  private void crossMouseExited() {
+    crossBig.setVisible(false);
   }
 }

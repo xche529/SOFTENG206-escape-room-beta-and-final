@@ -283,7 +283,7 @@ public class CafeteriaController {
 
   @FXML
   private void onClickCollectPaper() {
-    GameState.hasPaper = true;
+    GameState.hasPaperProperty().set(true);
     paperPane.setVisible(false);
   }
 
