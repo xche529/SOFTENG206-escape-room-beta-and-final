@@ -103,7 +103,6 @@ public class RoomController {
                 event -> {
                   if (GameState.stopTimer) {
                     timeline.stop();
-                    GameState.stopTimer = false;
                   }
                   GameState.secondsRemaining--;
                   updateTimerLabel();
