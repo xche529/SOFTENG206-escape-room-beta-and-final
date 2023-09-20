@@ -1,10 +1,12 @@
-package nz.ac.auckland.se206;
+package nz.ac.auckland.se206.controllers;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
-public class PlayHistory {
+
+public class PlayHistory implements Serializable{
   int score;
   int timeTook;
   int difficulty;

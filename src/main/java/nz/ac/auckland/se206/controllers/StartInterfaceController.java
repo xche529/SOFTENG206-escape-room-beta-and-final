@@ -15,7 +15,6 @@ import javafx.scene.control.TextArea;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GptAndTextAreaManager;
-import nz.ac.auckland.se206.PlayHistory;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
@@ -45,6 +44,7 @@ public class StartInterfaceController {
     System.out.println("StartInterfaceController initialized");
     try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("player_history.dat"))) {
       PlayHistory playHistory = (PlayHistory) ois.readObject();
+      System.out.println(playHistory.toString());
       playHistoryTextArea.setText(playHistory.toString());
     } catch (IOException | ClassNotFoundException e) {
       playHistoryTextArea.setText("No play history found");

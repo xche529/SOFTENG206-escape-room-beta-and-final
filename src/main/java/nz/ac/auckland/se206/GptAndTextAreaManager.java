@@ -154,5 +154,4 @@ public class GptAndTextAreaManager {
         Thread gptThread = new Thread(null, backgroundTask);
         gptThread.start();
     }
-
 }
