@@ -20,33 +20,39 @@ public class PlayHistory {
   }
 
   public void addHistory(PlayHistory playHistory) {
-    if (this.parentPlayHistory != null) {
-      if (this.parentPlayHistory.score > playHistory.score && this.score < playHistory.score) {
+
+    if (playHistory.score > this.score) {
+      if (this.parentPlayHistory == null) {
         playHistory.childPlayHistory = this;
         this.parentPlayHistory = playHistory;
-        this.parentPlayHistory.childPlayHistory = playHistory;
+        return;
+      } else {
+        if (this.parentPlayHistory.score > playHistory.score) {
+          playHistory.parentPlayHistory = this.parentPlayHistory;
+          playHistory.childPlayHistory = this;
+          this.parentPlayHistory.childPlayHistory = playHistory;
+          this.parentPlayHistory = playHistory;
+          return;
+        } else {
+          this.parentPlayHistory.addHistory(playHistory);
+          return;
+        }
+      }
+    } else {
+      if (this.childPlayHistory == null) {
+        this.childPlayHistory = playHistory;
+        playHistory.parentPlayHistory = this;
         return;
       }
-    } else if (this.parentPlayHistory == null && this.score < playHistory.score) {
-      playHistory.childPlayHistory = this;
-      this.parentPlayHistory = playHistory;
-      return;
-    } else if (this.childPlayHistory == null && this.score > playHistory.score) {
-      playHistory.parentPlayHistory = this;
-      this.childPlayHistory = playHistory;
-      return;
-    } else if (this.score == playHistory.score) {
-      if (this.childPlayHistory != null) {
+      if (this.childPlayHistory.score < playHistory.score) {
+        playHistory.childPlayHistory = this.childPlayHistory;
+        playHistory.parentPlayHistory = this;
         this.childPlayHistory.parentPlayHistory = playHistory;
-      }
-      this.childPlayHistory = playHistory;
-      playHistory.parentPlayHistory = this;
-
-    } else {
-      if (playHistory.score > this.score) {
-        this.parentPlayHistory.addHistory(playHistory);
-      } else if (playHistory.score < this.score) {
+        this.childPlayHistory = playHistory;
+        return;
+      } else {
         this.childPlayHistory.addHistory(playHistory);
+        return;
       }
     }
   }
@@ -58,16 +64,14 @@ public class PlayHistory {
       result = this.parentPlayHistory.toString();
     } else {
       do {
-        result =
-            "Name: "
-                + playHistory.name
-                + " Score: "
-                + playHistory.score
-                + " Time: "
-                + playHistory.timeTook
-                + " Difficulty: "
-                + playHistory.difficulty
-                + "\n";
+        result += playHistory.name
+            + " Score: "
+            + playHistory.score
+            + " Time: "
+            + playHistory.timeTook
+            + " Difficulty: "
+            + playHistory.difficulty
+            + "\n";
         playHistory = playHistory.childPlayHistory;
       } while (playHistory != null);
     }
@@ -75,8 +79,7 @@ public class PlayHistory {
   }
 
   public void saveHistory() {
-    try (ObjectOutputStream oos =
-        new ObjectOutputStream(new FileOutputStream("player_history.dat"))) {
+    try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("player_history.dat"))) {
       oos.writeObject(this);
     } catch (IOException e) {
       e.printStackTrace();
