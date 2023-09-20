@@ -32,7 +32,16 @@ public class GptPromptEngineering {
     //     + " than 20 words. First message ask what they've completed so far. They only have 2"
     //     + " questions so answer in one go. Do not ask for them to enter more info! Just"
     //     + " reply with text, no \"Role: \".";
-    return "you are a Guard";
+    return "You are playing the role of a guard who is helping someone escape an escape room where"
+      + " they are the prisoner.  You can only give the" 
+      + "prisoner 3 hints. You should give the prisoner a riddle with the answer sink to give "
+      + "them their first clue in your first message. Sink is the only correct answer. You should tell them that the answer "
+      + "to the riddle will help them escape in your first message. Never say the word sink. The riddle does not count as a hint. "
+      + "Keep your "
+      + "messages as concise as possible. Never write from the players/prisoners perspective. Only write what "
+      + "the guard says. Never refer to the prison as an escape room. Don't give a hint that is not "
+      + "asked for\r\n" + //
+        "";
   }
 
   public static String getPrisonerOneSetUp(){

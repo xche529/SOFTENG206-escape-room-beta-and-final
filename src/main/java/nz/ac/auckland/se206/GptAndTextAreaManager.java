@@ -73,7 +73,7 @@ public class GptAndTextAreaManager {
         String result = "";
         List<ChatMessage> messages = chat.getMessages();
         // IMPORTANT: increase i here to filtout the prompt Engineering content
-        for (int i = 0; i < messages.size(); i++) {
+        for (int i = 1; i < messages.size(); i++) {
             result += messages.get(i).getRole() + ": " + chat.getMessages().get(i).getContent() + "\n\n";
         }
         return result;
