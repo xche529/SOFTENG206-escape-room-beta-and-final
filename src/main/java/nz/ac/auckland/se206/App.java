@@ -9,9 +9,11 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.transform.Scale;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.scene.layout.VBox;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.controllers.CafeteriaController;
 import nz.ac.auckland.se206.controllers.OfficeController;
+import nz.ac.auckland.se206.controllers.RoomController;
 import nz.ac.auckland.se206.controllers.StartInterfaceController;
 
 /**
@@ -21,8 +23,9 @@ import nz.ac.auckland.se206.controllers.StartInterfaceController;
  */
 public class App extends Application {
   public static Scale scale;
-
+  public static double overallScale = 1;
   private static Scene scene;
+  Boolean isFirstSwitch = false;
 
   public static void main(final String[] args) {
     launch();
@@ -54,7 +57,6 @@ public class App extends Application {
    */
   @Override
   public void start(final Stage stage) throws IOException {
-    double overallScale = 1;
     Screen screen = Screen.getPrimary();
     double width = screen.getBounds().getWidth();
     double height = screen.getBounds().getHeight();
@@ -73,14 +75,24 @@ public class App extends Application {
     FXMLLoader officeSceneLoader = loadFxml("officeScene");
     FXMLLoader cafeteriaLoader = loadFxml("cafeteria");
     FXMLLoader StartInterfaceLoader = loadFxml("StartInterface");
+    FXMLLoader textAreaLoader = loadFxml("textArea");
+    FXMLLoader roomLoader = loadFxml("room");
+    VBox cafeteria = cafeteriaLoader.load();
+    VBox office = officeSceneLoader.load();
+    VBox room = roomLoader.load();
+    VBox textArea = textAreaLoader.load();
+
+    VBox cafeteriaVBox = new VBox(cafeteria, textArea);
+    VBox officeVBox = new VBox(office, textArea);
+    VBox roomVBox = new VBox(room, textArea);
 
     SceneManager.addUi(AppUi.END_WON, endScreenWonLoader.load());
     SceneManager.addUi(AppUi.END_LOST, endScreenLostLoader.load());
-    SceneManager.addUi(AppUi.OFFICE, officeSceneLoader.load());
-    SceneManager.addUi(AppUi.CAFETERIA, cafeteriaLoader.load());
     SceneManager.addUi(AppUi.START_INTERFACE, StartInterfaceLoader.load());
-    SceneManager.getUiRoot(AppUi.CAFETERIA).getTransforms().add(scale);
-    SceneManager.getUiRoot(AppUi.OFFICE).getTransforms().add(scale);
+    SceneManager.addUi(AppUi.OFFICE, officeVBox);
+    SceneManager.addUi(AppUi.CAFETERIA, cafeteriaVBox);
+    SceneManager.addUi(AppUi.ROOM, roomVBox);
+    SceneManager.addUi(AppUi.TEXT_AREA, textArea);
     SceneManager.getUiRoot(AppUi.START_INTERFACE).getTransforms().add(scale);
     SceneManager.getUiRoot(AppUi.END_WON).getTransforms().add(scale);
     SceneManager.getUiRoot(AppUi.END_LOST).getTransforms().add(scale);
@@ -88,26 +100,35 @@ public class App extends Application {
     CafeteriaController cafeteriaController = cafeteriaLoader.getController();
     OfficeController officeController = officeSceneLoader.getController();
     StartInterfaceController startInterfaceController = StartInterfaceLoader.getController();
+    RoomController roomController = roomLoader.getController();
 
     SceneManager.cafeteriaController = cafeteriaController;
     SceneManager.officeController = officeController;
     cafeteriaController.setOfficeController(officeController);
     officeController.setCafeteriaController(cafeteriaController);
-    startInterfaceController.setOfficeController(officeController);
-    startInterfaceController.setCafeteriaController(cafeteriaController);
+    startInterfaceController.setRoomController(roomController);
+    SceneManager.roomController = roomController;
+    officeController.setRoomController(roomController);
+    cafeteriaController.setRoomController(roomController);
+    roomController.setCafeteriaController(cafeteriaController);
+    roomController.setOfficeController(officeController);
 
     Safe.getRandomCode();
 
     scene = new Scene(SceneManager.getUiRoot(AppUi.START_INTERFACE), 1113 * overallScale, 800 * overallScale);
     stage.setScene(scene);
     scene.addEventFilter(javafx.scene.input.KeyEvent.KEY_PRESSED, event -> {
+      VBox up = null;
       if (event.getCode() == KeyCode.LEFT) {
-        scene.setRoot(SceneManager.switchRoom(true));
+        SceneManager.switchRoom(true, scene);
       } else if (event.getCode() == KeyCode.RIGHT) {
-        scene.setRoot(SceneManager.switchRoom(false));
+        SceneManager.switchRoom(false, scene);
+      }
+      if (up == null) {
+        return;
       }
     });
     stage.show();
-    SceneManager.getUiRoot(AppUi.START_INTERFACE).requestFocus();
+    // SceneManager.getUiRoot(AppUi.START_INTERFACE).requestFocus();
   }
 }
