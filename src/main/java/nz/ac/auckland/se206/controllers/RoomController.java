@@ -101,6 +101,10 @@ public class RoomController {
             new KeyFrame(
                 Duration.seconds(1),
                 event -> {
+                  if (GameState.stopTimer) {
+                    timeline.stop();
+                    GameState.stopTimer = false;
+                  }
                   GameState.secondsRemaining--;
                   updateTimerLabel();
                   if (GameState.secondsRemaining == 90 && GameState.isWon == false) {

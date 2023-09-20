@@ -46,6 +46,8 @@ public static boolean gameFinishedOffice = false;
 
 public static boolean gameFinishedRoom = false;
 
+public static boolean stopTimer = false;
+
 
 
   public static boolean isRiddleResolved() {
