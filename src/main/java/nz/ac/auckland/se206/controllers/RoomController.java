@@ -156,8 +156,8 @@ public class RoomController {
    * @throws IOException
    */
   public void initialize() throws ApiProxyException, IOException {
-  
-      // initialize fields in the GptAndTextAreaManager class
+
+    // initialize fields in the GptAndTextAreaManager class
     GptAndTextAreaManager.roomController = this;
     GptAndTextAreaManager.roomChatDisplayBoard = chatDisplayBoard;
     GptAndTextAreaManager.roomTypePromptText = typePromptText;
@@ -165,7 +165,8 @@ public class RoomController {
     GptAndTextAreaManager.roomObjectiveDisplayBoard = objectiveDisplayBoard;
 
     animationItems = new ImageView[] { prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo };
-  resetAnimation();
+    resetAnimation();
+
 
     // Sending the initial request so the riddle is ready when the player enters the
     // chat
@@ -178,29 +179,27 @@ public class RoomController {
     // GptPromptEngineering.getRiddleWithGivenWord(GameState.itemToChoose.getId()));
     // runGpt(userChatMessage, lastMsg -> {});
 
-
     itemToChoose();
     prepareRiddle();
 
     // Setting up the timer timeline
-    timeline =
-        new Timeline(
-            new KeyFrame(
-                Duration.seconds(1),
-                event -> {
-                  if (GameState.stopTimer) {
-                    timeline.stop();
-                  }
-                  GameState.secondsRemaining--;
-                  updateTimerLabel();
-                  if (GameState.secondsRemaining == 90 && GameState.isWon == false) {
-                    textToSpeech.speak("a minute and a half remaining");
-                  } else if (GameState.secondsRemaining == 60 && GameState.isWon == false) {
-                    textToSpeech.speak("one minute remaining");
-                  } else if (GameState.secondsRemaining == 30 && GameState.isWon == false) {
-                    textToSpeech.speak("thirty seconds remaining");
-                  }
-                }));
+    timeline = new Timeline(
+        new KeyFrame(
+            Duration.seconds(1),
+            event -> {
+              if (GameState.stopTimer) {
+                timeline.stop();
+              }
+              GameState.secondsRemaining--;
+              updateTimerLabel();
+              if (GameState.secondsRemaining == 90 && GameState.isWon == false) {
+                textToSpeech.speak("a minute and a half remaining");
+              } else if (GameState.secondsRemaining == 60 && GameState.isWon == false) {
+                textToSpeech.speak("one minute remaining");
+              } else if (GameState.secondsRemaining == 30 && GameState.isWon == false) {
+                textToSpeech.speak("thirty seconds remaining");
+              }
+            }));
 
     timeline.setCycleCount(GameState.totalSeconds);
     timeline.setOnFinished(event -> handleTimerExpired());
@@ -230,6 +229,7 @@ public class RoomController {
         });
 
     resetchecker();
+    doorArrow.setVisible(false);
   }
 
   /*
@@ -239,36 +239,35 @@ public class RoomController {
    */
 
   private void resetchecker() throws IOException {
-    timeline =
-        new Timeline(
-            new KeyFrame(
-                Duration.seconds(1),
-                event -> {
-                  if (GameState.secondsRemaining >= 0) {
-                    updateTimerLabel();
-                  }
-                  if (GameState.secondsRemaining == 0) {
-                    if (GameState.gameFinishedRoom){
+    timeline = new Timeline(
+        new KeyFrame(
+            Duration.seconds(1),
+            event -> {
+              if (GameState.secondsRemaining >= 0) {
+                updateTimerLabel();
+              }
+              if (GameState.secondsRemaining == 0) {
+                if (GameState.gameFinishedRoom) {
 
-                      GameState.resetCafeteria = true;
-                      GameState.resetOffice = true;
-                      GameState.resetRoom = true;
-                      try {
-                        Scene scene = sink.getScene();
-                        scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.END_LOST));
-                      } catch (NullPointerException e) {
-                      }
-                    }
+                  GameState.resetCafeteria = true;
+                  GameState.resetOffice = true;
+                  GameState.resetRoom = true;
+                  try {
+                    Scene scene = sink.getScene();
+                    scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.END_LOST));
+                  } catch (NullPointerException e) {
                   }
-                  updateTimerLabel();
-                  if (GameState.resetRoom) {
-                      try {
-                        resetRoom();
-                      } catch (ApiProxyException e) {
-                      }
-                    GameState.resetRoom = false;
-                  }
-                }));
+                }
+              }
+              updateTimerLabel();
+              if (GameState.resetRoom) {
+                try {
+                  resetRoom();
+                } catch (ApiProxyException e) {
+                }
+                GameState.resetRoom = false;
+              }
+            }));
     timeline.setCycleCount(Timeline.INDEFINITE);
     timeline.play();
   }
@@ -295,20 +294,20 @@ public class RoomController {
    * @throws ApiProxyException
    */
   private void prepareRiddle() throws ApiProxyException {
-    // Sending the initial request so the riddle is ready when the player enters the chat
-    chatCompletionRequest =
-        new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
-    ChatMessage userChatMessage =
-        new ChatMessage(
-            "user", GptPromptEngineering.getRiddleWithGivenWord(GameState.itemToChoose.getId()));
-    runGpt(userChatMessage, lastMsg -> {});
+    // Sending the initial request so the riddle is ready when the player enters the
+    // chat
+    chatCompletionRequest = new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
+    ChatMessage userChatMessage = new ChatMessage(
+        "user", GptPromptEngineering.getRiddleWithGivenWord(GameState.itemToChoose.getId()));
+    runGpt(userChatMessage, lastMsg -> {
+    });
   }
 
   /*
    * This method selects a random item to be used in the riddle.
    */
   private void itemToChoose() {
-    Rectangle[] items = new Rectangle[] {vent, toiletPaper, toilet, mirror, towel, sink};
+    Rectangle[] items = new Rectangle[] { vent, toiletPaper, toilet, mirror, towel, sink };
     Random randomChoose = new Random();
     int randomIndexChoose = randomChoose.nextInt(items.length);
     GameState.itemToChoose = items[randomIndexChoose];
@@ -637,7 +636,8 @@ public class RoomController {
     chatPane.setVisible(true);
     questionInfoLabel.setVisible(true);
     chatCompletionRequest = new ChatCompletionRequest().setN(1).setTemperature(1).setTopP(0.5).setMaxTokens(100);
-    ChatMessage userChatMessage = new ChatMessage("user", GptPromptEngineering.getGuardSetUp(GameState.itemToChoose.getId()));
+    ChatMessage userChatMessage = new ChatMessage("user",
+        GptPromptEngineering.getGuardSetUp(GameState.itemToChoose.getId()));
     // runGpt(userChatMessage, lastMsg -> {});
   }
 
