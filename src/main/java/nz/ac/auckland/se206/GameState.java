@@ -18,7 +18,11 @@ public class GameState {
   /** Indicates whether the riddle has been resolved. */
   private static final BooleanProperty isRiddleResolvedProperty = new SimpleBooleanProperty(false);
 
+  private static final BooleanProperty hasPaper = new SimpleBooleanProperty(false);
+
   public static boolean isWon = false;
+
+  public static String phoneNumber;
 
   public static String code;
 
@@ -44,5 +48,17 @@ public class GameState {
 
   public static BooleanProperty isRiddleResolvedProperty() {
     return isRiddleResolvedProperty;
+  }
+
+  public static boolean hasPaper() {
+    return hasPaper.get();
+  }
+
+  public static void setHasPaper(boolean value) {
+    hasPaper.set(value);
+  }
+
+  public static BooleanProperty hasPaperProperty() {
+    return hasPaper;
   }
 }

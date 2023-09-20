@@ -1,5 +1,7 @@
 package nz.ac.auckland.se206.controllers;
 
+import java.util.Random;
+
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -17,32 +19,65 @@ import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class CafeteriaController {
 
-  @FXML private Rectangle paintingWithSafe;
-  @FXML private Rectangle paintingWithoutSafe;
-  @FXML private Rectangle vendingMachine;
-  @FXML private ImageView paintingWithSafeBig;
-  @FXML private ImageView paintingWithoutSafeBig;
-  @FXML private ImageView safe;
-  @FXML private ImageView safeBig;
-  @FXML private ImageView vendingMachineBig;
-  @FXML private Pane padlockPane;
-  @FXML private ImageView digitOnePlus;
-  @FXML private ImageView digitOneMinus;
-  @FXML private ImageView digitTwoPlus;
-  @FXML private ImageView digitTwoMinus;
-  @FXML private ImageView digitThreePlus;
-  @FXML private ImageView digitThreeMinus;
-  @FXML private ImageView digitFourPlus;
-  @FXML private ImageView digitFourMinus;
-  @FXML private ImageView prisonerOne;
-  @FXML private ImageView prisonerTwo;
-  @FXML private ImageView speechBubbleOne;
-  @FXML private ImageView speechBubbleTwo;
-  @FXML private Label digitOne;
-  @FXML private Label digitTwo;
-  @FXML private Label digitThree;
-  @FXML private Label digitFour;
-  @FXML private Button openButton;
+  @FXML
+  private Rectangle paintingWithSafe;
+  @FXML
+  private Rectangle paintingWithoutSafe;
+  @FXML
+  private Rectangle vendingMachine;
+  @FXML
+  private ImageView paintingWithSafeBig;
+  @FXML
+  private ImageView paintingWithoutSafeBig;
+  @FXML
+  private ImageView safe;
+  @FXML
+  private ImageView safeBig;
+  @FXML
+  private ImageView vendingMachineBig;
+  @FXML
+  private Pane padlockPane;
+  @FXML
+  private ImageView digitOnePlus;
+  @FXML
+  private ImageView digitOneMinus;
+  @FXML
+  private ImageView digitTwoPlus;
+  @FXML
+  private ImageView digitTwoMinus;
+  @FXML
+  private ImageView digitThreePlus;
+  @FXML
+  private ImageView digitThreeMinus;
+  @FXML
+  private ImageView digitFourPlus;
+  @FXML
+  private ImageView digitFourMinus;
+  @FXML
+  private ImageView prisonerOne;
+  @FXML
+  private ImageView prisonerTwo;
+  @FXML
+  private ImageView speechBubbleOne;
+  @FXML
+  private ImageView speechBubbleTwo;
+  @FXML
+  private Label digitOne;
+  @FXML
+  private Label digitTwo;
+  @FXML
+  private Label digitThree;
+  @FXML
+  private Label digitFour;
+  @FXML
+  private Button openButton;
+  @FXML
+  private Pane paperPane;
+  @FXML
+  private Label collectPaperLabel;
+  @FXML
+  private Label numberLabel;
+
   private OfficeController officeController;
   private RoomController roomController;
   private ImageView[] animationItems;
@@ -62,7 +97,15 @@ public class CafeteriaController {
    */
   @FXML
   private void initialize() {
-        animationItems = new ImageView[] {prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo};
+    animationItems = new ImageView[] { prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo };
+    Random random = new Random();
+
+    System.out.println("-------------" + GameState.code);
+
+    // Generate a random 6-digit number
+    String phoneNumberInitial = Integer.toString(random.nextInt(999999 - 100000 + 1) + 100000);
+    GameState.phoneNumber = "027" + " " + phoneNumberInitial.substring(0, 3) + " " + phoneNumberInitial.substring(3, 6);
+    numberLabel.setText(GameState.phoneNumber);
 
     // TODO: set visability of all required items
   }
@@ -224,14 +267,13 @@ public class CafeteriaController {
     int digitFourInt = Integer.parseInt(digitFour.getText());
     int code = digitOneInt * 1000 + digitTwoInt * 100 + digitThreeInt * 10 + digitFourInt;
     if (code == Integer.parseInt(GameState.code)) {
-      Scene scene = openButton.getScene();
-      GameState.isWon = true;
-      scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.END_WON));
+      padlockPane.setVisible(false);
+      paperPane.setVisible(true);
     } else {
       showDialog(
           "Wrong combination",
           "Try again",
-          "The padlock did not open. " + GameState.codeWord + " " + GameState.code + " " + code);
+          "The padlock did not open.");
     }
   }
 
@@ -239,8 +281,24 @@ public class CafeteriaController {
   private void onClickExitPadlock() {
     padlockPane.setVisible(false);
   }
-  
-    @FXML
+
+  @FXML
+  private void onClickCollectPaper() {
+    GameState.hasPaperProperty().set(true);
+    paperPane.setVisible(false);
+  }
+
+  @FXML
+  private void collectPaperMouseEntered() {
+    collectPaperLabel.setStyle("-fx-text-fill: blue;");
+  }
+
+  @FXML
+  private void collectPaperMouseExited() {
+    collectPaperLabel.setStyle("-fx-text-fill: black;");
+  }
+
+  @FXML
   private void onSpeechBubbleOneClicked() {
     System.out.println("Speech bubble one clicked");
   }
@@ -258,11 +316,11 @@ public class CafeteriaController {
     alert.showAndWait();
   }
 
-    public void walkInAnimation() {
+  public void walkInAnimation() {
     MovementControl.moveToLeft(true, 1, 500, animationItems);
   }
 
-  public  void resetAnimation() {
+  public void resetAnimation() {
     for (ImageView item : animationItems) {
       item.setTranslateX(500);
     }
