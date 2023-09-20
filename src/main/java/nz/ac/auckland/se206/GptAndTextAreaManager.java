@@ -8,6 +8,7 @@ import javafx.scene.text.Text;
 import nz.ac.auckland.se206.controllers.CafeteriaController;
 import nz.ac.auckland.se206.controllers.OfficeController;
 import nz.ac.auckland.se206.controllers.RoomController;
+import nz.ac.auckland.se206.controllers.TextAreaController;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
@@ -35,22 +36,12 @@ public class GptAndTextAreaManager {
     public static RoomController roomController;
     public static CafeteriaController cafeteriaController;
     public static OfficeController officeController;
+    public static TextAreaController textAreaController;
 
-    public static Text roomTypePromptText;
-    public static Text officeTypePromptText;
-    public static Text cafeteriaTypePromptText;
-
-    public static TextArea roomChatDisplayBoard;
-    public static TextArea officeChatDisplayBoard;
-    public static TextArea cafeteriaChatDisplayBoard;
-
-    public static TextArea roomInputBox;
-    public static TextArea officeInputBox;
-    public static TextArea cafeteriaInputBox;
-
-    public static TextArea roomObjectiveDisplayBoard;
-    public static TextArea officeObjectiveDisplayBoard;
-    public static TextArea cafeteriaObjectiveDisplayBoard;
+    public static Text textAreaTypePromptText;
+    public static TextArea textAreaChatDisplayBoard;
+    public static TextArea textAreaInputBox;
+    public static TextArea textAreaObjectiveDisplayBoard;
 
     public static boolean isGptRunning = false;
 
@@ -73,14 +64,17 @@ public class GptAndTextAreaManager {
         String result = "";
         List<ChatMessage> messages = chat.getMessages();
         // IMPORTANT: increase i here to filtout the prompt Engineering content
-        for (int i = 1; i < messages.size(); i++) {
+
+        if (messages.size() > 1) {
+          for (int i = 1; i < messages.size(); i++) {
             if (messages.get(i).getRole().equals("assistant") && messages.get(i).getContent().contains("Guard: Correct")) {
                 GameState.setRiddleResolved(true);
             }
-            result += messages.get(i).getRole() + ": " + chat.getMessages().get(i).getContent() + "\n\n";
+              result += messages.get(i).getRole() + ": " + chat.getMessages().get(i).getContent() + "\n\n";
+          }
+
         }
         return result;
-
     }
 
     /*
@@ -108,13 +102,8 @@ public class GptAndTextAreaManager {
             chatHistory = getMessageHistory(prisonerTwoCompletionRequest);
             System.out.println("display Prisoner2 history");
         }
-        
-        roomTypePromptText.setText(prompt);
-        officeTypePromptText.setText(prompt);
-        cafeteriaTypePromptText.setText(prompt);
-        roomChatDisplayBoard.setText(chatHistory);
-        officeChatDisplayBoard.setText(chatHistory);
-        cafeteriaChatDisplayBoard.setText(chatHistory);
+        textAreaTypePromptText.setText(prompt);
+        textAreaChatDisplayBoard.setText(chatHistory);
     }
 
     public static void sendMessage(String message) throws ApiProxyException {

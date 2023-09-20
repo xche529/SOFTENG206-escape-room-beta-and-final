@@ -61,6 +61,7 @@ public class OfficeController {
   @FXML
 
   private ImageView speechBubbleTwo;
+
   @FXML
   private TextArea inputBox;
   @FXML
@@ -70,6 +71,7 @@ public class OfficeController {
   @FXML
   private Text typePromptText;
   private Label digitOne;
+
   @FXML
   private Label digitTwo;
   @FXML
@@ -113,12 +115,14 @@ public class OfficeController {
     resetchecker();
 
     GptAndTextAreaManager.officeController = this;
-    GptAndTextAreaManager.officeChatDisplayBoard = chatDisplayBoard;
-    GptAndTextAreaManager.officeTypePromptText = typePromptText;
-    GptAndTextAreaManager.officeInputBox = inputBox;
-    GptAndTextAreaManager.officeObjectiveDisplayBoard = objectiveDisplayBoard;
+
+    //GptAndTextAreaManager.officeChatDisplayBoard = chatDisplayBoard;
+    //GptAndTextAreaManager.officeTypePromptText = typePromptText;
+    //GptAndTextAreaManager.officeInputBox = inputBox;
+    //GptAndTextAreaManager.officeObjectiveDisplayBoard = objectiveDisplayBoard;
 
     animationItems = new ImageView[] { prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo };
+
 
     digits = new Label[] {
         digitOne, digitTwo, digitThree, digitFour, digitFive, digitSix, digitSeven, digitEight,
@@ -151,24 +155,6 @@ public class OfficeController {
   public void resetAnimation() {
     for (ImageView item : animationItems) {
       item.setTranslateX(-500);
-    }
-  }
-
-  @FXML
-  public void onSetPromptTextFalse() {
-    typePromptText.setVisible(false);
-  }
-
-  @FXML
-  public void onSubmitMessage() throws ApiProxyException {
-    String message = inputBox.getText();
-    inputBox.clear();
-    typePromptText.setVisible(true);
-    if (message.trim().isEmpty()) {
-      typePromptText.setVisible(true);
-      return;
-    } else {
-      GptAndTextAreaManager.sendMessage(message);
     }
   }
 
@@ -259,22 +245,6 @@ public class OfficeController {
   private void onSpeechBubbleTwoClicked() {
     GptAndTextAreaManager.displayTarget(Characters.PRISONER_TWO);
     System.out.println("Speech bubble two clicked");
-  }
-
-  @FXML
-  private void goToRoom() {
-    roomController.resetAnimation();
-    Scene scene = bin.getScene();
-    scene.setRoot(SceneManager.getUiRoot(AppUi.ROOM));
-    roomController.walkInAnimation();
-  }
-
-  @FXML
-  private void goToCafeteria() {
-    cafeteriaController.resetAnimation();
-    Scene scene = bin.getScene();
-    scene.setRoot(SceneManager.getUiRoot(AppUi.CAFETERIA));
-    cafeteriaController.walkInAnimation();
   }
 
   @FXML

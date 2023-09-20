@@ -126,17 +126,7 @@ public class RoomController {
   @FXML
   private Button sendButton;
   @FXML
-  private Button responseSubmitButton;
-  @FXML
   private TextArea chatTextArea;
-  @FXML
-  private TextArea inputBox;
-  @FXML
-  private TextArea chatDisplayBoard;
-  @FXML
-  private TextArea objectiveDisplayBoard;
-  @FXML
-  private Text typePromptText;
   @FXML
   private TextField inputText;
   @FXML
@@ -159,14 +149,9 @@ public class RoomController {
 
     // initialize fields in the GptAndTextAreaManager class
     GptAndTextAreaManager.roomController = this;
-    GptAndTextAreaManager.roomChatDisplayBoard = chatDisplayBoard;
-    GptAndTextAreaManager.roomTypePromptText = typePromptText;
-    GptAndTextAreaManager.roomInputBox = inputBox;
-    GptAndTextAreaManager.roomObjectiveDisplayBoard = objectiveDisplayBoard;
 
     animationItems = new ImageView[] { prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo };
     resetAnimation();
-
 
     // Sending the initial request so the riddle is ready when the player enters the
     // chat
@@ -181,8 +166,17 @@ public class RoomController {
 
     itemToChoose();
     prepareRiddle();
-
     // Setting up the timer timeline
+
+  }
+
+  /*
+   * This method starts a thread that checks if the room needs to be reset.
+   * 
+   * @throws IOException
+   */
+  public void start() {
+
     timeline = new Timeline(
         new KeyFrame(
             Duration.seconds(1),
@@ -231,12 +225,6 @@ public class RoomController {
     resetchecker();
     doorArrow.setVisible(false);
   }
-
-  /*
-   * This method starts a thread that checks if the room needs to be reset.
-   * 
-   * @throws IOException
-   */
 
   private void resetchecker() throws IOException {
     timeline = new Timeline(
@@ -405,24 +393,6 @@ public class RoomController {
     alert.setHeaderText(headerText);
     alert.setContentText(message);
     alert.showAndWait();
-  }
-
-  @FXML
-  public void onSetPromptTextFalse() {
-    typePromptText.setVisible(false);
-  }
-
-  @FXML
-  public void onSubmitMessage() throws ApiProxyException {
-    String message = inputBox.getText();
-    inputBox.clear();
-    typePromptText.setVisible(true);
-    if (message.trim().isEmpty()) {
-      typePromptText.setVisible(true);
-      return;
-    } else {
-      GptAndTextAreaManager.sendMessage(message);
-    }
   }
 
   @FXML
@@ -757,21 +727,5 @@ public class RoomController {
   @FXML
   private void onGoBack(ActionEvent event) throws ApiProxyException, IOException {
     chatPane.setVisible(false);
-  }
-
-  @FXML
-  private void goToCafeteria() {
-    cafeteriaController.resetAnimation();
-    Scene scene = mirror.getScene();
-    scene.setRoot(SceneManager.getUiRoot(AppUi.CAFETERIA));
-    cafeteriaController.walkInAnimation();
-  }
-
-  @FXML
-  private void goToOffice() {
-    officeController.resetAnimation();
-    Scene scene = mirror.getScene();
-    scene.setRoot(SceneManager.getUiRoot(AppUi.OFFICE));
-    officeController.walkInAnimation();
   }
 }

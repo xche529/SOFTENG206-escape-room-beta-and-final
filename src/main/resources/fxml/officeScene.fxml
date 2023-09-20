@@ -1,217 +1,195 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1113.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.OfficeController">
+<VBox xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.OfficeController">
    <children>
-      <ImageView fitHeight="605.0" fitWidth="1113.0" pickOnBounds="true">
-         <image>
-            <Image url="@../images/wardensOffice.jpg" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="50.0" fitWidth="100.0" layoutY="300.0" onMouseClicked="#goToCafeteria" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-         <image>
-            <Image url="@../images/redArrow.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="binBig" fitHeight="71.0" fitWidth="55.0" layoutX="110.0" layoutY="494.0" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.5" visible="false">
-         <image>
-            <Image url="@../images/Bin.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="blackBoardBig1" fitHeight="188.0" fitWidth="181.0" layoutX="905.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.5">
-         <image>
-            <Image url="@../images/Blackboard.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="blackBoardBig" fitHeight="204.0" fitWidth="183.0" layoutX="886.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.5" visible="false">
-         <image>
-            <Image url="@../images/Blackboard.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="phoneBig" fitHeight="59.0" fitWidth="70.0" layoutX="598.0" layoutY="315.0" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.5" visible="false">
-         <image>
-            <Image url="@../images/Phone.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="deskDrawersBig" fitHeight="72.0" fitWidth="99.0" layoutX="667.0" layoutY="496.0" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.5" visible="false">
-         <image>
-            <Image url="@../images/Draw.png" />
-         </image>
-      </ImageView>
-      <Rectangle id="deskDrawers" fx:id="deskDrawers" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="47.0" layoutX="677.0" layoutY="503.0" onMouseClicked="#clickDeskDrawers" onMouseEntered="#deskDrawersMouseEntered" onMouseExited="#deskDrawersMouseExited" opacity="0.0" rotate="-10.0" scaleX="1.5" scaleY="1.5" stroke="BLACK" strokeType="INSIDE" width="83.0" />
-      <Rectangle id="bin" fx:id="bin" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="75.0" layoutX="111.0" layoutY="495.0" onMouseClicked="#clickBin" onMouseEntered="#binMouseEntered" onMouseExited="#binMouseExited" opacity="0.0" scaleX="1.2" scaleY="1.2" stroke="BLACK" strokeType="INSIDE" width="55.0" />
-      <Rectangle id="phone" fx:id="phone" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="59.0" layoutX="597.0" layoutY="305.0" onMouseClicked="#clickPhone" onMouseEntered="#phoneMouseEntered" onMouseExited="#phoneMouseExited" opacity="0.0" scaleX="1.2" scaleY="1.2" stroke="BLACK" strokeType="INSIDE" width="57.0" />
-      <Rectangle id="blackBoard" fx:id="blackBoard" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="180.0" layoutX="881.0" layoutY="107.0" onMouseClicked="#clickBlackboard" onMouseEntered="#blackBoardMouseEntered" onMouseExited="#blackBoardMouseExited" opacity="0.0" scaleX="1.5" scaleY="1.5" stroke="BLACK" strokeType="INSIDE" width="175.0" />
-      <ImageView fitHeight="50.0" fitWidth="100.0" layoutX="1030.0" layoutY="300.0" onMouseClicked="#goToRoom" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/redArrow.png" />
-         </image>
-      </ImageView>
-      <Pane fx:id="cypherPane" layoutX="135.0" layoutY="30.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="480.0" prefWidth="840.0" style="-fx-background-color: white;" visible="false">
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="605.0" prefWidth="1113.0">
          <children>
-            <ImageView fitHeight="329.0" fitWidth="656.0" layoutX="94.0" layoutY="31.0">
+            <ImageView fitHeight="605.0" fitWidth="1113.0" pickOnBounds="true">
                <image>
-                  <Image url="@../images/number_converter.png" />
+                  <Image url="@../images/wardensOffice.jpg" />
                </image>
             </ImageView>
-            <Button fx:id="exitViewButton" layoutX="347.0" layoutY="382.0" mnemonicParsing="false" onAction="#onClickExitConverterView" prefHeight="53.0" prefWidth="148.0" text="Exit view">
-               <font>
-                  <Font size="19.0" />
-               </font>
-            </Button>
-         </children>
-      </Pane>
-      <ImageView fx:id="prisonerTwo" fitHeight="293.0" fitWidth="135.0" layoutX="357.0" layoutY="314.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true">
-         <image>
-            <Image url="@../images/prisoner2.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="prisonerOne" fitHeight="293.0" fitWidth="149.0" layoutX="187.0" layoutY="312.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true">
-         <image>
-            <Image url="@../images/prisoner1.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="speechBubbleOne" fitHeight="72.0" fitWidth="95.0" layoutX="297.0" layoutY="263.0" onMouseClicked="#onSpeechBubbleOneClicked" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/speechBubble.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="speechBubbleTwo" fitHeight="150.0" fitWidth="89.0" layoutX="456.0" layoutY="260.0" onMouseClicked="#onSpeechBubbleTwoClicked" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/speechBubble.png" />
-         </image>
-      </ImageView>
-      <TextArea fx:id="inputBox" layoutY="605.0" onKeyTyped="#onSetPromptTextFalse" prefHeight="154.0" prefWidth="324.0" wrapText="true">
-         <font>
-            <Font size="21.0" />
-         </font>
-      </TextArea>
-      <Button fx:id="responseSubmitButton" layoutY="759.0" mnemonicParsing="false" onAction="#onSubmitMessage" prefHeight="40.0" prefWidth="324.0" text="Submit">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Button>
-      <TextArea fx:id="chatDisplayBoard" editable="false" layoutX="324.0" layoutY="605.0" prefHeight="195.0" prefWidth="562.0" wrapText="true">
-         <font>
-            <Font size="21.0" />
-         </font>
-      </TextArea>
-      <TextArea fx:id="objectiveDisplayBoard" layoutX="886.0" layoutY="656.0" prefHeight="141.0" prefWidth="225.0" />
-      <Text layoutX="925.0" layoutY="638.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current Objective:">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Text>
-      <Text fx:id="typePromptText" fill="#6b6b6b" layoutX="12.0" layoutY="625.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type your response here:" />
-      <Pane fx:id="phonePane" layoutX="37.0" layoutY="37.0" prefHeight="531.0" prefWidth="1035.0" style="-fx-background-color: white;" visible="false">
-         <children>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="194.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="digitOne" layoutX="87.0" layoutY="33.0" prefHeight="71.0" prefWidth="33.0" text="_">
-               <font>
-                  <Font size="61.0" />
-               </font></Label>
-            <Label fx:id="digitTwo" layoutX="143.0" layoutY="33.0" prefHeight="71.0" prefWidth="33.0" text="_">
-               <font>
-                  <Font size="61.0" />
-               </font>
-            </Label>
-            <Label fx:id="digitThree" layoutX="199.0" layoutY="33.0" prefHeight="71.0" prefWidth="33.0" text="_">
-               <font>
-                  <Font size="61.0" />
-               </font>
-            </Label>
-            <Label fx:id="digitFour" layoutX="255.0" layoutY="33.0" prefHeight="71.0" prefWidth="33.0" text="_">
-               <font>
-                  <Font size="61.0" />
-               </font>
-            </Label>
-            <Label fx:id="digitFive" layoutX="311.0" layoutY="33.0" prefHeight="71.0" prefWidth="33.0" text="_">
-               <font>
-                  <Font size="61.0" />
-               </font>
-            </Label>
-            <Label fx:id="digitSix" layoutX="367.0" layoutY="33.0" prefHeight="71.0" prefWidth="33.0" text="_">
-               <font>
-                  <Font size="61.0" />
-               </font>
-            </Label>
-            <Label fx:id="digitNine" layoutX="535.0" layoutY="33.0" prefHeight="71.0" prefWidth="33.0" text="_">
-               <font>
-                  <Font size="61.0" />
-               </font>
-            </Label>
-            <Label fx:id="digitEight" layoutX="479.0" layoutY="33.0" prefHeight="71.0" prefWidth="33.0" text="_">
-               <font>
-                  <Font size="61.0" />
-               </font>
-            </Label>
-            <Label fx:id="digitSeven" layoutX="423.0" layoutY="33.0" prefHeight="71.0" prefWidth="33.0" text="_">
-               <font>
-                  <Font size="61.0" />
-               </font>
-            </Label>
-            <ImageView fitHeight="409.0" fitWidth="666.0" layoutX="160.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true" x="-150.0">
+            <ImageView fx:id="binBig" fitHeight="71.0" fitWidth="55.0" layoutX="110.0" layoutY="494.0" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.5" visible="false">
                <image>
-                  <Image url="@../images/Phone2.png" />
+                  <Image url="@../images/Bin.png" />
                </image>
             </ImageView>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="23.0" layoutX="564.0" layoutY="235.0" onMouseClicked="#onClickOne" onMouseEntered="#oneMouseEntered" onMouseExited="#oneMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="24.0" x="-150.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="23.0" layoutX="529.0" layoutY="232.0" onMouseClicked="#onClickTwo" onMouseEntered="#twoMouseEntered" onMouseExited="#twoMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="24.0" x="-150.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="23.0" layoutX="497.0" layoutY="244.0" onMouseClicked="#onClickThree" onMouseEntered="#threeMouseEntered" onMouseExited="#threeMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="24.0" x="-150.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="26.0" layoutX="470.0" layoutY="264.0" onMouseClicked="#onClickFour" onMouseEntered="#fourMouseEntered" onMouseExited="#fourMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="24.0" x="-150.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="23.0" layoutX="461.0" layoutY="295.0" onMouseClicked="#onClickFour" onMouseEntered="#fiveMouseEntered" onMouseExited="#fiveMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="24.0" x="-150.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="23.0" layoutX="467.0" layoutY="328.0" onMouseClicked="#onClickSix" onMouseEntered="#sixMouseEntered" onMouseExited="#sixMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="28.0" x="-150.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="23.0" layoutX="493.0" layoutY="350.0" onMouseClicked="#onClickSeven" onMouseEntered="#sevenMouseEntered" onMouseExited="#sevenMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="24.0" x="-150.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="23.0" layoutX="528.0" layoutY="361.0" onMouseClicked="#onClickEight" onMouseEntered="#eightMouseEntered" onMouseExited="#eightMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="24.0" x="-150.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="23.0" layoutX="562.0" layoutY="357.0" onMouseClicked="#onClickNine" onMouseEntered="#nineMouseEntered" onMouseExited="#nineMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="24.0" x="-150.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="593.0" layoutY="338.0" onMouseClicked="#onClickZero" onMouseEntered="#zeroMouseEntered" onMouseExited="#zeroMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="24.0" x="-150.0" />
-            <Button layoutX="762.0" layoutY="22.0" mnemonicParsing="false" onMouseClicked="#onClickClear" text="Clear" />
-            <Button layoutX="767.0" layoutY="56.0" mnemonicParsing="false" onMouseClicked="#onClickCall" text="Call" />
-            <Button layoutX="733.0" layoutY="89.0" mnemonicParsing="false" onMouseClicked="#onClickDelete" text="Delete Last Digit" />
-            <Text layoutX="726.0" layoutY="327.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You have no phone number yet!" textAlignment="CENTER" wrappingWidth="227.0621337890625">
-               <font>
-                  <Font size="28.0" />
-               </font>
-            </Text>
-            <Pane fx:id="paperPane" layoutX="561.0" layoutY="127.0" prefHeight="332.0" prefWidth="540.0" visible="false">
+            <ImageView fx:id="blackBoardBig1" fitHeight="188.0" fitWidth="181.0" layoutX="905.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.5">
+               <image>
+                  <Image url="@../images/Blackboard.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="blackBoardBig" fitHeight="204.0" fitWidth="183.0" layoutX="886.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.5" visible="false">
+               <image>
+                  <Image url="@../images/Blackboard.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="phoneBig" fitHeight="59.0" fitWidth="70.0" layoutX="598.0" layoutY="315.0" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.5" visible="false">
+               <image>
+                  <Image url="@../images/Phone.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="deskDrawersBig" fitHeight="72.0" fitWidth="99.0" layoutX="667.0" layoutY="496.0" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.5" visible="false">
+               <image>
+                  <Image url="@../images/Draw.png" />
+               </image>
+            </ImageView>
+            <Rectangle id="deskDrawers" fx:id="deskDrawers" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="47.0" layoutX="677.0" layoutY="503.0" onMouseClicked="#clickDeskDrawers" onMouseEntered="#deskDrawersMouseEntered" onMouseExited="#deskDrawersMouseExited" opacity="0.0" rotate="-10.0" scaleX="1.5" scaleY="1.5" stroke="BLACK" strokeType="INSIDE" width="83.0" />
+            <Rectangle id="bin" fx:id="bin" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="75.0" layoutX="111.0" layoutY="495.0" onMouseClicked="#clickBin" onMouseEntered="#binMouseEntered" onMouseExited="#binMouseExited" opacity="0.0" scaleX="1.2" scaleY="1.2" stroke="BLACK" strokeType="INSIDE" width="55.0" />
+            <Rectangle id="phone" fx:id="phone" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="59.0" layoutX="597.0" layoutY="305.0" onMouseClicked="#clickPhone" onMouseEntered="#phoneMouseEntered" onMouseExited="#phoneMouseExited" opacity="0.0" scaleX="1.2" scaleY="1.2" stroke="BLACK" strokeType="INSIDE" width="57.0" />
+            <Rectangle id="blackBoard" fx:id="blackBoard" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="180.0" layoutX="881.0" layoutY="107.0" onMouseClicked="#clickBlackboard" onMouseEntered="#blackBoardMouseEntered" onMouseExited="#blackBoardMouseExited" opacity="0.0" scaleX="1.5" scaleY="1.5" stroke="BLACK" strokeType="INSIDE" width="175.0" />
+            <Pane fx:id="cypherPane" layoutX="135.0" layoutY="30.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="480.0" prefWidth="840.0" style="-fx-background-color: white;" visible="false">
                <children>
-                  <ImageView fitHeight="195.0" fitWidth="369.0" layoutX="105.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="329.0" fitWidth="656.0" layoutX="94.0" layoutY="31.0">
                      <image>
-                        <Image url="@../images/paper.png" />
+                        <Image url="@../images/number_converter.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="255.0" layoutY="59.0" prefHeight="105.0" prefWidth="110.0" text="Call:">
+                  <Button fx:id="exitViewButton" layoutX="347.0" layoutY="382.0" mnemonicParsing="false" onAction="#onClickExitConverterView" prefHeight="53.0" prefWidth="148.0" text="Exit view">
                      <font>
-                        <Font name="American Typewriter" size="28.0" />
+                        <Font size="19.0" />
                      </font>
-                  </Label>
-                  <Label fx:id="numberLabel" layoutX="139.0" layoutY="136.0" prefHeight="105.0" prefWidth="285.0" textAlignment="CENTER">
-                     <font>
-                        <Font name="American Typewriter" size="28.0" />
-                     </font>
-                  </Label>
+                  </Button>
                </children>
             </Pane>
-            <ImageView fx:id="crossBig" fitHeight="71.0" fitWidth="75.0" layoutX="946.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" visible="false">
+            <ImageView fx:id="prisonerTwo" fitHeight="293.0" fitWidth="135.0" layoutX="357.0" layoutY="312.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true">
                <image>
-                  <Image url="@../images/Cross.png" />
+                  <Image url="@../images/prisoner2.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="57.0" fitWidth="68.0" layoutX="952.0" layoutY="16.0" onMouseClicked="#onClickCross" onMouseEntered="#crossMouseEntered" onMouseExited="#crossMouseExited" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="prisonerOne" fitHeight="293.0" fitWidth="149.0" layoutX="187.0" layoutY="312.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true">
                <image>
-                  <Image url="@../images/Cross.png" />
+                  <Image url="@../images/prisoner1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="speechBubbleOne" fitHeight="72.0" fitWidth="95.0" layoutX="297.0" layoutY="263.0" onMouseClicked="#onSpeechBubbleOneClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/speechBubble.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="speechBubbleTwo" fitHeight="150.0" fitWidth="89.0" layoutX="456.0" layoutY="260.0" onMouseClicked="#onSpeechBubbleTwoClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/speechBubble.png" />
+               </image>
+            </ImageView>
+            <Pane fx:id="phonePane" layoutX="37.0" layoutY="37.0" prefHeight="531.0" prefWidth="1035.0" style="-fx-background-color: white;" visible="false">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="194.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="digitOne" layoutX="87.0" layoutY="33.0" prefHeight="71.0" prefWidth="33.0" text="_">
+                     <font>
+                        <Font size="61.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="digitTwo" layoutX="143.0" layoutY="33.0" prefHeight="71.0" prefWidth="33.0" text="_">
+                     <font>
+                        <Font size="61.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="digitThree" layoutX="199.0" layoutY="33.0" prefHeight="71.0" prefWidth="33.0" text="_">
+                     <font>
+                        <Font size="61.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="digitFour" layoutX="255.0" layoutY="33.0" prefHeight="71.0" prefWidth="33.0" text="_">
+                     <font>
+                        <Font size="61.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="digitFive" layoutX="311.0" layoutY="33.0" prefHeight="71.0" prefWidth="33.0" text="_">
+                     <font>
+                        <Font size="61.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="digitSix" layoutX="367.0" layoutY="33.0" prefHeight="71.0" prefWidth="33.0" text="_">
+                     <font>
+                        <Font size="61.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="digitNine" layoutX="535.0" layoutY="33.0" prefHeight="71.0" prefWidth="33.0" text="_">
+                     <font>
+                        <Font size="61.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="digitEight" layoutX="479.0" layoutY="33.0" prefHeight="71.0" prefWidth="33.0" text="_">
+                     <font>
+                        <Font size="61.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="digitSeven" layoutX="423.0" layoutY="33.0" prefHeight="71.0" prefWidth="33.0" text="_">
+                     <font>
+                        <Font size="61.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="409.0" fitWidth="666.0" layoutX="160.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true" x="-150.0">
+                     <image>
+                        <Image url="@../images/Phone2.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="23.0" layoutX="564.0" layoutY="235.0" onMouseClicked="#onClickOne" onMouseEntered="#oneMouseEntered" onMouseExited="#oneMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="24.0" x="-150.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="23.0" layoutX="529.0" layoutY="232.0" onMouseClicked="#onClickTwo" onMouseEntered="#twoMouseEntered" onMouseExited="#twoMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="24.0" x="-150.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="23.0" layoutX="497.0" layoutY="244.0" onMouseClicked="#onClickThree" onMouseEntered="#threeMouseEntered" onMouseExited="#threeMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="24.0" x="-150.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="26.0" layoutX="470.0" layoutY="264.0" onMouseClicked="#onClickFour" onMouseEntered="#fourMouseEntered" onMouseExited="#fourMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="24.0" x="-150.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="23.0" layoutX="461.0" layoutY="295.0" onMouseClicked="#onClickFour" onMouseEntered="#fiveMouseEntered" onMouseExited="#fiveMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="24.0" x="-150.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="23.0" layoutX="467.0" layoutY="328.0" onMouseClicked="#onClickSix" onMouseEntered="#sixMouseEntered" onMouseExited="#sixMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="28.0" x="-150.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="23.0" layoutX="493.0" layoutY="350.0" onMouseClicked="#onClickSeven" onMouseEntered="#sevenMouseEntered" onMouseExited="#sevenMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="24.0" x="-150.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="23.0" layoutX="528.0" layoutY="361.0" onMouseClicked="#onClickEight" onMouseEntered="#eightMouseEntered" onMouseExited="#eightMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="24.0" x="-150.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="23.0" layoutX="562.0" layoutY="357.0" onMouseClicked="#onClickNine" onMouseEntered="#nineMouseEntered" onMouseExited="#nineMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="24.0" x="-150.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="593.0" layoutY="338.0" onMouseClicked="#onClickZero" onMouseEntered="#zeroMouseEntered" onMouseExited="#zeroMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="24.0" x="-150.0" />
+                  <Button layoutX="762.0" layoutY="22.0" mnemonicParsing="false" onMouseClicked="#onClickClear" text="Clear" />
+                  <Button layoutX="767.0" layoutY="56.0" mnemonicParsing="false" onMouseClicked="#onClickCall" text="Call" />
+                  <Button layoutX="733.0" layoutY="89.0" mnemonicParsing="false" onMouseClicked="#onClickDelete" text="Delete Last Digit" />
+                  <Text layoutX="726.0" layoutY="327.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You have no phone number yet!" textAlignment="CENTER" wrappingWidth="227.0621337890625">
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                  </Text>
+                  <Pane fx:id="paperPane" layoutX="561.0" layoutY="127.0" prefHeight="332.0" prefWidth="540.0" visible="false">
+                     <children>
+                        <ImageView fitHeight="195.0" fitWidth="369.0" layoutX="105.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/paper.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="255.0" layoutY="59.0" prefHeight="105.0" prefWidth="110.0" text="Call:">
+                           <font>
+                              <Font name="American Typewriter" size="28.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="numberLabel" layoutX="139.0" layoutY="136.0" prefHeight="105.0" prefWidth="285.0" textAlignment="CENTER">
+                           <font>
+                              <Font name="American Typewriter" size="28.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <ImageView fx:id="crossBig" fitHeight="71.0" fitWidth="75.0" layoutX="946.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../images/Cross.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="57.0" fitWidth="68.0" layoutX="952.0" layoutY="16.0" onMouseClicked="#onClickCross" onMouseEntered="#crossMouseEntered" onMouseExited="#crossMouseExited" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/Cross.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <ImageView fitHeight="622.0" fitWidth="341.0" layoutX="-341.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../images/background.png" />
                </image>
             </ImageView>
          </children>
       </Pane>
    </children>
-</Pane>
+</VBox>

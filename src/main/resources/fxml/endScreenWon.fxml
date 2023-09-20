@@ -5,28 +5,35 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="605.0" prefWidth="1113.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.EndWonController">
+
+<VBox xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.EndWonController">
    <children>
-      <ImageView fitHeight="605.0" fitWidth="1113.0" pickOnBounds="true">
-         <image>
-            <Image url="@../images/outdoors.jpg" />
-         </image>
-      </ImageView>
-      <Label alignment="CENTER" layoutX="309.0" layoutY="53.0" prefHeight="120.0" prefWidth="498.0" text="You Won!!" textAlignment="CENTER">
-         <font>
-            <Font size="96.0" />
-         </font>
-      </Label>
-      <Label alignment="CENTER" layoutX="344.0" layoutY="177.0" prefHeight="124.0" prefWidth="431.0" text="You escaped!! Congratulations!">
-         <font>
-            <Font size="30.0" />
-         </font></Label>
-      <Button fx:id="restartButton" layoutX="429.0" layoutY="287.0" mnemonicParsing="false" onMouseClicked="#goToStart" prefHeight="62.0" prefWidth="258.0" text="Play Again">
-         <font>
-            <Font size="32.0" />
-         </font>
-      </Button>
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="605.0" prefWidth="1113.0">
+         <children>
+            <ImageView fitHeight="605.0" fitWidth="1113.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../images/outdoors.jpg" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" layoutX="309.0" layoutY="53.0" prefHeight="120.0" prefWidth="498.0" text="You Won!!" textAlignment="CENTER">
+               <font>
+                  <Font size="96.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="344.0" layoutY="177.0" prefHeight="124.0" prefWidth="431.0" text="You escaped!! Congratulations!">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+            <Button fx:id="restartButton" layoutX="429.0" layoutY="287.0" mnemonicParsing="false" onMouseClicked="#goToStart" prefHeight="62.0" prefWidth="258.0" text="Play Again">
+               <font>
+                  <Font size="32.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
    </children>
-</Pane>
+</VBox>
