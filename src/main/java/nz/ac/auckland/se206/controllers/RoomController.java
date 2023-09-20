@@ -23,11 +23,14 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.GptAndTextAreaManager;
 import nz.ac.auckland.se206.MovementControl;
 import nz.ac.auckland.se206.SceneManager;
+import nz.ac.auckland.se206.GptAndTextAreaManager.Characters;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
@@ -39,50 +42,104 @@ import nz.ac.auckland.se206.speech.TextToSpeech;
 
 /** Controller class for the room view. */
 public class RoomController {
-  @FXML private Pane room;
-  @FXML private Pane converterPane;
-  @FXML private Pane chatPane;
-  @FXML private Pane startPane;
-  @FXML private Pane guardSpeechPane;
-  @FXML private Rectangle textBubble;
-  @FXML private Rectangle door;
-  @FXML private Rectangle vent;
-  @FXML private Rectangle toiletPaper;
-  @FXML private Rectangle toilet;
-  @FXML private Rectangle sink;
-  @FXML private Rectangle tap;
-  @FXML private Rectangle mirror;
-  @FXML private Rectangle towel;
-  @FXML private ImageView toiletBig;
-  @FXML private ImageView toiletPaperBig;
-  @FXML private ImageView doorBig;
-  @FXML private ImageView ventBig;
-  @FXML private ImageView sinkBig;
-  @FXML private ImageView mirrorBig;
-  @FXML private ImageView towelBig;
-  @FXML private ImageView toiletArrow;
-  @FXML private ImageView toiletPaperArrow;
-  @FXML private ImageView ventArrow;
-  @FXML private ImageView sinkArrow;
-  @FXML private ImageView mirrorArrow;
-  @FXML private ImageView towelArrow;
-  @FXML private ImageView doorArrow;
-  @FXML private ImageView doorArrowSmall;
-  @FXML private ImageView bubbleBig;
-  @FXML private ImageView prisonerOne;
-  @FXML private ImageView prisonerTwo;
-  @FXML private ImageView speechBubbleOne;
-  @FXML private ImageView speechBubbleTwo;
-  @FXML private Label timerLabel;
-  @FXML private Label chatProgressLabel;
-  @FXML private Label overQuestionLimitLabel;
-  @FXML private Label questionInfoLabel;
-  @FXML private Button exitViewButton;
-  @FXML private Button openButton;
-  @FXML private Button sendButton;
-  @FXML private TextArea chatTextArea;
-  @FXML private TextField inputText;
-  @FXML private ProgressIndicator chatProgress;
+  @FXML
+  private Pane room;
+  @FXML
+  private Pane converterPane;
+  @FXML
+  private Pane chatPane;
+  @FXML
+  private Pane startPane;
+  @FXML
+  private Pane guardSpeechPane;
+  @FXML
+  private Rectangle textBubble;
+  @FXML
+  private Rectangle door;
+  @FXML
+  private Rectangle vent;
+  @FXML
+  private Rectangle toiletPaper;
+  @FXML
+  private Rectangle toilet;
+  @FXML
+  private Rectangle sink;
+  @FXML
+  private Rectangle tap;
+  @FXML
+  private Rectangle mirror;
+  @FXML
+  private Rectangle towel;
+  @FXML
+  private ImageView toiletBig;
+  @FXML
+  private ImageView toiletPaperBig;
+  @FXML
+  private ImageView doorBig;
+  @FXML
+  private ImageView ventBig;
+  @FXML
+  private ImageView sinkBig;
+  @FXML
+  private ImageView mirrorBig;
+  @FXML
+  private ImageView towelBig;
+  @FXML
+  private ImageView toiletArrow;
+  @FXML
+  private ImageView toiletPaperArrow;
+  @FXML
+  private ImageView ventArrow;
+  @FXML
+  private ImageView sinkArrow;
+  @FXML
+  private ImageView mirrorArrow;
+  @FXML
+  private ImageView towelArrow;
+  @FXML
+  private ImageView doorArrow;
+  @FXML
+  private ImageView doorArrowSmall;
+  @FXML
+  private ImageView bubbleBig;
+  @FXML
+  private ImageView prisonerOne;
+  @FXML
+  private ImageView prisonerTwo;
+  @FXML
+  private ImageView speechBubbleOne;
+  @FXML
+  private ImageView speechBubbleTwo;
+  @FXML
+  private Label timerLabel;
+  @FXML
+  private Label chatProgressLabel;
+  @FXML
+  private Label overQuestionLimitLabel;
+  @FXML
+  private Label questionInfoLabel;
+  @FXML
+  private Button exitViewButton;
+  @FXML
+  private Button openButton;
+  @FXML
+  private Button sendButton;
+  @FXML
+  private Button responseSubmitButton;
+  @FXML
+  private TextArea chatTextArea;
+  @FXML
+  private TextArea inputBox;
+  @FXML
+  private TextArea chatDisplayBoard;
+  @FXML
+  private TextArea objectiveDisplayBoard;
+  @FXML
+  private Text typePromptText;
+  @FXML
+  private TextField inputText;
+  @FXML
+  private ProgressIndicator chatProgress;
 
   private Timeline timeline;
   private ChatCompletionRequest chatCompletionRequest;
@@ -97,38 +154,47 @@ public class RoomController {
    * @throws ApiProxyException
    */
   public void initialize() throws ApiProxyException {
-    animationItems = new ImageView[] {prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo};
+    // initialize fields in the GptAndTextAreaManager class
+    GptAndTextAreaManager.roomController = this;
+    GptAndTextAreaManager.roomChatDisplayBoard = chatDisplayBoard;
+    GptAndTextAreaManager.roomTypePromptText = typePromptText;
+    GptAndTextAreaManager.roomInputBox = inputBox;
+    GptAndTextAreaManager.roomObjectiveDisplayBoard = objectiveDisplayBoard;
+
+    animationItems = new ImageView[] { prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo };
     // Getting random item to be used in the riddle
-    Rectangle[] items = new Rectangle[] {vent, toiletPaper, toilet, mirror, towel, sink};
+    Rectangle[] items = new Rectangle[] { vent, toiletPaper, toilet, mirror, towel, sink };
     resetAnimation();
     Random randomChoose = new Random();
     int randomIndexChoose = randomChoose.nextInt(items.length);
     GameState.itemToChoose = items[randomIndexChoose];
 
-    // Sending the initial request so the riddle is ready when the player enters the chat
-    chatCompletionRequest =
-        new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
-    ChatMessage userChatMessage =
-        new ChatMessage(
-            "user", GptPromptEngineering.getRiddleWithGivenWord(GameState.itemToChoose.getId()));
-    runGpt(userChatMessage, lastMsg -> {});
+    // Sending the initial request so the riddle is ready when the player enters the
+    // chat
+    // chatCompletionRequest =
+    // new
+    // ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
+    // ChatMessage userChatMessage =
+    // new ChatMessage(
+    // "user",
+    // GptPromptEngineering.getRiddleWithGivenWord(GameState.itemToChoose.getId()));
+    // runGpt(userChatMessage, lastMsg -> {});
 
     // Setting up the timer timeline
-    timeline =
-        new Timeline(
-            new KeyFrame(
-                Duration.seconds(1),
-                event -> {
-                  GameState.secondsRemaining--;
-                  updateTimerLabel();
-                  if (GameState.secondsRemaining == 90 && GameState.isWon == false) {
-                    textToSpeech.speak("a minute and a half remaining");
-                  } else if (GameState.secondsRemaining == 60 && GameState.isWon == false) {
-                    textToSpeech.speak("one minute remaining");
-                  } else if (GameState.secondsRemaining == 30 && GameState.isWon == false) {
-                    textToSpeech.speak("thirty seconds remaining");
-                  }
-                }));
+    timeline = new Timeline(
+        new KeyFrame(
+            Duration.seconds(1),
+            event -> {
+              GameState.secondsRemaining--;
+              updateTimerLabel();
+              if (GameState.secondsRemaining == 90 && GameState.isWon == false) {
+                textToSpeech.speak("a minute and a half remaining");
+              } else if (GameState.secondsRemaining == 60 && GameState.isWon == false) {
+                textToSpeech.speak("one minute remaining");
+              } else if (GameState.secondsRemaining == 30 && GameState.isWon == false) {
+                textToSpeech.speak("thirty seconds remaining");
+              }
+            }));
     timeline.setCycleCount(GameState.totalSeconds);
     timeline.setOnFinished(event -> handleTimerExpired());
     updateTimerLabel();
@@ -205,7 +271,7 @@ public class RoomController {
     MovementControl.moveToLeft(true, 1, 500, animationItems);
   }
 
-  public  void resetAnimation() {
+  public void resetAnimation() {
     for (ImageView item : animationItems) {
       item.setTranslateX(500);
     }
@@ -234,9 +300,9 @@ public class RoomController {
   /**
    * Displays a dialog box with the given title, header text, and message.
    *
-   * @param title the title of the dialog box
+   * @param title      the title of the dialog box
    * @param headerText the header text of the dialog box
-   * @param message the message content of the dialog box
+   * @param message    the message content of the dialog box
    */
   private void showDialog(String title, String headerText, String message) {
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -244,6 +310,24 @@ public class RoomController {
     alert.setHeaderText(headerText);
     alert.setContentText(message);
     alert.showAndWait();
+  }
+
+  @FXML
+  public void onSetPromptTextFalse() {
+    typePromptText.setVisible(false);
+  }
+
+  @FXML
+  public void onSubmitMessage() throws ApiProxyException {
+    String message = inputBox.getText();
+    inputBox.clear();
+    typePromptText.setVisible(true);
+    if (message.trim().isEmpty()) {
+      typePromptText.setVisible(true);
+      return;
+    } else {
+      GptAndTextAreaManager.sendMessage(message);
+    }
   }
 
   @FXML
@@ -342,7 +426,7 @@ public class RoomController {
    * Handles the click event on the door.
    *
    * @param event the mouse event
-   * @throws IOException if there is an error loading the chat view
+   * @throws IOException       if there is an error loading the chat view
    * @throws ApiProxyException
    */
   @FXML
@@ -456,19 +540,20 @@ public class RoomController {
   private void onTextBubbleClicked() throws ApiProxyException {
     chatPane.setVisible(true);
     questionInfoLabel.setVisible(true);
-    chatCompletionRequest =
-        new ChatCompletionRequest().setN(1).setTemperature(1).setTopP(0.5).setMaxTokens(100);
+    chatCompletionRequest = new ChatCompletionRequest().setN(1).setTemperature(1).setTopP(0.5).setMaxTokens(100);
     ChatMessage userChatMessage = new ChatMessage("user", GptPromptEngineering.getGuardSetUp());
-    runGpt(userChatMessage, lastMsg -> {});
+    // runGpt(userChatMessage, lastMsg -> {});
   }
 
   @FXML
-  private void onSpeechBubbleOneClicked(){
+  private void onSpeechBubbleOneClicked() {
+    GptAndTextAreaManager.displayTarget(Characters.PRISONER_ONE);
     System.out.println("Speech bubble one clicked");
   }
 
   @FXML
-  private void onSpeechBubbleTwoClicked(){
+  private void onSpeechBubbleTwoClicked() {
+    GptAndTextAreaManager.displayTarget(Characters.PRISONER_TWO);
     System.out.println("Speech bubble two clicked");
   }
 
@@ -490,36 +575,36 @@ public class RoomController {
    *
    * @param msg the chat message to process
    * @return the response chat message
-   * @throws ApiProxyException if there is an error communicating with the API proxy
+   * @throws ApiProxyException if there is an error communicating with the API
+   *                           proxy
    */
   private void runGpt(ChatMessage msg, Consumer<ChatMessage> completionCallback)
       throws ApiProxyException {
     // define a new task to create threading
-    Task<Void> callGpt =
-        new Task<Void>() {
-          @Override
-          protected Void call() throws Exception {
-            try {
-              // add the message to the request
-              chatCompletionRequest.addMessage(msg);
-              ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
-              Choice result = chatCompletionResult.getChoices().iterator().next();
-              chatCompletionRequest.addMessage(result.getChatMessage());
-              Platform.runLater(
-                  () -> {
-                    // update gui components later
-                    appendChatMessage(result.getChatMessage());
-                    completionCallback.accept(result.getChatMessage());
-                    chatProgress.setVisible(false);
-                    chatProgressLabel.setVisible(false);
-                  });
-            } catch (ApiProxyException e) {
-              // TODO handle exception appropriately
-              e.printStackTrace();
-            }
-            return null;
-          }
-        };
+    Task<Void> callGpt = new Task<Void>() {
+      @Override
+      protected Void call() throws Exception {
+        try {
+          // add the message to the request
+          chatCompletionRequest.addMessage(msg);
+          ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
+          Choice result = chatCompletionResult.getChoices().iterator().next();
+          chatCompletionRequest.addMessage(result.getChatMessage());
+          Platform.runLater(
+              () -> {
+                // update gui components later
+                appendChatMessage(result.getChatMessage());
+                completionCallback.accept(result.getChatMessage());
+                chatProgress.setVisible(false);
+                chatProgressLabel.setVisible(false);
+              });
+        } catch (ApiProxyException e) {
+          // TODO handle exception appropriately
+          e.printStackTrace();
+        }
+        return null;
+      }
+    };
     // start thread
     Thread thread = new Thread(callGpt);
     thread.start();
@@ -533,8 +618,9 @@ public class RoomController {
    * Sends a message to the GPT model.
    *
    * @param event the action event triggered by the send button
-   * @throws ApiProxyException if there is an error communicating with the API proxy
-   * @throws IOException if there is an I/O error
+   * @throws ApiProxyException if there is an error communicating with the API
+   *                           proxy
+   * @throws IOException       if there is an I/O error
    */
   @FXML
   private void onSendMessage(ActionEvent event) throws ApiProxyException, IOException {
@@ -568,8 +654,9 @@ public class RoomController {
    * Navigates back to the previous view.
    *
    * @param event the action event triggered by the go back button
-   * @throws ApiProxyException if there is an error communicating with the API proxy
-   * @throws IOException if there is an I/O error
+   * @throws ApiProxyException if there is an error communicating with the API
+   *                           proxy
+   * @throws IOException       if there is an I/O error
    */
   @FXML
   private void onGoBack(ActionEvent event) throws ApiProxyException, IOException {

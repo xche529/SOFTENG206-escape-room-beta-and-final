@@ -10,8 +10,10 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.MenuButton;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.GptAndTextAreaManager;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
+import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class StartInterfaceController {
   @FXML private CheckBox hard;
@@ -42,7 +44,7 @@ public class StartInterfaceController {
   }
 
   @FXML
-  private void onStartGame(Event event) throws IOException {
+  private void onStartGame(Event event) throws IOException, ApiProxyException {
     Button button = (Button) event.getSource();
     Scene sceneButtonIsIn = button.getScene();
     FXMLLoader roomLoader = App.loadFxml("room");
@@ -53,6 +55,8 @@ public class StartInterfaceController {
     cafeteriaController.setRoomController(roomController);
     roomController.setCafeteriaController(cafeteriaController);
     roomController.setOfficeController(officeController);
+    // initialize the characters with prompt
+    GptAndTextAreaManager.initialize();
     sceneButtonIsIn.setRoot(SceneManager.getUiRoot(AppUi.ROOM));
     roomController.walkInAnimation();
     System.out.println("Game started");
