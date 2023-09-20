@@ -3,6 +3,7 @@ package nz.ac.auckland.se206.controllers;
 import java.io.IOException;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -10,8 +11,10 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.MenuButton;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.GptAndTextAreaManager;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
+import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class StartInterfaceController {
   @FXML private CheckBox hard;
@@ -21,6 +24,8 @@ public class StartInterfaceController {
   @FXML private CheckBox fourMin;
   @FXML private CheckBox sixMin;
   @FXML private MenuButton difficulty;
+  private CafeteriaController cafeteriaController;
+  private OfficeController officeController;
 
   @FXML
   private void initialize() {
@@ -31,17 +36,35 @@ public class StartInterfaceController {
    * This method is invoked when the user clicks the "Start" button. It starts the game.
    * It loads the room scene with user selected difficulty and play time.
    */
+  public void setOfficeController(OfficeController officeController) {
+    this.officeController = officeController;
+  }
+
+  public void setCafeteriaController(CafeteriaController cafeteriaController) {
+    this.cafeteriaController = cafeteriaController;
+  }
+
   @FXML
-  private void onStartGame(Event event) throws IOException {
-    if (!twoMin.isSelected() && !fourMin.isSelected() && !sixMin.isSelected()) {
+  private void onStartGame(Event event) throws IOException, ApiProxyException {
+      if (!twoMin.isSelected() && !fourMin.isSelected() && !sixMin.isSelected()) {
       showDialog("Invaild Inputs", "Please select a difficulty and time limit", "");
       return;
     }
     Button button = (Button) event.getSource();
     Scene sceneButtonIsIn = button.getScene();
-    SceneManager.addUi(AppUi.ROOM, App.loadFxml("room"));
+    FXMLLoader roomLoader = App.loadFxml("room");
+    SceneManager.addUi(AppUi.ROOM, roomLoader.load());
+    RoomController roomController = roomLoader.getController();
+    SceneManager.roomController = roomController;
+    officeController.setRoomController(roomController);
+    cafeteriaController.setRoomController(roomController);
+    roomController.setCafeteriaController(cafeteriaController);
+    roomController.setOfficeController(officeController);
+    // initialize the characters with prompt
+    GptAndTextAreaManager.initialize();
 
     sceneButtonIsIn.setRoot(SceneManager.getUiRoot(AppUi.ROOM));
+    roomController.walkInAnimation();
     System.out.println("Game started");
     twoMin.setSelected(false);
     fourMin.setSelected(false);

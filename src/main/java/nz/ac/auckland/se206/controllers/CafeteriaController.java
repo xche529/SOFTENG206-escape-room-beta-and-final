@@ -1,48 +1,139 @@
 package nz.ac.auckland.se206.controllers;
 
-import java.io.IOException;
 
+import java.io.IOException;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import java.util.Random;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
+import javafx.scene.text.Text;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.GptAndTextAreaManager;
+import nz.ac.auckland.se206.GptAndTextAreaManager.Characters;
+import nz.ac.auckland.se206.MovementControl;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class CafeteriaController {
 
-  @FXML private Rectangle paintingWithSafe;
-  @FXML private Rectangle paintingWithoutSafe;
-  @FXML private Rectangle vendingMachine;
-  @FXML private ImageView paintingWithSafeBig;
-  @FXML private ImageView paintingWithoutSafeBig;
-  @FXML private ImageView safe;
-  @FXML private ImageView safeBig;
-  @FXML private ImageView vendingMachineBig;
-  @FXML private Pane padlockPane;
-  @FXML private ImageView digitOnePlus;
-  @FXML private ImageView digitOneMinus;
-  @FXML private ImageView digitTwoPlus;
-  @FXML private ImageView digitTwoMinus;
-  @FXML private ImageView digitThreePlus;
-  @FXML private ImageView digitThreeMinus;
-  @FXML private ImageView digitFourPlus;
-  @FXML private ImageView digitFourMinus;
-  @FXML private Label digitOne;
-  @FXML private Label digitTwo;
-  @FXML private Label digitThree;
-  @FXML private Label digitFour;
-  @FXML private Button openButton;
+  @FXML
+ 
+  private Rectangle paintingWithSafe;
+  @FXML
+ 
+  private Rectangle paintingWithoutSafe;
+  @FXML
+ 
+  private Rectangle vendingMachine;
+  @FXML
+ 
+  private ImageView paintingWithSafeBig;
+  @FXML
+ 
+  private ImageView paintingWithoutSafeBig;
+  @FXML
+ 
+  private ImageView safe;
+  @FXML
+ 
+  private ImageView safeBig;
+  @FXML
+ 
+  private ImageView vendingMachineBig;
+  @FXML
+ 
+  private Pane padlockPane;
+  @FXML
+ 
+  private ImageView digitOnePlus;
+  @FXML
+ 
+  private ImageView digitOneMinus;
+  @FXML
+ 
+  private ImageView digitTwoPlus;
+  @FXML
+ 
+  private ImageView digitTwoMinus;
+  @FXML
+ 
+  private ImageView digitThreePlus;
+  @FXML
+ 
+  private ImageView digitThreeMinus;
+  @FXML
+ 
+  private ImageView digitFourPlus;
+  @FXML
+ 
+  private ImageView digitFourMinus;
+  @FXML
+ 
+  private ImageView prisonerOne;
+  @FXML
+ 
+  private ImageView prisonerTwo;
+  @FXML
+ 
+  private ImageView speechBubbleOne;
+  @FXML
+ 
+  private ImageView speechBubbleTwo;
+  @FXML
+ 
+  private Label digitOne;
+  @FXML
+ 
+  private Label digitTwo;
+  @FXML
+ 
+  private Label digitThree;
+  @FXML
+ 
+  private Label digitFour;
+  @FXML
+ 
+  private Button openButton;
+  @FXML
+  private Button responseSubmitButton;
+  @FXML
+  private TextArea inputBox;
+  @FXML
+  private TextArea chatDisplayBoard;
+  @FXML
+  private TextArea objectiveDisplayBoard;
+  @FXML
+  private Text typePromptText;
+
+  @FXML
+  private Pane paperPane;
+  @FXML
+  private Label collectPaperLabel;
+  @FXML
+  private Label numberLabel;
+
+  private OfficeController officeController;
+  private RoomController roomController;
+  private ImageView[] animationItems;
+
+  public void setOfficeController(OfficeController officeController) {
+    this.officeController = officeController;
+  }
+
+  public void setRoomController(RoomController roomController) {
+    this.roomController = roomController;
+  }
 
   private Timeline timeline;
 
@@ -54,7 +145,33 @@ public class CafeteriaController {
    */
   @FXML
   private void initialize() {
+
     resetchecker();
+    GptAndTextAreaManager.cafeteriaController = this;
+    GptAndTextAreaManager.cafeteriaChatDisplayBoard = chatDisplayBoard;
+    GptAndTextAreaManager.cafeteriaTypePromptText = typePromptText;
+    GptAndTextAreaManager.cafeteriaInputBox = inputBox;
+    GptAndTextAreaManager.cafeteriaObjectiveDisplayBoard = objectiveDisplayBoard;
+
+    animationItems = new ImageView[] { prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo };
+  }
+
+  @FXML
+  public void onSetPromptTextFalse() {
+    typePromptText.setVisible(false);
+  }
+
+  @FXML
+  public void onSubmitMessage() throws ApiProxyException {
+    String message = inputBox.getText();
+    inputBox.clear();
+    typePromptText.setVisible(true);
+    if (message.trim().isEmpty()) {
+      typePromptText.setVisible(true);
+      return;
+    } else {
+      GptAndTextAreaManager.sendMessage(message);
+    }
   }
 
   /**
@@ -136,14 +253,18 @@ public class CafeteriaController {
 
   @FXML
   private void goToOffice() {
+    officeController.resetAnimation();
     Scene scene = paintingWithSafe.getScene();
     scene.setRoot(SceneManager.getUiRoot(AppUi.OFFICE));
+    officeController.walkInAnimation();
   }
 
   @FXML
   private void goToRoom() {
+    roomController.resetAnimation();
     Scene scene = paintingWithSafe.getScene();
     scene.setRoot(SceneManager.getUiRoot(AppUi.ROOM));
+    roomController.walkInAnimation();
   }
 
   @FXML
@@ -210,17 +331,21 @@ public class CafeteriaController {
     int digitFourInt = Integer.parseInt(digitFour.getText());
     int code = digitOneInt * 1000 + digitTwoInt * 100 + digitThreeInt * 10 + digitFourInt;
     if (code == Integer.parseInt(GameState.code)) {
+
       Scene scene = openButton.getScene();
       GameState.isWon = true;
       GameState.resetCafeteria = true;
       GameState.resetOffice = true;
       GameState.resetRoom = true;
       scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.END_WON));
+
+      padlockPane.setVisible(false);
+      paperPane.setVisible(true);
     } else {
       showDialog(
           "Wrong combination",
           "Try again",
-          "The padlock did not open. " + GameState.codeWord + " " + GameState.code + " " + code);
+          "The padlock did not open.");
     }
   }
 
@@ -229,6 +354,34 @@ public class CafeteriaController {
     padlockPane.setVisible(false);
   }
 
+  @FXML
+  private void onClickCollectPaper() {
+    GameState.hasPaperProperty().set(true);
+    paperPane.setVisible(false);
+  }
+
+  @FXML
+  private void collectPaperMouseEntered() {
+    collectPaperLabel.setStyle("-fx-text-fill: blue;");
+  }
+
+  @FXML
+  private void collectPaperMouseExited() {
+    collectPaperLabel.setStyle("-fx-text-fill: black;");
+  }
+
+
+  @FXML
+  private void onSpeechBubbleOneClicked() {
+    GptAndTextAreaManager.displayTarget(Characters.PRISONER_ONE);
+    System.out.println("Speech bubble one clicked");
+  }
+
+  @FXML
+  private void onSpeechBubbleTwoClicked() {
+    GptAndTextAreaManager.displayTarget(Characters.PRISONER_TWO);
+    System.out.println("Speech bubble two clicked");
+  }
   private void showDialog(String title, String headerText, String message) {
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
     alert.setTitle(title);
@@ -291,5 +444,15 @@ public class CafeteriaController {
 
   private void updateTimerLabel() {
     // TODO: add code to update timer label
+  }
+
+  public void walkInAnimation() {
+    MovementControl.moveToLeft(true, 1, 500, animationItems);
+  }
+
+  public void resetAnimation() {
+    for (ImageView item : animationItems) {
+      item.setTranslateX(500);
+
   }
 }

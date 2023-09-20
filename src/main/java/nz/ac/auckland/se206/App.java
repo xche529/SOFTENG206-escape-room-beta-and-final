@@ -5,8 +5,12 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import nz.ac.auckland.se206.SceneManager.AppUi;
+import nz.ac.auckland.se206.controllers.CafeteriaController;
+import nz.ac.auckland.se206.controllers.OfficeController;
+import nz.ac.auckland.se206.controllers.StartInterfaceController;
 
 /**
  * This is the entry point of the JavaFX application, while you can change this class, it should
@@ -20,8 +24,8 @@ public class App extends Application {
     launch();
   }
 
-  public static void setRoot(String fxml) throws IOException {
-    scene.setRoot(loadFxml(fxml));
+  public static void setRoot(Parent root) throws IOException {
+    scene.setRoot(root);
   }
 
   /**
@@ -32,8 +36,8 @@ public class App extends Application {
    * @return The node of the input file.
    * @throws IOException If the file is not found.
    */
-  public static Parent loadFxml(final String fxml) throws IOException {
-    return new FXMLLoader(App.class.getResource("/fxml/" + fxml + ".fxml")).load();
+  public static FXMLLoader loadFxml(final String fxml) throws IOException {
+    return new FXMLLoader(App.class.getResource("/fxml/" + fxml + ".fxml"));
   }
 
   /**
@@ -45,17 +49,41 @@ public class App extends Application {
   @Override
   public void start(final Stage stage) throws IOException {
 
-    SceneManager.addUi(AppUi.END_WON, loadFxml("endScreenWon"));
-    SceneManager.addUi(AppUi.END_LOST, App.loadFxml("endScreenLost"));
-    SceneManager.addUi(AppUi.OFFICE, App.loadFxml("officeScene"));
-    SceneManager.addUi(AppUi.CAFETERIA, App.loadFxml("cafeteria"));
-    SceneManager.addUi(AppUi.START_INTERFACE, App.loadFxml("StartInterface"));
+    FXMLLoader endScreenWonLoader = loadFxml("endScreenWon");
+    FXMLLoader endScreenLostLoader = loadFxml("endScreenLost");
+    FXMLLoader officeSceneLoader = loadFxml("officeScene");
+    FXMLLoader cafeteriaLoader = loadFxml("cafeteria");
+    FXMLLoader StartInterfaceLoader = loadFxml("StartInterface");
+
+    SceneManager.addUi(AppUi.END_WON, endScreenWonLoader.load());
+    SceneManager.addUi(AppUi.END_LOST, endScreenLostLoader.load());
+    SceneManager.addUi(AppUi.OFFICE, officeSceneLoader.load());
+    SceneManager.addUi(AppUi.CAFETERIA, cafeteriaLoader.load());
+    SceneManager.addUi(AppUi.START_INTERFACE, StartInterfaceLoader.load());
+
+    CafeteriaController cafeteriaController = cafeteriaLoader.getController();
+    OfficeController officeController = officeSceneLoader.getController();
+    StartInterfaceController startInterfaceController = StartInterfaceLoader.getController();
+
+    SceneManager.cafeteriaController = cafeteriaController;
+    SceneManager.officeController = officeController;
+    cafeteriaController.setOfficeController(officeController);
+    officeController.setCafeteriaController(cafeteriaController);
+    startInterfaceController.setOfficeController(officeController);
+    startInterfaceController.setCafeteriaController(cafeteriaController);
 
     Safe.getRandomCode();
 
-    scene = new Scene(SceneManager.getUiRoot(AppUi.START_INTERFACE), 1113, 605);
+    scene = new Scene(SceneManager.getUiRoot(AppUi.START_INTERFACE), 1113, 800);
 
     stage.setScene(scene);
+    scene.addEventFilter(javafx.scene.input.KeyEvent.KEY_PRESSED, event -> {
+      if (event.getCode() == KeyCode.LEFT) {
+        scene.setRoot(SceneManager.switchRoom(true));
+      }else if(event.getCode() == KeyCode.RIGHT) {
+        scene.setRoot(SceneManager.switchRoom(false));
+      }
+    });
     stage.show();
     SceneManager.getUiRoot(AppUi.START_INTERFACE).requestFocus();
   }
