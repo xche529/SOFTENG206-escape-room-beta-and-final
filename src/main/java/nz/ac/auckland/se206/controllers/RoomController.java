@@ -637,7 +637,7 @@ public class RoomController {
     chatPane.setVisible(true);
     questionInfoLabel.setVisible(true);
     chatCompletionRequest = new ChatCompletionRequest().setN(1).setTemperature(1).setTopP(0.5).setMaxTokens(100);
-    ChatMessage userChatMessage = new ChatMessage("user", GptPromptEngineering.getGuardSetUp());
+    ChatMessage userChatMessage = new ChatMessage("user", GptPromptEngineering.getGuardSetUp(GameState.itemToChoose.getId()));
     // runGpt(userChatMessage, lastMsg -> {});
   }
 

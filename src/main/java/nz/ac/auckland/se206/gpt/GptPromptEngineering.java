@@ -22,7 +22,7 @@ public class GptPromptEngineering {
 
   }
 
-  public static String getGuardSetUp() {
+  public static String getGuardSetUp(String wordToGuess) {
     // return "Play the part of a prison guard (secretly an escape room, don't call it an escape"
     //     + " room). There r two hidden items one is a chart that converts letters into"
     //     + " numbers (behind a random object) and the other hidden behind an object, which is"
@@ -34,8 +34,8 @@ public class GptPromptEngineering {
     //     + " reply with text, no \"Role: \".";
     return "You are playing the role of a guard who is helping someone escape an escape room where"
       + " they are the prisoner.  You can only give the" 
-      + "prisoner 3 hints. You should give the prisoner a riddle with the answer sink to give "
-      + "them their first clue in your first message. Sink is the only correct answer. You should tell them that the answer "
+      + "prisoner 3 hints. You should give the prisoner a riddle with the answer " + wordToGuess + " to give "
+      + "them their first clue in your first message. " + wordToGuess + " is the only correct answer. You should tell them that the answer "
       + "to the riddle will help them escape in your first message. Never say the word sink. The riddle does not count as a hint. "
       + "Keep your "
       + "messages as concise as possible. Never write from the players/prisoners perspective. Only write what "
