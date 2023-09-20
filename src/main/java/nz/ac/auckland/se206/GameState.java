@@ -46,9 +46,7 @@ public static boolean gameFinishedOffice = false;
 
 public static boolean gameFinishedRoom = false;
 
-public static boolean gameFinishedStartInterface = false;
 
-public static boolean resetStartInterface = false;
 
   public static boolean isRiddleResolved() {
     return isRiddleResolvedProperty.get();

@@ -215,7 +215,6 @@ public class CafeteriaController {
       GameState.resetCafeteria = true;
       GameState.resetOffice = true;
       GameState.resetRoom = true;
-      GameState.resetStartInterface = true;
       scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.END_WON));
     } else {
       showDialog(
