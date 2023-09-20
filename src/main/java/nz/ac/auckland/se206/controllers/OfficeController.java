@@ -106,7 +106,8 @@ public class OfficeController {
   private Label[] digits;
   private int currentDigit = 0;
   
-  private void initialize() {
+  @FXML
+  private void initialize() throws IOException {
     
     resetOffice();
     resetchecker();
