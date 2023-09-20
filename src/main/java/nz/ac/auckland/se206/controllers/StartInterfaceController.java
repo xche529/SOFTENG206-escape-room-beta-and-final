@@ -52,6 +52,7 @@ public class StartInterfaceController {
     // // initialize the characters with prompt
     // //GptAndTextAreaManager.initialize();
     SceneManager.switchRoom(false, sceneButtonIsIn);
+    roomController.start();
     System.out.println("Game started");
     twoMin.setSelected(false);
     fourMin.setSelected(false);

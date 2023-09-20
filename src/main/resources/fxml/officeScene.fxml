@@ -10,19 +10,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <VBox xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.OfficeController">
    <children>
-      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1113.0">
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="605.0" prefWidth="1113.0">
          <children>
             <ImageView fitHeight="605.0" fitWidth="1113.0" pickOnBounds="true">
                <image>
                   <Image url="@../images/wardensOffice.jpg" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="50.0" fitWidth="100.0" layoutY="300.0" onMouseClicked="#goToCafeteria" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-               <image>
-                  <Image url="@../images/redArrow.png" />
                </image>
             </ImageView>
             <ImageView fx:id="binBig" fitHeight="71.0" fitWidth="55.0" layoutX="110.0" layoutY="494.0" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.5" visible="false">
@@ -54,11 +48,6 @@
             <Rectangle id="bin" fx:id="bin" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="75.0" layoutX="111.0" layoutY="495.0" onMouseClicked="#clickBin" onMouseEntered="#binMouseEntered" onMouseExited="#binMouseExited" opacity="0.0" scaleX="1.2" scaleY="1.2" stroke="BLACK" strokeType="INSIDE" width="55.0" />
             <Rectangle id="phone" fx:id="phone" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="59.0" layoutX="597.0" layoutY="305.0" onMouseClicked="#clickPhone" onMouseEntered="#phoneMouseEntered" onMouseExited="#phoneMouseExited" opacity="0.0" scaleX="1.2" scaleY="1.2" stroke="BLACK" strokeType="INSIDE" width="57.0" />
             <Rectangle id="blackBoard" fx:id="blackBoard" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="180.0" layoutX="881.0" layoutY="107.0" onMouseClicked="#clickBlackboard" onMouseEntered="#blackBoardMouseEntered" onMouseExited="#blackBoardMouseExited" opacity="0.0" scaleX="1.5" scaleY="1.5" stroke="BLACK" strokeType="INSIDE" width="175.0" />
-            <ImageView fitHeight="50.0" fitWidth="100.0" layoutX="1030.0" layoutY="300.0" onMouseClicked="#goToRoom" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/redArrow.png" />
-               </image>
-            </ImageView>
             <Pane fx:id="cypherPane" layoutX="135.0" layoutY="30.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="480.0" prefWidth="840.0" style="-fx-background-color: white;" visible="false">
                <children>
                   <ImageView fitHeight="329.0" fitWidth="656.0" layoutX="94.0" layoutY="31.0">
@@ -73,7 +62,7 @@
                   </Button>
                </children>
             </Pane>
-            <ImageView fx:id="prisonerTwo" fitHeight="293.0" fitWidth="135.0" layoutX="357.0" layoutY="314.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true">
+            <ImageView fx:id="prisonerTwo" fitHeight="293.0" fitWidth="135.0" layoutX="357.0" layoutY="312.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true">
                <image>
                   <Image url="@../images/prisoner2.png" />
                </image>

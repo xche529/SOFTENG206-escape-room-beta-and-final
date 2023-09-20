@@ -4,7 +4,6 @@ import java.util.HashMap;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
-import javafx.scene.transform.Scale;
 import nz.ac.auckland.se206.controllers.CafeteriaController;
 import nz.ac.auckland.se206.controllers.OfficeController;
 import nz.ac.auckland.se206.controllers.RoomController;
@@ -39,6 +38,8 @@ public class SceneManager {
     if (curretUi == AppUi.START_INTERFACE) {
       roomToSwitch = (VBox) getUiRoot(AppUi.ROOM);
       curretUi = AppUi.ROOM;
+      roomController.resetAnimation();
+      roomController.walkInAnimation();
     } else {
       if (isToLeft) {
         System.out.println("Moving to left");

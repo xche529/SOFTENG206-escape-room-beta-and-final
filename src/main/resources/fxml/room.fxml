@@ -14,14 +14,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <VBox xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
    <children>
-      <Pane fx:id="room" focusTraversable="true" maxHeight="800.0" maxWidth="1113.0" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="600.0" prefWidth="1113.0">
+      <Pane fx:id="room" focusTraversable="true" maxHeight="800.0" maxWidth="1113.0" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="605.0" prefWidth="1113.0">
          <children>
             <Pane prefHeight="605.0" prefWidth="1113.0">
                <children>
-                  <ImageView fitHeight="610.0" fitWidth="1113.0" layoutY="1.0">
+                  <ImageView fitHeight="605.0" fitWidth="1113.0">
                      <image>
                         <Image url="@../images/prison_room.jpg" />
                      </image>
@@ -60,19 +59,9 @@
                         <Image url="@../images/TP.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="50.0" fitWidth="100.0" layoutX="3.0" layoutY="196.0" onMouseClicked="#goToOffice" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                     <image>
-                        <Image url="@../images/redArrow.png" />
-                     </image>
-                  </ImageView>
                   <ImageView fx:id="ventBig" fitHeight="99.0" fitWidth="110.0" layoutX="3.0" layoutY="86.0" visible="false">
                      <image>
                         <Image url="@../images/Vent.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="50.0" fitWidth="100.0" layoutX="1025.0" layoutY="185.0" onMouseClicked="#goToCafeteria" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/redArrow.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="mirrorBig" fitHeight="140.0" fitWidth="91.0" layoutX="957.0" layoutY="173.0" visible="false">
@@ -137,12 +126,12 @@
                         <Image url="@../images/newArrow.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="prisonerTwo" fitHeight="309.0" fitWidth="148.0" layoutX="693.0" layoutY="300.0" pickOnBounds="true">
+                  <ImageView fx:id="prisonerTwo" fitHeight="309.0" fitWidth="148.0" layoutX="693.0" layoutY="295.0" pickOnBounds="true">
                      <image>
                         <Image url="@../images/prisoner2.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="prisonerOne" fitHeight="309.0" fitWidth="165.0" layoutX="494.0" layoutY="300.0" pickOnBounds="true">
+                  <ImageView fx:id="prisonerOne" fitHeight="309.0" fitWidth="165.0" layoutX="494.0" layoutY="296.0" pickOnBounds="true">
                      <image>
                         <Image url="@../images/prisoner1.png" />
                      </image>
