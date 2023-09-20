@@ -64,11 +64,12 @@ public class GptAndTextAreaManager {
         String result = "";
         List<ChatMessage> messages = chat.getMessages();
         // IMPORTANT: increase i here to filtout the prompt Engineering content
-        for (int i = 0; i < messages.size(); i++) {
-            result += messages.get(i).getRole() + ": " + chat.getMessages().get(i).getContent() + "\n\n";
+        if (messages.size() > 2) {
+            for (int i = 0; i < messages.size(); i++) {
+                result += messages.get(i).getRole() + ": " + chat.getMessages().get(i).getContent() + "\n\n";
+            }
         }
         return result;
-
     }
 
     /*
