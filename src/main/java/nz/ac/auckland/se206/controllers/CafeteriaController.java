@@ -1,6 +1,5 @@
 package nz.ac.auckland.se206.controllers;
 
-
 import java.io.IOException;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -103,18 +102,7 @@ public class CafeteriaController {
 
   private Label digitFour;
   @FXML
-
   private Button openButton;
-  @FXML
-  private Button responseSubmitButton;
-  @FXML
-  private TextArea inputBox;
-  @FXML
-  private TextArea chatDisplayBoard;
-  @FXML
-  private TextArea objectiveDisplayBoard;
-  @FXML
-  private Text typePromptText;
 
   @FXML
   private Pane paperPane;
@@ -139,6 +127,7 @@ public class CafeteriaController {
 
   /**
    * Initializes the cafeteria view, it is called when the room loads.
+   * 
    * @throws IOException
    *
    * @throws ApiProxyException
@@ -148,10 +137,6 @@ public class CafeteriaController {
 
     resetchecker();
     GptAndTextAreaManager.cafeteriaController = this;
-    GptAndTextAreaManager.cafeteriaChatDisplayBoard = chatDisplayBoard;
-    GptAndTextAreaManager.cafeteriaTypePromptText = typePromptText;
-    GptAndTextAreaManager.cafeteriaInputBox = inputBox;
-    GptAndTextAreaManager.cafeteriaObjectiveDisplayBoard = objectiveDisplayBoard;
 
     animationItems = new ImageView[] { prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo };
 
@@ -162,25 +147,6 @@ public class CafeteriaController {
     GameState.phoneNumber = "027" + " " + phoneNumberInitial.substring(0, 3) + " " + phoneNumberInitial.substring(3, 6);
     numberLabel.setText(GameState.phoneNumber);
 
-
-  }
-
-  @FXML
-  public void onSetPromptTextFalse() {
-    typePromptText.setVisible(false);
-  }
-
-  @FXML
-  public void onSubmitMessage() throws ApiProxyException {
-    String message = inputBox.getText();
-    inputBox.clear();
-    typePromptText.setVisible(true);
-    if (message.trim().isEmpty()) {
-      typePromptText.setVisible(true);
-      return;
-    } else {
-      GptAndTextAreaManager.sendMessage(message);
-    }
   }
 
   /**
@@ -258,22 +224,6 @@ public class CafeteriaController {
   @FXML
   private void paintingWithoutSafeMouseExited() {
     paintingWithoutSafeBig.setVisible(false);
-  }
-
-  @FXML
-  private void goToOffice() {
-    officeController.resetAnimation();
-    Scene scene = paintingWithSafe.getScene();
-    scene.setRoot(SceneManager.getUiRoot(AppUi.OFFICE));
-    officeController.walkInAnimation();
-  }
-
-  @FXML
-  private void goToRoom() {
-    roomController.resetAnimation();
-    Scene scene = paintingWithSafe.getScene();
-    scene.setRoot(SceneManager.getUiRoot(AppUi.ROOM));
-    roomController.walkInAnimation();
   }
 
   @FXML
@@ -419,34 +369,33 @@ public class CafeteriaController {
    * This method starts a thread that checks if the cafeteria needs to be reset.
    */
   private void resetchecker() {
-    timeline =
-        new Timeline(
-            new KeyFrame(
-                Duration.seconds(1),
-                event -> {
-                  if (GameState.secondsRemaining >= 0) {
-                    updateTimerLabel();
+    timeline = new Timeline(
+        new KeyFrame(
+            Duration.seconds(1),
+            event -> {
+              if (GameState.secondsRemaining >= 0) {
+                updateTimerLabel();
+              }
+              if (GameState.secondsRemaining == 0) {
+                if (GameState.gameFinishedCafeteria) {
+                  GameState.gameFinishedCafeteria = false;
+                  GameState.resetCafeteria = true;
+                  GameState.resetOffice = true;
+                  GameState.resetRoom = true;
+                  try {
+                    Scene scene = vendingMachine.getScene();
+                    scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.END_LOST));
+                  } catch (NullPointerException e) {
                   }
-                  if (GameState.secondsRemaining == 0) {
-                    if (GameState.gameFinishedCafeteria) {
-                      GameState.gameFinishedCafeteria = false;
-                      GameState.resetCafeteria = true;
-                      GameState.resetOffice = true;
-                      GameState.resetRoom = true;
-                      try {
-                        Scene scene = vendingMachine.getScene();
-                        scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.END_LOST));
-                      } catch (NullPointerException e) {
-                      }
-                    }
+                }
 
-                  }
-                  updateTimerLabel();
-                  if (GameState.resetCafeteria) {
-                    resetCafeteria();
-                    GameState.resetCafeteria = false;
-                  }
-                }));
+              }
+              updateTimerLabel();
+              if (GameState.resetCafeteria) {
+                resetCafeteria();
+                GameState.resetCafeteria = false;
+              }
+            }));
     timeline.setCycleCount(Timeline.INDEFINITE);
     timeline.play();
   }

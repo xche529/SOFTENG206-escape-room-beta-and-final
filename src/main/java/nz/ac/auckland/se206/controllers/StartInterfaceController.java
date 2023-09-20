@@ -9,6 +9,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.MenuButton;
+import javafx.scene.layout.VBox;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GptAndTextAreaManager;
@@ -24,8 +25,7 @@ public class StartInterfaceController {
   @FXML private CheckBox fourMin;
   @FXML private CheckBox sixMin;
   @FXML private MenuButton difficulty;
-  private CafeteriaController cafeteriaController;
-  private OfficeController officeController;
+  private RoomController roomController;
 
   @FXML
   private void initialize() {
@@ -36,13 +36,10 @@ public class StartInterfaceController {
    * This method is invoked when the user clicks the "Start" button. It starts the game.
    * It loads the room scene with user selected difficulty and play time.
    */
-  public void setOfficeController(OfficeController officeController) {
-    this.officeController = officeController;
+  public void setRoomController(RoomController roomController) {
+    this.roomController = roomController;
   }
 
-  public void setCafeteriaController(CafeteriaController cafeteriaController) {
-    this.cafeteriaController = cafeteriaController;
-  }
 
   @FXML
   private void onStartGame(Event event) throws IOException, ApiProxyException {
@@ -52,20 +49,10 @@ public class StartInterfaceController {
     }
     Button button = (Button) event.getSource();
     Scene sceneButtonIsIn = button.getScene();
-    FXMLLoader roomLoader = App.loadFxml("room");
-    SceneManager.addUi(AppUi.ROOM, roomLoader.load());
-    SceneManager.getUiRoot(AppUi.ROOM).getTransforms().add(App.scale);
-    RoomController roomController = roomLoader.getController();
-    SceneManager.roomController = roomController;
-    officeController.setRoomController(roomController);
-    cafeteriaController.setRoomController(roomController);
-    roomController.setCafeteriaController(cafeteriaController);
-    roomController.setOfficeController(officeController);
-    // initialize the characters with prompt
-    GptAndTextAreaManager.initialize();
-
-    sceneButtonIsIn.setRoot(SceneManager.getUiRoot(AppUi.ROOM));
-    roomController.walkInAnimation();
+    // // initialize the characters with prompt
+    // //GptAndTextAreaManager.initialize();
+    SceneManager.switchRoom(false, sceneButtonIsIn);
+    roomController.start();
     System.out.println("Game started");
     twoMin.setSelected(false);
     fourMin.setSelected(false);
