@@ -52,7 +52,7 @@ public class GptAndTextAreaManager {
      * @param chat the ChatCompletionRequest for the chat history
      */
     public static void initialize() throws ApiProxyException {
-        sendMessage(GptPromptEngineering.getGuardSetUp());
+        sendMessage(GptPromptEngineering.getGuardSetUp(GameState.itemToChoose.getId()));
         currentCharacter = Characters.PRISONER_ONE;
         sendMessage(GptPromptEngineering.getPrisonerOneSetUp());
         currentCharacter = Characters.PRISONER_TWO;
@@ -64,10 +64,10 @@ public class GptAndTextAreaManager {
         String result = "";
         List<ChatMessage> messages = chat.getMessages();
         // IMPORTANT: increase i here to filtout the prompt Engineering content
-        if (messages.size() > 2) {
-            for (int i = 0; i < messages.size(); i++) {
-                result += messages.get(i).getRole() + ": " + chat.getMessages().get(i).getContent() + "\n\n";
-            }
+        if (messages.size() > 1) {
+          for (int i = 1; i < messages.size(); i++) {
+              result += messages.get(i).getRole() + ": " + chat.getMessages().get(i).getContent() + "\n\n";
+          }
         }
         return result;
     }
