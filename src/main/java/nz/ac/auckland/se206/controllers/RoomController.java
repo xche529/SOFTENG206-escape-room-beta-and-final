@@ -320,6 +320,7 @@ public class RoomController {
   @FXML
   public void onSubmitMessage() throws ApiProxyException {
     String message = inputBox.getText();
+    inputBox.clear();
     if (message.trim().isEmpty()) {
       typePromptText.setVisible(true);
       return;
