@@ -1,5 +1,9 @@
 # SOFTENG 206 - EscAIpe Room
 
+## Acreditation
+
+- outdoors.jpg <a href="https://www.freepik.com/free-vector/blank-landscape-nature-park-scene-with-many-pines_11206852.htm#page=2&query=cartoon%20outdoor%20background&position=17&from_view=keyword&track=ais">Image by brgfx</a> on Freepik
+
 ## To setup OpenAI's API
 
 - add in the root of the project (i.e., the same level where `pom.xml` is located) a file named `apiproxy.config`
