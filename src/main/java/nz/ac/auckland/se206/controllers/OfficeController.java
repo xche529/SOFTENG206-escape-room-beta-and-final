@@ -594,7 +594,7 @@ public class OfficeController {
   private void resetOffice() {
     // Getting random item to be used to hide the cypher
     Rectangle[] items = new Rectangle[] {
-        bin, phone, blackBoard, deskDrawers,
+        bin, blackBoard, deskDrawers,
     };
     Random randomChoose = new Random();
     int randomIndexChoose = randomChoose.nextInt(items.length);
