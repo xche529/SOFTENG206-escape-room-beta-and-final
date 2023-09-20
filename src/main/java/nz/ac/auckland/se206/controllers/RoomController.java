@@ -170,7 +170,10 @@ public class RoomController {
                   }
                   updateTimerLabel();
                   if (GameState.resetRoom) {
-                    resetOffice();
+                      try {
+                        resetRoom();
+                      } catch (ApiProxyException e) {
+                      }
                     GameState.resetRoom = false;
                   }
                 }));
@@ -178,8 +181,9 @@ public class RoomController {
     timeline.play();
   }
 
-  private void resetOffice() {
+  private void resetRoom() throws ApiProxyException {
     itemToChoose();
+    prepareRiddle();
     toiletArrow.setOpacity(0);
     toiletPaperArrow.setOpacity(0);
     ventArrow.setOpacity(0);
