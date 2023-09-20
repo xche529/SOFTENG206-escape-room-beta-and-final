@@ -21,11 +21,14 @@ public class GptAndTextAreaManager {
         GUARD
     }
 
-    Characters currentCharacter = Characters.GUARD;
+    static Characters currentCharacter = Characters.GUARD;
 
-    public static ChatCompletionRequest guardChatCompletionRequest;
-    public static ChatCompletionRequest prisonerOneCompletionRequest;
-    public static ChatCompletionRequest prisonerTwoCompletionRequest;
+    public static ChatCompletionRequest guardChatCompletionRequest = new ChatCompletionRequest().setN(1)
+            .setTemperature(0.2).setTopP(0.5).setMaxTokens(50);
+    public static ChatCompletionRequest prisonerOneCompletionRequest = new ChatCompletionRequest().setN(1)
+            .setTemperature(0.2).setTopP(0.5).setMaxTokens(50);
+    public static ChatCompletionRequest prisonerTwoCompletionRequest = new ChatCompletionRequest().setN(1)
+            .setTemperature(0.2).setTopP(0.5).setMaxTokens(50);
 
     // These fields are initialized in the initialize method of the controller
     public static RoomController roomController;
@@ -59,6 +62,7 @@ public class GptAndTextAreaManager {
     private static String getMessageHistory(ChatCompletionRequest chat) {
         String result = "";
         List<ChatMessage> messages = chat.getMessages();
+        // IMPORTANT: increase i here to filtout the prompt Engineering content
         for (int i = 0; i < messages.size(); i++) {
             result += messages.get(i).getRole() + ": " + chat.getMessages().get(i).getContent() + "\n\n";
         }
@@ -71,7 +75,7 @@ public class GptAndTextAreaManager {
      * 
      * @param character the character to display
      */
-    public void displayTarget(Characters character) {
+    public static void displayTarget(Characters character) {
         String prompt = null;
         String chatHistory = null;
         if (character == Characters.GUARD) {
@@ -95,20 +99,20 @@ public class GptAndTextAreaManager {
         cafeteriaTypePromptText.setText(prompt);
     }
 
-    public void sendMessage(String message) throws ApiProxyException {
+    public static void sendMessage(String message) throws ApiProxyException {
         if (currentCharacter == Characters.GUARD) {
-            guardChatCompletionRequest.addMessage(new ChatMessage("You", message));
+            guardChatCompletionRequest.addMessage(new ChatMessage("user", message));
             runGpt(guardChatCompletionRequest);
         } else if (currentCharacter == Characters.PRISONER_ONE) {
-            prisonerOneCompletionRequest.addMessage(new ChatMessage("You", message));
+            prisonerOneCompletionRequest.addMessage(new ChatMessage("user", message));
             runGpt(prisonerOneCompletionRequest);
         } else {
-            prisonerTwoCompletionRequest.addMessage(new ChatMessage("You", message));
+            prisonerTwoCompletionRequest.addMessage(new ChatMessage("user", message));
             runGpt(prisonerTwoCompletionRequest);
         }
     }
 
-    private void runGpt(ChatCompletionRequest chatCompletionRequest) throws ApiProxyException {
+    private static void runGpt(ChatCompletionRequest chatCompletionRequest) throws ApiProxyException {
         // run the GPT model in a background thread
         Task<Void> backgroundTask = new Task<Void>() {
             @Override
@@ -129,7 +133,7 @@ public class GptAndTextAreaManager {
                     e.printStackTrace();
                     return null;
                 }
-                
+
             }
         };
         Thread gptThread = new Thread(null, backgroundTask);

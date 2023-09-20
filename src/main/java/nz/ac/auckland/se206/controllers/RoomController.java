@@ -30,6 +30,7 @@ import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GptAndTextAreaManager;
 import nz.ac.auckland.se206.MovementControl;
 import nz.ac.auckland.se206.SceneManager;
+import nz.ac.auckland.se206.GptAndTextAreaManager.Characters;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
@@ -317,13 +318,13 @@ public class RoomController {
   }
 
   @FXML
-  public void onSubmitMessage() {
+  public void onSubmitMessage() throws ApiProxyException {
     String message = inputBox.getText();
-    if (message.isEmpty()) {
+    if (message.trim().isEmpty()) {
       typePromptText.setVisible(true);
       return;
     } else {
-
+      GptAndTextAreaManager.sendMessage(message);
     }
   }
 
@@ -544,11 +545,13 @@ public class RoomController {
 
   @FXML
   private void onSpeechBubbleOneClicked() {
+    GptAndTextAreaManager.displayTarget(Characters.PRISONER_ONE);
     System.out.println("Speech bubble one clicked");
   }
 
   @FXML
   private void onSpeechBubbleTwoClicked() {
+    GptAndTextAreaManager.displayTarget(Characters.PRISONER_TWO);
     System.out.println("Speech bubble two clicked");
   }
 
