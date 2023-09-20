@@ -28,7 +28,7 @@ public class GameState {
 
   public static String codeWord;
 
-  public static int secondsRemaining = 1000;
+  public static int secondsRemaining = 120;
 
   public static int totalSeconds = 120;
 
@@ -37,6 +37,22 @@ public class GameState {
   public static Rectangle itemWithCypher;
 
   public static int questionsAsked = 0;
+
+public static boolean resetCafeteria = false;
+
+public static boolean resetOffice = false;
+
+public static boolean resetRoom = false;
+
+public static boolean gameFinishedCafeteria = false;
+
+public static boolean gameFinishedOffice = false;
+
+public static boolean gameFinishedRoom = false;
+
+public static boolean stopTimer = false;
+
+
 
   public static boolean isRiddleResolved() {
     return isRiddleResolvedProperty.get();

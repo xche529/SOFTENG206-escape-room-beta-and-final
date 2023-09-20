@@ -1,7 +1,10 @@
 package nz.ac.auckland.se206.controllers;
 
-import java.util.Random;
 
+import java.io.IOException;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import java.util.Random;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -12,6 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 import javafx.scene.text.Text;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GptAndTextAreaManager;
@@ -131,13 +135,18 @@ public class CafeteriaController {
     this.roomController = roomController;
   }
 
+  private Timeline timeline;
+
   /**
    * Initializes the cafeteria view, it is called when the room loads.
+   * @throws IOException
    *
    * @throws ApiProxyException
    */
   @FXML
   private void initialize() {
+
+    resetchecker();
     GptAndTextAreaManager.cafeteriaController = this;
     GptAndTextAreaManager.cafeteriaChatDisplayBoard = chatDisplayBoard;
     GptAndTextAreaManager.cafeteriaTypePromptText = typePromptText;
@@ -153,7 +162,7 @@ public class CafeteriaController {
     GameState.phoneNumber = "027" + " " + phoneNumberInitial.substring(0, 3) + " " + phoneNumberInitial.substring(3, 6);
     numberLabel.setText(GameState.phoneNumber);
 
-    // TODO: set visability of all required items
+
   }
 
   @FXML
@@ -331,6 +340,14 @@ public class CafeteriaController {
     int digitFourInt = Integer.parseInt(digitFour.getText());
     int code = digitOneInt * 1000 + digitTwoInt * 100 + digitThreeInt * 10 + digitFourInt;
     if (code == Integer.parseInt(GameState.code)) {
+
+      Scene scene = openButton.getScene();
+      GameState.isWon = true;
+      GameState.resetCafeteria = true;
+      GameState.resetOffice = true;
+      GameState.resetRoom = true;
+      scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.END_WON));
+
       padlockPane.setVisible(false);
       paperPane.setVisible(true);
     } else {
@@ -382,6 +399,62 @@ public class CafeteriaController {
     alert.showAndWait();
   }
 
+  private void resetCafeteria() {
+    padlockPane.setVisible(false);
+    safe.setVisible(false);
+    paintingWithSafe.setVisible(true);
+    paintingWithoutSafe.setVisible(true);
+    vendingMachine.setVisible(true);
+    paintingWithSafeBig.setVisible(false);
+    paintingWithoutSafeBig.setVisible(false);
+    safeBig.setVisible(false);
+    vendingMachineBig.setVisible(false);
+    digitOne.setText("0");
+    digitTwo.setText("0");
+    digitThree.setText("0");
+    digitFour.setText("0");
+  }
+
+  /*
+   * This method starts a thread that checks if the cafeteria needs to be reset.
+   */
+  private void resetchecker() {
+    timeline =
+        new Timeline(
+            new KeyFrame(
+                Duration.seconds(1),
+                event -> {
+                  if (GameState.secondsRemaining >= 0) {
+                    updateTimerLabel();
+                  }
+                  if (GameState.secondsRemaining == 0) {
+                    if (GameState.gameFinishedCafeteria) {
+                      GameState.gameFinishedCafeteria = false;
+                      GameState.resetCafeteria = true;
+                      GameState.resetOffice = true;
+                      GameState.resetRoom = true;
+                      try {
+                        Scene scene = vendingMachine.getScene();
+                        scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.END_LOST));
+                      } catch (NullPointerException e) {
+                      }
+                    }
+
+                  }
+                  updateTimerLabel();
+                  if (GameState.resetCafeteria) {
+                    resetCafeteria();
+                    GameState.resetCafeteria = false;
+                  }
+                }));
+    timeline.setCycleCount(Timeline.INDEFINITE);
+    timeline.play();
+  }
+
+  private void updateTimerLabel() {
+    // TODO: add code to update timer label
+  }
+
   public void walkInAnimation() {
     MovementControl.moveToLeft(true, 1, 500, animationItems);
   }
@@ -389,6 +462,6 @@ public class CafeteriaController {
   public void resetAnimation() {
     for (ImageView item : animationItems) {
       item.setTranslateX(500);
-    }
+
   }
 }

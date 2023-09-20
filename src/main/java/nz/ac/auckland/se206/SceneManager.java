@@ -76,4 +76,8 @@ public class SceneManager {
     curretUi = ui;
     return sceneMap.get(ui);
   }
+
+public static Object getInstance() {
+    return null;
+}
 }

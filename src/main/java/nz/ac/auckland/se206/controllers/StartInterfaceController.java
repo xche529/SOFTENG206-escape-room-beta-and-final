@@ -5,6 +5,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.MenuButton;
@@ -45,6 +46,10 @@ public class StartInterfaceController {
 
   @FXML
   private void onStartGame(Event event) throws IOException, ApiProxyException {
+      if (!twoMin.isSelected() && !fourMin.isSelected() && !sixMin.isSelected()) {
+      showDialog("Invaild Inputs", "Please select a difficulty and time limit", "");
+      return;
+    }
     Button button = (Button) event.getSource();
     Scene sceneButtonIsIn = button.getScene();
     FXMLLoader roomLoader = App.loadFxml("room");
@@ -57,9 +62,13 @@ public class StartInterfaceController {
     roomController.setOfficeController(officeController);
     // initialize the characters with prompt
     GptAndTextAreaManager.initialize();
+
     sceneButtonIsIn.setRoot(SceneManager.getUiRoot(AppUi.ROOM));
     roomController.walkInAnimation();
     System.out.println("Game started");
+    twoMin.setSelected(false);
+    fourMin.setSelected(false);
+    sixMin.setSelected(false);
   }
 
   /*
@@ -69,6 +78,21 @@ public class StartInterfaceController {
   private void onExitGame(Event event) {
     System.out.println("Goodbye!");
     System.exit(0);
+  }
+
+  /**
+   * Displays a dialog box with the given title, header text, and message.
+   *
+   * @param title the title of the dialog box
+   * @param headerText the header text of the dialog box
+   * @param message the message content of the dialog box
+   */
+  private void showDialog(String title, String headerText, String message) {
+    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    alert.setTitle(title);
+    alert.setHeaderText(headerText);
+    alert.setContentText(message);
+    alert.showAndWait();
   }
 
   /*
