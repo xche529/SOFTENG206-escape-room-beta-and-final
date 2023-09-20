@@ -11,12 +11,16 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.scene.text.Text;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.GptAndTextAreaManager;
+import nz.ac.auckland.se206.GptAndTextAreaManager.Characters;
 import nz.ac.auckland.se206.GptAndTextAreaManager;
 import nz.ac.auckland.se206.GptAndTextAreaManager.Characters;
 import nz.ac.auckland.se206.MovementControl;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
+import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class OfficeController {
@@ -122,6 +126,27 @@ public class OfficeController {
     }
   }
 
+  @FXML
+  public void onSetPromptTextFalse() {
+    typePromptText.setVisible(false);
+  }
+
+  @FXML
+  public void onSubmitMessage() throws ApiProxyException {
+    String message = inputBox.getText();
+    inputBox.clear();
+    typePromptText.setVisible(true);
+    if (message.trim().isEmpty()) {
+      typePromptText.setVisible(true);
+      return;
+    } else {
+      GptAndTextAreaManager.sendMessage(message);
+    }
+  }
+  @FXML
+  private Button exitVeiwButton;
+  @FXML
+  private Pane cypherPane;
   @FXML
   public void onSetPromptTextFalse() {
     typePromptText.setVisible(false);
