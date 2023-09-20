@@ -1,6 +1,8 @@
 package nz.ac.auckland.se206;
 
 import java.util.HashMap;
+
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
@@ -76,7 +78,12 @@ public class SceneManager {
       roomToSwitch = (VBox) getUiRoot(appUis[index]);
     }
     VBox vBox = new VBox(roomToSwitch, getUiRoot(AppUi.TEXT_AREA));
+
+
     vBox.getTransforms().add(App.scale);
+    vBox.setLayoutX(App.centerX);
+    vBox.setLayoutY(App.centerY);
+
     scene.setRoot(vBox);
   }
 

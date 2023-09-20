@@ -146,6 +146,11 @@
                         <Image url="@../images/speechBubble.png" />
                      </image>
                   </ImageView>
+                  <ImageView fitHeight="622.0" fitWidth="341.0" layoutX="1114.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../images/background.png" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
             <Pane fx:id="guardSpeechPane" layoutX="470.0" layoutY="50.0" prefHeight="79.0" prefWidth="89.0" scaleX="1.5" scaleY="1.5" visible="false">

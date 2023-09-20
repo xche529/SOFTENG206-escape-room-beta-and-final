@@ -10,11 +10,13 @@ import javafx.scene.transform.Scale;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.controllers.CafeteriaController;
 import nz.ac.auckland.se206.controllers.OfficeController;
 import nz.ac.auckland.se206.controllers.RoomController;
 import nz.ac.auckland.se206.controllers.StartInterfaceController;
+import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 /**
  * This is the entry point of the JavaFX application, while you can change this
@@ -24,6 +26,8 @@ import nz.ac.auckland.se206.controllers.StartInterfaceController;
 public class App extends Application {
   public static Scale scale;
   public static double overallScale = 1;
+  public static double centerX = 1;
+  public static double centerY = 1; 
   private static Scene scene;
   Boolean isFirstSwitch = false;
 
@@ -54,9 +58,12 @@ public class App extends Application {
    *
    * @param stage The primary stage of the application.
    * @throws IOException If "src/main/resources/fxml/canvas.fxml" is not found.
+   * @throws ApiProxyException
    */
   @Override
-  public void start(final Stage stage) throws IOException {
+  public void start(final Stage stage) throws IOException, ApiProxyException {
+    stage.setTitle("Prison Escape");
+    stage.setMaximized(true);
     Screen screen = Screen.getPrimary();
     double width = screen.getBounds().getWidth();
     double height = screen.getBounds().getHeight();
@@ -69,6 +76,8 @@ public class App extends Application {
       System.out.println("The game start with scale:" + overallScale);
     }
     overallScale = overallScale * 0.9;
+    centerX = (width - 1113 * overallScale)/2;
+    centerY = (height - 800 * overallScale)/2;
     scale = new Scale(overallScale, overallScale);
     FXMLLoader endScreenWonLoader = loadFxml("endScreenWon");
     FXMLLoader endScreenLostLoader = loadFxml("endScreenLost");
@@ -114,8 +123,12 @@ public class App extends Application {
     roomController.setOfficeController(officeController);
 
     Safe.getRandomCode();
-
-    scene = new Scene(SceneManager.getUiRoot(AppUi.START_INTERFACE), 1113 * overallScale, 800 * overallScale);
+    GptAndTextAreaManager.initialize();
+    VBox root = (VBox) SceneManager.getUiRoot(AppUi.START_INTERFACE);
+    root.setLayoutX(centerX);
+    root.setLayoutY(centerY);
+    scene = new Scene(root,1113 * overallScale, 600 * overallScale);
+    scene.setFill(Color.rgb(244, 244, 244,1));
     stage.setScene(scene);
     scene.addEventFilter(javafx.scene.input.KeyEvent.KEY_PRESSED, event -> {
       VBox up = null;

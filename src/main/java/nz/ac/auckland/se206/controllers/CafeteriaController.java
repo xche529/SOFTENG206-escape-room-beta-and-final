@@ -137,6 +137,7 @@ public class CafeteriaController {
 
     resetchecker();
     GptAndTextAreaManager.cafeteriaController = this;
+
     animationItems = new ImageView[] { prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo };
 
     Random random = new Random();

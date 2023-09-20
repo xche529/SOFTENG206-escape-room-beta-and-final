@@ -39,11 +39,8 @@ public class GptAndTextAreaManager {
     public static TextAreaController textAreaController;
 
     public static Text textAreaTypePromptText;
-
     public static TextArea textAreaChatDisplayBoard;
-
     public static TextArea textAreaInputBox;
-
     public static TextArea textAreaObjectiveDisplayBoard;
 
     public static boolean isGptRunning = false;

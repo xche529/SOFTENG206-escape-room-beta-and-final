@@ -184,6 +184,11 @@
                   </ImageView>
                </children>
             </Pane>
+            <ImageView fitHeight="622.0" fitWidth="341.0" layoutX="-341.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../images/background.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
    </children>
