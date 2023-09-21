@@ -3,9 +3,10 @@ package nz.ac.auckland.se206;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
-public class PlayHistory {
-  int score;
+public class PlayHistory implements Serializable {
+  double score;
   int timeTook;
   int difficulty;
   String name;
@@ -14,39 +15,45 @@ public class PlayHistory {
 
   public PlayHistory(int time, int difficulty, String name) {
     this.name = name;
-    this.score = difficulty * time;
+    this.score = time / difficulty;
     this.timeTook = time;
     this.difficulty = difficulty;
   }
 
   public void addHistory(PlayHistory playHistory) {
-    if (this.parentPlayHistory != null) {
-      if (this.parentPlayHistory.score > playHistory.score && this.score < playHistory.score) {
+
+    if (playHistory.score > this.score) {
+      if (this.parentPlayHistory == null) {
         playHistory.childPlayHistory = this;
         this.parentPlayHistory = playHistory;
-        this.parentPlayHistory.childPlayHistory = playHistory;
+        return;
+      } else {
+        if (this.parentPlayHistory.score > playHistory.score) {
+          playHistory.parentPlayHistory = this.parentPlayHistory;
+          playHistory.childPlayHistory = this;
+          this.parentPlayHistory.childPlayHistory = playHistory;
+          this.parentPlayHistory = playHistory;
+          return;
+        } else {
+          this.parentPlayHistory.addHistory(playHistory);
+          return;
+        }
+      }
+    } else {
+      if (this.childPlayHistory == null) {
+        this.childPlayHistory = playHistory;
+        playHistory.parentPlayHistory = this;
         return;
       }
-    } else if (this.parentPlayHistory == null && this.score < playHistory.score) {
-      playHistory.childPlayHistory = this;
-      this.parentPlayHistory = playHistory;
-      return;
-    } else if (this.childPlayHistory == null && this.score > playHistory.score) {
-      playHistory.parentPlayHistory = this;
-      this.childPlayHistory = playHistory;
-      return;
-    } else if (this.score == playHistory.score) {
-      if (this.childPlayHistory != null) {
+      if (this.childPlayHistory.score < playHistory.score) {
+        playHistory.childPlayHistory = this.childPlayHistory;
+        playHistory.parentPlayHistory = this;
         this.childPlayHistory.parentPlayHistory = playHistory;
-      }
-      this.childPlayHistory = playHistory;
-      playHistory.parentPlayHistory = this;
-
-    } else {
-      if (playHistory.score > this.score) {
-        this.parentPlayHistory.addHistory(playHistory);
-      } else if (playHistory.score < this.score) {
+        this.childPlayHistory = playHistory;
+        return;
+      } else {
         this.childPlayHistory.addHistory(playHistory);
+        return;
       }
     }
   }
@@ -54,29 +61,27 @@ public class PlayHistory {
   public String toString() {
     PlayHistory playHistory = this;
     String result = "";
-    if (this.parentPlayHistory != null) {
-      result = this.parentPlayHistory.toString();
+    if (this.childPlayHistory != null) {
+      result = this.childPlayHistory.toString();
     } else {
+      int rank = 1;
       do {
-        result =
-            "Name: "
-                + playHistory.name
-                + " Score: "
-                + playHistory.score
-                + " Time: "
-                + playHistory.timeTook
-                + " Difficulty: "
-                + playHistory.difficulty
-                + "\n";
-        playHistory = playHistory.childPlayHistory;
+        result += "Rank" + rank + ":\n " +
+            playHistory.name + "\n"
+            + " Time: "
+            + playHistory.timeTook
+            + "\n Difficulty: "
+            + playHistory.difficulty
+            + "\n\n";
+        playHistory = playHistory.parentPlayHistory;
+        rank++;
       } while (playHistory != null);
     }
     return result;
   }
 
   public void saveHistory() {
-    try (ObjectOutputStream oos =
-        new ObjectOutputStream(new FileOutputStream("player_history.dat"))) {
+    try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("player_history.dat"))) {
       oos.writeObject(this);
     } catch (IOException e) {
       e.printStackTrace();

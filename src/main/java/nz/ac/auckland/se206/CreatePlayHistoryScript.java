@@ -5,9 +5,10 @@ public class CreatePlayHistoryScript {
         PlayHistory playHistory = new PlayHistory(555, 1, "player1");
         playHistory.addHistory(new PlayHistory(22, 1, "player2"));
         playHistory.addHistory(new PlayHistory(35, 1, "player3"));     
-      //  playHistory.saveHistory();
+        playHistory.addHistory(new PlayHistory(35, 2, "player4"));
+        playHistory.saveHistory();
         String history = playHistory.toString();
         System.out.println(history);
     }
-    
+
 }

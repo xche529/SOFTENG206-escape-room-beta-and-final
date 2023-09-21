@@ -1,16 +1,24 @@
 package nz.ac.auckland.se206.controllers;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GptAndTextAreaManager;
+import nz.ac.auckland.se206.PlayHistory;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
@@ -23,52 +31,76 @@ public class StartInterfaceController {
   @FXML private CheckBox fourMin;
   @FXML private CheckBox sixMin;
   @FXML private MenuButton difficulty;
-  private CafeteriaController cafeteriaController;
-  private OfficeController officeController;
+  @FXML private TextArea playHistoryTextArea;
+  @FXML private TextField playerName;
+  private RoomController roomController;
 
   @FXML
   private void initialize() {
     System.out.println("StartInterfaceController initialized");
+    try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("player_history.dat"))) {
+      PlayHistory playHistory = (PlayHistory) ois.readObject();
+      System.out.println(playHistory.toString());
+      playHistoryTextArea.setText(playHistory.toString());
+    } catch (IOException | ClassNotFoundException e) {
+      playHistoryTextArea.setText("No play history found");
+      e.printStackTrace();
+    }
+
   }
 
   /*
-   * This method is invoked when the user clicks the "Start" button. It starts the game.
+   * This method is invoked when the user clicks the "Start" button. It starts the
+   * game.
    * It loads the room scene with user selected difficulty and play time.
    */
-  public void setOfficeController(OfficeController officeController) {
-    this.officeController = officeController;
+  public void setRoomController(RoomController roomController) {
+    this.roomController = roomController;
   }
 
-  public void setCafeteriaController(CafeteriaController cafeteriaController) {
-    this.cafeteriaController = cafeteriaController;
-  }
 
   @FXML
   private void onStartGame(Event event) throws IOException, ApiProxyException {
+      if (!twoMin.isSelected() && !fourMin.isSelected() && !sixMin.isSelected()) {
+      showDialog("Invaild Inputs", "Please select a difficulty and time limit", "");
+      return;
+    }
+    GameState.playerName = playerName.getText();
     Button button = (Button) event.getSource();
     Scene sceneButtonIsIn = button.getScene();
-    FXMLLoader roomLoader = App.loadFxml("room");
-    SceneManager.addUi(AppUi.ROOM, roomLoader.load());
-    RoomController roomController = roomLoader.getController();
-    SceneManager.roomController = roomController;
-    officeController.setRoomController(roomController);
-    cafeteriaController.setRoomController(roomController);
-    roomController.setCafeteriaController(cafeteriaController);
-    roomController.setOfficeController(officeController);
-    // initialize the characters with prompt
-    GptAndTextAreaManager.initialize();
-    sceneButtonIsIn.setRoot(SceneManager.getUiRoot(AppUi.ROOM));
-    roomController.walkInAnimation();
+    // // initialize the characters with prompt
+    // //GptAndTextAreaManager.initialize();
+    SceneManager.switchRoom(false, sceneButtonIsIn);
+    roomController.start();
     System.out.println("Game started");
+    twoMin.setSelected(false);
+    fourMin.setSelected(false);
+    sixMin.setSelected(false);
   }
 
   /*
-   * This method is invoked when the user clicks the "Exit" button. It exits the application.
+   * This method is invoked when the user clicks the "Exit" button. It exits the
+   * application.
    */
   @FXML
   private void onExitGame(Event event) {
     System.out.println("Goodbye!");
     System.exit(0);
+  }
+
+  /**
+   * Displays a dialog box with the given title, header text, and message.
+   *
+   * @param title the title of the dialog box
+   * @param headerText the header text of the dialog box
+   * @param message the message content of the dialog box
+   */
+  private void showDialog(String title, String headerText, String message) {
+    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    alert.setTitle(title);
+    alert.setHeaderText(headerText);
+    alert.setContentText(message);
+    alert.showAndWait();
   }
 
   /*

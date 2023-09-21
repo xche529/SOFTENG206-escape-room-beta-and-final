@@ -1,21 +1,33 @@
 package nz.ac.auckland.se206.controllers;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.Random;
+
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 import javafx.scene.text.Text;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GptAndTextAreaManager;
 import nz.ac.auckland.se206.GptAndTextAreaManager.Characters;
 import nz.ac.auckland.se206.MovementControl;
+import nz.ac.auckland.se206.PlayHistory;
 import nz.ac.auckland.se206.SceneManager;
+import nz.ac.auckland.se206.GameState.Difficulty;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
@@ -55,8 +67,12 @@ public class OfficeController {
 
   private ImageView speechBubbleOne;
   @FXML
-
   private ImageView speechBubbleTwo;
+  @FXML private ImageView binArrow;
+  @FXML private ImageView blackBoardArrow;
+  @FXML private ImageView drawArrow;
+  @FXML private ImageView phoneArrow;
+
   @FXML
   private TextArea inputBox;
   @FXML
@@ -65,9 +81,9 @@ public class OfficeController {
   private TextArea objectiveDisplayBoard;
   @FXML
   private Text typePromptText;
-
   @FXML
   private Label digitOne;
+
   @FXML
   private Label digitTwo;
   @FXML
@@ -93,6 +109,7 @@ public class OfficeController {
   @FXML
   private Label numberLabel;
   @FXML
+
   private Pane inspectingBinPane;
   @FXML
   private Pane gamePane;
@@ -115,12 +132,85 @@ public class OfficeController {
   @FXML
   private ImageView drawerConverter;
 
+  private Label timerLabel;
+
+  private Timeline timeline;
   private CafeteriaController cafeteriaController;
   private RoomController roomController;
   private ImageView[] animationItems;
   private Label[] digits;
-
   private int currentDigit = 0;
+
+  @FXML
+  private void initialize() throws IOException {
+
+    resetOffice();
+    resetchecker();
+
+    animateArrows(binArrow);
+    animateArrows(blackBoardArrow);
+    animateArrows(drawArrow);
+    animateArrows(phoneArrow);
+
+  @FXML
+  public void onSubmitMessage() throws ApiProxyException {
+    String message = inputBox.getText();
+    inputBox.clear();
+    typePromptText.setVisible(true);
+    if (message.trim().isEmpty()) {
+      typePromptText.setVisible(true);
+      return;
+    } else {
+      GptAndTextAreaManager.sendMessage(message);
+    }
+  }
+
+  @FXML
+  private void initialize() {
+    GameState.isRiddleResolvedProperty().set(true);
+    GptAndTextAreaManager.officeController = this;
+
+    animationItems = new ImageView[] { prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo };
+    // Getting random item to be used to hide the cypher
+    Rectangle[] items = new Rectangle[] {
+        bin, blackBoard, deskDrawers,
+    };
+    Random randomChoose = new Random();
+    int randomIndexChoose = randomChoose.nextInt(items.length);
+    GameState.itemWithCypher = items[randomIndexChoose];
+    // GptAndTextAreaManager.officeChatDisplayBoard = chatDisplayBoard;
+    // GptAndTextAreaManager.officeTypePromptText = typePromptText;
+    // GptAndTextAreaManager.officeInputBox = inputBox;
+    // GptAndTextAreaManager.officeObjectiveDisplayBoard = objectiveDisplayBoard;
+
+    animationItems = new ImageView[] { prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo };
+
+    digits = new Label[] {
+        digitOne, digitTwo, digitThree, digitFour, digitFive, digitSix, digitSeven, digitEight,
+        digitNine
+    };
+
+    GameState.hasPaperProperty()
+        .addListener(
+            (observable, oldValue, newValue) -> {
+              if (newValue) {
+                paperPane.setVisible(true);
+                numberLabel.setText(GameState.phoneNumber);
+              }
+            });
+  }
+
+    public void animateArrows(ImageView arrow) {
+    double startY = 0;
+
+    TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.5), arrow);
+    translateTransition.setFromY(startY);
+    translateTransition.setToY(startY + 5);
+    translateTransition.setAutoReverse(true);
+    translateTransition.setCycleCount(Animation.INDEFINITE);
+    translateTransition.play();
+  }
+
 
   public void setCafeteriaController(CafeteriaController cafeteriaController) {
     this.cafeteriaController = cafeteriaController;
@@ -141,57 +231,6 @@ public class OfficeController {
   }
 
   @FXML
-  public void onSetPromptTextFalse() {
-    typePromptText.setVisible(false);
-  }
-
-  @FXML
-  public void onSubmitMessage() throws ApiProxyException {
-    String message = inputBox.getText();
-    inputBox.clear();
-    typePromptText.setVisible(true);
-    if (message.trim().isEmpty()) {
-      typePromptText.setVisible(true);
-      return;
-    } else {
-      GptAndTextAreaManager.sendMessage(message);
-    }
-  }
-
-  @FXML
-  private void initialize() {
-    GameState.isRiddleResolvedProperty().set(true);
-    GptAndTextAreaManager.officeController = this;
-    GptAndTextAreaManager.officeChatDisplayBoard = chatDisplayBoard;
-    GptAndTextAreaManager.officeTypePromptText = typePromptText;
-    GptAndTextAreaManager.officeInputBox = inputBox;
-    GptAndTextAreaManager.officeObjectiveDisplayBoard = objectiveDisplayBoard;
-
-    animationItems = new ImageView[] { prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo };
-    // Getting random item to be used to hide the cypher
-    Rectangle[] items = new Rectangle[] {
-        bin, blackBoard, deskDrawers,
-    };
-    Random randomChoose = new Random();
-    int randomIndexChoose = randomChoose.nextInt(items.length);
-    GameState.itemWithCypher = items[randomIndexChoose];
-
-    digits = new Label[] {
-        digitOne, digitTwo, digitThree, digitFour, digitFive, digitSix, digitSeven, digitEight,
-        digitNine
-    };
-
-    GameState.hasPaperProperty()
-        .addListener(
-            (observable, oldValue, newValue) -> {
-              if (newValue) {
-                paperPane.setVisible(true);
-                numberLabel.setText(GameState.phoneNumber);
-              }
-            });
-  }
-
-  @FXML
   void onClickInspectingDrawerPane() {
     inspectingDrawerPane.setVisible(false);
     blurringPane.setVisible(false);
@@ -200,6 +239,7 @@ public class OfficeController {
 
   @FXML
   private void clickDeskDrawers(MouseEvent event) {
+    drawArrow.setVisible(false);
     if (GameState.itemWithCypher == deskDrawers) {
       inspectingDrawerPane.setVisible(true);
       drawerConverter.setVisible(true);
@@ -224,6 +264,7 @@ public class OfficeController {
 
   @FXML
   private void clickBin(MouseEvent event) {
+    binArrow.setVisible(false);
     if (GameState.itemWithCypher == bin) {
       inspectingBinPane.setVisible(true);
       binConverter.setVisible(true);
@@ -247,6 +288,7 @@ public class OfficeController {
 
   @FXML
   private void clickBlackboard(MouseEvent event) {
+    blackBoardArrow.setVisible(false);
     if (GameState.itemWithCypher == blackBoard) {
       inspectingBlackBoardPane.setVisible(true);
       inspectingBlackBoardConverter.setVisible(true);
@@ -263,6 +305,7 @@ public class OfficeController {
 
   @FXML
   private void clickPhone(MouseEvent event) {
+    phoneArrow.setVisible(false);
     phonePane.setVisible(true);
   }
 
@@ -316,22 +359,6 @@ public class OfficeController {
   private void onSpeechBubbleTwoClicked() {
     GptAndTextAreaManager.displayTarget(Characters.PRISONER_TWO);
     System.out.println("Speech bubble two clicked");
-  }
-
-  @FXML
-  private void goToRoom() {
-    roomController.resetAnimation();
-    Scene scene = bin.getScene();
-    scene.setRoot(SceneManager.getUiRoot(AppUi.ROOM));
-    roomController.walkInAnimation();
-  }
-
-  @FXML
-  private void goToCafeteria() {
-    cafeteriaController.resetAnimation();
-    Scene scene = bin.getScene();
-    scene.setRoot(SceneManager.getUiRoot(AppUi.CAFETERIA));
-    cafeteriaController.walkInAnimation();
   }
 
   @FXML
@@ -585,6 +612,24 @@ public class OfficeController {
       if (phoneNumber.equals(GameState.phoneNumber)) {
         GameState.isWon = true;
         Scene scene = phonePane.getScene();
+        int timeTook = GameState.totalSeconds - GameState.secondsRemaining;
+        int difficulty = 1;
+        if(GameState.difficulty == Difficulty.MEDIUM){
+          difficulty = 2;
+        }else if(GameState.difficulty == Difficulty.HARD){
+          difficulty = 3;
+        }
+        PlayHistory playHistory = new PlayHistory(timeTook, difficulty, GameState.playerName);
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("player_history.dat"))) {
+          PlayHistory oldPlayHistory = (PlayHistory) ois.readObject();
+          oldPlayHistory.addHistory(playHistory);
+          playHistory.saveHistory();
+        } catch (IOException | ClassNotFoundException e) {
+          playHistory.saveHistory();
+        }
+        GameState.resetCafeteria = true;
+        GameState.resetOffice = true;
+        GameState.resetRoom = true;
         scene.setRoot(SceneManager.getUiRoot(AppUi.END_WON));
       } else {
         System.out.println("Wrong number");
@@ -607,5 +652,59 @@ public class OfficeController {
   @FXML
   private void crossMouseExited() {
     crossBig.setVisible(false);
+  }
+
+  private void resetchecker() throws IOException {
+    timeline = new Timeline(
+        new KeyFrame(
+            Duration.seconds(1),
+            event -> {
+              if (GameState.secondsRemaining >= 0) {
+                updateTimerLabel();
+              }
+              if (GameState.secondsRemaining == 0) {
+                if (GameState.gameFinishedOffice) {
+                  GameState.gameFinishedOffice = false;
+                  GameState.resetCafeteria = true;
+                  GameState.resetOffice = true;
+                  GameState.resetRoom = true;
+                  try {
+                    Scene scene = phone.getScene();
+                    scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.END_LOST));
+                  } catch (NullPointerException e) {
+                  }
+
+                }
+              }
+              updateTimerLabel();
+              if (GameState.resetOffice) {
+                resetOffice();
+                GameState.resetOffice = false;
+              }
+            }));
+    timeline.setCycleCount(Timeline.INDEFINITE);
+    timeline.play();
+  }
+
+  private void updateTimerLabel() {
+    int minutes = (GameState.secondsRemaining) / 60;
+    int seconds = (GameState.secondsRemaining) % 60;
+    timerLabel.setText(String.format("%d:%02d", minutes, seconds));
+  }
+
+  private void resetOffice() {
+    // Getting random item to be used to hide the cypher
+    Rectangle[] items = new Rectangle[] {
+        bin, blackBoard, deskDrawers,
+    };
+    Random randomChoose = new Random();
+    int randomIndexChoose = randomChoose.nextInt(items.length);
+    GameState.itemWithCypher = items[randomIndexChoose];
+
+    binArrow.setVisible(true);
+    blackBoardArrow.setVisible(true);
+    drawArrow.setVisible(true);
+    phoneArrow.setVisible(true);
+
   }
 }
