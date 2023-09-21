@@ -120,6 +120,26 @@ public class OfficeController {
   private Label numberLabel;
   @FXML
   private Label timerLabel;
+  @FXML
+  private Pane inspectingBinPane;
+  @FXML
+  private Pane blurringPane;
+  @FXML
+  private Pane thoughtBubblePane;
+  @FXML
+  private Text thoughtBubbleText;
+  @FXML
+  private ImageView binConverter;
+  @FXML
+  private Pane inspectingBlackBoardPane;
+  @FXML
+  private ImageView inspectingBlackBoardConverter;
+  @FXML
+  private ImageView inspectingBlackBoardEmpty;
+  @FXML
+  private Pane inspectingDrawerPane;
+  @FXML
+  private ImageView drawerConverter;
 
   private Timeline timeline;
   private CafeteriaController cafeteriaController;
@@ -193,37 +213,72 @@ public class OfficeController {
   }
 
   @FXML
-  private void onClickExitConverterView() {
-    cypherPane.setVisible(false);
+  void onClickInspectingDrawerPane() {
+    inspectingDrawerPane.setVisible(false);
+    blurringPane.setVisible(false);
+    thoughtBubblePane.setVisible(false);
   }
 
   @FXML
   private void clickDeskDrawers(MouseEvent event) {
-    drawArrow.setVisible(false);
     if (GameState.itemWithCypher == deskDrawers) {
-      cypherPane.setVisible(true);
+      inspectingDrawerPane.setVisible(true);
+      drawerConverter.setVisible(true);
+      thoughtBubblePane.setVisible(true);
+      blurringPane.setVisible(true);
+      thoughtBubbleText.setText("What's that piece of paper???");
     } else {
-      System.out.println("deskDrawersClicked");
+      inspectingDrawerPane.setVisible(true);
+      blurringPane.setVisible(true);
+      thoughtBubblePane.setVisible(true);
+      thoughtBubbleText.setText("Hmm.. Nothing here...");
     }
+  }
+
+  @FXML
+  void onClickInspectingBinPane() {
+    inspectingBinPane.setVisible(false);
+    blurringPane.setVisible(false);
+    thoughtBubblePane.setVisible(false);
+    binConverter.setVisible(false);
   }
 
   @FXML
   private void clickBin(MouseEvent event) {
-    binArrow.setVisible(false);
     if (GameState.itemWithCypher == bin) {
-      cypherPane.setVisible(true);
+      inspectingBinPane.setVisible(true);
+      binConverter.setVisible(true);
+      thoughtBubblePane.setVisible(true);
+      blurringPane.setVisible(true);
+      thoughtBubbleText.setText("What's that piece of paper???");
     } else {
-      System.out.println("binClicked");
+      inspectingBinPane.setVisible(true);
+      blurringPane.setVisible(true);
+      thoughtBubblePane.setVisible(true);
+      thoughtBubbleText.setText("Hmm.. Nothing here...");
     }
   }
 
   @FXML
+  void onClickInspectingBlackBoardPane() {
+    inspectingBlackBoardPane.setVisible(false);
+    blurringPane.setVisible(false);
+    thoughtBubblePane.setVisible(false);
+  }
+
+  @FXML
   private void clickBlackboard(MouseEvent event) {
-    blackBoardArrow.setVisible(false);
     if (GameState.itemWithCypher == blackBoard) {
-      cypherPane.setVisible(true);
+      inspectingBlackBoardPane.setVisible(true);
+      inspectingBlackBoardConverter.setVisible(true);
+      blurringPane.setVisible(true);
+      thoughtBubblePane.setVisible(true);
+      thoughtBubbleText.setText("What's that chart???");
     } else {
-      System.out.println("blackBoardClicked");
+      inspectingBlackBoardPane.setVisible(true);
+      blurringPane.setVisible(true);
+      thoughtBubblePane.setVisible(true);
+      thoughtBubbleText.setText("Hmm.. Nothing here...");
     }
   }
 
