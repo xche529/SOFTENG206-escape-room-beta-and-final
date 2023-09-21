@@ -1,12 +1,10 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
-
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
-
 import java.util.Random;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
@@ -92,6 +90,25 @@ public class CafeteriaController {
   @FXML
 
   private ImageView speechBubbleTwo;
+
+  @FXML
+  private ImageView speechBubbleThree;
+  @FXML
+
+  private ImageView speechBubbleOneSmall;
+  @FXML
+
+  private ImageView speechBubbleTwoSmall;
+
+  @FXML
+  private ImageView speechBubbleThreeSmall;
+  @FXML
+  private ImageView thinkingOne;
+  @FXML
+  private ImageView thinkingTwo;
+  @FXML
+  private ImageView thinkingThree;
+
   @FXML
 
   private Label digitOne;
@@ -150,7 +167,8 @@ public class CafeteriaController {
     resetchecker();
     GptAndTextAreaManager.cafeteriaController = this;
 
-    animationItems = new ImageView[] { prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo };
+    animationItems = new ImageView[] { prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo, speechBubbleOneSmall,
+        speechBubbleTwoSmall, thinkingOne, thinkingThree, thinkingTwo };
 
     Random random = new Random();
 
@@ -318,6 +336,36 @@ public class CafeteriaController {
   }
 
   @FXML
+  private void onSetSpeechBubbleOneUp() {
+    speechBubbleOne.setVisible(true);
+  }
+
+  @FXML
+  private void onSetSpeechBubbleOneDown() {
+    speechBubbleOne.setVisible(false);
+  }
+
+  @FXML
+  private void onSetSpeechBubbleTwoUp() {
+    speechBubbleTwo.setVisible(true);
+  }
+
+  @FXML
+  private void onSetSpeechBubbleTwoDown() {
+    speechBubbleTwo.setVisible(false);
+  }
+
+  @FXML
+  private void onSetSpeechBubbleThreeUp() {
+    speechBubbleThree.setVisible(true);
+  }
+
+  @FXML
+  private void onSetSpeechBubbleThreeDown() {
+    speechBubbleThree.setVisible(false);
+  }
+
+  @FXML
   private void onClickExitPadlock() {
     padlockPane.setVisible(false);
   }
@@ -348,6 +396,12 @@ public class CafeteriaController {
   private void onSpeechBubbleTwoClicked() {
     GptAndTextAreaManager.displayTarget(Characters.PRISONER_TWO);
     System.out.println("Speech bubble two clicked");
+  }
+
+  @FXML
+  private void onSpeechBubbleThreeClicked() {
+    GptAndTextAreaManager.displayTarget(Characters.GUARD);
+    System.out.println("Speech bubble three clicked");
   }
 
   private void showDialog(String title, String headerText, String message) {
@@ -443,4 +497,29 @@ public class CafeteriaController {
     }
 
   }
+
+  public void setThinkingOneUp() {
+    thinkingOne.setVisible(true);
+  }
+
+  public void setThinkingOneDown() {
+    thinkingOne.setVisible(false);
+  }
+
+  public void setThinkingTwoUp() {
+    thinkingTwo.setVisible(true);
+  }
+
+  public void setThinkingTwoDown() {
+    thinkingTwo.setVisible(false);
+  }
+
+  public void setThinkingThreeUp() {
+    thinkingThree.setVisible(true);
+  }
+
+  public void setThinkingThreeDown() {
+    thinkingThree.setVisible(false);
+  }
+
 }

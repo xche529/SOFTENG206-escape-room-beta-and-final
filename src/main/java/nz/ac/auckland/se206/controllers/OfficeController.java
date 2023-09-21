@@ -15,7 +15,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -30,8 +29,6 @@ import nz.ac.auckland.se206.MovementControl;
 import nz.ac.auckland.se206.PlayHistory;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.GameState.Difficulty;
-import nz.ac.auckland.se206.SceneManager.AppUi;
-import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class OfficeController {
 
@@ -66,10 +63,18 @@ public class OfficeController {
 
   private ImageView prisonerTwo;
   @FXML
-
   private ImageView speechBubbleOne;
   @FXML
   private ImageView speechBubbleTwo;
+  @FXML
+  private ImageView speechBubbleOneSmall;
+  @FXML
+  private ImageView speechBubbleTwoSmall;
+  @FXML
+  private ImageView thinkingOne;
+  @FXML
+  private ImageView thinkingTwo;
+
   @FXML
   private ImageView binArrow;
   @FXML
@@ -166,7 +171,7 @@ public class OfficeController {
     // GptAndTextAreaManager.officeInputBox = inputBox;
     // GptAndTextAreaManager.officeObjectiveDisplayBoard = objectiveDisplayBoard;
 
-    animationItems = new ImageView[] { prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo };
+    animationItems = new ImageView[] { prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo , speechBubbleOneSmall,speechBubbleTwoSmall};
 
     digits = new Label[] {
         digitOne, digitTwo, digitThree, digitFour, digitFive, digitSix, digitSeven, digitEight,
@@ -210,6 +215,22 @@ public class OfficeController {
     for (ImageView item : animationItems) {
       item.setTranslateX(-500);
     }
+  }
+  
+  public void setThinkingOneUp() {
+    thinkingOne.setVisible(true);
+  }
+
+  public void setThinkingOneDown() {
+    thinkingOne.setVisible(false);
+  }
+
+  public void setThinkingTwoUp() {
+    thinkingTwo.setVisible(true);
+  }
+
+  public void setThinkingTwoDown() {
+    thinkingTwo.setVisible(false);
   }
 
   @FXML
@@ -338,6 +359,26 @@ public class OfficeController {
   private void onSpeechBubbleTwoClicked() {
     GptAndTextAreaManager.displayTarget(Characters.PRISONER_TWO);
     System.out.println("Speech bubble two clicked");
+  }
+
+  @FXML
+  private void onSetSpeechBubbleOneUp() {
+    speechBubbleOne.setVisible(true);
+  }
+
+  @FXML
+  private void onSetSpeechBubbleOneDown() {
+    speechBubbleOne.setVisible(false);
+  }
+
+  @FXML
+  private void onSetSpeechBubbleTwoUp() {
+    speechBubbleTwo.setVisible(true);
+  }
+
+  @FXML
+  private void onSetSpeechBubbleTwoDown() {
+    speechBubbleTwo.setVisible(false);
   }
 
   @FXML

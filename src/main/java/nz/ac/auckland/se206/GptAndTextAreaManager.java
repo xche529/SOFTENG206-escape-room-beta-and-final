@@ -1,10 +1,12 @@
 package nz.ac.auckland.se206;
 
+import java.io.File;
 import java.util.List;
-
 import javafx.concurrent.Task;
 import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import nz.ac.auckland.se206.controllers.CafeteriaController;
 import nz.ac.auckland.se206.controllers.OfficeController;
 import nz.ac.auckland.se206.controllers.RoomController;
@@ -15,6 +17,7 @@ import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
+import nz.ac.auckland.se206.speech.TextToSpeech;
 
 public class GptAndTextAreaManager {
     public enum Characters {
@@ -44,6 +47,7 @@ public class GptAndTextAreaManager {
     public static TextArea textAreaObjectiveDisplayBoard;
 
     public static boolean isGptRunning = false;
+    private static TextToSpeech textToSpeech;
 
     /*
      * this method outputs MessageHistory as a string which can be put into display
@@ -57,7 +61,7 @@ public class GptAndTextAreaManager {
         sendMessage(GptPromptEngineering.getPrisonerOneSetUp());
         currentCharacter = Characters.PRISONER_TWO;
         sendMessage(GptPromptEngineering.getPrisonerTwoSetUp());
-        displayTarget(Characters.GUARD);
+        displayTarget(Characters.PRISONER_TWO);
     }
 
     private static String getMessageHistory(ChatCompletionRequest chat) {
@@ -66,12 +70,26 @@ public class GptAndTextAreaManager {
         // IMPORTANT: increase i here to filtout the prompt Engineering content
 
         if (messages.size() > 1) {
-          for (int i = 1; i < messages.size(); i++) {
-            if (messages.get(i).getRole().equals("assistant") && messages.get(i).getContent().contains("Guard: Correct")) {
-                GameState.setRiddleResolved(true);
+            for (int i = 1; i < messages.size(); i++) {
+                if (messages.get(i).getRole().equals("assistant")
+                        && messages.get(i).getContent().contains("Guard: Correct")) {
+                    GameState.setRiddleResolved(true);
+                }
+                String name = messages.get(i).getRole();
+                if (name.trim().equals("assistant")) {
+                    if (currentCharacter == Characters.GUARD) {
+                        name = "";
+                    } else if (currentCharacter == Characters.PRISONER_ONE) {
+                        name = "Prisoner1: ";
+                    } else {
+                        name = "Prisoner2: ";
+                    }
+                } else if (name.trim().equals("user")) {
+                    name = GameState.playerName + ": ";
+                }
+                result += name + chat.getMessages().get(i).getContent() + "\n\n";
+                System.out.println(messages.get(i).getRole() + ": " + chat.getMessages().get(i).getContent() + "\n\n");
             }
-              result += messages.get(i).getRole() + ": " + chat.getMessages().get(i).getContent() + "\n\n";
-          }
 
         }
         return result;
@@ -104,18 +122,44 @@ public class GptAndTextAreaManager {
         }
         textAreaTypePromptText.setText(prompt);
         textAreaChatDisplayBoard.setText(chatHistory);
+        textAreaChatDisplayBoard.setScrollTop(Double.MAX_VALUE);
     }
 
     public static void sendMessage(String message) throws ApiProxyException {
+        boolean ifSpeak = false;
         if (currentCharacter == Characters.GUARD) {
             guardChatCompletionRequest.addMessage(new ChatMessage("user", message));
             runGpt(guardChatCompletionRequest);
+            if (guardChatCompletionRequest.getMessages().size() > 2) {
+                ifSpeak = true;
+            }
         } else if (currentCharacter == Characters.PRISONER_ONE) {
             prisonerOneCompletionRequest.addMessage(new ChatMessage("user", message));
             runGpt(prisonerOneCompletionRequest);
+            if (prisonerOneCompletionRequest.getMessages().size() > 2) {
+                ifSpeak = true;
+            }
         } else {
             prisonerTwoCompletionRequest.addMessage(new ChatMessage("user", message));
             runGpt(prisonerTwoCompletionRequest);
+            if (prisonerTwoCompletionRequest.getMessages().size() > 2) {
+                ifSpeak = true;
+            }
+        }
+        if (ifSpeak) {
+            // textToSpeech = new TextToSpeech();
+            // textToSpeech.speak(message);
+            String soundEffect;
+            if (currentCharacter == Characters.GUARD) {
+                soundEffect = "src/main/resources/sounds/HmmSoundEffect1.mp3";
+            } else if (currentCharacter == Characters.PRISONER_ONE) {
+                soundEffect = "src/main/resources/sounds/HmmSoundEffect2.mp3";
+            } else {
+                soundEffect = "src/main/resources/sounds/HmmSoundEffect3.mp3";
+            }
+            Media media = new Media(new File(soundEffect).toURI().toString());
+            MediaPlayer mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.play();
         }
     }
 
@@ -124,11 +168,29 @@ public class GptAndTextAreaManager {
         Task<Void> backgroundTask = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
+                if (currentCharacter == Characters.GUARD) {
+                    cafeteriaController.setThinkingThreeUp();
+                } else if (currentCharacter == Characters.PRISONER_ONE) {
+                    roomController.setThinkingOneUp();
+                    cafeteriaController.setThinkingOneUp();
+                    officeController.setThinkingOneUp();
+                } else if (currentCharacter == Characters.PRISONER_TWO) {
+                    roomController.setThinkingTwoUp();
+                    cafeteriaController.setThinkingTwoUp();
+                    officeController.setThinkingTwoUp();
+                }
                 try {
                     ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
                     Choice result = chatCompletionResult.getChoices().iterator().next();
                     chatCompletionRequest.addMessage(result.getChatMessage());
                     displayTarget(currentCharacter);
+                    roomController.setThinkingTwoDown();
+                    cafeteriaController.setThinkingTwoDown();
+                    officeController.setThinkingTwoDown();
+                    roomController.setThinkingOneDown();
+                    cafeteriaController.setThinkingOneDown();
+                    officeController.setThinkingOneDown();
+                    cafeteriaController.setThinkingThreeDown();
                     return null;
                 } catch (ApiProxyException e) {
                     ChatMessage error = new ChatMessage(
@@ -138,10 +200,18 @@ public class GptAndTextAreaManager {
                     chatCompletionRequest.addMessage(error);
                     displayTarget(currentCharacter);
                     e.printStackTrace();
+                    roomController.setThinkingTwoDown();
+                    cafeteriaController.setThinkingTwoDown();
+                    officeController.setThinkingTwoDown();
+                    roomController.setThinkingOneDown();
+                    cafeteriaController.setThinkingOneDown();
+                    officeController.setThinkingOneDown();
+                    cafeteriaController.setThinkingThreeDown();
                     return null;
                 }
 
             }
+
         };
         Thread gptThread = new Thread(null, backgroundTask);
         gptThread.start();
