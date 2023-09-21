@@ -1,6 +1,8 @@
 package nz.ac.auckland.se206.controllers;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.Random;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -19,7 +21,9 @@ import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GptAndTextAreaManager;
 import nz.ac.auckland.se206.GptAndTextAreaManager.Characters;
 import nz.ac.auckland.se206.MovementControl;
+import nz.ac.auckland.se206.PlayHistory;
 import nz.ac.auckland.se206.SceneManager;
+import nz.ac.auckland.se206.GameState.Difficulty;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
@@ -116,13 +120,12 @@ public class OfficeController {
 
     GptAndTextAreaManager.officeController = this;
 
-    //GptAndTextAreaManager.officeChatDisplayBoard = chatDisplayBoard;
-    //GptAndTextAreaManager.officeTypePromptText = typePromptText;
-    //GptAndTextAreaManager.officeInputBox = inputBox;
-    //GptAndTextAreaManager.officeObjectiveDisplayBoard = objectiveDisplayBoard;
+    // GptAndTextAreaManager.officeChatDisplayBoard = chatDisplayBoard;
+    // GptAndTextAreaManager.officeTypePromptText = typePromptText;
+    // GptAndTextAreaManager.officeInputBox = inputBox;
+    // GptAndTextAreaManager.officeObjectiveDisplayBoard = objectiveDisplayBoard;
 
     animationItems = new ImageView[] { prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo };
-
 
     digits = new Label[] {
         digitOne, digitTwo, digitThree, digitFour, digitFive, digitSix, digitSeven, digitEight,
@@ -138,7 +141,6 @@ public class OfficeController {
               }
             });
   }
-
 
   public void setCafeteriaController(CafeteriaController cafeteriaController) {
     this.cafeteriaController = cafeteriaController;
@@ -498,7 +500,21 @@ public class OfficeController {
       if (phoneNumber.equals(GameState.phoneNumber)) {
         GameState.isWon = true;
         Scene scene = phonePane.getScene();
-        GameState.isWon = true;
+        int timeTook = GameState.totalSeconds - GameState.secondsRemaining;
+        int difficulty = 1;
+        if(GameState.difficulty == Difficulty.MEDIUM){
+          difficulty = 2;
+        }else if(GameState.difficulty == Difficulty.HARD){
+          difficulty = 3;
+        }
+        PlayHistory playHistory = new PlayHistory(timeTook, difficulty, GameState.playerName);
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("player_history.dat"))) {
+          PlayHistory oldPlayHistory = (PlayHistory) ois.readObject();
+          oldPlayHistory.addHistory(playHistory);
+          playHistory.saveHistory();
+        } catch (IOException | ClassNotFoundException e) {
+          playHistory.saveHistory();
+        }
         GameState.resetCafeteria = true;
         GameState.resetOffice = true;
         GameState.resetRoom = true;

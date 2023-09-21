@@ -10,4 +10,5 @@ public class CreatePlayHistoryScript {
         String history = playHistory.toString();
         System.out.println(history);
     }
+
 }
