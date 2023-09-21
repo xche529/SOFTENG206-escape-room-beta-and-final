@@ -108,6 +108,8 @@ public class OfficeController {
   private ImageView crossBig;
   @FXML
   private Label numberLabel;
+  @FXML
+  private Label timerLabel;
 
   private Timeline timeline;
   private CafeteriaController cafeteriaController;
@@ -585,6 +587,9 @@ public class OfficeController {
   }
 
   private void updateTimerLabel() {
+    int minutes = (GameState.secondsRemaining) / 60;
+    int seconds = (GameState.secondsRemaining) % 60;
+    timerLabel.setText(String.format("%d:%02d", minutes, seconds));
   }
 
   private void resetOffice() {
