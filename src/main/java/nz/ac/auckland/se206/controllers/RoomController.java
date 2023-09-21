@@ -167,7 +167,7 @@ public class RoomController {
     itemToChoose();
     prepareRiddle();
     // Setting up the timer timeline
-    resetchecker();
+
   }
 
   /*
@@ -175,7 +175,8 @@ public class RoomController {
    * 
    * @throws IOException
    */
-  public void start() {
+  public void start() throws IOException {
+
     timeline = new Timeline(
         new KeyFrame(
             Duration.seconds(1),
@@ -221,6 +222,8 @@ public class RoomController {
               });
         });
 
+    resetchecker();
+    doorArrow.setVisible(false);
   }
 
   private void resetchecker() throws IOException {
@@ -603,7 +606,8 @@ public class RoomController {
     chatPane.setVisible(true);
     questionInfoLabel.setVisible(true);
     chatCompletionRequest = new ChatCompletionRequest().setN(1).setTemperature(1).setTopP(0.5).setMaxTokens(100);
-    ChatMessage userChatMessage = new ChatMessage("user", GptPromptEngineering.getGuardSetUp(GameState.itemToChoose.getId()));
+    ChatMessage userChatMessage = new ChatMessage("user",
+        GptPromptEngineering.getGuardSetUp(GameState.itemToChoose.getId()));
     // runGpt(userChatMessage, lastMsg -> {});
   }
 

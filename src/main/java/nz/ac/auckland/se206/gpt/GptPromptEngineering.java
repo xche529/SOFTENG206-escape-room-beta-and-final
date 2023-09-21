@@ -38,9 +38,9 @@ public class GptPromptEngineering {
       + "them their first clue in your first message. " + wordToGuess + " is the only correct answer. You should tell them that the answer "
       + "to the riddle will help them escape in your first message. Never say the word sink. The riddle does not count as a hint. "
       + "Keep your "
-      + "messages as concise as possible. Never write from the players/prisoners perspective. Only write what "
+      + "messages as concise as possible. Never write from any perspective but your own. Do not write anything from the point of veiw of the prisoner. Only write what "
       + "the guard says. Never refer to the prison as an escape room. Don't give a hint that is not "
-      + "asked for\r\n";
+      + "asked for When the Riddle is guessed correctly return only the word Correct. Messages should start with Guard: every time\r\n";
   }
 
   public static String getPrisonerOneSetUp(){

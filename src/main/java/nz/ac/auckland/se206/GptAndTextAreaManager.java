@@ -64,10 +64,15 @@ public class GptAndTextAreaManager {
         String result = "";
         List<ChatMessage> messages = chat.getMessages();
         // IMPORTANT: increase i here to filtout the prompt Engineering content
+
         if (messages.size() > 1) {
           for (int i = 1; i < messages.size(); i++) {
+            if (messages.get(i).getRole().equals("assistant") && messages.get(i).getContent().contains("Guard: Correct")) {
+                GameState.setRiddleResolved(true);
+            }
               result += messages.get(i).getRole() + ": " + chat.getMessages().get(i).getContent() + "\n\n";
           }
+
         }
         return result;
     }
