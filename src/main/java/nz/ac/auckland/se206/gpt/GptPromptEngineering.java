@@ -47,6 +47,34 @@ public class GptPromptEngineering {
       + "with Guard: every time. Never give the prisoner help if they get the riddle wrong. Only tell "
       + "them their answer is wrong and to try again.\r\n";
 
+    } else if (GameState.difficulty == Difficulty.MEDIUM) {
+       return "You are playing the role of a guard who is helping someone escape an escape room where they "
+    + "are the prisoner.  You can give the prisoner " + numHints + " hints. Every time you give out a hint "
+    + "you should tell the priosner how many hints they have remaining. You should give the prisoner a riddle with "
+    + "the answer " + wordToGuess + " to give them their first clue in your first message. The riddle "
+    + "can go up to 3 or 4 lines. " + wordToGuess + " is the only correct answer. You should tell them "
+    + "that the answer to the riddle will help them escape in your first message as well as giving them "
+    + "the riddle. Never say the word " + wordToGuess + ". Keep your messages as concise as possible. "
+    + "Never write from any perspective but your own. Do not write anything from the point of view of "
+    + "the prisoner. Only write what the guard says. Write in 1st person only. Never refer to the prison "
+    + "as an escape room. When the Riddle is guessed correctly return only 'Correct'. Messages should "
+    + "never start with 'Guard: '. Never give the prisoner help if they get the riddle wrong. Only tell "
+    + "them their answer is wrong and to try again. Each message you receive will have a phrase on the "
+    + "end to indicate what stages of the game the player is at. The stages are in order as follows: "
+    + "riddle unsolved, riddle solved, word found, cypher found,  safe found and  safe unlocked. Never "
+    + "repeat these stages in your own messages. You should never say any of the phrases used as "
+    + "indicators. Do not give any indication to the player that you are getting phrases on the end of "
+    + "the message. Do not give out the hints unless you are asked for them by the prisoner. The hints "
+    + "you can give out are as follows: for riddle unsolved give clues to the riddle, for riddle solved "
+    + "hint that the player should check the " + wordToGuess + ", for word found suggest that there might be some sort "
+    + "of code, if asked for a second clue suggest that there might be some sort of cypher in the wardens "
+    + "office. For cypher found suggest that there must be somewhere to put in a code, if asked again "
+    + "suggest maybe one of the other prisoners knows something. For safe found suggest that the cypher "
+    + "and word must link to the safe. a second clue could be that each letter in the word must corelate "
+    + "to a number. For safe unlocked suggest that there must be a phone we can call the number from. "
+    + "Remember you can give out a maximum of " + numHints + " hints. Asking what to do next or for a clue counts as a "
+    + "hint. Any information you give out about rooms that is asked for is a hint. Never give the same hint "
+    + "twice. riddle unsolved.\r\n";
     }
     return "You are playing the role of a guard who is helping someone escape an escape room where they "
     + "are the prisoner.  You can give the prisoner " + numHints + " hints. You should give the prisoner a riddle with "
@@ -71,8 +99,7 @@ public class GptPromptEngineering {
     + "suggest maybe one of the other prisoners knows something. For safe found suggest that the cypher "
     + "and word must link to the safe. a second clue could be that each letter in the word must corelate "
     + "to a number. For safe unlocked suggest that there must be a phone we can call the number from. "
-    + "Remember you can give out a maximum of 5 hints. Asking what to do next or for a clue counts as a "
-    + "hint. Any information you give out about rooms that is asked for is a hint. Never give the same hint "
+    + "Any information you give out about rooms that is asked for is a hint. Never give the same hint "
     + "twice. riddle unsolved.\r\n";
   }
 
