@@ -132,12 +132,12 @@
                         <Image url="@../images/prisoner1.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="speechBubbleTwo" fitHeight="150.0" fitWidth="89.0" layoutX="797.0" layoutY="254.0" onMouseClicked="#onSpeechBubbleTwoClicked" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="speechBubbleTwoSmall" fitHeight="150.0" fitWidth="89.0" layoutX="797.0" layoutY="254.0" onMouseClicked="#onSpeechBubbleTwoClicked" onMouseEntered="#onSetSpeechBubbleTwoUp" onMouseExited="#onSetSpeechBubbleTwoDown" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/speechBubble.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="speechBubbleOne" fitHeight="72.0" fitWidth="95.0" layoutX="611.0" layoutY="253.0" onMouseClicked="#onSpeechBubbleOneClicked" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="speechBubbleOneSmall" fitHeight="72.0" fitWidth="95.0" layoutX="611.0" layoutY="253.0" onMouseClicked="#onSpeechBubbleOneClicked" onMouseEntered="#onSetSpeechBubbleOneUp" onMouseExited="#onSetSpeechBubbleOneDown" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/speechBubble.png" />
                      </image>
@@ -145,6 +145,16 @@
                   <ImageView fitHeight="622.0" fitWidth="341.0" layoutX="1114.0" pickOnBounds="true">
                      <image>
                         <Image url="@../images/background.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="speechBubbleOne" fitHeight="99.0" fitWidth="131.0" layoutX="595.0" layoutY="240.0" onMouseClicked="#onSpeechBubbleOneClicked" onMouseEntered="#onSetSpeechBubbleOneUp" onMouseExited="#onSetSpeechBubbleOneDown" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../images/speechBubble.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="speechBubbleTwo" fitHeight="99.0" fitWidth="113.0" layoutX="785.0" layoutY="244.0" onMouseClicked="#onSpeechBubbleTwoClicked" onMouseEntered="#onSetSpeechBubbleTwoUp" onMouseExited="#onSetSpeechBubbleTwoDown" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../images/speechBubble.png" />
                      </image>
                   </ImageView>
                </children>

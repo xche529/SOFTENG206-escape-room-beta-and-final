@@ -66,10 +66,13 @@ public class OfficeController {
 
   private ImageView prisonerTwo;
   @FXML
-
   private ImageView speechBubbleOne;
   @FXML
   private ImageView speechBubbleTwo;
+  @FXML
+  private ImageView speechBubbleOneSmall;
+  @FXML
+  private ImageView speechBubbleTwoSmall;
   @FXML
   private ImageView binArrow;
   @FXML
@@ -166,7 +169,7 @@ public class OfficeController {
     // GptAndTextAreaManager.officeInputBox = inputBox;
     // GptAndTextAreaManager.officeObjectiveDisplayBoard = objectiveDisplayBoard;
 
-    animationItems = new ImageView[] { prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo };
+    animationItems = new ImageView[] { prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo , speechBubbleOneSmall,speechBubbleTwoSmall};
 
     digits = new Label[] {
         digitOne, digitTwo, digitThree, digitFour, digitFive, digitSix, digitSeven, digitEight,
@@ -338,6 +341,26 @@ public class OfficeController {
   private void onSpeechBubbleTwoClicked() {
     GptAndTextAreaManager.displayTarget(Characters.PRISONER_TWO);
     System.out.println("Speech bubble two clicked");
+  }
+
+  @FXML
+  private void onSetSpeechBubbleOneUp() {
+    speechBubbleOne.setVisible(true);
+  }
+
+  @FXML
+  private void onSetSpeechBubbleOneDown() {
+    speechBubbleOne.setVisible(false);
+  }
+
+  @FXML
+  private void onSetSpeechBubbleTwoUp() {
+    speechBubbleTwo.setVisible(true);
+  }
+
+  @FXML
+  private void onSetSpeechBubbleTwoDown() {
+    speechBubbleTwo.setVisible(false);
   }
 
   @FXML

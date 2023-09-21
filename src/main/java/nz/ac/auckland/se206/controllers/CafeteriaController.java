@@ -1,12 +1,10 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
-
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
-
 import java.util.Random;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
@@ -97,6 +95,16 @@ public class CafeteriaController {
   private ImageView speechBubbleThree;
   @FXML
 
+  private ImageView speechBubbleOneSmall;
+  @FXML
+
+  private ImageView speechBubbleTwoSmall;
+
+  @FXML
+  private ImageView speechBubbleThreeSmall;
+
+  @FXML
+
   private Label digitOne;
   @FXML
 
@@ -153,7 +161,8 @@ public class CafeteriaController {
     resetchecker();
     GptAndTextAreaManager.cafeteriaController = this;
 
-    animationItems = new ImageView[] { prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo };
+    animationItems = new ImageView[] { prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo, speechBubbleOneSmall,
+        speechBubbleTwoSmall };
 
     Random random = new Random();
 
@@ -318,6 +327,36 @@ public class CafeteriaController {
           "Try again",
           "The padlock did not open.");
     }
+  }
+
+  @FXML
+  private void onSetSpeechBubbleOneUp() {
+    speechBubbleOne.setVisible(true);
+  }
+
+  @FXML
+  private void onSetSpeechBubbleOneDown() {
+    speechBubbleOne.setVisible(false);
+  }
+
+  @FXML
+  private void onSetSpeechBubbleTwoUp() {
+    speechBubbleTwo.setVisible(true);
+  }
+
+  @FXML
+  private void onSetSpeechBubbleTwoDown() {
+    speechBubbleTwo.setVisible(false);
+  }
+
+  @FXML
+  private void onSetSpeechBubbleThreeUp() {
+    speechBubbleThree.setVisible(true);
+  }
+
+  @FXML
+  private void onSetSpeechBubbleThreeDown() {
+    speechBubbleThree.setVisible(false);
   }
 
   @FXML

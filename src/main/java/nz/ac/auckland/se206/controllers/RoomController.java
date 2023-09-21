@@ -46,10 +46,6 @@ public class RoomController {
   @FXML
   private Pane startPane;
   @FXML
-  private Pane guardSpeechPane;
-  @FXML
-  private Rectangle textBubble;
-  @FXML
   private Rectangle door;
   @FXML
   private Rectangle vent;
@@ -105,6 +101,10 @@ public class RoomController {
   private ImageView speechBubbleOne;
   @FXML
   private ImageView speechBubbleTwo;
+  @FXML
+  private ImageView speechBubbleOneSmall;
+  @FXML
+  private ImageView speechBubbleTwoSmall;
   @FXML
   private Label timerLabel;
   @FXML
@@ -173,19 +173,9 @@ public class RoomController {
     // initialize fields in the GptAndTextAreaManager class
     GptAndTextAreaManager.roomController = this;
 
-    animationItems = new ImageView[] { prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo };
+    animationItems = new ImageView[] { prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo, speechBubbleOneSmall,
+        speechBubbleTwoSmall };
     resetAnimation();
-
-    // Sending the initial request so the riddle is ready when the player enters the
-    // chat
-    // chatCompletionRequest =
-    // new
-    // ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
-    // ChatMessage userChatMessage =
-    // new ChatMessage(
-    // "user",
-    // GptPromptEngineering.getRiddleWithGivenWord(GameState.itemToChoose.getId()));
-    // runGpt(userChatMessage, lastMsg -> {});
 
     itemToChoose();
     // Setting up the timer timeline
@@ -229,7 +219,6 @@ public class RoomController {
             (observable, oldValue, newValue) -> {
               if (newValue) {
                 animateAllArrows();
-                guardSpeechPane.setVisible(true);
               }
             });
     timeline.play();
@@ -685,6 +674,26 @@ public class RoomController {
   private void onSpeechBubbleTwoClicked() {
     GptAndTextAreaManager.displayTarget(Characters.PRISONER_TWO);
     System.out.println("Speech bubble two clicked");
+  }
+
+  @FXML
+  private void onSetSpeechBubbleOneUp() {
+    speechBubbleOne.setVisible(true);
+  }
+
+  @FXML
+  private void onSetSpeechBubbleOneDown() {
+    speechBubbleOne.setVisible(false);
+  }
+
+  @FXML
+  private void onSetSpeechBubbleTwoUp() {
+    speechBubbleTwo.setVisible(true);
+  }
+
+  @FXML
+  private void onSetSpeechBubbleTwoDown() {
+    speechBubbleTwo.setVisible(false);
   }
 
 }

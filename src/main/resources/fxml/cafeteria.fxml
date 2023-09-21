@@ -42,6 +42,109 @@
                </image>
             </ImageView>
             <Rectangle id="paintingWithSafe" fx:id="paintingWithSafe" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="97.0" layoutX="571.0" layoutY="170.0" onMouseClicked="#onClickPaintingWithSafe" onMouseEntered="#paintingWithSafeMouseEntered" onMouseExited="#paintingWithSafeMouseExited" opacity="0.0" scaleX="1.5" scaleY="1.5" stroke="BLACK" strokeType="INSIDE" width="74.0" />
+            <ImageView fitHeight="332.0" fitWidth="180.0" layoutX="106.0" layoutY="273.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../images/guard2.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="safeBig" fitHeight="105.0" fitWidth="80.0" layoutX="580.0" layoutY="175.0" onMouseClicked="#onSafeClick" onMouseExited="#safeMouseExited" scaleX="1.5" scaleY="1.5" visible="false">
+               <image>
+                  <Image url="@../images/Safe.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="prisonerTwo" fitHeight="305.0" fitWidth="147.0" layoutX="559.0" layoutY="300.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../images/prisoner2.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="prisonerOne" fitHeight="312.0" fitWidth="163.0" layoutX="756.0" layoutY="294.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../images/prisoner1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="speechBubbleOneSmall" fitHeight="72.0" fitWidth="95.0" layoutX="870.0" layoutY="246.0" onMouseClicked="#onSpeechBubbleOneClicked" onMouseEntered="#onSetSpeechBubbleOneUp" onMouseExited="#onSetSpeechBubbleOneDown" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/speechBubble.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="speechBubbleThreeSmall" fitHeight="87.0" fitWidth="108.0" layoutX="97.0" layoutY="210.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#onSpeechBubbleThreeClicked" onMouseEntered="#onSetSpeechBubbleThreeUp" onMouseExited="#onSetSpeechBubbleThreeDown" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/speechBubble.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="speechBubbleTwoSmall" fitHeight="150.0" fitWidth="89.0" layoutX="651.0" layoutY="243.0" onMouseClicked="#onSpeechBubbleTwoClicked" onMouseEntered="#onSetSpeechBubbleTwoUp" onMouseExited="#onSetSpeechBubbleTwoDown" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/speechBubble.png" />
+               </image>
+            </ImageView>
+            <Pane fx:id="paperPane" layoutX="130.0" layoutY="65.0" prefHeight="486.0" prefWidth="852.0" visible="false">
+               <children>
+                  <ImageView fitHeight="510.0" fitWidth="888.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/paper.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="359.0" layoutY="24.0" prefHeight="142.0" prefWidth="112.0" text="Call:">
+                     <font>
+                        <Font name="American Typewriter" size="47.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="collectPaperLabel" layoutX="320.0" layoutY="363.0" onMouseClicked="#onClickCollectPaper" onMouseEntered="#collectPaperMouseEntered" onMouseExited="#collectPaperMouseExited" prefHeight="49.0" prefWidth="199.0" text="Collect Paper">
+                     <font>
+                        <Font size="34.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="numberLabel" layoutX="255.0" layoutY="177.0" prefHeight="142.0" prefWidth="424.0" textAlignment="CENTER">
+                     <font>
+                        <Font name="American Typewriter" size="47.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <ImageView fitHeight="622.0" fitWidth="341.0" layoutX="1114.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../images/background.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="paintingWithoutSafeArrow" fitHeight="53.0" fitWidth="44.0" layoutX="1018.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/newArrow.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="paintingWithSafeArrow" fitHeight="53.0" fitWidth="44.0" layoutX="596.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/newArrow.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="vendingMachineArrow" fitHeight="53.0" fitWidth="44.0" layoutX="452.0" layoutY="253.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/newArrow.png" />
+               </image>
+            </ImageView>
+            <HBox alignment="CENTER" layoutX="1026.0" prefHeight="49.0" prefWidth="87.0" style="-fx-background-color: black; -fx-border-color: #0FFF50; -fx-border-width: 5px;">
+               <children>
+                  <Label fx:id="timerLabel" alignment="CENTER" layoutX="10.0" prefHeight="35.0" prefWidth="73.0" textAlignment="CENTER" textFill="#0fff50">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <ImageView fx:id="speechBubbleThree" fitHeight="110.0" fitWidth="147.0" layoutX="88.0" layoutY="203.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#onSpeechBubbleThreeClicked" onMouseEntered="#onSetSpeechBubbleThreeUp" onMouseExited="#onSetSpeechBubbleThreeDown" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../images/speechBubble.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="speechBubbleTwo" fitHeight="104.0" fitWidth="118.0" layoutX="637.0" layoutY="230.0" onMouseClicked="#onSpeechBubbleTwoClicked" onMouseEntered="#onSetSpeechBubbleTwoUp" onMouseExited="#onSetSpeechBubbleTwoDown" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../images/speechBubble.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="speechBubbleOne" fitHeight="97.0" fitWidth="120.0" layoutX="856.0" layoutY="234.0" onMouseClicked="#onSpeechBubbleOneClicked" onMouseEntered="#onSetSpeechBubbleOneUp" onMouseExited="#onSetSpeechBubbleOneDown" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../images/speechBubble.png" />
+               </image>
+            </ImageView>
             <Pane fx:id="padlockPane" layoutX="43.0" layoutY="40.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="360.0" prefWidth="684.0" style="-fx-background-color: white;" visible="false">
                <children>
                   <Label fx:id="digitOne" layoutX="175.0" layoutY="175.0" prefHeight="42.0" prefWidth="33.0" text="0">
@@ -117,109 +220,6 @@
                   </Button>
                </children>
             </Pane>
-            <ImageView fx:id="safeBig" fitHeight="105.0" fitWidth="80.0" layoutX="580.0" layoutY="175.0" onMouseClicked="#onSafeClick" onMouseExited="#safeMouseExited" scaleX="1.5" scaleY="1.5" visible="false">
-               <image>
-                  <Image url="@../images/Safe.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="prisonerTwo" fitHeight="305.0" fitWidth="147.0" layoutX="559.0" layoutY="300.0" pickOnBounds="true">
-               <image>
-                  <Image url="@../images/prisoner2.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="prisonerOne" fitHeight="312.0" fitWidth="163.0" layoutX="756.0" layoutY="294.0" pickOnBounds="true">
-               <image>
-                  <Image url="@../images/prisoner1.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="speechBubbleOne" fitHeight="72.0" fitWidth="95.0" layoutX="870.0" layoutY="246.0" onMouseClicked="#onSpeechBubbleOneClicked" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/speechBubble.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="332.0" fitWidth="180.0" layoutX="106.0" layoutY="273.0" pickOnBounds="true">
-               <image>
-                  <Image url="@../images/guard2.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="speechBubbleThree" fitHeight="87.0" fitWidth="108.0" layoutX="97.0" layoutY="210.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#onSpeechBubbleThreeClicked" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/speechBubble.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="speechBubbleTwo" fitHeight="150.0" fitWidth="89.0" layoutX="651.0" layoutY="243.0" onMouseClicked="#onSpeechBubbleTwoClicked" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/speechBubble.png" />
-               </image>
-            </ImageView>
-            <Pane fx:id="paperPane" layoutX="130.0" layoutY="65.0" prefHeight="486.0" prefWidth="852.0" visible="false">
-               <children>
-                  <ImageView fitHeight="510.0" fitWidth="888.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/paper.png" />
-                     </image>
-                  </ImageView>
-                  <Label layoutX="359.0" layoutY="24.0" prefHeight="142.0" prefWidth="112.0" text="Call:">
-                     <font>
-                        <Font name="American Typewriter" size="47.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="collectPaperLabel" layoutX="320.0" layoutY="363.0" onMouseClicked="#onClickCollectPaper" onMouseEntered="#collectPaperMouseEntered" onMouseExited="#collectPaperMouseExited" prefHeight="49.0" prefWidth="199.0" text="Collect Paper">
-                     <font>
-                        <Font size="34.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="numberLabel" layoutX="255.0" layoutY="177.0" prefHeight="142.0" prefWidth="424.0" textAlignment="CENTER">
-                     <font>
-                        <Font name="American Typewriter" size="47.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-            <ImageView fitHeight="622.0" fitWidth="341.0" layoutX="1114.0" pickOnBounds="true">
-               <image>
-                  <Image url="@../images/background.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="paintingWithoutSafeArrow" fitHeight="53.0" fitWidth="44.0" layoutX="1018.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/newArrow.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="paintingWithSafeArrow" fitHeight="53.0" fitWidth="44.0" layoutX="596.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/newArrow.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="vendingMachineArrow" fitHeight="53.0" fitWidth="44.0" layoutX="452.0" layoutY="253.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/newArrow.png" />
-               </image>
-            </ImageView>
-            <HBox alignment="CENTER" layoutX="1026.0" prefHeight="49.0" prefWidth="87.0" style="-fx-background-color: black; -fx-border-color: #0FFF50; -fx-border-width: 5px;">
-               <children>
-                  <Label fx:id="timerLabel" alignment="CENTER" layoutX="10.0" prefHeight="35.0" prefWidth="73.0" textAlignment="CENTER" textFill="#0fff50">
-                     <font>
-                        <Font size="25.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-            <ImageView fx:id="speechBubbleThree1" fitHeight="110.0" fitWidth="147.0" layoutX="88.0" layoutY="203.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#onSpeechBubbleThreeClicked" pickOnBounds="true" preserveRatio="true" visible="false">
-               <image>
-                  <Image url="@../images/speechBubble.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="speechBubbleTwo1" fitHeight="104.0" fitWidth="118.0" layoutX="637.0" layoutY="230.0" onMouseClicked="#onSpeechBubbleTwoClicked" pickOnBounds="true" preserveRatio="true" visible="false">
-               <image>
-                  <Image url="@../images/speechBubble.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="speechBubbleOne1" fitHeight="97.0" fitWidth="120.0" layoutX="856.0" layoutY="234.0" onMouseClicked="#onSpeechBubbleOneClicked" pickOnBounds="true" preserveRatio="true" visible="false">
-               <image>
-                  <Image url="@../images/speechBubble.png" />
-               </image>
-            </ImageView>
          </children>
       </Pane>
    </children>
