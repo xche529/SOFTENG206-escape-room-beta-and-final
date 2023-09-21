@@ -67,7 +67,7 @@ public class GptAndTextAreaManager {
 
         if (messages.size() > 1) {
           for (int i = 1; i < messages.size(); i++) {
-            if (messages.get(i).getRole().equals("assistant") && messages.get(i).getContent().contains("Guard: Correct")) {
+            if (messages.get(i).getRole().equals("assistant") && messages.get(i).getContent().contains("Correct")) {
                 GameState.setRiddleResolved(true);
             }
               result += messages.get(i).getRole() + ": " + chat.getMessages().get(i).getContent() + "\n\n";
@@ -107,7 +107,19 @@ public class GptAndTextAreaManager {
     }
 
     public static void sendMessage(String message) throws ApiProxyException {
+        
         if (currentCharacter == Characters.GUARD) {
+            if (GameState.isRiddleResolved() == false) {
+                message = message + "? " + "riddle unsolved";    
+            } else if (GameState.wordFound == false) {
+                message = message + "? " + "riddle solved";
+            } else if (GameState.cypherFound == false) {
+                message = message + "? " + "word found";
+            } else if (GameState.safeFound == false) {
+                message = message + "? " + "cypher found";
+            } else if (GameState.safeUnlocked == false) {
+                message = message + "? " + "safe found";
+            }
             guardChatCompletionRequest.addMessage(new ChatMessage("user", message));
             runGpt(guardChatCompletionRequest);
         } else if (currentCharacter == Characters.PRISONER_ONE) {

@@ -197,6 +197,7 @@ public class OfficeController {
     drawArrow.setVisible(false);
     if (GameState.itemWithCypher == deskDrawers) {
       cypherPane.setVisible(true);
+      GameState.cypherFound = true;
     } else {
       System.out.println("deskDrawersClicked");
     }
@@ -207,6 +208,7 @@ public class OfficeController {
     binArrow.setVisible(false);
     if (GameState.itemWithCypher == bin) {
       cypherPane.setVisible(true);
+      GameState.cypherFound = true;
     } else {
       System.out.println("binClicked");
     }
@@ -217,6 +219,7 @@ public class OfficeController {
     blackBoardArrow.setVisible(false);
     if (GameState.itemWithCypher == blackBoard) {
       cypherPane.setVisible(true);
+      GameState.cypherFound = true;
     } else {
       System.out.println("blackBoardClicked");
     }
@@ -611,6 +614,9 @@ public class OfficeController {
     timerLabel.setText(String.format("%d:%02d", minutes, seconds));
   }
 
+  /*
+   * restores the office to its original state
+   */
   private void resetOffice() {
     // Getting random item to be used to hide the cypher
     Rectangle[] items = new Rectangle[] {
@@ -624,6 +630,8 @@ public class OfficeController {
     blackBoardArrow.setVisible(true);
     drawArrow.setVisible(true);
     phoneArrow.setVisible(true);
+
+    GameState.cypherFound = false;
 
   }
 }
