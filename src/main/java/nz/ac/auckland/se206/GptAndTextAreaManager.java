@@ -59,7 +59,7 @@ public class GptAndTextAreaManager {
         sendMessage(GptPromptEngineering.getPrisonerOneSetUp());
         currentCharacter = Characters.PRISONER_TWO;
         sendMessage(GptPromptEngineering.getPrisonerTwoSetUp());
-        displayTarget(Characters.GUARD);
+        displayTarget(Characters.PRISONER_TWO);
     }
 
     private static String getMessageHistory(ChatCompletionRequest chat) {
@@ -73,17 +73,20 @@ public class GptAndTextAreaManager {
                         && messages.get(i).getContent().contains("Guard: Correct")) {
                     GameState.setRiddleResolved(true);
                 }
-                String name = GameState.playerName;
-                if (messages.get(i).getRole() == "assistant") {
+                String name = messages.get(i).getRole();
+                if (name.trim().equals("assistant")) {
                     if (currentCharacter == Characters.GUARD) {
-                        name = "Guard";
+                        name = "";
                     } else if (currentCharacter == Characters.PRISONER_ONE) {
-                        name = "Prisoner1";
+                        name = "Prisoner1:";
                     } else {
-                        name = "Prisoner2";
+                        name = "Prisoner2:";
                     }
+                } else if (name.trim().equals("user")) {
+                    name = GameState.playerName + ":";
                 }
-                result += name + ": " + chat.getMessages().get(i).getContent() + "\n\n";
+                result += name + "\n" + chat.getMessages().get(i).getContent() + "\n\n";
+                System.out.println(messages.get(i).getRole() + ": " + chat.getMessages().get(i).getContent() + "\n\n");
             }
 
         }
