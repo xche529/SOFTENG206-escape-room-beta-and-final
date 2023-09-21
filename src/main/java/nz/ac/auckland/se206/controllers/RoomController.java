@@ -247,7 +247,7 @@ public class RoomController {
                   }
                 }
               }
-              updateTimerLabel();
+              
               if (GameState.resetRoom) {
                 try {
                   resetRoom();
