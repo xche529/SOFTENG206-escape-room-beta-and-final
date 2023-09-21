@@ -65,7 +65,7 @@ public class StartInterfaceController {
       showDialog("Invaild Inputs", "Please select a difficulty and time limit", "");
       return;
     }
-    
+    GameState.playerName = playerName.getText();
     Button button = (Button) event.getSource();
     Scene sceneButtonIsIn = button.getScene();
     // // initialize the characters with prompt

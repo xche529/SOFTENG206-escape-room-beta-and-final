@@ -17,7 +17,7 @@
             <CheckBox fx:id="hard" layoutX="758.0" layoutY="84.0" mnemonicParsing="false" onAction="#onSwitchDifficulty" text="HARD" />
             <CheckBox fx:id="medium" layoutX="758.0" layoutY="115.0" mnemonicParsing="false" onAction="#onSwitchDifficulty" text="MEDIUM" />
             <CheckBox fx:id="easy" layoutX="760.0" layoutY="145.0" mnemonicParsing="false" onAction="#onSwitchDifficulty" selected="true" text="EASY" />
-            <TextArea fx:id="playHistoryTextArea" layoutX="138.0" layoutY="119.0" prefHeight="277.0" prefWidth="284.0" text="No play history&#10;">
+            <TextArea fx:id="playHistoryTextArea" layoutX="138.0" layoutY="119.0" prefHeight="277.0" prefWidth="284.0" text="No play history&#10;" wrapText="true">
                <font>
                   <Font size="21.0" />
                </font></TextArea>

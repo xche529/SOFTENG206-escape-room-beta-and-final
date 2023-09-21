@@ -5,9 +5,8 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-
-public class PlayHistory implements Serializable{
-  int score;
+public class PlayHistory implements Serializable {
+  double score;
   int timeTook;
   int difficulty;
   String name;
@@ -16,7 +15,7 @@ public class PlayHistory implements Serializable{
 
   public PlayHistory(int time, int difficulty, String name) {
     this.name = name;
-    this.score = difficulty * time;
+    this.score = time / difficulty;
     this.timeTook = time;
     this.difficulty = difficulty;
   }
@@ -62,19 +61,20 @@ public class PlayHistory implements Serializable{
   public String toString() {
     PlayHistory playHistory = this;
     String result = "";
-    if (this.parentPlayHistory != null) {
-      result = this.parentPlayHistory.toString();
+    if (this.childPlayHistory != null) {
+      result = this.childPlayHistory.toString();
     } else {
+      int rank = 1;
       do {
-        result += playHistory.name
-            + " Score: "
-            + playHistory.score
+        result += "Rank" + rank + ":\n " +
+            playHistory.name + "\n"
             + " Time: "
             + playHistory.timeTook
-            + " Difficulty: "
+            + "\n Difficulty: "
             + playHistory.difficulty
-            + "\n";
-        playHistory = playHistory.childPlayHistory;
+            + "\n\n";
+        playHistory = playHistory.parentPlayHistory;
+        rank++;
       } while (playHistory != null);
     }
     return result;
