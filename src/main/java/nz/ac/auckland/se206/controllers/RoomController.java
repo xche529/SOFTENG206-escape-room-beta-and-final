@@ -2,14 +2,11 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
 import java.util.Random;
-import java.util.function.Consumer;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
-import javafx.concurrent.Task;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -23,7 +20,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.GameState;
@@ -32,13 +28,8 @@ import nz.ac.auckland.se206.GptAndTextAreaManager;
 import nz.ac.auckland.se206.MovementControl;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.GptAndTextAreaManager.Characters;
-import nz.ac.auckland.se206.SceneManager.AppUi;
-import nz.ac.auckland.se206.gpt.ChatMessage;
-import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
-import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
-import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 
 /** Controller class for the room view. */
@@ -133,7 +124,6 @@ public class RoomController {
   private ProgressIndicator chatProgress;
 
   private Timeline timeline;
-  private ChatCompletionRequest chatCompletionRequest;
   private TextToSpeech textToSpeech;
   private OfficeController officeController = null;
   private CafeteriaController cafeteriaController = null;
@@ -165,7 +155,6 @@ public class RoomController {
     // runGpt(userChatMessage, lastMsg -> {});
 
     itemToChoose();
-    prepareRiddle();
     // Setting up the timer timeline
 
   }
@@ -262,7 +251,6 @@ public class RoomController {
 
   private void resetRoom() throws ApiProxyException {
     itemToChoose();
-    prepareRiddle();
     Safe.getRandomCode();
     toiletArrow.setOpacity(0);
     toiletPaperArrow.setOpacity(0);
@@ -271,24 +259,9 @@ public class RoomController {
     mirrorArrow.setOpacity(0);
     towelArrow.setOpacity(0);
     doorArrowSmall.setOpacity(0);
-    guardSpeechPane.setVisible(false);
     //animateArrows(doorArrow);
     GameState.setRiddleResolved(false);
-  }
-
-  /*
-   * This method prepares the riddle for the player to solve.
-   *
-   * @throws ApiProxyException
-   */
-  private void prepareRiddle() throws ApiProxyException {
-    // Sending the initial request so the riddle is ready when the player enters the
-    // chat
-    chatCompletionRequest = new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
-    ChatMessage userChatMessage = new ChatMessage(
-        "user", GptPromptEngineering.getRiddleWithGivenWord(GameState.itemToChoose.getId()));
-    runGpt(userChatMessage, lastMsg -> {
-    });
+    GameState.resetRoom = false;
   }
 
   /*
@@ -602,16 +575,6 @@ public class RoomController {
   }
 
   @FXML
-  private void onTextBubbleClicked() throws ApiProxyException {
-    chatPane.setVisible(true);
-    questionInfoLabel.setVisible(true);
-    chatCompletionRequest = new ChatCompletionRequest().setN(1).setTemperature(1).setTopP(0.5).setMaxTokens(100);
-    ChatMessage userChatMessage = new ChatMessage("user",
-        GptPromptEngineering.getGuardSetUp(GameState.itemToChoose.getId()));
-    // runGpt(userChatMessage, lastMsg -> {});
-  }
-
-  @FXML
   private void onSpeechBubbleOneClicked() {
     GptAndTextAreaManager.displayTarget(Characters.PRISONER_ONE);
     System.out.println("Speech bubble one clicked");
@@ -623,109 +586,4 @@ public class RoomController {
     System.out.println("Speech bubble two clicked");
   }
 
-  /**
-   * Appends a chat message to the chat text area.
-   *
-   * @param msg the chat message to append
-   */
-  private void appendChatMessage(ChatMessage msg) {
-    if (msg.getRole().equals("assistant")) {
-      chatTextArea.appendText("Guard: " + msg.getContent() + "\n\n");
-    } else if (msg.getRole().equals("user")) {
-      chatTextArea.appendText("You: " + msg.getContent() + "\n\n");
-    }
-  }
-
-  /**
-   * Runs the GPT model with a given chat message.
-   *
-   * @param msg the chat message to process
-   * @return the response chat message
-   * @throws ApiProxyException if there is an error communicating with the API
-   *                           proxy
-   */
-  private void runGpt(ChatMessage msg, Consumer<ChatMessage> completionCallback)
-      throws ApiProxyException {
-    // define a new task to create threading
-    Task<Void> callGpt = new Task<Void>() {
-      @Override
-      protected Void call() throws Exception {
-        try {
-          // add the message to the request
-          chatCompletionRequest.addMessage(msg);
-          ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
-          Choice result = chatCompletionResult.getChoices().iterator().next();
-          chatCompletionRequest.addMessage(result.getChatMessage());
-          Platform.runLater(
-              () -> {
-                // update gui components later
-                appendChatMessage(result.getChatMessage());
-                completionCallback.accept(result.getChatMessage());
-                chatProgress.setVisible(false);
-                chatProgressLabel.setVisible(false);
-              });
-        } catch (ApiProxyException e) {
-          // TODO handle exception appropriately
-          e.printStackTrace();
-        }
-        return null;
-      }
-    };
-    // start thread
-    Thread thread = new Thread(callGpt);
-    thread.start();
-    // set progress circle to loading
-    chatProgress.setProgress(ProgressIndicator.INDETERMINATE_PROGRESS);
-    chatProgress.setVisible(true);
-    chatProgressLabel.setVisible(true);
-  }
-
-  /**
-   * Sends a message to the GPT model.
-   *
-   * @param event the action event triggered by the send button
-   * @throws ApiProxyException if there is an error communicating with the API
-   *                           proxy
-   * @throws IOException       if there is an I/O error
-   */
-  @FXML
-  private void onSendMessage(ActionEvent event) throws ApiProxyException, IOException {
-    if (GameState.isRiddleResolved()) {
-      GameState.questionsAsked++;
-      if (GameState.questionsAsked >= 2) {
-        sendButton.disableProperty().set(true);
-        overQuestionLimitLabel.setVisible(true);
-        inputText.disableProperty().set(true);
-      }
-    }
-    String message = inputText.getText();
-    if (message.trim().isEmpty()) {
-      return;
-    }
-    inputText.clear();
-    ChatMessage msg = new ChatMessage("user", message);
-    appendChatMessage(msg);
-
-    runGpt(
-        msg,
-        lastMsg -> {
-          if (lastMsg.getRole().equals("assistant") && lastMsg.getContent().startsWith("Correct")) {
-            GameState.setRiddleResolved(true);
-          }
-          System.out.println(chatCompletionRequest.toString());
-        });
-  }
-
-  /**
-   * Navigates back to the previous view.
-   *
-   * @param event the action event triggered by the go back button
-   * @throws ApiProxyException if there is an error communicating with the API
-   *                           proxy
-   * @throws IOException       if there is an I/O error
-   */
-  @FXML
-  private void onGoBack(ActionEvent event) throws ApiProxyException, IOException {
-    chatPane.setVisible(false);
-  }
 }
