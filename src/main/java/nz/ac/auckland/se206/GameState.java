@@ -52,7 +52,7 @@ public static boolean gameFinishedRoom = false;
 
 public static boolean stopTimer = false;
 
-
+  public static String playerName = "Player";
 
   public static boolean isRiddleResolved() {
     return isRiddleResolvedProperty.get();

@@ -3,24 +3,38 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <VBox fillWidth="false" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.StartInterfaceController">
    <children>
-      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1113.0">
          <children>
-            <Button layoutX="247.0" layoutY="246.0" mnemonicParsing="false" onAction="#onStartGame" text="start game" />
-            <CheckBox fx:id="hard" layoutX="452.0" layoutY="85.0" mnemonicParsing="false" onAction="#onSwitchDifficulty" text="HARD" />
-            <CheckBox fx:id="medium" layoutX="452.0" layoutY="115.0" mnemonicParsing="false" onAction="#onSwitchDifficulty" text="MEDIUM" />
-            <CheckBox fx:id="easy" layoutX="452.0" layoutY="145.0" mnemonicParsing="false" onAction="#onSwitchDifficulty" selected="true" text="EASY" />
-            <TextArea layoutX="32.0" layoutY="92.0" prefHeight="139.0" prefWidth="138.0" text="No play history&#10;" />
-            <Text layoutX="32.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ranking List" wrappingWidth="77.623046875" />
-            <Button layoutX="401.0" layoutY="246.0" mnemonicParsing="false" onAction="#onExitGame" text="Exit" />
-            <CheckBox fx:id="twoMin" layoutX="360.0" layoutY="145.0" mnemonicParsing="false" onAction="#onSetPlayTime" selected="true" text="2min" />
-            <CheckBox fx:id="fourMin" layoutX="360.0" layoutY="115.0" mnemonicParsing="false" onAction="#onSetPlayTime" text="4min" />
-            <CheckBox fx:id="sixMin" layoutX="360.0" layoutY="84.0" mnemonicParsing="false" onAction="#onSetPlayTime" text="6min" />
+            <Button layoutX="563.0" layoutY="337.0" mnemonicParsing="false" onAction="#onStartGame" prefHeight="74.0" prefWidth="141.0" text="start game" />
+            <CheckBox fx:id="hard" layoutX="758.0" layoutY="84.0" mnemonicParsing="false" onAction="#onSwitchDifficulty" text="HARD" />
+            <CheckBox fx:id="medium" layoutX="758.0" layoutY="115.0" mnemonicParsing="false" onAction="#onSwitchDifficulty" text="MEDIUM" />
+            <CheckBox fx:id="easy" layoutX="760.0" layoutY="145.0" mnemonicParsing="false" onAction="#onSwitchDifficulty" selected="true" text="EASY" />
+            <TextArea fx:id="playHistoryTextArea" layoutX="138.0" layoutY="119.0" prefHeight="277.0" prefWidth="284.0" text="No play history&#10;" wrapText="true">
+               <font>
+                  <Font size="21.0" />
+               </font></TextArea>
+            <Text layoutX="138.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ranking List" wrappingWidth="259.623046875">
+               <font>
+                  <Font size="30.0" />
+               </font></Text>
+            <Button layoutX="767.0" layoutY="337.0" mnemonicParsing="false" onAction="#onExitGame" prefHeight="74.0" prefWidth="141.0" text="Exit" />
+            <CheckBox fx:id="twoMin" layoutX="633.0" layoutY="145.0" mnemonicParsing="false" onAction="#onSetPlayTime" selected="true" text="2min" />
+            <CheckBox fx:id="fourMin" layoutX="633.0" layoutY="115.0" mnemonicParsing="false" onAction="#onSetPlayTime" text="4min" />
+            <CheckBox fx:id="sixMin" layoutX="633.0" layoutY="84.0" mnemonicParsing="false" onAction="#onSetPlayTime" text="6min" />
+            <TextField fx:id="playerName" layoutX="633.0" layoutY="246.0" prefHeight="46.0" prefWidth="216.0" text="Player">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </TextField>
+            <Text layoutX="634.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter yout name:" />
          </children>
       </Pane>
    </children>
