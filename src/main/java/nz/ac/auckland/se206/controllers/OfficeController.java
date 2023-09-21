@@ -2,13 +2,17 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
 import java.util.Random;
+
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -59,8 +63,11 @@ public class OfficeController {
 
   private ImageView speechBubbleOne;
   @FXML
-
   private ImageView speechBubbleTwo;
+  @FXML private ImageView binArrow;
+  @FXML private ImageView blackBoardArrow;
+  @FXML private ImageView drawArrow;
+  @FXML private ImageView phoneArrow;
 
   @FXML
   private TextArea inputBox;
@@ -114,15 +121,19 @@ public class OfficeController {
     resetOffice();
     resetchecker();
 
+    animateArrows(binArrow);
+    animateArrows(blackBoardArrow);
+    animateArrows(drawArrow);
+    animateArrows(phoneArrow);
+
     GptAndTextAreaManager.officeController = this;
 
-    //GptAndTextAreaManager.officeChatDisplayBoard = chatDisplayBoard;
-    //GptAndTextAreaManager.officeTypePromptText = typePromptText;
-    //GptAndTextAreaManager.officeInputBox = inputBox;
-    //GptAndTextAreaManager.officeObjectiveDisplayBoard = objectiveDisplayBoard;
+    // GptAndTextAreaManager.officeChatDisplayBoard = chatDisplayBoard;
+    // GptAndTextAreaManager.officeTypePromptText = typePromptText;
+    // GptAndTextAreaManager.officeInputBox = inputBox;
+    // GptAndTextAreaManager.officeObjectiveDisplayBoard = objectiveDisplayBoard;
 
     animationItems = new ImageView[] { prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo };
-
 
     digits = new Label[] {
         digitOne, digitTwo, digitThree, digitFour, digitFive, digitSix, digitSeven, digitEight,
@@ -139,6 +150,16 @@ public class OfficeController {
             });
   }
 
+    public void animateArrows(ImageView arrow) {
+    double startY = 0;
+
+    TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.5), arrow);
+    translateTransition.setFromY(startY);
+    translateTransition.setToY(startY + 5);
+    translateTransition.setAutoReverse(true);
+    translateTransition.setCycleCount(Animation.INDEFINITE);
+    translateTransition.play();
+  }
 
   public void setCafeteriaController(CafeteriaController cafeteriaController) {
     this.cafeteriaController = cafeteriaController;
@@ -165,6 +186,7 @@ public class OfficeController {
 
   @FXML
   private void clickDeskDrawers(MouseEvent event) {
+    drawArrow.setVisible(false);
     if (GameState.itemWithCypher == deskDrawers) {
       cypherPane.setVisible(true);
     } else {
@@ -174,6 +196,7 @@ public class OfficeController {
 
   @FXML
   private void clickBin(MouseEvent event) {
+    binArrow.setVisible(false);
     if (GameState.itemWithCypher == bin) {
       cypherPane.setVisible(true);
     } else {
@@ -183,6 +206,7 @@ public class OfficeController {
 
   @FXML
   private void clickBlackboard(MouseEvent event) {
+    blackBoardArrow.setVisible(false);
     if (GameState.itemWithCypher == blackBoard) {
       cypherPane.setVisible(true);
     } else {
@@ -192,6 +216,7 @@ public class OfficeController {
 
   @FXML
   private void clickPhone(MouseEvent event) {
+    phoneArrow.setVisible(false);
     phonePane.setVisible(true);
   }
 
@@ -569,5 +594,11 @@ public class OfficeController {
     Random randomChoose = new Random();
     int randomIndexChoose = randomChoose.nextInt(items.length);
     GameState.itemWithCypher = items[randomIndexChoose];
+
+    binArrow.setVisible(true);
+    blackBoardArrow.setVisible(true);
+    drawArrow.setVisible(true);
+    phoneArrow.setVisible(true);
+
   }
 }
