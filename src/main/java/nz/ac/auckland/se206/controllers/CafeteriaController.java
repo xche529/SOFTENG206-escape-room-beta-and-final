@@ -1,7 +1,9 @@
 package nz.ac.auckland.se206.controllers;
 
+import java.io.IOException;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import java.util.Random;
-
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -12,6 +14,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 import javafx.scene.text.Text;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GptAndTextAreaManager;
@@ -24,93 +27,82 @@ import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 public class CafeteriaController {
 
   @FXML
- 
+
   private Rectangle paintingWithSafe;
   @FXML
- 
+
   private Rectangle paintingWithoutSafe;
   @FXML
- 
+
   private Rectangle vendingMachine;
   @FXML
- 
+
   private ImageView paintingWithSafeBig;
   @FXML
- 
+
   private ImageView paintingWithoutSafeBig;
   @FXML
- 
+
   private ImageView safe;
   @FXML
- 
+
   private ImageView safeBig;
   @FXML
- 
+
   private ImageView vendingMachineBig;
   @FXML
- 
+
   private Pane padlockPane;
   @FXML
- 
+
   private ImageView digitOnePlus;
   @FXML
- 
+
   private ImageView digitOneMinus;
   @FXML
- 
+
   private ImageView digitTwoPlus;
   @FXML
- 
+
   private ImageView digitTwoMinus;
   @FXML
- 
+
   private ImageView digitThreePlus;
   @FXML
- 
+
   private ImageView digitThreeMinus;
   @FXML
- 
+
   private ImageView digitFourPlus;
   @FXML
- 
+
   private ImageView digitFourMinus;
   @FXML
- 
+
   private ImageView prisonerOne;
   @FXML
- 
+
   private ImageView prisonerTwo;
   @FXML
- 
+
   private ImageView speechBubbleOne;
   @FXML
- 
+
   private ImageView speechBubbleTwo;
   @FXML
- 
+
   private Label digitOne;
   @FXML
- 
+
   private Label digitTwo;
   @FXML
- 
+
   private Label digitThree;
   @FXML
- 
+
   private Label digitFour;
   @FXML
- 
   private Button openButton;
-  @FXML
-  private Button responseSubmitButton;
-  @FXML
-  private TextArea inputBox;
-  @FXML
-  private TextArea chatDisplayBoard;
-  @FXML
-  private TextArea objectiveDisplayBoard;
-  @FXML
-  private Text typePromptText;
 
   @FXML
   private Pane paperPane;
@@ -131,40 +123,30 @@ public class CafeteriaController {
     this.roomController = roomController;
   }
 
+  private Timeline timeline;
+
   /**
    * Initializes the cafeteria view, it is called when the room loads.
+   * 
+   * @throws IOException
    *
    * @throws ApiProxyException
    */
   @FXML
   private void initialize() {
+
+    resetchecker();
     GptAndTextAreaManager.cafeteriaController = this;
-    GptAndTextAreaManager.cafeteriaChatDisplayBoard = chatDisplayBoard;
-    GptAndTextAreaManager.cafeteriaTypePromptText = typePromptText;
-    GptAndTextAreaManager.cafeteriaInputBox = inputBox;
-    GptAndTextAreaManager.cafeteriaObjectiveDisplayBoard = objectiveDisplayBoard;
 
     animationItems = new ImageView[] { prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo };
 
-    // TODO: set visability of all required items
-  }
+    Random random = new Random();
 
-  @FXML
-  public void onSetPromptTextFalse() {
-    typePromptText.setVisible(false);
-  }
+    // Generate a random 6-digit number
+    String phoneNumberInitial = Integer.toString(random.nextInt(999999 - 100000 + 1) + 100000);
+    GameState.phoneNumber = "027" + " " + phoneNumberInitial.substring(0, 3) + " " + phoneNumberInitial.substring(3, 6);
+    numberLabel.setText(GameState.phoneNumber);
 
-  @FXML
-  public void onSubmitMessage() throws ApiProxyException {
-    String message = inputBox.getText();
-    inputBox.clear();
-    typePromptText.setVisible(true);
-    if (message.trim().isEmpty()) {
-      typePromptText.setVisible(true);
-      return;
-    } else {
-      GptAndTextAreaManager.sendMessage(message);
-    }
   }
 
   /**
@@ -245,22 +227,6 @@ public class CafeteriaController {
   }
 
   @FXML
-  private void goToOffice() {
-    officeController.resetAnimation();
-    Scene scene = paintingWithSafe.getScene();
-    scene.setRoot(SceneManager.getUiRoot(AppUi.OFFICE));
-    officeController.walkInAnimation();
-  }
-
-  @FXML
-  private void goToRoom() {
-    roomController.resetAnimation();
-    Scene scene = paintingWithSafe.getScene();
-    scene.setRoot(SceneManager.getUiRoot(AppUi.ROOM));
-    roomController.walkInAnimation();
-  }
-
-  @FXML
   private void digitOneIncrement() {
     int digit = Integer.parseInt(digitOne.getText());
     digit = (digit + 1) % 10;
@@ -324,6 +290,7 @@ public class CafeteriaController {
     int digitFourInt = Integer.parseInt(digitFour.getText());
     int code = digitOneInt * 1000 + digitTwoInt * 100 + digitThreeInt * 10 + digitFourInt;
     if (code == Integer.parseInt(GameState.code)) {
+
       padlockPane.setVisible(false);
       paperPane.setVisible(true);
     } else {
@@ -355,7 +322,6 @@ public class CafeteriaController {
     collectPaperLabel.setStyle("-fx-text-fill: black;");
   }
 
-
   @FXML
   private void onSpeechBubbleOneClicked() {
     GptAndTextAreaManager.displayTarget(Characters.PRISONER_ONE);
@@ -367,12 +333,68 @@ public class CafeteriaController {
     GptAndTextAreaManager.displayTarget(Characters.PRISONER_TWO);
     System.out.println("Speech bubble two clicked");
   }
+
   private void showDialog(String title, String headerText, String message) {
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
     alert.setTitle(title);
     alert.setHeaderText(headerText);
     alert.setContentText(message);
     alert.showAndWait();
+  }
+
+  private void resetCafeteria() {
+    padlockPane.setVisible(false);
+    safe.setVisible(false);
+    paintingWithSafe.setVisible(true);
+    paintingWithoutSafe.setVisible(true);
+    vendingMachine.setVisible(true);
+    paintingWithSafeBig.setVisible(false);
+    paintingWithoutSafeBig.setVisible(false);
+    safeBig.setVisible(false);
+    vendingMachineBig.setVisible(false);
+    digitOne.setText("0");
+    digitTwo.setText("0");
+    digitThree.setText("0");
+    digitFour.setText("0");
+  }
+
+  /*
+   * This method starts a thread that checks if the cafeteria needs to be reset.
+   */
+  private void resetchecker() {
+    timeline = new Timeline(
+        new KeyFrame(
+            Duration.seconds(1),
+            event -> {
+              if (GameState.secondsRemaining >= 0) {
+                updateTimerLabel();
+              }
+              if (GameState.secondsRemaining == 0) {
+                if (GameState.gameFinishedCafeteria) {
+                  GameState.gameFinishedCafeteria = false;
+                  GameState.resetCafeteria = true;
+                  GameState.resetOffice = true;
+                  GameState.resetRoom = true;
+                  try {
+                    Scene scene = vendingMachine.getScene();
+                    scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.END_LOST));
+                  } catch (NullPointerException e) {
+                  }
+                }
+
+              }
+              updateTimerLabel();
+              if (GameState.resetCafeteria) {
+                resetCafeteria();
+                GameState.resetCafeteria = false;
+              }
+            }));
+    timeline.setCycleCount(Timeline.INDEFINITE);
+    timeline.play();
+  }
+
+  private void updateTimerLabel() {
+    // TODO: add code to update timer label
   }
 
   public void walkInAnimation() {
@@ -383,5 +405,6 @@ public class CafeteriaController {
     for (ImageView item : animationItems) {
       item.setTranslateX(500);
     }
+
   }
 }

@@ -27,6 +27,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.Safe;
 import nz.ac.auckland.se206.GptAndTextAreaManager;
 import nz.ac.auckland.se206.MovementControl;
 import nz.ac.auckland.se206.SceneManager;
@@ -125,17 +126,7 @@ public class RoomController {
   @FXML
   private Button sendButton;
   @FXML
-  private Button responseSubmitButton;
-  @FXML
   private TextArea chatTextArea;
-  @FXML
-  private TextArea inputBox;
-  @FXML
-  private TextArea chatDisplayBoard;
-  @FXML
-  private TextArea objectiveDisplayBoard;
-  @FXML
-  private Text typePromptText;
   @FXML
   private TextField inputText;
   @FXML
@@ -152,22 +143,15 @@ public class RoomController {
    * Initializes the room view, it is called when the room loads.
    *
    * @throws ApiProxyException
+   * @throws IOException
    */
-  public void initialize() throws ApiProxyException {
+  public void initialize() throws ApiProxyException, IOException {
+
     // initialize fields in the GptAndTextAreaManager class
     GptAndTextAreaManager.roomController = this;
-    GptAndTextAreaManager.roomChatDisplayBoard = chatDisplayBoard;
-    GptAndTextAreaManager.roomTypePromptText = typePromptText;
-    GptAndTextAreaManager.roomInputBox = inputBox;
-    GptAndTextAreaManager.roomObjectiveDisplayBoard = objectiveDisplayBoard;
 
     animationItems = new ImageView[] { prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo };
-    // Getting random item to be used in the riddle
-    Rectangle[] items = new Rectangle[] { vent, toiletPaper, toilet, mirror, towel, sink };
     resetAnimation();
-    Random randomChoose = new Random();
-    int randomIndexChoose = randomChoose.nextInt(items.length);
-    GameState.itemToChoose = items[randomIndexChoose];
 
     // Sending the initial request so the riddle is ready when the player enters the
     // chat
@@ -180,11 +164,26 @@ public class RoomController {
     // GptPromptEngineering.getRiddleWithGivenWord(GameState.itemToChoose.getId()));
     // runGpt(userChatMessage, lastMsg -> {});
 
+    itemToChoose();
+    prepareRiddle();
     // Setting up the timer timeline
+
+  }
+
+  /*
+   * This method starts a thread that checks if the room needs to be reset.
+   * 
+   * @throws IOException
+   */
+  public void start() throws IOException {
+
     timeline = new Timeline(
         new KeyFrame(
             Duration.seconds(1),
             event -> {
+              if (GameState.stopTimer) {
+                timeline.stop();
+              }
               GameState.secondsRemaining--;
               updateTimerLabel();
               if (GameState.secondsRemaining == 90 && GameState.isWon == false) {
@@ -195,6 +194,7 @@ public class RoomController {
                 textToSpeech.speak("thirty seconds remaining");
               }
             }));
+
     timeline.setCycleCount(GameState.totalSeconds);
     timeline.setOnFinished(event -> handleTimerExpired());
     updateTimerLabel();
@@ -221,6 +221,84 @@ public class RoomController {
                 Platform.exit();
               });
         });
+
+    resetchecker();
+    doorArrow.setVisible(false);
+  }
+
+  private void resetchecker() throws IOException {
+    timeline = new Timeline(
+        new KeyFrame(
+            Duration.seconds(1),
+            event -> {
+              if (GameState.secondsRemaining >= 0) {
+                updateTimerLabel();
+              }
+              if (GameState.secondsRemaining == 0) {
+                if (GameState.gameFinishedRoom) {
+
+                  GameState.resetCafeteria = true;
+                  GameState.resetOffice = true;
+                  GameState.resetRoom = true;
+                  try {
+                    Scene scene = sink.getScene();
+                    scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.END_LOST));
+                  } catch (NullPointerException e) {
+                  }
+                }
+              }
+              updateTimerLabel();
+              if (GameState.resetRoom) {
+                try {
+                  resetRoom();
+                } catch (ApiProxyException e) {
+                }
+                GameState.resetRoom = false;
+              }
+            }));
+    timeline.setCycleCount(Timeline.INDEFINITE);
+    timeline.play();
+  }
+
+  private void resetRoom() throws ApiProxyException {
+    itemToChoose();
+    prepareRiddle();
+    Safe.getRandomCode();
+    toiletArrow.setOpacity(0);
+    toiletPaperArrow.setOpacity(0);
+    ventArrow.setOpacity(0);
+    sinkArrow.setOpacity(0);
+    mirrorArrow.setOpacity(0);
+    towelArrow.setOpacity(0);
+    doorArrowSmall.setOpacity(0);
+    guardSpeechPane.setVisible(false);
+    animateArrows(doorArrow);
+    GameState.setRiddleResolved(false);
+  }
+
+  /*
+   * This method prepares the riddle for the player to solve.
+   *
+   * @throws ApiProxyException
+   */
+  private void prepareRiddle() throws ApiProxyException {
+    // Sending the initial request so the riddle is ready when the player enters the
+    // chat
+    chatCompletionRequest = new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
+    ChatMessage userChatMessage = new ChatMessage(
+        "user", GptPromptEngineering.getRiddleWithGivenWord(GameState.itemToChoose.getId()));
+    runGpt(userChatMessage, lastMsg -> {
+    });
+  }
+
+  /*
+   * This method selects a random item to be used in the riddle.
+   */
+  private void itemToChoose() {
+    Rectangle[] items = new Rectangle[] { vent, toiletPaper, toilet, mirror, towel, sink };
+    Random randomChoose = new Random();
+    int randomIndexChoose = randomChoose.nextInt(items.length);
+    GameState.itemToChoose = items[randomIndexChoose];
   }
 
   public void animateAllArrows() {
@@ -254,8 +332,13 @@ public class RoomController {
 
   private void handleTimerExpired() {
     if (!GameState.isWon) {
-      Scene scene = door.getScene();
-      scene.setRoot(SceneManager.getUiRoot(AppUi.END_LOST));
+      GameState.resetCafeteria = true;
+      GameState.resetOffice = true;
+      GameState.resetRoom = true;
+      GameState.gameFinishedCafeteria = true;
+      GameState.gameFinishedOffice = true;
+      GameState.gameFinishedRoom = true;
+      // TODO: fix the error
     }
   }
 
@@ -310,24 +393,6 @@ public class RoomController {
     alert.setHeaderText(headerText);
     alert.setContentText(message);
     alert.showAndWait();
-  }
-
-  @FXML
-  public void onSetPromptTextFalse() {
-    typePromptText.setVisible(false);
-  }
-
-  @FXML
-  public void onSubmitMessage() throws ApiProxyException {
-    String message = inputBox.getText();
-    inputBox.clear();
-    typePromptText.setVisible(true);
-    if (message.trim().isEmpty()) {
-      typePromptText.setVisible(true);
-      return;
-    } else {
-      GptAndTextAreaManager.sendMessage(message);
-    }
   }
 
   @FXML
@@ -541,7 +606,8 @@ public class RoomController {
     chatPane.setVisible(true);
     questionInfoLabel.setVisible(true);
     chatCompletionRequest = new ChatCompletionRequest().setN(1).setTemperature(1).setTopP(0.5).setMaxTokens(100);
-    ChatMessage userChatMessage = new ChatMessage("user", GptPromptEngineering.getGuardSetUp());
+    ChatMessage userChatMessage = new ChatMessage("user",
+        GptPromptEngineering.getGuardSetUp(GameState.itemToChoose.getId()));
     // runGpt(userChatMessage, lastMsg -> {});
   }
 
@@ -661,21 +727,5 @@ public class RoomController {
   @FXML
   private void onGoBack(ActionEvent event) throws ApiProxyException, IOException {
     chatPane.setVisible(false);
-  }
-
-  @FXML
-  private void goToCafeteria() {
-    cafeteriaController.resetAnimation();
-    Scene scene = mirror.getScene();
-    scene.setRoot(SceneManager.getUiRoot(AppUi.CAFETERIA));
-    cafeteriaController.walkInAnimation();
-  }
-
-  @FXML
-  private void goToOffice() {
-    officeController.resetAnimation();
-    Scene scene = mirror.getScene();
-    scene.setRoot(SceneManager.getUiRoot(AppUi.OFFICE));
-    officeController.walkInAnimation();
   }
 }
