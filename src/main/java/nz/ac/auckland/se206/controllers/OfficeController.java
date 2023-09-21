@@ -160,6 +160,7 @@ public class OfficeController {
 
   @FXML
   private void initialize() {
+    GameState.isRiddleResolvedProperty().set(true);
     GptAndTextAreaManager.officeController = this;
     GptAndTextAreaManager.officeChatDisplayBoard = chatDisplayBoard;
     GptAndTextAreaManager.officeTypePromptText = typePromptText;

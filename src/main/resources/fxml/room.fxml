@@ -187,7 +187,21 @@
             <Label fx:id="questionInfoLabel" layoutX="119.0" layoutY="289.0" text="You only get two questions! Use them wisely" visible="false" />
          </children>
       </Pane>
-      <Pane fx:id="blurringPane" opacity="0.74" prefHeight="615.0" prefWidth="1132.0" style="-fx-background-color: white;" visible="false" />
+      <Pane fx:id="blurredPane" opacity="0.74" prefHeight="615.0" prefWidth="1132.0" style="-fx-background-color: white;" visible="false" />
+      <Pane fx:id="inspectingToiletPane" onMouseClicked="#onClickInspectingToiletPane" prefHeight="606.0" prefWidth="1114.0" visible="false">
+         <children>
+            <ImageView fitHeight="392.0" fitWidth="422.0" layoutX="358.0" layoutY="107.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/Basin.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="toiletWordLabel" layoutX="657.0" layoutY="189.0" prefHeight="34.0" prefWidth="65.0" textAlignment="CENTER" textFill="#a48282">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
       <TextArea fx:id="chatDisplayBoard" editable="false" layoutX="324.0" layoutY="605.0" prefHeight="195.0" prefWidth="562.0" wrapText="true">
          <font>
             <Font size="21.0" />
@@ -210,5 +224,47 @@
             <Font size="20.0" />
          </font>
       </Button>
+      <Pane fx:id="inspectingToiletPaperPane" layoutX="10.0" layoutY="10.0" onMouseClicked="#onClickInspectingToiletPaperPane" prefHeight="606.0" prefWidth="1114.0" visible="false">
+         <children>
+            <ImageView fitHeight="392.0" fitWidth="422.0" layoutX="387.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/TP.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="toiletPaperWordLabel" layoutX="546.0" layoutY="355.0" prefHeight="34.0" prefWidth="65.0" textAlignment="CENTER" textFill="#bbc61e">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane fx:id="inspectingVentPane" layoutX="3.0" layoutY="-7.0" onMouseClicked="#onClickInspectingVentPane" prefHeight="606.0" prefWidth="1114.0" visible="false">
+         <children>
+            <ImageView fitHeight="357.0" fitWidth="461.0" layoutX="320.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/Vent.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="ventWordLabel" layoutX="633.0" layoutY="186.0" prefHeight="34.0" prefWidth="65.0" textAlignment="CENTER" textFill="#5a5b49">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane fx:id="thoughtBubblePane" layoutX="784.0" layoutY="363.0" prefHeight="219.0" prefWidth="360.0" visible="false">
+         <children>
+            <ImageView fitHeight="242.0" fitWidth="334.0" layoutX="24.0" layoutY="-15.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/thoughtBubble.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="thoughtBubbleText" layoutX="79.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="163.96007707045146">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
    </children>
 </Pane>
