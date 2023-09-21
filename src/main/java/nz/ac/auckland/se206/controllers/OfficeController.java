@@ -101,6 +101,10 @@ public class OfficeController {
   @FXML
   private Label digitNine;
   @FXML
+  private Button exitVeiwButton;
+  @FXML
+  private Pane cypherPane;
+  @FXML
   private Pane paperPane;
   @FXML
   private Pane phonePane;
@@ -109,29 +113,6 @@ public class OfficeController {
   @FXML
   private Label numberLabel;
   @FXML
-
-  private Pane inspectingBinPane;
-  @FXML
-  private Pane gamePane;
-  @FXML
-  private Pane blurringPane;
-  @FXML
-  private Pane thoughtBubblePane;
-  @FXML
-  private Text thoughtBubbleText;
-  @FXML
-  private ImageView binConverter;
-  @FXML
-  private Pane inspectingBlackBoardPane;
-  @FXML
-  private ImageView inspectingBlackBoardConverter;
-  @FXML
-  private ImageView inspectingBlackBoardEmpty;
-  @FXML
-  private Pane inspectingDrawerPane;
-  @FXML
-  private ImageView drawerConverter;
-
   private Label timerLabel;
 
   private Timeline timeline;
@@ -152,32 +133,8 @@ public class OfficeController {
     animateArrows(drawArrow);
     animateArrows(phoneArrow);
 
-  @FXML
-  public void onSubmitMessage() throws ApiProxyException {
-    String message = inputBox.getText();
-    inputBox.clear();
-    typePromptText.setVisible(true);
-    if (message.trim().isEmpty()) {
-      typePromptText.setVisible(true);
-      return;
-    } else {
-      GptAndTextAreaManager.sendMessage(message);
-    }
-  }
-
-  @FXML
-  private void initialize() {
-    GameState.isRiddleResolvedProperty().set(true);
     GptAndTextAreaManager.officeController = this;
 
-    animationItems = new ImageView[] { prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo };
-    // Getting random item to be used to hide the cypher
-    Rectangle[] items = new Rectangle[] {
-        bin, blackBoard, deskDrawers,
-    };
-    Random randomChoose = new Random();
-    int randomIndexChoose = randomChoose.nextInt(items.length);
-    GameState.itemWithCypher = items[randomIndexChoose];
     // GptAndTextAreaManager.officeChatDisplayBoard = chatDisplayBoard;
     // GptAndTextAreaManager.officeTypePromptText = typePromptText;
     // GptAndTextAreaManager.officeInputBox = inputBox;
@@ -231,75 +188,37 @@ public class OfficeController {
   }
 
   @FXML
-  void onClickInspectingDrawerPane() {
-    inspectingDrawerPane.setVisible(false);
-    blurringPane.setVisible(false);
-    thoughtBubblePane.setVisible(false);
+  private void onClickExitConverterView() {
+    cypherPane.setVisible(false);
   }
 
   @FXML
   private void clickDeskDrawers(MouseEvent event) {
     drawArrow.setVisible(false);
     if (GameState.itemWithCypher == deskDrawers) {
-      inspectingDrawerPane.setVisible(true);
-      drawerConverter.setVisible(true);
-      thoughtBubblePane.setVisible(true);
-      blurringPane.setVisible(true);
-      thoughtBubbleText.setText("What's that piece of paper???");
+      cypherPane.setVisible(true);
     } else {
-      inspectingDrawerPane.setVisible(true);
-      blurringPane.setVisible(true);
-      thoughtBubblePane.setVisible(true);
-      thoughtBubbleText.setText("Hmm.. Nothing here...");
+      System.out.println("deskDrawersClicked");
     }
-  }
-
-  @FXML
-  void onClickInspectingBinPane() {
-    inspectingBinPane.setVisible(false);
-    blurringPane.setVisible(false);
-    thoughtBubblePane.setVisible(false);
-    binConverter.setVisible(false);
   }
 
   @FXML
   private void clickBin(MouseEvent event) {
     binArrow.setVisible(false);
     if (GameState.itemWithCypher == bin) {
-      inspectingBinPane.setVisible(true);
-      binConverter.setVisible(true);
-      thoughtBubblePane.setVisible(true);
-      blurringPane.setVisible(true);
-      thoughtBubbleText.setText("What's that piece of paper???");
+      cypherPane.setVisible(true);
     } else {
-      inspectingBinPane.setVisible(true);
-      blurringPane.setVisible(true);
-      thoughtBubblePane.setVisible(true);
-      thoughtBubbleText.setText("Hmm.. Nothing here...");
+      System.out.println("binClicked");
     }
-  }
-
-  @FXML
-  void onClickInspectingBlackBoardPane() {
-    inspectingBlackBoardPane.setVisible(false);
-    blurringPane.setVisible(false);
-    thoughtBubblePane.setVisible(false);
   }
 
   @FXML
   private void clickBlackboard(MouseEvent event) {
     blackBoardArrow.setVisible(false);
     if (GameState.itemWithCypher == blackBoard) {
-      inspectingBlackBoardPane.setVisible(true);
-      inspectingBlackBoardConverter.setVisible(true);
-      blurringPane.setVisible(true);
-      thoughtBubblePane.setVisible(true);
-      thoughtBubbleText.setText("What's that chart???");
+      cypherPane.setVisible(true);
     } else {
-      inspectingBlackBoardPane.setVisible(true);
-      blurringPane.setVisible(true);
-      thoughtBubblePane.setVisible(true);
-      thoughtBubbleText.setText("Hmm.. Nothing here...");
+      System.out.println("blackBoardClicked");
     }
   }
 
