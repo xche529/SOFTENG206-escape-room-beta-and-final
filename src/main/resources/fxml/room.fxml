@@ -73,7 +73,7 @@
             </ImageView>
             <ImageView fx:id="mirrorBig" fitHeight="140.0" fitWidth="91.0" layoutX="957.0" layoutY="173.0" visible="false">
                <image>
-                  <Image url="@../images/mirror.png" />
+                  <Image url="@../images/Mirror_full.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="58.0" fitWidth="50.0" layoutX="975.0" layoutY="281.0">
@@ -248,6 +248,48 @@
             <Label fx:id="ventWordLabel" layoutX="633.0" layoutY="186.0" prefHeight="34.0" prefWidth="65.0" textAlignment="CENTER" textFill="#5a5b49">
                <font>
                   <Font size="25.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane fx:id="inspectingSinkPane" layoutX="13.0" layoutY="3.0" onMouseClicked="#onClickInspectingSinkPane" prefHeight="606.0" prefWidth="1114.0" visible="false">
+         <children>
+            <ImageView fitHeight="357.0" fitWidth="461.0" layoutX="320.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/Sink.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="sinkWordLabel" layoutX="633.0" layoutY="186.0" prefHeight="34.0" prefWidth="65.0" textAlignment="CENTER" textFill="#5a5b49">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane fx:id="inspectingTowelPane" layoutX="33.0" layoutY="23.0" onMouseClicked="#onClickInspectingTowelPane" prefHeight="606.0" prefWidth="1114.0" visible="false">
+         <children>
+            <ImageView fitHeight="395.0" fitWidth="359.0" layoutX="403.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/Towel.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="towelWordLabel" layoutX="411.0" layoutY="321.0" prefHeight="21.0" prefWidth="69.0" rotate="-90.0" textAlignment="CENTER" textFill="#5a5b49">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane fx:id="inspectingMirrorPane" layoutX="23.0" layoutY="13.0" onMouseClicked="#onClickInspectingMirrorPane" prefHeight="606.0" prefWidth="1114.0" visible="false">
+         <children>
+            <ImageView fitHeight="395.0" fitWidth="359.0" layoutX="403.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/Mirror_full.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="mirrorWordLabel" layoutX="649.0" layoutY="443.0" prefHeight="21.0" prefWidth="69.0" textAlignment="CENTER" textFill="#5a5b49">
+               <font>
+                  <Font size="19.0" />
                </font>
             </Label>
          </children>
