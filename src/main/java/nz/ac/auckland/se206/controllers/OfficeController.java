@@ -85,10 +85,6 @@ public class OfficeController {
   @FXML
   private Label digitNine;
   @FXML
-  private Button exitVeiwButton;
-  @FXML
-  private Pane cypherPane;
-  @FXML
   private Pane paperPane;
   @FXML
   private Pane phonePane;
@@ -114,6 +110,10 @@ public class OfficeController {
   private ImageView inspectingBlackBoardConverter;
   @FXML
   private ImageView inspectingBlackBoardEmpty;
+  @FXML
+  private Pane inspectingDrawerPane;
+  @FXML
+  private ImageView drawerConverter;
 
   private CafeteriaController cafeteriaController;
   private RoomController roomController;
@@ -169,7 +169,7 @@ public class OfficeController {
     animationItems = new ImageView[] { prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo };
     // Getting random item to be used to hide the cypher
     Rectangle[] items = new Rectangle[] {
-        bin, phone, blackBoard, deskDrawers,
+        bin, blackBoard, deskDrawers,
     };
     Random randomChoose = new Random();
     int randomIndexChoose = randomChoose.nextInt(items.length);
@@ -191,16 +191,25 @@ public class OfficeController {
   }
 
   @FXML
-  private void onClickExitConverterView() {
-    cypherPane.setVisible(false);
+  void onClickInspectingDrawerPane() {
+    inspectingDrawerPane.setVisible(false);
+    blurringPane.setVisible(false);
+    thoughtBubblePane.setVisible(false);
   }
 
   @FXML
   private void clickDeskDrawers(MouseEvent event) {
     if (GameState.itemWithCypher == deskDrawers) {
-      cypherPane.setVisible(true);
+      inspectingDrawerPane.setVisible(true);
+      drawerConverter.setVisible(true);
+      thoughtBubblePane.setVisible(true);
+      blurringPane.setVisible(true);
+      thoughtBubbleText.setText("What's that piece of paper???");
     } else {
-      System.out.println("deskDrawersClicked");
+      inspectingDrawerPane.setVisible(true);
+      blurringPane.setVisible(true);
+      thoughtBubblePane.setVisible(true);
+      thoughtBubbleText.setText("Hmm.. Nothing here...");
     }
   }
 

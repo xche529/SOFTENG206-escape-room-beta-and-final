@@ -56,20 +56,6 @@
             <Image url="@../images/redArrow.png" />
          </image>
       </ImageView>
-      <Pane fx:id="cypherPane" layoutX="135.0" layoutY="30.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="480.0" prefWidth="840.0" style="-fx-background-color: white;" visible="false">
-         <children>
-            <ImageView fitHeight="329.0" fitWidth="656.0" layoutX="94.0" layoutY="31.0">
-               <image>
-                  <Image url="@../images/number_converter.png" />
-               </image>
-            </ImageView>
-            <Button fx:id="exitViewButton" layoutX="347.0" layoutY="382.0" mnemonicParsing="false" onAction="#onClickExitConverterView" prefHeight="53.0" prefWidth="148.0" text="Exit view">
-               <font>
-                  <Font size="19.0" />
-               </font>
-            </Button>
-         </children>
-      </Pane>
       <ImageView fx:id="prisonerTwo" fitHeight="293.0" fitWidth="135.0" layoutX="357.0" layoutY="314.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true">
          <image>
             <Image url="@../images/prisoner2.png" />
@@ -228,14 +214,14 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="inspectingDrawerPane" layoutX="10.0" layoutY="7.0" onMouseClicked="#onClickInspectingBinPane" prefHeight="612.0" prefWidth="1117.0" visible="false">
+      <Pane fx:id="inspectingDrawerPane" layoutX="10.0" layoutY="7.0" onMouseClicked="#onClickInspectingDrawerPane" prefHeight="612.0" prefWidth="1117.0" visible="false">
          <children>
-            <ImageView fx:id="inspectingDrawer" fitHeight="527.0" fitWidth="727.0" layoutX="221.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="inspectingDrawer" fitHeight="527.0" fitWidth="727.0" layoutX="221.0" layoutY="35.0" onMouseClicked="#onClickInspectingDrawerPane" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/drawZoomed.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="drawerConverter" fitHeight="200.0" fitWidth="469.0" layoutX="314.0" layoutY="203.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="drawerConverter" fitHeight="200.0" fitWidth="469.0" layoutX="314.0" layoutY="203.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@../images/number_converter_crinkled.png" />
                </image>
