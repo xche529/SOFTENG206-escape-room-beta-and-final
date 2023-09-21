@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <VBox xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
    <children>
@@ -146,6 +147,105 @@
                         <Image url="@../images/background.png" />
                      </image>
                   </ImageView>
+               </children>
+            </Pane>
+            <Pane fx:id="blurredPane" opacity="0.74" prefHeight="615.0" prefWidth="1132.0" style="-fx-background-color: white;" visible="false" />
+            <Pane fx:id="inspectingToiletPane" onMouseClicked="#onClickInspectingToiletPane" prefHeight="606.0" prefWidth="1114.0" visible="false">
+               <children>
+                  <ImageView fitHeight="392.0" fitWidth="422.0" layoutX="358.0" layoutY="107.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/Basin.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="toiletWordLabel" layoutX="657.0" layoutY="189.0" prefHeight="34.0" prefWidth="65.0" textAlignment="CENTER" textFill="#a48282">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane fx:id="inspectingToiletPaperPane" onMouseClicked="#onClickInspectingToiletPaperPane" prefHeight="606.0" prefWidth="1114.0" visible="false">
+               <children>
+                  <ImageView fitHeight="392.0" fitWidth="422.0" layoutX="387.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/TP.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="toiletPaperWordLabel" layoutX="546.0" layoutY="355.0" prefHeight="34.0" prefWidth="65.0" textAlignment="CENTER" textFill="#bbc61e">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane fx:id="inspectingVentPane" onMouseClicked="#onClickInspectingVentPane" prefHeight="606.0" prefWidth="1114.0" visible="false">
+               <children>
+                  <ImageView fitHeight="357.0" fitWidth="461.0" layoutX="320.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/Vent.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="ventWordLabel" layoutX="633.0" layoutY="186.0" prefHeight="34.0" prefWidth="65.0" textAlignment="CENTER" textFill="#5a5b49">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane fx:id="inspectingSinkPane" onMouseClicked="#onClickInspectingSinkPane" prefHeight="606.0" prefWidth="1114.0" visible="false">
+               <children>
+                  <ImageView fitHeight="357.0" fitWidth="461.0" layoutX="320.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/Sink.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="sinkWordLabel" layoutX="633.0" layoutY="186.0" prefHeight="34.0" prefWidth="65.0" textAlignment="CENTER" textFill="#5a5b49">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane fx:id="inspectingTowelPane" onMouseClicked="#onClickInspectingTowelPane" prefHeight="606.0" prefWidth="1114.0" visible="false">
+               <children>
+                  <ImageView fitHeight="395.0" fitWidth="359.0" layoutX="403.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/Towel.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="towelWordLabel" layoutX="411.0" layoutY="321.0" prefHeight="21.0" prefWidth="69.0" rotate="-90.0" textAlignment="CENTER" textFill="#5a5b49">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane fx:id="inspectingMirrorPane" onMouseClicked="#onClickInspectingMirrorPane" prefHeight="606.0" prefWidth="1114.0" visible="false">
+               <children>
+                  <ImageView fitHeight="395.0" fitWidth="359.0" layoutX="403.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/Mirror_full%20(1).png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="mirrorWordLabel" layoutX="649.0" layoutY="443.0" prefHeight="21.0" prefWidth="69.0" textAlignment="CENTER" textFill="#5a5b49">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane fx:id="thoughtBubblePane" prefHeight="219.0" prefWidth="360.0" visible="false">
+               <children>
+                  <ImageView fitHeight="242.0" fitWidth="334.0" layoutX="24.0" layoutY="-15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/ThoughtBubble.png" />
+                     </image>
+                  </ImageView>
+                  <Text fx:id="thoughtBubbleText" layoutX="79.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="163.96007707045146">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Text>
                </children>
             </Pane>
          </children>
