@@ -22,7 +22,7 @@ public class GptPromptEngineering {
 
   }
 
-  public static String getGuardSetUp(String wordToGuess) {
+  public static String getGuardSetUp(String wordToGuess, String numHints) {
     // return "Play the part of a prison guard (secretly an escape room, don't call it an escape"
     //     + " room). There r two hidden items one is a chart that converts letters into"
     //     + " numbers (behind a random object) and the other hidden behind an object, which is"
@@ -33,14 +33,14 @@ public class GptPromptEngineering {
     //     + " questions so answer in one go. Do not ask for them to enter more info! Just"
     //     + " reply with text, no \"Role: \".";
     return "You are playing the role of a guard who is helping someone escape an escape room where"
-      + " they are the prisoner.  You can only give the" 
-      + "prisoner 3 hints. You should give the prisoner a riddle with the answer " + wordToGuess + " to give "
+      + " they are the prisoner.  You can give the" 
+      + "prisoner " + numHints + " hints. You should give the prisoner a riddle with the answer " + wordToGuess + " to give "
       + "them their first clue in your first message. " + wordToGuess + " is the only correct answer. You should tell them that the answer "
       + "to the riddle will help them escape in your first message. Never say the word sink. The riddle does not count as a hint. "
       + "Keep your "
       + "messages as concise as possible. Never write from any perspective but your own. Do not write anything from the point of veiw of the prisoner. Only write what "
       + "the guard says. Never refer to the prison as an escape room. Don't give a hint that is not "
-      + "asked for When the Riddle is guessed correctly return only the word Correct. Messages should start with Guard: every time\r\n";
+      + "asked for. When the Riddle is guessed correctly return only the word Correct. Messages should start with Guard: every time\r\n";
   }
 
   public static String getPrisonerOneSetUp(){

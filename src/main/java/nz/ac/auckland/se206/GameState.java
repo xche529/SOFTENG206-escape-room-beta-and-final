@@ -50,6 +50,8 @@ public static boolean gameFinishedOffice = false;
 
 public static boolean gameFinishedRoom = false;
 
+public static String numHints = "infinite";
+
 public static boolean stopTimer = false;
 
   public static String playerName = "Player";

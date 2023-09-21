@@ -6,7 +6,6 @@ import java.io.ObjectInputStream;
 
 import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -14,13 +13,9 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
-import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
-import nz.ac.auckland.se206.GptAndTextAreaManager;
 import nz.ac.auckland.se206.PlayHistory;
 import nz.ac.auckland.se206.SceneManager;
-import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class StartInterfaceController {
@@ -113,6 +108,7 @@ public class StartInterfaceController {
       hard.setSelected(false);
       medium.setSelected(false);
       easy.setSelected(true);
+      GameState.numHints = "infinite";
       GameState.difficulty = GameState.Difficulty.EASY;
       System.out.println("Difficulty change: easy");
     }
@@ -120,6 +116,7 @@ public class StartInterfaceController {
       easy.setSelected(false);
       hard.setSelected(false);
       medium.setSelected(true);
+      GameState.numHints = "5";
       GameState.difficulty = GameState.Difficulty.MEDIUM;
       System.out.println("Difficulty change: medium");
     }
@@ -127,6 +124,7 @@ public class StartInterfaceController {
       easy.setSelected(false);
       medium.setSelected(false);
       hard.setSelected(true);
+      GameState.numHints = "0";
       GameState.difficulty = GameState.Difficulty.HARD;
       System.out.println("Difficulty change: hard");
     }
