@@ -1,10 +1,12 @@
 package nz.ac.auckland.se206;
 
+import java.io.File;
 import java.util.List;
-
 import javafx.concurrent.Task;
 import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import nz.ac.auckland.se206.controllers.CafeteriaController;
 import nz.ac.auckland.se206.controllers.OfficeController;
 import nz.ac.auckland.se206.controllers.RoomController;
@@ -78,14 +80,14 @@ public class GptAndTextAreaManager {
                     if (currentCharacter == Characters.GUARD) {
                         name = "";
                     } else if (currentCharacter == Characters.PRISONER_ONE) {
-                        name = "Prisoner1:";
+                        name = "Prisoner1: ";
                     } else {
-                        name = "Prisoner2:";
+                        name = "Prisoner2: ";
                     }
                 } else if (name.trim().equals("user")) {
-                    name = GameState.playerName + ":";
+                    name = GameState.playerName + ": ";
                 }
-                result += name + "\n" + chat.getMessages().get(i).getContent() + "\n\n";
+                result += name + chat.getMessages().get(i).getContent() + "\n\n";
                 System.out.println(messages.get(i).getRole() + ": " + chat.getMessages().get(i).getContent() + "\n\n");
             }
 
@@ -120,6 +122,7 @@ public class GptAndTextAreaManager {
         }
         textAreaTypePromptText.setText(prompt);
         textAreaChatDisplayBoard.setText(chatHistory);
+        textAreaChatDisplayBoard.setScrollTop(Double.MAX_VALUE);
     }
 
     public static void sendMessage(String message) throws ApiProxyException {
@@ -144,10 +147,20 @@ public class GptAndTextAreaManager {
             }
         }
         if (ifSpeak) {
-            textToSpeech = new TextToSpeech();
-            textToSpeech.speak(message);
+            // textToSpeech = new TextToSpeech();
+            // textToSpeech.speak(message);
+            String soundEffect;
+            if (currentCharacter == Characters.GUARD) {
+                soundEffect = "src/main/resources/sounds/HmmSoundEffect1.mp3";
+            } else if (currentCharacter == Characters.PRISONER_ONE) {
+                soundEffect = "src/main/resources/sounds/HmmSoundEffect2.mp3";
+            } else {
+                soundEffect = "src/main/resources/sounds/HmmSoundEffect3.mp3";
+            }
+            Media media = new Media(new File(soundEffect).toURI().toString());
+            MediaPlayer mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.play();
         }
-
     }
 
     private static void runGpt(ChatCompletionRequest chatCompletionRequest) throws ApiProxyException {
