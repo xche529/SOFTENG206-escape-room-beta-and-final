@@ -175,7 +175,7 @@ public class RoomController {
    * 
    * @throws IOException
    */
-  public void start() {
+  public void start() throws IOException {
 
     timeline = new Timeline(
         new KeyFrame(
