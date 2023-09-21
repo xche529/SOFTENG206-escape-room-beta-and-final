@@ -70,7 +70,17 @@ public class GptAndTextAreaManager {
             if (messages.get(i).getRole().equals("assistant") && messages.get(i).getContent().contains("Guard: Correct")) {
                 GameState.setRiddleResolved(true);
             }
-              result += messages.get(i).getRole() + ": " + chat.getMessages().get(i).getContent() + "\n\n";
+            String name = GameState.playerName;
+            if(messages.get(i).getRole() == "assistant"){
+                if(currentCharacter == Characters.GUARD){
+                    name = "Guard";
+                }else if(currentCharacter == Characters.PRISONER_ONE){
+                    name = "Prisoner1";
+                }else{
+                    name = "Prisoner2";
+                }
+            }
+              result += name + ": " + chat.getMessages().get(i).getContent() + "\n\n";
           }
 
         }
