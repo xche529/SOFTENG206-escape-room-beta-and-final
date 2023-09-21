@@ -131,6 +131,36 @@ public class RoomController {
   private TextField inputText;
   @FXML
   private ProgressIndicator chatProgress;
+  @FXML
+  private Pane blurredPane;
+  @FXML
+  private Pane inspectingToiletPane;
+  @FXML
+  private Pane thoughtBubblePane;
+  @FXML
+  private Text thoughtBubbleText;
+  @FXML
+  private Label toiletWordLabel;
+  @FXML
+  private Label toiletPaperWordLabel;
+  @FXML
+  private Pane inspectingToiletPaperPane;
+  @FXML
+  private Pane inspectingVentPane;
+  @FXML
+  private Label ventWordLabel;
+  @FXML
+  private Pane inspectingSinkPane;
+  @FXML
+  private Label sinkWordLabel;
+  @FXML
+  private Pane inspectingMirrorPane;
+  @FXML
+  private Label mirrorWordLabel;
+  @FXML
+  private Pane inspectingTowelPane;
+  @FXML
+  private Label towelWordLabel;
 
   private Timeline timeline;
   private ChatCompletionRequest chatCompletionRequest;
@@ -511,18 +541,36 @@ public class RoomController {
   }
 
   @FXML
+  public void onClickInspectingToiletPane() {
+    blurredPane.setVisible(false);
+    inspectingToiletPane.setVisible(false);
+    thoughtBubblePane.setVisible(false);
+  }
+
+  @FXML
   public void clickToilet(MouseEvent event) {
     toiletArrow.setOpacity(0);
     if (GameState.isRiddleResolved()) {
       if (GameState.itemToChoose == toilet) {
-        showDialog(
-            "Nice Job",
-            "You found the item!",
-            "On the inside of the toilet is written the word " + GameState.codeWord);
+        blurredPane.setVisible(true);
+        inspectingToiletPane.setVisible(true);
+        toiletWordLabel.setText(GameState.codeWord);
+        thoughtBubblePane.setVisible(true);
+        thoughtBubbleText.setText("What's that scratched onto the rim?");
       } else {
-        showDialog("Nothing!", "Toilet", "Just a normal toilet.");
+        blurredPane.setVisible(true);
+        inspectingToiletPane.setVisible(true);
+        thoughtBubblePane.setVisible(true);
+        thoughtBubbleText.setText("Hmm... Can't see anything here");
       }
     }
+  }
+
+  @FXML
+  public void onClickInspectingToiletPaperPane() {
+    blurredPane.setVisible(false);
+    inspectingToiletPaperPane.setVisible(false);
+    thoughtBubblePane.setVisible(false);
   }
 
   @FXML
@@ -530,14 +578,25 @@ public class RoomController {
     toiletPaperArrow.setOpacity(0);
     if (GameState.isRiddleResolved()) {
       if (GameState.itemToChoose == toiletPaper) {
-        showDialog(
-            "Nice Job",
-            "You found the item!",
-            "On the toilet paper is written the word " + GameState.codeWord);
+        blurredPane.setVisible(true);
+        inspectingToiletPaperPane.setVisible(true);
+        toiletPaperWordLabel.setText(GameState.codeWord);
+        thoughtBubblePane.setVisible(true);
+        thoughtBubbleText.setText("What's that scratched onto the rim?");
       } else {
-        showDialog("Nothing!", "Toilet Paper", "Just a normal roll of toilet paper.");
+        blurredPane.setVisible(true);
+        inspectingToiletPaperPane.setVisible(true);
+        thoughtBubblePane.setVisible(true);
+        thoughtBubbleText.setText("Hmm... Can't see anything here");
       }
     }
+  }
+
+  @FXML
+  public void onClickInspectingVentPane() {
+    blurredPane.setVisible(false);
+    inspectingVentPane.setVisible(false);
+    thoughtBubblePane.setVisible(false);
   }
 
   @FXML
@@ -545,15 +604,25 @@ public class RoomController {
     ventArrow.setOpacity(0);
     if (GameState.isRiddleResolved()) {
       if (GameState.itemToChoose == vent) {
-        showDialog(
-            "Nice Job",
-            "You found the item!",
-            "In the vent you notice a piece of paper, scribbled on one side is the word "
-                + GameState.codeWord);
+        blurredPane.setVisible(true);
+        inspectingVentPane.setVisible(true);
+        ventWordLabel.setText(GameState.codeWord);
+        thoughtBubblePane.setVisible(true);
+        thoughtBubbleText.setText("What's that scratched onto the vent?");
       } else {
-        showDialog("Nothing!", "Vent", "Just an empty vent");
+        blurredPane.setVisible(true);
+        inspectingVentPane.setVisible(true);
+        thoughtBubblePane.setVisible(true);
+        thoughtBubbleText.setText("Hmm... Can't see anything here");
       }
     }
+  }
+
+  @FXML
+  public void onClickInspectingSinkPane() {
+    blurredPane.setVisible(false);
+    inspectingSinkPane.setVisible(false);
+    thoughtBubblePane.setVisible(false);
   }
 
   @FXML
@@ -561,14 +630,25 @@ public class RoomController {
     sinkArrow.setOpacity(0);
     if (GameState.isRiddleResolved()) {
       if (GameState.itemToChoose == sink) {
-        showDialog(
-            "Nice Job",
-            "You found the item!",
-            "In the sink you notice scribbled on the side is the word " + GameState.codeWord);
+        blurredPane.setVisible(true);
+        inspectingSinkPane.setVisible(true);
+        sinkWordLabel.setText(GameState.codeWord);
+        thoughtBubblePane.setVisible(true);
+        thoughtBubbleText.setText("What's that scratched onto the rim?");
       } else {
-        showDialog("Nothing!", "Sink", "Just an empty sink");
+        blurredPane.setVisible(true);
+        inspectingSinkPane.setVisible(true);
+        thoughtBubblePane.setVisible(true);
+        thoughtBubbleText.setText("Hmm... Can't see anything here");
       }
     }
+  }
+
+  @FXML
+  public void onClickInspectingMirrorPane() {
+    blurredPane.setVisible(false);
+    inspectingMirrorPane.setVisible(false);
+    thoughtBubblePane.setVisible(false);
   }
 
   @FXML
@@ -576,14 +656,25 @@ public class RoomController {
     mirrorArrow.setOpacity(0);
     if (GameState.isRiddleResolved()) {
       if (GameState.itemToChoose == mirror) {
-        showDialog(
-            "Nice Job",
-            "You found the item!",
-            "On the mirror you notice a word written in ink: " + GameState.codeWord);
+        blurredPane.setVisible(true);
+        inspectingMirrorPane.setVisible(true);
+        mirrorWordLabel.setText(GameState.codeWord);
+        thoughtBubblePane.setVisible(true);
+        thoughtBubbleText.setText("What's that on the mirror?");
       } else {
-        showDialog("Nothing!", "Mirror", "Just a normal mirror");
+        blurredPane.setVisible(true);
+        inspectingMirrorPane.setVisible(true);
+        thoughtBubblePane.setVisible(true);
+        thoughtBubbleText.setText("Hmm... Can't see anything here");
       }
     }
+  }
+
+  @FXML
+  public void onClickInspectingTowelPane() {
+    blurredPane.setVisible(false);
+    inspectingTowelPane.setVisible(false);
+    thoughtBubblePane.setVisible(false);
   }
 
   @FXML
@@ -591,12 +682,16 @@ public class RoomController {
     towelArrow.setOpacity(0);
     if (GameState.isRiddleResolved()) {
       if (GameState.itemToChoose == towel) {
-        showDialog(
-            "Nice Job",
-            "You found the item!",
-            "You notice that scribbled on one side of the towel is the word " + GameState.codeWord);
+        blurredPane.setVisible(true);
+        inspectingTowelPane.setVisible(true);
+        towelWordLabel.setText(GameState.codeWord);
+        thoughtBubblePane.setVisible(true);
+        thoughtBubbleText.setText("What's that written on the towel?");
       } else {
-        showDialog("Nothing!", "Towel", "Just a normal towel");
+        blurredPane.setVisible(true);
+        inspectingTowelPane.setVisible(true);
+        thoughtBubblePane.setVisible(true);
+        thoughtBubbleText.setText("Hmm... Can't see anything here");
       }
     }
   }

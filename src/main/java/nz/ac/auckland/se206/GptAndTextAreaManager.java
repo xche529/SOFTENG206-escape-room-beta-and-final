@@ -102,6 +102,13 @@ public class GptAndTextAreaManager {
             chatHistory = getMessageHistory(prisonerTwoCompletionRequest);
             System.out.println("display Prisoner2 history");
         }
+
+        roomTypePromptText.setText(prompt);
+        officeTypePromptText.setText(prompt);
+        cafeteriaTypePromptText.setText(prompt);
+        roomChatDisplayBoard.setText(chatHistory);
+        officeChatDisplayBoard.setText(chatHistory);
+        cafeteriaChatDisplayBoard.setText(chatHistory);
         textAreaTypePromptText.setText(prompt);
         textAreaChatDisplayBoard.setText(chatHistory);
     }
