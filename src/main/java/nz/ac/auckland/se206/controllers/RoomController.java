@@ -247,7 +247,7 @@ public class RoomController {
                   }
                 }
               }
-              updateTimerLabel();
+              
               if (GameState.resetRoom) {
                 try {
                   resetRoom();
@@ -272,7 +272,7 @@ public class RoomController {
     towelArrow.setOpacity(0);
     doorArrowSmall.setOpacity(0);
     guardSpeechPane.setVisible(false);
-    animateArrows(doorArrow);
+    //animateArrows(doorArrow);
     GameState.setRiddleResolved(false);
   }
 
@@ -308,7 +308,7 @@ public class RoomController {
     animateArrows(sinkArrow);
     animateArrows(mirrorArrow);
     animateArrows(towelArrow);
-    animateArrows(doorArrowSmall);
+    //animateArrows(doorArrowSmall);
   }
 
   public void animateArrows(ImageView arrow) {

@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
@@ -48,20 +49,6 @@
             <Rectangle id="bin" fx:id="bin" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="75.0" layoutX="111.0" layoutY="495.0" onMouseClicked="#clickBin" onMouseEntered="#binMouseEntered" onMouseExited="#binMouseExited" opacity="0.0" scaleX="1.2" scaleY="1.2" stroke="BLACK" strokeType="INSIDE" width="55.0" />
             <Rectangle id="phone" fx:id="phone" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="59.0" layoutX="597.0" layoutY="305.0" onMouseClicked="#clickPhone" onMouseEntered="#phoneMouseEntered" onMouseExited="#phoneMouseExited" opacity="0.0" scaleX="1.2" scaleY="1.2" stroke="BLACK" strokeType="INSIDE" width="57.0" />
             <Rectangle id="blackBoard" fx:id="blackBoard" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="180.0" layoutX="881.0" layoutY="107.0" onMouseClicked="#clickBlackboard" onMouseEntered="#blackBoardMouseEntered" onMouseExited="#blackBoardMouseExited" opacity="0.0" scaleX="1.5" scaleY="1.5" stroke="BLACK" strokeType="INSIDE" width="175.0" />
-            <Pane fx:id="cypherPane" layoutX="135.0" layoutY="30.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="480.0" prefWidth="840.0" style="-fx-background-color: white;" visible="false">
-               <children>
-                  <ImageView fitHeight="329.0" fitWidth="656.0" layoutX="94.0" layoutY="31.0">
-                     <image>
-                        <Image url="@../images/number_converter.png" />
-                     </image>
-                  </ImageView>
-                  <Button fx:id="exitViewButton" layoutX="347.0" layoutY="382.0" mnemonicParsing="false" onAction="#onClickExitConverterView" prefHeight="53.0" prefWidth="148.0" text="Exit view">
-                     <font>
-                        <Font size="19.0" />
-                     </font>
-                  </Button>
-               </children>
-            </Pane>
             <ImageView fx:id="prisonerTwo" fitHeight="293.0" fitWidth="135.0" layoutX="357.0" layoutY="312.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true">
                <image>
                   <Image url="@../images/prisoner2.png" />
@@ -82,6 +69,45 @@
                   <Image url="@../images/speechBubble.png" />
                </image>
             </ImageView>
+            <ImageView fitHeight="622.0" fitWidth="341.0" layoutX="-341.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../images/background.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="binArrow" fitHeight="53.0" fitWidth="44.0" layoutX="121.0" layoutY="437.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5">
+               <image>
+                  <Image url="@../images/newArrow.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="drawArrow" fitHeight="53.0" fitWidth="44.0" layoutX="714.0" layoutY="435.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5">
+               <image>
+                  <Image url="@../images/newArrow.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="phoneArrow" fitHeight="53.0" fitWidth="44.0" layoutX="610.0" layoutY="255.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5">
+               <image>
+                  <Image url="@../images/newArrow.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="blackBoardArrow" fitHeight="53.0" fitWidth="1000.0" layoutX="972.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5">
+               <image>
+                  <Image url="@../images/newArrow.png" />
+               </image>
+            </ImageView>
+            <Pane fx:id="cypherPane" layoutX="135.0" layoutY="30.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="480.0" prefWidth="840.0" style="-fx-background-color: white;" visible="false">
+               <children>
+                  <ImageView fitHeight="329.0" fitWidth="656.0" layoutX="94.0" layoutY="31.0">
+                     <image>
+                        <Image url="@../images/number_converter.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="exitViewButton" layoutX="347.0" layoutY="382.0" mnemonicParsing="false" onAction="#onClickExitConverterView" prefHeight="53.0" prefWidth="148.0" text="Exit view">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Pane>
             <Pane fx:id="phonePane" layoutX="37.0" layoutY="37.0" prefHeight="531.0" prefWidth="1035.0" style="-fx-background-color: white;" visible="false">
                <children>
                   <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="194.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" />
@@ -184,11 +210,15 @@
                   </ImageView>
                </children>
             </Pane>
-            <ImageView fitHeight="622.0" fitWidth="341.0" layoutX="-341.0" pickOnBounds="true">
-               <image>
-                  <Image url="@../images/background.png" />
-               </image>
-            </ImageView>
+            <HBox alignment="CENTER" layoutX="1026.0" prefHeight="49.0" prefWidth="87.0" style="-fx-background-color: black; -fx-border-color: #0FFF50; -fx-border-width: 5px;">
+               <children>
+                  <Label fx:id="timerLabel" alignment="CENTER" layoutX="10.0" prefHeight="35.0" prefWidth="73.0" textAlignment="CENTER" textFill="#0fff50">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
          </children>
       </Pane>
    </children>

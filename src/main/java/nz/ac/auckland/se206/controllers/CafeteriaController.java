@@ -1,8 +1,12 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.animation.TranslateTransition;
+
 import java.util.Random;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -111,6 +115,11 @@ public class CafeteriaController {
   @FXML
   private Label numberLabel;
 
+  @FXML private ImageView paintingWithSafeArrow;
+  @FXML private ImageView paintingWithoutSafeArrow;
+  @FXML private ImageView vendingMachineArrow;
+  @FXML private Label timerLabel;
+
   private OfficeController officeController;
   private RoomController roomController;
   private ImageView[] animationItems;
@@ -157,6 +166,7 @@ public class CafeteriaController {
   @FXML
   private void onClickVendingMachine(MouseEvent event) {
     // TODO: add code to handle click on vending machine
+    vendingMachineArrow.setVisible(false);
   }
 
   /**
@@ -168,6 +178,7 @@ public class CafeteriaController {
   private void onClickPaintingWithSafe(MouseEvent event) {
     safe.setVisible(true);
     paintingWithSafe.setVisible(false);
+    paintingWithSafeArrow.setVisible(false);
   }
 
   /**
@@ -178,12 +189,14 @@ public class CafeteriaController {
   @FXML
   private void onClickPaintingWithoutSafe(MouseEvent event) {
     // TODO: add code to handle click on picture without safe
+    paintingWithoutSafeArrow.setVisible(false);
   }
 
   @FXML
   private void onSafeClick(MouseEvent event) {
     padlockPane.setVisible(true);
     safeBig.setVisible(false);
+    
   }
 
   @FXML
@@ -356,6 +369,20 @@ public class CafeteriaController {
     digitTwo.setText("0");
     digitThree.setText("0");
     digitFour.setText("0");
+    paintingWithSafeArrow.setVisible(true);
+    paintingWithoutSafeArrow.setVisible(true);
+    vendingMachineArrow.setVisible(true);
+  }
+
+      public void animateArrows(ImageView arrow) {
+    double startY = 0;
+
+    TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.5), arrow);
+    translateTransition.setFromY(startY);
+    translateTransition.setToY(startY + 5);
+    translateTransition.setAutoReverse(true);
+    translateTransition.setCycleCount(Animation.INDEFINITE);
+    translateTransition.play();
   }
 
   /*
@@ -394,7 +421,9 @@ public class CafeteriaController {
   }
 
   private void updateTimerLabel() {
-    // TODO: add code to update timer label
+    int minutes = (GameState.secondsRemaining) / 60;
+    int seconds = (GameState.secondsRemaining) % 60;
+    timerLabel.setText(String.format("%d:%02d", minutes, seconds));
   }
 
   public void walkInAnimation() {
