@@ -187,6 +187,7 @@
             <Label fx:id="questionInfoLabel" layoutX="119.0" layoutY="289.0" text="You only get two questions! Use them wisely" visible="false" />
          </children>
       </Pane>
+      <Pane fx:id="blurringPane" opacity="0.74" prefHeight="615.0" prefWidth="1132.0" style="-fx-background-color: white;" visible="false" />
       <TextArea fx:id="chatDisplayBoard" editable="false" layoutX="324.0" layoutY="605.0" prefHeight="195.0" prefWidth="562.0" wrapText="true">
          <font>
             <Font size="21.0" />
