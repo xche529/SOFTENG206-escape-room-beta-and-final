@@ -10,17 +10,18 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import javafx.scene.text.Text;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GptAndTextAreaManager;
 import nz.ac.auckland.se206.GptAndTextAreaManager.Characters;
@@ -28,8 +29,6 @@ import nz.ac.auckland.se206.MovementControl;
 import nz.ac.auckland.se206.PlayHistory;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.GameState.Difficulty;
-import nz.ac.auckland.se206.SceneManager.AppUi;
-import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class OfficeController {
 
@@ -64,14 +63,26 @@ public class OfficeController {
 
   private ImageView prisonerTwo;
   @FXML
-
   private ImageView speechBubbleOne;
   @FXML
   private ImageView speechBubbleTwo;
-  @FXML private ImageView binArrow;
-  @FXML private ImageView blackBoardArrow;
-  @FXML private ImageView drawArrow;
-  @FXML private ImageView phoneArrow;
+  @FXML
+  private ImageView speechBubbleOneSmall;
+  @FXML
+  private ImageView speechBubbleTwoSmall;
+  @FXML
+  private ImageView thinkingOne;
+  @FXML
+  private ImageView thinkingTwo;
+
+  @FXML
+  private ImageView binArrow;
+  @FXML
+  private ImageView blackBoardArrow;
+  @FXML
+  private ImageView drawArrow;
+  @FXML
+  private ImageView phoneArrow;
 
   @FXML
   private TextArea inputBox;
@@ -114,6 +125,26 @@ public class OfficeController {
   private Label numberLabel;
   @FXML
   private Label timerLabel;
+  @FXML
+  private Pane inspectingBinPane;
+  @FXML
+  private Pane blurringPane;
+  @FXML
+  private Pane thoughtBubblePane;
+  @FXML
+  private Text thoughtBubbleText;
+  @FXML
+  private ImageView binConverter;
+  @FXML
+  private Pane inspectingBlackBoardPane;
+  @FXML
+  private ImageView inspectingBlackBoardConverter;
+  @FXML
+  private ImageView inspectingBlackBoardEmpty;
+  @FXML
+  private Pane inspectingDrawerPane;
+  @FXML
+  private ImageView drawerConverter;
 
   private Timeline timeline;
   private CafeteriaController cafeteriaController;
@@ -140,7 +171,7 @@ public class OfficeController {
     // GptAndTextAreaManager.officeInputBox = inputBox;
     // GptAndTextAreaManager.officeObjectiveDisplayBoard = objectiveDisplayBoard;
 
-    animationItems = new ImageView[] { prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo };
+    animationItems = new ImageView[] { prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo , speechBubbleOneSmall,speechBubbleTwoSmall};
 
     digits = new Label[] {
         digitOne, digitTwo, digitThree, digitFour, digitFive, digitSix, digitSeven, digitEight,
@@ -157,7 +188,7 @@ public class OfficeController {
             });
   }
 
-    public void animateArrows(ImageView arrow) {
+  public void animateArrows(ImageView arrow) {
     double startY = 0;
 
     TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.5), arrow);
@@ -167,7 +198,6 @@ public class OfficeController {
     translateTransition.setCycleCount(Animation.INDEFINITE);
     translateTransition.play();
   }
-
 
   public void setCafeteriaController(CafeteriaController cafeteriaController) {
     this.cafeteriaController = cafeteriaController;
@@ -186,42 +216,98 @@ public class OfficeController {
       item.setTranslateX(-500);
     }
   }
+  
+  public void setThinkingOneUp() {
+    thinkingOne.setVisible(true);
+  }
+
+  public void setThinkingOneDown() {
+    thinkingOne.setVisible(false);
+  }
+
+  public void setThinkingTwoUp() {
+    thinkingTwo.setVisible(true);
+  }
+
+  public void setThinkingTwoDown() {
+    thinkingTwo.setVisible(false);
+  }
 
   @FXML
-  private void onClickExitConverterView() {
-    cypherPane.setVisible(false);
+  void onClickInspectingDrawerPane() {
+    inspectingDrawerPane.setVisible(false);
+    blurringPane.setVisible(false);
+    thoughtBubblePane.setVisible(false);
   }
 
   @FXML
   private void clickDeskDrawers(MouseEvent event) {
-    drawArrow.setVisible(false);
     if (GameState.itemWithCypher == deskDrawers) {
+
       cypherPane.setVisible(true);
       GameState.cypherFound = true;
+      inspectingDrawerPane.setVisible(true);
+      drawerConverter.setVisible(true);
+      thoughtBubblePane.setVisible(true);
+      blurringPane.setVisible(true);
+      thoughtBubbleText.setText("What's that piece of paper???");
+
     } else {
-      System.out.println("deskDrawersClicked");
+      inspectingDrawerPane.setVisible(true);
+      blurringPane.setVisible(true);
+      thoughtBubblePane.setVisible(true);
+      thoughtBubbleText.setText("Hmm.. Nothing here...");
     }
+  }
+
+  @FXML
+  void onClickInspectingBinPane() {
+    inspectingBinPane.setVisible(false);
+    blurringPane.setVisible(false);
+    thoughtBubblePane.setVisible(false);
+    binConverter.setVisible(false);
   }
 
   @FXML
   private void clickBin(MouseEvent event) {
-    binArrow.setVisible(false);
     if (GameState.itemWithCypher == bin) {
       cypherPane.setVisible(true);
       GameState.cypherFound = true;
+      inspectingBinPane.setVisible(true);
+      binConverter.setVisible(true);
+      thoughtBubblePane.setVisible(true);
+      blurringPane.setVisible(true);
+      thoughtBubbleText.setText("What's that piece of paper???");
     } else {
-      System.out.println("binClicked");
+      inspectingBinPane.setVisible(true);
+      blurringPane.setVisible(true);
+      thoughtBubblePane.setVisible(true);
+      thoughtBubbleText.setText("Hmm.. Nothing here...");
     }
   }
 
   @FXML
+  void onClickInspectingBlackBoardPane() {
+    inspectingBlackBoardPane.setVisible(false);
+    blurringPane.setVisible(false);
+    thoughtBubblePane.setVisible(false);
+  }
+
+  @FXML
   private void clickBlackboard(MouseEvent event) {
-    blackBoardArrow.setVisible(false);
     if (GameState.itemWithCypher == blackBoard) {
       cypherPane.setVisible(true);
       GameState.cypherFound = true;
+      inspectingBlackBoardPane.setVisible(true);
+      inspectingBlackBoardConverter.setVisible(true);
+      blurringPane.setVisible(true);
+      thoughtBubblePane.setVisible(true);
+      thoughtBubbleText.setText("What's that chart???");
     } else {
-      System.out.println("blackBoardClicked");
+      inspectingBlackBoardPane.setVisible(true);
+      blurringPane.setVisible(true);
+      thoughtBubblePane.setVisible(true);
+      thoughtBubbleText.setText("Hmm.. Nothing here...");
     }
   }
 
@@ -281,6 +367,26 @@ public class OfficeController {
   private void onSpeechBubbleTwoClicked() {
     GptAndTextAreaManager.displayTarget(Characters.PRISONER_TWO);
     System.out.println("Speech bubble two clicked");
+  }
+
+  @FXML
+  private void onSetSpeechBubbleOneUp() {
+    speechBubbleOne.setVisible(true);
+  }
+
+  @FXML
+  private void onSetSpeechBubbleOneDown() {
+    speechBubbleOne.setVisible(false);
+  }
+
+  @FXML
+  private void onSetSpeechBubbleTwoUp() {
+    speechBubbleTwo.setVisible(true);
+  }
+
+  @FXML
+  private void onSetSpeechBubbleTwoDown() {
+    speechBubbleTwo.setVisible(false);
   }
 
   @FXML
@@ -536,9 +642,9 @@ public class OfficeController {
         Scene scene = phonePane.getScene();
         int timeTook = GameState.totalSeconds - GameState.secondsRemaining;
         int difficulty = 1;
-        if(GameState.difficulty == Difficulty.MEDIUM){
+        if (GameState.difficulty == Difficulty.MEDIUM) {
           difficulty = 2;
-        }else if(GameState.difficulty == Difficulty.HARD){
+        } else if (GameState.difficulty == Difficulty.HARD) {
           difficulty = 3;
         }
         PlayHistory playHistory = new PlayHistory(timeTook, difficulty, GameState.playerName);
@@ -552,7 +658,11 @@ public class OfficeController {
         GameState.resetCafeteria = true;
         GameState.resetOffice = true;
         GameState.resetRoom = true;
-        scene.setRoot(SceneManager.getUiRoot(AppUi.END_WON));
+
+        Parent parent = SceneManager.getUiRoot(SceneManager.AppUi.END_WON);
+        parent.setLayoutX(App.centerX);
+        parent.setLayoutY(App.centerY);
+        scene.setRoot(parent);
       } else {
         System.out.println("Wrong number");
       }
@@ -592,7 +702,10 @@ public class OfficeController {
                   GameState.resetRoom = true;
                   try {
                     Scene scene = phone.getScene();
-                    scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.END_LOST));
+                    Parent parent = SceneManager.getUiRoot(SceneManager.AppUi.END_LOST);
+                    parent.setLayoutX(App.centerX);
+                    parent.setLayoutY(App.centerY);
+                    scene.setRoot(parent);
                   } catch (NullPointerException e) {
                   }
 
@@ -601,7 +714,6 @@ public class OfficeController {
               updateTimerLabel();
               if (GameState.resetOffice) {
                 resetOffice();
-                GameState.resetOffice = false;
               }
             }));
     timeline.setCycleCount(Timeline.INDEFINITE);
@@ -630,8 +742,9 @@ public class OfficeController {
     blackBoardArrow.setVisible(true);
     drawArrow.setVisible(true);
     phoneArrow.setVisible(true);
-
     GameState.cypherFound = false;
+    GameState.resetOffice = false;
+    System.out.println("office reseted");
 
   }
 }

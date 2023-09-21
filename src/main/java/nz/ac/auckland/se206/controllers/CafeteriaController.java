@@ -1,31 +1,28 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
-
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
-
 import java.util.Random;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
-import javafx.scene.text.Text;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GptAndTextAreaManager;
 import nz.ac.auckland.se206.GptAndTextAreaManager.Characters;
 import nz.ac.auckland.se206.MovementControl;
 import nz.ac.auckland.se206.SceneManager;
-import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class CafeteriaController {
@@ -93,6 +90,25 @@ public class CafeteriaController {
   @FXML
 
   private ImageView speechBubbleTwo;
+
+  @FXML
+  private ImageView speechBubbleThree;
+  @FXML
+
+  private ImageView speechBubbleOneSmall;
+  @FXML
+
+  private ImageView speechBubbleTwoSmall;
+
+  @FXML
+  private ImageView speechBubbleThreeSmall;
+  @FXML
+  private ImageView thinkingOne;
+  @FXML
+  private ImageView thinkingTwo;
+  @FXML
+  private ImageView thinkingThree;
+
   @FXML
 
   private Label digitOne;
@@ -115,10 +131,14 @@ public class CafeteriaController {
   @FXML
   private Label numberLabel;
 
-  @FXML private ImageView paintingWithSafeArrow;
-  @FXML private ImageView paintingWithoutSafeArrow;
-  @FXML private ImageView vendingMachineArrow;
-  @FXML private Label timerLabel;
+  @FXML
+  private ImageView paintingWithSafeArrow;
+  @FXML
+  private ImageView paintingWithoutSafeArrow;
+  @FXML
+  private ImageView vendingMachineArrow;
+  @FXML
+  private Label timerLabel;
 
   private OfficeController officeController;
   private RoomController roomController;
@@ -147,7 +167,8 @@ public class CafeteriaController {
     resetchecker();
     GptAndTextAreaManager.cafeteriaController = this;
 
-    animationItems = new ImageView[] { prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo };
+    animationItems = new ImageView[] { prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo, speechBubbleOneSmall,
+        speechBubbleTwoSmall, thinkingOne, thinkingThree, thinkingTwo };
 
     Random random = new Random();
 
@@ -197,7 +218,7 @@ public class CafeteriaController {
   private void onSafeClick(MouseEvent event) {
     padlockPane.setVisible(true);
     safeBig.setVisible(false);
-    
+
   }
 
   @FXML
@@ -317,6 +338,36 @@ public class CafeteriaController {
   }
 
   @FXML
+  private void onSetSpeechBubbleOneUp() {
+    speechBubbleOne.setVisible(true);
+  }
+
+  @FXML
+  private void onSetSpeechBubbleOneDown() {
+    speechBubbleOne.setVisible(false);
+  }
+
+  @FXML
+  private void onSetSpeechBubbleTwoUp() {
+    speechBubbleTwo.setVisible(true);
+  }
+
+  @FXML
+  private void onSetSpeechBubbleTwoDown() {
+    speechBubbleTwo.setVisible(false);
+  }
+
+  @FXML
+  private void onSetSpeechBubbleThreeUp() {
+    speechBubbleThree.setVisible(true);
+  }
+
+  @FXML
+  private void onSetSpeechBubbleThreeDown() {
+    speechBubbleThree.setVisible(false);
+  }
+
+  @FXML
   private void onClickExitPadlock() {
     padlockPane.setVisible(false);
   }
@@ -349,6 +400,12 @@ public class CafeteriaController {
     System.out.println("Speech bubble two clicked");
   }
 
+  @FXML
+  private void onSpeechBubbleThreeClicked() {
+    GptAndTextAreaManager.displayTarget(Characters.GUARD);
+    System.out.println("Speech bubble three clicked");
+  }
+
   private void showDialog(String title, String headerText, String message) {
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
     alert.setTitle(title);
@@ -376,9 +433,11 @@ public class CafeteriaController {
     vendingMachineArrow.setVisible(true);
     GameState.safeFound = false;
     GameState.safeUnlocked = false;
+    GameState.resetCafeteria = false;
+    System.out.println("cafeteria reseted");
   }
 
-      public void animateArrows(ImageView arrow) {
+  public void animateArrows(ImageView arrow) {
     double startY = 0;
 
     TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.5), arrow);
@@ -408,7 +467,10 @@ public class CafeteriaController {
                   GameState.resetRoom = true;
                   try {
                     Scene scene = vendingMachine.getScene();
-                    scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.END_LOST));
+                    Parent parent = SceneManager.getUiRoot(SceneManager.AppUi.END_LOST);
+                    parent.setLayoutX(App.centerX);
+                    parent.setLayoutY(App.centerY);
+                    scene.setRoot(parent);
                   } catch (NullPointerException e) {
                   }
                 }
@@ -417,7 +479,6 @@ public class CafeteriaController {
               updateTimerLabel();
               if (GameState.resetCafeteria) {
                 resetCafeteria();
-                GameState.resetCafeteria = false;
               }
             }));
     timeline.setCycleCount(Timeline.INDEFINITE);
@@ -440,4 +501,29 @@ public class CafeteriaController {
     }
 
   }
+
+  public void setThinkingOneUp() {
+    thinkingOne.setVisible(true);
+  }
+
+  public void setThinkingOneDown() {
+    thinkingOne.setVisible(false);
+  }
+
+  public void setThinkingTwoUp() {
+    thinkingTwo.setVisible(true);
+  }
+
+  public void setThinkingTwoDown() {
+    thinkingTwo.setVisible(false);
+  }
+
+  public void setThinkingThreeUp() {
+    thinkingThree.setVisible(true);
+  }
+
+  public void setThinkingThreeDown() {
+    thinkingThree.setVisible(false);
+  }
+
 }

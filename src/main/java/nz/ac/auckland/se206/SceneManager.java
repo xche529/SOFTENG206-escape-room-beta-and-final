@@ -34,6 +34,11 @@ public class SceneManager {
       AppUi.CAFETERIA,
   };
 
+/*
+ * Switches the scene to the next room
+ * @param isToLeft true if the player is moving to the left, false if the player is moving to the right
+ * @param scene the scene to switch
+ */
   public static void switchRoom(boolean isToLeft, Scene scene) {
     VBox roomToSwitch = null;
 

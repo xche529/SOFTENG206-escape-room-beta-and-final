@@ -2,15 +2,13 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
 import java.util.Random;
-import java.util.function.Consumer;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
-import javafx.concurrent.Task;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -26,19 +24,15 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Safe;
 import nz.ac.auckland.se206.GptAndTextAreaManager;
 import nz.ac.auckland.se206.MovementControl;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.GptAndTextAreaManager.Characters;
-import nz.ac.auckland.se206.SceneManager.AppUi;
-import nz.ac.auckland.se206.gpt.ChatMessage;
-import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
-import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
-import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 
 /** Controller class for the room view. */
@@ -51,10 +45,6 @@ public class RoomController {
   private Pane chatPane;
   @FXML
   private Pane startPane;
-  @FXML
-  private Pane guardSpeechPane;
-  @FXML
-  private Rectangle textBubble;
   @FXML
   private Rectangle door;
   @FXML
@@ -112,6 +102,14 @@ public class RoomController {
   @FXML
   private ImageView speechBubbleTwo;
   @FXML
+  private ImageView speechBubbleOneSmall;
+  @FXML
+  private ImageView speechBubbleTwoSmall;
+  @FXML
+  private ImageView thinkingOne;
+  @FXML
+  private ImageView thinkingTwo;
+  @FXML
   private Label timerLabel;
   @FXML
   private Label chatProgressLabel;
@@ -131,9 +129,38 @@ public class RoomController {
   private TextField inputText;
   @FXML
   private ProgressIndicator chatProgress;
+  @FXML
+  private Pane blurredPane;
+  @FXML
+  private Pane inspectingToiletPane;
+  @FXML
+  private Pane thoughtBubblePane;
+  @FXML
+  private Text thoughtBubbleText;
+  @FXML
+  private Label toiletWordLabel;
+  @FXML
+  private Label toiletPaperWordLabel;
+  @FXML
+  private Pane inspectingToiletPaperPane;
+  @FXML
+  private Pane inspectingVentPane;
+  @FXML
+  private Label ventWordLabel;
+  @FXML
+  private Pane inspectingSinkPane;
+  @FXML
+  private Label sinkWordLabel;
+  @FXML
+  private Pane inspectingMirrorPane;
+  @FXML
+  private Label mirrorWordLabel;
+  @FXML
+  private Pane inspectingTowelPane;
+  @FXML
+  private Label towelWordLabel;
 
   private Timeline timeline;
-  private ChatCompletionRequest chatCompletionRequest;
   private TextToSpeech textToSpeech;
   private OfficeController officeController = null;
   private CafeteriaController cafeteriaController = null;
@@ -150,22 +177,11 @@ public class RoomController {
     // initialize fields in the GptAndTextAreaManager class
     GptAndTextAreaManager.roomController = this;
 
-    animationItems = new ImageView[] { prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo };
+    animationItems = new ImageView[] { prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo, speechBubbleOneSmall,
+        speechBubbleTwoSmall, thinkingOne, thinkingTwo };
     resetAnimation();
 
-    // Sending the initial request so the riddle is ready when the player enters the
-    // chat
-    // chatCompletionRequest =
-    // new
-    // ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
-    // ChatMessage userChatMessage =
-    // new ChatMessage(
-    // "user",
-    // GptPromptEngineering.getRiddleWithGivenWord(GameState.itemToChoose.getId()));
-    // runGpt(userChatMessage, lastMsg -> {});
-
     itemToChoose();
-    prepareRiddle();
     // Setting up the timer timeline
 
   }
@@ -207,7 +223,6 @@ public class RoomController {
             (observable, oldValue, newValue) -> {
               if (newValue) {
                 animateAllArrows();
-                guardSpeechPane.setVisible(true);
               }
             });
     timeline.play();
@@ -242,18 +257,20 @@ public class RoomController {
                   GameState.resetRoom = true;
                   try {
                     Scene scene = sink.getScene();
-                    scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.END_LOST));
+                    Parent parent = SceneManager.getUiRoot(SceneManager.AppUi.END_LOST);
+                    parent.setLayoutX(App.centerX);
+                    parent.setLayoutY(App.centerY);
+                    scene.setRoot(parent);
                   } catch (NullPointerException e) {
                   }
                 }
               }
-              
+
               if (GameState.resetRoom) {
                 try {
                   resetRoom();
                 } catch (ApiProxyException e) {
                 }
-                GameState.resetRoom = false;
               }
             }));
     timeline.setCycleCount(Timeline.INDEFINITE);
@@ -262,7 +279,6 @@ public class RoomController {
 
   private void resetRoom() throws ApiProxyException {
     itemToChoose();
-    prepareRiddle();
     Safe.getRandomCode();
     toiletArrow.setOpacity(0);
     toiletPaperArrow.setOpacity(0);
@@ -271,10 +287,12 @@ public class RoomController {
     mirrorArrow.setOpacity(0);
     towelArrow.setOpacity(0);
     doorArrowSmall.setOpacity(0);
-    guardSpeechPane.setVisible(false);
-    //animateArrows(doorArrow);
+    // animateArrows(doorArrow);
     GameState.setRiddleResolved(false);
+
     GameState.wordFound = false;
+    GameState.resetRoom = false;
+    System.out.println("room reseted");
   }
 
   /*
@@ -290,6 +308,7 @@ public class RoomController {
         "user", GptPromptEngineering.getRiddleWithGivenWord(GameState.itemToChoose.getId()));
     runGpt(userChatMessage, lastMsg -> {
     });
+
   }
 
   /*
@@ -309,7 +328,7 @@ public class RoomController {
     animateArrows(sinkArrow);
     animateArrows(mirrorArrow);
     animateArrows(towelArrow);
-    //animateArrows(doorArrowSmall);
+    // animateArrows(doorArrowSmall);
   }
 
   public void animateArrows(ImageView arrow) {
@@ -359,6 +378,18 @@ public class RoomController {
     for (ImageView item : animationItems) {
       item.setTranslateX(500);
     }
+  }
+  public void setThinkingOneUp(){
+    thinkingOne.setVisible(true);
+  }
+  public void setThinkingOneDown(){
+    thinkingOne.setVisible(false);
+  }
+  public void setThinkingTwoUp(){
+    thinkingTwo.setVisible(true);
+  }
+  public void setThinkingTwoDown(){
+    thinkingTwo.setVisible(false);
   }
 
   /**
@@ -512,19 +543,37 @@ public class RoomController {
   }
 
   @FXML
+  public void onClickInspectingToiletPane() {
+    blurredPane.setVisible(false);
+    inspectingToiletPane.setVisible(false);
+    thoughtBubblePane.setVisible(false);
+  }
+
+  @FXML
   public void clickToilet(MouseEvent event) {
     toiletArrow.setOpacity(0);
     if (GameState.isRiddleResolved()) {
       if (GameState.itemToChoose == toilet) {
-        showDialog(
-            "Nice Job",
-            "You found the item!",
-            "On the inside of the toilet is written the word " + GameState.codeWord);
-            GameState.wordFound = true;
+        blurredPane.setVisible(true);
+        inspectingToiletPane.setVisible(true);
+        toiletWordLabel.setText(GameState.codeWord);
+        thoughtBubblePane.setVisible(true);
+        thoughtBubbleText.setText("What's that scratched onto the rim?");
+        GameState.wordFound = true;
       } else {
-        showDialog("Nothing!", "Toilet", "Just a normal toilet.");
+        blurredPane.setVisible(true);
+        inspectingToiletPane.setVisible(true);
+        thoughtBubblePane.setVisible(true);
+        thoughtBubbleText.setText("Hmm... Can't see anything here");
       }
     }
+  }
+
+  @FXML
+  public void onClickInspectingToiletPaperPane() {
+    blurredPane.setVisible(false);
+    inspectingToiletPaperPane.setVisible(false);
+    thoughtBubblePane.setVisible(false);
   }
 
   @FXML
@@ -532,15 +581,26 @@ public class RoomController {
     toiletPaperArrow.setOpacity(0);
     if (GameState.isRiddleResolved()) {
       if (GameState.itemToChoose == toiletPaper) {
-        showDialog(
-            "Nice Job",
-            "You found the item!",
-            "On the toilet paper is written the word " + GameState.codeWord);
-            GameState.wordFound = true;
+        blurredPane.setVisible(true);
+        inspectingToiletPaperPane.setVisible(true);
+        toiletPaperWordLabel.setText(GameState.codeWord);
+        thoughtBubblePane.setVisible(true);
+        thoughtBubbleText.setText("What's that scratched onto the rim?");
+        GameState.wordFound = true;
       } else {
-        showDialog("Nothing!", "Toilet Paper", "Just a normal roll of toilet paper.");
+        blurredPane.setVisible(true);
+        inspectingToiletPaperPane.setVisible(true);
+        thoughtBubblePane.setVisible(true);
+        thoughtBubbleText.setText("Hmm... Can't see anything here");
       }
     }
+  }
+
+  @FXML
+  public void onClickInspectingVentPane() {
+    blurredPane.setVisible(false);
+    inspectingVentPane.setVisible(false);
+    thoughtBubblePane.setVisible(false);
   }
 
   @FXML
@@ -548,16 +608,28 @@ public class RoomController {
     ventArrow.setOpacity(0);
     if (GameState.isRiddleResolved()) {
       if (GameState.itemToChoose == vent) {
-        showDialog(
-            "Nice Job",
-            "You found the item!",
-            "In the vent you notice a piece of paper, scribbled on one side is the word "
-                + GameState.codeWord);
-                GameState.wordFound = true;
+
+        blurredPane.setVisible(true);
+        inspectingVentPane.setVisible(true);
+        ventWordLabel.setText(GameState.codeWord);
+        thoughtBubblePane.setVisible(true);
+        thoughtBubbleText.setText("What's that scratched onto the vent?");
+        GameState.wordFound = true;
+
       } else {
-        showDialog("Nothing!", "Vent", "Just an empty vent");
+        blurredPane.setVisible(true);
+        inspectingVentPane.setVisible(true);
+        thoughtBubblePane.setVisible(true);
+        thoughtBubbleText.setText("Hmm... Can't see anything here");
       }
     }
+  }
+
+  @FXML
+  public void onClickInspectingSinkPane() {
+    blurredPane.setVisible(false);
+    inspectingSinkPane.setVisible(false);
+    thoughtBubblePane.setVisible(false);
   }
 
   @FXML
@@ -565,15 +637,28 @@ public class RoomController {
     sinkArrow.setOpacity(0);
     if (GameState.isRiddleResolved()) {
       if (GameState.itemToChoose == sink) {
-        showDialog(
-            "Nice Job",
-            "You found the item!",
-            "In the sink you notice scribbled on the side is the word " + GameState.codeWord);
-            GameState.wordFound = true;
+
+        blurredPane.setVisible(true);
+        inspectingSinkPane.setVisible(true);
+        sinkWordLabel.setText(GameState.codeWord);
+        thoughtBubblePane.setVisible(true);
+        thoughtBubbleText.setText("What's that scratched onto the rim?");
+        GameState.wordFound = true;
+
       } else {
-        showDialog("Nothing!", "Sink", "Just an empty sink");
+        blurredPane.setVisible(true);
+        inspectingSinkPane.setVisible(true);
+        thoughtBubblePane.setVisible(true);
+        thoughtBubbleText.setText("Hmm... Can't see anything here");
       }
     }
+  }
+
+  @FXML
+  public void onClickInspectingMirrorPane() {
+    blurredPane.setVisible(false);
+    inspectingMirrorPane.setVisible(false);
+    thoughtBubblePane.setVisible(false);
   }
 
   @FXML
@@ -581,15 +666,28 @@ public class RoomController {
     mirrorArrow.setOpacity(0);
     if (GameState.isRiddleResolved()) {
       if (GameState.itemToChoose == mirror) {
-        showDialog(
-            "Nice Job",
-            "You found the item!",
-            "On the mirror you notice a word written in ink: " + GameState.codeWord);
-            GameState.wordFound = true;
+
+        blurredPane.setVisible(true);
+        inspectingMirrorPane.setVisible(true);
+        mirrorWordLabel.setText(GameState.codeWord);
+        thoughtBubblePane.setVisible(true);
+        thoughtBubbleText.setText("What's that on the mirror?");
+        GameState.wordFound = true;
+
       } else {
-        showDialog("Nothing!", "Mirror", "Just a normal mirror");
+        blurredPane.setVisible(true);
+        inspectingMirrorPane.setVisible(true);
+        thoughtBubblePane.setVisible(true);
+        thoughtBubbleText.setText("Hmm... Can't see anything here");
       }
     }
+  }
+
+  @FXML
+  public void onClickInspectingTowelPane() {
+    blurredPane.setVisible(false);
+    inspectingTowelPane.setVisible(false);
+    thoughtBubblePane.setVisible(false);
   }
 
   @FXML
@@ -597,18 +695,25 @@ public class RoomController {
     towelArrow.setOpacity(0);
     if (GameState.isRiddleResolved()) {
       if (GameState.itemToChoose == towel) {
-        showDialog(
-            "Nice Job",
-            "You found the item!",
-            "You notice that scribbled on one side of the towel is the word " + GameState.codeWord);
-            GameState.wordFound = true;
+
+        blurredPane.setVisible(true);
+        inspectingTowelPane.setVisible(true);
+        towelWordLabel.setText(GameState.codeWord);
+        thoughtBubblePane.setVisible(true);
+        thoughtBubbleText.setText("What's that written on the towel?");
+        GameState.wordFound = true;
+
       } else {
-        showDialog("Nothing!", "Towel", "Just a normal towel");
+        blurredPane.setVisible(true);
+        inspectingTowelPane.setVisible(true);
+        thoughtBubblePane.setVisible(true);
+        thoughtBubbleText.setText("Hmm... Can't see anything here");
       }
     }
   }
 
   @FXML
+
   private void onTextBubbleClicked() throws ApiProxyException {
     // chatPane.setVisible(true);
     // questionInfoLabel.setVisible(true);
@@ -619,6 +724,7 @@ public class RoomController {
   }
 
   @FXML
+
   private void onSpeechBubbleOneClicked() {
     GptAndTextAreaManager.displayTarget(Characters.PRISONER_ONE);
     System.out.println("Speech bubble one clicked");
@@ -630,109 +736,24 @@ public class RoomController {
     System.out.println("Speech bubble two clicked");
   }
 
-  /**
-   * Appends a chat message to the chat text area.
-   *
-   * @param msg the chat message to append
-   */
-  private void appendChatMessage(ChatMessage msg) {
-    if (msg.getRole().equals("assistant")) {
-      chatTextArea.appendText("Guard: " + msg.getContent() + "\n\n");
-    } else if (msg.getRole().equals("user")) {
-      chatTextArea.appendText("You: " + msg.getContent() + "\n\n");
-    }
-  }
-
-  /**
-   * Runs the GPT model with a given chat message.
-   *
-   * @param msg the chat message to process
-   * @return the response chat message
-   * @throws ApiProxyException if there is an error communicating with the API
-   *                           proxy
-   */
-  private void runGpt(ChatMessage msg, Consumer<ChatMessage> completionCallback)
-      throws ApiProxyException {
-    // define a new task to create threading
-    Task<Void> callGpt = new Task<Void>() {
-      @Override
-      protected Void call() throws Exception {
-        try {
-          // add the message to the request
-          chatCompletionRequest.addMessage(msg);
-          ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
-          Choice result = chatCompletionResult.getChoices().iterator().next();
-          chatCompletionRequest.addMessage(result.getChatMessage());
-          Platform.runLater(
-              () -> {
-                // update gui components later
-                appendChatMessage(result.getChatMessage());
-                completionCallback.accept(result.getChatMessage());
-                chatProgress.setVisible(false);
-                chatProgressLabel.setVisible(false);
-              });
-        } catch (ApiProxyException e) {
-          // TODO handle exception appropriately
-          e.printStackTrace();
-        }
-        return null;
-      }
-    };
-    // start thread
-    Thread thread = new Thread(callGpt);
-    thread.start();
-    // set progress circle to loading
-    chatProgress.setProgress(ProgressIndicator.INDETERMINATE_PROGRESS);
-    chatProgress.setVisible(true);
-    chatProgressLabel.setVisible(true);
-  }
-
-  /**
-   * Sends a message to the GPT model.
-   *
-   * @param event the action event triggered by the send button
-   * @throws ApiProxyException if there is an error communicating with the API
-   *                           proxy
-   * @throws IOException       if there is an I/O error
-   */
   @FXML
-  private void onSendMessage(ActionEvent event) throws ApiProxyException, IOException {
-    if (GameState.isRiddleResolved()) {
-      GameState.questionsAsked++;
-      if (GameState.questionsAsked >= 2) {
-        sendButton.disableProperty().set(true);
-        overQuestionLimitLabel.setVisible(true);
-        inputText.disableProperty().set(true);
-      }
-    }
-    String message = inputText.getText();
-    if (message.trim().isEmpty()) {
-      return;
-    }
-    inputText.clear();
-    ChatMessage msg = new ChatMessage("user", message);
-    appendChatMessage(msg);
-
-    runGpt(
-        msg,
-        lastMsg -> {
-          if (lastMsg.getRole().equals("assistant") && lastMsg.getContent().startsWith("Correct")) {
-            GameState.setRiddleResolved(true);
-          }
-          System.out.println(chatCompletionRequest.toString());
-        });
+  private void onSetSpeechBubbleOneUp() {
+    speechBubbleOne.setVisible(true);
   }
 
-  /**
-   * Navigates back to the previous view.
-   *
-   * @param event the action event triggered by the go back button
-   * @throws ApiProxyException if there is an error communicating with the API
-   *                           proxy
-   * @throws IOException       if there is an I/O error
-   */
   @FXML
-  private void onGoBack(ActionEvent event) throws ApiProxyException, IOException {
-    chatPane.setVisible(false);
+  private void onSetSpeechBubbleOneDown() {
+    speechBubbleOne.setVisible(false);
   }
+
+  @FXML
+  private void onSetSpeechBubbleTwoUp() {
+    speechBubbleTwo.setVisible(true);
+  }
+
+  @FXML
+  private void onSetSpeechBubbleTwoDown() {
+    speechBubbleTwo.setVisible(false);
+  }
+
 }
