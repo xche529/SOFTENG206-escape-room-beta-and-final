@@ -77,6 +77,7 @@ public class OfficeController {
   private TextArea objectiveDisplayBoard;
   @FXML
   private Text typePromptText;
+  @FXML
   private Label digitOne;
 
   @FXML
