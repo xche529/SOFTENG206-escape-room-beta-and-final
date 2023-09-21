@@ -595,7 +595,7 @@ public class RoomController {
         inspectingMirrorPane.setVisible(true);
         mirrorWordLabel.setText(GameState.codeWord);
         thoughtBubblePane.setVisible(true);
-        thoughtBubbleText.setText("What's that scratched onto the mirror?");
+        thoughtBubbleText.setText("What's that on the mirror?");
       } else {
         blurredPane.setVisible(true);
         inspectingMirrorPane.setVisible(true);
