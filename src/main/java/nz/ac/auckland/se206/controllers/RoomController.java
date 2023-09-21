@@ -272,7 +272,7 @@ public class RoomController {
     towelArrow.setOpacity(0);
     doorArrowSmall.setOpacity(0);
     guardSpeechPane.setVisible(false);
-    animateArrows(doorArrow);
+    //animateArrows(doorArrow);
     GameState.setRiddleResolved(false);
   }
 

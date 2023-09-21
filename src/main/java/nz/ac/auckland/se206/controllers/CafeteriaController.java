@@ -118,6 +118,7 @@ public class CafeteriaController {
   @FXML private ImageView paintingWithSafeArrow;
   @FXML private ImageView paintingWithoutSafeArrow;
   @FXML private ImageView vendingMachineArrow;
+  @FXML private Label timerLabel;
 
   private OfficeController officeController;
   private RoomController roomController;
@@ -420,7 +421,9 @@ public class CafeteriaController {
   }
 
   private void updateTimerLabel() {
-    // TODO: add code to update timer label
+    int minutes = (GameState.secondsRemaining) / 60;
+    int seconds = (GameState.secondsRemaining) % 60;
+    timerLabel.setText(String.format("%d:%02d", minutes, seconds));
   }
 
   public void walkInAnimation() {
