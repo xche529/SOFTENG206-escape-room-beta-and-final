@@ -157,6 +157,16 @@
                         <Image url="@../images/speechBubble.png" />
                      </image>
                   </ImageView>
+                  <ImageView fx:id="thinkingOne" fitHeight="42.0" fitWidth="39.0" layoutX="630.0" layoutY="265.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/thinking.gif" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="thinkingTwo" fitHeight="42.0" fitWidth="39.0" layoutX="822.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/thinking.gif" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
             <Pane fx:id="blurredPane" opacity="0.74" prefHeight="615.0" prefWidth="1132.0" style="-fx-background-color: white;" visible="false" />

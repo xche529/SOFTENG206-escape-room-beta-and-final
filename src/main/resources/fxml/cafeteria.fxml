@@ -155,6 +155,21 @@
                   <Image url="@../images/guard2.png" />
                </image>
             </ImageView>
+            <ImageView fx:id="thinkingTwo" fitHeight="42.0" fitWidth="39.0" layoutX="677.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/thinking.gif" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="thinkingOne" fitHeight="42.0" fitWidth="39.0" layoutX="892.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/thinking.gif" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="thinkingThree" fitHeight="42.0" fitWidth="39.0" layoutX="121.0" layoutY="227.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/thinking.gif" />
+               </image>
+            </ImageView>
             <Pane fx:id="paperPane" layoutX="130.0" layoutY="65.0" prefHeight="486.0" prefWidth="852.0" visible="false">
                <children>
                   <ImageView fitHeight="510.0" fitWidth="888.0" pickOnBounds="true" preserveRatio="true">

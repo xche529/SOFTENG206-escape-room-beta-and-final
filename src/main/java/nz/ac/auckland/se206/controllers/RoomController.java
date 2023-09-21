@@ -106,6 +106,10 @@ public class RoomController {
   @FXML
   private ImageView speechBubbleTwoSmall;
   @FXML
+  private ImageView thinkingOne;
+  @FXML
+  private ImageView thinkingTwo;
+  @FXML
   private Label timerLabel;
   @FXML
   private Label chatProgressLabel;
@@ -174,7 +178,7 @@ public class RoomController {
     GptAndTextAreaManager.roomController = this;
 
     animationItems = new ImageView[] { prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo, speechBubbleOneSmall,
-        speechBubbleTwoSmall };
+        speechBubbleTwoSmall, thinkingOne, thinkingTwo };
     resetAnimation();
 
     itemToChoose();
@@ -356,6 +360,18 @@ public class RoomController {
     for (ImageView item : animationItems) {
       item.setTranslateX(500);
     }
+  }
+  public void setThinkingOneUp(){
+    thinkingOne.setVisible(true);
+  }
+  public void setThinkingOneDown(){
+    thinkingOne.setVisible(false);
+  }
+  public void setThinkingTwoUp(){
+    thinkingTwo.setVisible(true);
+  }
+  public void setThinkingTwoDown(){
+    thinkingTwo.setVisible(false);
   }
 
   /**

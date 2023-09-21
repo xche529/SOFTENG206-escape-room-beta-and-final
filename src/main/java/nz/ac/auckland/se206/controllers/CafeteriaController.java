@@ -102,6 +102,12 @@ public class CafeteriaController {
 
   @FXML
   private ImageView speechBubbleThreeSmall;
+  @FXML
+  private ImageView thinkingOne;
+  @FXML
+  private ImageView thinkingTwo;
+  @FXML
+  private ImageView thinkingThree;
 
   @FXML
 
@@ -162,7 +168,7 @@ public class CafeteriaController {
     GptAndTextAreaManager.cafeteriaController = this;
 
     animationItems = new ImageView[] { prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo, speechBubbleOneSmall,
-        speechBubbleTwoSmall };
+        speechBubbleTwoSmall, thinkingOne, thinkingThree, thinkingTwo };
 
     Random random = new Random();
 
@@ -491,4 +497,29 @@ public class CafeteriaController {
     }
 
   }
+
+  public void setThinkingOneUp() {
+    thinkingOne.setVisible(true);
+  }
+
+  public void setThinkingOneDown() {
+    thinkingOne.setVisible(false);
+  }
+
+  public void setThinkingTwoUp() {
+    thinkingTwo.setVisible(true);
+  }
+
+  public void setThinkingTwoDown() {
+    thinkingTwo.setVisible(false);
+  }
+
+  public void setThinkingThreeUp() {
+    thinkingThree.setVisible(true);
+  }
+
+  public void setThinkingThreeDown() {
+    thinkingThree.setVisible(false);
+  }
+
 }

@@ -15,7 +15,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -30,8 +29,6 @@ import nz.ac.auckland.se206.MovementControl;
 import nz.ac.auckland.se206.PlayHistory;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.GameState.Difficulty;
-import nz.ac.auckland.se206.SceneManager.AppUi;
-import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class OfficeController {
 
@@ -73,6 +70,11 @@ public class OfficeController {
   private ImageView speechBubbleOneSmall;
   @FXML
   private ImageView speechBubbleTwoSmall;
+  @FXML
+  private ImageView thinkingOne;
+  @FXML
+  private ImageView thinkingTwo;
+
   @FXML
   private ImageView binArrow;
   @FXML
@@ -213,6 +215,22 @@ public class OfficeController {
     for (ImageView item : animationItems) {
       item.setTranslateX(-500);
     }
+  }
+  
+  public void setThinkingOneUp() {
+    thinkingOne.setVisible(true);
+  }
+
+  public void setThinkingOneDown() {
+    thinkingOne.setVisible(false);
+  }
+
+  public void setThinkingTwoUp() {
+    thinkingTwo.setVisible(true);
+  }
+
+  public void setThinkingTwoDown() {
+    thinkingTwo.setVisible(false);
   }
 
   @FXML
