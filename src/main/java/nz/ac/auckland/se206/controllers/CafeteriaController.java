@@ -9,23 +9,22 @@ import javafx.animation.TranslateTransition;
 
 import java.util.Random;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
-import javafx.scene.text.Text;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GptAndTextAreaManager;
 import nz.ac.auckland.se206.GptAndTextAreaManager.Characters;
 import nz.ac.auckland.se206.MovementControl;
 import nz.ac.auckland.se206.SceneManager;
-import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class CafeteriaController {
@@ -115,10 +114,14 @@ public class CafeteriaController {
   @FXML
   private Label numberLabel;
 
-  @FXML private ImageView paintingWithSafeArrow;
-  @FXML private ImageView paintingWithoutSafeArrow;
-  @FXML private ImageView vendingMachineArrow;
-  @FXML private Label timerLabel;
+  @FXML
+  private ImageView paintingWithSafeArrow;
+  @FXML
+  private ImageView paintingWithoutSafeArrow;
+  @FXML
+  private ImageView vendingMachineArrow;
+  @FXML
+  private Label timerLabel;
 
   private OfficeController officeController;
   private RoomController roomController;
@@ -196,7 +199,7 @@ public class CafeteriaController {
   private void onSafeClick(MouseEvent event) {
     padlockPane.setVisible(true);
     safeBig.setVisible(false);
-    
+
   }
 
   @FXML
@@ -372,9 +375,11 @@ public class CafeteriaController {
     paintingWithSafeArrow.setVisible(true);
     paintingWithoutSafeArrow.setVisible(true);
     vendingMachineArrow.setVisible(true);
+    GameState.resetCafeteria = false;
+    System.out.println("cafeteria reseted");
   }
 
-      public void animateArrows(ImageView arrow) {
+  public void animateArrows(ImageView arrow) {
     double startY = 0;
 
     TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.5), arrow);
@@ -404,7 +409,10 @@ public class CafeteriaController {
                   GameState.resetRoom = true;
                   try {
                     Scene scene = vendingMachine.getScene();
-                    scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.END_LOST));
+                    Parent parent = SceneManager.getUiRoot(SceneManager.AppUi.END_LOST);
+                    parent.setLayoutX(App.centerX);
+                    parent.setLayoutY(App.centerY);
+                    scene.setRoot(parent);
                   } catch (NullPointerException e) {
                   }
                 }
@@ -413,7 +421,6 @@ public class CafeteriaController {
               updateTimerLabel();
               if (GameState.resetCafeteria) {
                 resetCafeteria();
-                GameState.resetCafeteria = false;
               }
             }));
     timeline.setCycleCount(Timeline.INDEFINITE);

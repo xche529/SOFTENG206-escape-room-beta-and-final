@@ -75,9 +75,9 @@ public class App extends Application {
       overallScale = (height / 800.0);
       System.out.println("The game start with scale:" + overallScale);
     }
-    overallScale = overallScale * 0.9;
+    overallScale = overallScale * 0.8;
     centerX = (width - 1113 * overallScale)/2;
-    centerY = (height - 800 * overallScale)/2;
+    centerY = (height - 800 * overallScale)/5;
     scale = new Scale(overallScale, overallScale);
     FXMLLoader endScreenWonLoader = loadFxml("endScreenWon");
     FXMLLoader endScreenLostLoader = loadFxml("endScreenLost");
