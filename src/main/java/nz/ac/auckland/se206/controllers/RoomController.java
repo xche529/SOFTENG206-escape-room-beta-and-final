@@ -308,7 +308,7 @@ public class RoomController {
     animateArrows(sinkArrow);
     animateArrows(mirrorArrow);
     animateArrows(towelArrow);
-    animateArrows(doorArrowSmall);
+    //animateArrows(doorArrowSmall);
   }
 
   public void animateArrows(ImageView arrow) {
