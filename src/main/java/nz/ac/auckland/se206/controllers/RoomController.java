@@ -8,6 +8,7 @@ import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -22,6 +23,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Safe;
 import nz.ac.auckland.se206.GptAndTextAreaManager;
@@ -231,7 +233,10 @@ public class RoomController {
                   GameState.resetRoom = true;
                   try {
                     Scene scene = sink.getScene();
-                    scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.END_LOST));
+                    Parent parent = SceneManager.getUiRoot(SceneManager.AppUi.END_LOST);
+                    parent.setLayoutX(App.centerX);
+                    parent.setLayoutY(App.centerY);
+                    scene.setRoot(parent);
                   } catch (NullPointerException e) {
                   }
                 }
@@ -242,7 +247,6 @@ public class RoomController {
                   resetRoom();
                 } catch (ApiProxyException e) {
                 }
-                GameState.resetRoom = false;
               }
             }));
     timeline.setCycleCount(Timeline.INDEFINITE);
@@ -262,6 +266,7 @@ public class RoomController {
     //animateArrows(doorArrow);
     GameState.setRiddleResolved(false);
     GameState.resetRoom = false;
+    System.out.println("room reseted");
   }
 
   /*

@@ -10,6 +10,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -21,6 +22,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import javafx.scene.text.Text;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GptAndTextAreaManager;
 import nz.ac.auckland.se206.GptAndTextAreaManager.Characters;
@@ -68,10 +70,14 @@ public class OfficeController {
   private ImageView speechBubbleOne;
   @FXML
   private ImageView speechBubbleTwo;
-  @FXML private ImageView binArrow;
-  @FXML private ImageView blackBoardArrow;
-  @FXML private ImageView drawArrow;
-  @FXML private ImageView phoneArrow;
+  @FXML
+  private ImageView binArrow;
+  @FXML
+  private ImageView blackBoardArrow;
+  @FXML
+  private ImageView drawArrow;
+  @FXML
+  private ImageView phoneArrow;
 
   @FXML
   private TextArea inputBox;
@@ -157,7 +163,7 @@ public class OfficeController {
             });
   }
 
-    public void animateArrows(ImageView arrow) {
+  public void animateArrows(ImageView arrow) {
     double startY = 0;
 
     TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.5), arrow);
@@ -167,7 +173,6 @@ public class OfficeController {
     translateTransition.setCycleCount(Animation.INDEFINITE);
     translateTransition.play();
   }
-
 
   public void setCafeteriaController(CafeteriaController cafeteriaController) {
     this.cafeteriaController = cafeteriaController;
@@ -533,9 +538,9 @@ public class OfficeController {
         Scene scene = phonePane.getScene();
         int timeTook = GameState.totalSeconds - GameState.secondsRemaining;
         int difficulty = 1;
-        if(GameState.difficulty == Difficulty.MEDIUM){
+        if (GameState.difficulty == Difficulty.MEDIUM) {
           difficulty = 2;
-        }else if(GameState.difficulty == Difficulty.HARD){
+        } else if (GameState.difficulty == Difficulty.HARD) {
           difficulty = 3;
         }
         PlayHistory playHistory = new PlayHistory(timeTook, difficulty, GameState.playerName);
@@ -549,7 +554,11 @@ public class OfficeController {
         GameState.resetCafeteria = true;
         GameState.resetOffice = true;
         GameState.resetRoom = true;
-        scene.setRoot(SceneManager.getUiRoot(AppUi.END_WON));
+
+        Parent parent = SceneManager.getUiRoot(SceneManager.AppUi.END_WON);
+        parent.setLayoutX(App.centerX);
+        parent.setLayoutY(App.centerY);
+        scene.setRoot(parent);
       } else {
         System.out.println("Wrong number");
       }
@@ -589,7 +598,10 @@ public class OfficeController {
                   GameState.resetRoom = true;
                   try {
                     Scene scene = phone.getScene();
-                    scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.END_LOST));
+                    Parent parent = SceneManager.getUiRoot(SceneManager.AppUi.END_LOST);
+                    parent.setLayoutX(App.centerX);
+                    parent.setLayoutY(App.centerY);
+                    scene.setRoot(parent);
                   } catch (NullPointerException e) {
                   }
 
@@ -598,7 +610,6 @@ public class OfficeController {
               updateTimerLabel();
               if (GameState.resetOffice) {
                 resetOffice();
-                GameState.resetOffice = false;
               }
             }));
     timeline.setCycleCount(Timeline.INDEFINITE);
@@ -624,6 +635,7 @@ public class OfficeController {
     blackBoardArrow.setVisible(true);
     drawArrow.setVisible(true);
     phoneArrow.setVisible(true);
-
+    GameState.resetOffice = false;
+    System.out.println("office reseted");
   }
 }
