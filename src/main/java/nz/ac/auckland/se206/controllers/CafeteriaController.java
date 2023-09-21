@@ -92,6 +92,9 @@ public class CafeteriaController {
   @FXML
 
   private ImageView speechBubbleTwo;
+
+  @FXML
+  private ImageView speechBubbleThree;
   @FXML
 
   private Label digitOne;
@@ -348,6 +351,12 @@ public class CafeteriaController {
   private void onSpeechBubbleTwoClicked() {
     GptAndTextAreaManager.displayTarget(Characters.PRISONER_TWO);
     System.out.println("Speech bubble two clicked");
+  }
+
+  @FXML
+  private void onSpeechBubbleThreeClicked() {
+    GptAndTextAreaManager.displayTarget(Characters.GUARD);
+    System.out.println("Speech bubble three clicked");
   }
 
   private void showDialog(String title, String headerText, String message) {

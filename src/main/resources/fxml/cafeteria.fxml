@@ -137,6 +137,16 @@
                   <Image url="@../images/speechBubble.png" />
                </image>
             </ImageView>
+            <ImageView fitHeight="332.0" fitWidth="180.0" layoutX="106.0" layoutY="273.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../images/guard2.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="speechBubbleThree" fitHeight="87.0" fitWidth="108.0" layoutX="97.0" layoutY="210.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#onSpeechBubbleThreeClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/speechBubble.png" />
+               </image>
+            </ImageView>
             <ImageView fx:id="speechBubbleTwo" fitHeight="150.0" fitWidth="89.0" layoutX="651.0" layoutY="243.0" onMouseClicked="#onSpeechBubbleTwoClicked" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/speechBubble.png" />
@@ -195,6 +205,21 @@
                   </Label>
                </children>
             </HBox>
+            <ImageView fx:id="speechBubbleThree1" fitHeight="110.0" fitWidth="147.0" layoutX="88.0" layoutY="203.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#onSpeechBubbleThreeClicked" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../images/speechBubble.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="speechBubbleTwo1" fitHeight="104.0" fitWidth="118.0" layoutX="637.0" layoutY="230.0" onMouseClicked="#onSpeechBubbleTwoClicked" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../images/speechBubble.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="speechBubbleOne1" fitHeight="97.0" fitWidth="120.0" layoutX="856.0" layoutY="234.0" onMouseClicked="#onSpeechBubbleOneClicked" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../images/speechBubble.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
    </children>
