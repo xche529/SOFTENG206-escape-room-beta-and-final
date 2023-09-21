@@ -110,15 +110,15 @@ public class GptAndTextAreaManager {
         
         if (currentCharacter == Characters.GUARD) {
             if (GameState.isRiddleResolved() == false) {
-                message = message + "? " + "riddle unsolved";    
+                message = message + "? " + "(riddle unsolved)";    
             } else if (GameState.wordFound == false) {
-                message = message + "? " + "riddle solved";
+                message = message + "? " + "(riddle solved)";
             } else if (GameState.cypherFound == false) {
-                message = message + "? " + "word found";
+                message = message + "? " + "(word found)";
             } else if (GameState.safeFound == false) {
-                message = message + "? " + "cypher found";
+                message = message + "? " + "(cypher found)";
             } else if (GameState.safeUnlocked == false) {
-                message = message + "? " + "safe found";
+                message = message + "? " + "(safe found)";
             }
             guardChatCompletionRequest.addMessage(new ChatMessage("user", message));
             runGpt(guardChatCompletionRequest);
