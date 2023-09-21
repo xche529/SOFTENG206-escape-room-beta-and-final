@@ -13,10 +13,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GptAndTextAreaManager;
+import nz.ac.auckland.se206.PlayHistory;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
@@ -29,6 +31,8 @@ public class StartInterfaceController {
   @FXML private CheckBox fourMin;
   @FXML private CheckBox sixMin;
   @FXML private MenuButton difficulty;
+  @FXML private TextArea playHistoryTextArea;
+  @FXML private TextField playerName;
   private RoomController roomController;
 
   @FXML
@@ -61,6 +65,7 @@ public class StartInterfaceController {
       showDialog("Invaild Inputs", "Please select a difficulty and time limit", "");
       return;
     }
+    
     Button button = (Button) event.getSource();
     Scene sceneButtonIsIn = button.getScene();
     // // initialize the characters with prompt

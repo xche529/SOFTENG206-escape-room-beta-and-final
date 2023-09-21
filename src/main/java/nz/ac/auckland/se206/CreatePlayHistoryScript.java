@@ -1,7 +1,5 @@
 package nz.ac.auckland.se206;
 
-import nz.ac.auckland.se206.controllers.PlayHistory;
-
 public class CreatePlayHistoryScript {
     public static void main(String[] args) {
         PlayHistory playHistory = new PlayHistory(555, 1, "player1");
