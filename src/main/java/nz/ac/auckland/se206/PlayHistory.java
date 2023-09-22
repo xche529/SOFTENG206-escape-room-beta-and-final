@@ -22,17 +22,17 @@ public class PlayHistory implements Serializable {
 
   public void addHistory(PlayHistory playHistory) {
 
-    if (playHistory.score > this.score) {
+    if (playHistory.getScore() > this.score) {
       if (this.parentPlayHistory == null) {
-        playHistory.childPlayHistory = this;
+        playHistory.setChildPlayHistory(this); 
         this.parentPlayHistory = playHistory;
         return;
       } else {
-        if (this.parentPlayHistory.score > playHistory.score) {
-          playHistory.parentPlayHistory = this.parentPlayHistory;
-          playHistory.childPlayHistory = this;
-          this.parentPlayHistory.childPlayHistory = playHistory;
-          this.parentPlayHistory = playHistory;
+        if (getParentPlayHistory().getScore() > playHistory.getScore()) {
+          playHistory.setParentPlayHistory(this.parentPlayHistory);
+          playHistory.setChildPlayHistory(this);
+          getParentPlayHistory().setChildPlayHistory(playHistory);
+          this.setParentPlayHistory(playHistory);
           return;
         } else {
           this.parentPlayHistory.addHistory(playHistory);
@@ -42,13 +42,13 @@ public class PlayHistory implements Serializable {
     } else {
       if (this.childPlayHistory == null) {
         this.childPlayHistory = playHistory;
-        playHistory.parentPlayHistory = this;
+        playHistory.setParentPlayHistory(this);
         return;
       }
-      if (this.childPlayHistory.score < playHistory.score) {
-        playHistory.childPlayHistory = this.childPlayHistory;
-        playHistory.parentPlayHistory = this;
-        this.childPlayHistory.parentPlayHistory = playHistory;
+      if (this.childPlayHistory.getScore() < playHistory.getScore()) {
+        playHistory.setChildPlayHistory(this.childPlayHistory);
+        playHistory.setParentPlayHistory(this);
+        this.childPlayHistory.setParentPlayHistory(playHistory);
         this.childPlayHistory = playHistory;
         return;
       } else {
@@ -60,29 +60,27 @@ public class PlayHistory implements Serializable {
 
   public String toString() {
     PlayHistory playHistory = this;
-    StringBuilder resultBuilder = new StringBuilder();
     String result = "";
     if (this.childPlayHistory != null) {
       result = this.childPlayHistory.toString();
     } else {
       int rank = 1;
       do {
-        resultBuilder.append(
+        result+=(
             "Rank"
                 + rank
                 + ":\n "
-                + playHistory.name
+                + playHistory.getName()
                 + "\n"
                 + " Time: "
-                + playHistory.timeTook
+                + playHistory.getTimeTook()
                 + "\n Difficulty: "
-                + playHistory.difficulty
+                + playHistory.getDifficulty()
                 + "\n\n");
-        playHistory = playHistory.parentPlayHistory;
+        playHistory = playHistory.getParentPlayHistory();
         rank++;
       } while (playHistory != null);
     }
-    result = resultBuilder.toString();
     return result;
   }
 
@@ -93,5 +91,37 @@ public class PlayHistory implements Serializable {
     } catch (IOException e) {
       e.printStackTrace();
     }
+  }
+
+  public double getScore() {
+    return score;
+  }
+
+  public int getTimeTook() {
+    return timeTook;
+  }
+
+  public int getDifficulty() {
+    return difficulty;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public PlayHistory getParentPlayHistory() {
+    return parentPlayHistory;
+  }
+
+  public PlayHistory getChildPlayHistory() {
+    return childPlayHistory;
+  }
+
+  public void setParentPlayHistory(PlayHistory parentPlayHistory) {
+    this.parentPlayHistory = parentPlayHistory;
+  }
+
+  public void setChildPlayHistory(PlayHistory childPlayHistory) {
+    this.childPlayHistory = childPlayHistory;
   }
 }
