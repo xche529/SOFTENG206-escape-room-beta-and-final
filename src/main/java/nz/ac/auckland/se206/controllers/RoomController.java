@@ -248,8 +248,13 @@ public class RoomController {
    * @throws IOException if there is an error loading the start view
    */
   private void resetRoom() throws ApiProxyException {
+    // randomises the word for the riddle
     itemToChoose();
+
+    // resets the code for the safe
     Safe.getRandomCode();
+
+    //sets all the little arrows to invisible
     toiletArrow.setOpacity(0);
     toiletPaperArrow.setOpacity(0);
     ventArrow.setOpacity(0);
@@ -257,10 +262,13 @@ public class RoomController {
     mirrorArrow.setOpacity(0);
     towelArrow.setOpacity(0);
     doorArrowSmall.setOpacity(0);
+    //sets the required boolean values to false
     GameState.setRiddleResolved(false);
-    GptAndTextAreaManager.reset();
     GameState.wordFound = false;
     GameState.resetRoom = false;
+
+    //resets the text area
+    GptAndTextAreaManager.reset();
     System.out.println("room reseted");
   }
 
@@ -285,9 +293,10 @@ public class RoomController {
   /** This method animates the arrows */
   public void animateArrows(ImageView arrow) {
     arrow.setOpacity(1);
-
+    // sets the starting position of the arrow
     double startY = 0;
 
+    // makes the arrow move up and down
     TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.5), arrow);
     translateTransition.setFromY(startY);
     translateTransition.setToY(startY + 5);

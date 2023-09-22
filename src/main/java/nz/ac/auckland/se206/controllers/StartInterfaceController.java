@@ -124,7 +124,7 @@ public class StartInterfaceController {
 
   /**
    * This method is invoked when the user clicks any of the difficulty checkboxes.
-   * 
+   *
    * @param event
    */
   @FXML
@@ -135,6 +135,7 @@ public class StartInterfaceController {
       hard.setSelected(false);
       medium.setSelected(false);
       easy.setSelected(true);
+      // set number of hints
       GameState.numHints = "infinite";
       GameState.difficulty = GameState.Difficulty.EASY;
       System.out.println("Difficulty change: easy");
@@ -144,6 +145,7 @@ public class StartInterfaceController {
       easy.setSelected(false);
       hard.setSelected(false);
       medium.setSelected(true);
+      // set number of hints
       GameState.numHints = "5";
       GameState.difficulty = GameState.Difficulty.MEDIUM;
       System.out.println("Difficulty change: medium");
@@ -153,6 +155,7 @@ public class StartInterfaceController {
       easy.setSelected(false);
       medium.setSelected(false);
       hard.setSelected(true);
+      // no hints allowed
       GameState.numHints = "0";
       GameState.difficulty = GameState.Difficulty.HARD;
       System.out.println("Difficulty change: hard");
@@ -161,36 +164,42 @@ public class StartInterfaceController {
 
   @FXML
   private void onClickEasy() {
+    // set check boxes
     hard.setSelected(false);
     medium.setSelected(false);
     easy.setSelected(true);
     easyTick.setVisible(true);
     mediumTick.setVisible(false);
     hardTick.setVisible(false);
+    // set gamestate to easy
     GameState.difficulty = GameState.Difficulty.EASY;
     System.out.println("Difficulty change: easy");
   }
 
   @FXML
   private void onClickMedium() {
+    // set required check boxes
     easy.setSelected(false);
     hard.setSelected(false);
     medium.setSelected(true);
     easyTick.setVisible(false);
     mediumTick.setVisible(true);
     hardTick.setVisible(false);
+    // set difficulty to medium
     GameState.difficulty = GameState.Difficulty.MEDIUM;
     System.out.println("Difficulty change: medium");
   }
 
   @FXML
   private void onClickHard() {
+    // set required check boxes
     easy.setSelected(false);
     medium.setSelected(false);
     hard.setSelected(true);
     easyTick.setVisible(false);
     mediumTick.setVisible(false);
     hardTick.setVisible(true);
+    // set to hard difficulty
     GameState.difficulty = GameState.Difficulty.HARD;
     System.out.println("Difficulty change: hard");
   }
@@ -203,6 +212,7 @@ public class StartInterfaceController {
   private void onSetPlayTime(Event event) {
     CheckBox checkBox = (CheckBox) event.getSource();
     if (checkBox.getId().equals("twoMin")) {
+      // check if two minutes is selected, if so then uncheck the other two
       fourMin.setSelected(false);
       sixMin.setSelected(false);
       twoMin.setSelected(true);
@@ -211,6 +221,7 @@ public class StartInterfaceController {
       System.out.println("Play time change: 2 minutes");
     }
     if (checkBox.getId().equals("fourMin")) {
+      // check if four minutes is selected, if so then uncheck the other two
       twoMin.setSelected(false);
       sixMin.setSelected(false);
       fourMin.setSelected(true);
@@ -219,6 +230,7 @@ public class StartInterfaceController {
       System.out.println("Play time change: 4 minutes");
     }
     if (checkBox.getId().equals("sixMin")) {
+      // check if six minutes is selected, if so then uncheck the other two
       twoMin.setSelected(false);
       fourMin.setSelected(false);
       sixMin.setSelected(true);
@@ -230,12 +242,14 @@ public class StartInterfaceController {
 
   @FXML
   private void onClickTwo() {
+    // set checkboxes so two is checked
     fourMin.setSelected(false);
     sixMin.setSelected(false);
     twoMin.setSelected(true);
     fourTick.setVisible(false);
     sixTick.setVisible(false);
     twoTick.setVisible(true);
+    // set timer to two minutes
     GameState.secondsRemaining = 120;
     GameState.totalSeconds = 120;
     System.out.println("Play time change: 2 minutes");
@@ -243,12 +257,14 @@ public class StartInterfaceController {
 
   @FXML
   private void onClickFour() {
+    // set checkboxes so four is checked
     twoMin.setSelected(false);
     sixMin.setSelected(false);
     fourMin.setSelected(true);
     twoTick.setVisible(false);
     fourTick.setVisible(true);
     sixTick.setVisible(false);
+    // set timer to four minutes
     GameState.secondsRemaining = 240;
     GameState.totalSeconds = 240;
     System.out.println("Play time change: 4 minutes");
@@ -256,27 +272,32 @@ public class StartInterfaceController {
 
   @FXML
   private void onClickSix() {
+    // set checkboxes so six is checked
     twoMin.setSelected(false);
     fourMin.setSelected(false);
     sixMin.setSelected(true);
     twoTick.setVisible(false);
     fourTick.setVisible(false);
     sixTick.setVisible(true);
+    // set timer to six minutes
     GameState.secondsRemaining = 360;
     GameState.totalSeconds = 360;
     System.out.println("Play time change: 6 minutes");
   }
 
+  // handling exiting the play history pane
   @FXML
   private void onGoBack() {
     historyPane.setVisible(false);
   }
 
+  // viewing the play history pane
   @FXML
   private void onViewPlayHistory() {
     historyPane.setVisible(true);
   }
 
+  // handling hovering over the buttons
   @FXML
   private void twoMinEntered() {
     twoMinText.scaleXProperty().set(1.15);

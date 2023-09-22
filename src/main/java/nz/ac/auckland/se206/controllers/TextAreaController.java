@@ -76,6 +76,7 @@ public class TextAreaController {
 
   @FXML
   public void onSubmitMessage() throws ApiProxyException {
+    // submit message to GPT
     String message = inputBox.getText();
     inputBox.clear();
     typePromptText.setVisible(true);

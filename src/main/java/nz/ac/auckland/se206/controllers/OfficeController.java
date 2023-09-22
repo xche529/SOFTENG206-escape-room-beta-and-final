@@ -153,8 +153,11 @@ public class OfficeController {
    * @param arrow the arrow to be animates
    */
   public void animateArrows(ImageView arrow) {
+
+    //sets the starting position of the arrows
     double startY = 0;
 
+    //makes the arrow bounce up and down
     TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.5), arrow);
     translateTransition.setFromY(startY);
     translateTransition.setToY(startY + 5);
@@ -725,6 +728,7 @@ public class OfficeController {
    */
   @FXML
   private void onClickClear(MouseEvent event) {
+    // clears all the digits
     digitOne.setText("_");
     digitTwo.setText("_");
     digitThree.setText("_");
@@ -734,6 +738,7 @@ public class OfficeController {
     digitSeven.setText("_");
     digitEight.setText("_");
     digitNine.setText("_");
+    // resets the current digit
     currentDigit = 0;
   }
 
