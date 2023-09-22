@@ -52,12 +52,6 @@ public static boolean resetOffice = false;
 
 public static boolean resetRoom = false;
 
-public static boolean gameFinishedCafeteria = false;
-
-public static boolean gameFinishedOffice = false;
-
-public static boolean gameFinishedRoom = false;
-
 public static String numHints = "infinite";
 
 public static boolean stopTimer = false;
