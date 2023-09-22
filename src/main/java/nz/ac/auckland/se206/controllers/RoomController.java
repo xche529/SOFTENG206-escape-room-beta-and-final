@@ -563,7 +563,7 @@ public class RoomController {
     ventArrow.setOpacity(0);
     if (GameState.isRiddleResolved()) {
       if (GameState.itemToChoose == vent) {
-
+        //shows the blown up view of the vent with the word on it
         blurredPane.setVisible(true);
         inspectingVentPane.setVisible(true);
         ventWordLabel.setText(GameState.codeWord);
@@ -573,6 +573,7 @@ public class RoomController {
         GameState.wordFound = true;
 
       } else {
+        //shows the blown up view of the vent without the word on it
         blurredPane.setVisible(true);
         inspectingVentPane.setVisible(true);
         thoughtBubblePane.setVisible(true);
