@@ -7,12 +7,9 @@ import nz.ac.auckland.se206.MovementControl;
 
 public class MovementControlDemoController {
 
-  @FXML
-  private Button moveLeftButton;
-  @FXML
-  private Button moveRightButton;
-  @FXML
-  private ImageView imageView;
+  @FXML private Button moveLeftButton;
+  @FXML private Button moveRightButton;
+  @FXML private ImageView imageView;
 
   // you can change these values to change the speed and distance of the arrow
   int timeToMove = 1;
