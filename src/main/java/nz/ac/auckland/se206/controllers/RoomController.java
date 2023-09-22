@@ -26,138 +26,75 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
-import nz.ac.auckland.se206.Safe;
 import nz.ac.auckland.se206.GptAndTextAreaManager;
-import nz.ac.auckland.se206.MovementControl;
-import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.GptAndTextAreaManager.Characters;
+import nz.ac.auckland.se206.MovementControl;
+import nz.ac.auckland.se206.Safe;
+import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 
 /** Controller class for the room view. */
 public class RoomController {
-  @FXML
-  private Pane room;
-  @FXML
-  private Pane converterPane;
-  @FXML
-  private Pane chatPane;
-  @FXML
-  private Pane startPane;
-  @FXML
-  private Rectangle door;
-  @FXML
-  private Rectangle vent;
-  @FXML
-  private Rectangle toiletPaper;
-  @FXML
-  private Rectangle toilet;
-  @FXML
-  private Rectangle sink;
-  @FXML
-  private Rectangle tap;
-  @FXML
-  private Rectangle mirror;
-  @FXML
-  private Rectangle towel;
-  @FXML
-  private ImageView toiletBig;
-  @FXML
-  private ImageView toiletPaperBig;
-  @FXML
-  private ImageView doorBig;
-  @FXML
-  private ImageView ventBig;
-  @FXML
-  private ImageView sinkBig;
-  @FXML
-  private ImageView mirrorBig;
-  @FXML
-  private ImageView towelBig;
-  @FXML
-  private ImageView toiletArrow;
-  @FXML
-  private ImageView toiletPaperArrow;
-  @FXML
-  private ImageView ventArrow;
-  @FXML
-  private ImageView sinkArrow;
-  @FXML
-  private ImageView mirrorArrow;
-  @FXML
-  private ImageView towelArrow;
-  @FXML
-  private ImageView doorArrow;
-  @FXML
-  private ImageView doorArrowSmall;
-  @FXML
-  private ImageView bubbleBig;
-  @FXML
-  private ImageView prisonerOne;
-  @FXML
-  private ImageView prisonerTwo;
-  @FXML
-  private ImageView speechBubbleOne;
-  @FXML
-  private ImageView speechBubbleTwo;
-  @FXML
-  private ImageView speechBubbleOneSmall;
-  @FXML
-  private ImageView speechBubbleTwoSmall;
-  @FXML
-  private ImageView thinkingOne;
-  @FXML
-  private ImageView thinkingTwo;
-  @FXML
-  private Label timerLabel;
-  @FXML
-  private Label chatProgressLabel;
-  @FXML
-  private Label overQuestionLimitLabel;
-  @FXML
-  private Label questionInfoLabel;
-  @FXML
-  private Button exitViewButton;
-  @FXML
-  private Button openButton;
-  @FXML
-  private Button sendButton;
-  @FXML
-  private TextArea chatTextArea;
-  @FXML
-  private TextField inputText;
-  @FXML
-  private ProgressIndicator chatProgress;
-  @FXML
-  private Pane blurredPane;
-  @FXML
-  private Pane inspectingToiletPane;
-  @FXML
-  private Pane thoughtBubblePane;
-  @FXML
-  private Text thoughtBubbleText;
-  @FXML
-  private Label toiletWordLabel;
-  @FXML
-  private Label toiletPaperWordLabel;
-  @FXML
-  private Pane inspectingToiletPaperPane;
-  @FXML
-  private Pane inspectingVentPane;
-  @FXML
-  private Label ventWordLabel;
-  @FXML
-  private Pane inspectingSinkPane;
-  @FXML
-  private Label sinkWordLabel;
-  @FXML
-  private Pane inspectingMirrorPane;
-  @FXML
-  private Label mirrorWordLabel;
-  @FXML
-  private Pane inspectingTowelPane;
-  @FXML
-  private Label towelWordLabel;
+  @FXML private Pane room;
+  @FXML private Pane converterPane;
+  @FXML private Pane chatPane;
+  @FXML private Pane startPane;
+  @FXML private Rectangle vent;
+  @FXML private Rectangle toiletPaper;
+  @FXML private Rectangle toilet;
+  @FXML private Rectangle sink;
+  @FXML private Rectangle tap;
+  @FXML private Rectangle mirror;
+  @FXML private Rectangle towel;
+  @FXML private ImageView toiletBig;
+  @FXML private ImageView toiletPaperBig;
+  @FXML private ImageView ventBig;
+  @FXML private ImageView sinkBig;
+  @FXML private ImageView mirrorBig;
+  @FXML private ImageView towelBig;
+  @FXML private ImageView toiletArrow;
+  @FXML private ImageView toiletPaperArrow;
+  @FXML private ImageView ventArrow;
+  @FXML private ImageView sinkArrow;
+  @FXML private ImageView mirrorArrow;
+  @FXML private ImageView towelArrow;
+  @FXML private ImageView doorArrow;
+  @FXML private ImageView doorArrowSmall;
+  @FXML private ImageView bubbleBig;
+  @FXML private ImageView prisonerOne;
+  @FXML private ImageView prisonerTwo;
+  @FXML private ImageView speechBubbleOne;
+  @FXML private ImageView speechBubbleTwo;
+  @FXML private ImageView speechBubbleOneSmall;
+  @FXML private ImageView speechBubbleTwoSmall;
+  @FXML private ImageView thinkingOne;
+  @FXML private ImageView thinkingTwo;
+  @FXML private Label timerLabel;
+  @FXML private Label chatProgressLabel;
+  @FXML private Label overQuestionLimitLabel;
+  @FXML private Label questionInfoLabel;
+  @FXML private Button exitViewButton;
+  @FXML private Button openButton;
+  @FXML private Button sendButton;
+  @FXML private TextArea chatTextArea;
+  @FXML private TextField inputText;
+  @FXML private ProgressIndicator chatProgress;
+  @FXML private Pane blurredPane;
+  @FXML private Pane inspectingToiletPane;
+  @FXML private Pane thoughtBubblePane;
+  @FXML private Text thoughtBubbleText;
+  @FXML private Label toiletWordLabel;
+  @FXML private Label toiletPaperWordLabel;
+  @FXML private Pane inspectingToiletPaperPane;
+  @FXML private Pane inspectingVentPane;
+  @FXML private Label ventWordLabel;
+  @FXML private Pane inspectingSinkPane;
+  @FXML private Label sinkWordLabel;
+  @FXML private Pane inspectingMirrorPane;
+  @FXML private Label mirrorWordLabel;
+  @FXML private Pane inspectingTowelPane;
+  @FXML private Label towelWordLabel;
 
   private Timeline timeline;
   private TextToSpeech textToSpeech;
@@ -174,47 +111,60 @@ public class RoomController {
     // initialize fields in the GptAndTextAreaManager class
     GptAndTextAreaManager.roomController = this;
 
-    animationItems = new ImageView[] { prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo, speechBubbleOneSmall,
-        speechBubbleTwoSmall, thinkingOne, thinkingTwo };
+    // initializes all the animation items into an array
+    animationItems =
+        new ImageView[] {
+          prisonerOne,
+          prisonerTwo,
+          speechBubbleOne,
+          speechBubbleTwo,
+          speechBubbleOneSmall,
+          speechBubbleTwoSmall,
+          thinkingOne,
+          thinkingTwo
+        };
+    // moves the prisoners to their starting point
     resetAnimation();
 
     itemToChoose();
-    // Setting up the timer timeline
-
   }
 
-  /*
+  /**
    * This method starts a thread that checks if the room needs to be reset.
-   * 
+   *
    * @throws IOException
    */
   public void start() throws IOException {
 
-    timeline = new Timeline(
-        new KeyFrame(
-            Duration.seconds(1),
-            event -> {
-              if (GameState.stopTimer) {
-                timeline.stop();
-              }
-              GameState.secondsRemaining--;
-              updateTimerLabel();
-              if (GameState.secondsRemaining == 90 && GameState.isWon == false) {
-                textToSpeech.speak("a minute and a half remaining");
-              } else if (GameState.secondsRemaining == 60 && GameState.isWon == false) {
-                textToSpeech.speak("one minute remaining");
-              } else if (GameState.secondsRemaining == 30 && GameState.isWon == false) {
-                textToSpeech.speak("thirty seconds remaining");
-              }
-            }));
+    timeline =
+        new Timeline(
+            new KeyFrame(
+                Duration.seconds(1),
+                event -> {
+                  if (GameState.stopTimer) {
+                    timeline.stop();
+                  }
+                  GameState.secondsRemaining--;
+                  updateTimerLabel();
+                  // uses test to spech to tell the player how long they have left
+                  if (GameState.secondsRemaining == 90 && GameState.isWon == false) {
+                    textToSpeech.speak("a minute and a half remaining");
+                  } else if (GameState.secondsRemaining == 60 && GameState.isWon == false) {
+                    textToSpeech.speak("one minute remaining");
+                  } else if (GameState.secondsRemaining == 30 && GameState.isWon == false) {
+                    textToSpeech.speak("thirty seconds remaining");
+                  }
+                }));
 
     timeline.setCycleCount(GameState.totalSeconds);
     timeline.setOnFinished(event -> handleTimerExpired());
     updateTimerLabel();
 
+    // wlecomes the player to the room
     textToSpeech = new TextToSpeech();
     textToSpeech.speak("Welcome to the room");
     animateArrows(doorArrow);
+    // animates all the arrows if the riddle is resolved
     GameState.isRiddleResolvedProperty()
         .addListener(
             (observable, oldValue, newValue) -> {
@@ -223,6 +173,8 @@ public class RoomController {
               }
             });
     timeline.play();
+
+    // runs the test to speech in its iwn thread to avoid lag
     Platform.runLater(
         () -> {
           Stage stage = (Stage) room.getScene().getWindow();
@@ -234,46 +186,61 @@ public class RoomController {
               });
         });
 
+    // runs a thread that is always checking if the room needs to be reset
     resetchecker();
     doorArrow.setVisible(false);
   }
 
+  /**
+   * This method resets the room if the player has lost.
+   * @throws IOException
+   */
   private void resetchecker() throws IOException {
-    timeline = new Timeline(
-        new KeyFrame(
-            Duration.seconds(1),
-            event -> {
-              if (GameState.secondsRemaining >= 0) {
-                updateTimerLabel();
-              }
-              if (GameState.secondsRemaining == 0) {
-                if (SceneManager.curretUi == SceneManager.AppUi.ROOM) {
-                  GameState.secondsRemaining = -1;
-                  GameState.resetCafeteria = true;
-                  GameState.resetOffice = true;
-                  GameState.resetRoom = true;
-                  try {
-                    Scene scene = sink.getScene();
-                    Parent parent = SceneManager.getUiRoot(SceneManager.AppUi.END_LOST);
-                    parent.setLayoutX(App.centerX);
-                    parent.setLayoutY(App.centerY);
-                    scene.setRoot(parent);
-                  } catch (NullPointerException e) {
+    timeline =
+        new Timeline(
+            new KeyFrame(
+                Duration.seconds(1),
+                event -> {
+                  if (GameState.secondsRemaining >= 0) {
+                    updateTimerLabel();
                   }
-                }
-              }
+                  if (GameState.secondsRemaining == 0) {
+                    if (SceneManager.curretUi == SceneManager.AppUi.ROOM) {
+                      //prevents the reset from being called multipul times
+                      GameState.secondsRemaining = -1;
+                      GameState.resetCafeteria = true;
+                      GameState.resetOffice = true;
+                      GameState.resetRoom = true;
+                      try {
+                        //switches to the lost screen
+                        Scene scene = sink.getScene();
+                        Parent parent = SceneManager.getUiRoot(SceneManager.AppUi.END_LOST);
+                        parent.setLayoutX(App.centerX);
+                        parent.setLayoutY(App.centerY);
+                        scene.setRoot(parent);
+                      } catch (NullPointerException e) {
+                      }
+                    }
+                  }
 
-              if (GameState.resetRoom) {
-                try {
-                  resetRoom();
-                } catch (ApiProxyException e) {
-                }
-              }
-            }));
+                  if (GameState.resetRoom) {
+                    try {
+                      resetRoom();
+                    } catch (ApiProxyException e) {
+                    }
+                  }
+                }));
+
+    //starts the thread
     timeline.setCycleCount(Timeline.INDEFINITE);
     timeline.play();
   }
 
+  /**
+   * resets the room to it's origanial state with new randomised variables.
+   *
+   * @throws IOException if there is an error loading the start view
+   */
   private void resetRoom() throws ApiProxyException {
     itemToChoose();
     Safe.getRandomCode();
@@ -284,7 +251,6 @@ public class RoomController {
     mirrorArrow.setOpacity(0);
     towelArrow.setOpacity(0);
     doorArrowSmall.setOpacity(0);
-    // animateArrows(doorArrow);
     GameState.setRiddleResolved(false);
 
     GameState.wordFound = false;
@@ -292,16 +258,19 @@ public class RoomController {
     System.out.println("room reseted");
   }
 
-  /*
+  /**
    * This method selects a random item to be used in the riddle.
    */
   private void itemToChoose() {
-    Rectangle[] items = new Rectangle[] { vent, toiletPaper, toilet, mirror, towel, sink };
+    Rectangle[] items = new Rectangle[] {vent, toiletPaper, toilet, mirror, towel, sink};
     Random randomChoose = new Random();
     int randomIndexChoose = randomChoose.nextInt(items.length);
     GameState.itemToChoose = items[randomIndexChoose];
   }
 
+  /**
+   * This method animates all of the arrows in the scene
+   */
   public void animateAllArrows() {
     animateArrows(toiletArrow);
     animateArrows(toiletPaperArrow);
@@ -309,9 +278,11 @@ public class RoomController {
     animateArrows(sinkArrow);
     animateArrows(mirrorArrow);
     animateArrows(towelArrow);
-    // animateArrows(doorArrowSmall);
   }
 
+  /**
+   * This method animates the arrows
+   */
   public void animateArrows(ImageView arrow) {
     arrow.setOpacity(1);
 
@@ -325,12 +296,18 @@ public class RoomController {
     translateTransition.play();
   }
 
+  /**
+   * This method updates the timer label
+   */
   private void updateTimerLabel() {
     int minutes = GameState.secondsRemaining / 60;
     int seconds = GameState.secondsRemaining % 60;
     timerLabel.setText(String.format("%d:%02d", minutes, seconds));
   }
 
+  /**
+   * This method handles the event where timer reaches 0
+   */
   private void handleTimerExpired() {
     if (!GameState.isWon) {
       GameState.resetCafeteria = true;
@@ -339,10 +316,16 @@ public class RoomController {
     }
   }
 
+  /**
+   * This methos animates the prioners walking into the room
+   */
   public void walkInAnimation() {
     MovementControl.moveToLeft(true, 1, 500, animationItems);
   }
 
+  /**
+   * Moves the prisoners to their starting position.
+   */
   public void resetAnimation() {
     for (ImageView item : animationItems) {
       item.setTranslateX(500);
@@ -388,9 +371,9 @@ public class RoomController {
   /**
    * Displays a dialog box with the given title, header text, and message.
    *
-   * @param title      the title of the dialog box
+   * @param title the title of the dialog box
    * @param headerText the header text of the dialog box
-   * @param message    the message content of the dialog box
+   * @param message the message content of the dialog box
    */
   private void showDialog(String title, String headerText, String message) {
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -403,58 +386,57 @@ public class RoomController {
   @FXML
   public void toiletMouseEntered() {
     if (GameState.isRiddleResolved()) {
+      //shows the enlarged image of the toilet
       toiletBig.setVisible(true);
     }
   }
 
   @FXML
   public void toiletMouseExit() {
+    //hides the enlarged image of the toilet
     toiletBig.setVisible(false);
   }
 
   @FXML
   public void toiletPaperMouseEntered() {
     if (GameState.isRiddleResolved()) {
+      //shows the enlarged image of the toilet paper
       toiletPaperBig.setVisible(true);
     }
   }
 
   @FXML
   public void toiletPaperMouseExit() {
+    //hides the enlarged image of the toilet paper
     toiletPaperBig.setVisible(false);
   }
 
-  @FXML
-  public void doorMouseEntered() {
-    doorBig.setVisible(true);
-  }
-
-  @FXML
-  public void doorMouseExit() {
-    doorBig.setVisible(false);
-  }
 
   @FXML
   public void ventMouseEntered() {
     if (GameState.isRiddleResolved()) {
+      //shows the enlarged image of the vent
       ventBig.setVisible(true);
     }
   }
 
   @FXML
   public void ventMouseExit() {
+    //hides the enlarged image of the vent
     ventBig.setVisible(false);
   }
 
   @FXML
   public void sinkMouseEntered() {
     if (GameState.isRiddleResolved()) {
+      //shows the enlarged image of the sink
       sinkBig.setVisible(true);
     }
   }
 
   @FXML
   public void sinkMouseExit() {
+    //hides the enlarged image of the sink
     sinkBig.setVisible(false);
   }
 
@@ -492,29 +474,6 @@ public class RoomController {
     bubbleBig.setVisible(false);
   }
 
-  /**
-   * Handles the click event on the door.
-   *
-   * @param event the mouse event
-   * @throws IOException       if there is an error loading the chat view
-   * @throws ApiProxyException
-   */
-  @FXML
-  public void clickDoor(MouseEvent event) throws IOException, ApiProxyException {
-    doorArrow.setOpacity(0);
-    doorArrowSmall.setOpacity(0);
-    if (!GameState.isRiddleResolved()) {
-      showDialog(
-          "Info",
-          "A guard approaches...",
-          "\"Are you ready to break out of here? Then listen to this riddle:\" he says");
-      chatPane.setVisible(true);
-      return;
-    } else {
-      showDialog("Info", "Locked!", "Find the next clue elsewhere");
-    }
-  }
-
   @FXML
   public void onClickInspectingToiletPane() {
     blurredPane.setVisible(false);
@@ -542,8 +501,12 @@ public class RoomController {
     }
   }
 
+  /*
+   * This methao allows the user to exit the blown up view of the toilet paper
+   */
   @FXML
   public void onClickInspectingToiletPaperPane() {
+    // sets the pane and its features to invisible
     blurredPane.setVisible(false);
     inspectingToiletPaperPane.setVisible(false);
     thoughtBubblePane.setVisible(false);
@@ -686,7 +649,6 @@ public class RoomController {
   }
 
   @FXML
-
   private void onSpeechBubbleOneClicked() {
     GptAndTextAreaManager.displayTarget(Characters.PRISONER_ONE);
     System.out.println("Speech bubble one clicked");
@@ -717,5 +679,4 @@ public class RoomController {
   private void onSetSpeechBubbleTwoDown() {
     speechBubbleTwo.setVisible(false);
   }
-
 }

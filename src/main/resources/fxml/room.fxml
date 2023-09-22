@@ -35,11 +35,6 @@
                         <Image url="@../images/Basin.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="doorBig" fitHeight="466.0" fitWidth="261.0" layoutX="189.0" layoutY="28.0" visible="false">
-                     <image>
-                        <Image url="@../images/Door.png" />
-                     </image>
-                  </ImageView>
                   <ImageView fx:id="doorArrow" fitHeight="125.0" fitWidth="89.0" layoutX="274.0" layoutY="24.0" visible="false">
                      <image>
                         <Image url="@../images/newArrow.png" />
@@ -112,7 +107,6 @@
                   </ImageView>
                   <Rectangle fx:id="toiletPaper" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="66.0" layoutX="87.0" layoutY="293.0" onMouseClicked="#clickToiletPaper" onMouseEntered="#toiletPaperMouseEntered" onMouseExited="#toiletPaperMouseExit" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="43.0" />
                   <Rectangle fx:id="toilet" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="89.0" layoutX="17.0" layoutY="373.0" onMouseClicked="#clickToilet" onMouseEntered="#toiletMouseEntered" onMouseExited="#toiletMouseExit" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="82.0" />
-                  <Rectangle fx:id="door" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="442.0" layoutX="208.0" layoutY="51.0" onMouseClicked="#clickDoor" onMouseEntered="#doorMouseEntered" onMouseExited="#doorMouseExit" opacity="0.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="225.0" />
                   <Rectangle fx:id="towel" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="66.0" layoutX="1068.0" layoutY="327.0" onMouseClicked="#clickTowel" onMouseEntered="#towelMouseEntered" onMouseExited="#towelMouseExit" opacity="0.0" scaleX="1.5" scaleY="1.5" stroke="BLACK" strokeType="INSIDE" width="26.0" />
                   <Rectangle id="vent" fx:id="vent" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="79.0" layoutX="13.0" layoutY="94.0" onMouseClicked="#clickVent" onMouseEntered="#ventMouseEntered" onMouseExited="#ventMouseExit" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="91.0" />
                   <Rectangle fx:id="sink" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="66.0" layoutX="948.0" layoutY="324.0" onMouseClicked="#clickSink" onMouseEntered="#sinkMouseEntered" onMouseExited="#sinkMouseExit" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="103.0" />
