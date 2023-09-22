@@ -15,6 +15,8 @@
 
 -thoughtBubble.png <a href = "https://www.vecteezy.com/?utm_source=vecteezy-download&utm_medium=license-info-pdf&utm_campaign=license-info-document">
 
+- thinking.gif https://tenor.com/view/emojis-emoji-hmm-thinking-think-gif-16078272
+
 ## To setup OpenAI's API
 
 - add in the root of the project (i.e., the same level where `pom.xml` is located) a file named `apiproxy.config`
