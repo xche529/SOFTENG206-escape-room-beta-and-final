@@ -24,6 +24,7 @@ public class TextAreaController {
   @FXML private CheckBox converterFoundObjective;
   @FXML private CheckBox phoneLocatedObjective;
   @FXML private CheckBox safeLocatedObjective;
+  @FXML private CheckBox guardTalkedObjective;
 
   @FXML
   private void initialize() {
@@ -69,6 +70,13 @@ public class TextAreaController {
             (observable, oldValue, newValue) -> {
               if (newValue) {
                 safeLocatedObjective.setSelected(true);
+              }
+            });
+    GameState.isGuardTalkedProperty()
+        .addListener(
+            (observable, oldValue, newValue) -> {
+              if (newValue) {
+                guardTalkedObjective.setSelected(true);
               }
             });
   }

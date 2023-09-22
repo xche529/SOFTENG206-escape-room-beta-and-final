@@ -466,6 +466,7 @@ public class CafeteriaController {
    */
   @FXML
   private void onSpeechBubbleThreeClicked(MouseEvent event) {
+    GameState.setGuardTalked(true);
     GptAndTextAreaManager.displayTarget(Characters.GUARD);
     System.out.println("Speech bubble three clicked");
   }
