@@ -248,8 +248,13 @@ public class RoomController {
    * @throws IOException if there is an error loading the start view
    */
   private void resetRoom() throws ApiProxyException {
+    // randomises the word for the riddle
     itemToChoose();
+
+    // resets the code for the safe
     Safe.getRandomCode();
+
+    //sets all the little arrows to invisible
     toiletArrow.setOpacity(0);
     toiletPaperArrow.setOpacity(0);
     ventArrow.setOpacity(0);
@@ -257,10 +262,13 @@ public class RoomController {
     mirrorArrow.setOpacity(0);
     towelArrow.setOpacity(0);
     doorArrowSmall.setOpacity(0);
+    //sets the required boolean values to false
     GameState.setRiddleResolved(false);
-    GptAndTextAreaManager.reset();
     GameState.wordFound = false;
     GameState.resetRoom = false;
+
+    //resets the text area
+    GptAndTextAreaManager.reset();
     System.out.println("room reseted");
   }
 
