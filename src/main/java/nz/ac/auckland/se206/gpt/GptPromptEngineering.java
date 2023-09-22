@@ -93,7 +93,7 @@ public class GptPromptEngineering {
           + " the word must corelate to a number. For safe unlocked suggest that there must be a"
           + " phone we can call the number from. Remember you can give out a maximum of five"
           + " hints. Asking what to do next or for a clue counts as a hint. Any information you"
-          + " give out about rooms that is asked for is a hint. Never give the same hint twice."
+          + " give out about rooms that is asked for is a hint. Never give the same hint twice. DO NOT give answer at any time."
           + " put (HINT) at the end of your response if you are giving a hint!!!\r\n"
           + ")";
     }
@@ -131,7 +131,7 @@ public class GptPromptEngineering {
         + " cypher and word must link to the safe. a second clue could be that each letter in the"
         + " word must corelate to a number. For safe unlocked suggest that there must be a phone we"
         + " can call the number from. Any information you give out about rooms that is asked for is"
-        + " a hint. Never give the same hint twice.\r\n"
+        + " a hint. DO NOT give answer at any time.\r\n"
         + ")";
   }
 

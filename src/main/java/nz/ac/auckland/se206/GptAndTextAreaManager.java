@@ -44,9 +44,11 @@ public class GptAndTextAreaManager {
   public static TextArea textAreaChatDisplayBoard;
   public static TextArea textAreaInputBox;
   public static TextArea textAreaObjectiveDisplayBoard;
+  public static Text textAreaHintsLeftText;
 
   public static boolean isGptRunning = false;
   public static boolean isHintRunning = true;
+  public static int hintLeft;
 
   /*
    * this method outputs MessageHistory as a string which can be put into display
@@ -56,8 +58,7 @@ public class GptAndTextAreaManager {
    */
   public static void initialize() throws ApiProxyException {
     // send initial messages to GPT
-    sendMessage(
-        GptPromptEngineering.getGuardSetUp(GameState.itemToChoose.getId()));
+    sendMessage(GptPromptEngineering.getGuardSetUp(GameState.itemToChoose.getId()));
     currentCharacter = Characters.PRISONER_ONE;
     sendMessage(GptPromptEngineering.getPrisonerOneSetUp());
     currentCharacter = Characters.PRISONER_TWO;
@@ -69,9 +70,15 @@ public class GptAndTextAreaManager {
     isHintRunning = true;
     // function for replayability and resetting conversations
     currentCharacter = Characters.GUARD;
-    guardChatCompletionRequest = new ChatCompletionRequest().setN(1).setTemperature(0.1).setTopP(0.5).setMaxTokens(100);
-    prisonerOneCompletionRequest = new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(50);
-    prisonerTwoCompletionRequest = new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(50);
+    guardChatCompletionRequest =
+        new ChatCompletionRequest().setN(1).setTemperature(0.1).setTopP(0.5).setMaxTokens(100);
+    prisonerOneCompletionRequest =
+        new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(50);
+    prisonerTwoCompletionRequest =
+        new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(50);
+        if(GameState.difficulty == GameState.Difficulty.MEDIUM){
+          textAreaHintsLeftText.setText("5");
+        }
   }
 
   private static String getMessageHistory(ChatCompletionRequest chat) {
@@ -80,7 +87,12 @@ public class GptAndTextAreaManager {
     // IMPORTANT: increase i here to filtout the prompt Engineering content
 
     if (messages.size() > 1) {
-      int hintLeft = GameState.hints;      // filter parentheses out so we can send messages without player seeing
+      if (isHintRunning) {
+        hintLeft = GameState.hints;
+      } else{
+        hintLeft = 0;
+      }
+      // filter parentheses out so we can send messages without player seeing
       for (int i = messages.size() - 1; i >= 0; i--) {
         String check = messages.get(i).getContent();
         if (check.charAt(0) == ('(') && check.charAt(check.length() - 1) == (')')) {
@@ -88,27 +100,26 @@ public class GptAndTextAreaManager {
               messages.get(i).getRole() + ": " + chat.getMessages().get(i).getContent() + "\n\n");
           continue;
         }
-        if(currentCharacter == Characters.GUARD){
-        if (messages.get(i).getRole().equals("assistant")
-            && messages.get(i).getContent().contains("Correct")) {
-          GameState.setRiddleResolved(true);
-        }
-        if(isHintRunning && GameState.difficulty == GameState.Difficulty.MEDIUM){
+        if (currentCharacter == Characters.GUARD) {
           if (messages.get(i).getRole().equals("assistant")
-              && messages.get(i).getContent().contains("HINT")) {
-            hintLeft--;
+              && messages.get(i).getContent().contains("Correct")) {
+            GameState.setRiddleResolved(true);
           }
-          if(hintLeft == 0){
-            isHintRunning = false;
-            try {
-              sendMessage(GptPromptEngineering.stopGivingHint());
-            } catch (ApiProxyException e) {
-              System.err.println("Error sending message: " + e.getMessage());
+          if (isHintRunning && GameState.difficulty == GameState.Difficulty.MEDIUM) {
+            if (messages.get(i).getRole().equals("assistant")
+                && (messages.get(i).getContent().contains("HINT") || messages.get(i).getContent().contains("Hint:")) && i != 1) {
+              hintLeft--;
+            }
+            if (hintLeft == 0) {
+              isHintRunning = false;
+              try {
+                sendMessage(GptPromptEngineering.stopGivingHint());
+              } catch (ApiProxyException e) {
+                System.err.println("Error sending message: " + e.getMessage());
+              }
             }
           }
-          GameState.hintsLeft = hintLeft;
         }
-      }
         // replace "assistant" with "Guard:" for immersion
         String name = messages.get(i).getRole();
         if (name.trim().equals("assistant")) {
@@ -129,6 +140,7 @@ public class GptAndTextAreaManager {
         System.out.println(
             messages.get(i).getRole() + ": " + chat.getMessages().get(i).getContent() + "\n\n");
       }
+      GameState.hintsLeft = hintLeft;
       System.out.println("Hints left: " + hintLeft);
     }
     return result;
@@ -166,6 +178,13 @@ public class GptAndTextAreaManager {
     textAreaTypePromptText.setText(prompt);
     textAreaChatDisplayBoard.setText(chatHistory);
     textAreaChatDisplayBoard.setScrollTop(0);
+    if (GameState.difficulty == GameState.Difficulty.MEDIUM) {
+      textAreaHintsLeftText.setText(Integer.toString(GameState.hintsLeft));
+    } else if (GameState.difficulty == GameState.Difficulty.HARD) {
+      textAreaHintsLeftText.setText("No hints available");
+    } else {
+      textAreaHintsLeftText.setText("Unlimited");
+    }
   }
 
   private static String parenthesesFilter(String input) {

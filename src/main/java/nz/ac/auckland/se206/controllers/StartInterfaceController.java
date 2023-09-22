@@ -144,7 +144,6 @@ public class StartInterfaceController {
       hard.setSelected(false);
       medium.setSelected(true);
       // set number of hints
-      GameState.numHints = "5";
       GameState.difficulty = GameState.Difficulty.MEDIUM;
       System.out.println("Difficulty change: medium");
     }

@@ -13,7 +13,7 @@
    <children>
       <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="195.0" prefWidth="1113.0">
          <children>
-            <TextArea fx:id="inputBox" onKeyTyped="#onSetPromptTextFalse" prefHeight="154.0" prefWidth="324.0" wrapText="true">
+            <TextArea fx:id="inputBox" onKeyTyped="#onSetPromptTextFalse" prefHeight="122.0" prefWidth="324.0" wrapText="true">
                <font>
                   <Font size="19.0" />
                </font>
@@ -41,8 +41,18 @@
                   <CheckBox fx:id="converterFoundObjective" layoutX="47.0" layoutY="63.0" mnemonicParsing="false" text="Cypher located" />
                   <CheckBox fx:id="phoneLocatedObjective" layoutX="47.0" layoutY="110.0" mnemonicParsing="false" text="Phone located" />
                   <CheckBox fx:id="safeLocatedObjective" layoutX="47.0" layoutY="87.0" mnemonicParsing="false" text="Safe located" />
+                  <Pane layoutX="-1.0" prefHeight="134.0" prefWidth="225.0" />
                </children>
             </Pane>
+            <Text layoutX="3.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hints left:">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Text>
+            <Text fx:id="hintsLeftText" layoutX="111.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0">
+               <font>
+                  <Font size="19.0" />
+               </font></Text>
          </children>
       </Pane>
    </children>

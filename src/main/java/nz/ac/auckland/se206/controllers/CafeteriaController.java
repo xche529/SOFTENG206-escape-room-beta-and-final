@@ -109,7 +109,6 @@ public class CafeteriaController {
           speechBubbleOneSmall,
           speechBubbleTwoSmall,
           thinkingOne,
-          thinkingThree,
           thinkingTwo
         };
 
