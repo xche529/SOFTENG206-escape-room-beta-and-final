@@ -47,7 +47,7 @@
             </ImageView>
             <ImageView fitHeight="20.0" fitWidth="106.0" layoutX="643.0" layoutY="197.0" onMouseClicked="#onClickMedium" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/MEDUIM.png" />
+                  <Image url="@../images/MEDIUM.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="26.0" fitWidth="60.0" layoutX="645.0" layoutY="161.0" onMouseClicked="#onClickEasy" pickOnBounds="true" preserveRatio="true">
