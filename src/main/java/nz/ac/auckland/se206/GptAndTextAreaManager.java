@@ -65,11 +65,11 @@ public class GptAndTextAreaManager {
   }
 
   public static void reset() throws ApiProxyException {
+    isHintRunning = true;
     currentCharacter = Characters.GUARD;
     guardChatCompletionRequest = new ChatCompletionRequest().setN(1).setTemperature(0.1).setTopP(0.5).setMaxTokens(100);
     prisonerOneCompletionRequest = new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(50);
     prisonerTwoCompletionRequest = new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(50);
-    initialize();
   }
 
   private static String getMessageHistory(ChatCompletionRequest chat) {
@@ -104,6 +104,7 @@ public class GptAndTextAreaManager {
               System.err.println("Error sending message: " + e.getMessage());
             }
           }
+          GameState.hintsLeft = hintLeft;
         }
       }
         String name = messages.get(i).getRole();

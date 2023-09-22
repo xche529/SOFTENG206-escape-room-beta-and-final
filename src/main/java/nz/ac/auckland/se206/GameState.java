@@ -52,7 +52,9 @@ public class GameState {
 
   public static boolean resetRoom = false;
 
-  public static int hints = 5;
+  public static int hints = 6;
+
+  public static int hintsLeft = 6;
 
   public static boolean stopTimer = false;
 
