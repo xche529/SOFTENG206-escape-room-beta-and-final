@@ -100,10 +100,10 @@ public class OfficeController {
     // sets all the variables and randomises the cypher location
     resetOffice();
 
-    //starts a thread that constantly checks if the game is over
+    // starts a thread that constantly checks if the game is over
     resetchecker();
 
-    //animates all the arrows
+    // animates all the arrows
     animateArrows(binArrow);
     animateArrows(blackBoardArrow);
     animateArrows(drawArrow);
@@ -136,7 +136,7 @@ public class OfficeController {
           digitNine
         };
 
-    //if the user finds the paper, the phone number will be displayed
+    // if the user finds the paper, the phone number will be displayed
     GameState.hasPaperProperty()
         .addListener(
             (observable, oldValue, newValue) -> {
@@ -149,7 +149,7 @@ public class OfficeController {
 
   /**
    * animates the arrow so that it bounces up and down
-   * 
+   *
    * @param arrow the arrow to be animates
    */
   public void animateArrows(ImageView arrow) {
@@ -163,53 +163,41 @@ public class OfficeController {
     translateTransition.play();
   }
 
-  /**
-   * animates the prisoner and the speech bubble
-   */
+  /** animates the prisoner and the speech bubble */
   public void walkInAnimation() {
     MovementControl.moveToLeft(false, 1, 500, animationItems);
   }
 
-  /**
-   * this method resets the loction of the prisoner and the speech bubble
-   */
+  /** this method resets the loction of the prisoner and the speech bubble */
   public void resetAnimation() {
     for (ImageView item : animationItems) {
       item.setTranslateX(-500);
     }
   }
 
-  /**
-   * shows the enlarged speech bubble for the prisoner one
-   */
+  /** shows the enlarged speech bubble for the prisoner one */
   public void setThinkingOneUp() {
     thinkingOne.setVisible(true);
   }
 
-  /**
-   * hides the enlarged speech bubble for the prisoner one
-   */
+  /** hides the enlarged speech bubble for the prisoner one */
   public void setThinkingOneDown() {
     thinkingOne.setVisible(false);
   }
 
-  /**
-   * shows the enlarged speech bubble for the prisoner two
-   */
+  /** shows the enlarged speech bubble for the prisoner two */
   public void setThinkingTwoUp() {
     thinkingTwo.setVisible(true);
   }
 
-  /**
-   * hides the enlarged speech bubble for the prisoner two
-   */
+  /** hides the enlarged speech bubble for the prisoner two */
   public void setThinkingTwoDown() {
     thinkingTwo.setVisible(false);
   }
 
   /**
    * exits the veiw of the drawer
-   * 
+   *
    * @param event the mouse event wher the character clicks anywhare on the screen
    */
   @FXML
@@ -221,13 +209,13 @@ public class OfficeController {
 
   /**
    * shows the blown up drawer and if it has the cypher
-   * 
+   *
    * @param event
    */
   @FXML
   private void clickDeskDrawers(MouseEvent event) {
     if (GameState.itemWithCypher == deskDrawers) {
-
+      GameState.isConverterFoundProperty().set(true);
       // shows the drawer with the cypher
       inspectingDrawerPane.setVisible(true);
       drawerConverter.setVisible(true);
@@ -248,7 +236,7 @@ public class OfficeController {
 
   /**
    * exits the veiw of the bin
-   * 
+   *
    * @param event the mouse event wher the character clicks anywhare on the screen
    */
   @FXML
@@ -261,11 +249,13 @@ public class OfficeController {
 
   /**
    * shows the blown up bin and if it has the cypher
+   *
    * @param event
    */
   @FXML
   private void clickBin(MouseEvent event) {
     if (GameState.itemWithCypher == bin) {
+      GameState.isConverterFoundProperty().set(true);
       // shows the bin with the cypher
       GameState.cypherFound = true;
       inspectingBinPane.setVisible(true);
@@ -284,7 +274,7 @@ public class OfficeController {
 
   /**
    * exits the veiw of the blackboard
-   * 
+   *
    * @param event the mouse event wher the character clicks anywhare on the screen
    */
   @FXML
@@ -296,12 +286,13 @@ public class OfficeController {
 
   /**
    * shows the blown up blackboard and if it has the cypher
-   * 
+   *
    * @param event
    */
   @FXML
   private void clickBlackboard(MouseEvent event) {
     if (GameState.itemWithCypher == blackBoard) {
+      GameState.isConverterFoundProperty().set(true);
       // shows the blackboard with the cypher
       GameState.cypherFound = true;
       inspectingBlackBoardPane.setVisible(true);
@@ -320,74 +311,59 @@ public class OfficeController {
 
   /**
    * enters the veiw of the phone
-   * 
+   *
    * @param event the mouse event wher the character clicks on the phone
    */
   @FXML
   private void clickPhone(MouseEvent event) {
+    GameState.isPhoneFoundProperty().set(true);
     phoneArrow.setVisible(false);
     phonePane.setVisible(true);
   }
 
-  /**
-   * shows the enlarged desk drawer
-   */
+  /** shows the enlarged desk drawer */
   @FXML
   private void deskDrawersMouseEntered() {
     deskDrawersBig.setVisible(true);
   }
 
-  /**
-   * hides the enlarged desk drawer
-   */
+  /** hides the enlarged desk drawer */
   @FXML
   private void deskDrawersMouseExited() {
     deskDrawersBig.setVisible(false);
   }
 
-  /**
-   * shows the enlarged bin
-   */
+  /** shows the enlarged bin */
   @FXML
   private void binMouseEntered() {
     binBig.setVisible(true);
   }
 
-  /**
-   * hides the enlarged bin
-   */
+  /** hides the enlarged bin */
   @FXML
   private void binMouseExited() {
     binBig.setVisible(false);
   }
 
-  /**
-   * shows the enlarged blackboard
-   */
+  /** shows the enlarged blackboard */
   @FXML
   private void blackBoardMouseEntered() {
     blackBoardBig.setVisible(true);
   }
 
-  /**
-   * hides the enlarged blackboard
-   */
+  /** hides the enlarged blackboard */
   @FXML
   private void blackBoardMouseExited() {
     blackBoardBig.setVisible(false);
   }
 
-  /**
-   * shows the enlarged phone
-   */
+  /** shows the enlarged phone */
   @FXML
   private void phoneMouseEntered() {
     phoneBig.setVisible(true);
   }
 
-  /**
-   * hides the enlarged phone
-   */
+  /** hides the enlarged phone */
   @FXML
   private void phoneMouseExited() {
     phoneBig.setVisible(false);

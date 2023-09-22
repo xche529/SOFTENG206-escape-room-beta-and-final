@@ -2,9 +2,11 @@ package nz.ac.auckland.se206.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GptAndTextAreaManager;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
@@ -16,6 +18,12 @@ public class TextAreaController {
   @FXML private Text typePromptText;
   @FXML private TextField inputText;
 
+  @FXML private CheckBox riddleSolvedObjective;
+  @FXML private CheckBox codewordFoundObjective;
+  @FXML private CheckBox converterFoundObjective;
+  @FXML private CheckBox phoneLocatedObjective;
+  @FXML private CheckBox safeLocatedObjective;
+
   @FXML
   private void initialize() {
     GptAndTextAreaManager.textAreaController = this;
@@ -23,6 +31,42 @@ public class TextAreaController {
     GptAndTextAreaManager.textAreaInputBox = inputBox;
     GptAndTextAreaManager.textAreaObjectiveDisplayBoard = objectiveDisplayBoard;
     GptAndTextAreaManager.textAreaTypePromptText = typePromptText;
+
+    GameState.isRiddleResolvedProperty()
+        .addListener(
+            (observable, oldValue, newValue) -> {
+              if (newValue) {
+                riddleSolvedObjective.setSelected(true);
+              }
+            });
+    GameState.isCodeWordFoundProperty()
+        .addListener(
+            (observable, oldValue, newValue) -> {
+              if (newValue) {
+                codewordFoundObjective.setSelected(true);
+              }
+            });
+    GameState.isConverterFoundProperty()
+        .addListener(
+            (observable, oldValue, newValue) -> {
+              if (newValue) {
+                converterFoundObjective.setSelected(true);
+              }
+            });
+    GameState.isPhoneFoundProperty()
+        .addListener(
+            (observable, oldValue, newValue) -> {
+              if (newValue) {
+                phoneLocatedObjective.setSelected(true);
+              }
+            });
+    GameState.isSafeFoundProperty()
+        .addListener(
+            (observable, oldValue, newValue) -> {
+              if (newValue) {
+                safeLocatedObjective.setSelected(true);
+              }
+            });
   }
 
   @FXML

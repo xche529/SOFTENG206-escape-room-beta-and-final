@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
@@ -28,12 +29,20 @@
                   <Font size="20.0" />
                </font>
             </Button>
-            <TextArea fx:id="objectiveDisplayBoard" layoutX="886.0" layoutY="52.0" prefHeight="142.0" prefWidth="225.0" />
-            <TextField alignment="CENTER" editable="false" layoutX="885.0" layoutY="-1.0" prefHeight="55.0" prefWidth="225.0" text="Current Objective:">
+            <TextField alignment="CENTER" editable="false" layoutX="885.0" layoutY="-1.0" prefHeight="55.0" prefWidth="225.0" text="Objectives:">
                <font>
                   <Font size="21.0" />
                </font>
             </TextField>
+            <Pane layoutX="888.0" layoutY="53.0" prefHeight="143.0" prefWidth="226.0">
+               <children>
+                  <CheckBox fx:id="riddleSolvedObjective" layoutX="47.0" layoutY="9.0" mnemonicParsing="false" text="Riddle Solved" />
+                  <CheckBox fx:id="codewordFoundObjective" layoutX="47.0" layoutY="33.0" mnemonicParsing="false" text="Codeword Located" />
+                  <CheckBox fx:id="converterFoundObjective" layoutX="47.0" layoutY="63.0" mnemonicParsing="false" text="Cypher located" />
+                  <CheckBox fx:id="phoneLocatedObjective" layoutX="47.0" layoutY="110.0" mnemonicParsing="false" text="Phone located" />
+                  <CheckBox fx:id="safeLocatedObjective" layoutX="47.0" layoutY="87.0" mnemonicParsing="false" text="Safe located" />
+               </children>
+            </Pane>
          </children>
       </Pane>
    </children>
