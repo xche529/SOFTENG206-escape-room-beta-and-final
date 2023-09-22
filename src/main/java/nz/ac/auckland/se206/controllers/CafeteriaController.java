@@ -344,11 +344,9 @@ public class CafeteriaController {
 
   /**
    * When the user clicks on the open button, the padlock is opened if the combination is correct.
-   *
-   * @param event the mouse event from when the user clicks on the open button
    */
   @FXML
-  private void onClickOpenPadlock(MouseEvent event) {
+  private void onClickOpenPadlock() {
     int digitOneInt = Integer.parseInt(digitOne.getText());
     int digitTwoInt = Integer.parseInt(digitTwo.getText());
     int digitThreeInt = Integer.parseInt(digitThree.getText());
