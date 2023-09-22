@@ -4,7 +4,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.Random;
-
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -13,136 +12,77 @@ import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
-import javafx.util.Duration;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.GameState.Difficulty;
 import nz.ac.auckland.se206.GptAndTextAreaManager;
 import nz.ac.auckland.se206.GptAndTextAreaManager.Characters;
 import nz.ac.auckland.se206.MovementControl;
 import nz.ac.auckland.se206.PlayHistory;
 import nz.ac.auckland.se206.SceneManager;
-import nz.ac.auckland.se206.GameState.Difficulty;
 
 public class OfficeController {
 
-  @FXML
+  @FXML private Rectangle deskDrawers;
+  @FXML private Rectangle bin;
+  @FXML private Rectangle blackBoard;
+  @FXML private Rectangle phone;
+  @FXML private ImageView binBig;
+  @FXML private ImageView blackBoardBig;
+  @FXML private ImageView phoneBig;
+  @FXML private ImageView deskDrawersBig;
+  @FXML private ImageView prisonerOne;
+  @FXML private ImageView prisonerTwo;
+  @FXML private ImageView speechBubbleOne;
+  @FXML private ImageView speechBubbleTwo;
+  @FXML private ImageView speechBubbleOneSmall;
+  @FXML private ImageView speechBubbleTwoSmall;
+  @FXML private ImageView thinkingOne;
+  @FXML private ImageView thinkingTwo;
 
-  private Rectangle deskDrawers;
-  @FXML
+  @FXML private ImageView binArrow;
+  @FXML private ImageView blackBoardArrow;
+  @FXML private ImageView drawArrow;
+  @FXML private ImageView phoneArrow;
 
-  private Rectangle bin;
-  @FXML
+  @FXML private TextArea inputBox;
+  @FXML private TextArea chatDisplayBoard;
+  @FXML private TextArea objectiveDisplayBoard;
+  @FXML private Text typePromptText;
+  @FXML private Label digitOne;
 
-  private Rectangle blackBoard;
-  @FXML
-
-  private Rectangle phone;
-  @FXML
-
-  private ImageView binBig;
-  @FXML
-
-  private ImageView blackBoardBig;
-  @FXML
-
-  private ImageView phoneBig;
-  @FXML
-
-  private ImageView deskDrawersBig;
-  @FXML
-
-  private ImageView prisonerOne;
-  @FXML
-
-  private ImageView prisonerTwo;
-  @FXML
-  private ImageView speechBubbleOne;
-  @FXML
-  private ImageView speechBubbleTwo;
-  @FXML
-  private ImageView speechBubbleOneSmall;
-  @FXML
-  private ImageView speechBubbleTwoSmall;
-  @FXML
-  private ImageView thinkingOne;
-  @FXML
-  private ImageView thinkingTwo;
-
-  @FXML
-  private ImageView binArrow;
-  @FXML
-  private ImageView blackBoardArrow;
-  @FXML
-  private ImageView drawArrow;
-  @FXML
-  private ImageView phoneArrow;
-
-  @FXML
-  private TextArea inputBox;
-  @FXML
-  private TextArea chatDisplayBoard;
-  @FXML
-  private TextArea objectiveDisplayBoard;
-  @FXML
-  private Text typePromptText;
-  @FXML
-  private Label digitOne;
-
-  @FXML
-  private Label digitTwo;
-  @FXML
-  private Label digitThree;
-  @FXML
-  private Label digitFour;
-  @FXML
-  private Label digitFive;
-  @FXML
-  private Label digitSix;
-  @FXML
-  private Label digitSeven;
-  @FXML
-  private Label digitEight;
-  @FXML
-  private Label digitNine;
-  @FXML
-  private Button exitVeiwButton;
-  @FXML
-  private Pane paperPane;
-  @FXML
-  private Pane phonePane;
-  @FXML
-  private ImageView crossBig;
-  @FXML
-  private Label numberLabel;
-  @FXML
-  private Label timerLabel;
-  @FXML
-  private Pane inspectingBinPane;
-  @FXML
-  private Pane blurringPane;
-  @FXML
-  private Pane thoughtBubblePane;
-  @FXML
-  private Text thoughtBubbleText;
-  @FXML
-  private ImageView binConverter;
-  @FXML
-  private Pane inspectingBlackBoardPane;
-  @FXML
-  private ImageView inspectingBlackBoardConverter;
-  @FXML
-  private ImageView inspectingBlackBoardEmpty;
-  @FXML
-  private Pane inspectingDrawerPane;
-  @FXML
-  private ImageView drawerConverter;
+  @FXML private Label digitTwo;
+  @FXML private Label digitThree;
+  @FXML private Label digitFour;
+  @FXML private Label digitFive;
+  @FXML private Label digitSix;
+  @FXML private Label digitSeven;
+  @FXML private Label digitEight;
+  @FXML private Label digitNine;
+  @FXML private Button exitVeiwButton;
+  @FXML private Pane paperPane;
+  @FXML private Pane phonePane;
+  @FXML private ImageView crossBig;
+  @FXML private Label numberLabel;
+  @FXML private Label timerLabel;
+  @FXML private Pane inspectingBinPane;
+  @FXML private Pane blurringPane;
+  @FXML private Pane thoughtBubblePane;
+  @FXML private Text thoughtBubbleText;
+  @FXML private ImageView binConverter;
+  @FXML private Pane inspectingBlackBoardPane;
+  @FXML private ImageView inspectingBlackBoardConverter;
+  @FXML private ImageView inspectingBlackBoardEmpty;
+  @FXML private Pane inspectingDrawerPane;
+  @FXML private ImageView drawerConverter;
 
   private Timeline timeline;
   private ImageView[] animationItems;
@@ -167,13 +107,28 @@ public class OfficeController {
     // GptAndTextAreaManager.officeInputBox = inputBox;
     // GptAndTextAreaManager.officeObjectiveDisplayBoard = objectiveDisplayBoard;
 
-    animationItems = new ImageView[] { prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo, speechBubbleOneSmall,
-        speechBubbleTwoSmall };
+    animationItems =
+        new ImageView[] {
+          prisonerOne,
+          prisonerTwo,
+          speechBubbleOne,
+          speechBubbleTwo,
+          speechBubbleOneSmall,
+          speechBubbleTwoSmall
+        };
 
-    digits = new Label[] {
-        digitOne, digitTwo, digitThree, digitFour, digitFive, digitSix, digitSeven, digitEight,
-        digitNine
-    };
+    digits =
+        new Label[] {
+          digitOne,
+          digitTwo,
+          digitThree,
+          digitFour,
+          digitFive,
+          digitSix,
+          digitSeven,
+          digitEight,
+          digitNine
+        };
 
     GameState.hasPaperProperty()
         .addListener(
@@ -620,9 +575,18 @@ public class OfficeController {
   @FXML
   private void onClickCall() {
     if (currentDigit == 9) {
-      String phoneNumber = digitOne.getText() + digitTwo.getText() + digitThree.getText() + " "
-          + digitFour.getText() + digitFive.getText() + digitSix.getText() + " " + digitSeven.getText()
-          + digitEight.getText() + digitNine.getText();
+      String phoneNumber =
+          digitOne.getText()
+              + digitTwo.getText()
+              + digitThree.getText()
+              + " "
+              + digitFour.getText()
+              + digitFive.getText()
+              + digitSix.getText()
+              + " "
+              + digitSeven.getText()
+              + digitEight.getText()
+              + digitNine.getText();
       if (phoneNumber.equals(GameState.phoneNumber)) {
         GameState.isWon = true;
         Scene scene = phonePane.getScene();
@@ -634,7 +598,8 @@ public class OfficeController {
           difficulty = 3;
         }
         PlayHistory playHistory = new PlayHistory(timeTook, difficulty, GameState.playerName);
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("player_history.dat"))) {
+        try (ObjectInputStream ois =
+            new ObjectInputStream(new FileInputStream("player_history.dat"))) {
           PlayHistory oldPlayHistory = (PlayHistory) ois.readObject();
           oldPlayHistory.addHistory(playHistory);
           playHistory.saveHistory();
@@ -673,35 +638,35 @@ public class OfficeController {
   }
 
   private void resetchecker() throws IOException {
-    timeline = new Timeline(
-        new KeyFrame(
-            Duration.seconds(1),
-            event -> {
-              if (GameState.secondsRemaining >= 0) {
-                updateTimerLabel();
-              }
-              if (GameState.secondsRemaining == 0) {
-                if (SceneManager.curretUi == SceneManager.AppUi.OFFICE) {
-                  GameState.secondsRemaining = -1;
-                  GameState.resetCafeteria = true;
-                  GameState.resetOffice = true;
-                  GameState.resetRoom = true;
-                  try {
-                    Scene scene = phone.getScene();
-                    Parent parent = SceneManager.getUiRoot(SceneManager.AppUi.END_LOST);
-                    parent.setLayoutX(App.centerX);
-                    parent.setLayoutY(App.centerY);
-                    scene.setRoot(parent);
-                  } catch (NullPointerException e) {
+    timeline =
+        new Timeline(
+            new KeyFrame(
+                Duration.seconds(1),
+                event -> {
+                  if (GameState.secondsRemaining >= 0) {
+                    updateTimerLabel();
                   }
-
-                }
-              }
-              updateTimerLabel();
-              if (GameState.resetOffice) {
-                resetOffice();
-              }
-            }));
+                  if (GameState.secondsRemaining == 0) {
+                    if (SceneManager.curretUi == SceneManager.AppUi.OFFICE) {
+                      GameState.secondsRemaining = -1;
+                      GameState.resetCafeteria = true;
+                      GameState.resetOffice = true;
+                      GameState.resetRoom = true;
+                      try {
+                        Scene scene = phone.getScene();
+                        Parent parent = SceneManager.getUiRoot(SceneManager.AppUi.END_LOST);
+                        parent.setLayoutX(App.centerX);
+                        parent.setLayoutY(App.centerY);
+                        scene.setRoot(parent);
+                      } catch (NullPointerException e) {
+                      }
+                    }
+                  }
+                  updateTimerLabel();
+                  if (GameState.resetOffice) {
+                    resetOffice();
+                  }
+                }));
     timeline.setCycleCount(Timeline.INDEFINITE);
     timeline.play();
   }
@@ -717,9 +682,10 @@ public class OfficeController {
    */
   private void resetOffice() {
     // Getting random item to be used to hide the cypher
-    Rectangle[] items = new Rectangle[] {
-        bin, blackBoard, deskDrawers,
-    };
+    Rectangle[] items =
+        new Rectangle[] {
+          bin, blackBoard, deskDrawers,
+        };
     Random randomChoose = new Random();
     int randomIndexChoose = randomChoose.nextInt(items.length);
     GameState.itemWithCypher = items[randomIndexChoose];
@@ -731,6 +697,5 @@ public class OfficeController {
     GameState.cypherFound = false;
     GameState.resetOffice = false;
     System.out.println("office reseted");
-
   }
 }

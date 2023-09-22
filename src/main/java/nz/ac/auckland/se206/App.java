@@ -6,11 +6,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.transform.Scale;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.controllers.CafeteriaController;
 import nz.ac.auckland.se206.controllers.OfficeController;
@@ -19,8 +19,7 @@ import nz.ac.auckland.se206.controllers.StartInterfaceController;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 /**
- * This is the entry point of the JavaFX application, while you can change this
- * class, it should
+ * This is the entry point of the JavaFX application, while you can change this class, it should
  * remain as the class that runs the JavaFX application.
  */
 public class App extends Application {
@@ -40,8 +39,7 @@ public class App extends Application {
   }
 
   /**
-   * Returns the node associated to the input file. The method expects that the
-   * file is located in
+   * Returns the node associated to the input file. The method expects that the file is located in
    * "src/main/resources/fxml".
    *
    * @param fxml The name of the FXML file (without extension).
@@ -53,12 +51,10 @@ public class App extends Application {
   }
 
   /**
-   * This method is invoked when the application starts. It loads and shows the
-   * "Canvas" scene.
+   * This method is invoked when the application starts. It loads and shows the "Canvas" scene.
    *
    * @param stage The primary stage of the application.
-   * @throws IOException       If "src/main/resources/fxml/canvas.fxml" is not
-   *                           found.
+   * @throws IOException If "src/main/resources/fxml/canvas.fxml" is not found.
    * @throws ApiProxyException
    */
   @Override
@@ -125,17 +121,19 @@ public class App extends Application {
     scene = new Scene(root, 1113 * overallScale, 600 * overallScale);
     scene.setFill(Color.rgb(244, 244, 244, 1));
     stage.setScene(scene);
-    scene.addEventFilter(javafx.scene.input.KeyEvent.KEY_PRESSED, event -> {
-      VBox up = null;
-      if (event.getCode() == KeyCode.LEFT) {
-        SceneManager.switchRoom(true, scene);
-      } else if (event.getCode() == KeyCode.RIGHT) {
-        SceneManager.switchRoom(false, scene);
-      }
-      if (up == null) {
-        return;
-      }
-    });
+    scene.addEventFilter(
+        javafx.scene.input.KeyEvent.KEY_PRESSED,
+        event -> {
+          VBox up = null;
+          if (event.getCode() == KeyCode.LEFT) {
+            SceneManager.switchRoom(true, scene);
+          } else if (event.getCode() == KeyCode.RIGHT) {
+            SceneManager.switchRoom(false, scene);
+          }
+          if (up == null) {
+            return;
+          }
+        });
     stage.show();
     // SceneManager.getUiRoot(AppUi.START_INTERFACE).requestFocus();
   }
