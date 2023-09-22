@@ -9,13 +9,13 @@ import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
@@ -64,6 +64,8 @@ public class CafeteriaController {
   @FXML private Label digitFour;
   @FXML private Button openButton;
 
+  @FXML private ImageView cross;
+
   @FXML private Pane paperPane;
   @FXML private Label collectPaperLabel;
   @FXML private Label numberLabel;
@@ -72,6 +74,9 @@ public class CafeteriaController {
   @FXML private ImageView paintingWithoutSafeArrow;
   @FXML private ImageView vendingMachineArrow;
   @FXML private Label timerLabel;
+
+  @FXML private Pane thoughtBubblePane;
+  @FXML private Text thoughtBubbleText;
 
   private ImageView[] animationItems;
 
@@ -198,6 +203,7 @@ public class CafeteriaController {
 
   @FXML
   private void digitOneIncrement() {
+    thoughtBubblePane.setVisible(false);
     int digit = Integer.parseInt(digitOne.getText());
     digit = (digit + 1) % 10;
     digitOne.setText(Integer.toString(digit));
@@ -205,6 +211,7 @@ public class CafeteriaController {
 
   @FXML
   private void digitOneDecrease() {
+    thoughtBubblePane.setVisible(false);
     int digit = Integer.parseInt(digitOne.getText());
     digit = (digit - 1 + 10) % 10;
     digitOne.setText(Integer.toString(digit));
@@ -212,6 +219,7 @@ public class CafeteriaController {
 
   @FXML
   private void digitTwoIncrement() {
+    thoughtBubblePane.setVisible(false);
     int digit = Integer.parseInt(digitTwo.getText());
     digit = (digit + 1) % 10;
     digitTwo.setText(Integer.toString(digit));
@@ -219,6 +227,7 @@ public class CafeteriaController {
 
   @FXML
   private void digitTwoDecrease() {
+    thoughtBubblePane.setVisible(false);
     int digit = Integer.parseInt(digitTwo.getText());
     digit = (digit - 1 + 10) % 10;
     digitTwo.setText(Integer.toString(digit));
@@ -226,6 +235,7 @@ public class CafeteriaController {
 
   @FXML
   private void digitThreeIncrement() {
+    thoughtBubblePane.setVisible(false);
     int digit = Integer.parseInt(digitThree.getText());
     digit = (digit + 1) % 10;
     digitThree.setText(Integer.toString(digit));
@@ -233,6 +243,7 @@ public class CafeteriaController {
 
   @FXML
   private void digitThreeDecrease() {
+    thoughtBubblePane.setVisible(false);
     int digit = Integer.parseInt(digitThree.getText());
     digit = (digit - 1 + 10) % 10;
     digitThree.setText(Integer.toString(digit));
@@ -240,6 +251,7 @@ public class CafeteriaController {
 
   @FXML
   private void digitFourIncrement() {
+    thoughtBubblePane.setVisible(false);
     int digit = Integer.parseInt(digitFour.getText());
     digit = (digit + 1) % 10;
     digitFour.setText(Integer.toString(digit));
@@ -247,6 +259,7 @@ public class CafeteriaController {
 
   @FXML
   private void digitFourDecrease() {
+    thoughtBubblePane.setVisible(false);
     int digit = Integer.parseInt(digitFour.getText());
     digit = (digit - 1 + 10) % 10;
     digitFour.setText(Integer.toString(digit));
@@ -265,7 +278,8 @@ public class CafeteriaController {
       paperPane.setVisible(true);
       GameState.safeUnlocked = true;
     } else {
-      showDialog("Wrong combination", "Try again", "The padlock did not open.");
+      thoughtBubblePane.setVisible(true);
+      thoughtBubbleText.setText("Hmm, that code didn't work");
     }
   }
 
@@ -338,12 +352,16 @@ public class CafeteriaController {
     System.out.println("Speech bubble three clicked");
   }
 
-  private void showDialog(String title, String headerText, String message) {
-    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-    alert.setTitle(title);
-    alert.setHeaderText(headerText);
-    alert.setContentText(message);
-    alert.showAndWait();
+  @FXML
+  private void crossMouseEntered() {
+    cross.scaleXProperty().set(1.15);
+    cross.scaleYProperty().set(1.15);
+  }
+
+  @FXML
+  private void crossMouseExited() {
+    cross.scaleXProperty().set(1);
+    cross.scaleYProperty().set(1);
   }
 
   private void resetCafeteria() {
