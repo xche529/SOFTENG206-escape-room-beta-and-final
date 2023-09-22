@@ -82,9 +82,19 @@ public class StartInterfaceController {
     SceneManager.switchRoom(false, sceneButtonIsIn);
     roomController.start();
     System.out.println("Game started");
+    //unselects all of the choices
     twoMin.setSelected(false);
     fourMin.setSelected(false);
     sixMin.setSelected(false);
+    easy.setSelected(false);
+    medium.setSelected(false);
+    hard.setSelected(false);
+    easyTick.setVisible(false);
+    mediumTick.setVisible(false);
+    hardTick.setVisible(false);
+    twoTick.setVisible(false);
+    fourTick.setVisible(false);
+    sixTick.setVisible(false);
   }
 
   /*
