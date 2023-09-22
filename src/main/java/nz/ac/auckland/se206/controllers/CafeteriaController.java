@@ -177,6 +177,10 @@ public class CafeteriaController {
     GameState.phoneNumber = "027" + " " + phoneNumberInitial.substring(0, 3) + " " + phoneNumberInitial.substring(3, 6);
     numberLabel.setText(GameState.phoneNumber);
 
+    animateArrows(paintingWithSafeArrow);
+    animateArrows(paintingWithoutSafeArrow);
+    animateArrows(vendingMachineArrow);
+
   }
 
   /**

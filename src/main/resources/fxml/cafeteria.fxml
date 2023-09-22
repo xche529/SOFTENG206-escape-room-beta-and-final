@@ -52,6 +52,30 @@
                   <Image url="@../images/Safe.png" />
                </image>
             </ImageView>
+            <Pane fx:id="paperPane" layoutX="130.0" layoutY="65.0" prefHeight="486.0" prefWidth="852.0" visible="false">
+               <children>
+                  <ImageView fitHeight="510.0" fitWidth="888.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/paper.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="359.0" layoutY="24.0" prefHeight="142.0" prefWidth="112.0" text="Call:">
+                     <font>
+                        <Font name="American Typewriter" size="47.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="collectPaperLabel" layoutX="320.0" layoutY="363.0" onMouseClicked="#onClickCollectPaper" onMouseEntered="#collectPaperMouseEntered" onMouseExited="#collectPaperMouseExited" prefHeight="49.0" prefWidth="199.0" text="Collect Paper">
+                     <font>
+                        <Font size="34.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="numberLabel" layoutX="255.0" layoutY="177.0" prefHeight="142.0" prefWidth="424.0" textAlignment="CENTER">
+                     <font>
+                        <Font name="American Typewriter" size="47.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
             <ImageView fitHeight="622.0" fitWidth="341.0" layoutX="1114.0" pickOnBounds="true">
                <image>
                   <Image url="@../images/background.png" />
@@ -175,17 +199,17 @@
                   <Image url="@../images/background.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="paintingWithoutSafeArrow" fitHeight="53.0" fitWidth="44.0" layoutX="1018.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="paintingWithoutSafeArrow" fitHeight="53.0" fitWidth="44.0" layoutX="1018.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5">
                <image>
                   <Image url="@../images/newArrow.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="paintingWithSafeArrow" fitHeight="53.0" fitWidth="44.0" layoutX="596.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="paintingWithSafeArrow" fitHeight="53.0" fitWidth="44.0" layoutX="596.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5">
                <image>
                   <Image url="@../images/newArrow.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="vendingMachineArrow" fitHeight="53.0" fitWidth="44.0" layoutX="452.0" layoutY="253.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="vendingMachineArrow" fitHeight="53.0" fitWidth="44.0" layoutX="452.0" layoutY="253.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5">
                <image>
                   <Image url="@../images/newArrow.png" />
                </image>
@@ -263,30 +287,6 @@
                         <Font size="19.0" />
                      </font>
                   </Button>
-               </children>
-            </Pane>
-            <Pane fx:id="paperPane" layoutX="130.0" layoutY="65.0" prefHeight="486.0" prefWidth="852.0" visible="false">
-               <children>
-                  <ImageView fitHeight="510.0" fitWidth="888.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/paper.png" />
-                     </image>
-                  </ImageView>
-                  <Label layoutX="359.0" layoutY="24.0" prefHeight="142.0" prefWidth="112.0" text="Call:">
-                     <font>
-                        <Font name="American Typewriter" size="47.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="collectPaperLabel" layoutX="320.0" layoutY="363.0" onMouseClicked="#onClickCollectPaper" onMouseEntered="#collectPaperMouseEntered" onMouseExited="#collectPaperMouseExited" prefHeight="49.0" prefWidth="199.0" text="Collect Paper">
-                     <font>
-                        <Font size="34.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="numberLabel" layoutX="255.0" layoutY="177.0" prefHeight="142.0" prefWidth="424.0" textAlignment="CENTER">
-                     <font>
-                        <Font name="American Typewriter" size="47.0" />
-                     </font>
-                  </Label>
                </children>
             </Pane>
          </children>
