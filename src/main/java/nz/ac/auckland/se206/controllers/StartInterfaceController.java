@@ -14,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.GptAndTextAreaManager;
 import nz.ac.auckland.se206.PlayHistory;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
@@ -77,11 +78,10 @@ public class StartInterfaceController {
     }
     GameState.playerName = playerName.getText();
     Scene sceneButtonIsIn = twoTick.getScene();
-    // // initialize the characters with prompt
-    // //GptAndTextAreaManager.initialize();
+    GptAndTextAreaManager.initialize();
     SceneManager.switchRoom(false, sceneButtonIsIn);
     roomController.start();
-    System.out.println("Game started");
+    System.out.println("Game started with difficulty " + GameState.difficulty + " and play time " + GameState.secondsRemaining + " seconds");
     twoMin.setSelected(false);
     fourMin.setSelected(false);
     sixMin.setSelected(false);

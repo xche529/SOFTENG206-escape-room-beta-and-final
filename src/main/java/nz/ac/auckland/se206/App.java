@@ -113,7 +113,6 @@ public class App extends Application {
     SceneManager.roomController = roomController;
 
     Safe.getRandomCode();
-    GptAndTextAreaManager.initialize();
     VBox root = (VBox) SceneManager.getUiRoot(AppUi.START_INTERFACE);
     root.setLayoutX(centerX);
     root.setLayoutY(centerY);
