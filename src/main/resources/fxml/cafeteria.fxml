@@ -106,7 +106,7 @@
                   <Image url="@../images/speechBubble.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="speechBubbleThreeSmall" fitHeight="87.0" fitWidth="108.0" layoutX="97.0" layoutY="210.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#onSpeechBubbleThreeClicked" onMouseEntered="#onSetSpeechBubbleThreeUp" onMouseExited="#onSetSpeechBubbleThreeDown" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="speechBubbleThreeSmall" fitHeight="78.0" fitWidth="89.0" layoutX="236.0" layoutY="224.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#onSpeechBubbleThreeClicked" onMouseEntered="#onSetSpeechBubbleThreeUp" onMouseExited="#onSetSpeechBubbleThreeDown" pickOnBounds="true" preserveRatio="true" scaleX="-1.0">
                <image>
                   <Image url="@../images/speechBubble.png" />
                </image>
@@ -141,7 +141,7 @@
                   <Image url="@../images/guard2.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="thinkingTwo" fitHeight="42.0" fitWidth="39.0" layoutX="677.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="thinkingTwo" fitHeight="53.0" fitWidth="55.0" layoutX="668.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/thinking.gif" />
                </image>
@@ -161,12 +161,12 @@
                   <Image url="@../images/newArrow.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="thinkingOne" fitHeight="42.0" fitWidth="39.0" layoutX="892.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="thinkingOne" fitHeight="50.0" fitWidth="53.0" layoutX="885.0" layoutY="251.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/thinking.gif" />
                </image>
             </ImageView>
-            <ImageView fx:id="thinkingThree" fitHeight="42.0" fitWidth="39.0" layoutX="121.0" layoutY="227.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="thinkingThree" fitHeight="50.0" fitWidth="53.0" layoutX="256.0" layoutY="232.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/thinking.gif" />
                </image>
