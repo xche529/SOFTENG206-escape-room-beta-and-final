@@ -114,8 +114,6 @@ public class OfficeController {
   @FXML
   private Button exitVeiwButton;
   @FXML
-  private Pane cypherPane;
-  @FXML
   private Pane paperPane;
   @FXML
   private Pane phonePane;
@@ -243,11 +241,14 @@ public class OfficeController {
   @FXML
   private void clickDeskDrawers(MouseEvent event) {
     if (GameState.itemWithCypher == deskDrawers) {
+
+      GameState.cypherFound = true;
       inspectingDrawerPane.setVisible(true);
       drawerConverter.setVisible(true);
       thoughtBubblePane.setVisible(true);
       blurringPane.setVisible(true);
       thoughtBubbleText.setText("What's that piece of paper???");
+
     } else {
       inspectingDrawerPane.setVisible(true);
       blurringPane.setVisible(true);
@@ -267,6 +268,7 @@ public class OfficeController {
   @FXML
   private void clickBin(MouseEvent event) {
     if (GameState.itemWithCypher == bin) {
+      GameState.cypherFound = true;
       inspectingBinPane.setVisible(true);
       binConverter.setVisible(true);
       thoughtBubblePane.setVisible(true);
@@ -290,6 +292,7 @@ public class OfficeController {
   @FXML
   private void clickBlackboard(MouseEvent event) {
     if (GameState.itemWithCypher == blackBoard) {
+      GameState.cypherFound = true;
       inspectingBlackBoardPane.setVisible(true);
       inspectingBlackBoardConverter.setVisible(true);
       blurringPane.setVisible(true);
@@ -687,8 +690,8 @@ public class OfficeController {
                 updateTimerLabel();
               }
               if (GameState.secondsRemaining == 0) {
-                if (GameState.gameFinishedOffice) {
-                  GameState.gameFinishedOffice = false;
+                if (SceneManager.curretUi == SceneManager.AppUi.OFFICE) {
+                  GameState.secondsRemaining = -1;
                   GameState.resetCafeteria = true;
                   GameState.resetOffice = true;
                   GameState.resetRoom = true;
@@ -718,6 +721,9 @@ public class OfficeController {
     timerLabel.setText(String.format("%d:%02d", minutes, seconds));
   }
 
+  /*
+   * restores the office to its original state
+   */
   private void resetOffice() {
     // Getting random item to be used to hide the cypher
     Rectangle[] items = new Rectangle[] {
@@ -731,7 +737,9 @@ public class OfficeController {
     blackBoardArrow.setVisible(true);
     drawArrow.setVisible(true);
     phoneArrow.setVisible(true);
+    GameState.cypherFound = false;
     GameState.resetOffice = false;
     System.out.println("office reseted");
+
   }
 }
