@@ -60,13 +60,14 @@ public class PlayHistory implements Serializable {
 
   public String toString() {
     PlayHistory playHistory = this;
+    StringBuilder resultBuilder = new StringBuilder();
     String result = "";
     if (this.childPlayHistory != null) {
       result = this.childPlayHistory.toString();
     } else {
       int rank = 1;
       do {
-        result +=
+        resultBuilder.append(
             "Rank"
                 + rank
                 + ":\n "
@@ -76,11 +77,12 @@ public class PlayHistory implements Serializable {
                 + playHistory.timeTook
                 + "\n Difficulty: "
                 + playHistory.difficulty
-                + "\n\n";
+                + "\n\n");
         playHistory = playHistory.parentPlayHistory;
         rank++;
       } while (playHistory != null);
     }
+    result = resultBuilder.toString();
     return result;
   }
 
