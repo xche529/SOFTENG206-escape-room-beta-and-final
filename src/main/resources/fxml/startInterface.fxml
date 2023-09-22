@@ -4,6 +4,8 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -11,30 +13,134 @@
 
 <VBox fillWidth="false" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.StartInterfaceController">
    <children>
-      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1113.0">
+      <Pane layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1113.0">
          <children>
-            <Button layoutX="563.0" layoutY="337.0" mnemonicParsing="false" onAction="#onStartGame" prefHeight="74.0" prefWidth="141.0" text="start game" />
-            <CheckBox fx:id="hard" layoutX="758.0" layoutY="84.0" mnemonicParsing="false" onAction="#onSwitchDifficulty" text="HARD" />
-            <CheckBox fx:id="medium" layoutX="758.0" layoutY="115.0" mnemonicParsing="false" onAction="#onSwitchDifficulty" text="MEDIUM" />
-            <CheckBox fx:id="easy" layoutX="760.0" layoutY="145.0" mnemonicParsing="false" onAction="#onSwitchDifficulty" selected="true" text="EASY" />
-            <TextArea fx:id="playHistoryTextArea" layoutX="138.0" layoutY="119.0" prefHeight="277.0" prefWidth="284.0" text="No play history&#10;" wrapText="true">
-               <font>
-                  <Font size="21.0" />
-               </font></TextArea>
-            <Text layoutX="138.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ranking List" wrappingWidth="259.623046875">
-               <font>
-                  <Font size="30.0" />
-               </font></Text>
-            <Button layoutX="767.0" layoutY="337.0" mnemonicParsing="false" onAction="#onExitGame" prefHeight="74.0" prefWidth="141.0" text="Exit" />
-            <CheckBox fx:id="twoMin" layoutX="633.0" layoutY="145.0" mnemonicParsing="false" onAction="#onSetPlayTime" selected="true" text="2min" />
-            <CheckBox fx:id="fourMin" layoutX="633.0" layoutY="115.0" mnemonicParsing="false" onAction="#onSetPlayTime" text="4min" />
-            <CheckBox fx:id="sixMin" layoutX="633.0" layoutY="84.0" mnemonicParsing="false" onAction="#onSetPlayTime" text="6min" />
-            <TextField fx:id="playerName" layoutX="633.0" layoutY="246.0" prefHeight="46.0" prefWidth="216.0" text="Player">
+            <ImageView fitHeight="597.0" fitWidth="1112.0" layoutX="25.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" scaleX="1.05">
+               <image>
+                  <Image url="@../images/MENU%20_screen.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="24.0" fitWidth="137.0" layoutX="330.0" layoutY="202.0" onMouseClicked="#onClickFour" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/4%20MINUTES.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="19.0" fitWidth="137.0" layoutX="329.0" layoutY="238.0" onMouseClicked="#onClickSix" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/6%20MINUTES.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="19.0" fitWidth="131.0" layoutX="337.0" layoutY="165.0" onMouseClicked="#onClickTwo" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/2%20MINUTES.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="twoTick" fitHeight="28.0" fitWidth="42.0" layoutX="483.0" layoutY="159.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/checkmark.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="629.0" layoutY="99.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/DIFFICULTY.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="20.0" fitWidth="106.0" layoutX="643.0" layoutY="197.0" onMouseClicked="#onClickMedium" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/MEDUIM.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="26.0" fitWidth="60.0" layoutX="645.0" layoutY="161.0" onMouseClicked="#onClickEasy" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/EASY.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="20.0" fitWidth="75.0" layoutX="644.0" layoutY="231.0" onMouseClicked="#onClickHard" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/HARD.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="467.0" layoutY="296.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/ENTER%20YOUR%20NAME_.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="26.0" fitWidth="150.0" layoutX="517.0" layoutY="550.0" onMouseClicked="#onExitGame" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/EXIT.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="459.0" layoutY="335.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/Nametextbox.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="460.0" layoutY="493.0" onMouseClicked="#onViewPlayHistory" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/VIEW%20PLAY%20HISTORY.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="304.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/TIME%20LIMIT.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="230.0" fitWidth="508.0" layoutX="285.0" layoutY="402.0" onMouseClicked="#onStartGame" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/START%20GAME.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="fourTick" fitHeight="28.0" fitWidth="42.0" layoutX="483.0" layoutY="196.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../images/checkmark.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="sixTick" fitHeight="28.0" fitWidth="42.0" layoutX="482.0" layoutY="227.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../images/checkmark.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="easyTick" fitHeight="28.0" fitWidth="42.0" layoutX="770.0" layoutY="155.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/checkmark.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="mediumTick" fitHeight="28.0" fitWidth="42.0" layoutX="773.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../images/checkmark.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="hardTick" fitHeight="28.0" fitWidth="42.0" layoutX="772.0" layoutY="222.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../images/checkmark.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="playerName" layoutX="457.0" layoutY="332.0" prefHeight="39.0" prefWidth="199.0" style="-fx-background-color: none; -fx-text-fill: white;" text="Player">
                <font>
                   <Font size="22.0" />
                </font>
             </TextField>
-            <Text layoutX="634.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter yout name:" />
+            <Pane layoutX="345.0" layoutY="79.0" prefHeight="399.0" prefWidth="367.0" style="-fx-background-color: white;" visible="false">
+               <children>
+                  <TextArea fx:id="playHistoryTextArea" layoutX="32.0" layoutY="62.0" prefHeight="277.0" prefWidth="284.0" text="No play history&#10;" wrapText="true">
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                  </TextArea>
+                  <Text layoutX="76.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ranking List" wrappingWidth="259.623046875">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Text>
+                  <Button layoutX="151.0" layoutY="347.0" mnemonicParsing="false" onAction="#onGoBack" text="Go Back" />
+               </children>
+            </Pane>
+            <CheckBox fx:id="twoMin" layoutX="36.0" layoutY="126.0" mnemonicParsing="false" onAction="#onSetPlayTime" selected="true" text="2min" visible="false" />
+            <CheckBox fx:id="fourMin" layoutX="36.0" layoutY="96.0" mnemonicParsing="false" onAction="#onSetPlayTime" text="4min" visible="false" />
+            <CheckBox fx:id="sixMin" layoutX="36.0" layoutY="54.0" mnemonicParsing="false" onAction="#onSetPlayTime" text="6min" visible="false" />
+            <CheckBox fx:id="hard" layoutX="39.0" layoutY="165.0" mnemonicParsing="false" onAction="#onSwitchDifficulty" text="HARD" visible="false" />
+            <CheckBox fx:id="medium" layoutX="39.0" layoutY="177.0" mnemonicParsing="false" onAction="#onSwitchDifficulty" text="MEDIUM" visible="false" />
+            <CheckBox fx:id="easy" layoutX="41.0" layoutY="207.0" mnemonicParsing="false" onAction="#onSwitchDifficulty" selected="true" text="EASY" visible="false" />
          </children>
       </Pane>
    </children>

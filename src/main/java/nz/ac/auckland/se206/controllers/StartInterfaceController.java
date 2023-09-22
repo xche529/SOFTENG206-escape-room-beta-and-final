@@ -14,6 +14,8 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
@@ -24,15 +26,39 @@ import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class StartInterfaceController {
-  @FXML private CheckBox hard;
-  @FXML private CheckBox medium;
-  @FXML private CheckBox easy;
-  @FXML private CheckBox twoMin;
-  @FXML private CheckBox fourMin;
-  @FXML private CheckBox sixMin;
-  @FXML private MenuButton difficulty;
-  @FXML private TextArea playHistoryTextArea;
-  @FXML private TextField playerName;
+  @FXML
+  private CheckBox hard;
+  @FXML
+  private CheckBox medium;
+  @FXML
+  private CheckBox easy;
+  @FXML
+  private CheckBox twoMin;
+  @FXML
+  private CheckBox fourMin;
+  @FXML
+  private CheckBox sixMin;
+  @FXML
+  private MenuButton difficulty;
+  @FXML
+  private TextArea playHistoryTextArea;
+  @FXML
+  private TextField playerName;
+  @FXML
+  private ImageView easyTick;
+  @FXML
+  private ImageView mediumTick;
+  @FXML
+  private ImageView hardTick;
+  @FXML
+  private ImageView twoTick;
+  @FXML
+  private ImageView fourTick;
+  @FXML
+  private ImageView sixTick;
+  @FXML
+  private Pane historyPane;
+
   private RoomController roomController;
 
   @FXML
@@ -58,16 +84,14 @@ public class StartInterfaceController {
     this.roomController = roomController;
   }
 
-
   @FXML
   private void onStartGame(Event event) throws IOException, ApiProxyException {
-      if (!twoMin.isSelected() && !fourMin.isSelected() && !sixMin.isSelected()) {
+    if (!twoMin.isSelected() && !fourMin.isSelected() && !sixMin.isSelected()) {
       showDialog("Invaild Inputs", "Please select a difficulty and time limit", "");
       return;
     }
     GameState.playerName = playerName.getText();
-    Button button = (Button) event.getSource();
-    Scene sceneButtonIsIn = button.getScene();
+    Scene sceneButtonIsIn = twoTick.getScene();
     // // initialize the characters with prompt
     // //GptAndTextAreaManager.initialize();
     SceneManager.switchRoom(false, sceneButtonIsIn);
@@ -91,9 +115,9 @@ public class StartInterfaceController {
   /**
    * Displays a dialog box with the given title, header text, and message.
    *
-   * @param title the title of the dialog box
+   * @param title      the title of the dialog box
    * @param headerText the header text of the dialog box
-   * @param message the message content of the dialog box
+   * @param message    the message content of the dialog box
    */
   private void showDialog(String title, String headerText, String message) {
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -132,8 +156,45 @@ public class StartInterfaceController {
     }
   }
 
+  @FXML
+  private void onClickEasy() {
+    hard.setSelected(false);
+    medium.setSelected(false);
+    easy.setSelected(true);
+    easyTick.setVisible(true);
+    mediumTick.setVisible(false);
+    hardTick.setVisible(false);
+    GameState.difficulty = GameState.Difficulty.EASY;
+    System.out.println("Difficulty change: easy");
+  }
+
+  @FXML
+  private void onClickMedium() {
+    easy.setSelected(false);
+    hard.setSelected(false);
+    medium.setSelected(true);
+    easyTick.setVisible(false);
+    mediumTick.setVisible(true);
+    hardTick.setVisible(false);
+    GameState.difficulty = GameState.Difficulty.MEDIUM;
+    System.out.println("Difficulty change: medium");
+  }
+
+  @FXML
+  private void onClickHard() {
+    easy.setSelected(false);
+    medium.setSelected(false);
+    hard.setSelected(true);
+    easyTick.setVisible(false);
+    mediumTick.setVisible(false);
+    hardTick.setVisible(true);
+    GameState.difficulty = GameState.Difficulty.HARD;
+    System.out.println("Difficulty change: hard");
+  }
+
   /*
-   * This method is invoked when the user clicks any of the play time checkboxes.
+   * This method is invoked when the user clicks any of the play time
+   * checkboxes.
    */
   @FXML
   private void onSetPlayTime(Event event) {
@@ -163,4 +224,54 @@ public class StartInterfaceController {
       System.out.println("Play time change: 6 minutes");
     }
   }
+
+  @FXML
+  private void onClickTwo() {
+    fourMin.setSelected(false);
+    sixMin.setSelected(false);
+    twoMin.setSelected(true);
+    fourTick.setVisible(false);
+    sixTick.setVisible(false);
+    twoTick.setVisible(true);
+    GameState.secondsRemaining = 120;
+    GameState.totalSeconds = 120;
+    System.out.println("Play time change: 2 minutes");
+  }
+
+  @FXML
+  private void onClickFour() {
+    twoMin.setSelected(false);
+    sixMin.setSelected(false);
+    fourMin.setSelected(true);
+    twoTick.setVisible(false);
+    fourTick.setVisible(true);
+    sixTick.setVisible(false);
+    GameState.secondsRemaining = 240;
+    GameState.totalSeconds = 240;
+    System.out.println("Play time change: 4 minutes");
+  }
+
+  @FXML
+  private void onClickSix() {
+    twoMin.setSelected(false);
+    fourMin.setSelected(false);
+    sixMin.setSelected(true);
+    twoTick.setVisible(false);
+    fourTick.setVisible(false);
+    sixTick.setVisible(true);
+    GameState.secondsRemaining = 360;
+    GameState.totalSeconds = 360;
+    System.out.println("Play time change: 6 minutes");
+  }
+
+  @FXML
+  private void onGoBack() {
+    historyPane.setVisible(false);
+  }
+
+  @FXML
+  private void onViewPlayHistory() {
+    historyPane.setVisible(true);
+  }
+
 }
