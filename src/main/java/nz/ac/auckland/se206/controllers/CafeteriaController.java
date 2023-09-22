@@ -78,6 +78,10 @@ public class CafeteriaController {
   @FXML private Pane thoughtBubblePane;
   @FXML private Text thoughtBubbleText;
 
+  @FXML private Pane inspectingVendingPane;
+  @FXML private Pane inspectingPaintingPane;
+  @FXML private Pane blurredPane;
+
   private ImageView[] animationItems;
 
   private Timeline timeline;
@@ -130,7 +134,10 @@ public class CafeteriaController {
    */
   @FXML
   private void onClickVendingMachine(MouseEvent event) {
-    // TODO: add code to handle click on vending machine
+    blurredPane.setVisible(true);
+    inspectingVendingPane.setVisible(true);
+    thoughtBubblePane.setVisible(true);
+    thoughtBubbleText.setText("Hmm, there's nothing here");
     vendingMachineArrow.setVisible(false);
   }
 
@@ -154,8 +161,25 @@ public class CafeteriaController {
    */
   @FXML
   private void onClickPaintingWithoutSafe(MouseEvent event) {
-    // TODO: add code to handle click on picture without safe
+    blurredPane.setVisible(true);
+    inspectingPaintingPane.setVisible(true);
+    thoughtBubblePane.setVisible(true);
+    thoughtBubbleText.setText("Hmm, there's nothing here");
     paintingWithoutSafeArrow.setVisible(false);
+  }
+
+  @FXML
+  private void onClickInspectingVendingPane() {
+    blurredPane.setVisible(false);
+    inspectingVendingPane.setVisible(false);
+    thoughtBubblePane.setVisible(false);
+  }
+
+  @FXML
+  private void onClickInspectingPaintingPane() {
+    blurredPane.setVisible(false);
+    inspectingPaintingPane.setVisible(false);
+    thoughtBubblePane.setVisible(false);
   }
 
   @FXML
