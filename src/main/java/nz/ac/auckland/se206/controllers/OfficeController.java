@@ -135,6 +135,7 @@ public class OfficeController {
           digitEight,
           digitNine
         };
+
     //if the user finds the paper, the phone number will be displayed
     GameState.hasPaperProperty()
         .addListener(
@@ -763,6 +764,7 @@ public class OfficeController {
                         parent.setLayoutY(App.centerY);
                         scene.setRoot(parent);
                       } catch (NullPointerException e) {
+                        System.out.println("Null pointer exception");
                       }
                     }
                   }

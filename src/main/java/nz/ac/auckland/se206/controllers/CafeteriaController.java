@@ -9,13 +9,13 @@ import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
@@ -64,6 +64,9 @@ public class CafeteriaController {
   @FXML private Label digitFour;
   @FXML private Button openButton;
 
+
+  @FXML private ImageView cross;
+
   @FXML private Pane paperPane;
   @FXML private Label collectPaperLabel;
   @FXML private Label numberLabel;
@@ -72,6 +75,10 @@ public class CafeteriaController {
   @FXML private ImageView paintingWithoutSafeArrow;
   @FXML private ImageView vendingMachineArrow;
   @FXML private Label timerLabel;
+
+  @FXML private Pane thoughtBubblePane;
+  @FXML private Text thoughtBubbleText;
+
 
   private ImageView[] animationItems;
 
@@ -215,6 +222,8 @@ public class CafeteriaController {
    */
   @FXML
   private void digitOneIncrement(MouseEvent event) {
+    thoughtBubblePane.setVisible(false);
+
     int digit = Integer.parseInt(digitOne.getText());
     digit = (digit + 1) % 10;
     digitOne.setText(Integer.toString(digit));
@@ -226,7 +235,8 @@ public class CafeteriaController {
    * @param event the mouse event from when the user clicks on the minus down of the first digit
    */
   @FXML
-  private void digitOneDecrease() {
+  private void digitOneDecrease(MouseEvent Event) {
+    thoughtBubblePane.setVisible(false);
     int digit = Integer.parseInt(digitOne.getText());
     digit = (digit - 1 + 10) % 10;
     digitOne.setText(Integer.toString(digit));
@@ -238,7 +248,8 @@ public class CafeteriaController {
    * @param event the mouse event from when the user clicks on the plus up of the second digit
    */
   @FXML
-  private void digitTwoIncrement() {
+  private void digitTwoIncrement(MouseEvent event) {
+    thoughtBubblePane.setVisible(false);
     int digit = Integer.parseInt(digitTwo.getText());
     digit = (digit + 1) % 10;
     digitTwo.setText(Integer.toString(digit));
@@ -250,7 +261,8 @@ public class CafeteriaController {
    * @param event the mouse event from when the user clicks on the minus down of the second digit
    */
   @FXML
-  private void digitTwoDecrease() {
+  private void digitTwoDecrease(MouseEvent event) {
+    thoughtBubblePane.setVisible(false);
     int digit = Integer.parseInt(digitTwo.getText());
     digit = (digit - 1 + 10) % 10;
     digitTwo.setText(Integer.toString(digit));
@@ -262,7 +274,8 @@ public class CafeteriaController {
    * @param event the mouse event from when the user clicks on the plus up of the third digit
    */
   @FXML
-  private void digitThreeIncrement() {
+  private void digitThreeIncrement(MouseEvent event) {
+    thoughtBubblePane.setVisible(false);
     int digit = Integer.parseInt(digitThree.getText());
     digit = (digit + 1) % 10;
     digitThree.setText(Integer.toString(digit));
@@ -274,7 +287,8 @@ public class CafeteriaController {
    * @param event the mouse event from when the user clicks on the minus down of the third digit
    */
   @FXML
-  private void digitThreeDecrease() {
+  private void digitThreeDecrease(MouseEvent event) {
+    thoughtBubblePane.setVisible(false);
     int digit = Integer.parseInt(digitThree.getText());
     digit = (digit - 1 + 10) % 10;
     digitThree.setText(Integer.toString(digit));
@@ -286,7 +300,8 @@ public class CafeteriaController {
    * @param event the mouse event from when the user clicks on the plus up of the fourth digit
    */
   @FXML
-  private void digitFourIncrement() {
+  private void digitFourIncrement(MouseEvent event) {
+    thoughtBubblePane.setVisible(false);
     int digit = Integer.parseInt(digitFour.getText());
     digit = (digit + 1) % 10;
     digitFour.setText(Integer.toString(digit));
@@ -298,7 +313,8 @@ public class CafeteriaController {
    * @param event the mouse event from when the user clicks on the minus down of the fourth digit
    */
   @FXML
-  private void digitFourDecrease() {
+  private void digitFourDecrease(MouseEvent event) {
+    thoughtBubblePane.setVisible(false);
     int digit = Integer.parseInt(digitFour.getText());
     digit = (digit - 1 + 10) % 10;
     digitFour.setText(Integer.toString(digit));
@@ -310,7 +326,7 @@ public class CafeteriaController {
    * @param event the mouse event from when the user clicks on the open button
    */
   @FXML
-  private void onClickOpenPadlock() {
+  private void onClickOpenPadlock(MouseEvent event) {
     int digitOneInt = Integer.parseInt(digitOne.getText());
     int digitTwoInt = Integer.parseInt(digitTwo.getText());
     int digitThreeInt = Integer.parseInt(digitThree.getText());
@@ -322,7 +338,8 @@ public class CafeteriaController {
       paperPane.setVisible(true);
       GameState.safeUnlocked = true;
     } else {
-      showDialog("Wrong combination", "Try again", "The padlock did not open.");
+      thoughtBubblePane.setVisible(true);
+      thoughtBubbleText.setText("Hmm, that code didn't work");
     }
   }
 
@@ -431,12 +448,16 @@ public class CafeteriaController {
     System.out.println("Speech bubble three clicked");
   }
 
-  private void showDialog(String title, String headerText, String message) {
-    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-    alert.setTitle(title);
-    alert.setHeaderText(headerText);
-    alert.setContentText(message);
-    alert.showAndWait();
+  @FXML
+  private void crossMouseEntered() {
+    cross.scaleXProperty().set(1.15);
+    cross.scaleYProperty().set(1.15);
+  }
+
+  @FXML
+  private void crossMouseExited() {
+    cross.scaleXProperty().set(1);
+    cross.scaleYProperty().set(1);
   }
 
   /** This method resets the cafeteria to its initial state. */
@@ -474,6 +495,7 @@ public class CafeteriaController {
    * @param arrow the arrow to animate
    */
   public void animateArrows(ImageView arrow) {
+
     double startY = 0;
 
     TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.5), arrow);

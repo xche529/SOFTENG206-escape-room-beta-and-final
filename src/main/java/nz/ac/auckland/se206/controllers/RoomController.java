@@ -111,7 +111,9 @@ public class RoomController {
     // initialize fields in the GptAndTextAreaManager class
     GptAndTextAreaManager.roomController = this;
 
+
     // initializes all the animation items into an array
+
     animationItems =
         new ImageView[] {
           prisonerOne,
@@ -123,6 +125,7 @@ public class RoomController {
           thinkingOne,
           thinkingTwo
         };
+
     // moves the prisoners to their starting point
     resetAnimation();
 
@@ -146,6 +149,7 @@ public class RoomController {
                   }
                   GameState.secondsRemaining--;
                   updateTimerLabel();
+
                   // uses test to spech to tell the player how long they have left
                   if (GameState.secondsRemaining == 90 && GameState.isWon == false) {
                     textToSpeech.speak("a minute and a half remaining");
@@ -206,6 +210,7 @@ public class RoomController {
                   }
                   if (GameState.secondsRemaining == 0) {
                     if (SceneManager.curretUi == SceneManager.AppUi.ROOM) {
+
                       //prevents the reset from being called multipul times
                       GameState.secondsRemaining = -1;
                       GameState.resetCafeteria = true;
@@ -219,6 +224,7 @@ public class RoomController {
                         parent.setLayoutY(App.centerY);
                         scene.setRoot(parent);
                       } catch (NullPointerException e) {
+                        System.out.println("Null pointer exception");
                       }
                     }
                   }
@@ -227,6 +233,7 @@ public class RoomController {
                     try {
                       resetRoom();
                     } catch (ApiProxyException e) {
+                      e.printStackTrace();
                     }
                   }
                 }));
@@ -252,7 +259,7 @@ public class RoomController {
     towelArrow.setOpacity(0);
     doorArrowSmall.setOpacity(0);
     GameState.setRiddleResolved(false);
-
+    GptAndTextAreaManager.reset();
     GameState.wordFound = false;
     GameState.resetRoom = false;
     System.out.println("room reseted");
