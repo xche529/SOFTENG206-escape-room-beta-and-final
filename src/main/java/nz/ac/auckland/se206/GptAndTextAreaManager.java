@@ -55,7 +55,7 @@ public class GptAndTextAreaManager {
    */
   public static void initialize() throws ApiProxyException {
     sendMessage(
-        GptPromptEngineering.getGuardSetUp(GameState.itemToChoose.getId(), GameState.numHints));
+        GptPromptEngineering.getGuardSetUp(GameState.itemToChoose.getId()));
     currentCharacter = Characters.PRISONER_ONE;
     sendMessage(GptPromptEngineering.getPrisonerOneSetUp());
     currentCharacter = Characters.PRISONER_TWO;

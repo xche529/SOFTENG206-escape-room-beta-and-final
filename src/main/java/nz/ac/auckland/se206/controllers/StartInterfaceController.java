@@ -122,7 +122,6 @@ public class StartInterfaceController {
       hard.setSelected(false);
       medium.setSelected(false);
       easy.setSelected(true);
-      GameState.numHints = "infinite";
       GameState.difficulty = GameState.Difficulty.EASY;
       System.out.println("Difficulty change: easy");
     }
@@ -130,7 +129,6 @@ public class StartInterfaceController {
       easy.setSelected(false);
       hard.setSelected(false);
       medium.setSelected(true);
-      GameState.numHints = "5";
       GameState.difficulty = GameState.Difficulty.MEDIUM;
       System.out.println("Difficulty change: medium");
     }
@@ -138,7 +136,6 @@ public class StartInterfaceController {
       easy.setSelected(false);
       medium.setSelected(false);
       hard.setSelected(true);
-      GameState.numHints = "0";
       GameState.difficulty = GameState.Difficulty.HARD;
       System.out.println("Difficulty change: hard");
     }
