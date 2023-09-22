@@ -200,6 +200,7 @@ public class CafeteriaController {
     safe.setVisible(true);
     paintingWithSafe.setVisible(false);
     paintingWithSafeArrow.setVisible(false);
+    GameState.safeFound = true;
   }
 
   /**
@@ -327,6 +328,7 @@ public class CafeteriaController {
 
       padlockPane.setVisible(false);
       paperPane.setVisible(true);
+      GameState.safeUnlocked = true;
     } else {
       showDialog(
           "Wrong combination",
@@ -429,6 +431,8 @@ public class CafeteriaController {
     paintingWithSafeArrow.setVisible(true);
     paintingWithoutSafeArrow.setVisible(true);
     vendingMachineArrow.setVisible(true);
+    GameState.safeFound = false;
+    GameState.safeUnlocked = false;
     GameState.resetCafeteria = false;
     System.out.println("cafeteria reseted");
   }

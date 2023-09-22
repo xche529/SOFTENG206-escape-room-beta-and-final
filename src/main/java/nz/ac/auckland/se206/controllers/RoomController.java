@@ -289,8 +289,26 @@ public class RoomController {
     doorArrowSmall.setOpacity(0);
     // animateArrows(doorArrow);
     GameState.setRiddleResolved(false);
+
+    GameState.wordFound = false;
     GameState.resetRoom = false;
     System.out.println("room reseted");
+  }
+
+  /*
+   * This method prepares the riddle for the player to solve.
+   *
+   * @throws ApiProxyException
+   */
+  private void prepareRiddle() throws ApiProxyException {
+    // Sending the initial request so the riddle is ready when the player enters the
+    // chat
+    chatCompletionRequest = new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
+    ChatMessage userChatMessage = new ChatMessage(
+        "user", GptPromptEngineering.getRiddleWithGivenWord(GameState.itemToChoose.getId()));
+    runGpt(userChatMessage, lastMsg -> {
+    });
+
   }
 
   /*
@@ -541,6 +559,7 @@ public class RoomController {
         toiletWordLabel.setText(GameState.codeWord);
         thoughtBubblePane.setVisible(true);
         thoughtBubbleText.setText("What's that scratched onto the rim?");
+        GameState.wordFound = true;
       } else {
         blurredPane.setVisible(true);
         inspectingToiletPane.setVisible(true);
@@ -567,6 +586,7 @@ public class RoomController {
         toiletPaperWordLabel.setText(GameState.codeWord);
         thoughtBubblePane.setVisible(true);
         thoughtBubbleText.setText("What's that scratched onto the rim?");
+        GameState.wordFound = true;
       } else {
         blurredPane.setVisible(true);
         inspectingToiletPaperPane.setVisible(true);
@@ -588,11 +608,14 @@ public class RoomController {
     ventArrow.setOpacity(0);
     if (GameState.isRiddleResolved()) {
       if (GameState.itemToChoose == vent) {
+
         blurredPane.setVisible(true);
         inspectingVentPane.setVisible(true);
         ventWordLabel.setText(GameState.codeWord);
         thoughtBubblePane.setVisible(true);
         thoughtBubbleText.setText("What's that scratched onto the vent?");
+        GameState.wordFound = true;
+
       } else {
         blurredPane.setVisible(true);
         inspectingVentPane.setVisible(true);
@@ -614,11 +637,14 @@ public class RoomController {
     sinkArrow.setOpacity(0);
     if (GameState.isRiddleResolved()) {
       if (GameState.itemToChoose == sink) {
+
         blurredPane.setVisible(true);
         inspectingSinkPane.setVisible(true);
         sinkWordLabel.setText(GameState.codeWord);
         thoughtBubblePane.setVisible(true);
         thoughtBubbleText.setText("What's that scratched onto the rim?");
+        GameState.wordFound = true;
+
       } else {
         blurredPane.setVisible(true);
         inspectingSinkPane.setVisible(true);
@@ -640,11 +666,14 @@ public class RoomController {
     mirrorArrow.setOpacity(0);
     if (GameState.isRiddleResolved()) {
       if (GameState.itemToChoose == mirror) {
+
         blurredPane.setVisible(true);
         inspectingMirrorPane.setVisible(true);
         mirrorWordLabel.setText(GameState.codeWord);
         thoughtBubblePane.setVisible(true);
         thoughtBubbleText.setText("What's that on the mirror?");
+        GameState.wordFound = true;
+
       } else {
         blurredPane.setVisible(true);
         inspectingMirrorPane.setVisible(true);
@@ -666,11 +695,14 @@ public class RoomController {
     towelArrow.setOpacity(0);
     if (GameState.isRiddleResolved()) {
       if (GameState.itemToChoose == towel) {
+
         blurredPane.setVisible(true);
         inspectingTowelPane.setVisible(true);
         towelWordLabel.setText(GameState.codeWord);
         thoughtBubblePane.setVisible(true);
         thoughtBubbleText.setText("What's that written on the towel?");
+        GameState.wordFound = true;
+
       } else {
         blurredPane.setVisible(true);
         inspectingTowelPane.setVisible(true);
@@ -681,6 +713,18 @@ public class RoomController {
   }
 
   @FXML
+
+  private void onTextBubbleClicked() throws ApiProxyException {
+    // chatPane.setVisible(true);
+    // questionInfoLabel.setVisible(true);
+    // chatCompletionRequest = new ChatCompletionRequest().setN(1).setTemperature(1).setTopP(0.5).setMaxTokens(100);
+    // ChatMessage userChatMessage = new ChatMessage("user",
+    //     GptPromptEngineering.getGuardSetUp(GameState.itemToChoose.getId()), GameState.numHints);
+    // // runGpt(userChatMessage, lastMsg -> {});
+  }
+
+  @FXML
+
   private void onSpeechBubbleOneClicked() {
     GptAndTextAreaManager.displayTarget(Characters.PRISONER_ONE);
     System.out.println("Speech bubble one clicked");

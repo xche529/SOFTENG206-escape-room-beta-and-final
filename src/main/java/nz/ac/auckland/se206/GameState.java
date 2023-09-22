@@ -30,6 +30,14 @@ public class GameState {
 
   public static int secondsRemaining = 120;
 
+  public static boolean wordFound = false;
+
+  public static boolean cypherFound = false;
+
+  public static boolean safeFound = false;
+
+  public static boolean safeUnlocked = false;
+
   public static int totalSeconds = 120;
 
   public static Rectangle itemToChoose;
@@ -49,6 +57,8 @@ public static boolean gameFinishedCafeteria = false;
 public static boolean gameFinishedOffice = false;
 
 public static boolean gameFinishedRoom = false;
+
+public static String numHints = "infinite";
 
 public static boolean stopTimer = false;
 

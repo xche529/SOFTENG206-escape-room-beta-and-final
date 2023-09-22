@@ -56,7 +56,7 @@ public class GptAndTextAreaManager {
      * @param chat the ChatCompletionRequest for the chat history
      */
     public static void initialize() throws ApiProxyException {
-        sendMessage(GptPromptEngineering.getGuardSetUp(GameState.itemToChoose.getId()));
+        sendMessage(GptPromptEngineering.getGuardSetUp(GameState.itemToChoose.getId(), GameState.numHints));
         currentCharacter = Characters.PRISONER_ONE;
         sendMessage(GptPromptEngineering.getPrisonerOneSetUp());
         currentCharacter = Characters.PRISONER_TWO;
@@ -70,9 +70,10 @@ public class GptAndTextAreaManager {
         // IMPORTANT: increase i here to filtout the prompt Engineering content
 
         if (messages.size() > 1) {
+
             for (int i = 1; i < messages.size(); i++) {
                 if (messages.get(i).getRole().equals("assistant")
-                        && messages.get(i).getContent().contains("Guard: Correct")) {
+                        && messages.get(i).getContent().contains("Correct")) {
                     GameState.setRiddleResolved(true);
                 }
                 String name = messages.get(i).getRole();
@@ -126,8 +127,21 @@ public class GptAndTextAreaManager {
     }
 
     public static void sendMessage(String message) throws ApiProxyException {
+
         boolean ifSpeak = false;
+
         if (currentCharacter == Characters.GUARD) {
+            if (GameState.isRiddleResolved() == false) {
+                message = message + "? " + "(riddle unsolved)";    
+            } else if (GameState.wordFound == false) {
+                message = message + "? " + "(riddle solved)";
+            } else if (GameState.cypherFound == false) {
+                message = message + "? " + "(word found)";
+            } else if (GameState.safeFound == false) {
+                message = message + "? " + "(cypher found)";
+            } else if (GameState.safeUnlocked == false) {
+                message = message + "? " + "(safe found)";
+            }
             guardChatCompletionRequest.addMessage(new ChatMessage("user", message));
             runGpt(guardChatCompletionRequest);
             if (guardChatCompletionRequest.getMessages().size() > 2) {
