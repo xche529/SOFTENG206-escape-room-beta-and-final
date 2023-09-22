@@ -120,7 +120,6 @@ public class App extends Application {
 
     // setting up the scene and getting the random code
     Safe.getRandomCode();
-    GptAndTextAreaManager.initialize();
     VBox root = (VBox) SceneManager.getUiRoot(AppUi.START_INTERFACE);
     root.setLayoutX(centerX);
     root.setLayoutY(centerY);

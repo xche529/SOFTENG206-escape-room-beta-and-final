@@ -16,6 +16,7 @@ public class TextAreaController {
   @FXML private TextArea chatDisplayBoard;
   @FXML private TextArea objectiveDisplayBoard;
   @FXML private Text typePromptText;
+  @FXML private Text hintsLeftText;
   @FXML private TextField inputText;
 
   @FXML private CheckBox riddleSolvedObjective;
@@ -32,6 +33,7 @@ public class TextAreaController {
     GptAndTextAreaManager.textAreaInputBox = inputBox;
     GptAndTextAreaManager.textAreaObjectiveDisplayBoard = objectiveDisplayBoard;
     GptAndTextAreaManager.textAreaTypePromptText = typePromptText;
+    GptAndTextAreaManager.textAreaHintsLeftText = hintsLeftText;
 
     // adding listener to update objectives
     GameState.isRiddleResolvedProperty()
