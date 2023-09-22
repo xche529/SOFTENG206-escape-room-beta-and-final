@@ -83,8 +83,13 @@ public class StartInterfaceController {
     GptAndTextAreaManager.initialize();
     SceneManager.switchRoom(false, sceneButtonIsIn);
     roomController.start();
-    System.out.println("Game started with difficulty " + GameState.difficulty + " and play time " + GameState.secondsRemaining + " seconds");
-    //unselects all of the choices
+    System.out.println(
+        "Game started with difficulty "
+            + GameState.difficulty
+            + " and play time "
+            + GameState.secondsRemaining
+            + " seconds");
+    // unselects all of the choices
     twoMin.setSelected(false);
     fourMin.setSelected(false);
     sixMin.setSelected(false);

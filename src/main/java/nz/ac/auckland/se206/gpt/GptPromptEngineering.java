@@ -64,9 +64,10 @@ public class GptPromptEngineering {
     } else if (GameState.difficulty == Difficulty.MEDIUM) {
       // get the guards story if the difficulty is medium
       return "(You are playing the role of a guard who is helping someone escape an escape room"
-                 + " where they are the prisoner.  You can give the prisoner five"
-          + " hint. put (HINT) at the end of your response if you are giving a hint You should give the prisoner a riddle with the answer and one hint at a time, don't give hint if not asked."
-
+                 + " where they are the prisoner.  You can give the prisoner five hint. put (HINT)"
+                 + " at the end of your response if you are giving a hint You should give the"
+                 + " prisoner a riddle with the answer and one hint at a time, don't give hint if"
+                 + " not asked."
           + wordToGuess
           + " to give them their first clue in your first message. The riddle "
           + "can go up to 3 or 4 lines. "
@@ -101,13 +102,14 @@ public class GptPromptEngineering {
           + " phone we can call the number from. Remember you can give out a maximum of five"
           // defining rules about hints
           + " hints. Asking what to do next or for a clue counts as a hint. Any information you"
-          + " give out about rooms that is asked for is a hint. Never give the same hint twice. DO NOT give answer at any time."
-          + " put (HINT) at the end of your response if you are giving a hint!!!\r\n"
+          + " give out about rooms that is asked for is a hint. Never give the same hint twice. DO"
+          + " NOT give answer at any time. put (HINT) at the end of your response if you are giving"
+          + " a hint!!!\r\n"
           + ")";
     }
     // get the guards story if the difficulty is easy
     return "(You are playing the role of a guard who is helping someone escape an escape room where"
-               + " they are the prisoner.  You can give the prisoner infinite"
+        + " they are the prisoner.  You can give the prisoner infinite"
         // set unlimited hints
         + " hints. You should give the prisoner a riddle with "
         + "the answer "
@@ -172,8 +174,8 @@ public class GptPromptEngineering {
         + " send one message at a time)";
   }
 
-  public static String stopGivingHint(){
+  public static String stopGivingHint() {
     return "(the player have used up all the hints, you should not give any more hints after this."
-                + "now inform the player that you have no more hints to give as the guard.)";
+        + "now inform the player that you have no more hints to give as the guard.)";
   }
 }

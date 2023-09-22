@@ -76,9 +76,9 @@ public class GptAndTextAreaManager {
         new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(50);
     prisonerTwoCompletionRequest =
         new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(50);
-        if(GameState.difficulty == GameState.Difficulty.MEDIUM){
-          textAreaHintsLeftText.setText("5");
-        }
+    if (GameState.difficulty == GameState.Difficulty.MEDIUM) {
+      textAreaHintsLeftText.setText("5");
+    }
   }
 
   private static String getMessageHistory(ChatCompletionRequest chat) {
@@ -89,7 +89,7 @@ public class GptAndTextAreaManager {
     if (messages.size() > 1) {
       if (isHintRunning) {
         hintLeft = GameState.hints;
-      } else{
+      } else {
         hintLeft = 0;
       }
       // filter parentheses out so we can send messages without player seeing
@@ -107,7 +107,9 @@ public class GptAndTextAreaManager {
           }
           if (isHintRunning && GameState.difficulty == GameState.Difficulty.MEDIUM) {
             if (messages.get(i).getRole().equals("assistant")
-                && (messages.get(i).getContent().contains("HINT") || messages.get(i).getContent().contains("Hint:")) && i != 1) {
+                && (messages.get(i).getContent().contains("HINT")
+                    || messages.get(i).getContent().contains("Hint:"))
+                && i != 1) {
               hintLeft--;
             }
             if (hintLeft == 0) {
@@ -202,11 +204,10 @@ public class GptAndTextAreaManager {
     } else {
       result = input;
     }
-  
+
     // return the filtered message
     return result;
   }
-
 
   public static void sendMessage(String message) throws ApiProxyException {
 
