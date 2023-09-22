@@ -194,7 +194,6 @@ public class GptAndTextAreaManager {
       System.out.println("parenthesesFilter Stage 1 passed");
       result += input.substring(0, input.indexOf("("));
       if (!(input.indexOf(")") + 1 < input.length() - 1)) {
-      if (!(input.indexOf(")") + 1 < input.length() - 1)) {
         result += input.substring(input.indexOf(")") + 1);
       }
       // check if passed
@@ -203,9 +202,11 @@ public class GptAndTextAreaManager {
     } else {
       result = input;
     }
+  
     // return the filtered message
     return result;
   }
+
 
   public static void sendMessage(String message) throws ApiProxyException {
 
