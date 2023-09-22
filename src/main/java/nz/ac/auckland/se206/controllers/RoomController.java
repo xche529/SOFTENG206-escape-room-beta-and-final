@@ -161,8 +161,6 @@ public class RoomController {
 
   private Timeline timeline;
   private TextToSpeech textToSpeech;
-  private OfficeController officeController = null;
-  private CafeteriaController cafeteriaController = null;
   private ImageView[] animationItems = null;
 
   /**
@@ -249,8 +247,8 @@ public class RoomController {
                 updateTimerLabel();
               }
               if (GameState.secondsRemaining == 0) {
-                if (GameState.gameFinishedRoom) {
-
+                if (SceneManager.curretUi == SceneManager.AppUi.ROOM) {
+                  GameState.secondsRemaining = -1;
                   GameState.resetCafeteria = true;
                   GameState.resetOffice = true;
                   GameState.resetRoom = true;
@@ -338,19 +336,7 @@ public class RoomController {
       GameState.resetCafeteria = true;
       GameState.resetOffice = true;
       GameState.resetRoom = true;
-      GameState.gameFinishedCafeteria = true;
-      GameState.gameFinishedOffice = true;
-      GameState.gameFinishedRoom = true;
-      // TODO: fix the error
     }
-  }
-
-  public void setOfficeController(OfficeController officeController) {
-    this.officeController = officeController;
-  }
-
-  public void setCafeteriaController(CafeteriaController cafeteriaController) {
-    this.cafeteriaController = cafeteriaController;
   }
 
   public void walkInAnimation() {
@@ -362,16 +348,20 @@ public class RoomController {
       item.setTranslateX(500);
     }
   }
-  public void setThinkingOneUp(){
+
+  public void setThinkingOneUp() {
     thinkingOne.setVisible(true);
   }
-  public void setThinkingOneDown(){
+
+  public void setThinkingOneDown() {
     thinkingOne.setVisible(false);
   }
-  public void setThinkingTwoUp(){
+
+  public void setThinkingTwoUp() {
     thinkingTwo.setVisible(true);
   }
-  public void setThinkingTwoDown(){
+
+  public void setThinkingTwoDown() {
     thinkingTwo.setVisible(false);
   }
 
@@ -694,17 +684,6 @@ public class RoomController {
       }
     }
   }
-
-  // @FXML
-
-  // private void onTextBubbleClicked() throws ApiProxyException {
-  //   // chatPane.setVisible(true);
-  //   // questionInfoLabel.setVisible(true);
-  //   // chatCompletionRequest = new ChatCompletionRequest().setN(1).setTemperature(1).setTopP(0.5).setMaxTokens(100);
-  //   // ChatMessage userChatMessage = new ChatMessage("user",
-  //   //     GptPromptEngineering.getGuardSetUp(GameState.itemToChoose.getId()), GameState.numHints);
-  //   // // runGpt(userChatMessage, lastMsg -> {});
-  // }
 
   @FXML
 

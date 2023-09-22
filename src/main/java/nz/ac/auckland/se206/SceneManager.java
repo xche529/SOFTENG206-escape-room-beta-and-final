@@ -2,7 +2,6 @@ package nz.ac.auckland.se206;
 
 import java.util.HashMap;
 
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
@@ -26,7 +25,7 @@ public class SceneManager {
     TEXT_AREA
   }
 
-  static AppUi curretUi = AppUi.START_INTERFACE;
+  public static AppUi curretUi = AppUi.START_INTERFACE;
 
   static AppUi[] appUis = {
       AppUi.ROOM,
@@ -34,11 +33,14 @@ public class SceneManager {
       AppUi.CAFETERIA,
   };
 
-/*
- * Switches the scene to the next room
- * @param isToLeft true if the player is moving to the left, false if the player is moving to the right
- * @param scene the scene to switch
- */
+  /*
+   * Switches the scene to the next room
+   * 
+   * @param isToLeft true if the player is moving to the left, false if the player
+   * is moving to the right
+   * 
+   * @param scene the scene to switch
+   */
   public static void switchRoom(boolean isToLeft, Scene scene) {
     VBox roomToSwitch = null;
 
@@ -83,7 +85,6 @@ public class SceneManager {
       roomToSwitch = (VBox) getUiRoot(appUis[index]);
     }
     VBox vBox = new VBox(roomToSwitch, getUiRoot(AppUi.TEXT_AREA));
-
 
     vBox.getTransforms().add(App.scale);
     vBox.setLayoutX(App.centerX);

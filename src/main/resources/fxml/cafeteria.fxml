@@ -199,17 +199,17 @@
                   <Image url="@../images/background.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="paintingWithoutSafeArrow" fitHeight="53.0" fitWidth="44.0" layoutX="1018.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="paintingWithoutSafeArrow" fitHeight="53.0" fitWidth="44.0" layoutX="1018.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5">
                <image>
                   <Image url="@../images/newArrow.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="paintingWithSafeArrow" fitHeight="53.0" fitWidth="44.0" layoutX="596.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="paintingWithSafeArrow" fitHeight="53.0" fitWidth="44.0" layoutX="596.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5">
                <image>
                   <Image url="@../images/newArrow.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="vendingMachineArrow" fitHeight="53.0" fitWidth="44.0" layoutX="452.0" layoutY="253.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="vendingMachineArrow" fitHeight="53.0" fitWidth="44.0" layoutX="452.0" layoutY="253.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5">
                <image>
                   <Image url="@../images/newArrow.png" />
                </image>

@@ -140,17 +140,7 @@ public class CafeteriaController {
   @FXML
   private Label timerLabel;
 
-  private OfficeController officeController;
-  private RoomController roomController;
   private ImageView[] animationItems;
-
-  public void setOfficeController(OfficeController officeController) {
-    this.officeController = officeController;
-  }
-
-  public void setRoomController(RoomController roomController) {
-    this.roomController = roomController;
-  }
 
   private Timeline timeline;
 
@@ -176,6 +166,10 @@ public class CafeteriaController {
     String phoneNumberInitial = Integer.toString(random.nextInt(999999 - 100000 + 1) + 100000);
     GameState.phoneNumber = "027" + " " + phoneNumberInitial.substring(0, 3) + " " + phoneNumberInitial.substring(3, 6);
     numberLabel.setText(GameState.phoneNumber);
+
+    animateArrows(paintingWithSafeArrow);
+    animateArrows(paintingWithoutSafeArrow);
+    animateArrows(vendingMachineArrow);
 
   }
 
@@ -460,8 +454,8 @@ public class CafeteriaController {
                 updateTimerLabel();
               }
               if (GameState.secondsRemaining == 0) {
-                if (GameState.gameFinishedCafeteria) {
-                  GameState.gameFinishedCafeteria = false;
+                if (SceneManager.curretUi == SceneManager.AppUi.CAFETERIA) {
+                  GameState.secondsRemaining = -1;
                   GameState.resetCafeteria = true;
                   GameState.resetOffice = true;
                   GameState.resetRoom = true;

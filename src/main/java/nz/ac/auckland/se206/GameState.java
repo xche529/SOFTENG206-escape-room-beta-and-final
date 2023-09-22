@@ -46,21 +46,15 @@ public class GameState {
 
   public static int questionsAsked = 0;
 
-public static boolean resetCafeteria = false;
+  public static boolean resetCafeteria = false;
 
-public static boolean resetOffice = false;
+  public static boolean resetOffice = false;
 
-public static boolean resetRoom = false;
+  public static boolean resetRoom = false;
 
-public static boolean gameFinishedCafeteria = false;
+  public static String numHints = "infinite";
 
-public static boolean gameFinishedOffice = false;
-
-public static boolean gameFinishedRoom = false;
-
-public static String numHints = "infinite";
-
-public static boolean stopTimer = false;
+  public static boolean stopTimer = false;
 
   public static String playerName = "Player";
 

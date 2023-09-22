@@ -114,8 +114,6 @@ public class OfficeController {
   @FXML
   private Button exitVeiwButton;
   @FXML
-  private Pane cypherPane;
-  @FXML
   private Pane paperPane;
   @FXML
   private Pane phonePane;
@@ -147,8 +145,6 @@ public class OfficeController {
   private ImageView drawerConverter;
 
   private Timeline timeline;
-  private CafeteriaController cafeteriaController;
-  private RoomController roomController;
   private ImageView[] animationItems;
   private Label[] digits;
   private int currentDigit = 0;
@@ -171,7 +167,8 @@ public class OfficeController {
     // GptAndTextAreaManager.officeInputBox = inputBox;
     // GptAndTextAreaManager.officeObjectiveDisplayBoard = objectiveDisplayBoard;
 
-    animationItems = new ImageView[] { prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo , speechBubbleOneSmall,speechBubbleTwoSmall};
+    animationItems = new ImageView[] { prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo, speechBubbleOneSmall,
+        speechBubbleTwoSmall };
 
     digits = new Label[] {
         digitOne, digitTwo, digitThree, digitFour, digitFive, digitSix, digitSeven, digitEight,
@@ -199,14 +196,6 @@ public class OfficeController {
     translateTransition.play();
   }
 
-  public void setCafeteriaController(CafeteriaController cafeteriaController) {
-    this.cafeteriaController = cafeteriaController;
-  }
-
-  public void setRoomController(RoomController roomController) {
-    this.roomController = roomController;
-  }
-
   public void walkInAnimation() {
     MovementControl.moveToLeft(false, 1, 500, animationItems);
   }
@@ -216,7 +205,7 @@ public class OfficeController {
       item.setTranslateX(-500);
     }
   }
-  
+
   public void setThinkingOneUp() {
     thinkingOne.setVisible(true);
   }
@@ -244,7 +233,6 @@ public class OfficeController {
   private void clickDeskDrawers(MouseEvent event) {
     if (GameState.itemWithCypher == deskDrawers) {
 
-      cypherPane.setVisible(true);
       GameState.cypherFound = true;
       inspectingDrawerPane.setVisible(true);
       drawerConverter.setVisible(true);
@@ -271,7 +259,6 @@ public class OfficeController {
   @FXML
   private void clickBin(MouseEvent event) {
     if (GameState.itemWithCypher == bin) {
-      cypherPane.setVisible(true);
       GameState.cypherFound = true;
       inspectingBinPane.setVisible(true);
       binConverter.setVisible(true);
@@ -296,7 +283,6 @@ public class OfficeController {
   @FXML
   private void clickBlackboard(MouseEvent event) {
     if (GameState.itemWithCypher == blackBoard) {
-      cypherPane.setVisible(true);
       GameState.cypherFound = true;
       inspectingBlackBoardPane.setVisible(true);
       inspectingBlackBoardConverter.setVisible(true);
@@ -695,8 +681,8 @@ public class OfficeController {
                 updateTimerLabel();
               }
               if (GameState.secondsRemaining == 0) {
-                if (GameState.gameFinishedOffice) {
-                  GameState.gameFinishedOffice = false;
+                if (SceneManager.curretUi == SceneManager.AppUi.OFFICE) {
+                  GameState.secondsRemaining = -1;
                   GameState.resetCafeteria = true;
                   GameState.resetOffice = true;
                   GameState.resetRoom = true;

@@ -21,15 +21,15 @@ public class TextAreaController {
     private Text typePromptText;
     @FXML
     private TextField inputText;
-    
+
     @FXML
-  private void initialize() {
-    GptAndTextAreaManager.textAreaController = this;
-    GptAndTextAreaManager.textAreaChatDisplayBoard = chatDisplayBoard;
-    GptAndTextAreaManager.textAreaInputBox = inputBox;
-    GptAndTextAreaManager.textAreaObjectiveDisplayBoard = objectiveDisplayBoard;
-    GptAndTextAreaManager.textAreaTypePromptText = typePromptText;
-  }
+    private void initialize() {
+        GptAndTextAreaManager.textAreaController = this;
+        GptAndTextAreaManager.textAreaChatDisplayBoard = chatDisplayBoard;
+        GptAndTextAreaManager.textAreaInputBox = inputBox;
+        GptAndTextAreaManager.textAreaObjectiveDisplayBoard = objectiveDisplayBoard;
+        GptAndTextAreaManager.textAreaTypePromptText = typePromptText;
+    }
 
     @FXML
     public void onSetPromptTextFalse() {
