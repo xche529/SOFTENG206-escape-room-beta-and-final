@@ -145,8 +145,6 @@ public class OfficeController {
   private ImageView drawerConverter;
 
   private Timeline timeline;
-  private CafeteriaController cafeteriaController;
-  private RoomController roomController;
   private ImageView[] animationItems;
   private Label[] digits;
   private int currentDigit = 0;
@@ -169,7 +167,8 @@ public class OfficeController {
     // GptAndTextAreaManager.officeInputBox = inputBox;
     // GptAndTextAreaManager.officeObjectiveDisplayBoard = objectiveDisplayBoard;
 
-    animationItems = new ImageView[] { prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo , speechBubbleOneSmall,speechBubbleTwoSmall};
+    animationItems = new ImageView[] { prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo, speechBubbleOneSmall,
+        speechBubbleTwoSmall };
 
     digits = new Label[] {
         digitOne, digitTwo, digitThree, digitFour, digitFive, digitSix, digitSeven, digitEight,
@@ -197,14 +196,6 @@ public class OfficeController {
     translateTransition.play();
   }
 
-  public void setCafeteriaController(CafeteriaController cafeteriaController) {
-    this.cafeteriaController = cafeteriaController;
-  }
-
-  public void setRoomController(RoomController roomController) {
-    this.roomController = roomController;
-  }
-
   public void walkInAnimation() {
     MovementControl.moveToLeft(false, 1, 500, animationItems);
   }
@@ -214,7 +205,7 @@ public class OfficeController {
       item.setTranslateX(-500);
     }
   }
-  
+
   public void setThinkingOneUp() {
     thinkingOne.setVisible(true);
   }

@@ -140,17 +140,7 @@ public class CafeteriaController {
   @FXML
   private Label timerLabel;
 
-  private OfficeController officeController;
-  private RoomController roomController;
   private ImageView[] animationItems;
-
-  public void setOfficeController(OfficeController officeController) {
-    this.officeController = officeController;
-  }
-
-  public void setRoomController(RoomController roomController) {
-    this.roomController = roomController;
-  }
 
   private Timeline timeline;
 

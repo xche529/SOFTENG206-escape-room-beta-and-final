@@ -27,7 +27,7 @@ public class App extends Application {
   public static Scale scale;
   public static double overallScale = 1;
   public static double centerX = 1;
-  public static double centerY = 1; 
+  public static double centerY = 1;
   private static Scene scene;
   Boolean isFirstSwitch = false;
 
@@ -57,7 +57,8 @@ public class App extends Application {
    * "Canvas" scene.
    *
    * @param stage The primary stage of the application.
-   * @throws IOException If "src/main/resources/fxml/canvas.fxml" is not found.
+   * @throws IOException       If "src/main/resources/fxml/canvas.fxml" is not
+   *                           found.
    * @throws ApiProxyException
    */
   @Override
@@ -76,8 +77,8 @@ public class App extends Application {
       System.out.println("The game start with scale:" + overallScale);
     }
     overallScale = overallScale * 0.8;
-    centerX = (width - 1113 * overallScale)/2;
-    centerY = (height - 800 * overallScale)/5;
+    centerX = (width - 1113 * overallScale) / 2;
+    centerY = (height - 800 * overallScale) / 5;
     scale = new Scale(overallScale, overallScale);
     FXMLLoader endScreenWonLoader = loadFxml("endScreenWon");
     FXMLLoader endScreenLostLoader = loadFxml("endScreenLost");
@@ -113,22 +114,16 @@ public class App extends Application {
 
     SceneManager.cafeteriaController = cafeteriaController;
     SceneManager.officeController = officeController;
-    cafeteriaController.setOfficeController(officeController);
-    officeController.setCafeteriaController(cafeteriaController);
     startInterfaceController.setRoomController(roomController);
     SceneManager.roomController = roomController;
-    officeController.setRoomController(roomController);
-    cafeteriaController.setRoomController(roomController);
-    roomController.setCafeteriaController(cafeteriaController);
-    roomController.setOfficeController(officeController);
 
     Safe.getRandomCode();
     GptAndTextAreaManager.initialize();
     VBox root = (VBox) SceneManager.getUiRoot(AppUi.START_INTERFACE);
     root.setLayoutX(centerX);
     root.setLayoutY(centerY);
-    scene = new Scene(root,1113 * overallScale, 600 * overallScale);
-    scene.setFill(Color.rgb(244, 244, 244,1));
+    scene = new Scene(root, 1113 * overallScale, 600 * overallScale);
+    scene.setFill(Color.rgb(244, 244, 244, 1));
     stage.setScene(scene);
     scene.addEventFilter(javafx.scene.input.KeyEvent.KEY_PRESSED, event -> {
       VBox up = null;

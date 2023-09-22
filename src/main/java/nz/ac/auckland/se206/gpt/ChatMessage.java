@@ -9,7 +9,7 @@ public class ChatMessage {
   /**
    * Constructs a new ChatMessage object with the specified role and content.
    *
-   * @param role the role of the message (e.g., "user", "assistant")
+   * @param role    the role of the message (e.g., "user", "assistant")
    * @param content the content of the message
    */
   public ChatMessage(String role, String content) {
