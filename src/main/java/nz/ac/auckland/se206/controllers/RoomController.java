@@ -291,9 +291,10 @@ public class RoomController {
    */
   public void animateArrows(ImageView arrow) {
     arrow.setOpacity(1);
-
+    // sets the starting position of the arrow
     double startY = 0;
 
+    // makes the arrow move up and down
     TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.5), arrow);
     translateTransition.setFromY(startY);
     translateTransition.setToY(startY + 5);
