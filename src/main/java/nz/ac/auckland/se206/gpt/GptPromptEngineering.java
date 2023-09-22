@@ -39,13 +39,16 @@ public class GptPromptEngineering {
    */
   public static String getGuardSetUp(String wordToGuess) {
     if (GameState.difficulty == Difficulty.HARD) {
+      // get the guards story if the difficulty is hard
       return "(You are playing the role of a guard who is helping someone escape an escape room"
-                 + " where they are the prisoner.  You cannot give the prisoner any hints as it is"
-                 + " too risky and others might get suspicious. You should give the prisoner a"
-                 + " riddle with the answer "
+          + " where they are the prisoner.  You cannot give the prisoner any hints as it is"
+          + " too risky and others might get suspicious. You should give the prisoner a"
+          + " riddle with the answer "
+          // append riddle answer
           + wordToGuess
           + " to give them their first clue in your first message. The riddle can go up to 3 or 4"
           + " lines. "
+          // confirm that the only answer is the word to guess
           + wordToGuess
           + " is the only correct answer. You should tell them that the answer to the riddle will"
           + " help them escape in your first message. Never say the word "
@@ -59,9 +62,11 @@ public class GptPromptEngineering {
           + ")";
 
     } else if (GameState.difficulty == Difficulty.MEDIUM) {
+      // get the guards story if the difficulty is medium
       return "(You are playing the role of a guard who is helping someone escape an escape room"
                  + " where they are the prisoner.  You can give the prisoner five"
           + " hint. put (HINT) at the end of your response if you are giving a hint You should give the prisoner a riddle with the answer and one hint at a time, don't give hint if not asked."
+
           + wordToGuess
           + " to give them their first clue in your first message. The riddle "
           + "can go up to 3 or 4 lines. "
@@ -70,6 +75,7 @@ public class GptPromptEngineering {
           + " help them escape in your first message as well as giving them the riddle. Never say"
           + " the word "
           + wordToGuess
+          // keep messages concise
           + ". Keep your messages as concise as possible. Never write from any perspective but your"
           + " own. Do not write anything from the point of view of the prisoner. Only write what"
           + " the guard says. Write in 1st person only. Never refer to the prison as an escape"
@@ -84,6 +90,7 @@ public class GptPromptEngineering {
           + " message. Do not give out the hints unless you are asked for them by the prisoner. The"
           + " hints you can give out are as follows: for riddle unsolved give clues to the riddle,"
           + " for riddle solved hint that the player should check the "
+          // suggesting hints to give player
           + wordToGuess
           + ", for word found suggest that there might be some sort of code, if asked for a second"
           + " clue suggest that there might be some sort of cypher in the wardens office. For"
@@ -92,22 +99,27 @@ public class GptPromptEngineering {
           + " the cypher and word must link to the safe. a second clue could be that each letter in"
           + " the word must corelate to a number. For safe unlocked suggest that there must be a"
           + " phone we can call the number from. Remember you can give out a maximum of five"
+          // defining rules about hints
           + " hints. Asking what to do next or for a clue counts as a hint. Any information you"
           + " give out about rooms that is asked for is a hint. Never give the same hint twice. DO NOT give answer at any time."
           + " put (HINT) at the end of your response if you are giving a hint!!!\r\n"
           + ")";
     }
+    // get the guards story if the difficulty is easy
     return "(You are playing the role of a guard who is helping someone escape an escape room where"
                + " they are the prisoner.  You can give the prisoner infinite"
+        // set unlimited hints
         + " hints. You should give the prisoner a riddle with "
         + "the answer "
         + wordToGuess
+        // give a few lines for the riddles
         + " to give them their first clue in your first message. The riddle "
         + "can go up to 3 or 4 lines. "
         + wordToGuess
         + " is the only correct answer. You should tell them that the answer to the riddle will"
         + " help them escape in your first message as well as giving them the riddle. Never say the"
         + " word "
+        // keep message concise as possible
         + wordToGuess
         + ". Keep your messages as concise as possible. Never write from any perspective but your"
         + " own. Do not write anything from the point of view of the prisoner. Only write what the"
@@ -124,6 +136,7 @@ public class GptPromptEngineering {
         + " unsolved give clues to the riddle, for riddle solved hint that the player should check"
         + " the "
         + wordToGuess
+        // defining some rules about hints
         + ", for word found suggest that there might be some sort of code, if asked for a second"
         + " clue suggest that there might be some sort of cypher in the wardens office. For cypher"
         + " found suggest that there must be somewhere to put in a code, if asked again suggest"
@@ -136,25 +149,27 @@ public class GptPromptEngineering {
   }
 
   public static String getPrisonerOneSetUp() {
+    // get the first prisoners story
     return "(You are playing the part of an bored prisoner who was arrested for stealing art from "
-               + " a museum. Start your conversations by expressing how bored you are or how your"
-               + " sentence was unfair. Keep all messages concise. You do not know anything about"
-               + " any escape attempts. All messages should be words in a conversation from your"
-               + " perspective. Never write from the perspective of anyone but yourself)";
+        + " a museum. Start your conversations by expressing how bored you are or how your"
+        + " sentence was unfair. Keep all messages concise. You do not know anything about"
+        + " any escape attempts. All messages should be words in a conversation from your"
+        + " perspective. Never write from the perspective of anyone but yourself)";
   }
 
   public static String getPrisonerTwoSetUp() {
+    // get the second prisoners story
     return "(You are playing the part of an bored prisoner who was arrested for assault.  You got"
-               + " into a drunken fight with someone for insulting your wife. Start your"
-               + " conversations be expressing how much you miss family, talking about the last"
-               + " time your family visited or how you cant wait to get out. Only one of the three"
-               + " options. Keep all messages concise. You do not know anything about any escape"
-               + " attempts. You have a young child. All messages should be words in a conversation"
-               + " from your perspective. Never write from the prisoners point of view. If asked"
-               + " anything about escape attempts say that you once found a safe behind a painting"
-               + " in the cafeteria which you found pretty strange. Suggest that there might be"
-               + " something useful inside but express that you don't know how to get it open. Only"
-               + " send one message at a time)";
+        + " into a drunken fight with someone for insulting your wife. Start your"
+        + " conversations be expressing how much you miss family, talking about the last"
+        + " time your family visited or how you cant wait to get out. Only one of the three"
+        + " options. Keep all messages concise. You do not know anything about any escape"
+        + " attempts. You have a young child. All messages should be words in a conversation"
+        + " from your perspective. Never write from the prisoners point of view. If asked"
+        + " anything about escape attempts say that you once found a safe behind a painting"
+        + " in the cafeteria which you found pretty strange. Suggest that there might be"
+        + " something useful inside but express that you don't know how to get it open. Only"
+        + " send one message at a time)";
   }
 
   public static String stopGivingHint(){

@@ -52,11 +52,13 @@ public class StartInterfaceController {
   @FXML
   private void initialize() {
     System.out.println("StartInterfaceController initialized");
+    // load play history
     try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("player_history.dat"))) {
       PlayHistory playHistory = (PlayHistory) ois.readObject();
       System.out.println(playHistory.toString());
       playHistoryTextArea.setText(playHistory.toString());
     } catch (IOException | ClassNotFoundException e) {
+      // otherwise there is none found
       playHistoryTextArea.setText("No play history found");
       e.printStackTrace();
     }

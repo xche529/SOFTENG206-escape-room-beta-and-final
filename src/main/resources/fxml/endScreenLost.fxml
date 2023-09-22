@@ -8,35 +8,30 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <VBox xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.EndLostController">
    <children>
       <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="605.0" prefWidth="1113.0">
          <children>
             <ImageView fitHeight="605.0" fitWidth="1113.0" pickOnBounds="true">
                <image>
-                  <Image url="@../images/prison_room.jpg" />
+                  <Image url="@../images/MENU%20_screen.jpg" />
                </image>
             </ImageView>
-            <Pane layoutX="200.0" layoutY="67.0" prefHeight="457.0" prefWidth="716.0" style="-fx-background-color: white;">
-               <children>
-                  <Label alignment="CENTER" layoutX="163.0" layoutY="207.0" prefHeight="98.0" prefWidth="387.0" text="Better luck next time!">
-                     <font>
-                        <Font size="40.0" />
-                     </font>
-                  </Label>
-                  <Label alignment="CENTER" layoutX="145.0" layoutY="62.0" prefHeight="58.0" prefWidth="429.0" text="Captured!!" textAlignment="CENTER">
-                     <font>
-                        <Font size="72.0" />
-                     </font>
-                  </Label>
-                  <Button fx:id="restartButton" layoutX="228.0" layoutY="328.0" mnemonicParsing="false" onMouseClicked="#onTryAgain" prefHeight="79.0" prefWidth="260.0" text="Try Again">
-                     <font>
-                        <Font size="34.0" />
-                     </font>
-                  </Button>
-               </children>
-            </Pane>
+            <Label alignment="CENTER" layoutX="354.0" layoutY="133.0" prefHeight="58.0" prefWidth="429.0" text="Captured!!" textAlignment="CENTER" textFill="#f20000">
+               <font>
+                  <Font size="72.0" />
+               </font>
+            </Label>
+            <Button fx:id="restartButton" layoutX="439.0" layoutY="445.0" mnemonicParsing="false" onMouseClicked="#onTryAgain" prefHeight="79.0" prefWidth="260.0" text="Try Again">
+               <font>
+                  <Font size="34.0" />
+               </font>
+            </Button>
+            <Label alignment="CENTER" layoutX="339.0" layoutY="291.0" prefHeight="98.0" prefWidth="464.0" text="Better luck next time!" textFill="RED">
+               <font>
+                  <Font size="40.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </children>

@@ -27,6 +27,7 @@ public class TextAreaController {
 
   @FXML
   private void initialize() {
+    // setting up the text area manager
     GptAndTextAreaManager.textAreaController = this;
     GptAndTextAreaManager.textAreaChatDisplayBoard = chatDisplayBoard;
     GptAndTextAreaManager.textAreaInputBox = inputBox;
@@ -34,6 +35,7 @@ public class TextAreaController {
     GptAndTextAreaManager.textAreaTypePromptText = typePromptText;
     GptAndTextAreaManager.textAreaHintsLeftText = hintsLeftText;
 
+    // adding listener to update objectives
     GameState.isRiddleResolvedProperty()
         .addListener(
             (observable, oldValue, newValue) -> {
