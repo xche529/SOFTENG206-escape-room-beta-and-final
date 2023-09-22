@@ -68,6 +68,7 @@ public class PlayHistory implements Serializable {
   // This is the function that creates a string to display the play history
   // It dis plays the name, time and difficulty of the player
   public String toString() {
+    // setting up the variables
     PlayHistory playHistory = this;
     String result = "";
     if (this.childPlayHistory != null) {
@@ -75,8 +76,9 @@ public class PlayHistory implements Serializable {
     } else {
       int rank = 1;
       do {
+        // get past results and format in the right way
         result +=
-            ("Rank"
+            ("Rank "
                 + rank
                 + ":\n "
                 + playHistory.getName()
@@ -90,7 +92,7 @@ public class PlayHistory implements Serializable {
         rank++;
       } while (playHistory != null);
     }
-    // get the results
+    // Send the result back, which is the string to display
     return result;
   }
 
