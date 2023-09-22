@@ -905,6 +905,8 @@ public class OfficeController {
     blackBoardArrow.setVisible(true);
     drawArrow.setVisible(true);
     phoneArrow.setVisible(true);
+    phonePane.setVisible(false);
+    paperPane.setVisible(false);
 
     // resets the neccesary booleans
     GameState.cypherFound = false;
