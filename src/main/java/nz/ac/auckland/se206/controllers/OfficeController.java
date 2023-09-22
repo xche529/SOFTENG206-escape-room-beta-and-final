@@ -183,6 +183,7 @@ public class OfficeController {
   private void clickDeskDrawers(MouseEvent event) {
     if (GameState.itemWithCypher == deskDrawers) {
 
+      //makes thecypher visable
       GameState.cypherFound = true;
       inspectingDrawerPane.setVisible(true);
       drawerConverter.setVisible(true);
@@ -191,6 +192,7 @@ public class OfficeController {
       thoughtBubbleText.setText("What's that piece of paper???");
 
     } else {
+      //shows an empty drawer
       inspectingDrawerPane.setVisible(true);
       blurringPane.setVisible(true);
       thoughtBubblePane.setVisible(true);
