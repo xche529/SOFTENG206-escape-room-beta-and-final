@@ -103,7 +103,7 @@
                   <Image url="@../images/newArrow.png" />
                </image>
             </ImageView>
-            <Pane fx:id="phonePane" layoutX="37.0" layoutY="37.0" prefHeight="531.0" prefWidth="1035.0" style="-fx-background-color: white;">
+            <Pane fx:id="phonePane" layoutX="37.0" layoutY="37.0" prefHeight="531.0" prefWidth="1035.0" style="-fx-background-color: white;" visible="false">
                <children>
                   <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="194.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" />
                   <Label fx:id="digitOne" layoutX="87.0" layoutY="33.0" prefHeight="71.0" prefWidth="33.0" text="_">
