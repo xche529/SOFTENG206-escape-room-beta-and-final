@@ -13,7 +13,7 @@ public class EndLostController {
 
   /**
    * Switches the scene to the start interface
-   * 
+   *
    * @param event
    */
   @FXML

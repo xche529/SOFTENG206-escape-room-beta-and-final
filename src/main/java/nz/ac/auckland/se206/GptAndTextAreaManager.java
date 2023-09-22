@@ -107,9 +107,7 @@ public class GptAndTextAreaManager {
           }
           if (isHintRunning && GameState.difficulty == GameState.Difficulty.MEDIUM) {
             if (messages.get(i).getRole().equals("assistant")
-                && (messages.get(i).getContent().contains("HINT")
-                    || messages.get(i).getContent().contains("Hint:"))
-                && i != 1) {
+                && (messages.get(i).getContent().contains("HINT") || messages.get(i).getContent().contains("Hint:") || messages.get(i).getContent().contains("hint:")) && i != 1) {
               hintLeft--;
             }
             if (hintLeft == 0) {
