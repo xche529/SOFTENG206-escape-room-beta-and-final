@@ -13,7 +13,9 @@
 
 - cross.png <a href = "https://www.freepik.com/free-vector/multiple-different-red-crosses_35514636.htm#query=multiple%20different%20red%20crosses&position=0&from_view=search&track=ais">Image by juivy_fish </a> on Freepik
 
-- thoughtBubble.png <a href = "https://www.vecteezy.com/?utm_source=vecteezy-download&utm_medium=license-info-pdf&utm_campaign=license-info-document">
+-thoughtBubble.png <a href = "https://www.vecteezy.com/?utm_source=vecteezy-download&utm_medium=license-info-pdf&utm_campaign=license-info-document">
+
+- thinking.gif https://tenor.com/view/emojis-emoji-hmm-thinking-think-gif-16078272
 
 ## To setup OpenAI's API
 
