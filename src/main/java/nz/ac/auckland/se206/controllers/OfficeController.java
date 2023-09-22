@@ -393,26 +393,31 @@ public class OfficeController {
 
   @FXML
   private void onSetSpeechBubbleOneUp() {
+    // shows the enlarged speech bubble for the prisoner one
     speechBubbleOne.setVisible(true);
   }
 
   @FXML
   private void onSetSpeechBubbleOneDown() {
+    // hides the enlarged speech bubble for the prisoner one
     speechBubbleOne.setVisible(false);
   }
 
   @FXML
   private void onSetSpeechBubbleTwoUp() {
+    // shows the enlarged speech bubble for the prisoner two
     speechBubbleTwo.setVisible(true);
   }
 
   @FXML
   private void onSetSpeechBubbleTwoDown() {
+    // hides the enlarged speech bubble for the prisoner two
     speechBubbleTwo.setVisible(false);
   }
 
   @FXML
   private void oneMouseEntered() {
+    // shows the image of the number one in the next digit slot
     if (currentDigit < 9) {
       digits[currentDigit].setText("1");
     }
@@ -420,13 +425,20 @@ public class OfficeController {
 
   @FXML
   private void oneMouseExited() {
+    // hides the image of the number one in the next digit slot
     if (currentDigit < 9) {
       digits[currentDigit].setText("_");
     }
   }
 
+  /**
+   * sets the image of the number one in the next digit slot
+   *
+   * @param event
+   */
   @FXML
-  private void onClickOne() {
+  private void onClickOne(MouseEvent event) {
+    // sets the image of the number one in the next digit slot
     if (currentDigit < 9) {
       digits[currentDigit].setText("1");
       currentDigit++;
@@ -435,6 +447,7 @@ public class OfficeController {
 
   @FXML
   private void twoMouseEntered() {
+    // shows the image of the number two in the next digit slot
     if (currentDigit < 9) {
       digits[currentDigit].setText("2");
     }
@@ -442,13 +455,20 @@ public class OfficeController {
 
   @FXML
   private void twoMouseExited() {
+    // hides the image of the number two in the next digit slot
     if (currentDigit < 9) {
       digits[currentDigit].setText("_");
     }
   }
 
+  /**
+   * sets the image of the number two in the next digit slot
+   *
+   * @param event
+   */
   @FXML
-  private void onClickTwo() {
+  private void onClickTwo(MouseEvent event) {
+    // sets the image of the number two in the next digit slot
     if (currentDigit < 9) {
       digits[currentDigit].setText("2");
       currentDigit++;
@@ -457,6 +477,7 @@ public class OfficeController {
 
   @FXML
   private void threeMouseEntered() {
+    // shows the image of the number three in the next digit slot
     if (currentDigit < 9) {
       digits[currentDigit].setText("3");
     }
@@ -464,13 +485,20 @@ public class OfficeController {
 
   @FXML
   private void threeMouseExited() {
+    // hides the image of the number three in the next digit slot
     if (currentDigit < 9) {
       digits[currentDigit].setText("_");
     }
   }
 
+  /**
+   * sets the image of the number three in the next digit slot
+   *
+   * @param event
+   */
   @FXML
-  private void onClickThree() {
+  private void onClickThree(MouseEvent event) {
+    // sets the image of the number three in the next digit slot
     if (currentDigit < 9) {
       digits[currentDigit].setText("3");
       currentDigit++;
@@ -479,6 +507,7 @@ public class OfficeController {
 
   @FXML
   private void fourMouseEntered() {
+    // shows the image of the number four in the next digit slot
     if (currentDigit < 9) {
       digits[currentDigit].setText("4");
     }
@@ -486,13 +515,20 @@ public class OfficeController {
 
   @FXML
   private void fourMouseExited() {
+    // hides the image of the number four in the next digit slot
     if (currentDigit < 9) {
       digits[currentDigit].setText("_");
     }
   }
 
+  /**
+   * sets the image of the number four in the next digit slot
+   *
+   * @param event
+   */
   @FXML
-  private void onClickFour() {
+  private void onClickFour(MouseEvent event) {
+    // sets the image of the number four in the next digit slot
     if (currentDigit < 9) {
       digits[currentDigit].setText("4");
       currentDigit++;
@@ -501,6 +537,7 @@ public class OfficeController {
 
   @FXML
   private void fiveMouseEntered() {
+    // shows the image of the number five in the next digit slot
     if (currentDigit < 9) {
       digits[currentDigit].setText("5");
     }
@@ -508,13 +545,20 @@ public class OfficeController {
 
   @FXML
   private void fiveMouseExited() {
+    // hides the image of the number five in the next digit slot
     if (currentDigit < 9) {
       digits[currentDigit].setText("_");
     }
   }
 
+  /**
+   * sets the image of the number five in the next digit slot
+   *
+   * @param event
+   */
   @FXML
-  private void onClickFive() {
+  private void onClickFive(MouseEvent event) {
+    // sets the image of the number five in the next digit slot
     if (currentDigit < 9) {
       digits[currentDigit].setText("5");
       currentDigit++;
@@ -523,6 +567,7 @@ public class OfficeController {
 
   @FXML
   private void sixMouseEntered() {
+    // shows the image of the number six in the next digit slot
     if (currentDigit < 9) {
       digits[currentDigit].setText("6");
     }
@@ -530,13 +575,20 @@ public class OfficeController {
 
   @FXML
   private void sixMouseExited() {
+    // hides the image of the number six in the next digit slot
     if (currentDigit < 9) {
       digits[currentDigit].setText("_");
     }
   }
 
+  /**
+   * sets the image of the number six in the next digit slot
+   *
+   * @param event
+   */
   @FXML
-  private void onClickSix() {
+  private void onClickSix(MouseEvent event) {
+    // sets the image of the number six in the next digit slot
     if (currentDigit < 9) {
       digits[currentDigit].setText("6");
       currentDigit++;
@@ -545,6 +597,7 @@ public class OfficeController {
 
   @FXML
   private void sevenMouseEntered() {
+    // shows the image of the number seven in the next digit slot
     if (currentDigit < 9) {
       digits[currentDigit].setText("7");
     }
@@ -552,13 +605,20 @@ public class OfficeController {
 
   @FXML
   private void sevenMouseExited() {
+    // hides the image of the number seven in the next digit slot
     if (currentDigit < 9) {
       digits[currentDigit].setText("_");
     }
   }
 
+  /**
+   * sets the image of the number seven in the next digit slot
+   *
+   * @param event
+   */
   @FXML
-  private void onClickSeven() {
+  private void onClickSeven(MouseEvent event) {
+    // sets the image of the number seven in the next digit slot
     if (currentDigit < 9) {
       digits[currentDigit].setText("7");
       currentDigit++;
@@ -567,6 +627,7 @@ public class OfficeController {
 
   @FXML
   private void eightMouseEntered() {
+    // shows the image of the number eight in the next digit slot
     if (currentDigit < 9) {
       digits[currentDigit].setText("8");
     }
@@ -574,13 +635,20 @@ public class OfficeController {
 
   @FXML
   private void eightMouseExited() {
+    // hides the image of the number eight in the next digit slot
     if (currentDigit < 9) {
       digits[currentDigit].setText("_");
     }
   }
 
+  /**
+   * sets the image of the number eight in the next digit slot
+   *
+   * @param event
+   */
   @FXML
-  private void onClickEight() {
+  private void onClickEight(MouseEvent event) {
+    // sets the image of the number eight in the next digit slot
     if (currentDigit < 9) {
       digits[currentDigit].setText("8");
       currentDigit++;
@@ -589,6 +657,7 @@ public class OfficeController {
 
   @FXML
   private void nineMouseEntered() {
+    // shows the image of the number nine in the next digit slot
     if (currentDigit < 9) {
       digits[currentDigit].setText("9");
     }
@@ -596,13 +665,20 @@ public class OfficeController {
 
   @FXML
   private void nineMouseExited() {
+    // hides the image of the number nine in the next digit slot
     if (currentDigit < 9) {
       digits[currentDigit].setText("_");
     }
   }
 
+  /**
+   * sets the image of the number nine in the next digit slot
+   *
+   * @param event
+   */
   @FXML
-  private void onClickNine() {
+  private void onClickNine(MouseEvent event) {
+    // sets the image of the number nine in the next digit slot
     if (currentDigit < 9) {
       digits[currentDigit].setText("9");
       currentDigit++;
@@ -611,6 +687,7 @@ public class OfficeController {
 
   @FXML
   private void zeroMouseEntered() {
+    // shows the image of the number zero in the next digit slot
     if (currentDigit < 9) {
       digits[currentDigit].setText("0");
     }
@@ -618,21 +695,33 @@ public class OfficeController {
 
   @FXML
   private void zeroMouseExited() {
+    // hides the image of the number zero in the next digit slot
     if (currentDigit < 9) {
       digits[currentDigit].setText("_");
     }
   }
 
+  /**
+   * sets the image of the number zero in the next digit slot
+   *
+   * @param event
+   */
   @FXML
-  private void onClickZero() {
+  private void onClickZero(MouseEvent event) {
+    // sets the image of the number zero in the next digit slot
     if (currentDigit < 9) {
       digits[currentDigit].setText("0");
       currentDigit++;
     }
   }
 
+  /**
+   * clears all the digits
+   *
+   * @param event
+   */
   @FXML
-  private void onClickClear() {
+  private void onClickClear(MouseEvent event) {
     digitOne.setText("_");
     digitTwo.setText("_");
     digitThree.setText("_");
@@ -645,17 +734,28 @@ public class OfficeController {
     currentDigit = 0;
   }
 
+  /**
+   * deletes the last digit
+   *
+   * @param event
+   */
   @FXML
-  private void onClickDelete() {
+  private void onClickDelete(MouseEvent event) {
     if (currentDigit > 0) {
       digits[currentDigit - 1].setText("_");
       currentDigit--;
     }
   }
 
+  /**
+   * checks if the number is correct and declares the game won if it is
+   *
+   * @param event
+   */
   @FXML
-  private void onClickCall() {
+  private void onClickCall(MouseEvent event) {
     if (currentDigit == 9) {
+      // creates a string of the phone number
       String phoneNumber =
           digitOne.getText()
               + digitTwo.getText()
@@ -669,9 +769,11 @@ public class OfficeController {
               + digitEight.getText()
               + digitNine.getText();
       if (phoneNumber.equals(GameState.phoneNumber)) {
+        // if the strings match, the game is won
         GameState.isWon = true;
         Scene scene = phonePane.getScene();
         int timeTook = GameState.totalSeconds - GameState.secondsRemaining;
+        // updates the play history
         int difficulty = 1;
         if (GameState.difficulty == Difficulty.MEDIUM) {
           difficulty = 2;
@@ -687,34 +789,46 @@ public class OfficeController {
         } catch (IOException | ClassNotFoundException e) {
           playHistory.saveHistory();
         }
+        // resets the game
+        GameState.secondsRemaining = -1;
         GameState.resetCafeteria = true;
         GameState.resetOffice = true;
         GameState.resetRoom = true;
 
+        // switches to the end screen
         Parent parent = SceneManager.getUiRoot(SceneManager.AppUi.END_WON);
         parent.setLayoutX(App.centerX);
         parent.setLayoutY(App.centerY);
         scene.setRoot(parent);
       } else {
+        // do nothing if the phone number is wrong
         System.out.println("Wrong number");
       }
     } else {
+      // do nothing if the phone nuber is not long enough
       System.out.println("Number is invalid");
     }
   }
 
+  /**
+   * exits the veiw of the phone
+   *
+   * @param event
+   */
   @FXML
-  private void onClickCross() {
+  private void onClickCross(MouseEvent event) {
     phonePane.setVisible(false);
   }
 
   @FXML
   private void crossMouseEntered() {
+    // shows the enlarged cross
     crossBig.setVisible(true);
   }
 
   @FXML
   private void crossMouseExited() {
+    // hides the enlarged cross
     crossBig.setVisible(false);
   }
 
@@ -725,15 +839,19 @@ public class OfficeController {
                 Duration.seconds(1),
                 event -> {
                   if (GameState.secondsRemaining >= 0) {
+                    // updates the timer
                     updateTimerLabel();
                   }
                   if (GameState.secondsRemaining == 0) {
                     if (SceneManager.curretUi == SceneManager.AppUi.OFFICE) {
+                      // if the time runs out, the game is lost
+                      // setting to negative one so that the game does not reset multiple times
                       GameState.secondsRemaining = -1;
                       GameState.resetCafeteria = true;
                       GameState.resetOffice = true;
                       GameState.resetRoom = true;
                       try {
+                        // changes to the end screen
                         Scene scene = phone.getScene();
                         Parent parent = SceneManager.getUiRoot(SceneManager.AppUi.END_LOST);
                         parent.setLayoutX(App.centerX);
@@ -744,24 +862,24 @@ public class OfficeController {
                       }
                     }
                   }
-                  updateTimerLabel();
+
                   if (GameState.resetOffice) {
                     resetOffice();
                   }
                 }));
+    // runs the thread
     timeline.setCycleCount(Timeline.INDEFINITE);
     timeline.play();
   }
 
   private void updateTimerLabel() {
+    // updates the timer
     int minutes = (GameState.secondsRemaining) / 60;
     int seconds = (GameState.secondsRemaining) % 60;
     timerLabel.setText(String.format("%d:%02d", minutes, seconds));
   }
 
-  /*
-   * restores the office to its original state
-   */
+  /** restores the office to its original state */
   private void resetOffice() {
     // Getting random item to be used to hide the cypher
     Rectangle[] items =
@@ -772,10 +890,13 @@ public class OfficeController {
     int randomIndexChoose = randomChoose.nextInt(items.length);
     GameState.itemWithCypher = items[randomIndexChoose];
 
+    //resets the visability of the items
     binArrow.setVisible(true);
     blackBoardArrow.setVisible(true);
     drawArrow.setVisible(true);
     phoneArrow.setVisible(true);
+
+    //resets the neccesary booleans
     GameState.cypherFound = false;
     GameState.resetOffice = false;
     System.out.println("office reseted");
