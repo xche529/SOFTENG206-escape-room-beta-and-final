@@ -200,21 +200,6 @@
                   <Image url="@../images/background.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="paintingWithoutSafeArrow" fitHeight="53.0" fitWidth="44.0" layoutX="1018.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5">
-               <image>
-                  <Image url="@../images/newArrow.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="paintingWithSafeArrow" fitHeight="53.0" fitWidth="44.0" layoutX="596.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5">
-               <image>
-                  <Image url="@../images/newArrow.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="vendingMachineArrow" fitHeight="53.0" fitWidth="44.0" layoutX="452.0" layoutY="253.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5">
-               <image>
-                  <Image url="@../images/newArrow.png" />
-               </image>
-            </ImageView>
             <Pane fx:id="padlockPane" layoutX="250.0" layoutY="104.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="360.0" prefWidth="684.0" style="-fx-background-color: white;" visible="false">
                <children>
                   <Label fx:id="digitOne" layoutX="175.0" layoutY="175.0" prefHeight="42.0" prefWidth="33.0" text="0">
@@ -286,6 +271,25 @@
                   <ImageView fx:id="cross" fitHeight="150.0" fitWidth="48.0" layoutX="618.0" layoutY="29.0" onMouseClicked="#onClickExitPadlock" onMouseEntered="#crossMouseEntered" onMouseExited="#crossMouseExited" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/Cross.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane fx:id="blurredPane" opacity="0.74" prefHeight="615.0" prefWidth="1132.0" style="-fx-background-color: white;" visible="false" />
+            <Pane fx:id="inspectingVendingPane" onMouseClicked="#onClickInspectingVendingPane" prefHeight="612.0" prefWidth="1117.0" visible="false">
+               <children>
+                  <ImageView fx:id="inspectingBin1" fitHeight="518.0" fitWidth="392.0" layoutX="438.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/Vending.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane fx:id="inspectingPaintingPane" onMouseClicked="#onClickInspectingPaintingPane" prefHeight="612.0" prefWidth="1117.0" visible="false">
+               <children>
+                  <ImageView fx:id="inspectingBin" fitHeight="470.0" fitWidth="465.0" layoutX="349.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/Pic2.png" />
                      </image>
                   </ImageView>
                </children>
