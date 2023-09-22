@@ -135,8 +135,6 @@ public class StartInterfaceController {
       hard.setSelected(false);
       medium.setSelected(false);
       easy.setSelected(true);
-      // set number of hints
-      GameState.numHints = "infinite";
       GameState.difficulty = GameState.Difficulty.EASY;
       System.out.println("Difficulty change: easy");
     }
@@ -155,8 +153,6 @@ public class StartInterfaceController {
       easy.setSelected(false);
       medium.setSelected(false);
       hard.setSelected(true);
-      // no hints allowed
-      GameState.numHints = "0";
       GameState.difficulty = GameState.Difficulty.HARD;
       System.out.println("Difficulty change: hard");
     }

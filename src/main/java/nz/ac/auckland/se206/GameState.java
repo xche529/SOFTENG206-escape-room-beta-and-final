@@ -60,7 +60,7 @@ public class GameState {
 
   public static boolean resetRoom = false;
 
-  public static String numHints = "infinite";
+  public static int remainingHints = 5;
 
   public static boolean stopTimer = false;
 
