@@ -32,7 +32,6 @@ import nz.ac.auckland.se206.MovementControl;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.GptAndTextAreaManager.Characters;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
-import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 
 /** Controller class for the room view. */
@@ -293,22 +292,6 @@ public class RoomController {
     GameState.wordFound = false;
     GameState.resetRoom = false;
     System.out.println("room reseted");
-  }
-
-  /*
-   * This method prepares the riddle for the player to solve.
-   *
-   * @throws ApiProxyException
-   */
-  private void prepareRiddle() throws ApiProxyException {
-    // Sending the initial request so the riddle is ready when the player enters the
-    // chat
-    chatCompletionRequest = new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
-    ChatMessage userChatMessage = new ChatMessage(
-        "user", GptPromptEngineering.getRiddleWithGivenWord(GameState.itemToChoose.getId()));
-    runGpt(userChatMessage, lastMsg -> {
-    });
-
   }
 
   /*
@@ -712,16 +695,16 @@ public class RoomController {
     }
   }
 
-  @FXML
+  // @FXML
 
-  private void onTextBubbleClicked() throws ApiProxyException {
-    // chatPane.setVisible(true);
-    // questionInfoLabel.setVisible(true);
-    // chatCompletionRequest = new ChatCompletionRequest().setN(1).setTemperature(1).setTopP(0.5).setMaxTokens(100);
-    // ChatMessage userChatMessage = new ChatMessage("user",
-    //     GptPromptEngineering.getGuardSetUp(GameState.itemToChoose.getId()), GameState.numHints);
-    // // runGpt(userChatMessage, lastMsg -> {});
-  }
+  // private void onTextBubbleClicked() throws ApiProxyException {
+  //   // chatPane.setVisible(true);
+  //   // questionInfoLabel.setVisible(true);
+  //   // chatCompletionRequest = new ChatCompletionRequest().setN(1).setTemperature(1).setTopP(0.5).setMaxTokens(100);
+  //   // ChatMessage userChatMessage = new ChatMessage("user",
+  //   //     GptPromptEngineering.getGuardSetUp(GameState.itemToChoose.getId()), GameState.numHints);
+  //   // // runGpt(userChatMessage, lastMsg -> {});
+  // }
 
   @FXML
 
