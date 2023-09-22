@@ -30,17 +30,18 @@ public class Safe {
     String code = "";
     String[] converterValues = {"jt", "aku", "bvl", "cmw", "dnx", "eoy", "fpz", "gq", "hr", "is"};
     int[] digits = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    StringBuilder codeBuilder = new StringBuilder();
 
     for (int i = 0; i < 4; i++) {
       char currentChar = string.charAt(i);
       for (int j = 0; j < 10; j++) {
         if (converterValues[j].contains(String.valueOf(currentChar))) {
-          code = code + digits[j];
+          codeBuilder.append(digits[j]);
           break;
         }
       }
     }
-
+    code = codeBuilder.toString();
     return code;
   }
 }
