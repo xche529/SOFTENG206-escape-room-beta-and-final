@@ -2,14 +2,10 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
 import java.util.Random;
-
-import javax.swing.Action;
-
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -90,11 +86,11 @@ public class CafeteriaController {
   @FXML
   private void initialize() {
 
-    //starts a thread to check if the cafeteria needs to be reset
+    // starts a thread to check if the cafeteria needs to be reset
     resetchecker();
     GptAndTextAreaManager.cafeteriaController = this;
 
-    //creates a array of all the items that need to be animated
+    // creates a array of all the items that need to be animated
     animationItems =
         new ImageView[] {
           prisonerOne,
@@ -116,7 +112,7 @@ public class CafeteriaController {
         "027" + " " + phoneNumberInitial.substring(0, 3) + " " + phoneNumberInitial.substring(3, 6);
     numberLabel.setText(GameState.phoneNumber);
 
-    //animates all the arrows in the scene
+    // animates all the arrows in the scene
     animateArrows(paintingWithSafeArrow);
     animateArrows(paintingWithoutSafeArrow);
     animateArrows(vendingMachineArrow);
@@ -159,62 +155,62 @@ public class CafeteriaController {
 
   @FXML
   private void onSafeClick(MouseEvent event) {
-    //Shows the safe pane
+    // Shows the safe pane
     padlockPane.setVisible(true);
     safeBig.setVisible(false);
   }
 
   @FXML
   private void safeMouseEntered() {
-    //Shows the enlarged safe
+    // Shows the enlarged safe
     safeBig.setVisible(true);
   }
 
   @FXML
   private void safeMouseExited() {
-    //Hides the enlarged safe
+    // Hides the enlarged safe
     safeBig.setVisible(false);
   }
 
   @FXML
   private void vendingMachineMouseEntered() {
-    //Shows the enlarged vending machine
+    // Shows the enlarged vending machine
     vendingMachineBig.setVisible(true);
   }
 
   @FXML
   private void vendingMachineMouseExited() {
-    //Hides the enlarged vending machine
+    // Hides the enlarged vending machine
     vendingMachineBig.setVisible(false);
   }
 
   @FXML
   private void paintingWithSafeMouseEntered() {
-    //Shows the enlarged painting with safe
+    // Shows the enlarged painting with safe
     paintingWithSafeBig.setVisible(true);
   }
 
   @FXML
   private void paintingWithSafeMouseExited() {
-    //Hides the enlarged painting with safe
+    // Hides the enlarged painting with safe
     paintingWithSafeBig.setVisible(false);
   }
 
   @FXML
   private void paintingWithoutSafeMouseEntered() {
-    //Shows the enlarged painting without safe
+    // Shows the enlarged painting without safe
     paintingWithoutSafeBig.setVisible(true);
   }
 
   @FXML
   private void paintingWithoutSafeMouseExited() {
-    //Hides the enlarged painting without safe
+    // Hides the enlarged painting without safe
     paintingWithoutSafeBig.setVisible(false);
   }
 
   /**
    * When the user clicks on the plus up of the first digit, the digit is incremented by one.
-   * 
+   *
    * @param event the mouse event from when the user clicks on the plus up of the first digit
    */
   @FXML
@@ -226,7 +222,7 @@ public class CafeteriaController {
 
   /**
    * When the user clicks on the minus down of the first digit, the digit is decremented by one.
-   * 
+   *
    * @param event the mouse event from when the user clicks on the minus down of the first digit
    */
   @FXML
@@ -238,7 +234,7 @@ public class CafeteriaController {
 
   /**
    * When the user clicks on the plus up of the second digit, the digit is incremented by one.
-   * 
+   *
    * @param event the mouse event from when the user clicks on the plus up of the second digit
    */
   @FXML
@@ -250,7 +246,7 @@ public class CafeteriaController {
 
   /**
    * When the user clicks on the minus down of the second digit, the digit is decremented by one.
-   * 
+   *
    * @param event the mouse event from when the user clicks on the minus down of the second digit
    */
   @FXML
@@ -262,7 +258,7 @@ public class CafeteriaController {
 
   /**
    * When the user clicks on the plus up of the third digit, the digit is incremented by one.
-   * 
+   *
    * @param event the mouse event from when the user clicks on the plus up of the third digit
    */
   @FXML
@@ -274,7 +270,7 @@ public class CafeteriaController {
 
   /**
    * When the user clicks on the minus down of the third digit, the digit is decremented by one.
-   * 
+   *
    * @param event the mouse event from when the user clicks on the minus down of the third digit
    */
   @FXML
@@ -286,7 +282,7 @@ public class CafeteriaController {
 
   /**
    * When the user clicks on the plus up of the fourth digit, the digit is incremented by one.
-   * 
+   *
    * @param event the mouse event from when the user clicks on the plus up of the fourth digit
    */
   @FXML
@@ -298,7 +294,7 @@ public class CafeteriaController {
 
   /**
    * When the user clicks on the minus down of the fourth digit, the digit is decremented by one.
-   * 
+   *
    * @param event the mouse event from when the user clicks on the minus down of the fourth digit
    */
   @FXML
@@ -310,7 +306,7 @@ public class CafeteriaController {
 
   /**
    * When the user clicks on the open button, the padlock is opened if the combination is correct.
-   * 
+   *
    * @param event the mouse event from when the user clicks on the open button
    */
   @FXML
@@ -321,7 +317,7 @@ public class CafeteriaController {
     int digitFourInt = Integer.parseInt(digitFour.getText());
     int code = digitOneInt * 1000 + digitTwoInt * 100 + digitThreeInt * 10 + digitFourInt;
     if (code == Integer.parseInt(GameState.code)) {
-      //Gives the player the next clue
+      // Gives the player the next clue
       padlockPane.setVisible(false);
       paperPane.setVisible(true);
       GameState.safeUnlocked = true;
@@ -331,7 +327,8 @@ public class CafeteriaController {
   }
 
   /**
-   * This method enlarges the speech bubble for prisoner one when the mouse enters the speech bubble.
+   * This method enlarges the speech bubble for prisoner one when the mouse enters the speech
+   * bubble.
    */
   @FXML
   private void onSetSpeechBubbleOneUp() {
@@ -346,9 +343,7 @@ public class CafeteriaController {
     speechBubbleOne.setVisible(false);
   }
 
-  /**
-   * This method enlarges the speech bubble for prisoner two when the mouse enters the speech
-   */
+  /** This method enlarges the speech bubble for prisoner two when the mouse enters the speech */
   @FXML
   private void onSetSpeechBubbleTwoUp() {
     speechBubbleTwo.setVisible(true);
@@ -370,51 +365,41 @@ public class CafeteriaController {
     speechBubbleThree.setVisible(true);
   }
 
-  /**
-   * This method shrinks the speech bubble for the guard when the mouse exits the speech bubble.
-   */
+  /** This method shrinks the speech bubble for the guard when the mouse exits the speech bubble. */
   @FXML
   private void onSetSpeechBubbleThreeDown() {
     speechBubbleThree.setVisible(false);
   }
 
-  /**
-   * This method allows the player to leave the view with the padlock.
-   */
+  /** This method allows the player to leave the view with the padlock. */
   @FXML
   private void onClickExitPadlock() {
     padlockPane.setVisible(false);
   }
 
-  /**
-   * This method collects the phone number and makes the navigates back to the room.
-   */
-  
+  /** This method collects the phone number and makes the navigates back to the room. */
   @FXML
   private void onClickCollectPaper() {
     GameState.hasPaperProperty().set(true);
     paperPane.setVisible(false);
   }
 
-  /**
-   * This method makes the test blue when the mouse enters the text.
-   */
+  /** This method makes the test blue when the mouse enters the text. */
   @FXML
   private void collectPaperMouseEntered() {
     collectPaperLabel.setStyle("-fx-text-fill: blue;");
   }
 
-  /**
-   * This method makes the test black when the mouse exits the text.
-   */
+  /** This method makes the test black when the mouse exits the text. */
   @FXML
   private void collectPaperMouseExited() {
     collectPaperLabel.setStyle("-fx-text-fill: black;");
   }
 
   /**
-   * This method switchs the conversation to the prisoner one when the player clicks on the speech bubble
-   * 
+   * This method switchs the conversation to the prisoner one when the player clicks on the speech
+   * bubble
+   *
    * @param event the mouse event from when the user clicks on the speech bubble
    */
   @FXML
@@ -424,8 +409,9 @@ public class CafeteriaController {
   }
 
   /**
-   * This method switchs the conversation to the prisoner two when the player clicks on the speech bubble
-   * 
+   * This method switchs the conversation to the prisoner two when the player clicks on the speech
+   * bubble
+   *
    * @param event the mouse event from when the user clicks on the speech bubble
    */
   @FXML
@@ -436,7 +422,7 @@ public class CafeteriaController {
 
   /**
    * This method switchs the conversation to the guard when the player clicks on the speech bubble
-   * 
+   *
    * @param event the mouse event from when the user clicks on the speech bubble
    */
   @FXML
@@ -453,11 +439,9 @@ public class CafeteriaController {
     alert.showAndWait();
   }
 
-  /**
-   * This method resets the cafeteria to its initial state.
-   */
+  /** This method resets the cafeteria to its initial state. */
   private void resetCafeteria() {
-    //sets visablity of the images
+    // sets visablity of the images
     padlockPane.setVisible(false);
     safe.setVisible(false);
     paintingWithSafe.setVisible(true);
@@ -468,13 +452,13 @@ public class CafeteriaController {
     safeBig.setVisible(false);
     vendingMachineBig.setVisible(false);
 
-    //resets the digits of the padlock
+    // resets the digits of the padlock
     digitOne.setText("0");
     digitTwo.setText("0");
     digitThree.setText("0");
     digitFour.setText("0");
 
-    //resets the arrows
+    // resets the arrows
     paintingWithSafeArrow.setVisible(true);
     paintingWithoutSafeArrow.setVisible(true);
     vendingMachineArrow.setVisible(true);
@@ -486,7 +470,7 @@ public class CafeteriaController {
 
   /**
    * This method animates the arrows in the scene.
-   * 
+   *
    * @param arrow the arrow to animate
    */
   public void animateArrows(ImageView arrow) {
@@ -501,8 +485,8 @@ public class CafeteriaController {
   }
 
   /**
-   * This method starts a thread that checks if the cafeteria needs to be reset.
-   * It also changes to the end lost scene if the timer ran out in the cafeteria.
+   * This method starts a thread that checks if the cafeteria needs to be reset. It also changes to
+   * the end lost scene if the timer ran out in the cafeteria.
    */
   private void resetchecker() {
     timeline =
@@ -511,18 +495,18 @@ public class CafeteriaController {
                 Duration.seconds(1),
                 event -> {
                   if (GameState.secondsRemaining >= 0) {
-                    //updates the timer label
+                    // updates the timer label
                     updateTimerLabel();
                   }
                   if (GameState.secondsRemaining == 0) {
                     if (SceneManager.curretUi == SceneManager.AppUi.CAFETERIA) {
-                      //stops the timer from being called repeatedly
+                      // stops the timer from being called repeatedly
                       GameState.secondsRemaining = -1;
                       GameState.resetCafeteria = true;
                       GameState.resetOffice = true;
                       GameState.resetRoom = true;
                       try {
-                        //switches to the lost screen
+                        // switches to the lost screen
                         Scene scene = vendingMachine.getScene();
                         Parent parent = SceneManager.getUiRoot(SceneManager.AppUi.END_LOST);
                         parent.setLayoutX(App.centerX);
@@ -541,69 +525,51 @@ public class CafeteriaController {
     timeline.play();
   }
 
-  /**
-   * This method updates the timer label.
-   */
+  /** This method updates the timer label. */
   private void updateTimerLabel() {
     int minutes = (GameState.secondsRemaining) / 60;
     int seconds = (GameState.secondsRemaining) % 60;
     timerLabel.setText(String.format("%d:%02d", minutes, seconds));
   }
 
-  /**
-   * This method animates the items in the scene.
-   */
+  /** This method animates the items in the scene. */
   public void walkInAnimation() {
     MovementControl.moveToLeft(true, 1, 500, animationItems);
   }
 
-  /**
-   * This method resets the start location of the items in the scene.
-   */
+  /** This method resets the start location of the items in the scene. */
   public void resetAnimation() {
     for (ImageView item : animationItems) {
       item.setTranslateX(500);
     }
   }
 
-  /**
-   * This method shows the thinking emoji for the prisoner one.
-   */
+  /** This method shows the thinking emoji for the prisoner one. */
   public void setThinkingOneUp() {
     thinkingOne.setVisible(true);
   }
 
-  /**
-   * This method hides the thinking emoji for the prisoner one.
-   */
+  /** This method hides the thinking emoji for the prisoner one. */
   public void setThinkingOneDown() {
     thinkingOne.setVisible(false);
   }
 
-  /**
-   * This method shows the thinking emoji for the prisoner two.
-   */
+  /** This method shows the thinking emoji for the prisoner two. */
   public void setThinkingTwoUp() {
     thinkingTwo.setVisible(true);
   }
 
-  /**
-   * This method hides the thinking emoji for the prisoner two.
-   */
+  /** This method hides the thinking emoji for the prisoner two. */
   public void setThinkingTwoDown() {
     thinkingTwo.setVisible(false);
   }
 
-  /**
-   * This method shows the thinking emoji for the guard.
-   */
+  /** This method shows the thinking emoji for the guard. */
   public void setThinkingThreeUp() {
     thinkingThree.setVisible(true);
   }
 
-  /**
-   * This method hides the thinking emoji for the guard.
-   */
+  /** This method hides the thinking emoji for the guard. */
   public void setThinkingThreeDown() {
     thinkingThree.setVisible(false);
   }
