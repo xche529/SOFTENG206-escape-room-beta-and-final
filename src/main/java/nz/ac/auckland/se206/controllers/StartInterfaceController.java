@@ -58,6 +58,24 @@ public class StartInterfaceController {
   private ImageView sixTick;
   @FXML
   private Pane historyPane;
+  @FXML
+  private ImageView twoMinText;
+  @FXML
+  private ImageView fourMinText;
+  @FXML
+  private ImageView sixMinText;
+  @FXML
+  private ImageView easyText;
+  @FXML
+  private ImageView mediumText;
+  @FXML
+  private ImageView hardText;
+  @FXML
+  private ImageView startGameText;
+  @FXML
+  private ImageView exitText;
+  @FXML
+  private ImageView playHistoryText;
 
   private RoomController roomController;
 
@@ -272,6 +290,114 @@ public class StartInterfaceController {
   @FXML
   private void onViewPlayHistory() {
     historyPane.setVisible(true);
+  }
+
+  @FXML
+  private void twoMinEntered() {
+    twoMinText.scaleXProperty().set(1.15);
+    twoMinText.scaleYProperty().set(1.15);
+  }
+
+  @FXML
+  private void twoMinExited() {
+    twoMinText.scaleXProperty().set(1);
+    twoMinText.scaleYProperty().set(1);
+  }
+
+  @FXML
+  private void fourMinEntered() {
+    fourMinText.scaleXProperty().set(1.15);
+    fourMinText.scaleYProperty().set(1.15);
+  }
+
+  @FXML
+  private void fourMinExited() {
+    fourMinText.scaleXProperty().set(1);
+    fourMinText.scaleYProperty().set(1);
+  }
+
+  @FXML
+  private void sixMinEntered() {
+    sixMinText.scaleXProperty().set(1.15);
+    sixMinText.scaleYProperty().set(1.15);
+  }
+
+  @FXML
+  private void sixMinExited() {
+    sixMinText.scaleXProperty().set(1);
+    sixMinText.scaleYProperty().set(1);
+  }
+
+  @FXML
+  private void easyEntered() {
+    easyText.scaleXProperty().set(1.15);
+    easyText.scaleYProperty().set(1.15);
+  }
+
+  @FXML
+  private void easyExited() {
+    easyText.scaleXProperty().set(1);
+    easyText.scaleYProperty().set(1);
+  }
+
+  @FXML
+  private void mediumEntered() {
+    mediumText.scaleXProperty().set(1.15);
+    mediumText.scaleYProperty().set(1.15);
+  }
+
+  @FXML
+  private void mediumExited() {
+    mediumText.scaleXProperty().set(1);
+    mediumText.scaleYProperty().set(1);
+  }
+
+  @FXML
+  private void hardEntered() {
+    hardText.scaleXProperty().set(1.15);
+    hardText.scaleYProperty().set(1.15);
+  }
+
+  @FXML
+  private void hardExited() {
+    hardText.scaleXProperty().set(1);
+    hardText.scaleYProperty().set(1);
+  }
+
+  @FXML
+  private void startEntered() {
+    startGameText.scaleXProperty().set(1.15);
+    startGameText.scaleYProperty().set(1.15);
+  }
+
+  @FXML
+  private void startExited() {
+    startGameText.scaleXProperty().set(1);
+    startGameText.scaleYProperty().set(1);
+  }
+
+  @FXML
+  private void exitEntered() {
+    exitText.scaleXProperty().set(1.15);
+    exitText.scaleYProperty().set(1.15);
+  }
+
+  @FXML
+  private void exitExited() {
+    exitText.scaleXProperty().set(1);
+    exitText.scaleYProperty().set(1);
+  }
+
+  @FXML
+  private void viewHistoryEntered() {
+    playHistoryText.scaleXProperty().set(1.15);
+    playHistoryText.scaleYProperty().set(1.15);
+  }
+
+  @FXML
+  private void viewHistoryExited() {
+    playHistoryText.scaleXProperty().set(1);
+    playHistoryText.scaleYProperty().set(1);
   }
 
 }

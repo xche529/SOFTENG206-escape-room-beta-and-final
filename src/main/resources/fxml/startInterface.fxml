@@ -20,17 +20,17 @@
                   <Image url="@../images/MENU%20_screen.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="24.0" fitWidth="137.0" layoutX="330.0" layoutY="202.0" onMouseClicked="#onClickFour" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="fourMinText" fitHeight="24.0" fitWidth="137.0" layoutX="330.0" layoutY="202.0" onMouseClicked="#onClickFour" onMouseEntered="#fourMinEntered" onMouseExited="#fourMinExited" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/4%20MINUTES.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="19.0" fitWidth="137.0" layoutX="329.0" layoutY="238.0" onMouseClicked="#onClickSix" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="sixMinText" fitHeight="19.0" fitWidth="137.0" layoutX="329.0" layoutY="238.0" onMouseClicked="#onClickSix" onMouseEntered="#sixMinEntered" onMouseExited="#sixMinExited" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/6%20MINUTES.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="19.0" fitWidth="131.0" layoutX="337.0" layoutY="165.0" onMouseClicked="#onClickTwo" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="twoMinText" fitHeight="19.0" fitWidth="131.0" layoutX="337.0" layoutY="165.0" onMouseClicked="#onClickTwo" onMouseEntered="#twoMinEntered" onMouseExited="#twoMinExited" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/2%20MINUTES.png" />
                </image>
@@ -45,17 +45,17 @@
                   <Image url="@../images/DIFFICULTY.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="20.0" fitWidth="106.0" layoutX="643.0" layoutY="197.0" onMouseClicked="#onClickMedium" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="mediumText" fitHeight="20.0" fitWidth="106.0" layoutX="643.0" layoutY="197.0" onMouseClicked="#onClickMedium" onMouseEntered="#mediumEntered" onMouseExited="#mediumExited" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/MEDIUM.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="26.0" fitWidth="60.0" layoutX="645.0" layoutY="161.0" onMouseClicked="#onClickEasy" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="easyText" fitHeight="26.0" fitWidth="60.0" layoutX="645.0" layoutY="161.0" onMouseClicked="#onClickEasy" onMouseEntered="#easyEntered" onMouseExited="#easyExited" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/EASY.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="20.0" fitWidth="75.0" layoutX="644.0" layoutY="231.0" onMouseClicked="#onClickHard" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="hardText" fitHeight="20.0" fitWidth="75.0" layoutX="644.0" layoutY="231.0" onMouseClicked="#onClickHard" onMouseEntered="#hardEntered" onMouseExited="#hardExited" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/HARD.png" />
                </image>
@@ -65,7 +65,7 @@
                   <Image url="@../images/ENTER%20YOUR%20NAME_.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="26.0" fitWidth="150.0" layoutX="517.0" layoutY="550.0" onMouseClicked="#onExitGame" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="exitText" fitHeight="26.0" fitWidth="150.0" layoutX="517.0" layoutY="550.0" onMouseClicked="#onExitGame" onMouseEntered="#exitEntered" onMouseExited="#exitExited" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/EXIT.png" />
                </image>
@@ -75,7 +75,7 @@
                   <Image url="@../images/Nametextbox.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="460.0" layoutY="493.0" onMouseClicked="#onViewPlayHistory" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="playHistoryText" fitHeight="150.0" fitWidth="200.0" layoutX="460.0" layoutY="493.0" onMouseClicked="#onViewPlayHistory" onMouseEntered="#viewHistoryEntered" onMouseExited="#viewHistoryExited" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/VIEW%20PLAY%20HISTORY.png" />
                </image>
@@ -85,7 +85,7 @@
                   <Image url="@../images/TIME%20LIMIT.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="230.0" fitWidth="508.0" layoutX="285.0" layoutY="402.0" onMouseClicked="#onStartGame" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="startGameText" fitHeight="230.0" fitWidth="508.0" layoutX="285.0" layoutY="402.0" onMouseClicked="#onStartGame" onMouseEntered="#startEntered" onMouseExited="#startExited" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/START%20GAME.png" />
                </image>
@@ -120,7 +120,7 @@
                   <Font size="22.0" />
                </font>
             </TextField>
-            <Pane layoutX="345.0" layoutY="79.0" prefHeight="399.0" prefWidth="367.0" style="-fx-background-color: white;" visible="false">
+            <Pane fx:id="historyPane" layoutX="345.0" layoutY="79.0" prefHeight="399.0" prefWidth="367.0" style="-fx-background-color: white;" visible="false">
                <children>
                   <TextArea fx:id="playHistoryTextArea" layoutX="32.0" layoutY="62.0" prefHeight="277.0" prefWidth="284.0" text="No play history&#10;" wrapText="true">
                      <font>
