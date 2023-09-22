@@ -272,12 +272,12 @@
                   <Image url="@../images/speechBubble.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="thinkingOne" fitHeight="42.0" fitWidth="39.0" layoutX="317.0" layoutY="275.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="thinkingOne" fitHeight="49.0" fitWidth="52.0" layoutX="312.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/thinking.gif" />
                </image>
             </ImageView>
-            <ImageView fx:id="thinkingTwo" fitHeight="42.0" fitWidth="39.0" layoutX="481.0" layoutY="275.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="thinkingTwo" fitHeight="49.0" fitWidth="58.0" layoutX="475.0" layoutY="266.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/thinking.gif" />
                </image>
