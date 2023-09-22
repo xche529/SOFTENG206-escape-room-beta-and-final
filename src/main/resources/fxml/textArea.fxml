@@ -36,12 +36,13 @@
             </TextField>
             <Pane layoutX="888.0" layoutY="53.0" prefHeight="143.0" prefWidth="226.0">
                <children>
-                  <CheckBox fx:id="riddleSolvedObjective" layoutX="47.0" layoutY="9.0" mnemonicParsing="false" text="Riddle Solved" />
-                  <CheckBox fx:id="codewordFoundObjective" layoutX="47.0" layoutY="33.0" mnemonicParsing="false" text="Codeword Located" />
-                  <CheckBox fx:id="converterFoundObjective" layoutX="47.0" layoutY="63.0" mnemonicParsing="false" text="Cypher located" />
-                  <CheckBox fx:id="phoneLocatedObjective" layoutX="47.0" layoutY="110.0" mnemonicParsing="false" text="Phone located" />
-                  <CheckBox fx:id="safeLocatedObjective" layoutX="47.0" layoutY="87.0" mnemonicParsing="false" text="Safe located" />
-                  <Pane layoutX="-1.0" prefHeight="134.0" prefWidth="225.0" />
+                  <CheckBox fx:id="riddleSolvedObjective" layoutX="47.0" layoutY="35.0" mnemonicParsing="false" text="Solve riddle" />
+                  <CheckBox fx:id="codewordFoundObjective" layoutX="47.0" layoutY="57.0" mnemonicParsing="false" text="Locate codeword" />
+                  <CheckBox fx:id="converterFoundObjective" layoutX="47.0" layoutY="77.0" mnemonicParsing="false" text="Locate cypher" />
+                  <CheckBox fx:id="phoneLocatedObjective" layoutX="47.0" layoutY="119.0" mnemonicParsing="false" text="Find phone" />
+                  <CheckBox fx:id="safeLocatedObjective" layoutX="47.0" layoutY="99.0" mnemonicParsing="false" text="Find safe" />
+                  <Pane layoutX="-1.0" prefHeight="134.0" prefWidth="225.0" visible="false" />
+                  <CheckBox fx:id="guardTalkedObjective" layoutX="47.0" layoutY="11.0" mnemonicParsing="false" text="Talk to guard!" />
                </children>
             </Pane>
             <Text layoutX="3.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hints left:">

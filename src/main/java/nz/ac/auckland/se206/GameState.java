@@ -28,6 +28,8 @@ public class GameState {
 
   private static final BooleanProperty isSafeFound = new SimpleBooleanProperty(false);
 
+  private static final BooleanProperty isGuardTalked = new SimpleBooleanProperty(false);
+
   public static boolean isWon = false;
 
   public static String phoneNumber;
@@ -138,5 +140,17 @@ public class GameState {
 
   public static BooleanProperty isPhoneFoundProperty() {
     return isPhoneFound;
+  }
+
+  public static boolean isGuardTalked() {
+    return isGuardTalked.get();
+  }
+
+  public static void setGuardTalked(boolean value) {
+    isGuardTalked.set(value);
+  }
+
+  public static BooleanProperty isGuardTalkedProperty() {
+    return isGuardTalked;
   }
 }
