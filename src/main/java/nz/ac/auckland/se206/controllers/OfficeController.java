@@ -214,6 +214,7 @@ public class OfficeController {
    */
   @FXML
   private void clickDeskDrawers(MouseEvent event) {
+    drawArrow.setVisible(false);
     if (GameState.itemWithCypher == deskDrawers) {
       GameState.isConverterFoundProperty().set(true);
       // shows the drawer with the cypher
@@ -254,6 +255,7 @@ public class OfficeController {
    */
   @FXML
   private void clickBin(MouseEvent event) {
+    binArrow.setVisible(false);
     if (GameState.itemWithCypher == bin) {
       GameState.isConverterFoundProperty().set(true);
       // shows the bin with the cypher
@@ -291,6 +293,7 @@ public class OfficeController {
    */
   @FXML
   private void clickBlackboard(MouseEvent event) {
+    blackBoardArrow.setVisible(false);
     if (GameState.itemWithCypher == blackBoard) {
       GameState.isConverterFoundProperty().set(true);
       // shows the blackboard with the cypher
@@ -890,13 +893,13 @@ public class OfficeController {
     int randomIndexChoose = randomChoose.nextInt(items.length);
     GameState.itemWithCypher = items[randomIndexChoose];
 
-    //resets the visability of the items
+    // resets the visability of the items
     binArrow.setVisible(true);
     blackBoardArrow.setVisible(true);
     drawArrow.setVisible(true);
     phoneArrow.setVisible(true);
 
-    //resets the neccesary booleans
+    // resets the neccesary booleans
     GameState.cypherFound = false;
     GameState.resetOffice = false;
     System.out.println("office reseted");
