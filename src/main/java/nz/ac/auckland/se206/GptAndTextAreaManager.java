@@ -63,6 +63,14 @@ public class GptAndTextAreaManager {
     displayTarget(Characters.PRISONER_TWO);
   }
 
+  public static void reset() throws ApiProxyException {
+    currentCharacter = Characters.GUARD;
+    guardChatCompletionRequest = new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
+    prisonerOneCompletionRequest = new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(50);
+    prisonerTwoCompletionRequest = new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(50);
+    initialize();
+  }
+
   private static String getMessageHistory(ChatCompletionRequest chat) {
     String result = "";
     List<ChatMessage> messages = chat.getMessages();
