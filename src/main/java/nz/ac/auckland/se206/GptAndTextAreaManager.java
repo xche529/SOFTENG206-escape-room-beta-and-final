@@ -110,8 +110,8 @@ public class GptAndTextAreaManager {
    * @param character the character to display
    */
   public static void displayTarget(Characters character) {
-    String prompt = null;
-    String chatHistory = null;
+    String prompt;
+    String chatHistory;
     if (character == Characters.GUARD) {
       currentCharacter = Characters.GUARD;
       prompt = "Type here to talk to the guard";
@@ -184,8 +184,6 @@ public class GptAndTextAreaManager {
       }
     }
     if (ifSpeak) {
-      // textToSpeech = new TextToSpeech();
-      // textToSpeech.speak(message);
       String soundEffect;
       if (currentCharacter == Characters.GUARD) {
         soundEffect = "src/main/resources/sounds/HmmSoundEffect1.mp3";

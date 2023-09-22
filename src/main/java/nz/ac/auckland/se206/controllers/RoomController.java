@@ -209,6 +209,7 @@ public class RoomController {
                         parent.setLayoutY(App.centerY);
                         scene.setRoot(parent);
                       } catch (NullPointerException e) {
+                        System.out.println("Null pointer exception");
                       }
                     }
                   }
@@ -217,6 +218,7 @@ public class RoomController {
                     try {
                       resetRoom();
                     } catch (ApiProxyException e) {
+                      e.printStackTrace();
                     }
                   }
                 }));
@@ -259,7 +261,6 @@ public class RoomController {
     animateArrows(sinkArrow);
     animateArrows(mirrorArrow);
     animateArrows(towelArrow);
-    // animateArrows(doorArrowSmall);
   }
 
   public void animateArrows(ImageView arrow) {

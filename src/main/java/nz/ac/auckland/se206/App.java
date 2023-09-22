@@ -134,6 +134,5 @@ public class App extends Application {
           }
         });
     stage.show();
-    // SceneManager.getUiRoot(AppUi.START_INTERFACE).requestFocus();
   }
 }

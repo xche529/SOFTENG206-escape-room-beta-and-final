@@ -29,6 +29,8 @@ public class SceneManager {
     AppUi.ROOM, AppUi.OFFICE, AppUi.CAFETERIA,
   };
 
+  private static HashMap<AppUi, Parent> sceneMap = new HashMap<AppUi, Parent>();
+
   /*
    * Switches the scene to the next room
    *
@@ -38,7 +40,7 @@ public class SceneManager {
    * @param scene the scene to switch
    */
   public static void switchRoom(boolean isToLeft, Scene scene) {
-    VBox roomToSwitch = null;
+    VBox roomToSwitch;
 
     if (curretUi == AppUi.START_INTERFACE) {
       roomToSwitch = (VBox) getUiRoot(AppUi.ROOM);
@@ -88,8 +90,6 @@ public class SceneManager {
 
     scene.setRoot(vbox);
   }
-
-  private static HashMap<AppUi, Parent> sceneMap = new HashMap<AppUi, Parent>();
 
   public static void addUi(AppUi ui, VBox uiRoot) {
     sceneMap.put(ui, uiRoot);
