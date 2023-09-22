@@ -111,7 +111,7 @@
                   <Image url="@../images/speechBubble.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="speechBubbleThree" fitHeight="110.0" fitWidth="147.0" layoutX="88.0" layoutY="203.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#onSpeechBubbleThreeClicked" onMouseEntered="#onSetSpeechBubbleThreeUp" onMouseExited="#onSetSpeechBubbleThreeDown" pickOnBounds="true" preserveRatio="true" visible="false">
+            <ImageView fx:id="speechBubbleThree" fitHeight="110.0" fitWidth="147.0" layoutX="218.0" layoutY="208.0" onMouseClicked="#onSpeechBubbleThreeClicked" onMouseEntered="#onSetSpeechBubbleThreeUp" onMouseExited="#onSetSpeechBubbleThreeDown" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@../images/speechBubble.png" />
                </image>
