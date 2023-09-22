@@ -31,11 +31,10 @@ public class Safe {
 
   private static String getCodeFromWord(String string) {
     // getting code from word
-    String code = "";
     String[] converterValues = {"jt", "aku", "bvl", "cmw", "dnx", "eoy", "fpz", "gq", "hr", "is"};
     int[] digits = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     StringBuilder codeBuilder = new StringBuilder();
-// iterating through all characters
+    // iterating through all characters
     for (int i = 0; i < 4; i++) {
       char currentChar = string.charAt(i);
       for (int j = 0; j < 10; j++) {
@@ -46,7 +45,6 @@ public class Safe {
         }
       }
     }
-    code = codeBuilder.toString();
-    return code;
+    return codeBuilder.toString();
   }
 }
