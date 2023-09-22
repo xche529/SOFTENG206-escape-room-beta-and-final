@@ -70,7 +70,7 @@ public class GptAndTextAreaManager {
 
     if (messages.size() > 1) {
 
-      for (int i = 0; i < messages.size(); i++) {
+      for (int i = messages.size() - 1; i >= 0; i--) {
         String check = messages.get(i).getContent();
         if (check.charAt(0) == ('(') && check.charAt(check.length() - 1) == (')')) {
           System.out.println(
@@ -130,7 +130,7 @@ public class GptAndTextAreaManager {
     }
     textAreaTypePromptText.setText(prompt);
     textAreaChatDisplayBoard.setText(chatHistory);
-    textAreaChatDisplayBoard.setScrollTop(Double.MAX_VALUE);
+    textAreaChatDisplayBoard.setScrollTop(0);
   }
 
   private static String parenthesesFilter(String input) {
