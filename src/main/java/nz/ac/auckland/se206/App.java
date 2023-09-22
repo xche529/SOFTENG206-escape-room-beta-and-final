@@ -58,12 +58,14 @@ public class App extends Application {
    */
   @Override
   public void start(final Stage stage) throws IOException, ApiProxyException {
+    // set up the scene
     stage.setTitle("Prison Escape");
     stage.setMaximized(true);
     Screen screen = Screen.getPrimary();
     double width = screen.getBounds().getWidth();
     double height = screen.getBounds().getHeight();
     double ratio = width / height;
+    // make it so that it fits the screen
     if (ratio < 1113.0 / 800.0) {
       overallScale = (width / 1113.0);
       System.out.println("The game start with scale:" + overallScale);
@@ -75,6 +77,7 @@ public class App extends Application {
     centerX = (width - 1113 * overallScale) / 2;
     centerY = (height - 800 * overallScale) / 5;
     scale = new Scale(overallScale, overallScale);
+    // creating loaders for all fxml files
     FXMLLoader endScreenWonLoader = loadFxml("endScreenWon");
     FXMLLoader endScreenLostLoader = loadFxml("endScreenLost");
     FXMLLoader officeSceneLoader = loadFxml("officeScene");
@@ -82,15 +85,16 @@ public class App extends Application {
     FXMLLoader startInterfaceLoader = loadFxml("StartInterface");
     FXMLLoader textAreaLoader = loadFxml("textArea");
     FXMLLoader roomLoader = loadFxml("room");
+    // creating vboxes for the scenes
     VBox cafeteria = cafeteriaLoader.load();
     VBox office = officeSceneLoader.load();
     VBox room = roomLoader.load();
     VBox textArea = textAreaLoader.load();
-
     VBox cafeteriaVbox = new VBox(cafeteria, textArea);
     VBox officeVbox = new VBox(office, textArea);
     VBox roomVbox = new VBox(room, textArea);
 
+    // adding all the scenes to the scene manager
     SceneManager.addUi(AppUi.END_WON, endScreenWonLoader.load());
     SceneManager.addUi(AppUi.END_LOST, endScreenLostLoader.load());
     SceneManager.addUi(AppUi.START_INTERFACE, startInterfaceLoader.load());
@@ -102,21 +106,25 @@ public class App extends Application {
     SceneManager.getUiRoot(AppUi.END_WON).getTransforms().add(scale);
     SceneManager.getUiRoot(AppUi.END_LOST).getTransforms().add(scale);
 
+    // setting up the controllers
     CafeteriaController cafeteriaController = cafeteriaLoader.getController();
     OfficeController officeController = officeSceneLoader.getController();
     StartInterfaceController startInterfaceController = startInterfaceLoader.getController();
     RoomController roomController = roomLoader.getController();
 
+    // setting up the controllers
     SceneManager.cafeteriaController = cafeteriaController;
     SceneManager.officeController = officeController;
     startInterfaceController.setRoomController(roomController);
     SceneManager.roomController = roomController;
 
+    // setting up the scene and getting the random code
     Safe.getRandomCode();
     GptAndTextAreaManager.initialize();
     VBox root = (VBox) SceneManager.getUiRoot(AppUi.START_INTERFACE);
     root.setLayoutX(centerX);
     root.setLayoutY(centerY);
+    // make it fill the screen
     scene = new Scene(root, 1113 * overallScale, 600 * overallScale);
     scene.setFill(Color.rgb(244, 244, 244, 1));
     stage.setScene(scene);

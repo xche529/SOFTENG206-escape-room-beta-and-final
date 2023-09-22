@@ -4,6 +4,7 @@ import java.util.Random;
 
 public class Safe {
 
+  // defining list of random words to use
   private static String[] fourLetterWords = {
     "back", "test", "idea", "star", "fire",
     "hope", "moon", "work", "luck", "book",
@@ -19,6 +20,8 @@ public class Safe {
 
   public static void getRandomCode() {
 
+    // getting a random string and turning into code
+
     Random random = new Random();
     int randomIndex = random.nextInt(fourLetterWords.length);
 
@@ -27,14 +30,16 @@ public class Safe {
   }
 
   private static String getCodeFromWord(String string) {
+    // getting code from word
     String code = "";
     String[] converterValues = {"jt", "aku", "bvl", "cmw", "dnx", "eoy", "fpz", "gq", "hr", "is"};
     int[] digits = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     StringBuilder codeBuilder = new StringBuilder();
-
+// iterating through all characters
     for (int i = 0; i < 4; i++) {
       char currentChar = string.charAt(i);
       for (int j = 0; j < 10; j++) {
+        // appending number to code string
         if (converterValues[j].contains(String.valueOf(currentChar))) {
           codeBuilder.append(digits[j]);
           break;

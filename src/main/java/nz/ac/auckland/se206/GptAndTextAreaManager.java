@@ -54,6 +54,7 @@ public class GptAndTextAreaManager {
    * @param chat the ChatCompletionRequest for the chat history
    */
   public static void initialize() throws ApiProxyException {
+    // send initial messages to GPT
     sendMessage(
         GptPromptEngineering.getGuardSetUp(GameState.itemToChoose.getId(), GameState.numHints));
     currentCharacter = Characters.PRISONER_ONE;
@@ -64,10 +65,14 @@ public class GptAndTextAreaManager {
   }
 
   public static void reset() throws ApiProxyException {
+    // function for replayability and resetting conversations
     currentCharacter = Characters.GUARD;
-    guardChatCompletionRequest = new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
-    prisonerOneCompletionRequest = new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(50);
-    prisonerTwoCompletionRequest = new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(50);
+    guardChatCompletionRequest =
+        new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
+    prisonerOneCompletionRequest =
+        new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(50);
+    prisonerTwoCompletionRequest =
+        new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(50);
     initialize();
   }
 
@@ -77,7 +82,7 @@ public class GptAndTextAreaManager {
     // IMPORTANT: increase i here to filtout the prompt Engineering content
 
     if (messages.size() > 1) {
-
+      // filter parentheses out so we can send messages without player seeing
       for (int i = messages.size() - 1; i >= 0; i--) {
         String check = messages.get(i).getContent();
         if (check.charAt(0) == ('(') && check.charAt(check.length() - 1) == (')')) {
@@ -89,6 +94,7 @@ public class GptAndTextAreaManager {
             && messages.get(i).getContent().contains("Correct")) {
           GameState.setRiddleResolved(true);
         }
+        // replace "assistant" with "Guard:" for immersion
         String name = messages.get(i).getRole();
         if (name.trim().equals("assistant")) {
           if (currentCharacter == Characters.GUARD) {
@@ -101,6 +107,7 @@ public class GptAndTextAreaManager {
         } else if (name.trim().equals("user")) {
           name = GameState.playerName + ": ";
         }
+        // get filtered messages for display
         String content = chat.getMessages().get(i).getContent();
         result += name + parenthesesFilter(content) + "\n\n";
         System.out.println("parenthesesFilter passed");
@@ -121,27 +128,32 @@ public class GptAndTextAreaManager {
     String prompt;
     String chatHistory;
     if (character == Characters.GUARD) {
+      // set different recommended text depending on who they want to talk to
       currentCharacter = Characters.GUARD;
       prompt = "Type here to talk to the guard";
       chatHistory = getMessageHistory(guardChatCompletionRequest);
       System.out.println("display Guard history");
     } else if (character == Characters.PRISONER_ONE) {
+      // logic for talking to prisoner
       currentCharacter = Characters.PRISONER_ONE;
       prompt = "Type here to talk to prisoner1";
       chatHistory = getMessageHistory(prisonerOneCompletionRequest);
       System.out.println("display Prisoner1 history");
     } else {
       currentCharacter = Characters.PRISONER_TWO;
+      // logic for chatting to prisoner 2
       prompt = "Type here to talk to prisoner2";
       chatHistory = getMessageHistory(prisonerTwoCompletionRequest);
       System.out.println("display Prisoner2 history");
     }
+    // setting the text for fxml objects
     textAreaTypePromptText.setText(prompt);
     textAreaChatDisplayBoard.setText(chatHistory);
     textAreaChatDisplayBoard.setScrollTop(0);
   }
 
   private static String parenthesesFilter(String input) {
+    // Filtering partheses out of the message
     String result = "";
     if (input.contains("(") && input.contains(")")) {
       System.out.println("parenthesesFilter Stage 1 passed");
@@ -149,11 +161,13 @@ public class GptAndTextAreaManager {
       if (!(input.indexOf(")") + 1 < input.length())) {
         result += input.substring(input.indexOf(")") + 1);
       }
+      // check if passed
       System.out.println("parenthesesFilter Stage 2 passed");
       System.out.println("parenthesesFilter result: " + result);
     } else {
       result = input;
     }
+    // return the filtered message
     return result;
   }
 
@@ -162,6 +176,7 @@ public class GptAndTextAreaManager {
     boolean ifSpeak = false;
 
     if (currentCharacter == Characters.GUARD) {
+      // append message depending on where the player is in the game
       if (GameState.isRiddleResolved() == false) {
         message = message + "(riddle unsolved)";
       } else if (GameState.wordFound == false) {
@@ -173,18 +188,21 @@ public class GptAndTextAreaManager {
       } else if (GameState.safeUnlocked == false) {
         message = message + "(safe found)";
       }
+      // make new message and apppend
       guardChatCompletionRequest.addMessage(new ChatMessage("user", message));
       runGpt(guardChatCompletionRequest);
       if (guardChatCompletionRequest.getMessages().size() > 2) {
         ifSpeak = true;
       }
     } else if (currentCharacter == Characters.PRISONER_ONE) {
+      // send to prisoner one
       prisonerOneCompletionRequest.addMessage(new ChatMessage("user", message));
       runGpt(prisonerOneCompletionRequest);
       if (prisonerOneCompletionRequest.getMessages().size() > 2) {
         ifSpeak = true;
       }
     } else {
+      // send to prisoner two
       prisonerTwoCompletionRequest.addMessage(new ChatMessage("user", message));
       runGpt(prisonerTwoCompletionRequest);
       if (prisonerTwoCompletionRequest.getMessages().size() > 2) {
@@ -192,6 +210,7 @@ public class GptAndTextAreaManager {
       }
     }
     if (ifSpeak) {
+      // play sound effect, hmm sound
       String soundEffect;
       if (currentCharacter == Characters.GUARD) {
         soundEffect = "src/main/resources/sounds/HmmSoundEffect1.mp3";
@@ -200,6 +219,7 @@ public class GptAndTextAreaManager {
       } else {
         soundEffect = "src/main/resources/sounds/HmmSoundEffect3.mp3";
       }
+      // sound effect configuration
       Media media = new Media(new File(soundEffect).toURI().toString());
       MediaPlayer mediaPlayer = new MediaPlayer(media);
       mediaPlayer.play();
@@ -213,12 +233,15 @@ public class GptAndTextAreaManager {
           @Override
           protected Void call() throws Exception {
             if (currentCharacter == Characters.GUARD) {
+              // make guard thinking animation go
               cafeteriaController.setThinkingThreeUp();
             } else if (currentCharacter == Characters.PRISONER_ONE) {
+              // make prisoner one thinking animation start
               roomController.setThinkingOneUp();
               cafeteriaController.setThinkingOneUp();
               officeController.setThinkingOneUp();
             } else if (currentCharacter == Characters.PRISONER_TWO) {
+              // make prisoner two thinking animation start
               roomController.setThinkingTwoUp();
               cafeteriaController.setThinkingTwoUp();
               officeController.setThinkingTwoUp();
@@ -228,6 +251,7 @@ public class GptAndTextAreaManager {
               Choice result = chatCompletionResult.getChoices().iterator().next();
               chatCompletionRequest.addMessage(result.getChatMessage());
               displayTarget(currentCharacter);
+              // setting the thinking animations in all of the scenes
               roomController.setThinkingTwoDown();
               cafeteriaController.setThinkingTwoDown();
               officeController.setThinkingTwoDown();
@@ -241,6 +265,7 @@ public class GptAndTextAreaManager {
               chatCompletionRequest.addMessage(error);
               displayTarget(currentCharacter);
               e.printStackTrace();
+              // setting the thinking animations in all of the scenes
               roomController.setThinkingTwoDown();
               cafeteriaController.setThinkingTwoDown();
               officeController.setThinkingTwoDown();

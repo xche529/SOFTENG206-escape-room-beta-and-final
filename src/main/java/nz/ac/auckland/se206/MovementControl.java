@@ -18,6 +18,7 @@ public class MovementControl {
       boolean isToLeft, int timeToMove, int distanceToMove, ImageView imageView) {
     int timesToMove = timeToMove * 60;
     int distanceToMovePerIteration = distanceToMove / timesToMove;
+    // threading the calculation of the movement of the image
     Thread timerThread =
         new Thread(
             () -> {
@@ -39,8 +40,10 @@ public class MovementControl {
 
   public static void moveToLeft(
       boolean isToLeft, double timeToMove, int distanceToMove, ImageView[] imageViews) {
+    // handling moving left through the scenes
     ArrayList<TranslateTransition> transitionsArray = new ArrayList<TranslateTransition>();
     for (ImageView imageView : imageViews) {
+      // creating a transition for each image
       TranslateTransition transition = new TranslateTransition();
       transition.setNode(imageView);
       transition.setDuration(javafx.util.Duration.seconds(timeToMove));
@@ -51,6 +54,7 @@ public class MovementControl {
       }
       transitionsArray.add(transition);
     }
+    // playing all the transitions at once
     ParallelTransition parallelTransition = new ParallelTransition();
     parallelTransition.getChildren().addAll(transitionsArray);
     parallelTransition.play();

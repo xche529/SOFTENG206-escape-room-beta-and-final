@@ -43,6 +43,7 @@ public class SceneManager {
     VBox roomToSwitch;
 
     if (curretUi == AppUi.START_INTERFACE) {
+      // switching room sto the left
       roomToSwitch = (VBox) getUiRoot(AppUi.ROOM);
       curretUi = AppUi.ROOM;
       roomController.resetAnimation();
@@ -69,6 +70,7 @@ public class SceneManager {
         index++;
       }
       if (index == 0) {
+        // creating a playing walk animations
         roomController.resetAnimation();
         roomController.walkInAnimation();
       } else if (index == 1) {
@@ -83,6 +85,8 @@ public class SceneManager {
       roomToSwitch = (VBox) getUiRoot(appUis[index]);
     }
     VBox vbox = new VBox(roomToSwitch, getUiRoot(AppUi.TEXT_AREA));
+
+    // setting up the vbox
 
     vbox.getTransforms().add(App.scale);
     vbox.setLayoutX(App.centerX);
