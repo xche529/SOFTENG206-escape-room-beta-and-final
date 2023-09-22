@@ -151,6 +151,7 @@ public class CafeteriaController {
     safe.setVisible(true);
     paintingWithSafe.setVisible(false);
     paintingWithSafeArrow.setVisible(false);
+    GameState.isSafeFoundProperty().set(true);
     GameState.safeFound = true;
   }
 

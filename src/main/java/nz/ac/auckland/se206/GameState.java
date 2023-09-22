@@ -20,6 +20,14 @@ public class GameState {
 
   private static final BooleanProperty hasPaper = new SimpleBooleanProperty(false);
 
+  private static final BooleanProperty isPhoneFound = new SimpleBooleanProperty(false);
+
+  private static final BooleanProperty isCodeWordFound = new SimpleBooleanProperty(false);
+
+  private static final BooleanProperty isConverterFound = new SimpleBooleanProperty(false);
+
+  private static final BooleanProperty isSafeFound = new SimpleBooleanProperty(false);
+
   public static boolean isWon = false;
 
   public static String phoneNumber;
@@ -80,5 +88,53 @@ public class GameState {
 
   public static BooleanProperty hasPaperProperty() {
     return hasPaper;
+  }
+
+  public static boolean isCodeWordFound() {
+    return isCodeWordFound.get();
+  }
+
+  public static void setCodeWordFound(boolean value) {
+    isCodeWordFound.set(value);
+  }
+
+  public static BooleanProperty isCodeWordFoundProperty() {
+    return isCodeWordFound;
+  }
+
+  public static boolean isConverterFound() {
+    return isConverterFound.get();
+  }
+
+  public static void setConverterFound(boolean value) {
+    isConverterFound.set(value);
+  }
+
+  public static BooleanProperty isConverterFoundProperty() {
+    return isConverterFound;
+  }
+
+  public static boolean isSafeFound() {
+    return isSafeFound.get();
+  }
+
+  public static void setSafeFound(boolean value) {
+    isSafeFound.set(value);
+  }
+
+  public static BooleanProperty isSafeFoundProperty() {
+    return isSafeFound;
+  }
+
+  public static boolean isPhoneFound() {
+    return isPhoneFound.get();
+  }
+
+  public static void setPhoneFound(boolean value) {
+    isPhoneFound.set(value);
+  }
+
+  public static BooleanProperty isPhoneFoundProperty() {
+    return isPhoneFound;
   }
 }

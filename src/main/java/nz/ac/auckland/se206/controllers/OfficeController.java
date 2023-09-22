@@ -215,7 +215,7 @@ public class OfficeController {
   @FXML
   private void clickDeskDrawers(MouseEvent event) {
     if (GameState.itemWithCypher == deskDrawers) {
-
+      GameState.isConverterFoundProperty().set(true);
       // shows the drawer with the cypher
       inspectingDrawerPane.setVisible(true);
       drawerConverter.setVisible(true);
@@ -255,6 +255,7 @@ public class OfficeController {
   @FXML
   private void clickBin(MouseEvent event) {
     if (GameState.itemWithCypher == bin) {
+      GameState.isConverterFoundProperty().set(true);
       // shows the bin with the cypher
       GameState.cypherFound = true;
       inspectingBinPane.setVisible(true);
@@ -291,6 +292,7 @@ public class OfficeController {
   @FXML
   private void clickBlackboard(MouseEvent event) {
     if (GameState.itemWithCypher == blackBoard) {
+      GameState.isConverterFoundProperty().set(true);
       // shows the blackboard with the cypher
       GameState.cypherFound = true;
       inspectingBlackBoardPane.setVisible(true);
@@ -314,6 +316,7 @@ public class OfficeController {
    */
   @FXML
   private void clickPhone(MouseEvent event) {
+    GameState.isPhoneFoundProperty().set(true);
     phoneArrow.setVisible(false);
     phonePane.setVisible(true);
   }

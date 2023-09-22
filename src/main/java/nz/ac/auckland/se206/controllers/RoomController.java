@@ -110,7 +110,6 @@ public class RoomController {
     // initialize fields in the GptAndTextAreaManager class
     GptAndTextAreaManager.roomController = this;
 
-
     // initializes all the animation items into an array
 
     animationItems =
@@ -196,6 +195,7 @@ public class RoomController {
 
   /**
    * This method resets the room if the player has lost.
+   *
    * @throws IOException
    */
   private void resetchecker() throws IOException {
@@ -210,13 +210,13 @@ public class RoomController {
                   if (GameState.secondsRemaining == 0) {
                     if (SceneManager.curretUi == SceneManager.AppUi.ROOM) {
 
-                      //prevents the reset from being called multipul times
+                      // prevents the reset from being called multipul times
                       GameState.secondsRemaining = -1;
                       GameState.resetCafeteria = true;
                       GameState.resetOffice = true;
                       GameState.resetRoom = true;
                       try {
-                        //switches to the lost screen
+                        // switches to the lost screen
                         Scene scene = sink.getScene();
                         Parent parent = SceneManager.getUiRoot(SceneManager.AppUi.END_LOST);
                         parent.setLayoutX(App.centerX);
@@ -237,7 +237,7 @@ public class RoomController {
                   }
                 }));
 
-    //starts the thread
+    // starts the thread
     timeline.setCycleCount(Timeline.INDEFINITE);
     timeline.play();
   }
@@ -264,9 +264,7 @@ public class RoomController {
     System.out.println("room reseted");
   }
 
-  /**
-   * This method selects a random item to be used in the riddle.
-   */
+  /** This method selects a random item to be used in the riddle. */
   private void itemToChoose() {
     Rectangle[] items = new Rectangle[] {vent, toiletPaper, toilet, mirror, towel, sink};
     Random randomChoose = new Random();
@@ -274,9 +272,7 @@ public class RoomController {
     GameState.itemToChoose = items[randomIndexChoose];
   }
 
-  /**
-   * This method animates all of the arrows in the scene
-   */
+  /** This method animates all of the arrows in the scene */
   public void animateAllArrows() {
     animateArrows(toiletArrow);
     animateArrows(toiletPaperArrow);
@@ -286,9 +282,7 @@ public class RoomController {
     animateArrows(towelArrow);
   }
 
-  /**
-   * This method animates the arrows
-   */
+  /** This method animates the arrows */
   public void animateArrows(ImageView arrow) {
     arrow.setOpacity(1);
 
@@ -302,18 +296,14 @@ public class RoomController {
     translateTransition.play();
   }
 
-  /**
-   * This method updates the timer label
-   */
+  /** This method updates the timer label */
   private void updateTimerLabel() {
     int minutes = GameState.secondsRemaining / 60;
     int seconds = GameState.secondsRemaining % 60;
     timerLabel.setText(String.format("%d:%02d", minutes, seconds));
   }
 
-  /**
-   * This method handles the event where timer reaches 0
-   */
+  /** This method handles the event where timer reaches 0 */
   private void handleTimerExpired() {
     if (!GameState.isWon) {
       GameState.resetCafeteria = true;
@@ -322,16 +312,12 @@ public class RoomController {
     }
   }
 
-  /**
-   * This methos animates the prioners walking into the room
-   */
+  /** This methos animates the prioners walking into the room */
   public void walkInAnimation() {
     MovementControl.moveToLeft(true, 1, 500, animationItems);
   }
 
-  /**
-   * Moves the prisoners to their starting position.
-   */
+  /** Moves the prisoners to their starting position. */
   public void resetAnimation() {
     for (ImageView item : animationItems) {
       item.setTranslateX(500);
@@ -377,105 +363,103 @@ public class RoomController {
   @FXML
   public void toiletMouseEntered() {
     if (GameState.isRiddleResolved()) {
-      //shows the enlarged image of the toilet
+      // shows the enlarged image of the toilet
       toiletBig.setVisible(true);
     }
   }
 
   @FXML
   public void toiletMouseExit() {
-    //hides the enlarged image of the toilet
+    // hides the enlarged image of the toilet
     toiletBig.setVisible(false);
   }
 
   @FXML
   public void toiletPaperMouseEntered() {
     if (GameState.isRiddleResolved()) {
-      //shows the enlarged image of the toilet paper
+      // shows the enlarged image of the toilet paper
       toiletPaperBig.setVisible(true);
     }
   }
 
   @FXML
   public void toiletPaperMouseExit() {
-    //hides the enlarged image of the toilet paper
+    // hides the enlarged image of the toilet paper
     toiletPaperBig.setVisible(false);
   }
-
 
   @FXML
   public void ventMouseEntered() {
     if (GameState.isRiddleResolved()) {
-      //shows the enlarged image of the vent
+      // shows the enlarged image of the vent
       ventBig.setVisible(true);
     }
   }
 
   @FXML
   public void ventMouseExit() {
-    //hides the enlarged image of the vent
+    // hides the enlarged image of the vent
     ventBig.setVisible(false);
   }
 
   @FXML
   public void sinkMouseEntered() {
     if (GameState.isRiddleResolved()) {
-      //shows the enlarged image of the sink
+      // shows the enlarged image of the sink
       sinkBig.setVisible(true);
     }
   }
 
   @FXML
   public void sinkMouseExit() {
-    //hides the enlarged image of the sink
+    // hides the enlarged image of the sink
     sinkBig.setVisible(false);
   }
 
   @FXML
   public void mirrorMouseEntered() {
     if (GameState.isRiddleResolved()) {
-      //shows the enlarged image of the mirror
+      // shows the enlarged image of the mirror
       mirrorBig.setVisible(true);
     }
   }
 
   @FXML
   public void mirrorMouseExit() {
-    //hides the enlarged image of the mirror
+    // hides the enlarged image of the mirror
     mirrorBig.setVisible(false);
   }
 
   @FXML
   public void towelMouseEntered() {
     if (GameState.isRiddleResolved()) {
-      //shows the enlarged image of the towel
+      // shows the enlarged image of the towel
       towelBig.setVisible(true);
     }
   }
 
   @FXML
   public void towelMouseExit() {
-    //hides the enlarged image of the towel
+    // hides the enlarged image of the towel
     towelBig.setVisible(false);
   }
 
   @FXML
   public void textBubbleMouseEntered() {
-    //shows the enlarged image of the text bubble
+    // shows the enlarged image of the text bubble
     bubbleBig.setVisible(true);
   }
 
   @FXML
   public void textBubbleMouseExit() {
-    //hides the enlarged image of the text bubble
+    // hides the enlarged image of the text bubble
     bubbleBig.setVisible(false);
   }
-  /**
-   * This method lets the user exit the blown up view of the toilet
-   */
+
+  /** This method lets the user exit the blown up view of the toilet */
   @FXML
   public void onClickInspectingToiletPane() {
-    //hides a blown up view of the toilet
+    // hides a blown up view of the toilet
     blurredPane.setVisible(false);
     inspectingToiletPane.setVisible(false);
     thoughtBubblePane.setVisible(false);
@@ -483,6 +467,7 @@ public class RoomController {
 
   /**
    * This method shows the user a blown up view of the toilet when it is clicked on
+   *
    * @param event
    */
   @FXML
@@ -490,10 +475,11 @@ public class RoomController {
     toiletArrow.setOpacity(0);
     if (GameState.isRiddleResolved()) {
       if (GameState.itemToChoose == toilet) {
+        GameState.isCodeWordFoundProperty().set(true);
         blurredPane.setVisible(true);
         inspectingToiletPane.setVisible(true);
         toiletWordLabel.setText(GameState.codeWord);
-        //shows the text bubble
+        // shows the text bubble
         thoughtBubblePane.setVisible(true);
         thoughtBubbleText.setText("What's that scratched onto the rim?");
         GameState.wordFound = true;
@@ -506,9 +492,7 @@ public class RoomController {
     }
   }
 
-  /**
-   * This methao allows the user to exit the blown up view of the toilet paper
-   */
+  /** This methao allows the user to exit the blown up view of the toilet paper */
   @FXML
   public void onClickInspectingToiletPaperPane() {
     // sets the pane and its features to invisible
@@ -519,7 +503,7 @@ public class RoomController {
 
   /**
    * This method shows the user a blown up view of the toilet paper when it is clicked on
-   * 
+   *
    * @param event
    */
   @FXML
@@ -527,10 +511,11 @@ public class RoomController {
     toiletPaperArrow.setOpacity(0);
     if (GameState.isRiddleResolved()) {
       if (GameState.itemToChoose == toiletPaper) {
+        GameState.isCodeWordFoundProperty().set(true);
         blurredPane.setVisible(true);
         inspectingToiletPaperPane.setVisible(true);
         toiletPaperWordLabel.setText(GameState.codeWord);
-        //shows the text bubble
+        // shows the text bubble
         thoughtBubblePane.setVisible(true);
         thoughtBubbleText.setText("What's that scratched onto the rim?");
         GameState.wordFound = true;
@@ -543,9 +528,7 @@ public class RoomController {
     }
   }
 
-  /**
-   * This method allows the user to exit the blown up view of the vent
-   */
+  /** This method allows the user to exit the blown up view of the vent */
   @FXML
   public void onClickInspectingVentPane() {
     blurredPane.setVisible(false);
@@ -555,7 +538,7 @@ public class RoomController {
 
   /**
    * This method shows the user a blown up view of the vent when it is clicked on
-   * 
+   *
    * @param event
    */
   @FXML
@@ -563,11 +546,12 @@ public class RoomController {
     ventArrow.setOpacity(0);
     if (GameState.isRiddleResolved()) {
       if (GameState.itemToChoose == vent) {
+        GameState.isCodeWordFoundProperty().set(true);
         //shows the blown up view of the vent with the word on it
         blurredPane.setVisible(true);
         inspectingVentPane.setVisible(true);
         ventWordLabel.setText(GameState.codeWord);
-        //shows the text bubble
+        // shows the text bubble
         thoughtBubblePane.setVisible(true);
         thoughtBubbleText.setText("What's that scratched onto the vent?");
         GameState.wordFound = true;
@@ -582,9 +566,7 @@ public class RoomController {
     }
   }
 
-  /**
-   * This method allows the user to exit the blown up view of the sink
-   */
+  /** This method allows the user to exit the blown up view of the sink */
   @FXML
   public void onClickInspectingSinkPane() {
     blurredPane.setVisible(false);
@@ -594,7 +576,7 @@ public class RoomController {
 
   /**
    * This method shows the user a blown up view of the sink when it is clicked on
-   * 
+   *
    * @param event
    */
   @FXML
@@ -602,11 +584,11 @@ public class RoomController {
     sinkArrow.setOpacity(0);
     if (GameState.isRiddleResolved()) {
       if (GameState.itemToChoose == sink) {
-
+        GameState.isCodeWordFoundProperty().set(true);
         blurredPane.setVisible(true);
         inspectingSinkPane.setVisible(true);
         sinkWordLabel.setText(GameState.codeWord);
-        //shows the text bubble
+        // shows the text bubble
         thoughtBubblePane.setVisible(true);
         thoughtBubbleText.setText("What's that scratched onto the rim?");
         GameState.wordFound = true;
@@ -620,9 +602,7 @@ public class RoomController {
     }
   }
 
-  /**
-   * This method allows the user to exit the blown up view of the mirror
-   */
+  /** This method allows the user to exit the blown up view of the mirror */
   @FXML
   public void onClickInspectingMirrorPane() {
     blurredPane.setVisible(false);
@@ -632,7 +612,7 @@ public class RoomController {
 
   /**
    * This method shows the user a blown up view of the mirror when it is clicked on
-   * 
+   *
    * @param event
    */
   @FXML
@@ -640,11 +620,11 @@ public class RoomController {
     mirrorArrow.setOpacity(0);
     if (GameState.isRiddleResolved()) {
       if (GameState.itemToChoose == mirror) {
-
+        GameState.isCodeWordFoundProperty().set(true);
         blurredPane.setVisible(true);
         inspectingMirrorPane.setVisible(true);
         mirrorWordLabel.setText(GameState.codeWord);
-        //shows the text bubble
+        // shows the text bubble
         thoughtBubblePane.setVisible(true);
         thoughtBubbleText.setText("What's that on the mirror?");
         GameState.wordFound = true;
@@ -658,9 +638,7 @@ public class RoomController {
     }
   }
 
-  /**
-   * This method allows the user to exit the blown up view of the towel
-   */
+  /** This method allows the user to exit the blown up view of the towel */
   @FXML
   public void onClickInspectingTowelPane() {
     blurredPane.setVisible(false);
@@ -670,7 +648,7 @@ public class RoomController {
 
   /**
    * This method shows the user a blown up view of the towel when it is clicked on
-   * 
+   *
    * @param event
    */
   @FXML
@@ -678,11 +656,11 @@ public class RoomController {
     towelArrow.setOpacity(0);
     if (GameState.isRiddleResolved()) {
       if (GameState.itemToChoose == towel) {
-
+        GameState.isCodeWordFoundProperty().set(true);
         blurredPane.setVisible(true);
         inspectingTowelPane.setVisible(true);
         towelWordLabel.setText(GameState.codeWord);
-        //shows the text bubble
+        // shows the text bubble
         thoughtBubblePane.setVisible(true);
         thoughtBubbleText.setText("What's that written on the towel?");
         GameState.wordFound = true;
@@ -696,51 +674,39 @@ public class RoomController {
     }
   }
 
-  /**
-   * This methos allows the user to speak to prisoner one
-   */
+  /** This methos allows the user to speak to prisoner one */
   @FXML
   private void onSpeechBubbleOneClicked() {
     GptAndTextAreaManager.displayTarget(Characters.PRISONER_ONE);
     System.out.println("Speech bubble one clicked");
   }
 
-  /**
-   * This method allows the user to speak to prisoner two
-   */
+  /** This method allows the user to speak to prisoner two */
   @FXML
   private void onSpeechBubbleTwoClicked() {
     GptAndTextAreaManager.displayTarget(Characters.PRISONER_TWO);
     System.out.println("Speech bubble two clicked");
   }
 
-  /**
-   * This method enlarges the prisoner one's speech bubble
-   */
+  /** This method enlarges the prisoner one's speech bubble */
   @FXML
   private void onSetSpeechBubbleOneUp() {
     speechBubbleOne.setVisible(true);
   }
 
-  /**
-   * This method shrinks the prisoner one's speech bubble
-   */
+  /** This method shrinks the prisoner one's speech bubble */
   @FXML
   private void onSetSpeechBubbleOneDown() {
     speechBubbleOne.setVisible(false);
   }
 
-  /**
-   * This method enlarges the prisoner two's speech bubble
-   */
+  /** This method enlarges the prisoner two's speech bubble */
   @FXML
   private void onSetSpeechBubbleTwoUp() {
     speechBubbleTwo.setVisible(true);
   }
 
-  /**
-   * This method shrinks the prisoner two's speech bubble
-   */
+  /** This method shrinks the prisoner two's speech bubble */
   @FXML
   private void onSetSpeechBubbleTwoDown() {
     speechBubbleTwo.setVisible(false);
