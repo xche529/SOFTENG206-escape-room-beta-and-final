@@ -10,10 +10,6 @@ import nz.ac.auckland.se206.controllers.RoomController;
 
 public class SceneManager {
 
-  public static RoomController roomController;
-  public static OfficeController officeController;
-  public static CafeteriaController cafeteriaController;
-
   public enum AppUi {
     ROOM,
     OFFICE,
@@ -25,6 +21,9 @@ public class SceneManager {
   }
 
   public static AppUi curretUi = AppUi.START_INTERFACE;
+  public static RoomController roomController;
+  public static OfficeController officeController;
+  public static CafeteriaController cafeteriaController;
 
   static AppUi[] appUis = {
     AppUi.ROOM, AppUi.OFFICE, AppUi.CAFETERIA,
