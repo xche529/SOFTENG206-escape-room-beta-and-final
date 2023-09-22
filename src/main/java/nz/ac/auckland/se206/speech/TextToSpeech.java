@@ -36,7 +36,8 @@ public class TextToSpeech {
   private final Synthesizer synthesizer;
 
   /**
-   * Constructs the TextToSpeech object creating and allocating the speech synthesizer. English
+   * Constructs the TextToSpeech object creating and allocating the speech
+   * synthesizer. English
    * voice: com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory
    */
   public TextToSpeech() {
@@ -80,24 +81,23 @@ public class TextToSpeech {
    */
   public void speak(final String sentence) {
 
-    Task<Void> speakTask =
-        new Task<Void>() {
-          @Override
-          protected Void call() throws Exception {
-            if (sentence == null) {
-              throw new IllegalArgumentException("Text cannot be null.");
-            }
+    Task<Void> speakTask = new Task<Void>() {
+      @Override
+      protected Void call() throws Exception {
+        if (sentence == null) {
+          throw new IllegalArgumentException("Text cannot be null.");
+        }
 
-            try {
-              synthesizer.resume();
-              synthesizer.speakPlainText(sentence, null);
-              synthesizer.waitEngineState(Synthesizer.QUEUE_EMPTY);
-            } catch (final AudioException | InterruptedException e) {
-              throw new TextToSpeechException(e.getMessage());
-            }
-            return null;
-          }
-        };
+        try {
+          synthesizer.resume();
+          synthesizer.speakPlainText(sentence, null);
+          synthesizer.waitEngineState(Synthesizer.QUEUE_EMPTY);
+        } catch (final AudioException | InterruptedException e) {
+          throw new TextToSpeechException(e.getMessage());
+        }
+        return null;
+      }
+    };
 
     Thread speakThread = new Thread(speakTask);
     speakThread.setDaemon(true);
@@ -114,7 +114,8 @@ public class TextToSpeech {
   }
 
   /**
-   * It deallocates the speech synthesizer. If you are experiencing an IllegalThreadStateException,
+   * It deallocates the speech synthesizer. If you are experiencing an
+   * IllegalThreadStateException,
    * avoid using this method and run the speak method without terminating.
    */
   public void terminate() {

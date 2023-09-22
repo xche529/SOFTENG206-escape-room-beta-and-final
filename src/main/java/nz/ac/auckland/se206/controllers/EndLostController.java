@@ -9,12 +9,13 @@ import nz.ac.auckland.se206.SceneManager.AppUi;
 
 public class EndLostController {
 
-    @FXML private Button restartButton;
+    @FXML
+    private Button restartButton;
 
     @FXML
     private void onTryAgain(MouseEvent event) {
         Scene scene = restartButton.getScene();
         scene.setRoot(SceneManager.getUiRoot(AppUi.START_INTERFACE));
     }
-    
+
 }

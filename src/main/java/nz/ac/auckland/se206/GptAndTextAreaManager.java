@@ -17,7 +17,6 @@ import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
-import nz.ac.auckland.se206.speech.TextToSpeech;
 
 public class GptAndTextAreaManager {
     public enum Characters {
@@ -47,7 +46,6 @@ public class GptAndTextAreaManager {
     public static TextArea textAreaObjectiveDisplayBoard;
 
     public static boolean isGptRunning = false;
-    private static TextToSpeech textToSpeech;
 
     /*
      * this method outputs MessageHistory as a string which can be put into display
@@ -132,7 +130,7 @@ public class GptAndTextAreaManager {
 
         if (currentCharacter == Characters.GUARD) {
             if (GameState.isRiddleResolved() == false) {
-                message = message + "? " + "(riddle unsolved)";    
+                message = message + "? " + "(riddle unsolved)";
             } else if (GameState.wordFound == false) {
                 message = message + "? " + "(riddle solved)";
             } else if (GameState.cypherFound == false) {
