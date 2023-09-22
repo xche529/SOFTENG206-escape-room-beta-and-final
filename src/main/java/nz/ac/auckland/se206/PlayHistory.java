@@ -6,12 +6,12 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 public class PlayHistory implements Serializable {
-  double score;
-  int timeTook;
-  int difficulty;
-  String name;
-  PlayHistory childPlayHistory = null;
-  PlayHistory parentPlayHistory = null;
+  private double score;
+  private int timeTook;
+  private int difficulty;
+  private String name;
+  private PlayHistory childPlayHistory = null;
+  private PlayHistory parentPlayHistory = null;
 
   public PlayHistory(int time, int difficulty, String name) {
     this.name = name;
@@ -66,13 +66,17 @@ public class PlayHistory implements Serializable {
     } else {
       int rank = 1;
       do {
-        result += "Rank" + rank + ":\n " +
-            playHistory.name + "\n"
-            + " Time: "
-            + playHistory.timeTook
-            + "\n Difficulty: "
-            + playHistory.difficulty
-            + "\n\n";
+        result +=
+            "Rank"
+                + rank
+                + ":\n "
+                + playHistory.name
+                + "\n"
+                + " Time: "
+                + playHistory.timeTook
+                + "\n Difficulty: "
+                + playHistory.difficulty
+                + "\n\n";
         playHistory = playHistory.parentPlayHistory;
         rank++;
       } while (playHistory != null);
@@ -81,7 +85,8 @@ public class PlayHistory implements Serializable {
   }
 
   public void saveHistory() {
-    try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("player_history.dat"))) {
+    try (ObjectOutputStream oos =
+        new ObjectOutputStream(new FileOutputStream("player_history.dat"))) {
       oos.writeObject(this);
     } catch (IOException e) {
       e.printStackTrace();

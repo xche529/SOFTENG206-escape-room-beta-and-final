@@ -1,7 +1,6 @@
 package nz.ac.auckland.se206;
 
 import java.util.HashMap;
-
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
@@ -10,10 +9,6 @@ import nz.ac.auckland.se206.controllers.OfficeController;
 import nz.ac.auckland.se206.controllers.RoomController;
 
 public class SceneManager {
-
-  public static RoomController roomController;
-  public static OfficeController officeController;
-  public static CafeteriaController cafeteriaController;
 
   public enum AppUi {
     ROOM,
@@ -26,23 +21,26 @@ public class SceneManager {
   }
 
   public static AppUi curretUi = AppUi.START_INTERFACE;
+  public static RoomController roomController;
+  public static OfficeController officeController;
+  public static CafeteriaController cafeteriaController;
 
   static AppUi[] appUis = {
-      AppUi.ROOM,
-      AppUi.OFFICE,
-      AppUi.CAFETERIA,
+    AppUi.ROOM, AppUi.OFFICE, AppUi.CAFETERIA,
   };
+
+  private static HashMap<AppUi, Parent> sceneMap = new HashMap<AppUi, Parent>();
 
   /*
    * Switches the scene to the next room
-   * 
+   *
    * @param isToLeft true if the player is moving to the left, false if the player
    * is moving to the right
-   * 
+   *
    * @param scene the scene to switch
    */
   public static void switchRoom(boolean isToLeft, Scene scene) {
-    VBox roomToSwitch = null;
+    VBox roomToSwitch;
 
     if (curretUi == AppUi.START_INTERFACE) {
       roomToSwitch = (VBox) getUiRoot(AppUi.ROOM);
@@ -84,16 +82,14 @@ public class SceneManager {
       curretUi = appUis[index];
       roomToSwitch = (VBox) getUiRoot(appUis[index]);
     }
-    VBox vBox = new VBox(roomToSwitch, getUiRoot(AppUi.TEXT_AREA));
+    VBox vbox = new VBox(roomToSwitch, getUiRoot(AppUi.TEXT_AREA));
 
-    vBox.getTransforms().add(App.scale);
-    vBox.setLayoutX(App.centerX);
-    vBox.setLayoutY(App.centerY);
+    vbox.getTransforms().add(App.scale);
+    vbox.setLayoutX(App.centerX);
+    vbox.setLayoutY(App.centerY);
 
-    scene.setRoot(vBox);
+    scene.setRoot(vbox);
   }
-
-  private static HashMap<AppUi, Parent> sceneMap = new HashMap<AppUi, Parent>();
 
   public static void addUi(AppUi ui, VBox uiRoot) {
     sceneMap.put(ui, uiRoot);

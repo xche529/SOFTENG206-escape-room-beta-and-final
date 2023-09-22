@@ -9,10 +9,8 @@ import nz.ac.auckland.se206.SceneManager.AppUi;
 
 public class EndWonController {
 
-  @FXML
-  private Label resultLabel;
-  @FXML
-  private Button restartButton;
+  @FXML private Label resultLabel;
+  @FXML private Button restartButton;
 
   @FXML
   private void goToStart() {

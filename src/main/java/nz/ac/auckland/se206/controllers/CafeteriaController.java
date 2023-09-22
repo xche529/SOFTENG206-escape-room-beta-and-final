@@ -1,11 +1,11 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import java.util.Random;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
-import java.util.Random;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -27,118 +27,51 @@ import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class CafeteriaController {
 
-  @FXML
+  @FXML private Rectangle paintingWithSafe;
+  @FXML private Rectangle paintingWithoutSafe;
+  @FXML private Rectangle vendingMachine;
+  @FXML private ImageView paintingWithSafeBig;
+  @FXML private ImageView paintingWithoutSafeBig;
+  @FXML private ImageView safe;
+  @FXML private ImageView safeBig;
+  @FXML private ImageView vendingMachineBig;
+  @FXML private Pane padlockPane;
+  @FXML private ImageView digitOnePlus;
+  @FXML private ImageView digitOneMinus;
+  @FXML private ImageView digitTwoPlus;
+  @FXML private ImageView digitTwoMinus;
+  @FXML private ImageView digitThreePlus;
+  @FXML private ImageView digitThreeMinus;
+  @FXML private ImageView digitFourPlus;
+  @FXML private ImageView digitFourMinus;
+  @FXML private ImageView prisonerOne;
+  @FXML private ImageView prisonerTwo;
+  @FXML private ImageView speechBubbleOne;
+  @FXML private ImageView speechBubbleTwo;
 
-  private Rectangle paintingWithSafe;
-  @FXML
+  @FXML private ImageView speechBubbleThree;
+  @FXML private ImageView speechBubbleOneSmall;
+  @FXML private ImageView speechBubbleTwoSmall;
 
-  private Rectangle paintingWithoutSafe;
-  @FXML
+  @FXML private ImageView speechBubbleThreeSmall;
+  @FXML private ImageView thinkingOne;
+  @FXML private ImageView thinkingTwo;
+  @FXML private ImageView thinkingThree;
 
-  private Rectangle vendingMachine;
-  @FXML
+  @FXML private Label digitOne;
+  @FXML private Label digitTwo;
+  @FXML private Label digitThree;
+  @FXML private Label digitFour;
+  @FXML private Button openButton;
 
-  private ImageView paintingWithSafeBig;
-  @FXML
+  @FXML private Pane paperPane;
+  @FXML private Label collectPaperLabel;
+  @FXML private Label numberLabel;
 
-  private ImageView paintingWithoutSafeBig;
-  @FXML
-
-  private ImageView safe;
-  @FXML
-
-  private ImageView safeBig;
-  @FXML
-
-  private ImageView vendingMachineBig;
-  @FXML
-
-  private Pane padlockPane;
-  @FXML
-
-  private ImageView digitOnePlus;
-  @FXML
-
-  private ImageView digitOneMinus;
-  @FXML
-
-  private ImageView digitTwoPlus;
-  @FXML
-
-  private ImageView digitTwoMinus;
-  @FXML
-
-  private ImageView digitThreePlus;
-  @FXML
-
-  private ImageView digitThreeMinus;
-  @FXML
-
-  private ImageView digitFourPlus;
-  @FXML
-
-  private ImageView digitFourMinus;
-  @FXML
-
-  private ImageView prisonerOne;
-  @FXML
-
-  private ImageView prisonerTwo;
-  @FXML
-
-  private ImageView speechBubbleOne;
-  @FXML
-
-  private ImageView speechBubbleTwo;
-
-  @FXML
-  private ImageView speechBubbleThree;
-  @FXML
-
-  private ImageView speechBubbleOneSmall;
-  @FXML
-
-  private ImageView speechBubbleTwoSmall;
-
-  @FXML
-  private ImageView speechBubbleThreeSmall;
-  @FXML
-  private ImageView thinkingOne;
-  @FXML
-  private ImageView thinkingTwo;
-  @FXML
-  private ImageView thinkingThree;
-
-  @FXML
-
-  private Label digitOne;
-  @FXML
-
-  private Label digitTwo;
-  @FXML
-
-  private Label digitThree;
-  @FXML
-
-  private Label digitFour;
-  @FXML
-  private Button openButton;
-
-  @FXML
-  private Pane paperPane;
-  @FXML
-  private Label collectPaperLabel;
-  @FXML
-  private Label numberLabel;
-
-  @FXML
-  private ImageView paintingWithSafeArrow;
-  @FXML
-  private ImageView paintingWithoutSafeArrow;
-  @FXML
-  private ImageView vendingMachineArrow;
-  @FXML
-  private Label timerLabel;
+  @FXML private ImageView paintingWithSafeArrow;
+  @FXML private ImageView paintingWithoutSafeArrow;
+  @FXML private ImageView vendingMachineArrow;
+  @FXML private Label timerLabel;
 
   private ImageView[] animationItems;
 
@@ -146,9 +79,8 @@ public class CafeteriaController {
 
   /**
    * Initializes the cafeteria view, it is called when the room loads.
-   * 
-   * @throws IOException
    *
+   * @throws IOException
    * @throws ApiProxyException
    */
   @FXML
@@ -157,20 +89,30 @@ public class CafeteriaController {
     resetchecker();
     GptAndTextAreaManager.cafeteriaController = this;
 
-    animationItems = new ImageView[] { prisonerOne, prisonerTwo, speechBubbleOne, speechBubbleTwo, speechBubbleOneSmall,
-        speechBubbleTwoSmall, thinkingOne, thinkingThree, thinkingTwo };
+    animationItems =
+        new ImageView[] {
+          prisonerOne,
+          prisonerTwo,
+          speechBubbleOne,
+          speechBubbleTwo,
+          speechBubbleOneSmall,
+          speechBubbleTwoSmall,
+          thinkingOne,
+          thinkingThree,
+          thinkingTwo
+        };
 
     Random random = new Random();
 
     // Generate a random 6-digit number
     String phoneNumberInitial = Integer.toString(random.nextInt(999999 - 100000 + 1) + 100000);
-    GameState.phoneNumber = "027" + " " + phoneNumberInitial.substring(0, 3) + " " + phoneNumberInitial.substring(3, 6);
+    GameState.phoneNumber =
+        "027" + " " + phoneNumberInitial.substring(0, 3) + " " + phoneNumberInitial.substring(3, 6);
     numberLabel.setText(GameState.phoneNumber);
 
     animateArrows(paintingWithSafeArrow);
     animateArrows(paintingWithoutSafeArrow);
     animateArrows(vendingMachineArrow);
-
   }
 
   /**
@@ -212,7 +154,6 @@ public class CafeteriaController {
   private void onSafeClick(MouseEvent event) {
     padlockPane.setVisible(true);
     safeBig.setVisible(false);
-
   }
 
   @FXML
@@ -324,10 +265,7 @@ public class CafeteriaController {
       paperPane.setVisible(true);
       GameState.safeUnlocked = true;
     } else {
-      showDialog(
-          "Wrong combination",
-          "Try again",
-          "The padlock did not open.");
+      showDialog("Wrong combination", "Try again", "The padlock did not open.");
     }
   }
 
@@ -446,35 +384,36 @@ public class CafeteriaController {
    * This method starts a thread that checks if the cafeteria needs to be reset.
    */
   private void resetchecker() {
-    timeline = new Timeline(
-        new KeyFrame(
-            Duration.seconds(1),
-            event -> {
-              if (GameState.secondsRemaining >= 0) {
-                updateTimerLabel();
-              }
-              if (GameState.secondsRemaining == 0) {
-                if (SceneManager.curretUi == SceneManager.AppUi.CAFETERIA) {
-                  GameState.secondsRemaining = -1;
-                  GameState.resetCafeteria = true;
-                  GameState.resetOffice = true;
-                  GameState.resetRoom = true;
-                  try {
-                    Scene scene = vendingMachine.getScene();
-                    Parent parent = SceneManager.getUiRoot(SceneManager.AppUi.END_LOST);
-                    parent.setLayoutX(App.centerX);
-                    parent.setLayoutY(App.centerY);
-                    scene.setRoot(parent);
-                  } catch (NullPointerException e) {
+    timeline =
+        new Timeline(
+            new KeyFrame(
+                Duration.seconds(1),
+                event -> {
+                  if (GameState.secondsRemaining >= 0) {
+                    updateTimerLabel();
                   }
-                }
-
-              }
-              updateTimerLabel();
-              if (GameState.resetCafeteria) {
-                resetCafeteria();
-              }
-            }));
+                  if (GameState.secondsRemaining == 0) {
+                    if (SceneManager.curretUi == SceneManager.AppUi.CAFETERIA) {
+                      GameState.secondsRemaining = -1;
+                      GameState.resetCafeteria = true;
+                      GameState.resetOffice = true;
+                      GameState.resetRoom = true;
+                      try {
+                        Scene scene = vendingMachine.getScene();
+                        Parent parent = SceneManager.getUiRoot(SceneManager.AppUi.END_LOST);
+                        parent.setLayoutX(App.centerX);
+                        parent.setLayoutY(App.centerY);
+                        scene.setRoot(parent);
+                      } catch (NullPointerException e) {
+                        System.out.println("Scene is null");
+                      }
+                    }
+                  }
+                  updateTimerLabel();
+                  if (GameState.resetCafeteria) {
+                    resetCafeteria();
+                  }
+                }));
     timeline.setCycleCount(Timeline.INDEFINITE);
     timeline.play();
   }
@@ -493,7 +432,6 @@ public class CafeteriaController {
     for (ImageView item : animationItems) {
       item.setTranslateX(500);
     }
-
   }
 
   public void setThinkingOneUp() {
@@ -519,5 +457,4 @@ public class CafeteriaController {
   public void setThinkingThreeDown() {
     thinkingThree.setVisible(false);
   }
-
 }

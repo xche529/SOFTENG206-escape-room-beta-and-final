@@ -3,7 +3,6 @@ package nz.ac.auckland.se206.controllers;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -20,56 +19,31 @@ import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class StartInterfaceController {
-  @FXML
-  private CheckBox hard;
-  @FXML
-  private CheckBox medium;
-  @FXML
-  private CheckBox easy;
-  @FXML
-  private CheckBox twoMin;
-  @FXML
-  private CheckBox fourMin;
-  @FXML
-  private CheckBox sixMin;
-  @FXML
-  private MenuButton difficulty;
-  @FXML
-  private TextArea playHistoryTextArea;
-  @FXML
-  private TextField playerName;
-  @FXML
-  private ImageView easyTick;
-  @FXML
-  private ImageView mediumTick;
-  @FXML
-  private ImageView hardTick;
-  @FXML
-  private ImageView twoTick;
-  @FXML
-  private ImageView fourTick;
-  @FXML
-  private ImageView sixTick;
-  @FXML
-  private Pane historyPane;
-  @FXML
-  private ImageView twoMinText;
-  @FXML
-  private ImageView fourMinText;
-  @FXML
-  private ImageView sixMinText;
-  @FXML
-  private ImageView easyText;
-  @FXML
-  private ImageView mediumText;
-  @FXML
-  private ImageView hardText;
-  @FXML
-  private ImageView startGameText;
-  @FXML
-  private ImageView exitText;
-  @FXML
-  private ImageView playHistoryText;
+  @FXML private CheckBox hard;
+  @FXML private CheckBox medium;
+  @FXML private CheckBox easy;
+  @FXML private CheckBox twoMin;
+  @FXML private CheckBox fourMin;
+  @FXML private CheckBox sixMin;
+  @FXML private MenuButton difficulty;
+  @FXML private TextArea playHistoryTextArea;
+  @FXML private TextField playerName;
+  @FXML private ImageView easyTick;
+  @FXML private ImageView mediumTick;
+  @FXML private ImageView hardTick;
+  @FXML private ImageView twoTick;
+  @FXML private ImageView fourTick;
+  @FXML private ImageView sixTick;
+  @FXML private Pane historyPane;
+  @FXML private ImageView twoMinText;
+  @FXML private ImageView fourMinText;
+  @FXML private ImageView sixMinText;
+  @FXML private ImageView easyText;
+  @FXML private ImageView mediumText;
+  @FXML private ImageView hardText;
+  @FXML private ImageView startGameText;
+  @FXML private ImageView exitText;
+  @FXML private ImageView playHistoryText;
 
   private RoomController roomController;
 
@@ -84,7 +58,6 @@ public class StartInterfaceController {
       playHistoryTextArea.setText("No play history found");
       e.printStackTrace();
     }
-
   }
 
   /*
@@ -127,9 +100,9 @@ public class StartInterfaceController {
   /**
    * Displays a dialog box with the given title, header text, and message.
    *
-   * @param title      the title of the dialog box
+   * @param title the title of the dialog box
    * @param headerText the header text of the dialog box
-   * @param message    the message content of the dialog box
+   * @param message the message content of the dialog box
    */
   private void showDialog(String title, String headerText, String message) {
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -396,5 +369,4 @@ public class StartInterfaceController {
     playHistoryText.scaleXProperty().set(1);
     playHistoryText.scaleYProperty().set(1);
   }
-
 }
