@@ -249,8 +249,8 @@ public class RoomController {
                 updateTimerLabel();
               }
               if (GameState.secondsRemaining == 0) {
-                if (GameState.gameFinishedRoom) {
-
+                if (SceneManager.curretUi == SceneManager.AppUi.ROOM) {
+                  GameState.secondsRemaining = -1;
                   GameState.resetCafeteria = true;
                   GameState.resetOffice = true;
                   GameState.resetRoom = true;
@@ -338,10 +338,6 @@ public class RoomController {
       GameState.resetCafeteria = true;
       GameState.resetOffice = true;
       GameState.resetRoom = true;
-      GameState.gameFinishedCafeteria = true;
-      GameState.gameFinishedOffice = true;
-      GameState.gameFinishedRoom = true;
-      // TODO: fix the error
     }
   }
 

@@ -114,8 +114,6 @@ public class OfficeController {
   @FXML
   private Button exitVeiwButton;
   @FXML
-  private Pane cypherPane;
-  @FXML
   private Pane paperPane;
   @FXML
   private Pane phonePane;
@@ -244,7 +242,6 @@ public class OfficeController {
   private void clickDeskDrawers(MouseEvent event) {
     if (GameState.itemWithCypher == deskDrawers) {
 
-      cypherPane.setVisible(true);
       GameState.cypherFound = true;
       inspectingDrawerPane.setVisible(true);
       drawerConverter.setVisible(true);
@@ -271,7 +268,6 @@ public class OfficeController {
   @FXML
   private void clickBin(MouseEvent event) {
     if (GameState.itemWithCypher == bin) {
-      cypherPane.setVisible(true);
       GameState.cypherFound = true;
       inspectingBinPane.setVisible(true);
       binConverter.setVisible(true);
@@ -296,7 +292,6 @@ public class OfficeController {
   @FXML
   private void clickBlackboard(MouseEvent event) {
     if (GameState.itemWithCypher == blackBoard) {
-      cypherPane.setVisible(true);
       GameState.cypherFound = true;
       inspectingBlackBoardPane.setVisible(true);
       inspectingBlackBoardConverter.setVisible(true);
@@ -695,8 +690,8 @@ public class OfficeController {
                 updateTimerLabel();
               }
               if (GameState.secondsRemaining == 0) {
-                if (GameState.gameFinishedOffice) {
-                  GameState.gameFinishedOffice = false;
+                if (SceneManager.curretUi == SceneManager.AppUi.OFFICE) {
+                  GameState.secondsRemaining = -1;
                   GameState.resetCafeteria = true;
                   GameState.resetOffice = true;
                   GameState.resetRoom = true;

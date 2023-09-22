@@ -26,7 +26,7 @@ public class SceneManager {
     TEXT_AREA
   }
 
-  static AppUi curretUi = AppUi.START_INTERFACE;
+  public static AppUi curretUi = AppUi.START_INTERFACE;
 
   static AppUi[] appUis = {
       AppUi.ROOM,

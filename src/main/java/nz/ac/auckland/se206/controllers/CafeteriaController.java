@@ -460,8 +460,8 @@ public class CafeteriaController {
                 updateTimerLabel();
               }
               if (GameState.secondsRemaining == 0) {
-                if (GameState.gameFinishedCafeteria) {
-                  GameState.gameFinishedCafeteria = false;
+                if (SceneManager.curretUi == SceneManager.AppUi.CAFETERIA) {
+                  GameState.secondsRemaining = -1;
                   GameState.resetCafeteria = true;
                   GameState.resetOffice = true;
                   GameState.resetRoom = true;
