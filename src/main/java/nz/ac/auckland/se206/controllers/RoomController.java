@@ -237,7 +237,7 @@ public class RoomController {
                     }
                   }
                 }));
-]
+
     //starts the thread
     timeline.setCycleCount(Timeline.INDEFINITE);
     timeline.play();
