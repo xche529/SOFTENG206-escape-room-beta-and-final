@@ -112,13 +112,16 @@ public class StartInterfaceController {
     alert.showAndWait();
   }
 
-  /*
+  /**
    * This method is invoked when the user clicks any of the difficulty checkboxes.
+   * 
+   * @param event
    */
   @FXML
   private void onSwitchDifficulty(Event event) {
     CheckBox checkBox = (CheckBox) event.getSource();
     if (checkBox.getId().equals("easy")) {
+      // uncheck other checkboxes
       hard.setSelected(false);
       medium.setSelected(false);
       easy.setSelected(true);
@@ -127,6 +130,7 @@ public class StartInterfaceController {
       System.out.println("Difficulty change: easy");
     }
     if (checkBox.getId().equals("medium")) {
+      // uncheck other checkboxes
       easy.setSelected(false);
       hard.setSelected(false);
       medium.setSelected(true);
@@ -135,6 +139,7 @@ public class StartInterfaceController {
       System.out.println("Difficulty change: medium");
     }
     if (checkBox.getId().equals("hard")) {
+      // uncheck other checkboxes
       easy.setSelected(false);
       medium.setSelected(false);
       hard.setSelected(true);
