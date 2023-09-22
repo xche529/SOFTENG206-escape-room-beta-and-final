@@ -405,6 +405,7 @@ public class CafeteriaController {
                         parent.setLayoutY(App.centerY);
                         scene.setRoot(parent);
                       } catch (NullPointerException e) {
+                        System.out.println("Scene is null");
                       }
                     }
                   }

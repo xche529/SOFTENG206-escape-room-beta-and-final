@@ -6,12 +6,12 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 public class PlayHistory implements Serializable {
-  double score;
-  int timeTook;
-  int difficulty;
-  String name;
-  PlayHistory childPlayHistory = null;
-  PlayHistory parentPlayHistory = null;
+  private double score;
+  private int timeTook;
+  private int difficulty;
+  private String name;
+  private PlayHistory childPlayHistory = null;
+  private PlayHistory parentPlayHistory = null;
 
   public PlayHistory(int time, int difficulty, String name) {
     this.name = name;

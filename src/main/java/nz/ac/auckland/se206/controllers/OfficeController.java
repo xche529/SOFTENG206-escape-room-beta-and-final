@@ -102,11 +102,6 @@ public class OfficeController {
 
     GptAndTextAreaManager.officeController = this;
 
-    // GptAndTextAreaManager.officeChatDisplayBoard = chatDisplayBoard;
-    // GptAndTextAreaManager.officeTypePromptText = typePromptText;
-    // GptAndTextAreaManager.officeInputBox = inputBox;
-    // GptAndTextAreaManager.officeObjectiveDisplayBoard = objectiveDisplayBoard;
-
     animationItems =
         new ImageView[] {
           prisonerOne,
@@ -659,6 +654,7 @@ public class OfficeController {
                         parent.setLayoutY(App.centerY);
                         scene.setRoot(parent);
                       } catch (NullPointerException e) {
+                        System.out.println("Null pointer exception");
                       }
                     }
                   }
