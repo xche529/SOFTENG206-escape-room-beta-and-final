@@ -131,6 +131,9 @@ public class App extends Application {
     scene.addEventFilter(
         javafx.scene.input.KeyEvent.KEY_PRESSED,
         event -> {
+          if(SceneManager.curretUi == AppUi.START_INTERFACE){
+            return;
+          }
           VBox up = null;
           if (event.getCode() == KeyCode.LEFT) {
             SceneManager.switchRoom(true, scene);
