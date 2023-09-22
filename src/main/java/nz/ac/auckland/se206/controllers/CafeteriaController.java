@@ -388,6 +388,7 @@ public class CafeteriaController {
   }
 
   public void animateArrows(ImageView arrow) {
+
     double startY = 0;
 
     TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.5), arrow);
