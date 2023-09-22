@@ -61,8 +61,7 @@ public class GptPromptEngineering {
     } else if (GameState.difficulty == Difficulty.MEDIUM) {
       return "(You are playing the role of a guard who is helping someone escape an escape room"
                  + " where they are the prisoner.  You can give the prisoner five"
-          + " hints. Every time you give out a hint you should tell the priosner how many hints"
-          + " they have remaining. You should give the prisoner a riddle with the answer "
+          + " hint. put (HINT) at the end of your response if you are giving a hint You should give the prisoner a riddle with the answer and one hint at a time, don't give hint if not asked."
           + wordToGuess
           + " to give them their first clue in your first message. The riddle "
           + "can go up to 3 or 4 lines. "
@@ -95,7 +94,7 @@ public class GptPromptEngineering {
           + " phone we can call the number from. Remember you can give out a maximum of five"
           + " hints. Asking what to do next or for a clue counts as a hint. Any information you"
           + " give out about rooms that is asked for is a hint. Never give the same hint twice."
-          + " When give a hint put (give hint) at the start of your response\r\n"
+          + " put (HINT) at the end of your response if you are giving a hint!!!\r\n"
           + ")";
     }
     return "(You are playing the role of a guard who is helping someone escape an escape room where"
@@ -132,7 +131,7 @@ public class GptPromptEngineering {
         + " cypher and word must link to the safe. a second clue could be that each letter in the"
         + " word must corelate to a number. For safe unlocked suggest that there must be a phone we"
         + " can call the number from. Any information you give out about rooms that is asked for is"
-        + " a hint. Never give the same hint twice.vWhen give a hint put (give hint) at the start of your response\r\n"
+        + " a hint. Never give the same hint twice.\r\n"
         + ")";
   }
 
