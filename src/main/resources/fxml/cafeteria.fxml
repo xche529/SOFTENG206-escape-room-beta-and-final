@@ -81,21 +81,6 @@
                   <Image url="@../images/background.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="paintingWithoutSafeArrow" fitHeight="53.0" fitWidth="44.0" layoutX="1018.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/newArrow.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="paintingWithSafeArrow" fitHeight="53.0" fitWidth="44.0" layoutX="596.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/newArrow.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="vendingMachineArrow" fitHeight="53.0" fitWidth="44.0" layoutX="452.0" layoutY="253.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/newArrow.png" />
-               </image>
-            </ImageView>
             <HBox alignment="CENTER" layoutX="1026.0" prefHeight="49.0" prefWidth="87.0" style="-fx-background-color: black; -fx-border-color: #0FFF50; -fx-border-width: 5px;">
                <children>
                   <Label fx:id="timerLabel" alignment="CENTER" layoutX="10.0" prefHeight="35.0" prefWidth="73.0" textAlignment="CENTER" textFill="#0fff50">
@@ -160,6 +145,21 @@
                   <Image url="@../images/thinking.gif" />
                </image>
             </ImageView>
+            <ImageView fx:id="paintingWithoutSafeArrow" fitHeight="53.0" fitWidth="44.0" layoutX="1018.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5">
+               <image>
+                  <Image url="@../images/newArrow.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="paintingWithSafeArrow" fitHeight="53.0" fitWidth="44.0" layoutX="591.0" layoutY="107.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5">
+               <image>
+                  <Image url="@../images/newArrow.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="vendingMachineArrow" fitHeight="53.0" fitWidth="44.0" layoutX="453.0" layoutY="304.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5">
+               <image>
+                  <Image url="@../images/newArrow.png" />
+               </image>
+            </ImageView>
             <ImageView fx:id="thinkingOne" fitHeight="42.0" fitWidth="39.0" layoutX="892.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/thinking.gif" />
@@ -197,21 +197,6 @@
             <ImageView fitHeight="622.0" fitWidth="341.0" layoutX="1114.0" pickOnBounds="true">
                <image>
                   <Image url="@../images/background.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="paintingWithoutSafeArrow" fitHeight="53.0" fitWidth="44.0" layoutX="1018.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5">
-               <image>
-                  <Image url="@../images/newArrow.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="paintingWithSafeArrow" fitHeight="53.0" fitWidth="44.0" layoutX="596.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5">
-               <image>
-                  <Image url="@../images/newArrow.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="vendingMachineArrow" fitHeight="53.0" fitWidth="44.0" layoutX="452.0" layoutY="253.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5">
-               <image>
-                  <Image url="@../images/newArrow.png" />
                </image>
             </ImageView>
             <Pane fx:id="padlockPane" layoutX="43.0" layoutY="40.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="360.0" prefWidth="684.0" style="-fx-background-color: white;" visible="false">
