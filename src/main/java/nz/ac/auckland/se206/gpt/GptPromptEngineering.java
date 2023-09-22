@@ -131,7 +131,7 @@ public class GptPromptEngineering {
         + " cypher and word must link to the safe. a second clue could be that each letter in the"
         + " word must corelate to a number. For safe unlocked suggest that there must be a phone we"
         + " can call the number from. Any information you give out about rooms that is asked for is"
-        + " a hint. DO NOT give answer at any time.\r\n"
+        + " a hint. Never give the same hint twice. riddle unsolved.\r\n"
         + ")";
   }
 
