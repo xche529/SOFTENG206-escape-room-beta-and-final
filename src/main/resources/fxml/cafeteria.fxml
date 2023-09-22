@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <VBox xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.CafeteriaController">
    <children>
@@ -105,6 +106,11 @@
                   </Label>
                </children>
             </HBox>
+            <ImageView fx:id="safeBig" fitHeight="105.0" fitWidth="80.0" layoutX="580.0" layoutY="175.0" onMouseClicked="#onSafeClick" onMouseExited="#safeMouseExited" scaleX="1.5" scaleY="1.5" visible="false">
+               <image>
+                  <Image url="@../images/Safe.png" />
+               </image>
+            </ImageView>
             <ImageView fx:id="speechBubbleTwoSmall" fitHeight="150.0" fitWidth="89.0" layoutX="651.0" layoutY="243.0" onMouseClicked="#onSpeechBubbleTwoClicked" onMouseEntered="#onSetSpeechBubbleTwoUp" onMouseExited="#onSetSpeechBubbleTwoDown" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/speechBubble.png" />
@@ -133,11 +139,6 @@
             <ImageView fx:id="speechBubbleOne" fitHeight="97.0" fitWidth="120.0" layoutX="856.0" layoutY="234.0" onMouseClicked="#onSpeechBubbleOneClicked" onMouseEntered="#onSetSpeechBubbleOneUp" onMouseExited="#onSetSpeechBubbleOneDown" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@../images/speechBubble.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="safeBig" fitHeight="105.0" fitWidth="80.0" layoutX="580.0" layoutY="175.0" onMouseClicked="#onSafeClick" onMouseExited="#safeMouseExited" scaleX="1.5" scaleY="1.5" visible="false">
-               <image>
-                  <Image url="@../images/Safe.png" />
                </image>
             </ImageView>
             <ImageView fx:id="prisonerTwo" fitHeight="305.0" fitWidth="147.0" layoutX="559.0" layoutY="300.0" pickOnBounds="true">
@@ -214,7 +215,7 @@
                   <Image url="@../images/newArrow.png" />
                </image>
             </ImageView>
-            <Pane fx:id="padlockPane" layoutX="43.0" layoutY="40.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="360.0" prefWidth="684.0" style="-fx-background-color: white;" visible="false">
+            <Pane fx:id="padlockPane" layoutX="250.0" layoutY="104.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="360.0" prefWidth="684.0" style="-fx-background-color: white;" visible="false">
                <children>
                   <Label fx:id="digitOne" layoutX="175.0" layoutY="175.0" prefHeight="42.0" prefWidth="33.0" text="0">
                      <font>
@@ -282,11 +283,25 @@
                         <Image url="@../images/incrementer.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="exitPadlockButton" layoutX="275.0" layoutY="300.0" mnemonicParsing="false" onAction="#onClickExitPadlock" prefHeight="37.0" prefWidth="103.0" text="Go Back">
+                  <ImageView fx:id="cross" fitHeight="150.0" fitWidth="48.0" layoutX="618.0" layoutY="29.0" onMouseClicked="#onClickExitPadlock" onMouseEntered="#crossMouseEntered" onMouseExited="#crossMouseExited" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/Cross.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane fx:id="thoughtBubblePane" prefHeight="219.0" prefWidth="360.0" visible="false">
+               <children>
+                  <ImageView fitHeight="242.0" fitWidth="334.0" layoutX="24.0" layoutY="-15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/ThoughtBubble.png" />
+                     </image>
+                  </ImageView>
+                  <Text fx:id="thoughtBubbleText" layoutX="79.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="163.96007707045146">
                      <font>
-                        <Font size="19.0" />
+                        <Font size="26.0" />
                      </font>
-                  </Button>
+                  </Text>
                </children>
             </Pane>
          </children>
