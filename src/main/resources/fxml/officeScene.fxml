@@ -103,7 +103,7 @@
                   <Image url="@../images/newArrow.png" />
                </image>
             </ImageView>
-            <Pane fx:id="phonePane" layoutX="37.0" layoutY="37.0" prefHeight="531.0" prefWidth="1035.0" style="-fx-background-color: white;" visible="false">
+            <Pane fx:id="phonePane" layoutX="37.0" layoutY="37.0" prefHeight="531.0" prefWidth="1035.0" style="-fx-background-color: white;">
                <children>
                   <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="194.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" />
                   <Label fx:id="digitOne" layoutX="87.0" layoutY="33.0" prefHeight="71.0" prefWidth="33.0" text="_">
@@ -167,9 +167,9 @@
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="23.0" layoutX="562.0" layoutY="357.0" onMouseClicked="#onClickNine" onMouseEntered="#nineMouseEntered" onMouseExited="#nineMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="24.0" x="-150.0" />
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="593.0" layoutY="338.0" onMouseClicked="#onClickZero" onMouseEntered="#zeroMouseEntered" onMouseExited="#zeroMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="24.0" x="-150.0" />
                   <Button layoutX="762.0" layoutY="22.0" mnemonicParsing="false" onMouseClicked="#onClickClear" text="Clear" />
-                  <Button layoutX="767.0" layoutY="56.0" mnemonicParsing="false" onMouseClicked="#onClickCall" text="Call" />
+                  <Button layoutX="728.0" layoutY="57.0" mnemonicParsing="false" onMouseClicked="#onClickCall" text="Call For Helicopter" />
                   <Button layoutX="733.0" layoutY="89.0" mnemonicParsing="false" onMouseClicked="#onClickDelete" text="Delete Last Digit" />
-                  <Text layoutX="726.0" layoutY="327.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You have no phone number yet!" textAlignment="CENTER" wrappingWidth="227.0621337890625">
+                  <Text layoutX="725.0" layoutY="283.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You have no phone number yet!" textAlignment="CENTER" wrappingWidth="227.0621337890625">
                      <font>
                         <Font size="28.0" />
                      </font>
