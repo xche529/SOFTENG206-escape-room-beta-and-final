@@ -11,8 +11,14 @@ public class EndLostController {
 
   @FXML private Button restartButton;
 
+  /**
+   * Switches the scene to the start interface
+   * 
+   * @param event
+   */
   @FXML
   private void onTryAgain(MouseEvent event) {
+    // Switch to start interface
     Scene scene = restartButton.getScene();
     scene.setRoot(SceneManager.getUiRoot(AppUi.START_INTERFACE));
   }
