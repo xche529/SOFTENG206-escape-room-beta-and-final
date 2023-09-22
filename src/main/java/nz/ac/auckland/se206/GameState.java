@@ -60,7 +60,9 @@ public class GameState {
 
   public static boolean resetRoom = false;
 
-  public static String numHints = "infinite";
+  public static int hints = 5;
+
+  public static int hintsLeft = 5;
 
   public static boolean stopTimer = false;
 

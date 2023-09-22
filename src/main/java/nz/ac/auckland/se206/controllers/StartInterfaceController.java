@@ -14,6 +14,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.GptAndTextAreaManager;
+import nz.ac.auckland.se206.GptAndTextAreaManager;
 import nz.ac.auckland.se206.PlayHistory;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
@@ -79,12 +81,11 @@ public class StartInterfaceController {
     }
     GameState.playerName = playerName.getText();
     Scene sceneButtonIsIn = twoTick.getScene();
-    // // initialize the characters with prompt
-    // //GptAndTextAreaManager.initialize();
+    GptAndTextAreaManager.initialize();
     SceneManager.switchRoom(false, sceneButtonIsIn);
     roomController.start();
-    System.out.println("Game started");
-    // unselects all of the choices
+    System.out.println("Game started with difficulty " + GameState.difficulty + " and play time " + GameState.secondsRemaining + " seconds");
+    //unselects all of the choices
     twoMin.setSelected(false);
     fourMin.setSelected(false);
     sixMin.setSelected(false);
@@ -137,8 +138,6 @@ public class StartInterfaceController {
       hard.setSelected(false);
       medium.setSelected(false);
       easy.setSelected(true);
-      // set number of hints
-      GameState.numHints = "infinite";
       GameState.difficulty = GameState.Difficulty.EASY;
       System.out.println("Difficulty change: easy");
     }
@@ -148,7 +147,6 @@ public class StartInterfaceController {
       hard.setSelected(false);
       medium.setSelected(true);
       // set number of hints
-      GameState.numHints = "5";
       GameState.difficulty = GameState.Difficulty.MEDIUM;
       System.out.println("Difficulty change: medium");
     }
@@ -157,8 +155,6 @@ public class StartInterfaceController {
       easy.setSelected(false);
       medium.setSelected(false);
       hard.setSelected(true);
-      // no hints allowed
-      GameState.numHints = "0";
       GameState.difficulty = GameState.Difficulty.HARD;
       System.out.println("Difficulty change: hard");
     }

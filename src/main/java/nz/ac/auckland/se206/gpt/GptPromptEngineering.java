@@ -37,7 +37,7 @@ public class GptPromptEngineering {
    *
    * @return the generated prompt engineering string
    */
-  public static String getGuardSetUp(String wordToGuess, String numHints) {
+  public static String getGuardSetUp(String wordToGuess) {
     if (GameState.difficulty == Difficulty.HARD) {
       // get the guards story if the difficulty is hard
       return "(You are playing the role of a guard who is helping someone escape an escape room"
@@ -64,12 +64,9 @@ public class GptPromptEngineering {
     } else if (GameState.difficulty == Difficulty.MEDIUM) {
       // get the guards story if the difficulty is medium
       return "(You are playing the role of a guard who is helping someone escape an escape room"
-          + " where they are the prisoner.  You can give the prisoner "
-          // restrict number of hints to 5
-          + numHints
-          + " hints. Every time you give out a hint you should tell the priosner how many hints"
-          + " they have remaining. You should give the prisoner a riddle with the answer "
-          // confirming there is only one answer
+                 + " where they are the prisoner.  You can give the prisoner five"
+          + " hint. put (HINT) at the end of your response if you are giving a hint You should give the prisoner a riddle with the answer and one hint at a time, don't give hint if not asked."
+
           + wordToGuess
           + " to give them their first clue in your first message. The riddle "
           + "can go up to 3 or 4 lines. "
@@ -101,19 +98,17 @@ public class GptPromptEngineering {
           + " suggest maybe one of the other prisoners knows something. For safe found suggest that"
           + " the cypher and word must link to the safe. a second clue could be that each letter in"
           + " the word must corelate to a number. For safe unlocked suggest that there must be a"
-          + " phone we can call the number from. Remember you can give out a maximum of "
-          + numHints
+          + " phone we can call the number from. Remember you can give out a maximum of five"
           // defining rules about hints
           + " hints. Asking what to do next or for a clue counts as a hint. Any information you"
-          + " give out about rooms that is asked for is a hint. Never give the same hint twice."
-          + " riddle unsolved.\r\n"
+          + " give out about rooms that is asked for is a hint. Never give the same hint twice. DO NOT give answer at any time."
+          + " put (HINT) at the end of your response if you are giving a hint!!!\r\n"
           + ")";
     }
     // get the guards story if the difficulty is easy
     return "(You are playing the role of a guard who is helping someone escape an escape room where"
-        + " they are the prisoner.  You can give the prisoner "
+               + " they are the prisoner.  You can give the prisoner infinite"
         // set unlimited hints
-        + numHints
         + " hints. You should give the prisoner a riddle with "
         + "the answer "
         + wordToGuess
@@ -175,5 +170,10 @@ public class GptPromptEngineering {
         + " in the cafeteria which you found pretty strange. Suggest that there might be"
         + " something useful inside but express that you don't know how to get it open. Only"
         + " send one message at a time)";
+  }
+
+  public static String stopGivingHint(){
+    return "(the player have used up all the hints, you should not give any more hints after this."
+                + "now inform the player that you have no more hints to give as the guard.)";
   }
 }

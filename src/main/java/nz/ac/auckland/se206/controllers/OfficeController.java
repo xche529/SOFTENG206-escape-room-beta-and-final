@@ -119,7 +119,9 @@ public class OfficeController {
           speechBubbleOne,
           speechBubbleTwo,
           speechBubbleOneSmall,
-          speechBubbleTwoSmall
+          speechBubbleTwoSmall,
+          thinkingOne,
+          thinkingTwo
         };
 
     // creates an array with all of the digits
