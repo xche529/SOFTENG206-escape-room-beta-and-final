@@ -238,7 +238,7 @@ public class RoomController {
     doorArrowSmall.setOpacity(0);
     // animateArrows(doorArrow);
     GameState.setRiddleResolved(false);
-
+    GptAndTextAreaManager.reset();
     GameState.wordFound = false;
     GameState.resetRoom = false;
     System.out.println("room reseted");
