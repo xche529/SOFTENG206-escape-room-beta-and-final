@@ -88,7 +88,7 @@ public class GptAndTextAreaManager {
                 } else if (name.trim().equals("user")) {
                     name = GameState.playerName + ": ";
                 }
-                result += name + chat.getMessages().get(i).getContent() + "\n\n";
+                result += name + parenthesesFilter(chat.getMessages().get(i).getContent()) + "\n\n";
                 System.out.println(messages.get(i).getRole() + ": " + chat.getMessages().get(i).getContent() + "\n\n");
             }
 
@@ -126,6 +126,14 @@ public class GptAndTextAreaManager {
         textAreaChatDisplayBoard.setScrollTop(Double.MAX_VALUE);
     }
 
+    private static String parenthesesFilter(String input){
+        String result = "";
+        if (input.contains("(") && input.contains(")")) {
+            result += result.substring(0, input.indexOf("("));
+            result += result.substring(input.indexOf(")") + 1);
+        }
+        return result;
+    }
     public static void sendMessage(String message) throws ApiProxyException {
 
         boolean ifSpeak = false;
