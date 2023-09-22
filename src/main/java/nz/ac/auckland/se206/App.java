@@ -28,7 +28,6 @@ public class App extends Application {
   public static double centerX = 1;
   public static double centerY = 1;
   private static Scene scene;
-  Boolean isFirstSwitch = false;
 
   public static void main(final String[] args) {
     launch();
