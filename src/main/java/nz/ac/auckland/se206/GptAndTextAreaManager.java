@@ -28,7 +28,7 @@ public class GptAndTextAreaManager {
     static Characters currentCharacter = Characters.GUARD;
 
     public static ChatCompletionRequest guardChatCompletionRequest = new ChatCompletionRequest().setN(1)
-            .setTemperature(0.2).setTopP(0.5).setMaxTokens(50);
+            .setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
     public static ChatCompletionRequest prisonerOneCompletionRequest = new ChatCompletionRequest().setN(1)
             .setTemperature(0.2).setTopP(0.5).setMaxTokens(50);
     public static ChatCompletionRequest prisonerTwoCompletionRequest = new ChatCompletionRequest().setN(1)
@@ -69,7 +69,13 @@ public class GptAndTextAreaManager {
 
         if (messages.size() > 1) {
 
-            for (int i = 1; i < messages.size(); i++) {
+            for (int i = 0; i < messages.size(); i++) {
+                String check = messages.get(i).getContent();
+                if (check.charAt(0) == ('(') && check.charAt(check.length() - 1) == (')')) {
+                    System.out.println(
+                            messages.get(i).getRole() + ": " + chat.getMessages().get(i).getContent() + "\n\n");
+                    continue;
+                }
                 if (messages.get(i).getRole().equals("assistant")
                         && messages.get(i).getContent().contains("Correct")) {
                     GameState.setRiddleResolved(true);
@@ -77,7 +83,7 @@ public class GptAndTextAreaManager {
                 String name = messages.get(i).getRole();
                 if (name.trim().equals("assistant")) {
                     if (currentCharacter == Characters.GUARD) {
-                        name = "";
+                        name = "Guard: ";
                     } else if (currentCharacter == Characters.PRISONER_ONE) {
                         name = "Prisoner1: ";
                     } else {
@@ -86,12 +92,15 @@ public class GptAndTextAreaManager {
                 } else if (name.trim().equals("user")) {
                     name = GameState.playerName + ": ";
                 }
-                result += name + chat.getMessages().get(i).getContent() + "\n\n";
+                String content = chat.getMessages().get(i).getContent();
+                result += name + parenthesesFilter(content) + "\n\n";
+                System.out.println("parenthesesFilter passed");
                 System.out.println(messages.get(i).getRole() + ": " + chat.getMessages().get(i).getContent() + "\n\n");
             }
 
         }
         return result;
+
     }
 
     /*
@@ -124,21 +133,37 @@ public class GptAndTextAreaManager {
         textAreaChatDisplayBoard.setScrollTop(Double.MAX_VALUE);
     }
 
+    private static String parenthesesFilter(String input) {
+        String result = "";
+        if (input.contains("(") && input.contains(")")) {
+            System.out.println("parenthesesFilter Stage 1 passed");
+            result += input.substring(0, input.indexOf("("));
+            if (!(input.indexOf(")") + 1 < input.length())) {
+                result += input.substring(input.indexOf(")") + 1);
+            }
+            System.out.println("parenthesesFilter Stage 2 passed");
+            System.out.println("parenthesesFilter result: " + result);
+        } else {
+            result = input;
+        }
+        return result;
+    }
+
     public static void sendMessage(String message) throws ApiProxyException {
 
         boolean ifSpeak = false;
 
         if (currentCharacter == Characters.GUARD) {
             if (GameState.isRiddleResolved() == false) {
-                message = message + "? " + "(riddle unsolved)";
+                message = message + "(riddle unsolved)";
             } else if (GameState.wordFound == false) {
-                message = message + "? " + "(riddle solved)";
+                message = message + "(riddle solved)";
             } else if (GameState.cypherFound == false) {
-                message = message + "? " + "(word found)";
+                message = message + "(word found)";
             } else if (GameState.safeFound == false) {
-                message = message + "? " + "(cypher found)";
+                message = message + "(cypher found)";
             } else if (GameState.safeUnlocked == false) {
-                message = message + "? " + "(safe found)";
+                message = message + "(safe found)";
             }
             guardChatCompletionRequest.addMessage(new ChatMessage("user", message));
             runGpt(guardChatCompletionRequest);
