@@ -64,7 +64,6 @@ public class CafeteriaController {
   @FXML private Label digitFour;
   @FXML private Button openButton;
 
-
   @FXML private ImageView cross;
 
   @FXML private Pane paperPane;
@@ -78,7 +77,6 @@ public class CafeteriaController {
 
   @FXML private Pane thoughtBubblePane;
   @FXML private Text thoughtBubbleText;
-
 
   private ImageView[] animationItems;
 
@@ -448,12 +446,14 @@ public class CafeteriaController {
     System.out.println("Speech bubble three clicked");
   }
 
+  /** This method enlages the cross when the mouse enters the cross. */
   @FXML
   private void crossMouseEntered() {
     cross.scaleXProperty().set(1.15);
     cross.scaleYProperty().set(1.15);
   }
 
+  /** This method shrinks the cross when the mouse exits the cross. */
   @FXML
   private void crossMouseExited() {
     cross.scaleXProperty().set(1);
@@ -496,8 +496,10 @@ public class CafeteriaController {
    */
   public void animateArrows(ImageView arrow) {
 
+    // sets the start position of the arrow
     double startY = 0;
 
+    // makes the arrow bounce up and down
     TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.5), arrow);
     translateTransition.setFromY(startY);
     translateTransition.setToY(startY + 5);
