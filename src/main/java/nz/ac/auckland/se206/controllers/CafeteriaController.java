@@ -411,6 +411,7 @@ public class CafeteriaController {
   /** This method allows the player to leave the view with the padlock. */
   @FXML
   private void onClickExitPadlock() {
+    thoughtBubblePane.setVisible(false);
     padlockPane.setVisible(false);
   }
 
