@@ -141,6 +141,16 @@
             <CheckBox fx:id="hard" layoutX="39.0" layoutY="165.0" mnemonicParsing="false" onAction="#onSwitchDifficulty" text="HARD" visible="false" />
             <CheckBox fx:id="medium" layoutX="39.0" layoutY="177.0" mnemonicParsing="false" onAction="#onSwitchDifficulty" text="MEDIUM" visible="false" />
             <CheckBox fx:id="easy" layoutX="41.0" layoutY="207.0" mnemonicParsing="false" onAction="#onSwitchDifficulty" selected="true" text="EASY" visible="false" />
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="863.0" layoutY="462.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/Arrow_keys.png" />
+               </image>
+            </ImageView>
+            <Text fill="WHITE" layoutX="863.0" layoutY="451.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Use arrow keys to change rooms in the game" wrappingWidth="178.818359375">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Text>
          </children>
       </Pane>
    </children>
