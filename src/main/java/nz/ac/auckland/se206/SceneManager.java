@@ -81,13 +81,13 @@ public class SceneManager {
       curretUi = appUis[index];
       roomToSwitch = (VBox) getUiRoot(appUis[index]);
     }
-    VBox vBox = new VBox(roomToSwitch, getUiRoot(AppUi.TEXT_AREA));
+    VBox vbox = new VBox(roomToSwitch, getUiRoot(AppUi.TEXT_AREA));
 
-    vBox.getTransforms().add(App.scale);
-    vBox.setLayoutX(App.centerX);
-    vBox.setLayoutY(App.centerY);
+    vbox.getTransforms().add(App.scale);
+    vbox.setLayoutX(App.centerX);
+    vbox.setLayoutY(App.centerY);
 
-    scene.setRoot(vBox);
+    scene.setRoot(vbox);
   }
 
   private static HashMap<AppUi, Parent> sceneMap = new HashMap<AppUi, Parent>();

@@ -80,7 +80,7 @@ public class App extends Application {
     FXMLLoader endScreenLostLoader = loadFxml("endScreenLost");
     FXMLLoader officeSceneLoader = loadFxml("officeScene");
     FXMLLoader cafeteriaLoader = loadFxml("cafeteria");
-    FXMLLoader StartInterfaceLoader = loadFxml("StartInterface");
+    FXMLLoader startInterfaceLoader = loadFxml("StartInterface");
     FXMLLoader textAreaLoader = loadFxml("textArea");
     FXMLLoader roomLoader = loadFxml("room");
     VBox cafeteria = cafeteriaLoader.load();
@@ -88,16 +88,16 @@ public class App extends Application {
     VBox room = roomLoader.load();
     VBox textArea = textAreaLoader.load();
 
-    VBox cafeteriaVBox = new VBox(cafeteria, textArea);
-    VBox officeVBox = new VBox(office, textArea);
-    VBox roomVBox = new VBox(room, textArea);
+    VBox cafeteriaVbox = new VBox(cafeteria, textArea);
+    VBox officeVbox = new VBox(office, textArea);
+    VBox roomVbox = new VBox(room, textArea);
 
     SceneManager.addUi(AppUi.END_WON, endScreenWonLoader.load());
     SceneManager.addUi(AppUi.END_LOST, endScreenLostLoader.load());
-    SceneManager.addUi(AppUi.START_INTERFACE, StartInterfaceLoader.load());
-    SceneManager.addUi(AppUi.OFFICE, officeVBox);
-    SceneManager.addUi(AppUi.CAFETERIA, cafeteriaVBox);
-    SceneManager.addUi(AppUi.ROOM, roomVBox);
+    SceneManager.addUi(AppUi.START_INTERFACE, startInterfaceLoader.load());
+    SceneManager.addUi(AppUi.OFFICE, officeVbox);
+    SceneManager.addUi(AppUi.CAFETERIA, cafeteriaVbox);
+    SceneManager.addUi(AppUi.ROOM, roomVbox);
     SceneManager.addUi(AppUi.TEXT_AREA, textArea);
     SceneManager.getUiRoot(AppUi.START_INTERFACE).getTransforms().add(scale);
     SceneManager.getUiRoot(AppUi.END_WON).getTransforms().add(scale);
@@ -105,7 +105,7 @@ public class App extends Application {
 
     CafeteriaController cafeteriaController = cafeteriaLoader.getController();
     OfficeController officeController = officeSceneLoader.getController();
-    StartInterfaceController startInterfaceController = StartInterfaceLoader.getController();
+    StartInterfaceController startInterfaceController = startInterfaceLoader.getController();
     RoomController roomController = roomLoader.getController();
 
     SceneManager.cafeteriaController = cafeteriaController;
