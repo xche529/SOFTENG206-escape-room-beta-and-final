@@ -734,10 +734,14 @@ public class OfficeController {
   /**
    * clears all the digits
    *
-   * @param event
+   * @param event the mouse event where the character clicks on the clear button
    */
   @FXML
   private void onClickClear(MouseEvent event) {
+    clearAll();
+  }
+
+  private void clearAll() {
     // clears all the digits
     digitOne.setText("_");
     digitTwo.setText("_");
@@ -899,6 +903,7 @@ public class OfficeController {
 
   /** restores the office to its original state */
   private void resetOffice() {
+
     // Getting random item to be used to hide the cypher
     RandomizationGenerator.hideChypher(items);
 
@@ -914,5 +919,8 @@ public class OfficeController {
     GameState.cypherFound = false;
     GameState.resetOffice = false;
     System.out.println("office reseted");
+
+    // resets the digits
+    clearAll();
   }
 }
