@@ -1,7 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
-import java.util.Random;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -99,7 +98,7 @@ public class RoomController {
   private Timeline timeline;
   private TextToSpeech textToSpeech;
   private ImageView[] animationItems = null;
-  private Rectangle[] items = {vent, toiletPaper, toilet, sink, tap, mirror, towel};
+  private Rectangle[] items;
 
   /**
    * Initializes the room view, it is called when the room loads.
@@ -108,6 +107,10 @@ public class RoomController {
    * @throws IOException
    */
   public void initialize() throws ApiProxyException, IOException {
+
+    items = new Rectangle[] {vent, toiletPaper, toilet, sink, tap, mirror, towel};
+
+    RandomizationGenerator.randomiseWord(items);
 
     // initialize fields in the GptAndTextAreaManager class
     GptAndTextAreaManager.roomController = this;
@@ -128,8 +131,6 @@ public class RoomController {
 
     // moves the prisoners to their starting point
     resetAnimation();
-
-    RandomizationGenerator.randomiseWord(items);
   }
 
   /**
@@ -256,7 +257,7 @@ public class RoomController {
     // resets the code for the safe
     Safe.getRandomCode();
 
-    //sets all the little arrows to invisible
+    // sets all the little arrows to invisible
     toiletArrow.setOpacity(0);
     toiletPaperArrow.setOpacity(0);
     ventArrow.setOpacity(0);
@@ -264,12 +265,12 @@ public class RoomController {
     mirrorArrow.setOpacity(0);
     towelArrow.setOpacity(0);
     doorArrowSmall.setOpacity(0);
-    //sets the required boolean values to false
+    // sets the required boolean values to false
     GameState.setRiddleResolved(false);
     GameState.wordFound = false;
     GameState.resetRoom = false;
 
-    //resets the text area
+    // resets the text area
     GptAndTextAreaManager.reset();
     System.out.println("room reseted");
   }
@@ -550,7 +551,7 @@ public class RoomController {
     if (GameState.isRiddleResolved()) {
       if (GameState.itemToChoose == vent) {
         GameState.isCodeWordFoundProperty().set(true);
-        //shows the blown up view of the vent with the word on it
+        // shows the blown up view of the vent with the word on it
         blurredPane.setVisible(true);
         inspectingVentPane.setVisible(true);
         ventWordLabel.setText(GameState.codeWord);
@@ -560,7 +561,7 @@ public class RoomController {
         GameState.wordFound = true;
 
       } else {
-        //shows the blown up view of the vent without the word on it
+        // shows the blown up view of the vent without the word on it
         blurredPane.setVisible(true);
         inspectingVentPane.setVisible(true);
         thoughtBubblePane.setVisible(true);
