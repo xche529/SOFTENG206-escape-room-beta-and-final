@@ -1,7 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
-import java.util.Random;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -22,6 +21,7 @@ import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GptAndTextAreaManager;
 import nz.ac.auckland.se206.GptAndTextAreaManager.Characters;
 import nz.ac.auckland.se206.MovementControl;
+import nz.ac.auckland.se206.RandomizationGenerator;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
@@ -112,12 +112,7 @@ public class CafeteriaController {
           thinkingTwo
         };
 
-    Random random = new Random();
-
-    // Generate a random 6-digit number
-    String phoneNumberInitial = Integer.toString(random.nextInt(999999 - 100000 + 1) + 100000);
-    GameState.phoneNumber =
-        "027" + " " + phoneNumberInitial.substring(0, 3) + " " + phoneNumberInitial.substring(3, 6);
+    RandomizationGenerator.createPhoneNunber();
     numberLabel.setText(GameState.phoneNumber);
 
     // animates all the arrows in the scene
@@ -511,6 +506,10 @@ public class CafeteriaController {
     GameState.safeUnlocked = false;
     GameState.resetCafeteria = false;
     System.out.println("cafeteria reseted");
+
+    //chooses a new phone number
+    RandomizationGenerator.createPhoneNunber();
+    numberLabel.setText(GameState.phoneNumber);
   }
 
   /**

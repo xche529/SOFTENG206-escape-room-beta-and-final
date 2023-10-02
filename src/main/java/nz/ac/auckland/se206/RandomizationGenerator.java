@@ -10,4 +10,13 @@ public class RandomizationGenerator {
     int randomIndexChoose = randomChoose.nextInt(cypherItems.length);
     GameState.itemWithCypher = cypherItems[randomIndexChoose];
   }
+
+  public static void createPhoneNunber() {
+    Random random = new Random();
+
+    // Generate a random 6-digit number
+    String phoneNumberInitial = Integer.toString(random.nextInt(999999 - 100000 + 1) + 100000);
+    GameState.phoneNumber =
+        "027" + " " + phoneNumberInitial.substring(0, 3) + " " + phoneNumberInitial.substring(3, 6);
+  }
 }
