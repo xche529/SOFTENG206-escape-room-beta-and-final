@@ -19,4 +19,11 @@ public class RandomizationGenerator {
     GameState.phoneNumber =
         "027" + " " + phoneNumberInitial.substring(0, 3) + " " + phoneNumberInitial.substring(3, 6);
   }
+
+    /** This method selects a random item to be used in the riddle. */
+    public static void randomiseWord(Rectangle[] items) {
+        Random randomChoose = new Random();
+        int randomIndexChoose = randomChoose.nextInt(items.length);
+        GameState.itemToChoose = items[randomIndexChoose];
+      }
 }

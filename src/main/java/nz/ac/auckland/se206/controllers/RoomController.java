@@ -28,6 +28,7 @@ import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GptAndTextAreaManager;
 import nz.ac.auckland.se206.GptAndTextAreaManager.Characters;
 import nz.ac.auckland.se206.MovementControl;
+import nz.ac.auckland.se206.RandomizationGenerator;
 import nz.ac.auckland.se206.Safe;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
@@ -98,6 +99,7 @@ public class RoomController {
   private Timeline timeline;
   private TextToSpeech textToSpeech;
   private ImageView[] animationItems = null;
+  private Rectangle[] items = {vent, toiletPaper, toilet, sink, tap, mirror, towel};
 
   /**
    * Initializes the room view, it is called when the room loads.
@@ -127,7 +129,7 @@ public class RoomController {
     // moves the prisoners to their starting point
     resetAnimation();
 
-    itemToChoose();
+    RandomizationGenerator.randomiseWord(items);
   }
 
   /**
@@ -249,7 +251,7 @@ public class RoomController {
    */
   private void resetRoom() throws ApiProxyException {
     // randomises the word for the riddle
-    itemToChoose();
+    RandomizationGenerator.randomiseWord(items);
 
     // resets the code for the safe
     Safe.getRandomCode();
@@ -270,14 +272,6 @@ public class RoomController {
     //resets the text area
     GptAndTextAreaManager.reset();
     System.out.println("room reseted");
-  }
-
-  /** This method selects a random item to be used in the riddle. */
-  private void itemToChoose() {
-    Rectangle[] items = new Rectangle[] {vent, toiletPaper, toilet, mirror, towel, sink};
-    Random randomChoose = new Random();
-    int randomIndexChoose = randomChoose.nextInt(items.length);
-    GameState.itemToChoose = items[randomIndexChoose];
   }
 
   /** This method animates all of the arrows in the scene */
