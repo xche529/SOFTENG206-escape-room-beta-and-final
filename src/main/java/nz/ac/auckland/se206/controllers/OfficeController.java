@@ -3,7 +3,6 @@ package nz.ac.auckland.se206.controllers;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.util.Random;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -27,6 +26,7 @@ import nz.ac.auckland.se206.GptAndTextAreaManager;
 import nz.ac.auckland.se206.GptAndTextAreaManager.Characters;
 import nz.ac.auckland.se206.MovementControl;
 import nz.ac.auckland.se206.PlayHistory;
+import nz.ac.auckland.se206.RandomizationGenerator;
 import nz.ac.auckland.se206.SceneManager;
 
 public class OfficeController {
@@ -88,6 +88,7 @@ public class OfficeController {
   private ImageView[] animationItems;
   private Label[] digits;
   private int currentDigit = 0;
+  private Rectangle[] items;
 
   /**
    * This method is called by the FXMLLoader when initialization is complete
@@ -97,6 +98,12 @@ public class OfficeController {
   @FXML
   private void initialize() throws IOException {
 
+    // creates an array with all of the items that can hide the cypher
+    items =
+        new Rectangle[] {
+          bin, blackBoard, deskDrawers,
+        };
+        
     // sets all the variables and randomises the cypher location
     resetOffice();
 
@@ -110,6 +117,7 @@ public class OfficeController {
     animateArrows(phoneArrow);
 
     GptAndTextAreaManager.officeController = this;
+
 
     // creates an array with all of the animation items
     animationItems =
@@ -156,10 +164,10 @@ public class OfficeController {
    */
   public void animateArrows(ImageView arrow) {
 
-    //sets the starting position of the arrows
+    // sets the starting position of the arrows
     double startY = 0;
 
-    //makes the arrow bounce up and down
+    // makes the arrow bounce up and down
     TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.5), arrow);
     translateTransition.setFromY(startY);
     translateTransition.setToY(startY + 5);
@@ -892,13 +900,7 @@ public class OfficeController {
   /** restores the office to its original state */
   private void resetOffice() {
     // Getting random item to be used to hide the cypher
-    Rectangle[] items =
-        new Rectangle[] {
-          bin, blackBoard, deskDrawers,
-        };
-    Random randomChoose = new Random();
-    int randomIndexChoose = randomChoose.nextInt(items.length);
-    GameState.itemWithCypher = items[randomIndexChoose];
+    RandomizationGenerator.hideChypher(items);
 
     // resets the visability of the items
     binArrow.setVisible(true);
