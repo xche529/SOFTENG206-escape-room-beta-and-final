@@ -1,7 +1,8 @@
-package nz.ac.auckland.se206;
+package nz.ac.auckland.se206.reseters;
 
 import java.util.Random;
 import javafx.scene.shape.Rectangle;
+import nz.ac.auckland.se206.GameState;
 
 public class RandomizationGenerator {
 

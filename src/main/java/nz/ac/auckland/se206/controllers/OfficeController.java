@@ -26,8 +26,9 @@ import nz.ac.auckland.se206.GptAndTextAreaManager;
 import nz.ac.auckland.se206.GptAndTextAreaManager.Characters;
 import nz.ac.auckland.se206.MovementControl;
 import nz.ac.auckland.se206.PlayHistory;
-import nz.ac.auckland.se206.RandomizationGenerator;
 import nz.ac.auckland.se206.SceneManager;
+import nz.ac.auckland.se206.reseters.GameEnd;
+import nz.ac.auckland.se206.reseters.RandomizationGenerator;
 
 public class OfficeController {
 
@@ -103,7 +104,7 @@ public class OfficeController {
         new Rectangle[] {
           bin, blackBoard, deskDrawers,
         };
-        
+
     // sets all the variables and randomises the cypher location
     resetOffice();
 
@@ -117,7 +118,6 @@ public class OfficeController {
     animateArrows(phoneArrow);
 
     GptAndTextAreaManager.officeController = this;
-
 
     // creates an array with all of the animation items
     animationItems =
@@ -811,12 +811,7 @@ public class OfficeController {
         } catch (IOException | ClassNotFoundException e) {
           playHistory.saveHistory();
         }
-        // resets the game
-        GameState.secondsRemaining = -1;
-        GameState.resetCafeteria = true;
-        GameState.resetOffice = true;
-        GameState.resetRoom = true;
-        GameState.resetTextArea = true;
+        GameEnd.triggerResters();
 
         // switches to the end screen
         Parent parent = SceneManager.getUiRoot(SceneManager.AppUi.END_WON);
@@ -867,13 +862,7 @@ public class OfficeController {
                   }
                   if (GameState.secondsRemaining == 0) {
                     if (SceneManager.curretUi == SceneManager.AppUi.OFFICE) {
-                      // if the time runs out, the game is lost
-                      // setting to negative one so that the game does not reset multiple times
-                      GameState.secondsRemaining = -1;
-                      GameState.resetCafeteria = true;
-                      GameState.resetOffice = true;
-                      GameState.resetRoom = true;
-                      GameState.resetTextArea = true;
+                      GameEnd.triggerResters();
                       try {
                         // changes to the end screen
                         Scene scene = phone.getScene();
@@ -882,7 +871,7 @@ public class OfficeController {
                         parent.setLayoutY(App.centerY);
                         scene.setRoot(parent);
                       } catch (NullPointerException e) {
-                        System.out.println("Null pointer exception");
+                        e.printStackTrace();
                       }
                     }
                   }

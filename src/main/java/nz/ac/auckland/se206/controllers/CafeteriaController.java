@@ -21,9 +21,9 @@ import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GptAndTextAreaManager;
 import nz.ac.auckland.se206.GptAndTextAreaManager.Characters;
 import nz.ac.auckland.se206.MovementControl;
-import nz.ac.auckland.se206.RandomizationGenerator;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
+import nz.ac.auckland.se206.reseters.RandomizationGenerator;
 
 public class CafeteriaController {
 
@@ -507,7 +507,7 @@ public class CafeteriaController {
     GameState.resetCafeteria = false;
     System.out.println("cafeteria reseted");
 
-    //chooses a new phone number
+    // chooses a new phone number
     RandomizationGenerator.createPhoneNunber();
     numberLabel.setText(GameState.phoneNumber);
   }
@@ -547,12 +547,7 @@ public class CafeteriaController {
                   }
                   if (GameState.secondsRemaining == 0) {
                     if (SceneManager.curretUi == SceneManager.AppUi.CAFETERIA) {
-                      // stops the timer from being called repeatedly
-                      GameState.secondsRemaining = -1;
                       GameState.resetCafeteria = true;
-                      GameState.resetOffice = true;
-                      GameState.resetRoom = true;
-                      GameState.resetTextArea = true;
                       try {
                         // switches to the lost screen
                         Scene scene = vendingMachine.getScene();
