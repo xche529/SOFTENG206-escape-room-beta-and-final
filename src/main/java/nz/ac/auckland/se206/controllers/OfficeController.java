@@ -816,6 +816,7 @@ public class OfficeController {
         GameState.resetCafeteria = true;
         GameState.resetOffice = true;
         GameState.resetRoom = true;
+        GameState.resetTextArea = true;
 
         // switches to the end screen
         Parent parent = SceneManager.getUiRoot(SceneManager.AppUi.END_WON);
@@ -872,6 +873,7 @@ public class OfficeController {
                       GameState.resetCafeteria = true;
                       GameState.resetOffice = true;
                       GameState.resetRoom = true;
+                      GameState.resetTextArea = true;
                       try {
                         // changes to the end screen
                         Scene scene = phone.getScene();

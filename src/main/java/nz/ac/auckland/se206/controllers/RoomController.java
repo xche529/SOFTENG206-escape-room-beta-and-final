@@ -218,6 +218,7 @@ public class RoomController {
                       GameState.resetCafeteria = true;
                       GameState.resetOffice = true;
                       GameState.resetRoom = true;
+                      GameState.resetTextArea = true;
                       try {
                         // switches to the lost screen
                         Scene scene = sink.getScene();
