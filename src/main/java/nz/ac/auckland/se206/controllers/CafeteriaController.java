@@ -82,6 +82,8 @@ public class CafeteriaController {
   @FXML private Pane inspectingPaintingPane;
   @FXML private Pane blurredPane;
 
+  @FXML private Rectangle safeRectangle;
+
   private ImageView[] animationItems;
 
   private Timeline timeline;
@@ -147,6 +149,7 @@ public class CafeteriaController {
    */
   @FXML
   private void onClickPaintingWithSafe(MouseEvent event) {
+    safeRectangle.setVisible(true);
     safe.setVisible(true);
     paintingWithSafe.setVisible(false);
     paintingWithSafeArrow.setVisible(false);
