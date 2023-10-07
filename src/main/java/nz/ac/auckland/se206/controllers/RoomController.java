@@ -140,6 +140,8 @@ public class RoomController {
    */
   public void start() throws IOException {
 
+    RandomizationGenerator.randomiseWord(items);
+
     timeline =
         new Timeline(
             new KeyFrame(

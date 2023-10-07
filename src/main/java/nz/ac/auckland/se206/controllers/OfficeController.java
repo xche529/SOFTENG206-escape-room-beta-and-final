@@ -897,6 +897,12 @@ public class OfficeController {
 
     // Getting random item to be used to hide the cypher
     RandomizationGenerator.hideChypher(items);
+    
+    // resets the neccesary booleans
+    GameState.cypherFound = false;
+    GameState.resetOffice = false;
+    GameState.isConverterFoundProperty().set(false);
+    System.out.println("office reseted");
 
     // resets the visability of the items
     binArrow.setVisible(true);
@@ -905,11 +911,6 @@ public class OfficeController {
     phoneArrow.setVisible(true);
     phonePane.setVisible(false);
     paperPane.setVisible(false);
-
-    // resets the neccesary booleans
-    GameState.cypherFound = false;
-    GameState.resetOffice = false;
-    System.out.println("office reseted");
 
     // resets the digits
     clearAll();
