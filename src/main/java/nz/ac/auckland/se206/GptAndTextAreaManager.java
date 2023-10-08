@@ -50,7 +50,6 @@ public class GptAndTextAreaManager {
   public static TextArea textAreaInputBox;
   public static TextArea textAreaObjectiveDisplayBoard;
   public static Text textAreaHintsLeftText;
-  public static VBox chatVBox;
 
   public static boolean isGptRunning = false;
   public static boolean isHintRunning = true;

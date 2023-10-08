@@ -33,7 +33,7 @@
                   <Font size="16.0" />
                </font>
             </TextArea>
-            <VBox fx:id="chatVbox" layoutX="324.0" prefHeight="195.0" prefWidth="562.0" />
+            <VBox fx:id="chatVbox" layoutX="324.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="195.0" prefWidth="562.0" />
             <Text fx:id="typePromptText" fill="#6b6b6b" layoutX="14.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type your response here:">
                <font>
                   <Font name="Century" size="12.0" />

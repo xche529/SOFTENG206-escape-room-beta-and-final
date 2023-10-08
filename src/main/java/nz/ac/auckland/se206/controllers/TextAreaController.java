@@ -1,5 +1,7 @@
 package nz.ac.auckland.se206.controllers;
 
+import java.io.File;
+import java.net.URL;
 import java.util.List;
 
 import javafx.fxml.FXML;
@@ -37,27 +39,30 @@ public class TextAreaController {
   @FXML private CheckBox safeLocatedObjective;
   @FXML private CheckBox guardTalkedObjective;
 
-  public static Image guardAvatar;
-  public static Image playerAvatar;
-  public static Image prisonerOneAvatar;
-  public static Image prisonerTwoAvatar;
+  public Image guardAvatar;
+  public Image playerAvatar;
+  public Image prisonerOneAvatar;
+  public Image prisonerTwoAvatar;
 
   @FXML
   private void initialize() {
     // setting up the text area manager
+    chatVbox.setMaxWidth(562);
+    chatVbox.setMaxHeight(195);
+
     GptAndTextAreaManager.textAreaController = this;
     GptAndTextAreaManager.textAreaChatDisplayBoard = chatDisplayBoard;
     GptAndTextAreaManager.textAreaInputBox = inputBox;
     GptAndTextAreaManager.textAreaObjectiveDisplayBoard = objectiveDisplayBoard;
     GptAndTextAreaManager.textAreaTypePromptText = typePromptText;
-    GptAndTextAreaManager.chatVBox = chatVbox;
     GptAndTextAreaManager.textAreaHintsLeftText = hintsLeftText;
-    guardAvatar = new Image(getClass().getResourceAsStream("src/main/resources/images/paper.png"));
-    playerAvatar = new Image(getClass().getResourceAsStream("src/main/resources/images/paper.png"));
+    String image = "src/main/resources/images/paper.png";
+    guardAvatar = new Image(new File(image).toURI().toString()); 
+    playerAvatar = new Image(new File(image).toURI().toString()); 
     prisonerOneAvatar =
-        new Image(getClass().getResourceAsStream("src/main/resources/images/paper.png")); 
+        new Image(new File(image).toURI().toString()); 
     prisonerTwoAvatar = 
-        new Image(getClass().getResourceAsStream("src/main/resources/images/paper.png"));
+        new Image(new File(image).toURI().toString()); 
 
     // adding listener to update objectives
     GameState.isRiddleResolvedProperty()
@@ -174,17 +179,17 @@ public class TextAreaController {
         if (name.trim().equals("assistant")) {
           if (GptAndTextAreaManager.currentCharacter == Characters.GUARD) {
             name = "Guard: ";
-            avatar = new ImageView(TextAreaController.guardAvatar);
+            avatar = new ImageView(guardAvatar);
           } else if (GptAndTextAreaManager.currentCharacter == Characters.PRISONER_ONE) {
             name = "Prisoner1: ";
-           avatar = new ImageView(TextAreaController.prisonerOneAvatar);
+           avatar = new ImageView(prisonerOneAvatar);
           } else {
             name = "Prisoner2: ";
-            avatar = new ImageView(TextAreaController.prisonerTwoAvatar);
+            avatar = new ImageView(prisonerTwoAvatar);
           }
         } else if (name.trim().equals("user")) {
             name = GameState.playerName + ": ";
-            avatar = new ImageView(TextAreaController.playerAvatar);
+            avatar = new ImageView(playerAvatar);
         }
         // get filtered messages for display
         String content = chat.getMessages().get(i).getContent();
@@ -208,8 +213,6 @@ public class TextAreaController {
       GameState.hintsLeft = GptAndTextAreaManager.hintLeft;
       System.out.println("Hints left: " + GptAndTextAreaManager.hintLeft);
     }
-
-    
   }
 
   public void displayTarget(Characters character) {
