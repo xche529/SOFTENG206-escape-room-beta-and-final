@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.skin.TextAreaSkin;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -16,6 +17,7 @@ import nz.ac.auckland.se206.controllers.CafeteriaController;
 import nz.ac.auckland.se206.controllers.OfficeController;
 import nz.ac.auckland.se206.controllers.RoomController;
 import nz.ac.auckland.se206.controllers.StartInterfaceController;
+import nz.ac.auckland.se206.controllers.TextAreaController;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 /**
@@ -138,6 +140,12 @@ public class App extends Application {
             SceneManager.switchRoom(true, scene);
           } else if (event.getCode() == KeyCode.RIGHT) {
             SceneManager.switchRoom(false, scene);
+          } else if (event.getCode() == KeyCode.ENTER){
+            try {
+              GptAndTextAreaManager.onSubmitMessage();
+            } catch (ApiProxyException e) {
+              e.printStackTrace();
+            }
           }
           if (up == null) {
             return;

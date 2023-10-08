@@ -1,14 +1,27 @@
 package nz.ac.auckland.se206.controllers;
 
+import java.io.File;
+import java.util.List;
+
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GptAndTextAreaManager;
+import nz.ac.auckland.se206.GptAndTextAreaManager.Characters;
+import nz.ac.auckland.se206.gpt.ChatMessage;
+import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
+import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 
 public class TextAreaController {
   @FXML private Button responseSubmitButton;
@@ -18,6 +31,7 @@ public class TextAreaController {
   @FXML private Text typePromptText;
   @FXML private Text hintsLeftText;
   @FXML private TextField inputText;
+  @FXML private VBox chatVbox;
 
   @FXML private CheckBox riddleSolvedObjective;
   @FXML private CheckBox codewordFoundObjective;
@@ -26,15 +40,33 @@ public class TextAreaController {
   @FXML private CheckBox safeLocatedObjective;
   @FXML private CheckBox guardTalkedObjective;
 
+  public Image guardAvatar;
+  public Image playerAvatar;
+  public Image prisonerOneAvatar;
+  public Image prisonerTwoAvatar;
+
   @FXML
   private void initialize() {
     // setting up the text area manager
+    chatVbox.setMaxWidth(562);
+    chatVbox.setMaxHeight(195);
+
     GptAndTextAreaManager.textAreaController = this;
     GptAndTextAreaManager.textAreaChatDisplayBoard = chatDisplayBoard;
     GptAndTextAreaManager.textAreaInputBox = inputBox;
     GptAndTextAreaManager.textAreaObjectiveDisplayBoard = objectiveDisplayBoard;
     GptAndTextAreaManager.textAreaTypePromptText = typePromptText;
     GptAndTextAreaManager.textAreaHintsLeftText = hintsLeftText;
+    String image = "src/main/resources/images/prisonerOneAvatar.png";
+    String guardAvatarImage = "src/main/resources/images/guardAvatar.png";
+    String prisonerOneAvatarImage = "src/main/resources/images/prisonerTwoAvatar.png";
+    String prisonerTwoAvatarImage = "src/main/resources/images/prisonerOneAvatar.png";
+    guardAvatar = new Image(new File(guardAvatarImage).toURI().toString()); 
+    playerAvatar = new Image(new File(image).toURI().toString()); 
+    prisonerOneAvatar =
+        new Image(new File(prisonerOneAvatarImage).toURI().toString()); 
+    prisonerTwoAvatar = 
+        new Image(new File(prisonerTwoAvatarImage).toURI().toString()); 
 
     // adding listener to update objectives
     GameState.isRiddleResolvedProperty()
@@ -99,4 +131,153 @@ public class TextAreaController {
       GptAndTextAreaManager.sendMessage(message);
     }
   }
+
+
+      public  void setMessageHistory(ChatCompletionRequest chat) {
+      chatVbox.getChildren().clear();
+      System.out.println("Vbox cleared");
+
+    List<ChatMessage> messages = chat.getMessages();
+    // IMPORTANT: increase i here to filtout the prompt Engineering content
+
+    if (messages.size() > 1) {
+      if (GptAndTextAreaManager.isHintRunning) {
+        GptAndTextAreaManager.hintLeft = GameState.hints;
+      } else {
+        GptAndTextAreaManager.hintLeft = 0;
+      }
+      // filter parentheses out so we can send messages without player seeing
+      for (int i = messages.size() - 1; i >= 0; i--) {
+        String result = "";
+        String check = messages.get(i).getContent();
+        if (check.charAt(0) == ('(') && check.charAt(check.length() - 1) == (')')) {
+          System.out.println(
+              messages.get(i).getRole() + ": " + chat.getMessages().get(i).getContent() + "\n\n");
+          continue;
+        }
+
+        if (GptAndTextAreaManager.currentCharacter == Characters.GUARD) {
+          if (messages.get(i).getRole().equals("assistant")
+              && messages.get(i).getContent().contains("Correct")) {
+            GameState.setRiddleResolved(true);
+          }
+          if (GptAndTextAreaManager.isHintRunning && GameState.difficulty == GameState.Difficulty.MEDIUM) {
+            if (messages.get(i).getRole().equals("assistant")
+                && (messages.get(i).getContent().contains("HINT") || messages.get(i).getContent().contains("Hint:") || messages.get(i).getContent().contains("hint:")) && i != 1) {
+              GptAndTextAreaManager.hintLeft--;
+            }
+            if (GptAndTextAreaManager.hintLeft == 0) {
+              GptAndTextAreaManager.isHintRunning = false;
+              try {
+                GptAndTextAreaManager.sendMessage(GptPromptEngineering.stopGivingHint());
+              } catch (ApiProxyException e) {
+                System.err.println("Error sending message: " + e.getMessage());
+              }
+            }
+          }
+        }
+
+        // replace "assistant" with "Guard:" for immersion
+        String name = messages.get(i).getRole();
+        ImageView avatar = null;
+        if (name.trim().equals("assistant")) {
+          if (GptAndTextAreaManager.currentCharacter == Characters.GUARD) {
+            name = "Guard: ";
+            avatar = new ImageView(guardAvatar);
+          } else if (GptAndTextAreaManager.currentCharacter == Characters.PRISONER_ONE) {
+            name = "Prisoner1: ";
+           avatar = new ImageView(prisonerOneAvatar);
+          } else {
+            name = "Prisoner2: ";
+            avatar = new ImageView(prisonerTwoAvatar);
+          }
+        } else if (name.trim().equals("user")) {
+            name = GameState.playerName + ": ";
+            avatar = new ImageView(playerAvatar);
+        }
+        // get filtered messages for display
+        String content = chat.getMessages().get(i).getContent();
+        result += name + "\n" + parenthesesFilter(content) + "\n\n";
+        System.out.println("parenthesesFilter passed");
+        System.out.println(
+        messages.get(i).getRole() + ": " + chat.getMessages().get(i).getContent() + "\n\n");
+        System.out.println("creating new Hbox");
+
+        HBox hbox = new HBox();
+        Text text = new Text(result);
+        text.setWrappingWidth(200);
+      
+        avatar.setFitHeight(50);
+        avatar.setFitWidth(50);
+        if(messages.get(i).getRole() == "user"){
+          text.setTextAlignment(TextAlignment.RIGHT);
+          hbox.getChildren().add(text);
+          hbox.getChildren().add(avatar);
+          //hbox.setMaxWidth(562);
+          hbox.setAlignment(Pos.CENTER_RIGHT);
+        } else{
+          hbox.getChildren().add(avatar);
+          hbox.getChildren().add(text);
+        }
+        chatVbox.getChildren().add(hbox);
+        System.out.println("Vbox updated");
+      }
+      GameState.hintsLeft = GptAndTextAreaManager.hintLeft;
+      System.out.println("Hints left: " + GptAndTextAreaManager.hintLeft);
+    }
+  }
+
+  public void displayTarget(Characters character) {
+    String prompt;
+    if (character == Characters.GUARD) {
+      // set different recommended text depending on who they want to talk to
+      GptAndTextAreaManager.currentCharacter = Characters.GUARD;
+      prompt = "Type here to talk to the guard";
+      setMessageHistory(GptAndTextAreaManager.guardChatCompletionRequest);
+      System.out.println("display Guard history");
+    } else if (character == Characters.PRISONER_ONE) {
+      // logic for talking to prisoner
+      GptAndTextAreaManager.currentCharacter = Characters.PRISONER_ONE;
+      prompt = "Type here to talk to prisoner1";
+      setMessageHistory(GptAndTextAreaManager.prisonerOneCompletionRequest);
+      System.out.println("display Prisoner1 history");
+    } else {
+      GptAndTextAreaManager.currentCharacter = Characters.PRISONER_TWO;
+      // logic for chatting to prisoner 2
+      prompt = "Type here to talk to prisoner2";
+      setMessageHistory(GptAndTextAreaManager.prisonerTwoCompletionRequest);
+      System.out.println("display Prisoner2 history");
+    }
+    // setting the text for fxml objects
+    typePromptText.setText(prompt);
+    typePromptText.setVisible(true);
+    if (GameState.difficulty == GameState.Difficulty.MEDIUM) {
+      hintsLeftText.setText(Integer.toString(GameState.hintsLeft));
+    } else if (GameState.difficulty == GameState.Difficulty.HARD) {
+      hintsLeftText.setText("No hints available");
+    } else {
+      hintsLeftText.setText("Unlimited");
+    }
+  }
+
+  public static String parenthesesFilter(String input) {
+    // Filtering partheses out of the message
+    String result = "";
+    if (input.contains("(") && input.contains(")")) {
+      System.out.println("parenthesesFilter Stage 1 passed");
+      result += input.substring(0, input.indexOf("("));
+      if (!(input.indexOf(")") + 1 < input.length() - 1)) {
+        result += input.substring(input.indexOf(")") + 1);
+      }
+      // check if passed
+      System.out.println("parenthesesFilter Stage 2 passed");
+      System.out.println("parenthesesFilter result: " + result);
+    } else {
+      result = input;
+    }
+
+    // return the filtered message
+    return result;
+  }
+
 }
