@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -13,47 +15,77 @@
    <children>
       <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="195.0" prefWidth="1113.0">
          <children>
-            <TextArea fx:id="inputBox" onKeyTyped="#onSetPromptTextFalse" prefHeight="122.0" prefWidth="324.0" wrapText="true">
+            <ImageView fitHeight="195.0" fitWidth="1113.0" pickOnBounds="true" smooth="false">
+               <image>
+                  <Image url="@../images/textAreaBackground2.jpg" />
+               </image>
+            </ImageView>
+            <TextArea fx:id="inputBox" blendMode="MULTIPLY" onKeyTyped="#onSetPromptTextFalse" prefHeight="156.0" prefWidth="324.0" wrapText="true">
                <font>
                   <Font size="19.0" />
                </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
             </TextArea>
-            <TextArea fx:id="chatDisplayBoard" editable="false" layoutX="324.0" prefHeight="195.0" prefWidth="562.0" wrapText="true">
+            <TextArea fx:id="chatDisplayBoard" blendMode="MULTIPLY" editable="false" layoutX="324.0" prefHeight="195.0" prefWidth="562.0" text="454545454545" wrapText="true">
                <font>
                   <Font size="16.0" />
                </font>
             </TextArea>
-            <Text fx:id="typePromptText" fill="#6b6b6b" layoutX="14.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type your response here:" />
-            <Button fx:id="responseSubmitButton" layoutY="154.0" mnemonicParsing="false" onAction="#onSubmitMessage" prefHeight="40.0" prefWidth="324.0" text="Submit">
+            <VBox fx:id="chatVbox" layoutX="324.0" prefHeight="195.0" prefWidth="562.0" />
+            <Text fx:id="typePromptText" fill="#6b6b6b" layoutX="14.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type your response here:">
                <font>
-                  <Font size="20.0" />
+                  <Font name="Century" size="12.0" />
+               </font></Text>
+            <Button fx:id="responseSubmitButton" blendMode="MULTIPLY" layoutY="154.0" mnemonicParsing="false" onAction="#onSubmitMessage" prefHeight="40.0" prefWidth="324.0" text="Submit" textOverrun="CLIP">
+               <font>
+                  <Font name="Century" size="20.0" />
                </font>
             </Button>
-            <TextField alignment="CENTER" editable="false" layoutX="885.0" layoutY="-1.0" prefHeight="55.0" prefWidth="225.0" text="Objectives:">
-               <font>
-                  <Font size="21.0" />
-               </font>
-            </TextField>
-            <Pane layoutX="888.0" layoutY="53.0" prefHeight="143.0" prefWidth="226.0">
+            <Pane layoutX="886.0" layoutY="45.0" prefHeight="143.0" prefWidth="226.0">
                <children>
-                  <CheckBox fx:id="riddleSolvedObjective" layoutX="47.0" layoutY="35.0" mnemonicParsing="false" text="Solve riddle" />
-                  <CheckBox fx:id="codewordFoundObjective" layoutX="47.0" layoutY="57.0" mnemonicParsing="false" text="Locate codeword" />
-                  <CheckBox fx:id="converterFoundObjective" layoutX="47.0" layoutY="77.0" mnemonicParsing="false" text="Locate cypher" />
-                  <CheckBox fx:id="phoneLocatedObjective" layoutX="47.0" layoutY="119.0" mnemonicParsing="false" text="Find phone" />
-                  <CheckBox fx:id="safeLocatedObjective" layoutX="47.0" layoutY="99.0" mnemonicParsing="false" text="Find safe" />
+                  <CheckBox fx:id="riddleSolvedObjective" blendMode="DARKEN" layoutX="47.0" layoutY="35.0" mnemonicParsing="false" text="Solve riddle">
+                     <font>
+                        <Font name="Century" size="12.0" />
+                     </font></CheckBox>
+                  <CheckBox fx:id="codewordFoundObjective" blendMode="DARKEN" layoutX="47.0" layoutY="57.0" mnemonicParsing="false" text="Locate codeword">
+                     <font>
+                        <Font name="Century" size="12.0" />
+                     </font></CheckBox>
+                  <CheckBox fx:id="converterFoundObjective" blendMode="DARKEN" layoutX="47.0" layoutY="77.0" mnemonicParsing="false" text="Locate cypher">
+                     <font>
+                        <Font name="Century" size="12.0" />
+                     </font></CheckBox>
+                  <CheckBox fx:id="phoneLocatedObjective" blendMode="DARKEN" layoutX="47.0" layoutY="119.0" mnemonicParsing="false" text="Find phone">
+                     <font>
+                        <Font name="Century" size="12.0" />
+                     </font></CheckBox>
+                  <CheckBox fx:id="safeLocatedObjective" blendMode="DARKEN" layoutX="47.0" layoutY="99.0" mnemonicParsing="false" text="Find safe">
+                     <font>
+                        <Font name="Century" size="12.0" />
+                     </font></CheckBox>
                   <Pane layoutX="-1.0" prefHeight="134.0" prefWidth="225.0" visible="false" />
-                  <CheckBox fx:id="guardTalkedObjective" layoutX="47.0" layoutY="11.0" mnemonicParsing="false" text="Talk to guard!" />
+                  <CheckBox fx:id="guardTalkedObjective" blendMode="DARKEN" layoutX="47.0" layoutY="11.0" mnemonicParsing="false" text="Talk to guard!">
+                     <font>
+                        <Font name="Century" size="12.0" />
+                     </font></CheckBox>
                </children>
             </Pane>
             <Text layoutX="3.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hints left:">
                <font>
-                  <Font size="19.0" />
+                  <Font name="Century" size="19.0" />
                </font>
             </Text>
             <Text fx:id="hintsLeftText" layoutX="111.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0">
                <font>
                   <Font size="19.0" />
                </font></Text>
+            <Text layoutX="917.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Objectives:">
+               <font>
+                  <Font name="Century" size="29.0" />
+               </font>
+            </Text>
          </children>
       </Pane>
    </children>
