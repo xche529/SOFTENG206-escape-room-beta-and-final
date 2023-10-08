@@ -2,8 +2,13 @@ package nz.ac.auckland.se206;
 
 import java.io.File;
 import java.util.List;
+
 import javafx.concurrent.Task;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
@@ -25,7 +30,7 @@ public class GptAndTextAreaManager {
     GUARD
   }
 
-  static Characters currentCharacter = Characters.GUARD;
+  public static Characters currentCharacter = Characters.GUARD;
 
   public static ChatCompletionRequest guardChatCompletionRequest =
       new ChatCompletionRequest().setN(1).setTemperature(0.1).setTopP(0.5).setMaxTokens(100);
@@ -45,6 +50,7 @@ public class GptAndTextAreaManager {
   public static TextArea textAreaInputBox;
   public static TextArea textAreaObjectiveDisplayBoard;
   public static Text textAreaHintsLeftText;
+  public static VBox chatVBox;
 
   public static boolean isGptRunning = false;
   public static boolean isHintRunning = true;
@@ -81,70 +87,71 @@ public class GptAndTextAreaManager {
     }
   }
 
-  private static String getMessageHistory(ChatCompletionRequest chat) {
-    String result = "";
-    List<ChatMessage> messages = chat.getMessages();
-    // IMPORTANT: increase i here to filtout the prompt Engineering content
+  // private static String getMessageHistory(ChatCompletionRequest chat) {
+  //   String result = "";
+  //   List<ChatMessage> messages = chat.getMessages();
+  //   // IMPORTANT: increase i here to filtout the prompt Engineering content
 
-    if (messages.size() > 1) {
-      if (isHintRunning) {
-        hintLeft = GameState.hints;
-      } else {
-        hintLeft = 0;
-      }
-      // filter parentheses out so we can send messages without player seeing
-      for (int i = messages.size() - 1; i >= 0; i--) {
-        String check = messages.get(i).getContent();
-        if (check.charAt(0) == ('(') && check.charAt(check.length() - 1) == (')')) {
-          System.out.println(
-              messages.get(i).getRole() + ": " + chat.getMessages().get(i).getContent() + "\n\n");
-          continue;
-        }
-        if (currentCharacter == Characters.GUARD) {
-          if (messages.get(i).getRole().equals("assistant")
-              && messages.get(i).getContent().contains("Correct")) {
-            GameState.setRiddleResolved(true);
-          }
-          if (isHintRunning && GameState.difficulty == GameState.Difficulty.MEDIUM) {
-            if (messages.get(i).getRole().equals("assistant")
-                && (messages.get(i).getContent().contains("HINT") || messages.get(i).getContent().contains("Hint:") || messages.get(i).getContent().contains("hint:")) && i != 1) {
-              hintLeft--;
-            }
-            if (hintLeft == 0) {
-              isHintRunning = false;
-              try {
-                sendMessage(GptPromptEngineering.stopGivingHint());
-              } catch (ApiProxyException e) {
-                System.err.println("Error sending message: " + e.getMessage());
-              }
-            }
-          }
-        }
-        // replace "assistant" with "Guard:" for immersion
-        String name = messages.get(i).getRole();
-        if (name.trim().equals("assistant")) {
-          if (currentCharacter == Characters.GUARD) {
-            name = "Guard: ";
-          } else if (currentCharacter == Characters.PRISONER_ONE) {
-            name = "Prisoner1: ";
-          } else {
-            name = "Prisoner2: ";
-          }
-        } else if (name.trim().equals("user")) {
-          name = GameState.playerName + ": ";
-        }
-        // get filtered messages for display
-        String content = chat.getMessages().get(i).getContent();
-        result += name + parenthesesFilter(content) + "\n\n";
-        System.out.println("parenthesesFilter passed");
-        System.out.println(
-            messages.get(i).getRole() + ": " + chat.getMessages().get(i).getContent() + "\n\n");
-      }
-      GameState.hintsLeft = hintLeft;
-      System.out.println("Hints left: " + hintLeft);
-    }
-    return result;
-  }
+  //   if (messages.size() > 1) {
+  //     if (isHintRunning) {
+  //       hintLeft = GameState.hints;
+  //     } else {
+  //       hintLeft = 0;
+  //     }
+  //     // filter parentheses out so we can send messages without player seeing
+  //     for (int i = messages.size() - 1; i >= 0; i--) {
+  //       String check = messages.get(i).getContent();
+  //       if (check.charAt(0) == ('(') && check.charAt(check.length() - 1) == (')')) {
+  //         System.out.println(
+  //             messages.get(i).getRole() + ": " + chat.getMessages().get(i).getContent() + "\n\n");
+  //         continue;
+  //       }
+  //       if (currentCharacter == Characters.GUARD) {
+  //         if (messages.get(i).getRole().equals("assistant")
+  //             && messages.get(i).getContent().contains("Correct")) {
+  //           GameState.setRiddleResolved(true);
+  //         }
+  //         if (isHintRunning && GameState.difficulty == GameState.Difficulty.MEDIUM) {
+  //           if (messages.get(i).getRole().equals("assistant")
+  //               && (messages.get(i).getContent().contains("HINT") || messages.get(i).getContent().contains("Hint:") || messages.get(i).getContent().contains("hint:")) && i != 1) {
+  //             hintLeft--;
+  //           }
+  //           if (hintLeft == 0) {
+  //             isHintRunning = false;
+  //             try {
+  //               sendMessage(GptPromptEngineering.stopGivingHint());
+  //             } catch (ApiProxyException e) {
+  //               System.err.println("Error sending message: " + e.getMessage());
+  //             }
+  //           }
+  //         }
+  //       }
+  //       // replace "assistant" with "Guard:" for immersion
+  //       String name = messages.get(i).getRole();
+  //       if (name.trim().equals("assistant")) {
+  //         if (currentCharacter == Characters.GUARD) {
+  //           name = "Guard: ";
+  //         } else if (currentCharacter == Characters.PRISONER_ONE) {
+  //           name = "Prisoner1: ";
+  //         } else {
+  //           name = "Prisoner2: ";
+  //         }
+  //       } else if (name.trim().equals("user")) {
+  //         name = GameState.playerName + ": ";
+  //       }
+  //       // get filtered messages for display
+  //       String content = chat.getMessages().get(i).getContent();
+  //       result += name + parenthesesFilter(content) + "\n\n";
+  //       System.out.println("parenthesesFilter passed");
+  //       System.out.println(
+  //           messages.get(i).getRole() + ": " + chat.getMessages().get(i).getContent() + "\n\n");
+  //     }
+  //     GameState.hintsLeft = hintLeft;
+  //     System.out.println("Hints left: " + hintLeft);
+  //   }
+  //   return result;
+  // }
+
 
   /*
    * this method is called when the user switches the target character or the
@@ -152,59 +159,8 @@ public class GptAndTextAreaManager {
    *
    * @param character the character to display
    */
-  public static void displayTarget(Characters character) {
-    String prompt;
-    String chatHistory;
-    if (character == Characters.GUARD) {
-      // set different recommended text depending on who they want to talk to
-      currentCharacter = Characters.GUARD;
-      prompt = "Type here to talk to the guard";
-      chatHistory = getMessageHistory(guardChatCompletionRequest);
-      System.out.println("display Guard history");
-    } else if (character == Characters.PRISONER_ONE) {
-      // logic for talking to prisoner
-      currentCharacter = Characters.PRISONER_ONE;
-      prompt = "Type here to talk to prisoner1";
-      chatHistory = getMessageHistory(prisonerOneCompletionRequest);
-      System.out.println("display Prisoner1 history");
-    } else {
-      currentCharacter = Characters.PRISONER_TWO;
-      // logic for chatting to prisoner 2
-      prompt = "Type here to talk to prisoner2";
-      chatHistory = getMessageHistory(prisonerTwoCompletionRequest);
-      System.out.println("display Prisoner2 history");
-    }
-    // setting the text for fxml objects
-    textAreaTypePromptText.setText(prompt);
-    textAreaChatDisplayBoard.setText(chatHistory);
-    textAreaChatDisplayBoard.setScrollTop(0);
-    if (GameState.difficulty == GameState.Difficulty.MEDIUM) {
-      textAreaHintsLeftText.setText(Integer.toString(GameState.hintsLeft));
-    } else if (GameState.difficulty == GameState.Difficulty.HARD) {
-      textAreaHintsLeftText.setText("No hints available");
-    } else {
-      textAreaHintsLeftText.setText("Unlimited");
-    }
-  }
-
-  private static String parenthesesFilter(String input) {
-    // Filtering partheses out of the message
-    String result = "";
-    if (input.contains("(") && input.contains(")")) {
-      System.out.println("parenthesesFilter Stage 1 passed");
-      result += input.substring(0, input.indexOf("("));
-      if (!(input.indexOf(")") + 1 < input.length() - 1)) {
-        result += input.substring(input.indexOf(")") + 1);
-      }
-      // check if passed
-      System.out.println("parenthesesFilter Stage 2 passed");
-      System.out.println("parenthesesFilter result: " + result);
-    } else {
-      result = input;
-    }
-
-    // return the filtered message
-    return result;
+  public static void displayTarget(Characters character){
+    textAreaController.displayTarget(character);
   }
 
   public static void sendMessage(String message) throws ApiProxyException {
@@ -286,8 +242,6 @@ public class GptAndTextAreaManager {
               ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
               Choice result = chatCompletionResult.getChoices().iterator().next();
               chatCompletionRequest.addMessage(result.getChatMessage());
-              displayTarget(currentCharacter);
-              // setting the thinking animations in all of the scenes
               roomController.setThinkingTwoDown();
               cafeteriaController.setThinkingTwoDown();
               officeController.setThinkingTwoDown();
@@ -295,6 +249,9 @@ public class GptAndTextAreaManager {
               cafeteriaController.setThinkingOneDown();
               officeController.setThinkingOneDown();
               cafeteriaController.setThinkingThreeDown();
+
+              displayTarget(currentCharacter);
+              // setting the thinking animations in all of the scenes
               return null;
             } catch (ApiProxyException e) {
               ChatMessage error = new ChatMessage("assistant", "Error: \n" + "GPT not working");

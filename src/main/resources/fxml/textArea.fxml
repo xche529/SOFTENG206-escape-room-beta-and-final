@@ -28,7 +28,7 @@
                   <Insets />
                </opaqueInsets>
             </TextArea>
-            <TextArea fx:id="chatDisplayBoard" blendMode="MULTIPLY" editable="false" layoutX="324.0" prefHeight="195.0" prefWidth="562.0" text="454545454545" wrapText="true">
+            <TextArea fx:id="chatDisplayBoard" blendMode="MULTIPLY" editable="false" layoutX="324.0" prefHeight="195.0" prefWidth="562.0" text="454545454545" visible="false" wrapText="true">
                <font>
                   <Font size="16.0" />
                </font>
