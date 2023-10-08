@@ -59,8 +59,8 @@ public class TextAreaController {
     GptAndTextAreaManager.textAreaHintsLeftText = hintsLeftText;
     String image = "src/main/resources/images/prisonerOneAvatar.png";
     String guardAvatarImage = "src/main/resources/images/guardAvatar.png";
-    String prisonerOneAvatarImage = "src/main/resources/images/prisonerOneAvatar.png";
-    String prisonerTwoAvatarImage = "src/main/resources/images/prisonerTwoAvatar.png";
+    String prisonerOneAvatarImage = "src/main/resources/images/prisonerTwoAvatar.png";
+    String prisonerTwoAvatarImage = "src/main/resources/images/prisonerOneAvatar.png";
     guardAvatar = new Image(new File(guardAvatarImage).toURI().toString()); 
     playerAvatar = new Image(new File(image).toURI().toString()); 
     prisonerOneAvatar =
@@ -250,6 +250,7 @@ public class TextAreaController {
     }
     // setting the text for fxml objects
     typePromptText.setText(prompt);
+    typePromptText.setVisible(true);
     if (GameState.difficulty == GameState.Difficulty.MEDIUM) {
       hintsLeftText.setText(Integer.toString(GameState.hintsLeft));
     } else if (GameState.difficulty == GameState.Difficulty.HARD) {

@@ -48,6 +48,7 @@ public class GptAndTextAreaManager {
 
   public static boolean isGptRunning = false;
   public static boolean isHintRunning = true;
+  public static boolean isNewMessage = false;
   public static int hintLeft;
 
   /*
@@ -153,12 +154,19 @@ public class GptAndTextAreaManager {
    *
    * @param character the character to display
    */
+  public static void displayTarget(){
+    textAreaController.displayTarget(currentCharacter);
+  }
+
   public static void displayTarget(Characters character){
     textAreaController.displayTarget(character);
   }
 
   public static void setMessageHistory(ChatCompletionRequest chatCompletionRequest){
     textAreaController.setMessageHistory(chatCompletionRequest);
+  }
+  public static void onSubmitMessage() throws ApiProxyException{
+    textAreaController.onSubmitMessage();
   }
 
 
@@ -249,7 +257,7 @@ public class GptAndTextAreaManager {
               cafeteriaController.setThinkingOneDown();
               officeController.setThinkingOneDown();
               cafeteriaController.setThinkingThreeDown();
-              setMessageHistory(chatCompletionRequest);
+              isNewMessage = true;
               // setting the thinking animations in all of the scenes
               return null;
             } catch (ApiProxyException e) {
@@ -265,6 +273,7 @@ public class GptAndTextAreaManager {
               cafeteriaController.setThinkingOneDown();
               officeController.setThinkingOneDown();
               cafeteriaController.setThinkingThreeDown();
+              isNewMessage = true;
               return null;
             }
           }

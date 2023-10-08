@@ -88,7 +88,7 @@
             </Text>
             <ScrollPane blendMode="DARKEN" hbarPolicy="NEVER" layoutX="324.0" layoutY="-2.0" prefHeight="195.0" prefWidth="562.0">
                <content>
-                  <VBox fx:id="chatVbox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="195.0" prefWidth="531.0" translateX="10.0" />
+                  <VBox fx:id="chatVbox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="176.0" prefWidth="531.0" translateX="10.0" translateY="10.0" />
                </content>
             </ScrollPane>
          </children>
