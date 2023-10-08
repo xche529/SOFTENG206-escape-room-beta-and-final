@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -33,7 +34,6 @@
                   <Font size="16.0" />
                </font>
             </TextArea>
-            <VBox fx:id="chatVbox" layoutX="324.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="195.0" prefWidth="562.0" />
             <Text fx:id="typePromptText" fill="#6b6b6b" layoutX="14.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type your response here:">
                <font>
                   <Font name="Century" size="12.0" />
@@ -86,6 +86,11 @@
                   <Font name="Century" size="29.0" />
                </font>
             </Text>
+            <ScrollPane blendMode="DARKEN" hbarPolicy="NEVER" layoutX="324.0" layoutY="-2.0" prefHeight="195.0" prefWidth="562.0">
+               <content>
+                  <VBox fx:id="chatVbox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="195.0" prefWidth="531.0" translateX="10.0" />
+               </content>
+            </ScrollPane>
          </children>
       </Pane>
    </children>

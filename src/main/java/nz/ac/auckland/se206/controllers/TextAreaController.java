@@ -1,10 +1,10 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.File;
-import java.net.URL;
 import java.util.List;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextArea;
@@ -14,6 +14,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GptAndTextAreaManager;
 import nz.ac.auckland.se206.GptAndTextAreaManager.Characters;
@@ -56,13 +57,16 @@ public class TextAreaController {
     GptAndTextAreaManager.textAreaObjectiveDisplayBoard = objectiveDisplayBoard;
     GptAndTextAreaManager.textAreaTypePromptText = typePromptText;
     GptAndTextAreaManager.textAreaHintsLeftText = hintsLeftText;
-    String image = "src/main/resources/images/paper.png";
-    guardAvatar = new Image(new File(image).toURI().toString()); 
+    String image = "src/main/resources/images/prisonerOneAvatar.png";
+    String guardAvatarImage = "src/main/resources/images/guardAvatar.png";
+    String prisonerOneAvatarImage = "src/main/resources/images/prisonerOneAvatar.png";
+    String prisonerTwoAvatarImage = "src/main/resources/images/prisonerTwoAvatar.png";
+    guardAvatar = new Image(new File(guardAvatarImage).toURI().toString()); 
     playerAvatar = new Image(new File(image).toURI().toString()); 
     prisonerOneAvatar =
-        new Image(new File(image).toURI().toString()); 
+        new Image(new File(prisonerOneAvatarImage).toURI().toString()); 
     prisonerTwoAvatar = 
-        new Image(new File(image).toURI().toString()); 
+        new Image(new File(prisonerTwoAvatarImage).toURI().toString()); 
 
     // adding listener to update objectives
     GameState.isRiddleResolvedProperty()
@@ -193,7 +197,7 @@ public class TextAreaController {
         }
         // get filtered messages for display
         String content = chat.getMessages().get(i).getContent();
-        result += name + parenthesesFilter(content) + "\n\n";
+        result += name + "\n" + parenthesesFilter(content) + "\n\n";
         System.out.println("parenthesesFilter passed");
         System.out.println(
         messages.get(i).getRole() + ": " + chat.getMessages().get(i).getContent() + "\n\n");
@@ -205,8 +209,16 @@ public class TextAreaController {
       
         avatar.setFitHeight(50);
         avatar.setFitWidth(50);
-        hbox.getChildren().add(avatar);
-        hbox.getChildren().add(text);
+        if(messages.get(i).getRole() == "user"){
+          text.setTextAlignment(TextAlignment.RIGHT);
+          hbox.getChildren().add(text);
+          hbox.getChildren().add(avatar);
+          //hbox.setMaxWidth(562);
+          hbox.setAlignment(Pos.CENTER_RIGHT);
+        } else{
+          hbox.getChildren().add(avatar);
+          hbox.getChildren().add(text);
+        }
         chatVbox.getChildren().add(hbox);
         System.out.println("Vbox updated");
       }
@@ -266,7 +278,5 @@ public class TextAreaController {
     // return the filtered message
     return result;
   }
-
-
 
 }

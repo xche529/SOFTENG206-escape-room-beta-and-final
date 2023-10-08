@@ -1,14 +1,9 @@
 package nz.ac.auckland.se206;
 
 import java.io.File;
-import java.util.List;
 
 import javafx.concurrent.Task;
 import javafx.scene.control.TextArea;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
@@ -162,6 +157,11 @@ public class GptAndTextAreaManager {
     textAreaController.displayTarget(character);
   }
 
+  public static void setMessageHistory(ChatCompletionRequest chatCompletionRequest){
+    textAreaController.setMessageHistory(chatCompletionRequest);
+  }
+
+
   public static void sendMessage(String message) throws ApiProxyException {
 
     boolean ifSpeak = false;
@@ -179,7 +179,7 @@ public class GptAndTextAreaManager {
       } else if (GameState.safeUnlocked == false) {
         message = message + "(safe found)";
       }
-      // make new message and apppend
+      // make new message and append
       guardChatCompletionRequest.addMessage(new ChatMessage("user", message));
       runGpt(guardChatCompletionRequest);
       if (guardChatCompletionRequest.getMessages().size() > 2) {
@@ -200,6 +200,7 @@ public class GptAndTextAreaManager {
         ifSpeak = true;
       }
     }
+    displayTarget(currentCharacter);
     if (ifSpeak) {
       // play sound effect, hmm sound
       String soundEffect;
@@ -248,8 +249,7 @@ public class GptAndTextAreaManager {
               cafeteriaController.setThinkingOneDown();
               officeController.setThinkingOneDown();
               cafeteriaController.setThinkingThreeDown();
-
-              displayTarget(currentCharacter);
+              setMessageHistory(chatCompletionRequest);
               // setting the thinking animations in all of the scenes
               return null;
             } catch (ApiProxyException e) {
