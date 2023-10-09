@@ -335,6 +335,10 @@ public class OfficeController {
     GameState.isPhoneFoundProperty().set(true);
     phoneArrow.setVisible(false);
     phonePane.setVisible(true);
+    if (GameState.hasPaperProperty().get()) {
+      paperPane.setVisible(true);
+      numberLabel.setText(GameState.phoneNumber);
+    }
   }
 
   /** shows the enlarged desk drawer */
