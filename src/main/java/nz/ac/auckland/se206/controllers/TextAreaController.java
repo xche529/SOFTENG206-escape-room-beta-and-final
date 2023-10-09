@@ -51,6 +51,7 @@ public class TextAreaController {
 
   @FXML
   private void initialize() {
+    resetchecker();
     // setting up the text area manager
     chatVbox.setMaxWidth(562);
     chatVbox.setMaxHeight(195);
