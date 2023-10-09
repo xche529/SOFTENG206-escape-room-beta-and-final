@@ -1,5 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -11,6 +12,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.GameState;
@@ -35,6 +37,7 @@ public class StartInterfaceController {
   @FXML private ImageView twoTick;
   @FXML private ImageView fourTick;
   @FXML private ImageView sixTick;
+  @FXML private ImageView avatarImageView;
   @FXML private Pane historyPane;
   @FXML private ImageView twoMinText;
   @FXML private ImageView fourMinText;
@@ -47,9 +50,27 @@ public class StartInterfaceController {
   @FXML private ImageView playHistoryText;
 
   private RoomController roomController;
+  private int currentAvatar = 1;
+
+  public Image playerAvatarOne;
+  public Image playerAvatarTwo;
+  public Image playerAvatarThree;
+  public Image playerAvatarFour;
+  public Image playerAvatarFive;
+  public Image currentAvatarImage;
+
+
 
   @FXML
   private void initialize() {
+    playerAvatarOne = new Image(new File("src/main/resources/images/PlayerAvatarOne.png").toURI().toString());
+    playerAvatarTwo = new Image(new File("src/main/resources/images/PlayerAvatarTwo.png").toURI().toString());
+    playerAvatarThree = new Image(new File("src/main/resources/images/PlayerAvatarThree.png").toURI().toString());
+    playerAvatarFour = new Image(new File("src/main/resources/images/PlayerAvatarFour.png").toURI().toString());
+    playerAvatarFive = new Image(new File("src/main/resources/images/PlayerAvatarFive.png").toURI().toString());
+    avatarImageView.setImage(playerAvatarOne);
+    avatarImageView.setFitHeight(100);
+    avatarImageView.setFitWidth(100);
     System.out.println("StartInterfaceController initialized");
     // load play history
     try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("player_history.dat"))) {
@@ -78,6 +99,7 @@ public class StartInterfaceController {
       showDialog("Invaild Inputs", "Please select a difficulty and time limit", "");
       return;
     }
+    GptAndTextAreaManager.setPlayerAvatar(currentAvatarImage);
     GameState.playerName = playerName.getText();
     Scene sceneButtonIsIn = twoTick.getScene();
     SceneManager.switchRoom(false, sceneButtonIsIn);
@@ -127,6 +149,30 @@ public class StartInterfaceController {
     alert.setHeaderText(headerText);
     alert.setContentText(message);
     alert.showAndWait();
+  }
+
+  @FXML
+  private void onSwitchAvatar(Event e){
+    currentAvatar++;
+    if(currentAvatar == 1){
+      currentAvatarImage = playerAvatarOne;
+    }
+    if(currentAvatar == 2){
+      currentAvatarImage = playerAvatarTwo;
+    }
+    if(currentAvatar == 3){
+      currentAvatarImage = playerAvatarThree;
+    }
+    if(currentAvatar == 4){
+      currentAvatarImage = playerAvatarFour;
+    }
+    if(currentAvatar == 5){
+      currentAvatarImage = playerAvatarFive;
+      currentAvatar = 0;
+    }
+    avatarImageView.setImage(currentAvatarImage);
+    avatarImageView.setFitHeight(100);
+    avatarImageView.setFitWidth(100);
   }
 
   /**

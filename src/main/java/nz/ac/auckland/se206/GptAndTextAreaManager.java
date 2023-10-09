@@ -4,6 +4,7 @@ import java.io.File;
 
 import javafx.concurrent.Task;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
@@ -172,6 +173,9 @@ public class GptAndTextAreaManager {
   }
   public static void onSubmitMessage() throws ApiProxyException{
     textAreaController.onSubmitMessage();
+  }
+  public static void setPlayerAvatar(Image image){
+    textAreaController.setPlayerAvatar(image);
   }
 
 
