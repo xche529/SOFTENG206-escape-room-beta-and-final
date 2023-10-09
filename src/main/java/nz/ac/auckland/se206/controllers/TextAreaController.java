@@ -229,8 +229,7 @@ public class TextAreaController {
 
         if (GptAndTextAreaManager.currentCharacter == Characters.GUARD) {
           if (messages.get(i).getRole().equals("assistant")
-              && (messages.get(i).getContent().contains("Correct")
-                  || messages.get(i).getContent().contains("correct"))) {
+              && (messages.get(i).getContent().contains("Correct"))) {
             GameState.setRiddleResolved(true);
           }
           if (GptAndTextAreaManager.isHintRunning
