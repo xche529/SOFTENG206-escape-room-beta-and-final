@@ -156,7 +156,7 @@
                   <Font name="System Bold" size="22.0" />
                </font>
             </Text>
-            <ImageView fx:id="avatarImageView" fitHeight="100.0" fitWidth="100.0" layoutX="770.0" layoutY="285.0" onMouseClicked="#onSwitchAvatar" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="avatarImageView" fitHeight="100.0" fitWidth="100.0" layoutX="770.0" layoutY="285.0" onMouseClicked="#onSwitchAvatar" pickOnBounds="true">
                <image>
                   <Image url="@../images/PlayerAvatarOne.png" />
                </image>
