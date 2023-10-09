@@ -858,7 +858,7 @@ public class OfficeController {
     timeline =
         new Timeline(
             new KeyFrame(
-                Duration.seconds(1),
+                Duration.seconds(0.1),
                 event -> {
                   if (GameState.secondsRemaining >= 0) {
                     // updates the timer

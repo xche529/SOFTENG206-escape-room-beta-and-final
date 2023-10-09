@@ -80,13 +80,13 @@ public class App extends Application {
     centerY = (height - 800 * overallScale) / 5;
     scale = new Scale(overallScale, overallScale);
     // creating loaders for all fxml files
+    FXMLLoader roomLoader = loadFxml("room");
     FXMLLoader endScreenWonLoader = loadFxml("endScreenWon");
     FXMLLoader endScreenLostLoader = loadFxml("endScreenLost");
     FXMLLoader officeSceneLoader = loadFxml("officeScene");
     FXMLLoader cafeteriaLoader = loadFxml("cafeteria");
     FXMLLoader startInterfaceLoader = loadFxml("StartInterface");
     FXMLLoader textAreaLoader = loadFxml("textArea");
-    FXMLLoader roomLoader = loadFxml("room");
     // creating vboxes for the scenes
     VBox cafeteria = cafeteriaLoader.load();
     VBox office = officeSceneLoader.load();
