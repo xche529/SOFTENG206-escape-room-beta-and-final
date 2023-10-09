@@ -142,6 +142,7 @@ public class App extends Application {
             try {
               GptAndTextAreaManager.onSubmitMessage();
               GptAndTextAreaManager.removeInputTextAreaFocus();
+              GptAndTextAreaManager.onSubmitMessage();
             } catch (ApiProxyException e) {
               e.printStackTrace();
             }
