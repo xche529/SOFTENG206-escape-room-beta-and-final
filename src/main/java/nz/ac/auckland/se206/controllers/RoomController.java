@@ -128,10 +128,14 @@ public class RoomController {
           thinkingOne,
           thinkingTwo
         };
+        
+        // moves the prisoners to their starting point
+        resetAnimation();
 
-    // moves the prisoners to their starting point
-    resetAnimation();
-  }
+        // runs a thread that is always checking if the room needs to be reset
+        resetchecker();
+        doorArrow.setVisible(false);
+      }
 
   /**
    * This method starts a thread that checks if the room needs to be reset.
@@ -139,8 +143,6 @@ public class RoomController {
    * @throws IOException
    */
   public void start() throws IOException {
-
-    RandomizationGenerator.randomiseWord(items);
 
     timeline =
         new Timeline(
@@ -193,9 +195,6 @@ public class RoomController {
               });
         });
 
-    // runs a thread that is always checking if the room needs to be reset
-    resetchecker();
-    doorArrow.setVisible(false);
   }
 
   /**
