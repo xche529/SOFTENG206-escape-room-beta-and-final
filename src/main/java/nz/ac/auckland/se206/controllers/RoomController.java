@@ -163,10 +163,6 @@ public class RoomController {
                   } else if (GameState.secondsRemaining == 30 && GameState.isWon == false) {
                     textToSpeech.speak("thirty seconds remaining");
                   }
-                  if (GptAndTextAreaManager.isNewMessage){
-                    GptAndTextAreaManager.displayTarget();
-                    GptAndTextAreaManager.isNewMessage = false;
-                  }
                 }));
 
     timeline.setCycleCount(GameState.totalSeconds);

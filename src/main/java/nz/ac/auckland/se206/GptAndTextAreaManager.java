@@ -78,7 +78,8 @@ public class GptAndTextAreaManager {
     prisonerTwoCompletionRequest =
         new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(50);
     if (GameState.difficulty == GameState.Difficulty.MEDIUM) {
-      textAreaHintsLeftText.setText("5");
+      GameState.hintsLeft = 5;
+      hintLeft = 5;
     }
   }
 
@@ -154,6 +155,10 @@ public class GptAndTextAreaManager {
    *
    * @param character the character to display
    */
+  public static void removeInputTextAreaFocus() {
+    textAreaInputBox.getParent().requestFocus();
+  }
+
   public static void displayTarget(){
     textAreaController.displayTarget(currentCharacter);
   }

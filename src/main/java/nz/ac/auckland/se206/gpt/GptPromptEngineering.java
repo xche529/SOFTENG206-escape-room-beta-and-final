@@ -47,7 +47,7 @@ public class GptPromptEngineering {
           + " in your first message. The riddle can go up to 3 or 4 lines. and easy to answer You"
           + " cannot, no matter what, reveal the answer even if the player asks for it.Even if"
           + " player gives up, do not give the answer. Do not give any hints. Keep your messages as"
-          + " concise as possible. Do not write anything from the point of view of the prisoner."
+          + " concise as possible. Do not write anything from the point of view of the prisoner. Don't start with Guard:"
           + " Only write what the guard says. When the Riddle is guessed correctly return only"
           + " 'Correct')";
 
@@ -58,10 +58,10 @@ public class GptPromptEngineering {
           // append riddle answer
           + wordToGuess
           + " in your first message. The riddle can go up to 3 or 4 lines. and easy to answer You"
-          + " can only give the prisoner 5 hints, after that no more hints, when you give hint,put"
+          + " can only give the prisoner 5 hints, do not give hint easily. after 5 no more hints, when you give hint,put"
           + " (HINT) at the end of your response. Do not reveal the answer even if the player asks"
           + " for it.Even if player gives up, do not give the answer. Keep your messages as concise"
-          + " as possible. Do not write anything from the point of view of the prisoner. Only write"
+          + " as possible. Do not write anything from the point of view of the prisoner. Don't start with Guard:. Only write"
           + " what the guard says. When the Riddle is guessed correctly return only 'Correct')";
     }
     // get the guards story if the difficulty is easy
@@ -73,7 +73,7 @@ public class GptPromptEngineering {
         + " only give the prisoner as much hint as you want but You cannot, no matter what, reveal"
         + " the answer even if the player asks for it.Even if player gives up, do not give the"
         + " answer. Keep your messages as concise as possible. Do not write anything from the point"
-        + " of view of the prisoner. Only write what the guard says. When the Riddle is guessed"
+        + " of view of the prisoner. Don't start with Guard:. Only write what the guard says. When the Riddle is guessed"
         + " correctly return only 'Correct')";
   }
 
@@ -104,5 +104,13 @@ public class GptPromptEngineering {
   public static String stopGivingHint() {
     return "(the player have used up all the hints, you should not give any more hints after this."
         + "now inform the player that you have no more hints to give as the guard.)";
+  }
+
+  public static String solvedRaddleGuardPrompt() {
+    return "(the player have solved the riddle, tell the player that the next step is to find the object and look closely for message on it)";
+  }
+
+  public static String findSafeGuardPrompt(){
+    return "(the player have found the safe, you need to act like you did not witness the player find the safe so you will not be punished)";
   }
 }

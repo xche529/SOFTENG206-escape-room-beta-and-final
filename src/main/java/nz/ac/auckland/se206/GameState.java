@@ -30,6 +30,8 @@ public class GameState {
 
   private static final BooleanProperty isGuardTalked = new SimpleBooleanProperty(false);
 
+  private static final BooleanProperty isNewMessage = new SimpleBooleanProperty(false);
+
   public static boolean isWon = false;
 
   public static String phoneNumber;
