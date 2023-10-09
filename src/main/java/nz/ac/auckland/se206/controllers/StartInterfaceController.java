@@ -80,9 +80,9 @@ public class StartInterfaceController {
     }
     GameState.playerName = playerName.getText();
     Scene sceneButtonIsIn = twoTick.getScene();
-    GptAndTextAreaManager.initialize();
     SceneManager.switchRoom(false, sceneButtonIsIn);
     roomController.start();
+    GptAndTextAreaManager.initialize();
     System.out.println(
         "Game started with difficulty "
             + GameState.difficulty

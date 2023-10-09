@@ -62,6 +62,8 @@ public class GameState {
 
   public static boolean resetRoom = false;
 
+  public static boolean resetTextArea = false;
+
   public static int hints = 5;
 
   public static int hintsLeft = 5;

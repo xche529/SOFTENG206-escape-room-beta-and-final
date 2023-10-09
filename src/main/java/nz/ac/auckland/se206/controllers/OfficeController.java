@@ -3,7 +3,6 @@ package nz.ac.auckland.se206.controllers;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.util.Random;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -28,6 +27,8 @@ import nz.ac.auckland.se206.GptAndTextAreaManager.Characters;
 import nz.ac.auckland.se206.MovementControl;
 import nz.ac.auckland.se206.PlayHistory;
 import nz.ac.auckland.se206.SceneManager;
+import nz.ac.auckland.se206.reseters.GameEnd;
+import nz.ac.auckland.se206.reseters.RandomizationGenerator;
 
 public class OfficeController {
 
@@ -88,6 +89,7 @@ public class OfficeController {
   private ImageView[] animationItems;
   private Label[] digits;
   private int currentDigit = 0;
+  private Rectangle[] items;
 
   /**
    * This method is called by the FXMLLoader when initialization is complete
@@ -96,6 +98,12 @@ public class OfficeController {
    */
   @FXML
   private void initialize() throws IOException {
+
+    // creates an array with all of the items that can hide the cypher
+    items =
+        new Rectangle[] {
+          bin, blackBoard, deskDrawers,
+        };
 
     // sets all the variables and randomises the cypher location
     resetOffice();
@@ -156,10 +164,10 @@ public class OfficeController {
    */
   public void animateArrows(ImageView arrow) {
 
-    //sets the starting position of the arrows
+    // sets the starting position of the arrows
     double startY = 0;
 
-    //makes the arrow bounce up and down
+    // makes the arrow bounce up and down
     TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.5), arrow);
     translateTransition.setFromY(startY);
     translateTransition.setToY(startY + 5);
@@ -327,6 +335,10 @@ public class OfficeController {
     GameState.isPhoneFoundProperty().set(true);
     phoneArrow.setVisible(false);
     phonePane.setVisible(true);
+    if (GameState.hasPaperProperty().get()) {
+      paperPane.setVisible(true);
+      numberLabel.setText(GameState.phoneNumber);
+    }
   }
 
   /** shows the enlarged desk drawer */
@@ -726,10 +738,14 @@ public class OfficeController {
   /**
    * clears all the digits
    *
-   * @param event
+   * @param event the mouse event where the character clicks on the clear button
    */
   @FXML
   private void onClickClear(MouseEvent event) {
+    clearAll();
+  }
+
+  private void clearAll() {
     // clears all the digits
     digitOne.setText("_");
     digitTwo.setText("_");
@@ -799,11 +815,7 @@ public class OfficeController {
         } catch (IOException | ClassNotFoundException e) {
           playHistory.saveHistory();
         }
-        // resets the game
-        GameState.secondsRemaining = -1;
-        GameState.resetCafeteria = true;
-        GameState.resetOffice = true;
-        GameState.resetRoom = true;
+        GameEnd.triggerResters();
 
         // switches to the end screen
         Parent parent = SceneManager.getUiRoot(SceneManager.AppUi.END_WON);
@@ -854,12 +866,7 @@ public class OfficeController {
                   }
                   if (GameState.secondsRemaining == 0) {
                     if (SceneManager.curretUi == SceneManager.AppUi.OFFICE) {
-                      // if the time runs out, the game is lost
-                      // setting to negative one so that the game does not reset multiple times
-                      GameState.secondsRemaining = -1;
-                      GameState.resetCafeteria = true;
-                      GameState.resetOffice = true;
-                      GameState.resetRoom = true;
+                      GameEnd.triggerResters();
                       try {
                         // changes to the end screen
                         Scene scene = phone.getScene();
@@ -868,7 +875,7 @@ public class OfficeController {
                         parent.setLayoutY(App.centerY);
                         scene.setRoot(parent);
                       } catch (NullPointerException e) {
-                        System.out.println("Null pointer exception");
+                        e.printStackTrace();
                       }
                     }
                   }
@@ -891,14 +898,15 @@ public class OfficeController {
 
   /** restores the office to its original state */
   private void resetOffice() {
+
     // Getting random item to be used to hide the cypher
-    Rectangle[] items =
-        new Rectangle[] {
-          bin, blackBoard, deskDrawers,
-        };
-    Random randomChoose = new Random();
-    int randomIndexChoose = randomChoose.nextInt(items.length);
-    GameState.itemWithCypher = items[randomIndexChoose];
+    RandomizationGenerator.hideChypher(items);
+    
+    // resets the neccesary booleans
+    GameState.cypherFound = false;
+    GameState.resetOffice = false;
+    GameState.isConverterFoundProperty().set(false);
+    System.out.println("office reseted");
 
     // resets the visability of the items
     binArrow.setVisible(true);
@@ -908,9 +916,7 @@ public class OfficeController {
     phonePane.setVisible(false);
     paperPane.setVisible(false);
 
-    // resets the neccesary booleans
-    GameState.cypherFound = false;
-    GameState.resetOffice = false;
-    System.out.println("office reseted");
+    // resets the digits
+    clearAll();
   }
 }

@@ -1,7 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
-import java.util.Random;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -24,6 +23,7 @@ import nz.ac.auckland.se206.GptAndTextAreaManager.Characters;
 import nz.ac.auckland.se206.MovementControl;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
+import nz.ac.auckland.se206.reseters.RandomizationGenerator;
 
 public class CafeteriaController {
 
@@ -114,12 +114,7 @@ public class CafeteriaController {
           thinkingTwo
         };
 
-    Random random = new Random();
-
-    // Generate a random 6-digit number
-    String phoneNumberInitial = Integer.toString(random.nextInt(999999 - 100000 + 1) + 100000);
-    GameState.phoneNumber =
-        "027" + " " + phoneNumberInitial.substring(0, 3) + " " + phoneNumberInitial.substring(3, 6);
+    RandomizationGenerator.createPhoneNunber();
     numberLabel.setText(GameState.phoneNumber);
 
     // animates all the arrows in the scene
@@ -514,6 +509,10 @@ public class CafeteriaController {
     GameState.safeUnlocked = false;
     GameState.resetCafeteria = false;
     System.out.println("cafeteria reseted");
+
+    // chooses a new phone number
+    RandomizationGenerator.createPhoneNunber();
+    numberLabel.setText(GameState.phoneNumber);
   }
 
   /**
@@ -551,11 +550,7 @@ public class CafeteriaController {
                   }
                   if (GameState.secondsRemaining == 0) {
                     if (SceneManager.curretUi == SceneManager.AppUi.CAFETERIA) {
-                      // stops the timer from being called repeatedly
-                      GameState.secondsRemaining = -1;
                       GameState.resetCafeteria = true;
-                      GameState.resetOffice = true;
-                      GameState.resetRoom = true;
                       try {
                         // switches to the lost screen
                         Scene scene = vendingMachine.getScene();
