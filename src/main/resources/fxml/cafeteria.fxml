@@ -37,7 +37,7 @@
             </ImageView>
             <Rectangle id="paintingWithoutSafe" fx:id="paintingWithoutSafe" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="92.0" layoutX="996.0" layoutY="177.0" onMouseClicked="#onClickPaintingWithoutSafe" onMouseEntered="#paintingWithoutSafeMouseEntered" onMouseExited="#paintingWithoutSafeMouseExited" opacity="0.0" scaleX="1.5" scaleY="1.5" stroke="BLACK" strokeType="INSIDE" width="72.0" />
             <Rectangle id="vendingMachine" fx:id="vendingMachine" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="160.0" layoutX="433.0" layoutY="342.0" onMouseClicked="#onClickVendingMachine" onMouseEntered="#vendingMachineMouseEntered" onMouseExited="#vendingMachineMouseExited" opacity="0.0" scaleX="1.5" scaleY="1.5" stroke="BLACK" strokeType="INSIDE" width="98.0" />
-            <ImageView fx:id="safe" fitHeight="93.0" fitWidth="71.0" layoutX="576.0" layoutY="178.0" onMouseClicked="#onSafeClick" onMouseEntered="#safeMouseEntered" scaleX="1.5" scaleY="1.5" visible="false">
+            <ImageView fx:id="safe" fitHeight="93.0" fitWidth="71.0" layoutX="576.0" layoutY="178.0" onMouseClicked="#onSafeClick" scaleX="1.5" scaleY="1.5" visible="false">
                <image>
                   <Image url="@../images/Safe.png" />
                </image>
@@ -48,11 +48,12 @@
                   <Image url="@../images/guard2.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="safeBig" fitHeight="105.0" fitWidth="80.0" layoutX="580.0" layoutY="175.0" onMouseClicked="#onSafeClick" onMouseExited="#safeMouseExited" scaleX="1.5" scaleY="1.5" visible="false">
+            <ImageView fx:id="safeBig" fitHeight="105.0" fitWidth="80.0" layoutX="572.0" layoutY="171.0" scaleX="1.5" scaleY="1.5" visible="false">
                <image>
                   <Image url="@../images/Safe.png" />
                </image>
             </ImageView>
+            <Rectangle fx:id="safeRectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="53.0" layoutX="576.0" layoutY="197.0" onMouseClicked="#onSafeClick" onMouseEntered="#safeMouseEntered" onMouseExited="#safeMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="64.0" />
             <Pane fx:id="paperPane" layoutX="130.0" layoutY="65.0" prefHeight="486.0" prefWidth="852.0" visible="false">
                <children>
                   <ImageView fitHeight="510.0" fitWidth="888.0" pickOnBounds="true" preserveRatio="true">
@@ -91,11 +92,6 @@
                   </Label>
                </children>
             </HBox>
-            <ImageView fx:id="safeBig" fitHeight="105.0" fitWidth="80.0" layoutX="580.0" layoutY="175.0" onMouseClicked="#onSafeClick" onMouseExited="#safeMouseExited" scaleX="1.5" scaleY="1.5" visible="false">
-               <image>
-                  <Image url="@../images/Safe.png" />
-               </image>
-            </ImageView>
             <ImageView fx:id="speechBubbleTwoSmall" fitHeight="150.0" fitWidth="89.0" layoutX="651.0" layoutY="243.0" onMouseClicked="#onSpeechBubbleTwoClicked" onMouseEntered="#onSetSpeechBubbleTwoUp" onMouseExited="#onSetSpeechBubbleTwoDown" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/speechBubble.png" />

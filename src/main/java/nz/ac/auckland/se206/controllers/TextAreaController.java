@@ -1,17 +1,29 @@
 package nz.ac.auckland.se206.controllers;
 
+import java.io.File;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import javafx.scene.text.TextAlignment;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GptAndTextAreaManager;
+import nz.ac.auckland.se206.GptAndTextAreaManager.Characters;
+import nz.ac.auckland.se206.gpt.ChatMessage;
+import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
+import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 
 public class TextAreaController {
   @FXML private Button responseSubmitButton;
@@ -21,6 +33,7 @@ public class TextAreaController {
   @FXML private Text typePromptText;
   @FXML private Text hintsLeftText;
   @FXML private TextField inputText;
+  @FXML private VBox chatVbox;
 
   @FXML private CheckBox riddleSolvedObjective;
   @FXML private CheckBox codewordFoundObjective;
@@ -30,15 +43,33 @@ public class TextAreaController {
   @FXML private CheckBox guardTalkedObjective;
   private Timeline timeline;
 
+  public Image guardAvatar;
+  public Image playerAvatar;
+  public Image prisonerOneAvatar;
+  public Image prisonerTwoAvatar;
+
   @FXML
   private void initialize() {
     // setting up the text area manager
+    chatVbox.setMaxWidth(562);
+    chatVbox.setMaxHeight(195);
+
     GptAndTextAreaManager.textAreaController = this;
     GptAndTextAreaManager.textAreaChatDisplayBoard = chatDisplayBoard;
     GptAndTextAreaManager.textAreaInputBox = inputBox;
     GptAndTextAreaManager.textAreaObjectiveDisplayBoard = objectiveDisplayBoard;
     GptAndTextAreaManager.textAreaTypePromptText = typePromptText;
     GptAndTextAreaManager.textAreaHintsLeftText = hintsLeftText;
+    String image = "src/main/resources/images/prisonerOneAvatar.png";
+    String guardAvatarImage = "src/main/resources/images/guardAvatar.png";
+    String prisonerOneAvatarImage = "src/main/resources/images/prisonerTwoAvatar.png";
+    String prisonerTwoAvatarImage = "src/main/resources/images/prisonerOneAvatar.png";
+    guardAvatar = new Image(new File(guardAvatarImage).toURI().toString()); 
+    playerAvatar = new Image(new File(image).toURI().toString()); 
+    prisonerOneAvatar =
+        new Image(new File(prisonerOneAvatarImage).toURI().toString()); 
+    prisonerTwoAvatar = 
+        new Image(new File(prisonerTwoAvatarImage).toURI().toString()); 
 
     resetchecker();
 
