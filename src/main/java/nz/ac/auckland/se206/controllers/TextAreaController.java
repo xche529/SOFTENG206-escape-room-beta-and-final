@@ -2,7 +2,6 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.File;
 import java.util.List;
-
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -16,8 +15,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.util.Duration;
 import javafx.scene.text.TextAlignment;
+import javafx.util.Duration;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GptAndTextAreaManager;
 import nz.ac.auckland.se206.GptAndTextAreaManager.Characters;
@@ -42,8 +41,9 @@ public class TextAreaController {
   @FXML private CheckBox phoneLocatedObjective;
   @FXML private CheckBox safeLocatedObjective;
   @FXML private CheckBox guardTalkedObjective;
-  private Timeline timeline;
+  private Timeline timelineTwo;
 
+  private Timeline timeline;
   public Image guardAvatar;
   public Image playerAvatar;
   public Image prisonerOneAvatar;
@@ -51,6 +51,7 @@ public class TextAreaController {
 
   @FXML
   private void initialize() {
+    resetchecker();
     // setting up the text area manager
     chatVbox.setMaxWidth(562);
     chatVbox.setMaxHeight(195);
@@ -61,18 +62,14 @@ public class TextAreaController {
     GptAndTextAreaManager.textAreaObjectiveDisplayBoard = objectiveDisplayBoard;
     GptAndTextAreaManager.textAreaTypePromptText = typePromptText;
     GptAndTextAreaManager.textAreaHintsLeftText = hintsLeftText;
-    String image = "src/main/resources/images/prisonerOneAvatar.png";
     String guardAvatarImage = "src/main/resources/images/guardAvatar.png";
     String prisonerOneAvatarImage = "src/main/resources/images/prisonerTwoAvatar.png";
     String prisonerTwoAvatarImage = "src/main/resources/images/prisonerOneAvatar.png";
     guardAvatar = new Image(new File(guardAvatarImage).toURI().toString()); 
-    playerAvatar = new Image(new File(image).toURI().toString()); 
     prisonerOneAvatar =
         new Image(new File(prisonerOneAvatarImage).toURI().toString()); 
     prisonerTwoAvatar = 
         new Image(new File(prisonerTwoAvatarImage).toURI().toString()); 
-
-    resetchecker();
 
     // adding listener to update objectives
     GameState.isRiddleResolvedProperty()
@@ -80,6 +77,12 @@ public class TextAreaController {
             (observable, oldValue, newValue) -> {
               if (newValue) {
                 riddleSolvedObjective.setSelected(true);
+                try {
+                  GptAndTextAreaManager.sendMessage(GptPromptEngineering.solvedRaddleGuardPrompt());
+                } catch (ApiProxyException e) {
+                  // TODO Auto-generated catch block
+                  e.printStackTrace();
+                }
               }
             });
     GameState.isCodeWordFoundProperty()
@@ -108,6 +111,13 @@ public class TextAreaController {
             (observable, oldValue, newValue) -> {
               if (newValue) {
                 safeLocatedObjective.setSelected(true);
+                GptAndTextAreaManager.currentCharacter = Characters.GUARD;
+                try {
+                  GptAndTextAreaManager.sendMessage(GptPromptEngineering.findSafeGuardPrompt());
+                } catch (ApiProxyException e) {
+                  // TODO Auto-generated catch block
+                  e.printStackTrace();
+                }
               }
             });
     GameState.isGuardTalkedProperty()
@@ -117,6 +127,19 @@ public class TextAreaController {
                 guardTalkedObjective.setSelected(true);
               }
             });
+
+    timelineTwo =
+        new Timeline(
+            new KeyFrame(
+                Duration.seconds(0.2),
+                event -> {
+                  if (GptAndTextAreaManager.isNewMessage) {
+                    GptAndTextAreaManager.displayTarget();
+                    GptAndTextAreaManager.isNewMessage = false;
+                  }
+                }));
+    timelineTwo.setCycleCount(Timeline.INDEFINITE);
+    timelineTwo.play();
   }
 
   @FXML
@@ -138,6 +161,9 @@ public class TextAreaController {
     }
   }
 
+  public void setPlayerAvatar(Image avatar) {
+    playerAvatar = avatar;
+  }
   private void resetchecker() {
     timeline =
         new Timeline(
@@ -145,7 +171,7 @@ public class TextAreaController {
                 Duration.seconds(1),
                 event -> {
                   if (GameState.secondsRemaining == 0) {
-                      GameState.resetTextArea = true;
+                    GameState.resetTextArea = true;
                   }
 
                   if (GameState.resetTextArea) {
@@ -159,7 +185,7 @@ public class TextAreaController {
   }
 
   private void resetTicks() {
-    //resets the booleans
+    // resets the booleans
     GameState.setRiddleResolved(false);
     GameState.setCodeWordFound(false);
     GameState.setConverterFound(false);
@@ -167,32 +193,34 @@ public class TextAreaController {
     GameState.setSafeFound(false);
     GameState.setGuardTalked(false);
 
-    //resets the checkboxes
+    // resets the checkboxes
     riddleSolvedObjective.setSelected(false);
     codewordFoundObjective.setSelected(false);
     converterFoundObjective.setSelected(false);
     phoneLocatedObjective.setSelected(false);
     safeLocatedObjective.setSelected(false);
     guardTalkedObjective.setSelected(false);
-    
   }
 
-  
-      public  void setMessageHistory(ChatCompletionRequest chat) {
-      chatVbox.getChildren().clear();
-      System.out.println("Vbox cleared");
+  public void setMessageHistory(ChatCompletionRequest chat) {
+    chatVbox.getChildren().clear();
+    System.out.println("Vbox cleared");
 
     List<ChatMessage> messages = chat.getMessages();
     // IMPORTANT: increase i here to filtout the prompt Engineering content
 
     if (messages.size() > 1) {
-      if (GptAndTextAreaManager.isHintRunning) {
-        GptAndTextAreaManager.hintLeft = GameState.hints;
-      } else {
-        GptAndTextAreaManager.hintLeft = 0;
+      if (GptAndTextAreaManager.currentCharacter == Characters.GUARD) {
+        if (GptAndTextAreaManager.isHintRunning) {
+          GptAndTextAreaManager.hintLeft = GameState.hints;
+        } else {
+          GptAndTextAreaManager.hintLeft = 0;
+        }
       }
       // filter parentheses out so we can send messages without player seeing
+
       for (int i = messages.size() - 1; i >= 0; i--) {
+
         String result = "";
         String check = messages.get(i).getContent();
         if (check.charAt(0) == ('(') && check.charAt(check.length() - 1) == (')')) {
@@ -203,12 +231,16 @@ public class TextAreaController {
 
         if (GptAndTextAreaManager.currentCharacter == Characters.GUARD) {
           if (messages.get(i).getRole().equals("assistant")
-              && messages.get(i).getContent().contains("Correct")) {
+              && (messages.get(i).getContent().contains("Correct"))) {
             GameState.setRiddleResolved(true);
           }
-          if (GptAndTextAreaManager.isHintRunning && GameState.difficulty == GameState.Difficulty.MEDIUM) {
+          if (GptAndTextAreaManager.isHintRunning
+              && GameState.difficulty == GameState.Difficulty.MEDIUM) {
             if (messages.get(i).getRole().equals("assistant")
-                && (messages.get(i).getContent().contains("HINT") || messages.get(i).getContent().contains("Hint:") || messages.get(i).getContent().contains("hint:")) && i != 1) {
+                && (messages.get(i).getContent().contains("HINT")
+                    || messages.get(i).getContent().contains("Hint:")
+                    || messages.get(i).getContent().contains("hint:"))
+                && i != 1) {
               GptAndTextAreaManager.hintLeft--;
             }
             if (GptAndTextAreaManager.hintLeft == 0) {
@@ -231,21 +263,21 @@ public class TextAreaController {
             avatar = new ImageView(guardAvatar);
           } else if (GptAndTextAreaManager.currentCharacter == Characters.PRISONER_ONE) {
             name = "Prisoner1: ";
-           avatar = new ImageView(prisonerOneAvatar);
+            avatar = new ImageView(prisonerOneAvatar);
           } else {
             name = "Prisoner2: ";
             avatar = new ImageView(prisonerTwoAvatar);
           }
         } else if (name.trim().equals("user")) {
-            name = GameState.playerName + ": ";
-            avatar = new ImageView(playerAvatar);
+          name = GameState.playerName + ": ";
+          avatar = new ImageView(playerAvatar);
         }
         // get filtered messages for display
         String content = chat.getMessages().get(i).getContent();
         result += name + "\n" + parenthesesFilter(content) + "\n\n";
         System.out.println("parenthesesFilter passed");
         System.out.println(
-        messages.get(i).getRole() + ": " + chat.getMessages().get(i).getContent() + "\n\n");
+            messages.get(i).getRole() + ": " + chat.getMessages().get(i).getContent() + "\n\n");
         System.out.println("creating new Hbox");
 
         HBox hbox = new HBox();
@@ -254,13 +286,13 @@ public class TextAreaController {
 
         avatar.setFitHeight(50);
         avatar.setFitWidth(50);
-        if(messages.get(i).getRole() == "user"){
+        if (messages.get(i).getRole() == "user") {
           text.setTextAlignment(TextAlignment.RIGHT);
           hbox.getChildren().add(text);
           hbox.getChildren().add(avatar);
-          //hbox.setMaxWidth(562);
+          // hbox.setMaxWidth(562);
           hbox.setAlignment(Pos.CENTER_RIGHT);
-        } else{
+        } else {
           hbox.getChildren().add(avatar);
           hbox.getChildren().add(text);
         }
@@ -324,5 +356,4 @@ public class TextAreaController {
     // return the filtered message
     return result;
   }
-
 }
