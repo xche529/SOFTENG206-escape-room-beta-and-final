@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fillWidth="false" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.StartInterfaceController">
+<VBox fillWidth="false" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.StartInterfaceController">
    <children>
       <Pane layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1113.0">
          <children>
@@ -60,7 +60,7 @@
                   <Image url="@../images/HARD.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="467.0" layoutY="296.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="329.0" layoutY="294.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/ENTER%20YOUR%20NAME_.png" />
                </image>
@@ -70,7 +70,7 @@
                   <Image url="@../images/EXIT.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="459.0" layoutY="335.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="329.0" layoutY="335.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/Nametextbox.png" />
                </image>
@@ -115,7 +115,7 @@
                   <Image url="@../images/checkmark.png" />
                </image>
             </ImageView>
-            <TextField fx:id="playerName" layoutX="457.0" layoutY="332.0" prefHeight="39.0" prefWidth="199.0" style="-fx-background-color: none; -fx-text-fill: white;" text="Player">
+            <TextField fx:id="playerName" layoutX="330.0" layoutY="332.0" prefHeight="39.0" prefWidth="199.0" style="-fx-background-color: none; -fx-text-fill: white;" text="Player">
                <font>
                   <Font size="22.0" />
                </font>
@@ -146,11 +146,21 @@
                   <Image url="@../images/Arrow_keys.png" />
                </image>
             </ImageView>
-            <Text fill="WHITE" layoutX="863.0" layoutY="451.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Use arrow keys to change rooms in the game" wrappingWidth="178.818359375">
+            <Text fill="WHITE" layoutX="847.0" layoutY="450.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Use arrow keys to switch rooms in the game" textAlignment="CENTER" wrappingWidth="200.0">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Text>
+            <Text fill="WHITE" layoutX="608.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SELECT YOUR AVATAR:" wrappingWidth="177.0">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+            </Text>
+            <ImageView fx:id="avatarImageView" fitHeight="100.0" fitWidth="100.0" layoutX="770.0" layoutY="285.0" onMouseClicked="#onSwitchAvatar" pickOnBounds="true">
+               <image>
+                  <Image url="@../images/PlayerAvatarOne.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
    </children>

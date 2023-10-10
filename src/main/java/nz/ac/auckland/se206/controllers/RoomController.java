@@ -153,6 +153,7 @@ public class RoomController {
    * @throws IOException
    */
   public void start() throws IOException {
+
     updateTimerLabel();
 
     animateArrows(doorArrow);
