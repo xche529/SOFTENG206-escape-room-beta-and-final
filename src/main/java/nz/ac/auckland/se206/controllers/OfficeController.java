@@ -48,7 +48,7 @@ public class OfficeController {
   @FXML private ImageView speechBubbleTwoSmall;
   @FXML private ImageView thinkingOne;
   @FXML private ImageView thinkingTwo;
-
+  @FXML private ImageView cog;
   @FXML private ImageView binArrow;
   @FXML private ImageView blackBoardArrow;
   @FXML private ImageView drawArrow;
@@ -852,6 +852,25 @@ public class OfficeController {
   private void crossMouseExited() {
     // hides the enlarged cross
     crossBig.setVisible(false);
+  }
+
+  @FXML
+  private void onClickCog(MouseEvent event) {
+    GameState.setSettingsVisable(true);
+  }
+
+  @FXML
+  private void cogMouseEntered() {
+    // shows the enlarged cog
+    cog.setScaleX(1.2);
+    cog.setScaleY(1.2);
+  }
+
+  @FXML
+  private void cogMouseExited() {
+    // hides the enlarged cog
+    cog.setScaleX(1);
+    cog.setScaleY(1);
   }
 
   private void resetchecker() throws IOException {

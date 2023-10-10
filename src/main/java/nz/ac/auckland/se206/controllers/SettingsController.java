@@ -51,11 +51,19 @@ public class SettingsController {
             // float sfxVolume = newValue.intValue() / 100f;
             // GameState.sfxVolume = sfxVolume;
         });
-    }
 
+        GameState.isSettingsVisableProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                settingsBox.setVisible(true);
+            }
+        });
+    }
+    
+    
     @FXML
     private void onCrossClicked() {
         settingsBox.setVisible(false);
+        GameState.setSettingsVisable(false);
     }
 
     @FXML

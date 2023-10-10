@@ -282,6 +282,11 @@
                   <Image url="@../images/thinking.gif" />
                </image>
             </ImageView>
+            <ImageView fx:id="cog" fitHeight="109.0" fitWidth="93.0" onMouseClicked="#onClickCog" onMouseEntered="#cogMouseEntered" onMouseExited="#cogMouseExited" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/cog.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
    </children>

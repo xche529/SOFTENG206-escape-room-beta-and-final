@@ -17,6 +17,8 @@
 
 - thinking.gif https://tenor.com/view/emojis-emoji-hmm-thinking-think-gif-16078272
 
+- cog.png <a href="https://www.freepik.com/free-vector/illustration-cogwheel_2609999.htm#query=settings%20icon&position=0&from_view=search&track=ais">Image by rawpixel.com</a> on Freepik
+
 ## To setup OpenAI's API
 
 - add in the root of the project (i.e., the same level where `pom.xml` is located) a file named `apiproxy.config`

@@ -32,6 +32,8 @@ public class GameState {
 
   private static final BooleanProperty isGameClosed = new SimpleBooleanProperty(false);
 
+  private static final BooleanProperty isSettingsVisable = new SimpleBooleanProperty(false);
+
   public static boolean isWon = false;
 
   public static String phoneNumber;
@@ -75,6 +77,18 @@ public class GameState {
   public static String playerName = "Player";
 
   public static float audioVolume = 1.0f;
+
+  public static boolean isSettingsVisable() {
+    return isSettingsVisable.get();
+  }
+
+  public static void setSettingsVisable(boolean value) {
+    isSettingsVisable.set(value);
+  }
+
+  public static BooleanProperty isSettingsVisableProperty() {
+    return isSettingsVisable;
+  }
 
   public static boolean isRiddleResolved() {
     return isRiddleResolvedProperty.get();
