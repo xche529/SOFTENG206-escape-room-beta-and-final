@@ -1,6 +1,9 @@
 package nz.ac.auckland.se206.speech;
 
+import java.beans.PropertyVetoException;
 import javafx.concurrent.Task;
+import nz.ac.auckland.se206.GameState;
+
 import javax.speech.AudioException;
 import javax.speech.Central;
 import javax.speech.EngineException;
@@ -91,6 +94,8 @@ public class TextToSpeech {
             // otherwise speak the sentence
             try {
               synthesizer.resume();
+              // set the volume
+              synthesizer.getSynthesizerProperties().setVolume(GameState.volume);
               synthesizer.speakPlainText(sentence, null);
               synthesizer.waitEngineState(Synthesizer.QUEUE_EMPTY);
             } catch (final AudioException | InterruptedException e) {
@@ -124,5 +129,19 @@ public class TextToSpeech {
     } catch (final EngineException e) {
       throw new TextToSpeechException(e.getMessage());
     }
+  }
+
+  /**
+   * Sets the volume of the speech synthesizer.
+   *
+   * @param volume The volume level (0.0 to 1.0, where 0.0 is silent and 1.0 is full volume).
+   * @throws PropertyVetoException
+   */
+  public void setVolume(float volume) throws PropertyVetoException {
+    if (volume < 0.0f || volume > 1.0f) {
+      throw new IllegalArgumentException("Volume should be between 0.0 and 1.0");
+    }
+
+    synthesizer.getSynthesizerProperties().setVolume(volume);
   }
 }
