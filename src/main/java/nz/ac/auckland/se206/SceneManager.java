@@ -26,7 +26,7 @@ public class SceneManager {
   public static RoomController roomController;
   public static OfficeController officeController;
   public static CafeteriaController cafeteriaController;
-
+  
   static AppUi[] appUis = {
     AppUi.ROOM, AppUi.OFFICE, AppUi.CAFETERIA,
   };
@@ -48,7 +48,7 @@ public class SceneManager {
     if (curretUi == AppUi.START_INTERFACE) {
       // switching room sto the left
       roomToSwitch = (VBox) getUiRoot(AppUi.ROOM);
-      
+
       curretUi = AppUi.ROOM;
       roomController.resetAnimation();
       roomController.walkInAnimation();
@@ -104,7 +104,7 @@ public class SceneManager {
   public static void switchToStart(Scene scene) {
     VBox endLost = (VBox) getUiRoot(AppUi.START_INTERFACE);
     VBox settings = (VBox) getUiRoot(AppUi.SETTINGS);
-    settings.getTransforms().add(App.scale);
+    //settings.getTransforms().add(App.scale);
     StackPane endLostStack = new StackPane(endLost, settings);
     StackPane.setAlignment(getUiRoot(AppUi.SETTINGS), javafx.geometry.Pos.TOP_LEFT);
     VBox vbox = new VBox(endLostStack);
@@ -112,14 +112,13 @@ public class SceneManager {
     vbox.setLayoutY(App.centerY);
     scene.setRoot(vbox);
     curretUi = AppUi.END_LOST;
-
   }
 
   public static void switchToEndWon(Scene scene) {
     VBox endWon = (VBox) getUiRoot(AppUi.END_WON);
     VBox settings = (VBox) getUiRoot(AppUi.SETTINGS);
-    settings.getTransforms().add(App.scale);
     StackPane endWonStack = new StackPane(endWon, settings);
+    settings.getTransforms().add(App.scale);
     StackPane.setAlignment(getUiRoot(AppUi.SETTINGS), javafx.geometry.Pos.TOP_LEFT);
     VBox vbox = new VBox(endWonStack);
     vbox.setLayoutX(App.centerX);

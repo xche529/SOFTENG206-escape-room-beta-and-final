@@ -19,7 +19,7 @@ import nz.ac.auckland.se206.controllers.OfficeController;
 import nz.ac.auckland.se206.controllers.RoomController;
 import nz.ac.auckland.se206.controllers.StartInterfaceController;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
-   
+
 /**
  * This is the entry point of the JavaFX application, while you can change this class, it should
  * remain as the class that runs the JavaFX application.
@@ -129,15 +129,15 @@ public class App extends Application {
 
     // setting up the scene and getting the random code
     Safe.getRandomCode();
-    VBox root = (VBox) SceneManager.getUiRoot(AppUi.START_INTERFACE);
-    root.setLayoutX(centerX);
-    root.setLayoutY(centerY);
+    //VBox root = (VBox) SceneManager.getUiRoot(AppUi.START_INTERFACE);
+    startInterfaceVBox.setLayoutX(centerX);
+    startInterfaceVBox.setLayoutY(centerY);
     // make it fill the screen
-    scene = new Scene(root, 1113 * overallScale, 605 * overallScale);
+    scene = new Scene(startInterfaceVBox, 1113 * overallScale, 605 * overallScale);
     scene.setFill(Color.rgb(244, 244, 244, 1));
     stage.setScene(scene);
 
-        Platform.runLater(
+    Platform.runLater(
         () -> {
           stage.setOnCloseRequest(
               event -> {
@@ -147,7 +147,7 @@ public class App extends Application {
                 GameState.setGameClosed(true);
               });
         });
-        
+
     scene.addEventFilter(
         javafx.scene.input.KeyEvent.KEY_PRESSED,
         event -> {
@@ -159,7 +159,7 @@ public class App extends Application {
             SceneManager.switchRoom(true, scene);
           } else if (event.getCode() == KeyCode.RIGHT) {
             SceneManager.switchRoom(false, scene);
-          } else if (event.getCode() == KeyCode.ENTER){
+          } else if (event.getCode() == KeyCode.ENTER) {
             try {
               GptAndTextAreaManager.onSubmitMessage();
               GptAndTextAreaManager.removeInputTextAreaFocus();
