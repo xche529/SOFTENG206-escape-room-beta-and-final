@@ -22,7 +22,7 @@ public class SceneManager {
     SETTINGS
   }
 
-  public static AppUi curretUi = AppUi.START_INTERFACE;
+  public static AppUi currentUi = AppUi.START_INTERFACE;
   public static RoomController roomController;
   public static OfficeController officeController;
   public static CafeteriaController cafeteriaController;
@@ -45,11 +45,11 @@ public class SceneManager {
     VBox roomToSwitch;
     VBox settings = (VBox) getUiRoot(AppUi.SETTINGS);
 
-    if (curretUi == AppUi.START_INTERFACE) {
+    if (currentUi == AppUi.START_INTERFACE) {
       // switching room sto the left
       roomToSwitch = (VBox) getUiRoot(AppUi.ROOM);
 
-      curretUi = AppUi.ROOM;
+      currentUi = AppUi.ROOM;
       roomController.resetAnimation();
       roomController.walkInAnimation();
     } else {
@@ -60,7 +60,7 @@ public class SceneManager {
       }
       int index = 0;
       for (int i = 0; i < appUis.length; i++) {
-        if (curretUi == appUis[i]) {
+        if (currentUi == appUis[i]) {
           index = i;
         }
       }
@@ -85,7 +85,7 @@ public class SceneManager {
         cafeteriaController.walkInAnimation();
       }
       System.out.println("Index: " + index);
-      curretUi = appUis[index];
+      currentUi = appUis[index];
       roomToSwitch = (VBox) getUiRoot(appUis[index]);
     }
     StackPane newRoomStack = new StackPane(roomToSwitch, settings);
@@ -111,7 +111,7 @@ public class SceneManager {
     vbox.setLayoutX(App.centerX);
     vbox.setLayoutY(App.centerY);
     scene.setRoot(vbox);
-    curretUi = AppUi.END_LOST;
+    currentUi = AppUi.END_LOST;
   }
 
   public static void switchToEndWon(Scene scene) {
@@ -124,7 +124,7 @@ public class SceneManager {
     vbox.setLayoutX(App.centerX);
     vbox.setLayoutY(App.centerY);
     scene.setRoot(vbox);
-    curretUi = AppUi.END_WON;
+    currentUi = AppUi.END_WON;
   }
 
   public static void switchToEndLost(Scene scene) {
@@ -137,7 +137,7 @@ public class SceneManager {
     vbox.setLayoutX(App.centerX);
     vbox.setLayoutY(App.centerY);
     scene.setRoot(vbox);
-    curretUi = AppUi.END_LOST;
+    currentUi = AppUi.END_LOST;
   }
 
   public static void addUi(AppUi ui, VBox uiRoot) {

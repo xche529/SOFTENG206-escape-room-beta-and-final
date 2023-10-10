@@ -171,7 +171,7 @@ public class RoomController {
                     updateTimerLabel();
                   }
                   if (GameState.secondsRemaining == 0) {
-                    if (SceneManager.curretUi == SceneManager.AppUi.ROOM) {
+                    if (SceneManager.currentUi == SceneManager.AppUi.ROOM) {
 
                       // prevents the reset from being called multipul times
                       GameEnd.triggerResters();

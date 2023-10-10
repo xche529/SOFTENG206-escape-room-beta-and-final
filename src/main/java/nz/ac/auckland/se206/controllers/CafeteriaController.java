@@ -547,7 +547,7 @@ public class CafeteriaController {
                     updateTimerLabel();
                   }
                   if (GameState.secondsRemaining == 0) {
-                    if (SceneManager.curretUi == SceneManager.AppUi.CAFETERIA) {
+                    if (SceneManager.currentUi == SceneManager.AppUi.CAFETERIA) {
                       GameState.resetCafeteria = true;
                       try {
                         // switches to the lost screen

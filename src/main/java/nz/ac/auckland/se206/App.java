@@ -30,6 +30,7 @@ public class App extends Application {
   public static double centerX = 1;
   public static double centerY = 1;
   private static Scene scene;
+  private static boolean isFirstRound = true;
 
   public static void main(final String[] args) {
     launch();
@@ -133,7 +134,13 @@ public class App extends Application {
     startInterfaceVBox.setLayoutX(centerX);
     startInterfaceVBox.setLayoutY(centerY);
     // make it fill the screen
-    scene = new Scene(startInterfaceVBox, 1113 * overallScale, 605 * overallScale);
+    if (isFirstRound) {
+      isFirstRound = false;
+      scene = new Scene(startInterfaceVBox, 1113 * overallScale, 605 * overallScale);
+    } else {
+
+      scene = new Scene(startInterfaceVBox, 1113 * overallScale * 1.25, 605 * overallScale * 1.25);
+    }
     scene.setFill(Color.rgb(244, 244, 244, 1));
     stage.setScene(scene);
 
@@ -151,7 +158,7 @@ public class App extends Application {
     scene.addEventFilter(
         javafx.scene.input.KeyEvent.KEY_PRESSED,
         event -> {
-          if (SceneManager.curretUi == AppUi.START_INTERFACE) {
+          if (SceneManager.currentUi == AppUi.START_INTERFACE) {
             return;
           }
           VBox up = null;

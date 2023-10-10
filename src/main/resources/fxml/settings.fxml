@@ -27,7 +27,12 @@
                         <Image url="@../images/SETTINGS.png" />
                      </image>
                   </ImageView>
-                  <VBox layoutX="76.0" layoutY="118.0" prefHeight="362.0" prefWidth="682.0">
+                  <ImageView fx:id="cross" fitHeight="73.0" fitWidth="100.0" layoutX="792.0" layoutY="11.0" onMouseClicked="#onCrossClicked" onMouseEntered="#crossMouseEntered" onMouseExited="#crossMouseExited" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/Cross.png" />
+                     </image>
+                  </ImageView>
+                  <VBox layoutX="76.0" layoutY="118.0" prefHeight="373.0" prefWidth="682.0">
                      <children>
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
@@ -80,13 +85,22 @@
                               </Label>
                            </children>
                         </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fx:id="abandonGame" fitHeight="108.0" fitWidth="517.0" onMouseClicked="#onClickAbandonGame" onMouseEntered="#abandonGameMouseEntered" onMouseExited="#abandonGameMouseExited" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/ABANDON%20GAME.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="help" fitHeight="144.0" fitWidth="194.0" onMouseClicked="#onClickHelp" onMouseEntered="#helpMouseEntered" onMouseExited="#helpMouseExited" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/HELP.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </HBox>
                      </children>
                   </VBox>
-                  <ImageView fx:id="cross" fitHeight="73.0" fitWidth="100.0" layoutX="792.0" layoutY="11.0" onMouseClicked="#onCrossClicked" onMouseEntered="#crossMouseEntered" onMouseExited="#crossMouseExited" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/Cross.png" />
-                     </image>
-                  </ImageView>
                </children>
             </Pane>
          </children>

@@ -817,10 +817,6 @@ public class OfficeController {
 
         // switches to the end screen
         SceneManager.switchToEndWon(scene);
-        // Parent parent = SceneManager.getUiRoot(SceneManager.AppUi.END_WON);
-        // parent.setLayoutX(App.centerX);
-        // parent.setLayoutY(App.centerY);
-        // scene.setRoot(parent);
       } else {
         // do nothing if the phone number is wrong
         System.out.println("Wrong number");
@@ -883,7 +879,7 @@ public class OfficeController {
                     updateTimerLabel();
                   }
                   if (GameState.secondsRemaining == 0) {
-                    if (SceneManager.curretUi == SceneManager.AppUi.OFFICE) {
+                    if (SceneManager.currentUi == SceneManager.AppUi.OFFICE) {
                       GameEnd.triggerResters();
                       try {
                         // changes to the end screen
