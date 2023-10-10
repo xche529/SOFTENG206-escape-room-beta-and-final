@@ -3,6 +3,7 @@ package nz.ac.auckland.se206;
 import java.util.HashMap;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import nz.ac.auckland.se206.controllers.CafeteriaController;
 import nz.ac.auckland.se206.controllers.OfficeController;
@@ -17,7 +18,8 @@ public class SceneManager {
     END_WON,
     END_LOST,
     START_INTERFACE,
-    TEXT_AREA
+    TEXT_AREA,
+    SETTINGS
   }
 
   public static AppUi curretUi = AppUi.START_INTERFACE;
@@ -41,10 +43,12 @@ public class SceneManager {
    */
   public static void switchRoom(boolean isToLeft, Scene scene) {
     VBox roomToSwitch;
+    VBox settings = (VBox) getUiRoot(AppUi.SETTINGS);
 
     if (curretUi == AppUi.START_INTERFACE) {
       // switching room sto the left
       roomToSwitch = (VBox) getUiRoot(AppUi.ROOM);
+      
       curretUi = AppUi.ROOM;
       roomController.resetAnimation();
       roomController.walkInAnimation();
@@ -84,7 +88,9 @@ public class SceneManager {
       curretUi = appUis[index];
       roomToSwitch = (VBox) getUiRoot(appUis[index]);
     }
-    VBox vbox = new VBox(roomToSwitch, getUiRoot(AppUi.TEXT_AREA));
+    StackPane newRoomStack = new StackPane(roomToSwitch, settings);
+    StackPane.setAlignment(settings, javafx.geometry.Pos.TOP_LEFT);
+    VBox vbox = new VBox(newRoomStack, getUiRoot(AppUi.TEXT_AREA));
 
     // setting up the vbox
 
