@@ -6,7 +6,6 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -20,7 +19,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
-import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GptAndTextAreaManager;
 import nz.ac.auckland.se206.GptAndTextAreaManager.Characters;
@@ -28,6 +26,7 @@ import nz.ac.auckland.se206.MovementControl;
 import nz.ac.auckland.se206.Safe;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
+import nz.ac.auckland.se206.reseters.GameEnd;
 import nz.ac.auckland.se206.reseters.RandomizationGenerator;
 
 /** Controller class for the room view. */
@@ -175,18 +174,11 @@ public class RoomController {
                     if (SceneManager.curretUi == SceneManager.AppUi.ROOM) {
 
                       // prevents the reset from being called multipul times
-                      GameState.secondsRemaining = -1;
-                      GameState.resetCafeteria = true;
-                      GameState.resetOffice = true;
-                      GameState.resetRoom = true;
-                      GameState.resetTextArea = true;
+                      GameEnd.triggerResters();
                       try {
                         // switches to the lost screen
                         Scene scene = sink.getScene();
-                        Parent parent = SceneManager.getUiRoot(SceneManager.AppUi.END_LOST);
-                        parent.setLayoutX(App.centerX);
-                        parent.setLayoutY(App.centerY);
-                        scene.setRoot(parent);
+                        SceneManager.switchToEndLost(scene);
                       } catch (NullPointerException e) {
                       }
                     }

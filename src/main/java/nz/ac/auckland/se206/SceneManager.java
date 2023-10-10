@@ -101,6 +101,46 @@ public class SceneManager {
     scene.setRoot(vbox);
   }
 
+  public static void switchToStart(Scene scene) {
+    VBox endLost = (VBox) getUiRoot(AppUi.START_INTERFACE);
+    VBox settings = (VBox) getUiRoot(AppUi.SETTINGS);
+    settings.getTransforms().add(App.scale);
+    StackPane endLostStack = new StackPane(endLost, settings);
+    StackPane.setAlignment(getUiRoot(AppUi.SETTINGS), javafx.geometry.Pos.TOP_LEFT);
+    VBox vbox = new VBox(endLostStack);
+    vbox.setLayoutX(App.centerX);
+    vbox.setLayoutY(App.centerY);
+    scene.setRoot(vbox);
+    curretUi = AppUi.END_LOST;
+
+  }
+
+  public static void switchToEndWon(Scene scene) {
+    VBox endWon = (VBox) getUiRoot(AppUi.END_WON);
+    VBox settings = (VBox) getUiRoot(AppUi.SETTINGS);
+    settings.getTransforms().add(App.scale);
+    StackPane endWonStack = new StackPane(endWon, settings);
+    StackPane.setAlignment(getUiRoot(AppUi.SETTINGS), javafx.geometry.Pos.TOP_LEFT);
+    VBox vbox = new VBox(endWonStack);
+    vbox.setLayoutX(App.centerX);
+    vbox.setLayoutY(App.centerY);
+    scene.setRoot(vbox);
+    curretUi = AppUi.END_WON;
+  }
+
+  public static void switchToEndLost(Scene scene) {
+    VBox endLost = (VBox) getUiRoot(AppUi.END_LOST);
+    VBox settings = (VBox) getUiRoot(AppUi.SETTINGS);
+    settings.getTransforms().add(App.scale);
+    StackPane endLostStack = new StackPane(endLost, settings);
+    StackPane.setAlignment(getUiRoot(AppUi.SETTINGS), javafx.geometry.Pos.TOP_LEFT);
+    VBox vbox = new VBox(endLostStack);
+    vbox.setLayoutX(App.centerX);
+    vbox.setLayoutY(App.centerY);
+    scene.setRoot(vbox);
+    curretUi = AppUi.END_LOST;
+  }
+
   public static void addUi(AppUi ui, VBox uiRoot) {
     sceneMap.put(ui, uiRoot);
   }

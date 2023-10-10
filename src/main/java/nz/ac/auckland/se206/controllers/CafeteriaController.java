@@ -6,7 +6,6 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -16,7 +15,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
-import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GptAndTextAreaManager;
 import nz.ac.auckland.se206.GptAndTextAreaManager.Characters;
@@ -553,11 +551,8 @@ public class CafeteriaController {
                       GameState.resetCafeteria = true;
                       try {
                         // switches to the lost screen
-                        Scene scene = vendingMachine.getScene();
-                        Parent parent = SceneManager.getUiRoot(SceneManager.AppUi.END_LOST);
-                        parent.setLayoutX(App.centerX);
-                        parent.setLayoutY(App.centerY);
-                        scene.setRoot(parent);
+                        Scene scene = cross.getScene();
+                        SceneManager.switchToEndLost(scene);
                       } catch (NullPointerException e) {
                       }
                     }

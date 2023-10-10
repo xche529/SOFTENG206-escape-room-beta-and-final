@@ -476,4 +476,5 @@ public class StartInterfaceController {
     playHistoryText.scaleXProperty().set(1);
     playHistoryText.scaleYProperty().set(1);
   }
+
 }
