@@ -74,7 +74,7 @@ public class GameState {
 
   public static String playerName = "Player";
 
-  public static float volume = 1.0f;
+  public static float audioVolume = 1.0f;
 
   public static boolean isRiddleResolved() {
     return isRiddleResolvedProperty.get();

@@ -103,14 +103,14 @@ public class App extends Application {
     VBox roomVbox = new VBox(room, textArea);
 
     // adding all the scenes to the scene manager
+    SceneManager.addUi(AppUi.ROOM, roomVbox);
     SceneManager.addUi(AppUi.END_WON, endScreenWonLoader.load());
     SceneManager.addUi(AppUi.END_LOST, endScreenLostLoader.load());
     SceneManager.addUi(AppUi.START_INTERFACE, startInterfaceVBox);
     SceneManager.addUi(AppUi.OFFICE, officeVbox);
     SceneManager.addUi(AppUi.CAFETERIA, cafeteriaVbox);
-    SceneManager.addUi(AppUi.ROOM, roomVbox);
-    SceneManager.addUi(AppUi.TEXT_AREA, textArea);
     SceneManager.addUi(AppUi.SETTINGS, settings);
+    SceneManager.addUi(AppUi.TEXT_AREA, textArea);
     SceneManager.getUiRoot(AppUi.START_INTERFACE).getTransforms().add(scale);
     SceneManager.getUiRoot(AppUi.END_WON).getTransforms().add(scale);
     SceneManager.getUiRoot(AppUi.END_LOST).getTransforms().add(scale);

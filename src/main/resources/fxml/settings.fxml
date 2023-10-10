@@ -1,15 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="605.0" prefWidth="1113.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.SettingsController">
+<VBox fx:id="settingsBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="605.0" prefWidth="1113.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.SettingsController">
    <children>
       <Pane prefHeight="605.0" prefWidth="1113.0">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#4c4c4c" height="605.0" opacity="0.5" stroke="BLACK" strokeType="INSIDE" width="1113.0" />
+            <Pane layoutX="125.0" layoutY="33.0" prefHeight="532.0" prefWidth="878.0">
+               <children>
+                  <ImageView fitHeight="543.0" fitWidth="882.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../images/MENU%20_screen.jpg" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="111.0" fitWidth="300.0" layoutX="290.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/SETTINGS.png" />
+                     </image>
+                  </ImageView>
+                  <VBox layoutX="76.0" layoutY="118.0" prefHeight="362.0" prefWidth="682.0">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fitHeight="86.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/AUDIO.png" />
+                                 </image>
+                              </ImageView>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="91.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="80.0" />
+                              <Slider fx:id="audioSlider" prefHeight="100.0" prefWidth="305.0" />
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="93.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="63.0" />
+                              <Label fx:id="audioValue" prefHeight="103.0" prefWidth="149.0" text="100" textFill="WHITE">
+                                 <font>
+                                    <Font size="55.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/MUSIC.png" />
+                                 </image>
+                              </ImageView>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="93.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="78.0" />
+                              <Slider fx:id="musicSlider" prefHeight="100.0" prefWidth="309.0" />
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="93.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="63.0" />
+                              <Label fx:id="musicValue" prefHeight="103.0" prefWidth="149.0" text="100" textFill="WHITE">
+                                 <font>
+                                    <Font size="55.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fitHeight="96.0" fitWidth="195.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/SFX.png" />
+                                 </image>
+                              </ImageView>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="76.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="144.0" />
+                              <Slider fx:id="sfxSlider" prefHeight="100.0" prefWidth="309.0" />
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="93.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="63.0" />
+                              <Label fx:id="sfxValue" prefHeight="103.0" prefWidth="149.0" text="100" textFill="WHITE">
+                                 <font>
+                                    <Font size="55.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <ImageView fx:id="cross" fitHeight="73.0" fitWidth="100.0" layoutX="792.0" layoutY="11.0" onMouseClicked="#onCrossClicked" onMouseEntered="#crossMouseEntered" onMouseExited="#crossMouseExited" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/Cross.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
          </children>
       </Pane>
    </children>

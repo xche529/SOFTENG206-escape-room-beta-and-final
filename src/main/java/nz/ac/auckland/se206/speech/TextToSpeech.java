@@ -95,7 +95,7 @@ public class TextToSpeech {
             try {
               synthesizer.resume();
               // set the volume
-              synthesizer.getSynthesizerProperties().setVolume(GameState.volume);
+              synthesizer.getSynthesizerProperties().setVolume(GameState.audioVolume);
               synthesizer.speakPlainText(sentence, null);
               synthesizer.waitEngineState(Synthesizer.QUEUE_EMPTY);
             } catch (final AudioException | InterruptedException e) {
