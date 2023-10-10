@@ -86,6 +86,8 @@ public class App extends Application {
     FXMLLoader cafeteriaLoader = loadFxml("cafeteria");
     FXMLLoader startInterfaceLoader = loadFxml("StartInterface");
     FXMLLoader textAreaLoader = loadFxml("textArea");
+    FXMLLoader settingsLoader = loadFxml("settings");
+
     // creating vboxes for the scenes
     VBox cafeteria = cafeteriaLoader.load();
     VBox office = officeSceneLoader.load();
