@@ -2,6 +2,7 @@ package nz.ac.auckland.se206;
 
 import java.io.IOException;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -129,6 +130,18 @@ public class App extends Application {
     scene = new Scene(root, 1113 * overallScale, 600 * overallScale);
     scene.setFill(Color.rgb(244, 244, 244, 1));
     stage.setScene(scene);
+
+        Platform.runLater(
+        () -> {
+          stage.setOnCloseRequest(
+              event -> {
+                // timeline.stop();
+                // textToSpeech.terminate();
+                Platform.exit();
+                GameState.setGameClosed(true);
+              });
+        });
+        
     scene.addEventFilter(
         javafx.scene.input.KeyEvent.KEY_PRESSED,
         event -> {

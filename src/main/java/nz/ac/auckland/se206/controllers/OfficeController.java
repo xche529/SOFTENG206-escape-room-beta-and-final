@@ -875,7 +875,6 @@ public class OfficeController {
                         parent.setLayoutY(App.centerY);
                         scene.setRoot(parent);
                       } catch (NullPointerException e) {
-                        e.printStackTrace();
                       }
                     }
                   }

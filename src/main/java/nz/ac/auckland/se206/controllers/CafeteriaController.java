@@ -559,7 +559,6 @@ public class CafeteriaController {
                         parent.setLayoutY(App.centerY);
                         scene.setRoot(parent);
                       } catch (NullPointerException e) {
-                        e.printStackTrace();
                       }
                     }
                   }

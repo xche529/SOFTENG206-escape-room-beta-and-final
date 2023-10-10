@@ -59,7 +59,7 @@ public class GameTimer {
   /** This method handles the event where timer reaches 0 */
   private void handleTimerExpired() {
     if (!GameState.isWon) {
-      GameEnd.triggerResters();
+      GameState.secondsRemaining = 0;
     }
   }
 }

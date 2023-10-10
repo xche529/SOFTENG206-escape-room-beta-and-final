@@ -144,6 +144,7 @@ public class RoomController {
                     animateAllArrows();
                   }
                 });
+
       }
       
       /**
@@ -155,20 +156,6 @@ public class RoomController {
     updateTimerLabel();
 
     animateArrows(doorArrow);
-    timeline.play();
-
-    // runs the test to speech in its iwn thread to avoid lag
-    Platform.runLater(
-        () -> {
-          Stage stage = (Stage) room.getScene().getWindow();
-          stage.setOnCloseRequest(
-              event -> {
-                // timeline.stop();
-                // textToSpeech.terminate();
-                Platform.exit();
-                GameState.setGameClosed(true);
-              });
-        });
 
   }
 
@@ -203,7 +190,6 @@ public class RoomController {
                         parent.setLayoutY(App.centerY);
                         scene.setRoot(parent);
                       } catch (NullPointerException e) {
-                        System.out.println("Null pointer exception");
                       }
                     }
                   }
