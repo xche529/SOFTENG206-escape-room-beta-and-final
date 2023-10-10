@@ -20,14 +20,36 @@ public class SettingsController {
 
     public void initialize() {
 
+        // set the initial values of the sliders
         audioSlider.setValue(100);
         audioSlider.setMin(0);
         audioSlider.setMax(100);
 
+        musicSlider.setValue(100);
+        musicSlider.setMin(0);
+        musicSlider.setMax(100);
+
+        sfxSlider.setValue(100);
+        sfxSlider.setMin(0);
+        sfxSlider.setMax(100);
+
+        //updates the volumes when the sliders are moved
         audioSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             audioValue.setText(String.valueOf(newValue.intValue()));
             float audioVolume = newValue.intValue() / 100f;
             GameState.audioVolume = audioVolume;
+        });
+
+        musicSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
+            musicValue.setText(String.valueOf(newValue.intValue()));
+            // float musicVolume = newValue.intValue() / 100f;
+            // GameState.musicVolume = musicVolume;
+        });
+
+        sfxSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
+            sfxValue.setText(String.valueOf(newValue.intValue()));
+            // float sfxVolume = newValue.intValue() / 100f;
+            // GameState.sfxVolume = sfxVolume;
         });
     }
 
