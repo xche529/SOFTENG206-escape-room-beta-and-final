@@ -16,6 +16,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.GameTimer;
 import nz.ac.auckland.se206.GptAndTextAreaManager;
 import nz.ac.auckland.se206.PlayHistory;
 import nz.ac.auckland.se206.SceneManager;
@@ -103,6 +104,7 @@ public class StartInterfaceController {
     GameState.playerName = playerName.getText();
     Scene sceneButtonIsIn = twoTick.getScene();
     SceneManager.switchRoom(false, sceneButtonIsIn);
+    new GameTimer();
     roomController.start();
     GptAndTextAreaManager.initialize();
     System.out.println(

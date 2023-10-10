@@ -114,11 +114,11 @@ public class RoomController {
 
     // initialize fields in the GptAndTextAreaManager class
     GptAndTextAreaManager.roomController = this;
-
+    
     // initializes all the animation items into an array
-
+    
     animationItems =
-        new ImageView[] {
+    new ImageView[] {
           prisonerOne,
           prisonerTwo,
           speechBubbleOne,
@@ -131,69 +131,32 @@ public class RoomController {
         
         // moves the prisoners to their starting point
         resetAnimation();
-
+        
         // runs a thread that is always checking if the room needs to be reset
         resetchecker();
         doorArrow.setVisible(false);
-      }
 
-  /**
-   * This method starts a thread that checks if the room needs to be reset.
-   *
+        // animates all the arrows if the riddle is resolved
+        GameState.isRiddleResolvedProperty()
+            .addListener(
+                (observable, oldValue, newValue) -> {
+                  if (newValue) {
+                    animateAllArrows();
+                  }
+                });
+
+      }
+      
+      /**
+       * This method starts a thread that checks if the room needs to be reset.
+       *
    * @throws IOException
    */
   public void start() throws IOException {
 
-    timeline =
-        new Timeline(
-            new KeyFrame(
-                Duration.seconds(1),
-                event -> {
-                  if (GameState.stopTimer) {
-                    timeline.stop();
-                  }
-                  GameState.secondsRemaining--;
-                  updateTimerLabel();
-
-                  // uses test to spech to tell the player how long they have left
-                  if (GameState.secondsRemaining == 90 && GameState.isWon == false) {
-                    textToSpeech.speak("a minute and a half remaining");
-                  } else if (GameState.secondsRemaining == 60 && GameState.isWon == false) {
-                    textToSpeech.speak("one minute remaining");
-                  } else if (GameState.secondsRemaining == 30 && GameState.isWon == false) {
-                    textToSpeech.speak("thirty seconds remaining");
-                  }
-                }));
-
-    timeline.setCycleCount(GameState.totalSeconds);
-    timeline.setOnFinished(event -> handleTimerExpired());
     updateTimerLabel();
 
-    // wlecomes the player to the room
-    textToSpeech = new TextToSpeech();
-    textToSpeech.speak("Welcome to the room");
     animateArrows(doorArrow);
-    // animates all the arrows if the riddle is resolved
-    GameState.isRiddleResolvedProperty()
-        .addListener(
-            (observable, oldValue, newValue) -> {
-              if (newValue) {
-                animateAllArrows();
-              }
-            });
-    timeline.play();
-
-    // runs the test to speech in its iwn thread to avoid lag
-    Platform.runLater(
-        () -> {
-          Stage stage = (Stage) room.getScene().getWindow();
-          stage.setOnCloseRequest(
-              event -> {
-                timeline.stop();
-                textToSpeech.terminate();
-                Platform.exit();
-              });
-        });
 
   }
 
@@ -206,7 +169,7 @@ public class RoomController {
     timeline =
         new Timeline(
             new KeyFrame(
-                Duration.seconds(1),
+                Duration.seconds(0.1),
                 event -> {
                   if (GameState.secondsRemaining >= 0) {
                     updateTimerLabel();
@@ -228,7 +191,6 @@ public class RoomController {
                         parent.setLayoutY(App.centerY);
                         scene.setRoot(parent);
                       } catch (NullPointerException e) {
-                        System.out.println("Null pointer exception");
                       }
                     }
                   }

@@ -30,6 +30,8 @@ public class GameState {
 
   private static final BooleanProperty isGuardTalked = new SimpleBooleanProperty(false);
 
+  private static final BooleanProperty isGameClosed = new SimpleBooleanProperty(false);
+
   public static boolean isWon = false;
 
   public static String phoneNumber;
@@ -154,5 +156,13 @@ public class GameState {
 
   public static BooleanProperty isGuardTalkedProperty() {
     return isGuardTalked;
+  }
+
+  public static void setGameClosed(boolean value) {
+  isGameClosed.set(value);
+  }
+
+  public static BooleanProperty isGameClosed() {
+  return isGameClosed;
   }
 }

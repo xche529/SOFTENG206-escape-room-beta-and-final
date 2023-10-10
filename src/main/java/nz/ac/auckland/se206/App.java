@@ -2,6 +2,7 @@ package nz.ac.auckland.se206;
 
 import java.io.IOException;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -78,13 +79,13 @@ public class App extends Application {
     centerY = (height - 800 * overallScale) / 5;
     scale = new Scale(overallScale, overallScale);
     // creating loaders for all fxml files
+    FXMLLoader roomLoader = loadFxml("room");
     FXMLLoader endScreenWonLoader = loadFxml("endScreenWon");
     FXMLLoader endScreenLostLoader = loadFxml("endScreenLost");
     FXMLLoader officeSceneLoader = loadFxml("officeScene");
     FXMLLoader cafeteriaLoader = loadFxml("cafeteria");
     FXMLLoader startInterfaceLoader = loadFxml("StartInterface");
     FXMLLoader textAreaLoader = loadFxml("textArea");
-    FXMLLoader roomLoader = loadFxml("room");
     // creating vboxes for the scenes
     VBox cafeteria = cafeteriaLoader.load();
     VBox office = officeSceneLoader.load();
@@ -127,6 +128,18 @@ public class App extends Application {
     scene = new Scene(root, 1113 * overallScale, 600 * overallScale);
     scene.setFill(Color.rgb(244, 244, 244, 1));
     stage.setScene(scene);
+
+        Platform.runLater(
+        () -> {
+          stage.setOnCloseRequest(
+              event -> {
+                // timeline.stop();
+                // textToSpeech.terminate();
+                Platform.exit();
+                GameState.setGameClosed(true);
+              });
+        });
+        
     scene.addEventFilter(
         javafx.scene.input.KeyEvent.KEY_PRESSED,
         event -> {
