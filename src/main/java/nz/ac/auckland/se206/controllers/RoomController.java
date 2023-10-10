@@ -5,7 +5,6 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -20,7 +19,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
@@ -31,7 +29,6 @@ import nz.ac.auckland.se206.Safe;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.reseters.RandomizationGenerator;
-import nz.ac.auckland.se206.speech.TextToSpeech;
 
 /** Controller class for the room view. */
 public class RoomController {
@@ -69,6 +66,7 @@ public class RoomController {
   @FXML private ImageView speechBubbleTwoSmall;
   @FXML private ImageView thinkingOne;
   @FXML private ImageView thinkingTwo;
+  @FXML private ImageView cog;
   @FXML private Label timerLabel;
   @FXML private Label chatProgressLabel;
   @FXML private Label overQuestionLimitLabel;
@@ -96,7 +94,6 @@ public class RoomController {
   @FXML private Label towelWordLabel;
 
   private Timeline timeline;
-  private TextToSpeech textToSpeech;
   private ImageView[] animationItems = null;
   private Rectangle[] items;
 
@@ -269,15 +266,6 @@ public class RoomController {
     int minutes = GameState.secondsRemaining / 60;
     int seconds = GameState.secondsRemaining % 60;
     timerLabel.setText(String.format("%d:%02d", minutes, seconds));
-  }
-
-  /** This method handles the event where timer reaches 0 */
-  private void handleTimerExpired() {
-    if (!GameState.isWon) {
-      GameState.resetCafeteria = true;
-      GameState.resetOffice = true;
-      GameState.resetRoom = true;
-    }
   }
 
   /** This methos animates the prioners walking into the room */
@@ -678,5 +666,24 @@ public class RoomController {
   @FXML
   private void onSetSpeechBubbleTwoDown() {
     speechBubbleTwo.setVisible(false);
+  }
+
+  @FXML
+  private void onClickCog(MouseEvent event) {
+    GameState.setSettingsVisable(true);
+  }
+
+  @FXML
+  private void cogMouseEntered() {
+    // shows the enlarged cog
+    cog.setScaleX(1.2);
+    cog.setScaleY(1.2);
+  }
+
+  @FXML
+  private void cogMouseExited() {
+    // hides the enlarged cog
+    cog.setScaleX(1);
+    cog.setScaleY(1);
   }
 }

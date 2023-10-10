@@ -48,7 +48,7 @@ public class CafeteriaController {
   @FXML private ImageView prisonerTwo;
   @FXML private ImageView speechBubbleOne;
   @FXML private ImageView speechBubbleTwo;
-
+  @FXML private ImageView cog;
   @FXML private ImageView speechBubbleThree;
   @FXML private ImageView speechBubbleOneSmall;
   @FXML private ImageView speechBubbleTwoSmall;
@@ -576,6 +576,25 @@ public class CafeteriaController {
     int minutes = (GameState.secondsRemaining) / 60;
     int seconds = (GameState.secondsRemaining) % 60;
     timerLabel.setText(String.format("%d:%02d", minutes, seconds));
+  }
+
+  @FXML
+  private void onClickCog(MouseEvent event) {
+    GameState.setSettingsVisable(true);
+  }
+
+  @FXML
+  private void cogMouseEntered() {
+    // shows the enlarged cog
+    cog.setScaleX(1.2);
+    cog.setScaleY(1.2);
+  }
+
+  @FXML
+  private void cogMouseExited() {
+    // hides the enlarged cog
+    cog.setScaleX(1);
+    cog.setScaleY(1);
   }
 
   /** This method animates the items in the scene. */
