@@ -105,7 +105,7 @@ public class StartInterfaceController {
     GptAndTextAreaManager.setPlayerAvatar(currentAvatarImage);
     GameState.playerName = playerName.getText();
     Scene sceneButtonIsIn = twoTick.getScene();
-    SceneManager.switchRoom(false, sceneButtonIsIn);
+    SceneManager.switchToFirstRoom(sceneButtonIsIn);
     new GameTimer();
     roomController.start();
     GptAndTextAreaManager.initialize();

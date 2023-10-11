@@ -30,7 +30,6 @@ public class App extends Application {
   public static double centerX = 1;
   public static double centerY = 1;
   private static Scene scene;
-  private static boolean isFirstRound = true;
 
   public static void main(final String[] args) {
     launch();
@@ -92,6 +91,7 @@ public class App extends Application {
 
     // creating vboxes for the scenes
     VBox settings = settingsLoader.load();
+    SceneManager.settings = settings;
     StackPane startInterfaceStack = new StackPane(startInterfaceLoader.load(), settings);
     StackPane.setAlignment(settings, javafx.geometry.Pos.TOP_LEFT);
     VBox startInterfaceVBox = new VBox(startInterfaceStack);
@@ -130,17 +130,11 @@ public class App extends Application {
 
     // setting up the scene and getting the random code
     Safe.getRandomCode();
-    //VBox root = (VBox) SceneManager.getUiRoot(AppUi.START_INTERFACE);
+    // VBox root = (VBox) SceneManager.getUiRoot(AppUi.START_INTERFACE);
     startInterfaceVBox.setLayoutX(centerX);
     startInterfaceVBox.setLayoutY(centerY);
     // make it fill the screen
-    if (isFirstRound) {
-      isFirstRound = false;
-      scene = new Scene(startInterfaceVBox, 1113 * overallScale, 605 * overallScale);
-    } else {
-
-      scene = new Scene(startInterfaceVBox, 1113 * overallScale * 1.25, 605 * overallScale * 1.25);
-    }
+    scene = new Scene(startInterfaceVBox, 1113 * overallScale, 605 * overallScale);
     scene.setFill(Color.rgb(244, 244, 244, 1));
     stage.setScene(scene);
 
