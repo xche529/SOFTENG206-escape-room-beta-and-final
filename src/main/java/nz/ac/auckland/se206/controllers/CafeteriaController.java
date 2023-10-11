@@ -122,7 +122,7 @@ public class CafeteriaController {
     animateArrows(vendingMachineArrow);
 
     // plays the sound of the safe opening
-    safeOpeningNoise = new SFX("src/main/resources/sounds/SafeOpening.mpw");
+    safeOpeningNoise = new SFX("src/main/resources/sounds/door-opening-and-closing-18398.mp3");
   }
 
   /**
@@ -417,12 +417,16 @@ public class CafeteriaController {
   private void onClickExitPadlock() {
     thoughtBubblePane.setVisible(false);
     padlockPane.setVisible(false);
+    if (paperPane.isVisible()) {
+      GameState.setSafeClosed(true);
+    }
   }
 
   /** This method collects the phone number and makes the navigates back to the room. */
   @FXML
   private void onClickCollectPaper() {
     GameState.hasPaperProperty().set(true);
+    GameState.setSafeClosed(true);
     paperPane.setVisible(false);
   }
 
