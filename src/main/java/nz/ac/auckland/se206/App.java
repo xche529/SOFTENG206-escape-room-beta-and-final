@@ -139,6 +139,7 @@ public class App extends Application {
     SceneManager.cafeteriaController = cafeteriaController;
     SceneManager.officeController = officeController;
     SceneManager.roomController = roomController;
+    GptAndTextAreaManager.sideConversationController = sideConversationController;
     startInterfaceController.setRoomController(roomController);
     startInterfaceController.setSideConversationController(sideConversationController);
 

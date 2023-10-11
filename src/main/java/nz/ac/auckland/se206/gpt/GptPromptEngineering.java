@@ -12,6 +12,8 @@ public class GptPromptEngineering {
    * @param wordToGuess the word to be guessed in the riddle
    * @return the generated prompt engineering string
    */
+  public static String answer = "";
+
   public static String getRiddleWithGivenWord(String wordToGuess) {
     // return "You are the AI of an escape room, tell me a riddle with"
     // + " answer being the physical object "
@@ -38,6 +40,7 @@ public class GptPromptEngineering {
    * @return the generated prompt engineering string
    */
   public static String getGuardSetUp(String wordToGuess) {
+    answer = wordToGuess;
     if (GameState.difficulty == Difficulty.HARD) {
       // get the guards story if the difficulty is hard
       return "(You are a guard with strong personality who is helping a prisoner escape an prison"
@@ -116,17 +119,23 @@ public class GptPromptEngineering {
   }
 
   public static String groupConversationPrompt(String playerName) {
-    return "(Be realistic and try to speak like real prisoners with clear persionality. Reply as the"
-               + " first prisoner.Start the conversation by saying the guard is looking for the a"
-               + " prisoner with a name of"
+    return "(Try to speak like real prisoner with clear persionality. Start the reply by"
+        + " saying the guard is looking for the a prisoner with a name of"
         + playerName
-        + " you are a good friend of him. Only reply the word of one person)";
+        + " you are a good friend of him. Do not reply as another person. Keep all messages"
+        + " concise.)";
   }
 
   public static String getConversationRespond() {
-    return "(Now respond to your previous message as another prisoner. Keep all messages"
-        + " concise. Only reply the word of one person)";
+    return "(Now respond to your previous message as a second prisoner. Keep all messages"
+        + " concise. Do not reply as another person)";
   }
 
-  
+  public static String findGuardConversationRepond() {
+    return "(You the first persioner reached to the guard, he gived you a riddle to solve with the"
+        + " answer of:"
+        + answer
+        + " Reply like you have no idea what the answer is and try to guess a wrong answer. Do not"
+        + " reply as another person. Do not give the answer. Keep all messages concise.)";
+  }
 }

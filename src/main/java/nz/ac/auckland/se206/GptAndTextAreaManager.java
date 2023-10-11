@@ -11,6 +11,7 @@ import javafx.scene.text.Text;
 import nz.ac.auckland.se206.controllers.CafeteriaController;
 import nz.ac.auckland.se206.controllers.OfficeController;
 import nz.ac.auckland.se206.controllers.RoomController;
+import nz.ac.auckland.se206.controllers.SideConversationController;
 import nz.ac.auckland.se206.controllers.TextAreaController;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
@@ -40,6 +41,7 @@ public class GptAndTextAreaManager {
   public static CafeteriaController cafeteriaController;
   public static OfficeController officeController;
   public static TextAreaController textAreaController;
+  public static SideConversationController sideConversationController;
 
   public static Text textAreaTypePromptText;
   public static TextArea textAreaChatDisplayBoard;
