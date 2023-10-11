@@ -26,6 +26,11 @@ public class SideConversationController {
   public void initialize() {
     String message = GptPromptEngineering.groupConversationPrompt(playerName);
     groupChatCompletionRequest.addMessage(new ChatMessage("user", message));
+    try {
+      runGpt(groupChatCompletionRequest, true);
+    } catch (ApiProxyException e) {
+      e.printStackTrace();
+    }
   }
 
   private void runGpt(ChatCompletionRequest chatCompletionRequest, boolean isRecursion)
@@ -36,6 +41,7 @@ public class SideConversationController {
           @Override
           protected Void call() throws Exception {
             try {
+                System.out.println("GPT for conversation running");
               ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
               Choice result = chatCompletionResult.getChoices().iterator().next();
               chatCompletionRequest.addMessage(result.getChatMessage());
