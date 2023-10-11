@@ -1,6 +1,5 @@
 package nz.ac.auckland.se206.controllers;
 
-import java.io.File;
 import java.io.IOException;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
