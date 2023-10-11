@@ -111,7 +111,14 @@ public class GptPromptEngineering {
   public static String findSafeGuardPrompt(){
     return "(the player have found the safe, say some thing to act like you did not witness it so you will not be punished as a guard)";
   }
-  public static String groupConversationPrompt(){
-    return "(You need to produce the conversation between two prisoners. Only reply from the point to view of one prisoner at a time. Start the conversation by saying )";
+
+  public static String groupConversationPrompt(String playerName){
+    return "(You need to produce the conversation between two prisoners. Only reply from the point to view of one prisoner at a time."
+    + "Start the conversation by saying the guard is looking for the a third prisoner, his name is"
+    + playerName +")";
+  }
+
+  public static String getConversationRespond(){
+    return "(Now respond to your previous message as the other prisoner. Keep all messages concise.)";
   }
 }

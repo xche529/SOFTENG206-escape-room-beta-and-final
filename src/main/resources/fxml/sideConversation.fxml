@@ -17,7 +17,7 @@
                   <Image url="@../images/textAreaBackground3.jpg" />
                </image>
             </ImageView>
-            <TextArea fx:id="prisonerOneText" blendMode="DARKEN" layoutX="14.0" layoutY="14.0" prefHeight="264.0" prefWidth="200.0" text="Hello&#10;">
+            <TextArea fx:id="prisonerOneTextArea" blendMode="DARKEN" layoutX="14.0" layoutY="14.0" prefHeight="264.0" prefWidth="200.0" text="Hello&#10;">
                <font>
                   <Font size="26.0" />
                </font>
@@ -32,7 +32,7 @@
                   <Image url="@../images/prisonerOneAvatar.png" />
                </image>
             </ImageView>
-            <TextArea fx:id="prisonerTwoText" blendMode="DARKEN" layoutX="14.0" layoutY="303.0" prefHeight="264.0" prefWidth="200.0" text="Hello&#10;">
+            <TextArea fx:id="prisonerTwoTextArea" blendMode="DARKEN" layoutX="14.0" layoutY="303.0" prefHeight="264.0" prefWidth="200.0" text="Hello&#10;">
                <font>
                   <Font size="26.0" />
                </font>

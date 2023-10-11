@@ -1,8 +1,8 @@
 package nz.ac.auckland.se206.controllers;
 
-import java.util.List;
-
 import javafx.concurrent.Task;
+import javafx.fxml.FXML;
+import javafx.scene.control.TextArea;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
@@ -12,11 +12,19 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 
 public class SideConversationController {
 
-    public  ChatCompletionRequest groupChatCompletionRequest =
+  @FXML private TextArea prisonerOneTextArea;
+  @FXML private TextArea prisonerTwoTextArea;
+
+  public String prisonerOneText = "";
+  public String prisonerTwoText = "";
+
+  public ChatCompletionRequest groupChatCompletionRequest =
       new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
+  private String playerName = "player";
+
 
   private void initialize() {
-    String message = GptPromptEngineering.groupConversationPrompt();
+    String message = GptPromptEngineering.groupConversationPrompt(playerName);
     groupChatCompletionRequest.addMessage(new ChatMessage("user", message));
   }
 
@@ -43,8 +51,27 @@ public class SideConversationController {
     gptThread.start();
   }
 
-  private void displayMessage(){
-    List<ChatMessage> messages = groupChatCompletionRequest.getMessages();
-    
+  private void displayPrisonerOneMessage() {
+    prisonerOneTextArea.setText(prisonerOneText);
+  }
+
+  private void displayPrisonerTwoMessage() {
+    prisonerTwoTextArea.setText(prisonerTwoText);
+  }
+
+  public void setPlayerName(String playerName) {
+    this.playerName = playerName;
+  }
+
+  public void refreshMessages(String prompt){
+    groupChatCompletionRequest.addMessage(new ChatMessage("user", prompt));
+    try {
+      runGpt(groupChatCompletionRequest);
+    } catch (ApiProxyException e) {
+      e.printStackTrace();
+    }
+
+
+
   }
 }
