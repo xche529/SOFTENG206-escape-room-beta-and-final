@@ -2,6 +2,7 @@ package nz.ac.auckland.se206;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
 
 /** Represents the state of the game. */
@@ -33,6 +34,8 @@ public class GameState {
   private static final BooleanProperty isGameClosed = new SimpleBooleanProperty(false);
 
   private static final BooleanProperty isSettingsVisable = new SimpleBooleanProperty(false);
+
+  private static Image playerAvatar;
 
   public static boolean isWon = false;
 
@@ -184,5 +187,13 @@ public class GameState {
 
   public static BooleanProperty isGameClosed() {
   return isGameClosed;
+  }
+
+  public static void setPlayerAvatar(Image image) {
+    playerAvatar = image;
+  }
+
+  public static Image getPlayerAvatar() {
+    return playerAvatar;
   }
 }

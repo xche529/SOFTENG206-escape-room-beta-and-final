@@ -804,7 +804,9 @@ public class OfficeController {
         } else if (GameState.difficulty == Difficulty.HARD) {
           difficulty = 3;
         }
-        PlayHistory playHistory = new PlayHistory(timeTook, difficulty, GameState.playerName);
+        PlayHistory playHistory =
+            new PlayHistory(
+                timeTook, difficulty, GameState.playerName, GameState.getPlayerAvatar());
         try (ObjectInputStream ois =
             new ObjectInputStream(new FileInputStream("player_history.dat"))) {
           PlayHistory oldPlayHistory = (PlayHistory) ois.readObject();
@@ -911,7 +913,7 @@ public class OfficeController {
 
     // Getting random item to be used to hide the cypher
     RandomizationGenerator.hideChypher(items);
-    
+
     // resets the neccesary booleans
     GameState.cypherFound = false;
     GameState.resetOffice = false;

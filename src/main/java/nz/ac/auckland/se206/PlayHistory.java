@@ -4,6 +4,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import javafx.scene.image.Image;
 
 public class PlayHistory implements Serializable {
   private double score;
@@ -12,9 +13,10 @@ public class PlayHistory implements Serializable {
   private String name;
   private PlayHistory childPlayHistory = null;
   private PlayHistory parentPlayHistory = null;
+  private Image playerAvatar;
 
   // Compare this snippet from src/main/java/nz/ac/auckland/se206/PlayHistory.java:
-  public PlayHistory(int time, int difficulty, String name) {
+  public PlayHistory(int time, int difficulty, String name, Image playerAvatar) {
     this.name = name;
     this.score = time / difficulty;
     this.timeTook = time;
@@ -137,5 +139,13 @@ public class PlayHistory implements Serializable {
 
   public void setChildPlayHistory(PlayHistory childPlayHistory) {
     this.childPlayHistory = childPlayHistory;
+  }
+
+  public Image getPlayerAvatar() {
+    return playerAvatar;
+  }
+
+  public void setPlayerAvatar(Image playerAvatar) {
+    this.playerAvatar = playerAvatar;
   }
 }
