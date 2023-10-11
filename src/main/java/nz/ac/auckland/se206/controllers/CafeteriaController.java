@@ -1,12 +1,10 @@
 package nz.ac.auckland.se206.controllers;
 
-import java.io.File;
 import java.io.IOException;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,16 +12,14 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
-import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GptAndTextAreaManager;
 import nz.ac.auckland.se206.GptAndTextAreaManager.Characters;
 import nz.ac.auckland.se206.MovementControl;
+import nz.ac.auckland.se206.SFX;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.reseters.RandomizationGenerator;
@@ -88,7 +84,7 @@ public class CafeteriaController {
   @FXML private Rectangle safeRectangle;
 
   private ImageView[] animationItems;
-
+  private SFX safeOpeningNoise;
   private Timeline timeline;
 
   /**
@@ -124,6 +120,9 @@ public class CafeteriaController {
     animateArrows(paintingWithSafeArrow);
     animateArrows(paintingWithoutSafeArrow);
     animateArrows(vendingMachineArrow);
+
+    // plays the sound of the safe opening
+    safeOpeningNoise = new SFX("src/main/resources/sounds/SafeOpening.mpw");
   }
 
   /**
@@ -359,21 +358,9 @@ public class CafeteriaController {
       paperPane.setVisible(true);
       GameState.safeUnlocked = true;
 
-      // runs the safe opening sound effect
-      Task<Void> task =
-      new Task<Void>() {
-        @Override
-        protected Void call() throws Exception {
-          Media song = new Media(App.class.getResource("/sounds/SafeOpening.mp3").toString());
-          MediaPlayer mediaPlayer = new MediaPlayer(song);
-          mediaPlayer.setVolume(GameState.sfxVolume);
-          mediaPlayer.play();
-          return null;
-        }
-      };
+      // plays the sound of the safe opening
+      safeOpeningNoise.playSFX();
 
-  Thread thread = new Thread(task);
-  thread.start();
     } else {
       thoughtBubblePane.setVisible(true);
       thoughtBubbleText.setText("Hmm, that code didn't work");
