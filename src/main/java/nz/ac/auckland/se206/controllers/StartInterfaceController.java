@@ -14,6 +14,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GameTimer;
@@ -49,6 +50,7 @@ public class StartInterfaceController {
   @FXML private ImageView startGameText;
   @FXML private ImageView exitText;
   @FXML private ImageView playHistoryText;
+  @FXML private ImageView cog;
 
   private RoomController roomController;
   private int currentAvatar = 1;
@@ -103,7 +105,7 @@ public class StartInterfaceController {
     GptAndTextAreaManager.setPlayerAvatar(currentAvatarImage);
     GameState.playerName = playerName.getText();
     Scene sceneButtonIsIn = twoTick.getScene();
-    SceneManager.switchRoom(false, sceneButtonIsIn);
+    SceneManager.switchToFirstRoom(sceneButtonIsIn);
     new GameTimer();
     roomController.start();
     GptAndTextAreaManager.initialize();
@@ -151,6 +153,25 @@ public class StartInterfaceController {
     alert.setHeaderText(headerText);
     alert.setContentText(message);
     alert.showAndWait();
+  }
+
+    @FXML
+  private void onClickCog(MouseEvent event) {
+    GameState.setSettingsVisable(true);
+  }
+
+  @FXML
+  private void cogMouseEntered() {
+    // shows the enlarged cog
+    cog.setScaleX(1.2);
+    cog.setScaleY(1.2);
+  }
+
+  @FXML
+  private void cogMouseExited() {
+    // hides the enlarged cog
+    cog.setScaleX(1);
+    cog.setScaleY(1);
   }
 
   @FXML
@@ -455,4 +476,5 @@ public class StartInterfaceController {
     playHistoryText.scaleXProperty().set(1);
     playHistoryText.scaleYProperty().set(1);
   }
+
 }

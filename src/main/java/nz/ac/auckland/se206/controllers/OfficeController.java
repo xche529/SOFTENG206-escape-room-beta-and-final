@@ -8,7 +8,6 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -19,7 +18,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
-import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GameState.Difficulty;
 import nz.ac.auckland.se206.GptAndTextAreaManager;
@@ -48,7 +46,7 @@ public class OfficeController {
   @FXML private ImageView speechBubbleTwoSmall;
   @FXML private ImageView thinkingOne;
   @FXML private ImageView thinkingTwo;
-
+  @FXML private ImageView cog;
   @FXML private ImageView binArrow;
   @FXML private ImageView blackBoardArrow;
   @FXML private ImageView drawArrow;
@@ -818,10 +816,7 @@ public class OfficeController {
         GameEnd.triggerResters();
 
         // switches to the end screen
-        Parent parent = SceneManager.getUiRoot(SceneManager.AppUi.END_WON);
-        parent.setLayoutX(App.centerX);
-        parent.setLayoutY(App.centerY);
-        scene.setRoot(parent);
+        SceneManager.switchToEndWon(scene);
       } else {
         // do nothing if the phone number is wrong
         System.out.println("Wrong number");
@@ -854,6 +849,25 @@ public class OfficeController {
     crossBig.setVisible(false);
   }
 
+  @FXML
+  private void onClickCog(MouseEvent event) {
+    GameState.setSettingsVisable(true);
+  }
+
+  @FXML
+  private void cogMouseEntered() {
+    // shows the enlarged cog
+    cog.setScaleX(1.2);
+    cog.setScaleY(1.2);
+  }
+
+  @FXML
+  private void cogMouseExited() {
+    // hides the enlarged cog
+    cog.setScaleX(1);
+    cog.setScaleY(1);
+  }
+
   private void resetchecker() throws IOException {
     timeline =
         new Timeline(
@@ -865,15 +879,12 @@ public class OfficeController {
                     updateTimerLabel();
                   }
                   if (GameState.secondsRemaining == 0) {
-                    if (SceneManager.curretUi == SceneManager.AppUi.OFFICE) {
+                    if (SceneManager.currentUi == SceneManager.AppUi.OFFICE) {
                       GameEnd.triggerResters();
                       try {
                         // changes to the end screen
                         Scene scene = phone.getScene();
-                        Parent parent = SceneManager.getUiRoot(SceneManager.AppUi.END_LOST);
-                        parent.setLayoutX(App.centerX);
-                        parent.setLayoutY(App.centerY);
-                        scene.setRoot(parent);
+                        SceneManager.switchToEndLost(scene);
                       } catch (NullPointerException e) {
                       }
                     }

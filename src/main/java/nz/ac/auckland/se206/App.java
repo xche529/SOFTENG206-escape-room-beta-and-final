@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Scale;
@@ -18,7 +19,7 @@ import nz.ac.auckland.se206.controllers.OfficeController;
 import nz.ac.auckland.se206.controllers.RoomController;
 import nz.ac.auckland.se206.controllers.StartInterfaceController;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
-   
+
 /**
  * This is the entry point of the JavaFX application, while you can change this class, it should
  * remain as the class that runs the JavaFX application.
@@ -86,7 +87,14 @@ public class App extends Application {
     FXMLLoader cafeteriaLoader = loadFxml("cafeteria");
     FXMLLoader startInterfaceLoader = loadFxml("StartInterface");
     FXMLLoader textAreaLoader = loadFxml("textArea");
+    FXMLLoader settingsLoader = loadFxml("settings");
+
     // creating vboxes for the scenes
+    VBox settings = settingsLoader.load();
+    SceneManager.settings = settings;
+    StackPane startInterfaceStack = new StackPane(startInterfaceLoader.load(), settings);
+    StackPane.setAlignment(settings, javafx.geometry.Pos.TOP_LEFT);
+    VBox startInterfaceVBox = new VBox(startInterfaceStack);
     VBox cafeteria = cafeteriaLoader.load();
     VBox office = officeSceneLoader.load();
     VBox room = roomLoader.load();
@@ -96,12 +104,13 @@ public class App extends Application {
     VBox roomVbox = new VBox(room, textArea);
 
     // adding all the scenes to the scene manager
+    SceneManager.addUi(AppUi.ROOM, roomVbox);
     SceneManager.addUi(AppUi.END_WON, endScreenWonLoader.load());
     SceneManager.addUi(AppUi.END_LOST, endScreenLostLoader.load());
-    SceneManager.addUi(AppUi.START_INTERFACE, startInterfaceLoader.load());
+    SceneManager.addUi(AppUi.START_INTERFACE, startInterfaceVBox);
     SceneManager.addUi(AppUi.OFFICE, officeVbox);
     SceneManager.addUi(AppUi.CAFETERIA, cafeteriaVbox);
-    SceneManager.addUi(AppUi.ROOM, roomVbox);
+    SceneManager.addUi(AppUi.SETTINGS, settings);
     SceneManager.addUi(AppUi.TEXT_AREA, textArea);
     SceneManager.getUiRoot(AppUi.START_INTERFACE).getTransforms().add(scale);
     SceneManager.getUiRoot(AppUi.END_WON).getTransforms().add(scale);
@@ -121,15 +130,15 @@ public class App extends Application {
 
     // setting up the scene and getting the random code
     Safe.getRandomCode();
-    VBox root = (VBox) SceneManager.getUiRoot(AppUi.START_INTERFACE);
-    root.setLayoutX(centerX);
-    root.setLayoutY(centerY);
+    // VBox root = (VBox) SceneManager.getUiRoot(AppUi.START_INTERFACE);
+    startInterfaceVBox.setLayoutX(centerX);
+    startInterfaceVBox.setLayoutY(centerY);
     // make it fill the screen
-    scene = new Scene(root, 1113 * overallScale, 600 * overallScale);
+    scene = new Scene(startInterfaceVBox, 1113 * overallScale, 605 * overallScale);
     scene.setFill(Color.rgb(244, 244, 244, 1));
     stage.setScene(scene);
 
-        Platform.runLater(
+    Platform.runLater(
         () -> {
           stage.setOnCloseRequest(
               event -> {
@@ -139,11 +148,11 @@ public class App extends Application {
                 GameState.setGameClosed(true);
               });
         });
-        
+
     scene.addEventFilter(
         javafx.scene.input.KeyEvent.KEY_PRESSED,
         event -> {
-          if (SceneManager.curretUi == AppUi.START_INTERFACE) {
+          if (SceneManager.currentUi == AppUi.START_INTERFACE) {
             return;
           }
           VBox up = null;
@@ -151,7 +160,7 @@ public class App extends Application {
             SceneManager.switchRoom(true, scene);
           } else if (event.getCode() == KeyCode.RIGHT) {
             SceneManager.switchRoom(false, scene);
-          } else if (event.getCode() == KeyCode.ENTER){
+          } else if (event.getCode() == KeyCode.ENTER) {
             try {
               GptAndTextAreaManager.onSubmitMessage();
               GptAndTextAreaManager.removeInputTextAreaFocus();

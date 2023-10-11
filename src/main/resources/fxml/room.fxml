@@ -161,6 +161,11 @@
                         <Image url="@../images/thinking.gif" />
                      </image>
                   </ImageView>
+                  <ImageView fx:id="cog" fitHeight="109.0" fitWidth="93.0" onMouseClicked="#onClickCog" onMouseEntered="#cogMouseEntered" onMouseExited="#cogMouseExited" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/cog.png" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
             <Pane fx:id="blurredPane" opacity="0.74" prefHeight="615.0" prefWidth="1132.0" style="-fx-background-color: white;" visible="false" />

@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <VBox xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.EndWonController">
    <children>
       <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="605.0" prefWidth="1113.0">
@@ -33,6 +32,11 @@
                   <Font size="32.0" />
                </font>
             </Button>
+            <ImageView fx:id="cog" fitHeight="109.0" fitWidth="93.0" onMouseClicked="#onClickCog" onMouseEntered="#cogMouseEntered" onMouseExited="#cogMouseExited" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/cog.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
    </children>

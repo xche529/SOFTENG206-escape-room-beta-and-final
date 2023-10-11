@@ -2,10 +2,7 @@ package nz.ac.auckland.se206;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.application.Platform;
-import javafx.stage.Stage;
 import javafx.util.Duration;
-import nz.ac.auckland.se206.reseters.GameEnd;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 
 public class GameTimer {
@@ -21,6 +18,7 @@ public class GameTimer {
                 event -> {
                   if (GameState.stopTimer) {
                     timeline.stop();
+                    GameState.stopTimer = false;
                   }
                   GameState.secondsRemaining--;
 

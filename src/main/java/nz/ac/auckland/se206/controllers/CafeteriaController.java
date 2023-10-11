@@ -1,18 +1,21 @@
 package nz.ac.auckland.se206.controllers;
 
+import java.io.File;
 import java.io.IOException;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
@@ -48,7 +51,7 @@ public class CafeteriaController {
   @FXML private ImageView prisonerTwo;
   @FXML private ImageView speechBubbleOne;
   @FXML private ImageView speechBubbleTwo;
-
+  @FXML private ImageView cog;
   @FXML private ImageView speechBubbleThree;
   @FXML private ImageView speechBubbleOneSmall;
   @FXML private ImageView speechBubbleTwoSmall;
@@ -355,6 +358,22 @@ public class CafeteriaController {
       padlockPane.setVisible(false);
       paperPane.setVisible(true);
       GameState.safeUnlocked = true;
+
+      // runs the safe opening sound effect
+      Task<Void> task =
+      new Task<Void>() {
+        @Override
+        protected Void call() throws Exception {
+          Media song = new Media(App.class.getResource("/sounds/SafeOpening.mp3").toString());
+          MediaPlayer mediaPlayer = new MediaPlayer(song);
+          mediaPlayer.setVolume(GameState.sfxVolume);
+          mediaPlayer.play();
+          return null;
+        }
+      };
+
+  Thread thread = new Thread(task);
+  thread.start();
     } else {
       thoughtBubblePane.setVisible(true);
       thoughtBubbleText.setText("Hmm, that code didn't work");
@@ -549,15 +568,12 @@ public class CafeteriaController {
                     updateTimerLabel();
                   }
                   if (GameState.secondsRemaining == 0) {
-                    if (SceneManager.curretUi == SceneManager.AppUi.CAFETERIA) {
+                    if (SceneManager.currentUi == SceneManager.AppUi.CAFETERIA) {
                       GameState.resetCafeteria = true;
                       try {
                         // switches to the lost screen
-                        Scene scene = vendingMachine.getScene();
-                        Parent parent = SceneManager.getUiRoot(SceneManager.AppUi.END_LOST);
-                        parent.setLayoutX(App.centerX);
-                        parent.setLayoutY(App.centerY);
-                        scene.setRoot(parent);
+                        Scene scene = cross.getScene();
+                        SceneManager.switchToEndLost(scene);
                       } catch (NullPointerException e) {
                       }
                     }
@@ -576,6 +592,25 @@ public class CafeteriaController {
     int minutes = (GameState.secondsRemaining) / 60;
     int seconds = (GameState.secondsRemaining) % 60;
     timerLabel.setText(String.format("%d:%02d", minutes, seconds));
+  }
+
+  @FXML
+  private void onClickCog(MouseEvent event) {
+    GameState.setSettingsVisable(true);
+  }
+
+  @FXML
+  private void cogMouseEntered() {
+    // shows the enlarged cog
+    cog.setScaleX(1.2);
+    cog.setScaleY(1.2);
+  }
+
+  @FXML
+  private void cogMouseExited() {
+    // hides the enlarged cog
+    cog.setScaleX(1);
+    cog.setScaleY(1);
   }
 
   /** This method animates the items in the scene. */
