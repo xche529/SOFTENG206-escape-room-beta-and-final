@@ -45,6 +45,7 @@ private void pauseSafeNoise(MediaPlayer mediaPlayer) throws InterruptedException
                 (observable, oldValue, newValue) -> {
                   if (newValue) {
                     mediaPlayer.seek(length);
+                    mediaPlayer.play();
                     GameState.isSafeClosed().set(false);
                   }
                 });
