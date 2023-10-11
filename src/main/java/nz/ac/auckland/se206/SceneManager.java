@@ -28,7 +28,6 @@ public class SceneManager {
   public static OfficeController officeController;
   public static CafeteriaController cafeteriaController;
   private static boolean isFirstRound = true;
-  private static double settingScaler = 1;
 
   public static VBox settings;
 
@@ -148,7 +147,6 @@ public class SceneManager {
     } else {
       Scale settingsScale = new Scale(1.39, 1.39);
       settings.getTransforms().add(settingsScale);
-      settingScaler = settingScaler * 1.39;
     }
     roomController.resetAnimation();
     roomController.walkInAnimation();

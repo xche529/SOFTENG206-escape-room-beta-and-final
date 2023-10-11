@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
@@ -19,9 +20,11 @@ public class SettingsController {
   @FXML private Label musicValue;
   @FXML private Label sfxValue;
   @FXML private ImageView cross;
+  @FXML private ImageView helpCross;
   @FXML private ImageView abandonGame;
   @FXML private ImageView help;
   @FXML private VBox settingsBox;
+  @FXML private Pane helpPane;
 
   public void initialize() {
 
@@ -124,6 +127,7 @@ public class SettingsController {
   @FXML
   private void onClickHelp(MouseEvent Event) {
     // opens the help window
+    helpPane.setVisible(true);
 
   }
 
@@ -139,5 +143,25 @@ public class SettingsController {
     // hides the enlarged text
     help.setScaleX(1);
     help.setScaleY(1);
+  }
+
+  @FXML
+  private void onClickHelpCross(MouseEvent Event) {
+    // closes the help window
+    helpPane.setVisible(false);
+  }
+
+  @FXML
+  private void helpCrossMouseEntered() {
+    // shows the enlarged text
+    helpCross.setScaleX(1.2);
+    helpCross.setScaleY(1.2);
+  }
+
+  @FXML
+  private void helpCrossMouseExited() {
+    // hides the enlarged text
+    helpCross.setScaleX(1);
+    helpCross.setScaleY(1);
   }
 }
