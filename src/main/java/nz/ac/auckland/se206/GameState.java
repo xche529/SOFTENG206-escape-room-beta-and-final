@@ -78,6 +78,8 @@ public class GameState {
 
   public static float audioVolume = 1.0f;
 
+  public static double musicVolume = 0.5f;
+
   public static boolean isSettingsVisable() {
     return isSettingsVisable.get();
   }
