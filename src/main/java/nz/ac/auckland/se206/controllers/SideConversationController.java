@@ -1,5 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
+import java.util.List;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
@@ -22,13 +23,13 @@ public class SideConversationController {
       new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
   private String playerName = "player";
 
-
-  private void initialize() {
+  public void initialize() {
     String message = GptPromptEngineering.groupConversationPrompt(playerName);
     groupChatCompletionRequest.addMessage(new ChatMessage("user", message));
   }
 
-  private void runGpt(ChatCompletionRequest chatCompletionRequest) throws ApiProxyException {
+  private void runGpt(ChatCompletionRequest chatCompletionRequest, boolean isRecursion)
+      throws ApiProxyException {
     // run the GPT model in a background thread
     Task<Void> backgroundTask =
         new Task<Void>() {
@@ -38,6 +39,22 @@ public class SideConversationController {
               ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
               Choice result = chatCompletionResult.getChoices().iterator().next();
               chatCompletionRequest.addMessage(result.getChatMessage());
+              List<ChatMessage> messages = chatCompletionRequest.getMessages();
+              int size = messages.size();
+
+              if (isRecursion) {
+                ChatMessage message = messages.get(size - 1);
+                prisonerOneText = message.getContent();
+                displayPrisonerOneMessage();
+                chatCompletionRequest.addMessage(
+                    new ChatMessage("user", GptPromptEngineering.getConversationRespond()));
+                runGpt(chatCompletionRequest, false);
+              }else{
+                ChatMessage message = messages.get(size - 1);
+                prisonerTwoText = message.getContent();
+                displayPrisonerTwoMessage();
+              }
+
               return null;
             } catch (ApiProxyException e) {
               ChatMessage error = new ChatMessage("assistant", "Error: \n" + "GPT not working");
@@ -63,15 +80,12 @@ public class SideConversationController {
     this.playerName = playerName;
   }
 
-  public void refreshMessages(String prompt){
+  public void refreshMessages(String prompt) {
     groupChatCompletionRequest.addMessage(new ChatMessage("user", prompt));
     try {
-      runGpt(groupChatCompletionRequest);
+      runGpt(groupChatCompletionRequest, true);
     } catch (ApiProxyException e) {
       e.printStackTrace();
     }
-
-
-
   }
 }
