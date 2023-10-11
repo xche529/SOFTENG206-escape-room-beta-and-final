@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -88,6 +89,7 @@ public class App extends Application {
     FXMLLoader startInterfaceLoader = loadFxml("StartInterface");
     FXMLLoader textAreaLoader = loadFxml("textArea");
     FXMLLoader settingsLoader = loadFxml("settings");
+    FXMLLoader sideConversationLoader = loadFxml("sideConversation");
 
     // creating vboxes for the scenes
     VBox settings = settingsLoader.load();
@@ -99,9 +101,16 @@ public class App extends Application {
     VBox office = officeSceneLoader.load();
     VBox room = roomLoader.load();
     VBox textArea = textAreaLoader.load();
-    VBox cafeteriaVbox = new VBox(cafeteria, textArea);
-    VBox officeVbox = new VBox(office, textArea);
-    VBox roomVbox = new VBox(room, textArea);
+    VBox sideConversation = sideConversationLoader.load();
+
+    HBox cafeteriaHbox = new HBox(cafeteria, sideConversation);
+    VBox cafeteriaVbox = new VBox(cafeteriaHbox, textArea);
+
+    HBox officeHbox = new HBox(office, sideConversation);
+    VBox officeVbox = new VBox(officeHbox, textArea);
+
+    HBox roomHbox = new HBox(room, sideConversation);
+    VBox roomVbox = new VBox(roomHbox, textArea);
 
     // adding all the scenes to the scene manager
     SceneManager.addUi(AppUi.ROOM, roomVbox);
