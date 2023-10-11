@@ -231,7 +231,17 @@ public class GptAndTextAreaManager {
       // sound effect configuration
       Media media = new Media(new File(soundEffect).toURI().toString());
       MediaPlayer mediaPlayer = new MediaPlayer(media);
-      mediaPlayer.play();
+      mediaPlayer.setVolume(GameState.sfxVolume);
+      Task<Void> task =
+          new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+              mediaPlayer.play();
+              return null;
+            }
+          };      
+      Thread thread = new Thread(task);
+      thread.start();
     }
   }
 
