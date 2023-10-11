@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="605.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.SideConversationController">
+   <children>
+      <Pane prefHeight="622.0" prefWidth="300.0">
+         <children>
+            <ImageView fitHeight="606.0" fitWidth="301.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../images/textAreaBackground3.jpg" />
+               </image>
+            </ImageView>
+            <TextArea fx:id="prisonerOneTextArea" blendMode="DARKEN" editable="false" layoutX="14.0" layoutY="14.0" prefHeight="264.0" prefWidth="200.0" text="How are you&#10;" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </TextArea>
+            <ImageView fitHeight="73.0" fitWidth="73.0" layoutX="220.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/prisonerTwoAvatar.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="73.0" fitWidth="73.0" layoutX="219.0" layoutY="303.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/prisonerOneAvatar.png" />
+               </image>
+            </ImageView>
+            <TextArea fx:id="prisonerTwoTextArea" blendMode="DARKEN" editable="false" layoutX="14.0" layoutY="303.0" prefHeight="264.0" prefWidth="200.0" text="I'm good&#10;" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </TextArea>
+         </children>
+      </Pane>
+   </children>
+</VBox>

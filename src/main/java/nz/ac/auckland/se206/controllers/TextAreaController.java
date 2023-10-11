@@ -65,11 +65,9 @@ public class TextAreaController {
     String guardAvatarImage = "src/main/resources/images/guardAvatar.png";
     String prisonerOneAvatarImage = "src/main/resources/images/prisonerTwoAvatar.png";
     String prisonerTwoAvatarImage = "src/main/resources/images/prisonerOneAvatar.png";
-    guardAvatar = new Image(new File(guardAvatarImage).toURI().toString()); 
-    prisonerOneAvatar =
-        new Image(new File(prisonerOneAvatarImage).toURI().toString()); 
-    prisonerTwoAvatar = 
-        new Image(new File(prisonerTwoAvatarImage).toURI().toString()); 
+    guardAvatar = new Image(new File(guardAvatarImage).toURI().toString());
+    prisonerOneAvatar = new Image(new File(prisonerOneAvatarImage).toURI().toString());
+    prisonerTwoAvatar = new Image(new File(prisonerTwoAvatarImage).toURI().toString());
 
     // adding listener to update objectives
     GameState.isRiddleResolvedProperty()
@@ -125,6 +123,8 @@ public class TextAreaController {
             (observable, oldValue, newValue) -> {
               if (newValue) {
                 guardTalkedObjective.setSelected(true);
+                GptAndTextAreaManager.sideConversationController.refreshMessages(
+                    GptPromptEngineering.findGuardConversationRepond());
               }
             });
 
@@ -164,6 +164,7 @@ public class TextAreaController {
   public void setPlayerAvatar(Image avatar) {
     playerAvatar = avatar;
   }
+
   private void resetchecker() {
     timeline =
         new Timeline(

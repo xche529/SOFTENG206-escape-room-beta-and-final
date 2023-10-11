@@ -3,6 +3,7 @@ package nz.ac.auckland.se206;
 import java.util.HashMap;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.transform.Scale;
@@ -20,7 +21,8 @@ public class SceneManager {
     END_LOST,
     START_INTERFACE,
     TEXT_AREA,
-    SETTINGS
+    SETTINGS,
+    SIDE_CONVERSATION
   }
 
   public static AppUi currentUi = AppUi.START_INTERFACE;
@@ -93,7 +95,8 @@ public class SceneManager {
     }
     StackPane newRoomStack = new StackPane(roomToSwitch, settings);
     StackPane.setAlignment(settings, javafx.geometry.Pos.TOP_LEFT);
-    VBox vbox = new VBox(newRoomStack, getUiRoot(AppUi.TEXT_AREA));
+    HBox hbox = new HBox(newRoomStack, getUiRoot(AppUi.SIDE_CONVERSATION));
+    VBox vbox = new VBox(hbox, getUiRoot(AppUi.TEXT_AREA));
 
     // setting up the vbox
 

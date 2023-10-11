@@ -12,6 +12,8 @@ public class GptPromptEngineering {
    * @param wordToGuess the word to be guessed in the riddle
    * @return the generated prompt engineering string
    */
+  public static String answer = "";
+
   public static String getRiddleWithGivenWord(String wordToGuess) {
     // return "You are the AI of an escape room, tell me a riddle with"
     // + " answer being the physical object "
@@ -38,10 +40,11 @@ public class GptPromptEngineering {
    * @return the generated prompt engineering string
    */
   public static String getGuardSetUp(String wordToGuess) {
+    answer = wordToGuess;
     if (GameState.difficulty == Difficulty.HARD) {
       // get the guards story if the difficulty is hard
-      return "(You are a guard with strong personality who is helping a prisoner escape an prison You should give the"
-                 + " prisoner a riddle with the answer of:"
+      return "(You are a guard with strong personality who is helping a prisoner escape an prison"
+          + " You should give the prisoner a riddle with the answer of:"
           // append riddle answer
           + wordToGuess
           + " in your first message. The riddle can go up to 3 or 4 lines. and easy to answer You"
@@ -53,26 +56,27 @@ public class GptPromptEngineering {
 
     } else if (GameState.difficulty == Difficulty.MEDIUM) {
       // get the guards story if the difficulty is medium
-      return "(You are a guard with strong personality who is helping a prisoner escape an prison You should give the"
-                 + " prisoner a riddle with the answer of:"
+      return "(You are a guard with strong personality who is helping a prisoner escape an prison"
+          + " You should give the prisoner a riddle with the answer of:"
           // append riddle answer
           + wordToGuess
           + " in your first message. The riddle can go up to 3 or 4 lines. and easy to answer You"
-          + " can only give the prisoner 5 hints, do not give hint easily. after 5 no more hints, when you give hint,put"
-          + " (HINT) at the end of your response. Do not reveal the answer even if the player asks"
-          + " for it.Even if player gives up, do not give the answer. Keep your messages as concise"
-          + " as possible. Only reply from the guard point of view. When the Riddle is guessed correctly return only 'Correct')";
+          + " can only give the prisoner 5 hints, do not give hint easily. after 5 no more hints,"
+          + " when you give hint,put (HINT) at the end of your response. Do not reveal the answer"
+          + " even if the player asks for it.Even if player gives up, do not give the answer. Keep"
+          + " your messages as concise as possible. Only reply from the guard point of view. When"
+          + " the Riddle is guessed correctly return only 'Correct')";
     }
     // get the guards story if the difficulty is easy
-    return "(You are a guard with strong personality who is helping a prisoner escape an prison You should give the"
-               + " prisoner a riddle with the answer of:"
+    return "(You are a guard with strong personality who is helping a prisoner escape an prison You"
+        + " should give the prisoner a riddle with the answer of:"
         // append riddle answer
         + wordToGuess
         + " in your first message. The riddle can go up to 3 or 4 lines. and easy to answer You can"
         + " only give the prisoner as much hint as you want but You cannot, no matter what, reveal"
         + " the answer even if the player asks for it.Even if player gives up, do not give the"
-        + " answer. Keep your messages as concise as possible. Only reply from the guard point of view. When the Riddle is guessed"
-        + " correctly return only 'Correct')";
+        + " answer. Keep your messages as concise as possible. Only reply from the guard point of"
+        + " view. When the Riddle is guessed correctly return only 'Correct')";
   }
 
   public static String getPrisonerOneSetUp() {
@@ -105,10 +109,33 @@ public class GptPromptEngineering {
   }
 
   public static String solvedRaddleGuardPrompt() {
-    return "(the player have solved the riddle, tell the player that the next step is to find the object and look closely for message on it)";
+    return "(the player have solved the riddle, tell the player that the next step is to find the"
+        + " object and look closely for message on it)";
   }
 
-  public static String findSafeGuardPrompt(){
-    return "(the player have found the safe, say some thing to act like you did not witness it so you will not be punished as a guard)";
+  public static String findSafeGuardPrompt() {
+    return "(the player have found the safe, say some thing to act like you did not witness it so"
+        + " you will not be punished as a guard)";
+  }
+
+  public static String groupConversationPrompt(String playerName) {
+    return "(Try to speak like real prisoner with clear persionality. Start the reply by"
+        + " saying the guard is looking for the a prisoner with a name of"
+        + playerName
+        + " you are a good friend of him. Do not reply as another person. Keep all messages"
+        + " concise.)";
+  }
+
+  public static String getConversationRespond() {
+    return "(Now respond to your previous message as a second prisoner. Keep all messages"
+        + " concise. Do not reply as another person)";
+  }
+
+  public static String findGuardConversationRepond() {
+    return "(You the first persioner reached to the guard, he gived you a riddle to solve with the"
+        + " answer of:"
+        + answer
+        + " Reply like you have no idea what the answer is and try to guess a wrong answer. Do not"
+        + " reply as another person. Do not give the answer. Keep all messages concise.)";
   }
 }
