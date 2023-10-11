@@ -69,15 +69,15 @@ public class App extends Application {
     double height = screen.getBounds().getHeight();
     double ratio = width / height;
     // make it so that it fits the screen
-    if (ratio < 1113.0 / 800.0) {
-      overallScale = (width / 1113.0);
+    if (ratio < 1413.0 / 800.0) {
+      overallScale = (width / 1413.0);
       System.out.println("The game start with scale:" + overallScale);
     } else {
       overallScale = (height / 800.0);
       System.out.println("The game start with scale:" + overallScale);
     }
     overallScale = overallScale * 0.8;
-    centerX = (width - 1113 * overallScale) / 2;
+    centerX = (width - 1413 * overallScale) / 2;
     centerY = (height - 800 * overallScale) / 5;
     scale = new Scale(overallScale, overallScale);
     // creating loaders for all fxml files
@@ -143,7 +143,7 @@ public class App extends Application {
     startInterfaceVBox.setLayoutX(centerX);
     startInterfaceVBox.setLayoutY(centerY);
     // make it fill the screen
-    scene = new Scene(startInterfaceVBox, 1113 * overallScale, 605 * overallScale);
+    scene = new Scene(startInterfaceVBox, 1413 * overallScale, 605 * overallScale);
     scene.setFill(Color.rgb(244, 244, 244, 1));
     stage.setScene(scene);
 
