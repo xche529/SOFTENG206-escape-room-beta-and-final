@@ -35,6 +35,8 @@ public class GameState {
   private static final BooleanProperty isSettingsVisable = new SimpleBooleanProperty(false);
 
   private static int playerAvatar;
+  
+  private static final BooleanProperty isSafeClosed = new SimpleBooleanProperty(false);
 
   public static boolean isWon = false;
 
@@ -90,6 +92,14 @@ public class GameState {
 
   public static void setSettingsVisable(boolean value) {
     isSettingsVisable.set(value);
+  }
+
+  public static BooleanProperty isSafeClosed() {
+    return isSafeClosed;
+  }
+
+  public static void setSafeClosed(boolean value) {
+    isSafeClosed.set(value);
   }
 
   public static BooleanProperty isSettingsVisableProperty() {

@@ -1,12 +1,8 @@
 package nz.ac.auckland.se206;
 
-import java.io.File;
-
 import javafx.concurrent.Task;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
 import nz.ac.auckland.se206.controllers.CafeteriaController;
 import nz.ac.auckland.se206.controllers.OfficeController;
@@ -222,28 +218,34 @@ public class GptAndTextAreaManager {
     displayTarget(currentCharacter);
     if (ifSpeak) {
       // play sound effect, hmm sound
-      String soundEffect;
+      //String soundEffect;
       if (currentCharacter == Characters.GUARD) {
-        soundEffect = "src/main/resources/sounds/HmmSoundEffect1.mp3";
+        //soundEffect = "src/main/resources/sounds/HmmSoundEffect1.mp3";
+        SFX guardNoise = new SFX("src/main/resources/sounds/HmmSoundEffect1.mp3");
+        guardNoise.playSFX();
       } else if (currentCharacter == Characters.PRISONER_ONE) {
-        soundEffect = "src/main/resources/sounds/HmmSoundEffect2.mp3";
+        //soundEffect = "src/main/resources/sounds/HmmSoundEffect2.mp3";
+        SFX prisonerOneNoise = new SFX("src/main/resources/sounds/HmmSoundEffect2.mp3");
+        prisonerOneNoise.playSFX();
       } else {
-        soundEffect = "src/main/resources/sounds/HmmSoundEffect3.mp3";
+        //soundEffect = "src/main/resources/sounds/HmmSoundEffect3.mp3";
+        SFX prisonerTwoNoise = new SFX("src/main/resources/sounds/HmmSoundEffect3.mp3");
+        prisonerTwoNoise.playSFX();
       }
       // sound effect configuration
-      Media media = new Media(new File(soundEffect).toURI().toString());
-      MediaPlayer mediaPlayer = new MediaPlayer(media);
-      mediaPlayer.setVolume(GameState.sfxVolume);
-      Task<Void> task =
-          new Task<Void>() {
-            @Override
-            protected Void call() throws Exception {
-              mediaPlayer.play();
-              return null;
-            }
-          };      
-      Thread thread = new Thread(task);
-      thread.start();
+      // Media media = new Media(new File(soundEffect).toURI().toString());
+      // MediaPlayer mediaPlayer = new MediaPlayer(media);
+      // mediaPlayer.setVolume(GameState.sfxVolume);
+      // Task<Void> task =
+      //     new Task<Void>() {
+      //       @Override
+      //       protected Void call() throws Exception {
+      //         mediaPlayer.play();
+      //         return null;
+      //       }
+      //     };      
+      // Thread thread = new Thread(task);
+      // thread.start();
     }
   }
 
