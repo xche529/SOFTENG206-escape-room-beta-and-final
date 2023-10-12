@@ -35,7 +35,7 @@ public class GameState {
 
   private static final BooleanProperty isSettingsVisable = new SimpleBooleanProperty(false);
 
-  private static Image playerAvatar;
+  private static int playerAvatar;
 
   public static boolean isWon = false;
 
@@ -189,11 +189,11 @@ public class GameState {
   return isGameClosed;
   }
 
-  public static void setPlayerAvatar(Image image) {
+  public static void setPlayerAvatar(int image) {
     playerAvatar = image;
   }
 
-  public static Image getPlayerAvatar() {
+  public static int getPlayerAvatar() {
     return playerAvatar;
   }
 }

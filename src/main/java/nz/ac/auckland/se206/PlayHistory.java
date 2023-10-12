@@ -19,15 +19,15 @@ public class PlayHistory implements Serializable {
   private PlayHistory childPlayHistory = null;
   private PlayHistory parentPlayHistory = null;
   private int playerAvatar;
-  public Image playerAvatarOne =
+  public transient Image playerAvatarOne =
       new Image(new File("src/main/resources/images/PlayerAvatarOne.png").toURI().toString());
-  public Image playerAvatarTwo =
+  public transient Image playerAvatarTwo =
       new Image(new File("src/main/resources/images/PlayerAvatarTwo.png").toURI().toString());
-  public Image playerAvatarThree =
+  public transient Image playerAvatarThree =
       new Image(new File("src/main/resources/images/PlayerAvatarThree.png").toURI().toString());
-  public Image playerAvatarFour =
+  public transient Image playerAvatarFour =
       new Image(new File("src/main/resources/images/PlayerAvatarFour.png").toURI().toString());
-  public Image playerAvatarFive =
+  public transient Image playerAvatarFive =
       new Image(new File("src/main/resources/images/PlayerAvatarFive.png").toURI().toString());
 
   // Compare this snippet from src/main/java/nz/ac/auckland/se206/PlayHistory.java:
@@ -108,7 +108,21 @@ public class PlayHistory implements Serializable {
                 + playHistory.getDifficulty()
                 + "\n\n");
         Text text = new Text(result);
-        ImageView avatar = new ImageView(playHistory.getPlayerAvatar());
+        Image image = playerAvatarOne;
+        int avatarNumber = playHistory.getPlayerAvatar();
+        avatarNumber++;
+        if(avatarNumber == 1){
+          image = playerAvatarOne;
+        }else if(avatarNumber == 2){
+          image = playerAvatarTwo;
+        }else if(avatarNumber == 3){
+          image = playerAvatarThree;
+        }else if(avatarNumber == 4){
+          image = playerAvatarFour;
+        }else if(avatarNumber == 5){
+          image = playerAvatarFive;
+        }
+        ImageView avatar = new ImageView(image);
         text.setWrappingWidth(150);
         avatar.setFitHeight(70);
         avatar.setFitWidth(70);
@@ -164,11 +178,11 @@ public class PlayHistory implements Serializable {
     this.childPlayHistory = childPlayHistory;
   }
 
-  public Image getPlayerAvatar() {
+  public int getPlayerAvatar() {
     return playerAvatar;
   }
 
-  public void setPlayerAvatar(Image playerAvatar) {
+  public void setPlayerAvatar(int playerAvatar) {
     this.playerAvatar = playerAvatar;
   }
 }

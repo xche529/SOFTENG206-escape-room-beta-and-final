@@ -111,7 +111,7 @@ public class StartInterfaceController {
       return;
     }
     GptAndTextAreaManager.setPlayerAvatar(currentAvatarImage);
-    GameState.setPlayerAvatar(currentAvatarImage);
+    GameState.setPlayerAvatar(currentAvatar);
     GameState.playerName = playerName.getText();
     Scene sceneButtonIsIn = twoTick.getScene();
     sideConversationController.setPlayerName(playerName.getText());
