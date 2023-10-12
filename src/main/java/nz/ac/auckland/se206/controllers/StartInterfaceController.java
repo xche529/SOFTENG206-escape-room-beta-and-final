@@ -4,18 +4,21 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.util.List;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.MenuButton;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GameTimer;
 import nz.ac.auckland.se206.GptAndTextAreaManager;
@@ -31,7 +34,7 @@ public class StartInterfaceController {
   @FXML private CheckBox fourMin;
   @FXML private CheckBox sixMin;
   @FXML private MenuButton difficulty;
-  @FXML private TextArea playHistoryTextArea;
+  @FXML private VBox playHistoryVBox;
   @FXML private TextField playerName;
   @FXML private ImageView easyTick;
   @FXML private ImageView mediumTick;
@@ -61,7 +64,8 @@ public class StartInterfaceController {
   public Image playerAvatarThree;
   public Image playerAvatarFour;
   public Image playerAvatarFive;
-  public Image currentAvatarImage;
+  public Image currentAvatarImage = new Image(new File("src/main/resources/images/PlayerAvatarOne.png").toURI().toString());
+
 
   @FXML
   private void initialize() {
@@ -96,12 +100,39 @@ public class StartInterfaceController {
     try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("player_history.dat"))) {
       // load the play history
       PlayHistory playHistory = (PlayHistory) ois.readObject();
-      System.out.println(playHistory.toString());
-      playHistoryTextArea.setText(playHistory.toString());
+      List<List<Object>> playHistoryList = playHistory.getFullList();
+      playHistoryVBox.getChildren().clear();
+
+      for (int i = 0; i < playHistoryList.size(); i++) {
+        HBox playHistoryHBox = new HBox();
+        List<Object> playHistoryHBoxList = playHistoryList.get(i);
+        String result = (String) playHistoryHBoxList.get(0);
+        Integer avatarNumber = (Integer) playHistoryHBoxList.get(1);
+        Image image = playerAvatarOne;
+        if (avatarNumber == 1) {
+          image = playerAvatarOne;
+        } else if (avatarNumber == 2) {
+          image = playerAvatarTwo;
+        } else if (avatarNumber == 3) {
+          image = playerAvatarThree;
+        } else if (avatarNumber == 4) {
+          image = playerAvatarFour;
+        } else if (avatarNumber == 5) {
+          image = playerAvatarFive;
+        }
+        ImageView avatar = new ImageView(image);
+        Text text = new Text(result);
+        text.setWrappingWidth(150);
+        avatar.setFitHeight(70);
+        avatar.setFitWidth(70);
+        playHistoryHBox.getChildren().add(avatar);
+        playHistoryHBox.getChildren().add(text);
+        playHistoryVBox.getChildren().add(playHistoryHBox);
+      }
+
     } catch (IOException | ClassNotFoundException e) {
-      // otherwise there is none found
-      playHistoryTextArea.setText("No play history found");
-      e.printStackTrace();
+      Text text = new Text("No play history found");
+      playHistoryVBox.getChildren().add(text);
     }
   }
 
@@ -125,10 +156,11 @@ public class StartInterfaceController {
       return;
     }
     GptAndTextAreaManager.setPlayerAvatar(currentAvatarImage);
+    GameState.setPlayerAvatar(currentAvatar);
     GameState.playerName = playerName.getText();
     Scene sceneButtonIsIn = twoTick.getScene();
     sideConversationController.setPlayerName(playerName.getText());
-    sideConversationController.initialize();
+    sideConversationController.start();
     SceneManager.switchToFirstRoom(sceneButtonIsIn);
     new GameTimer();
     roomController.start();

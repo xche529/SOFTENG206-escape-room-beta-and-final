@@ -62,9 +62,11 @@ public class TextAreaController {
     GptAndTextAreaManager.textAreaObjectiveDisplayBoard = objectiveDisplayBoard;
     GptAndTextAreaManager.textAreaTypePromptText = typePromptText;
     GptAndTextAreaManager.textAreaHintsLeftText = hintsLeftText;
+    String playerAvatarImage = "src/main/resources/images/PlayerAvatarOne.png";
     String guardAvatarImage = "src/main/resources/images/guardAvatar.png";
     String prisonerOneAvatarImage = "src/main/resources/images/prisonerTwoAvatar.png";
     String prisonerTwoAvatarImage = "src/main/resources/images/prisonerOneAvatar.png";
+    playerAvatar = new Image(new File(playerAvatarImage).toURI().toString());
     guardAvatar = new Image(new File(guardAvatarImage).toURI().toString());
     prisonerOneAvatar = new Image(new File(prisonerOneAvatarImage).toURI().toString());
     prisonerTwoAvatar = new Image(new File(prisonerTwoAvatarImage).toURI().toString());
