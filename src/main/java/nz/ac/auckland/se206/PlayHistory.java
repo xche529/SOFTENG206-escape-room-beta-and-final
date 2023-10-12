@@ -4,6 +4,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class PlayHistory implements Serializable {
   private double score;
@@ -12,13 +15,15 @@ public class PlayHistory implements Serializable {
   private String name;
   private PlayHistory childPlayHistory = null;
   private PlayHistory parentPlayHistory = null;
+  private int playerAvatar;
 
   // Compare this snippet from src/main/java/nz/ac/auckland/se206/PlayHistory.java:
-  public PlayHistory(int time, int difficulty, String name) {
+  public PlayHistory(int time, int difficulty, String name, int playerAvatar) {
     this.name = name;
     this.score = time / difficulty;
     this.timeTook = time;
     this.difficulty = difficulty;
+    this.playerAvatar = playerAvatar;
   }
 
   // Compare this snippet from src/main/java/nz/ac/auckland/se206/PlayHistory.java:
@@ -67,17 +72,20 @@ public class PlayHistory implements Serializable {
 
   // This is the function that creates a string to display the play history
   // It dis plays the name, time and difficulty of the player
-  public String toString() {
+  public List<List<Object>> getFullList() {
     // setting up the variables
+    List<List<Object>> playHistoryList = new ArrayList<>();
     PlayHistory playHistory = this;
-    String result = "";
     if (this.childPlayHistory != null) {
-      result = this.childPlayHistory.toString();
+      return this.childPlayHistory.getFullList();
     } else {
       int rank = 1;
       do {
+        List<Object> playHistoryHBox = new ArrayList<>();
+
+        // HBox playHistoryHBox = new HBox();
         // get past results and format in the right way
-        result +=
+         String result =
             ("Rank "
                 + rank
                 + ":\n "
@@ -88,12 +96,38 @@ public class PlayHistory implements Serializable {
                 + "\n Difficulty: "
                 + playHistory.getDifficulty()
                 + "\n\n");
+        playHistoryHBox.add(result);
+        Integer avatarNumber = playHistory.getPlayerAvatar();
+        avatarNumber++;
+        playHistoryHBox.add(avatarNumber);
+        playHistoryList.add(playHistoryHBox);
+        // Text text = new Text(result);
+        // Image image = playerAvatarOne;
+        // int avatarNumber = playHistory.getPlayerAvatar();
+        // avatarNumber++;
+        // if(avatarNumber == 1){
+        //   image = playerAvatarOne;
+        // }else if(avatarNumber == 2){
+        //   image = playerAvatarTwo;
+        // }else if(avatarNumber == 3){
+        //   image = playerAvatarThree;
+        // }else if(avatarNumber == 4){
+        //   image = playerAvatarFour;
+        // }else if(avatarNumber == 5){
+        //   image = playerAvatarFive;
+        // }
+        // ImageView avatar = new ImageView(image);
+        // text.setWrappingWidth(150);
+        // avatar.setFitHeight(70);
+        // avatar.setFitWidth(70);
+        // playHistoryHBox.getChildren().add(avatar);
+        // playHistoryHBox.getChildren().add(text);
+        // playHistoryVBox.getChildren().add(playHistoryHBox);
         playHistory = playHistory.getParentPlayHistory();
         rank++;
       } while (playHistory != null);
+      return playHistoryList;
     }
-    // Send the result back, which is the string to display
-    return result;
   }
 
   // This is the method for saving the play history
@@ -137,5 +171,13 @@ public class PlayHistory implements Serializable {
 
   public void setChildPlayHistory(PlayHistory childPlayHistory) {
     this.childPlayHistory = childPlayHistory;
+  }
+
+  public int getPlayerAvatar() {
+    return playerAvatar;
+  }
+
+  public void setPlayerAvatar(int playerAvatar) {
+    this.playerAvatar = playerAvatar;
   }
 }
