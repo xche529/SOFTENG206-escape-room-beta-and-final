@@ -10,12 +10,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.MenuButton;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GameTimer;
 import nz.ac.auckland.se206.GptAndTextAreaManager;
@@ -31,7 +32,7 @@ public class StartInterfaceController {
   @FXML private CheckBox fourMin;
   @FXML private CheckBox sixMin;
   @FXML private MenuButton difficulty;
-  @FXML private TextArea playHistoryTextArea;
+  @FXML private VBox playHistoryVBox;
   @FXML private TextField playerName;
   @FXML private ImageView easyTick;
   @FXML private ImageView mediumTick;
@@ -63,15 +64,18 @@ public class StartInterfaceController {
   public Image playerAvatarFive;
   public Image currentAvatarImage;
 
-
-
   @FXML
   private void initialize() {
-    playerAvatarOne = new Image(new File("src/main/resources/images/PlayerAvatarOne.png").toURI().toString());
-    playerAvatarTwo = new Image(new File("src/main/resources/images/PlayerAvatarTwo.png").toURI().toString());
-    playerAvatarThree = new Image(new File("src/main/resources/images/PlayerAvatarThree.png").toURI().toString());
-    playerAvatarFour = new Image(new File("src/main/resources/images/PlayerAvatarFour.png").toURI().toString());
-    playerAvatarFive = new Image(new File("src/main/resources/images/PlayerAvatarFive.png").toURI().toString());
+    playerAvatarOne =
+        new Image(new File("src/main/resources/images/PlayerAvatarOne.png").toURI().toString());
+    playerAvatarTwo =
+        new Image(new File("src/main/resources/images/PlayerAvatarTwo.png").toURI().toString());
+    playerAvatarThree =
+        new Image(new File("src/main/resources/images/PlayerAvatarThree.png").toURI().toString());
+    playerAvatarFour =
+        new Image(new File("src/main/resources/images/PlayerAvatarFour.png").toURI().toString());
+    playerAvatarFive =
+        new Image(new File("src/main/resources/images/PlayerAvatarFive.png").toURI().toString());
     avatarImageView.setImage(playerAvatarOne);
     avatarImageView.setFitHeight(100);
     avatarImageView.setFitWidth(100);
@@ -79,12 +83,11 @@ public class StartInterfaceController {
     // load play history
     try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("player_history.dat"))) {
       PlayHistory playHistory = (PlayHistory) ois.readObject();
-      System.out.println(playHistory.toString());
-      playHistoryTextArea.setText(playHistory.toString());
+      playHistory.toString(playHistoryVBox);
     } catch (IOException | ClassNotFoundException e) {
-      // otherwise there is none found
-      playHistoryTextArea.setText("No play history found");
       e.printStackTrace();
+      Text text = new Text("No play history found");
+      playHistoryVBox.getChildren().add(text);
     }
   }
 
@@ -112,7 +115,7 @@ public class StartInterfaceController {
     GameState.playerName = playerName.getText();
     Scene sceneButtonIsIn = twoTick.getScene();
     sideConversationController.setPlayerName(playerName.getText());
-    sideConversationController.initialize();
+    sideConversationController.start();
     SceneManager.switchToFirstRoom(sceneButtonIsIn);
     new GameTimer();
     roomController.start();
@@ -163,7 +166,7 @@ public class StartInterfaceController {
     alert.showAndWait();
   }
 
-    @FXML
+  @FXML
   private void onClickCog(MouseEvent event) {
     GameState.setSettingsVisable(true);
   }
@@ -183,21 +186,21 @@ public class StartInterfaceController {
   }
 
   @FXML
-  private void onSwitchAvatar(Event e){
+  private void onSwitchAvatar(Event e) {
     currentAvatar++;
-    if(currentAvatar == 1){
+    if (currentAvatar == 1) {
       currentAvatarImage = playerAvatarOne;
     }
-    if(currentAvatar == 2){
+    if (currentAvatar == 2) {
       currentAvatarImage = playerAvatarTwo;
     }
-    if(currentAvatar == 3){
+    if (currentAvatar == 3) {
       currentAvatarImage = playerAvatarThree;
     }
-    if(currentAvatar == 4){
+    if (currentAvatar == 4) {
       currentAvatarImage = playerAvatarFour;
     }
-    if(currentAvatar == 5){
+    if (currentAvatar == 5) {
       currentAvatarImage = playerAvatarFive;
       currentAvatar = 0;
     }
@@ -484,5 +487,4 @@ public class StartInterfaceController {
     playHistoryText.scaleXProperty().set(1);
     playHistoryText.scaleYProperty().set(1);
   }
-
 }

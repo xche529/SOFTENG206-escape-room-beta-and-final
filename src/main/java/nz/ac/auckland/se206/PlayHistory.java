@@ -1,10 +1,15 @@
 package nz.ac.auckland.se206;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 public class PlayHistory implements Serializable {
   private double score;
@@ -13,14 +18,25 @@ public class PlayHistory implements Serializable {
   private String name;
   private PlayHistory childPlayHistory = null;
   private PlayHistory parentPlayHistory = null;
-  private Image playerAvatar;
+  private int playerAvatar;
+  public Image playerAvatarOne =
+      new Image(new File("src/main/resources/images/PlayerAvatarOne.png").toURI().toString());
+  public Image playerAvatarTwo =
+      new Image(new File("src/main/resources/images/PlayerAvatarTwo.png").toURI().toString());
+  public Image playerAvatarThree =
+      new Image(new File("src/main/resources/images/PlayerAvatarThree.png").toURI().toString());
+  public Image playerAvatarFour =
+      new Image(new File("src/main/resources/images/PlayerAvatarFour.png").toURI().toString());
+  public Image playerAvatarFive =
+      new Image(new File("src/main/resources/images/PlayerAvatarFive.png").toURI().toString());
 
   // Compare this snippet from src/main/java/nz/ac/auckland/se206/PlayHistory.java:
-  public PlayHistory(int time, int difficulty, String name, Image playerAvatar) {
+  public PlayHistory(int time, int difficulty, String name, int playerAvatar) {
     this.name = name;
     this.score = time / difficulty;
     this.timeTook = time;
     this.difficulty = difficulty;
+    this.playerAvatar = playerAvatar;
   }
 
   // Compare this snippet from src/main/java/nz/ac/auckland/se206/PlayHistory.java:
@@ -69,17 +85,18 @@ public class PlayHistory implements Serializable {
 
   // This is the function that creates a string to display the play history
   // It dis plays the name, time and difficulty of the player
-  public String toString() {
+  public void toString(VBox playHistoryVBox) {
     // setting up the variables
     PlayHistory playHistory = this;
-    String result = "";
     if (this.childPlayHistory != null) {
-      result = this.childPlayHistory.toString();
+      this.childPlayHistory.toString(playHistoryVBox);
     } else {
       int rank = 1;
+      playHistoryVBox.getChildren().clear();
       do {
+        HBox playHistoryHBox = new HBox();
         // get past results and format in the right way
-        result +=
+        String result =
             ("Rank "
                 + rank
                 + ":\n "
@@ -90,12 +107,18 @@ public class PlayHistory implements Serializable {
                 + "\n Difficulty: "
                 + playHistory.getDifficulty()
                 + "\n\n");
+        Text text = new Text(result);
+        ImageView avatar = new ImageView(playHistory.getPlayerAvatar());
+        text.setWrappingWidth(150);
+        avatar.setFitHeight(70);
+        avatar.setFitWidth(70);
+        playHistoryHBox.getChildren().add(avatar);
+        playHistoryHBox.getChildren().add(text);
+        playHistoryVBox.getChildren().add(playHistoryHBox);
         playHistory = playHistory.getParentPlayHistory();
         rank++;
       } while (playHistory != null);
     }
-    // Send the result back, which is the string to display
-    return result;
   }
 
   // This is the method for saving the play history

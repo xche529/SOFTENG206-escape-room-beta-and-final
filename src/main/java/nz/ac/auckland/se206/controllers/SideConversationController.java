@@ -23,7 +23,7 @@ public class SideConversationController {
       new ChatCompletionRequest().setN(1).setTemperature(0.1).setTopP(0.8).setMaxTokens(100);
   private String playerName = "player";
 
-  public void initialize() {
+  public void start() {
     String message = GptPromptEngineering.groupConversationPrompt(playerName);
     groupChatCompletionRequest.addMessage(new ChatMessage("user", message));
     try {
