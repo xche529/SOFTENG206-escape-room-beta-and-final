@@ -3,7 +3,6 @@
 
 #
 apiproxy.config
-player_history.dat
 codestyle.config
 !libs/codestyle.jar
 ### Eclipse ###
