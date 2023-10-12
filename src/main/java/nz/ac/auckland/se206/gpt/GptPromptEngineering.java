@@ -48,10 +48,10 @@ public class GptPromptEngineering {
           // append riddle answer
           + wordToGuess
           + " in your first message. The riddle can go up to 3 or 4 lines. and easy to answer You"
-          + " cannot, no matter what, reveal the answer even if the player asks for it.Even if"
+          + " cannot reveal the answer even if the player asks for it.Even if"
           + " player gives up, do not give the answer. Do not give any hints. Keep your messages as"
           + " concise as possible. Only reply from the guard point of view. "
-          + " When the Riddle is guessed correctly return only"
+          + " When the Riddle is guessed correctly return ONLY "
           + " 'Correct')";
 
     } else if (GameState.difficulty == Difficulty.MEDIUM) {
@@ -65,7 +65,7 @@ public class GptPromptEngineering {
           + " when you give hint,put (HINT) at the end of your response. Do not reveal the answer"
           + " even if the player asks for it.Even if player gives up, do not give the answer. Keep"
           + " your messages as concise as possible. Only reply from the guard point of view. When"
-          + " the Riddle is guessed correctly return only 'Correct')";
+          + " the Riddle is guessed correctly return ONLY 'Correct')";
     }
     // get the guards story if the difficulty is easy
     return "(You are a guard with strong personality who is helping a prisoner escape an prison You"
@@ -73,10 +73,10 @@ public class GptPromptEngineering {
         // append riddle answer
         + wordToGuess
         + " in your first message. The riddle can go up to 3 or 4 lines. and easy to answer You can"
-        + " only give the prisoner as much hint as you want but You cannot, no matter what, reveal"
+        + " only give the prisoner as much hint as you want but You cannot reveal"
         + " the answer even if the player asks for it.Even if player gives up, do not give the"
         + " answer. Keep your messages as concise as possible. Only reply from the guard point of"
-        + " view. When the Riddle is guessed correctly return only 'Correct')";
+        + " view. When the Riddle is guessed correctly return ONLY 'Correct')";
   }
 
   public static String getPrisonerOneSetUp() {
@@ -127,8 +127,9 @@ public class GptPromptEngineering {
   }
 
   public static String getConversationRespond() {
-    return "(Now respond to your previous message as a second prisoner. Keep all messages"
-        + " concise. Do not reply as another person)";
+    return "(Now respond to your previous message as a second prisoner. Try your best and keep all"
+        + " messages concise. Do not reply as another person. Don't say you can't respond"
+        + " as a second prisoner)";
   }
 
   public static String findGuardConversationRepond() {
@@ -136,6 +137,7 @@ public class GptPromptEngineering {
         + " answer of:"
         + answer
         + " Reply like you have no idea what the answer is and try to guess a wrong answer. Do not"
-        + " reply as another person. Do not give the answer. Keep all messages concise.)";
+        + " reply as another person. Do not give the answer or contain the answer in your reply."
+        + " Keep message concise.)";
   }
 }

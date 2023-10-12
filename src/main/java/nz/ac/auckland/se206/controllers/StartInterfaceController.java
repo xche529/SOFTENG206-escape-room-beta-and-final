@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.util.List;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -14,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -62,7 +64,7 @@ public class StartInterfaceController {
   public Image playerAvatarThree;
   public Image playerAvatarFour;
   public Image playerAvatarFive;
-  public Image currentAvatarImage;
+  public Image currentAvatarImage = new Image(new File("src/main/resources/images/PlayerAvatarOne.png").toURI().toString());
 
   @FXML
   private void initialize() {
@@ -83,9 +85,37 @@ public class StartInterfaceController {
     // load play history
     try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("player_history.dat"))) {
       PlayHistory playHistory = (PlayHistory) ois.readObject();
-      playHistory.toString(playHistoryVBox);
+      List<List<Object>> playHistoryList = playHistory.getFullList();
+      playHistoryVBox.getChildren().clear();
+
+      for (int i = 0; i < playHistoryList.size(); i++) {
+        HBox playHistoryHBox = new HBox();
+        List<Object> playHistoryHBoxList = playHistoryList.get(i);
+        String result = (String) playHistoryHBoxList.get(0);
+        Integer avatarNumber = (Integer) playHistoryHBoxList.get(1);
+        Image image = playerAvatarOne;
+        if (avatarNumber == 1) {
+          image = playerAvatarOne;
+        } else if (avatarNumber == 2) {
+          image = playerAvatarTwo;
+        } else if (avatarNumber == 3) {
+          image = playerAvatarThree;
+        } else if (avatarNumber == 4) {
+          image = playerAvatarFour;
+        } else if (avatarNumber == 5) {
+          image = playerAvatarFive;
+        }
+        ImageView avatar = new ImageView(image);
+        Text text = new Text(result);
+        text.setWrappingWidth(150);
+        avatar.setFitHeight(70);
+        avatar.setFitWidth(70);
+        playHistoryHBox.getChildren().add(avatar);
+        playHistoryHBox.getChildren().add(text);
+        playHistoryVBox.getChildren().add(playHistoryHBox);
+      }
+
     } catch (IOException | ClassNotFoundException e) {
-      e.printStackTrace();
       Text text = new Text("No play history found");
       playHistoryVBox.getChildren().add(text);
     }

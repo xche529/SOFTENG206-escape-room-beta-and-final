@@ -2,7 +2,6 @@ package nz.ac.auckland.se206;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
 
 /** Represents the state of the game. */
