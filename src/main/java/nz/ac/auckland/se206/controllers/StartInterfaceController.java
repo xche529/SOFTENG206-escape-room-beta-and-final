@@ -53,6 +53,7 @@ public class StartInterfaceController {
   @FXML private ImageView cog;
 
   private RoomController roomController;
+  private SideConversationController sideConversationController;
   private int currentAvatar = 1;
 
   public Image playerAvatarOne;
@@ -96,6 +97,10 @@ public class StartInterfaceController {
     this.roomController = roomController;
   }
 
+  public void setSideConversationController(SideConversationController sideConversationController) {
+    this.sideConversationController = sideConversationController;
+  }
+
   @FXML
   private void onStartGame(Event event) throws IOException, ApiProxyException {
     if (!twoMin.isSelected() && !fourMin.isSelected() && !sixMin.isSelected()) {
@@ -105,6 +110,8 @@ public class StartInterfaceController {
     GptAndTextAreaManager.setPlayerAvatar(currentAvatarImage);
     GameState.playerName = playerName.getText();
     Scene sceneButtonIsIn = twoTick.getScene();
+    sideConversationController.setPlayerName(playerName.getText());
+    sideConversationController.initialize();
     SceneManager.switchToFirstRoom(sceneButtonIsIn);
     new GameTimer();
     roomController.start();

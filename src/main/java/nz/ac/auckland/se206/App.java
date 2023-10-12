@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -17,6 +18,7 @@ import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.controllers.CafeteriaController;
 import nz.ac.auckland.se206.controllers.OfficeController;
 import nz.ac.auckland.se206.controllers.RoomController;
+import nz.ac.auckland.se206.controllers.SideConversationController;
 import nz.ac.auckland.se206.controllers.StartInterfaceController;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
@@ -68,15 +70,15 @@ public class App extends Application {
     double height = screen.getBounds().getHeight();
     double ratio = width / height;
     // make it so that it fits the screen
-    if (ratio < 1113.0 / 800.0) {
-      overallScale = (width / 1113.0);
+    if (ratio < 1413.0 / 800.0) {
+      overallScale = (width / 1413.0);
       System.out.println("The game start with scale:" + overallScale);
     } else {
       overallScale = (height / 800.0);
       System.out.println("The game start with scale:" + overallScale);
     }
     overallScale = overallScale * 0.8;
-    centerX = (width - 1113 * overallScale) / 2;
+    centerX = (width - 1413 * overallScale) / 2;
     centerY = (height - 800 * overallScale) / 5;
     scale = new Scale(overallScale, overallScale);
     // creating loaders for all fxml files
@@ -88,6 +90,7 @@ public class App extends Application {
     FXMLLoader startInterfaceLoader = loadFxml("StartInterface");
     FXMLLoader textAreaLoader = loadFxml("textArea");
     FXMLLoader settingsLoader = loadFxml("settings");
+    FXMLLoader sideConversationLoader = loadFxml("sideConversation");
 
     // creating vboxes for the scenes
     VBox settings = settingsLoader.load();
@@ -99,9 +102,16 @@ public class App extends Application {
     VBox office = officeSceneLoader.load();
     VBox room = roomLoader.load();
     VBox textArea = textAreaLoader.load();
-    VBox cafeteriaVbox = new VBox(cafeteria, textArea);
-    VBox officeVbox = new VBox(office, textArea);
-    VBox roomVbox = new VBox(room, textArea);
+    VBox sideConversation = sideConversationLoader.load();
+
+    HBox cafeteriaHbox = new HBox(cafeteria, sideConversation);
+    VBox cafeteriaVbox = new VBox(cafeteriaHbox, textArea);
+
+    HBox officeHbox = new HBox(office, sideConversation);
+    VBox officeVbox = new VBox(officeHbox, textArea);
+
+    HBox roomHbox = new HBox(room, sideConversation);
+    VBox roomVbox = new VBox(roomHbox, textArea);
 
     // adding all the scenes to the scene manager
     SceneManager.addUi(AppUi.ROOM, roomVbox);
@@ -112,6 +122,8 @@ public class App extends Application {
     SceneManager.addUi(AppUi.CAFETERIA, cafeteriaVbox);
     SceneManager.addUi(AppUi.SETTINGS, settings);
     SceneManager.addUi(AppUi.TEXT_AREA, textArea);
+    SceneManager.addUi(AppUi.SIDE_CONVERSATION, sideConversation);
+
     SceneManager.getUiRoot(AppUi.START_INTERFACE).getTransforms().add(scale);
     SceneManager.getUiRoot(AppUi.END_WON).getTransforms().add(scale);
     SceneManager.getUiRoot(AppUi.END_LOST).getTransforms().add(scale);
@@ -121,12 +133,15 @@ public class App extends Application {
     OfficeController officeController = officeSceneLoader.getController();
     StartInterfaceController startInterfaceController = startInterfaceLoader.getController();
     RoomController roomController = roomLoader.getController();
+    SideConversationController sideConversationController = sideConversationLoader.getController();
 
     // setting up the controllers
     SceneManager.cafeteriaController = cafeteriaController;
     SceneManager.officeController = officeController;
-    startInterfaceController.setRoomController(roomController);
     SceneManager.roomController = roomController;
+    GptAndTextAreaManager.sideConversationController = sideConversationController;
+    startInterfaceController.setRoomController(roomController);
+    startInterfaceController.setSideConversationController(sideConversationController);
 
     // setting up the scene and getting the random code
     Safe.getRandomCode();
@@ -134,7 +149,7 @@ public class App extends Application {
     startInterfaceVBox.setLayoutX(centerX);
     startInterfaceVBox.setLayoutY(centerY);
     // make it fill the screen
-    scene = new Scene(startInterfaceVBox, 1113 * overallScale, 605 * overallScale);
+    scene = new Scene(startInterfaceVBox, 1413 * overallScale, 605 * overallScale);
     scene.setFill(Color.rgb(244, 244, 244, 1));
     stage.setScene(scene);
 
