@@ -109,6 +109,7 @@ public class SceneManager {
 
   public static void switchToStart(Scene scene) {
     VBox endLost = (VBox) getUiRoot(AppUi.START_INTERFACE);
+    GameState.setUpdatePlayHistory(true);
     // settings.getTransforms().add(App.scale);
     StackPane endLostStack = new StackPane(endLost, settings);
     StackPane.setAlignment(getUiRoot(AppUi.SETTINGS), javafx.geometry.Pos.TOP_LEFT);
