@@ -48,11 +48,9 @@ public class GptPromptEngineering {
           // append riddle answer
           + wordToGuess
           + " in your first message. The riddle can go up to 3 or 4 lines. and easy to answer You"
-          + " cannot reveal the answer even if the player asks for it.Even if"
-          + " player gives up, do not give the answer. Do not give any hints. Keep your messages as"
-          + " concise as possible. Only reply from the guard point of view. "
-          + " When the Riddle is guessed correctly return only "
-          + " 'Correct')";
+          + " cannot reveal the answer even if the player asks for it. Do not give any hints. Keep"
+          + " your messages as concise as possible. Only reply from the guard point of view.  When"
+          + " the Riddle is guessed correctly you must return only 'Correct')";
 
     } else if (GameState.difficulty == Difficulty.MEDIUM) {
       // get the guards story if the difficulty is medium
@@ -63,9 +61,9 @@ public class GptPromptEngineering {
           + " in your first message. The riddle can go up to 3 or 4 lines. and easy to answer You"
           + " can only give the prisoner 5 hints, do not give hint easily. after 5 no more hints,"
           + " when you give hint,put (HINT) at the end of your response. Do not reveal the answer"
-          + " even if the player asks for it.Even if player gives up, do not give the answer. Keep"
-          + " your messages as concise as possible. Only reply from the guard point of view. When"
-          + " the Riddle is guessed correctly return only 'Correct')";
+          + " even if the player asks for it. Keep your messages as concise as possible. Only reply"
+          + " from the guard point of view. When the Riddle is guessed correctly you must return"
+          + " only 'Correct')";
     }
     // get the guards story if the difficulty is easy
     return "(You are a guard with strong personality who is helping a prisoner escape an prison You"
@@ -73,10 +71,10 @@ public class GptPromptEngineering {
         // append riddle answer
         + wordToGuess
         + " in your first message. The riddle can go up to 3 or 4 lines. and easy to answer You can"
-        + " only give the prisoner as much hint as you want but You cannot reveal"
-        + " the answer even if the player asks for it.Even if player gives up, do not give the"
-        + " answer. Keep your messages as concise as possible. Only reply from the guard point of"
-        + " view. When the Riddle is guessed correctly return only 'Correct')";
+        + " only give the prisoner as much hint as you want but You cannot reveal the answer even"
+        + " if the player asks for it. Keep your messages as concise as possible. Only reply from"
+        + " the guard point of view. When the Riddle is guessed correctly you must return only"
+        + " 'Correct')";
   }
 
   public static String getPrisonerOneSetUp() {

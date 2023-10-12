@@ -123,8 +123,8 @@ public class PlayHistory implements Serializable {
         // playHistoryHBox.getChildren().add(avatar);
         // playHistoryHBox.getChildren().add(text);
         // playHistoryVBox.getChildren().add(playHistoryHBox);
-        // playHistory = playHistory.getParentPlayHistory();
-        // rank++;
+        playHistory = playHistory.getParentPlayHistory();
+        rank++;
       } while (playHistory != null);
       return playHistoryList;
     }
