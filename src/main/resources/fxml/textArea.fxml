@@ -90,7 +90,7 @@
                <content>
                   <VBox fx:id="chatVbox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="176.0" prefWidth="531.0" translateX="10.0" translateY="10.0">
                      <children>
-                        <TextArea prefHeight="200.0" prefWidth="200.0" />
+                        <TextArea prefHeight="200.0" prefWidth="200.0" style="-fx-control-inner-background: black; -fx-text-fill: white;" />
                      </children></VBox>
                </content>
             </ScrollPane>
