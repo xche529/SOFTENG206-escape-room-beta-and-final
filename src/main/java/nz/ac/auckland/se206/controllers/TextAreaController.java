@@ -56,6 +56,8 @@ public class TextAreaController {
     chatVbox.setMaxWidth(562);
     chatVbox.setMaxHeight(195);
 
+    inputBox.setStyle("-fx-background-color: none; -fx-text-fill: white;");
+
     GptAndTextAreaManager.textAreaController = this;
     GptAndTextAreaManager.textAreaChatDisplayBoard = chatDisplayBoard;
     GptAndTextAreaManager.textAreaInputBox = inputBox;

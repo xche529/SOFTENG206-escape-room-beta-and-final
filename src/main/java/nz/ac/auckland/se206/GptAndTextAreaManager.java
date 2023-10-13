@@ -98,7 +98,8 @@ public class GptAndTextAreaManager {
   //       String check = messages.get(i).getContent();
   //       if (check.charAt(0) == ('(') && check.charAt(check.length() - 1) == (')')) {
   //         System.out.println(
-  //             messages.get(i).getRole() + ": " + chat.getMessages().get(i).getContent() + "\n\n");
+  //             messages.get(i).getRole() + ": " + chat.getMessages().get(i).getContent() +
+  // "\n\n");
   //         continue;
   //       }
   //       if (currentCharacter == Characters.GUARD) {
@@ -108,7 +109,9 @@ public class GptAndTextAreaManager {
   //         }
   //         if (isHintRunning && GameState.difficulty == GameState.Difficulty.MEDIUM) {
   //           if (messages.get(i).getRole().equals("assistant")
-  //               && (messages.get(i).getContent().contains("HINT") || messages.get(i).getContent().contains("Hint:") || messages.get(i).getContent().contains("hint:")) && i != 1) {
+  //               && (messages.get(i).getContent().contains("HINT") ||
+  // messages.get(i).getContent().contains("Hint:") ||
+  // messages.get(i).getContent().contains("hint:")) && i != 1) {
   //             hintLeft--;
   //           }
   //           if (hintLeft == 0) {
@@ -147,7 +150,6 @@ public class GptAndTextAreaManager {
   //   return result;
   // }
 
-
   /*
    * this method is called when the user switches the target character or the
    * message needs to be update
@@ -158,24 +160,25 @@ public class GptAndTextAreaManager {
     textAreaInputBox.getParent().requestFocus();
   }
 
-  public static void displayTarget(){
+  public static void displayTarget() {
     textAreaController.displayTarget(currentCharacter);
   }
 
-  public static void displayTarget(Characters character){
+  public static void displayTarget(Characters character) {
     textAreaController.displayTarget(character);
   }
 
-  public static void setMessageHistory(ChatCompletionRequest chatCompletionRequest){
+  public static void setMessageHistory(ChatCompletionRequest chatCompletionRequest) {
     textAreaController.setMessageHistory(chatCompletionRequest);
   }
-  public static void onSubmitMessage() throws ApiProxyException{
+
+  public static void onSubmitMessage() throws ApiProxyException {
     textAreaController.onSubmitMessage();
   }
-  public static void setPlayerAvatar(Image image){
+
+  public static void setPlayerAvatar(Image image) {
     textAreaController.setPlayerAvatar(image);
   }
-
 
   public static void sendMessage(String message) throws ApiProxyException {
 
@@ -218,17 +221,17 @@ public class GptAndTextAreaManager {
     displayTarget(currentCharacter);
     if (ifSpeak) {
       // play sound effect, hmm sound
-      //String soundEffect;
+      // String soundEffect;
       if (currentCharacter == Characters.GUARD) {
-        //soundEffect = "src/main/resources/sounds/HmmSoundEffect1.mp3";
+        // soundEffect = "src/main/resources/sounds/HmmSoundEffect1.mp3";
         SFX guardNoise = new SFX("src/main/resources/sounds/HmmSoundEffect1.mp3");
         guardNoise.playSFX();
       } else if (currentCharacter == Characters.PRISONER_ONE) {
-        //soundEffect = "src/main/resources/sounds/HmmSoundEffect2.mp3";
+        // soundEffect = "src/main/resources/sounds/HmmSoundEffect2.mp3";
         SFX prisonerOneNoise = new SFX("src/main/resources/sounds/HmmSoundEffect2.mp3");
         prisonerOneNoise.playSFX();
       } else {
-        //soundEffect = "src/main/resources/sounds/HmmSoundEffect3.mp3";
+        // soundEffect = "src/main/resources/sounds/HmmSoundEffect3.mp3";
         SFX prisonerTwoNoise = new SFX("src/main/resources/sounds/HmmSoundEffect3.mp3");
         prisonerTwoNoise.playSFX();
       }
@@ -243,7 +246,7 @@ public class GptAndTextAreaManager {
       //         mediaPlayer.play();
       //         return null;
       //       }
-      //     };      
+      //     };
       // Thread thread = new Thread(task);
       // thread.start();
     }
