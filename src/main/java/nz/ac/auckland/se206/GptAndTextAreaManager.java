@@ -180,7 +180,7 @@ public class GptAndTextAreaManager {
 
   public static String getRiddle() throws ApiProxyException {
     List<ChatMessage> messages = guardChatCompletionRequest.getMessages();
-    return messages.get(2).getContent();
+    return messages.get(1).getContent();
   }
 
 

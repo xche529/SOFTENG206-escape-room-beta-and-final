@@ -1,8 +1,8 @@
 package nz.ac.auckland.se206.gpt;
 
 import nz.ac.auckland.se206.GameState;
-import nz.ac.auckland.se206.GptAndTextAreaManager;
 import nz.ac.auckland.se206.GameState.Difficulty;
+import nz.ac.auckland.se206.GptAndTextAreaManager;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 /** Utility class for generating GPT prompt engineering strings. */
@@ -48,10 +48,10 @@ public class GptPromptEngineering {
           + " You should give the prisoner a riddle with the answer of:"
           // append riddle answer
           + wordToGuess
-          + " in your first message. The riddle can go up to 3 or 4 lines. and easy to answer You"
-          + " cannot reveal the answer even if the player asks for it. Do not give any hints. Keep"
+          + " in your first message. The riddle can go up to 3 or 4 lines. And easy to answer. You"
+          + " cannot reveal the answer if the player asks for it. Do not give any hints. Keep"
           + " your messages as concise as possible. Only reply from the guard point of view.  When"
-          + " the Riddle is guessed correctly you must return only 'Correct')";
+          + " the Riddle is guessed correctly by player you must return only 'Correct')";
 
     } else if (GameState.difficulty == Difficulty.MEDIUM) {
       // get the guards story if the difficulty is medium
@@ -62,7 +62,7 @@ public class GptPromptEngineering {
           + " in your first message. The riddle can go up to 3 or 4 lines. and easy to answer You"
           + " can only give the prisoner 5 hints, do not give hint easily. after 5 no more hints,"
           + " when you give hint,put (HINT) at the end of your response. Do not reveal the answer"
-          + " even if the player asks for it. Keep your messages as concise as possible. Only reply"
+          + " if the player asks for it. Keep your messages as concise as possible. Only reply"
           + " from the guard point of view. When the Riddle is guessed correctly you must return"
           + " only 'Correct')";
     }
@@ -72,10 +72,10 @@ public class GptPromptEngineering {
         // append riddle answer
         + wordToGuess
         + " in your first message. The riddle can go up to 3 or 4 lines. and easy to answer You can"
-        + " only give the prisoner as much hint as you want but You cannot reveal the answer even"
-        + " if the player asks for it. Keep your messages as concise as possible. Only reply from"
-        + " the guard point of view. When the Riddle is guessed correctly you must return only"
-        + " 'Correct')";
+        + " give the prisoner as much hint as you want but You cannot reveal the answer if the"
+        + " player asks for it. Keep your messages as concise as possible. Only reply from the"
+        + " guard point of view. When the Riddle is guessed correctly by the player you must return"
+        + " only 'Correct')";
   }
 
   public static String getPrisonerOneSetUp() {
@@ -134,7 +134,7 @@ public class GptPromptEngineering {
   public static String findGuardConversationRepond() throws ApiProxyException {
     riddle = GptAndTextAreaManager.getRiddle();
     return "(You the first persioner reached to the guard, he said:"
-    + riddle
+        + riddle
         + " Reply like you have no idea what the answer is and try to guess a wrong answer. Do not"
         + " reply as another person. Do not give the answer or contain the answer in your reply."
         + " Keep message concise.)";
