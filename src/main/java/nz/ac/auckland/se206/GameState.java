@@ -34,6 +34,8 @@ public class GameState {
 
   private static final BooleanProperty isSettingsVisable = new SimpleBooleanProperty(false);
 
+  private static final BooleanProperty updatePlayHistory = new SimpleBooleanProperty(false);
+
   private static int playerAvatar;
   
   private static final BooleanProperty isSafeClosed = new SimpleBooleanProperty(false);
@@ -86,8 +88,16 @@ public class GameState {
 
   public static float sfxVolume = 1.0f;
 
-  public static boolean isSettingsVisable() {
-    return isSettingsVisable.get();
+  public static BooleanProperty updatePlayHistory() {
+    return updatePlayHistory;
+  }
+
+  public static void setUpdatePlayHistory(boolean value) {
+    updatePlayHistory.set(value);
+  }
+
+  public static BooleanProperty isSettingsVisable() {
+    return isSettingsVisable;
   }
 
   public static void setSettingsVisable(boolean value) {

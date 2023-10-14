@@ -66,6 +66,7 @@ public class StartInterfaceController {
   public Image playerAvatarFive;
   public Image currentAvatarImage = new Image(new File("src/main/resources/images/PlayerAvatarOne.png").toURI().toString());
 
+
   @FXML
   private void initialize() {
     playerAvatarOne =
@@ -83,7 +84,21 @@ public class StartInterfaceController {
     avatarImageView.setFitWidth(100);
     System.out.println("StartInterfaceController initialized");
     // load play history
+    loadPlayHistory();
+
+    GameState.updatePlayHistory()
+        .addListener(
+            (observable, oldValue, newValue) -> {
+              if (newValue) {
+                loadPlayHistory();
+                GameState.setUpdatePlayHistory(false);
+              }
+            });
+  }
+
+  private void loadPlayHistory() {
     try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("player_history.dat"))) {
+      // load the play history
       PlayHistory playHistory = (PlayHistory) ois.readObject();
       List<List<Object>> playHistoryList = playHistory.getFullList();
       playHistoryVBox.getChildren().clear();
