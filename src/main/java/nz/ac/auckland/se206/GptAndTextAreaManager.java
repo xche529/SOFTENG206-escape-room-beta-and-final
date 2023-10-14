@@ -1,5 +1,7 @@
 package nz.ac.auckland.se206;
 
+import java.util.List;
+
 import javafx.concurrent.Task;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
@@ -174,6 +176,11 @@ public class GptAndTextAreaManager {
   }
   public static void setPlayerAvatar(Image image){
     textAreaController.setPlayerAvatar(image);
+  }
+
+  public static String getRiddle() throws ApiProxyException {
+    List<ChatMessage> messages = guardChatCompletionRequest.getMessages();
+    return messages.get(2).getContent();
   }
 
 

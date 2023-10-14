@@ -125,8 +125,12 @@ public class TextAreaController {
             (observable, oldValue, newValue) -> {
               if (newValue) {
                 guardTalkedObjective.setSelected(true);
-                GptAndTextAreaManager.sideConversationController.refreshMessages(
-                    GptPromptEngineering.findGuardConversationRepond());
+                try {
+                  GptAndTextAreaManager.sideConversationController.refreshMessages(
+                      GptPromptEngineering.findGuardConversationRepond());
+                } catch (ApiProxyException e) {
+                  e.printStackTrace();
+                }
               }
             });
 

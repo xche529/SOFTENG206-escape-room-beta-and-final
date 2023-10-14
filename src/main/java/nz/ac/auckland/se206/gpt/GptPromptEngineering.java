@@ -1,7 +1,9 @@
 package nz.ac.auckland.se206.gpt;
 
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.GptAndTextAreaManager;
 import nz.ac.auckland.se206.GameState.Difficulty;
+import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 /** Utility class for generating GPT prompt engineering strings. */
 public class GptPromptEngineering {
@@ -12,7 +14,7 @@ public class GptPromptEngineering {
    * @param wordToGuess the word to be guessed in the riddle
    * @return the generated prompt engineering string
    */
-  public static String answer = "";
+  public static String riddle = "";
 
   public static String getRiddleWithGivenWord(String wordToGuess) {
     // return "You are the AI of an escape room, tell me a riddle with"
@@ -40,7 +42,6 @@ public class GptPromptEngineering {
    * @return the generated prompt engineering string
    */
   public static String getGuardSetUp(String wordToGuess) {
-    answer = wordToGuess;
     if (GameState.difficulty == Difficulty.HARD) {
       // get the guards story if the difficulty is hard
       return "(You are a guard with strong personality who is helping a prisoner escape an prison"
@@ -130,10 +131,10 @@ public class GptPromptEngineering {
         + " as a second prisoner)";
   }
 
-  public static String findGuardConversationRepond() {
-    return "(You the first persioner reached to the guard, he gived you a riddle to solve with the"
-        + " answer of:"
-        + answer
+  public static String findGuardConversationRepond() throws ApiProxyException {
+    riddle = GptAndTextAreaManager.getRiddle();
+    return "(You the first persioner reached to the guard, he said:"
+    + riddle
         + " Reply like you have no idea what the answer is and try to guess a wrong answer. Do not"
         + " reply as another person. Do not give the answer or contain the answer in your reply."
         + " Keep message concise.)";
