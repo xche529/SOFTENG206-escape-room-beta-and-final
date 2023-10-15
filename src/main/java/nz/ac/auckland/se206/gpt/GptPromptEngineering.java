@@ -127,8 +127,8 @@ public class GptPromptEngineering {
     return "(Try to speak like real prisoner with clear persionality. Start the reply by"
         + " saying the guard is looking for the a prisoner with a name of"
         + playerName
-        + " you are a good friend of him. Do not reply as another person. Keep all messages"
-        + " concise.)";
+        + " you are a good friend of him and he is next to you now. Do not reply as another person."
+        + " Keep all messages concise.)";
   }
 
   public static String getConversationRespond() {
@@ -153,24 +153,24 @@ public class GptPromptEngineering {
   }
 
   public static String safeFindPrisonerPrompt() {
-    return name
-        + "( have found a safe, Say that it need for digit code to open it and you know there's a"
+    return 
+         "(You found a safe, Say that it need for digit code to open it and you know there's a"
         + " safe with a phone number of your gang inside, this might be it. Try to guess where to"
         + " find the code. Keep all messages concise.)";
   }
 
   public static String converterFindPrisonerPrompt() {
-    return name + "( have found a cipher. Try to guess what it is. Keep all messages concise.)";
+    return  "(You found a cipher. Try to guess what it is. Keep all messages concise.)";
   }
 
   public static String phoneFindPrisonerPrompt() {
     if (GameState.isSafeFound()) {
       return name
-          + "( have found a phone. Say that try to call the number you found in the safe. Keep all"
+          + "( just found a phone. Say that try to call the number you found in the safe. Keep all"
           + " messages concise.)";
     } else {
       return name
-          + "( have found a phone. Say that there's a safe in the prison with a number inside you"
+          + "( just found a phone. Say that there's a safe in the prison with a number inside you"
           + " can call for a helicopter from the gang to pick you up but you cannot find the safe."
           + " Keep all messages concise.)";
     }
@@ -180,5 +180,11 @@ public class GptPromptEngineering {
     return "(You have found a codeword on the object "
         + answer
         + "Try to guess what it is used for. Keep all messages concise.)";
+  }
+
+  public static String noTimeLeftPrisonerPrompt() {
+    return "(You don't have much time left. Tell "
+        + name
+        + " to hurry up and you don't want to be caught. Keep all messages concise.)";
   }
 }
