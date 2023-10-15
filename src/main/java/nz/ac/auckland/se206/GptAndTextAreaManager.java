@@ -190,17 +190,17 @@ public class GptAndTextAreaManager {
 
     if (currentCharacter == Characters.GUARD) {
       // append message depending on where the player is in the game
-      if (GameState.isRiddleResolved() == false) {
-        message = message + "(riddle unsolved)";
-      } else if (GameState.wordFound == false) {
-        message = message + "(riddle solved)";
-      } else if (GameState.cypherFound == false) {
-        message = message + "(word found)";
-      } else if (GameState.safeFound == false) {
-        message = message + "(cypher found)";
-      } else if (GameState.safeUnlocked == false) {
-        message = message + "(safe found)";
-      }
+      // if (GameState.isRiddleResolved() == false) {
+      //   message = message + "(riddle unsolved)";
+      // } else if (GameState.wordFound == false) {
+      //   message = message + "(riddle solved)";
+      // } else if (GameState.cypherFound == false) {
+      //   message = message + "(word found)";
+      // } else if (GameState.safeFound == false) {
+      //   message = message + "(cypher found)";
+      // } else if (GameState.safeUnlocked == false) {
+      //   message = message + "(safe found)";
+      // }
       // make new message and append
       guardChatCompletionRequest.addMessage(new ChatMessage("user", message));
       runGpt(guardChatCompletionRequest);

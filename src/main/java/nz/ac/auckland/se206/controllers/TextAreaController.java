@@ -79,6 +79,8 @@ public class TextAreaController {
                 riddleSolvedObjective.setSelected(true);
                 try {
                   GptAndTextAreaManager.sendMessage(GptPromptEngineering.solvedRaddleGuardPrompt());
+                  GptAndTextAreaManager.sideConversationController.refreshMessages(
+                      GptPromptEngineering.solvedRiddlePrompt());
                 } catch (ApiProxyException e) {
                   // TODO Auto-generated catch block
                   e.printStackTrace();
