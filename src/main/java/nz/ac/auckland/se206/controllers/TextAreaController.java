@@ -108,7 +108,8 @@ public class TextAreaController {
             (observable, oldValue, newValue) -> {
               if (newValue) {
                 phoneLocatedObjective.setSelected(true);
-
+                GptAndTextAreaManager.sideConversationController.refreshMessages(
+                    GptPromptEngineering.phoneFindPrisonerPrompt());
               }
             });
     GameState.isSafeFoundProperty()
@@ -119,6 +120,8 @@ public class TextAreaController {
                 GptAndTextAreaManager.currentCharacter = Characters.GUARD;
                 try {
                   GptAndTextAreaManager.sendMessage(GptPromptEngineering.findSafeGuardPrompt());
+                  GptAndTextAreaManager.sideConversationController.refreshMessages(
+                      GptPromptEngineering.safeFindPrisonerPrompt());
                 } catch (ApiProxyException e) {
                   // TODO Auto-generated catch block
                   e.printStackTrace();

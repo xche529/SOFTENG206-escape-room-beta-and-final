@@ -18,6 +18,8 @@ public class GptPromptEngineering {
 
   public static String name = "";
 
+  public static String answer = "";
+
   public static String getRiddleWithGivenWord(String wordToGuess) {
     // return "You are the AI of an escape room, tell me a riddle with"
     // + " answer being the physical object "
@@ -44,6 +46,7 @@ public class GptPromptEngineering {
    * @return the generated prompt engineering string
    */
   public static String getGuardSetUp(String wordToGuess) {
+    answer = wordToGuess;
     if (GameState.difficulty == Difficulty.HARD) {
       // get the guards story if the difficulty is hard
       return "(You are a guard with strong personality who is helping a prisoner escape an prison"
@@ -151,8 +154,9 @@ public class GptPromptEngineering {
 
   public static String safeFindPrisonerPrompt() {
     return name
-        + "( have found the safe, Say that it need for digit code to open it. Try to guess where to"
-        + " find it. Keep all messages concise.)";
+        + "( have found a safe, Say that it need for digit code to open it and you know there's a"
+        + " safe with a phone number of your gang inside, this might be it. Try to guess where to"
+        + " find the code. Keep all messages concise.)";
   }
 
   public static String converterFindPrisonerPrompt() {
@@ -170,5 +174,11 @@ public class GptPromptEngineering {
           + " can call for a helicopter from the gang to pick you up but you cannot find the safe."
           + " Keep all messages concise.)";
     }
+  }
+
+  public static String codeWordFindPrisonerPrompt() {
+    return "(You have found a codeword on the object "
+        + answer
+        + "Try to guess what it is used for. Keep all messages concise.)";
   }
 }
