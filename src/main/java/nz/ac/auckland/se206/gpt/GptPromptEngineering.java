@@ -143,7 +143,32 @@ public class GptPromptEngineering {
         + " Keep message concise.)";
   }
 
-  public static String solvedRiddlePrompt() {
-    return name + "( have solved the riddle, tell him well done and try to guess what it means)";
+  public static String solvedRiddlePrisonerPrompt() {
+    return name
+        + "( have solved the riddle, tell him well done and try to guess what it means. Keep"
+        + " all messages concise.";
+  }
+
+  public static String safeFindPrisonerPrompt() {
+    return name
+        + "( have found the safe, Say that it need for digit code to open it. Try to guess where to"
+        + " find it. Keep all messages concise.)";
+  }
+
+  public static String converterFindPrisonerPrompt() {
+    return name + "( have found a cipher. Try to guess what it is. Keep all messages concise.)";
+  }
+
+  public static String phoneFindPrisonerPrompt() {
+    if (GameState.isSafeFound()) {
+      return name
+          + "( have found a phone. Say that try to call the number you found in the safe. Keep all"
+          + " messages concise.)";
+    } else {
+      return name
+          + "( have found a phone. Say that there's a safe in the prison with a number inside you"
+          + " can call for a helicopter from the gang to pick you up but you cannot find the safe."
+          + " Keep all messages concise.)";
+    }
   }
 }

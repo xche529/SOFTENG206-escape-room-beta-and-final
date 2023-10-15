@@ -80,7 +80,7 @@ public class TextAreaController {
                 try {
                   GptAndTextAreaManager.sendMessage(GptPromptEngineering.solvedRaddleGuardPrompt());
                   GptAndTextAreaManager.sideConversationController.refreshMessages(
-                      GptPromptEngineering.solvedRiddlePrompt());
+                      GptPromptEngineering.solvedRiddlePrisonerPrompt());
                 } catch (ApiProxyException e) {
                   // TODO Auto-generated catch block
                   e.printStackTrace();
@@ -99,6 +99,8 @@ public class TextAreaController {
             (observable, oldValue, newValue) -> {
               if (newValue) {
                 converterFoundObjective.setSelected(true);
+                GptAndTextAreaManager.sideConversationController.refreshMessages(
+                    GptPromptEngineering.converterFindPrisonerPrompt());
               }
             });
     GameState.isPhoneFoundProperty()
@@ -106,6 +108,7 @@ public class TextAreaController {
             (observable, oldValue, newValue) -> {
               if (newValue) {
                 phoneLocatedObjective.setSelected(true);
+
               }
             });
     GameState.isSafeFoundProperty()
