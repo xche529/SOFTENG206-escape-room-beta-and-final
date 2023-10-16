@@ -76,7 +76,7 @@ public class PlayHistory implements Serializable {
     } else {
       int rank = 1;
       do {
-        List<Object> playHistoryHBox = new ArrayList<>();
+        List<Object> playHistoryHbox = new ArrayList<>();
 
         // get past results and format in the right way
         String result =
@@ -89,10 +89,10 @@ public class PlayHistory implements Serializable {
                 + "\n\tDifficulty: "
                 + playHistory.getDifficulty()
                 + "\n\n");
-        playHistoryHBox.add(result);
+        playHistoryHbox.add(result);
         Integer avatarNumber = playHistory.getPlayerAvatar();
-        playHistoryHBox.add(avatarNumber);
-        playHistoryList.add(playHistoryHBox);
+        playHistoryHbox.add(avatarNumber);
+        playHistoryList.add(playHistoryHbox);
         playHistory = playHistory.getParentPlayHistory();
         rank++;
       } while (playHistory != null);
