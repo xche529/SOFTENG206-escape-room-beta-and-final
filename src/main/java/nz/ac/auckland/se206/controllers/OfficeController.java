@@ -69,7 +69,7 @@ public class OfficeController {
   @FXML private Button exitVeiwButton;
   @FXML private Pane paperPane;
   @FXML private Pane phonePane;
-  @FXML private ImageView crossBig;
+  @FXML private ImageView cross;
   @FXML private Label numberLabel;
   @FXML private Label timerLabel;
   @FXML private Pane inspectingBinPane;
@@ -838,18 +838,21 @@ public class OfficeController {
   @FXML
   private void onClickCross(MouseEvent event) {
     phonePane.setVisible(false);
+    blurringPane.setVisible(false);
   }
 
   @FXML
   private void crossMouseEntered() {
     // shows the enlarged cross
-    crossBig.setVisible(true);
+    cross.setScaleX(1.15);
+    cross.setScaleY(1.15);
   }
 
   @FXML
   private void crossMouseExited() {
     // hides the enlarged cross
-    crossBig.setVisible(false);
+    cross.setScaleX(1);
+    cross.setScaleY(1);
   }
 
   @FXML
@@ -907,13 +910,6 @@ public class OfficeController {
     int minutes = (GameState.secondsRemaining) / 60;
     int seconds = (GameState.secondsRemaining) % 60;
     timerLabel.setText(String.format("%d:%02d", minutes, seconds));
-  }
-
-  @FXML
-  private void onClickPhonePane() {
-    phonePane.setVisible(false);
-    blurringPane.setVisible(false);
-    thoughtBubblePane.setVisible(false);
   }
 
   /** restores the office to its original state */

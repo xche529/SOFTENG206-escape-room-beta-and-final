@@ -129,9 +129,12 @@
                </image>
             </ImageView>
             <Pane fx:id="blurringPane" opacity="0.74" prefHeight="615.0" prefWidth="1132.0" style="-fx-background-color: white;" visible="false" />
-            <Pane fx:id="phonePane" layoutX="-1.0" layoutY="-1.0" onMouseClicked="#onClickPhonePane" prefHeight="604.0" prefWidth="1115.0" style="-fx-background-color: none;" visible="false">
+            <Pane fx:id="phonePane" layoutX="-1.0" layoutY="-1.0" prefHeight="604.0" prefWidth="1115.0" style="-fx-background-color: none;" visible="false">
                <children>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="194.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="cross" fitHeight="134.0" fitWidth="91.0" layoutX="932.0" layoutY="67.0" onMouseClicked="#onClickCross" onMouseEntered="#crossMouseEntered" onMouseExited="#crossMouseExited" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/Cross.png" />
+                     </image></ImageView>
                   <Label fx:id="digitOne" layoutX="87.0" layoutY="33.0" prefHeight="71.0" prefWidth="33.0" text="_">
                      <font>
                         <Font size="61.0" />
@@ -219,11 +222,6 @@
                         </Label>
                      </children>
                   </Pane>
-                  <ImageView fx:id="crossBig" fitHeight="71.0" fitWidth="75.0" layoutX="946.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                     <image>
-                        <Image url="@../images/Cross.png" />
-                     </image>
-                  </ImageView>
                </children>
             </Pane>
             <Pane fx:id="inspectingBinPane" onMouseClicked="#onClickInspectingBinPane" prefHeight="612.0" prefWidth="1117.0" visible="false">
