@@ -55,6 +55,7 @@ public class TextAreaController {
     chatVbox.setMaxWidth(562);
     chatVbox.setMaxHeight(195);
 
+    // setting up the text area manager
     GptAndTextAreaManager.textAreaController = this;
     GptAndTextAreaManager.textAreaChatDisplayBoard = chatDisplayBoard;
     GptAndTextAreaManager.textAreaInputBox = inputBox;
@@ -65,40 +66,47 @@ public class TextAreaController {
     String guardAvatarImage = "src/main/resources/images/guardAvatar.png";
     String prisonerOneAvatarImage = "src/main/resources/images/prisonerTwoAvatar.png";
     String prisonerTwoAvatarImage = "src/main/resources/images/prisonerOneAvatar.png";
+
+    // setting up the images for the characters
     playerAvatar = new Image(new File(playerAvatarImage).toURI().toString());
     guardAvatar = new Image(new File(guardAvatarImage).toURI().toString());
     prisonerOneAvatar = new Image(new File(prisonerOneAvatarImage).toURI().toString());
     prisonerTwoAvatar = new Image(new File(prisonerTwoAvatarImage).toURI().toString());
 
-    // adding listener to update objectives
+    // adding listener to update the riddle objective
     GameState.isRiddleResolvedProperty()
         .addListener(
             (observable, oldValue, newValue) -> {
               if (newValue) {
+                // sets the objective to be strikethrough
                 riddleSolvedObjective.setStrikethrough(true);
                 writingSfx.playSFX();
                 try {
+                  // gives the guard the next hint
                   GptAndTextAreaManager.sendMessage(GptPromptEngineering.solvedRaddleGuardPrompt());
                   GptAndTextAreaManager.sideConversationController.refreshMessages(
                       GptPromptEngineering.solvedRiddlePrisonerPrompt());
                 } catch (ApiProxyException e) {
-                  // TODO Auto-generated catch block
                   e.printStackTrace();
                 }
               }
             });
+    // observes the property of the code word being found
     GameState.isCodeWordFoundProperty()
         .addListener(
             (observable, oldValue, newValue) -> {
               if (newValue) {
+                // sets the objective to be strikethrough
                 codewordFoundObjective.setStrikethrough(true);
                 writingSfx.playSFX();
               }
             });
+    // observes the property of the converter being found
     GameState.isConverterFoundProperty()
         .addListener(
             (observable, oldValue, newValue) -> {
               if (newValue) {
+                // sets the objective to be strikethrough
                 converterFoundObjective.setStrikethrough(true);
                 writingSfx.playSFX();
 
@@ -106,39 +114,46 @@ public class TextAreaController {
                     GptPromptEngineering.converterFindPrisonerPrompt());
               }
             });
+    // observes the property of the phone being
     GameState.isPhoneFoundProperty()
         .addListener(
             (observable, oldValue, newValue) -> {
               if (newValue) {
+                // sets the objective to be strikethrough
                 phoneLocatedObjective.setStrikethrough(true);
+                // plays the writing sound effect
                 writingSfx.playSFX();
-
+                // sets the current character to be the guard
                 GptAndTextAreaManager.sideConversationController.refreshMessages(
                     GptPromptEngineering.phoneFindPrisonerPrompt());
               }
             });
+    // observes the property of the safe being found
     GameState.isSafeFoundProperty()
         .addListener(
             (observable, oldValue, newValue) -> {
               if (newValue) {
+                // sets the objective to be strikethrough
                 safeLocatedObjective.setStrikethrough(true);
                 writingSfx.playSFX();
 
                 GptAndTextAreaManager.currentCharacter = Characters.GUARD;
                 try {
+                  // sends the guard the next hint
                   GptAndTextAreaManager.sendMessage(GptPromptEngineering.findSafeGuardPrompt());
                   GptAndTextAreaManager.sideConversationController.refreshMessages(
                       GptPromptEngineering.safeFindPrisonerPrompt());
                 } catch (ApiProxyException e) {
-                  // TODO Auto-generated catch block
                   e.printStackTrace();
                 }
               }
             });
+    // observes the property of the guard being talked to
     GameState.isGuardTalkedProperty()
         .addListener(
             (observable, oldValue, newValue) -> {
               if (newValue) {
+                // sets the objective to be strikethrough
                 guardTalkedObjective.setStrikethrough(true);
                 writingSfx.playSFX();
 
@@ -151,6 +166,7 @@ public class TextAreaController {
               }
             });
 
+    // setting up the timeline to display the target
     timelineTwo =
         new Timeline(
             new KeyFrame(
@@ -170,6 +186,11 @@ public class TextAreaController {
     typePromptText.setVisible(false);
   }
 
+  /**
+   * This method submits the message to the GPT
+   * 
+   * @throws ApiProxyException - if the message cannot be sent
+   */
   @FXML
   public void onSubmitMessage() throws ApiProxyException {
     // submit message to GPT
@@ -195,12 +216,7 @@ public class TextAreaController {
                 Duration.seconds(1),
                 event -> {
                   if (GameState.secondsRemaining == 0) {
-                    GameState.resetTextArea = true;
-                  }
-
-                  if (GameState.resetTextArea) {
                     resetTicks();
-                    GameState.resetTextArea = false;
                   }
                 }));
     // runs the thread
@@ -265,11 +281,13 @@ public class TextAreaController {
                     || messages.get(i).getContent().contains("Hint:")
                     || messages.get(i).getContent().contains("hint:"))
                 && i != 1) {
+                  // if the hint is the first message, then it is a hint
               GptAndTextAreaManager.hintLeft--;
             }
             if (GptAndTextAreaManager.hintLeft == 0) {
               GptAndTextAreaManager.isHintRunning = false;
               try {
+                // tells gpt to stop giving hints
                 GptAndTextAreaManager.sendMessage(GptPromptEngineering.stopGivingHint());
               } catch (ApiProxyException e) {
                 System.err.println("Error sending message: " + e.getMessage());
@@ -308,13 +326,13 @@ public class TextAreaController {
         Text text = new Text(result);
         text.setWrappingWidth(200);
 
+        // setting up the avatar
         avatar.setFitHeight(50);
         avatar.setFitWidth(50);
         if (messages.get(i).getRole() == "user") {
           text.setTextAlignment(TextAlignment.RIGHT);
           hbox.getChildren().add(text);
           hbox.getChildren().add(avatar);
-          // hbox.setMaxWidth(562);
           hbox.setAlignment(Pos.CENTER_RIGHT);
         } else {
           hbox.getChildren().add(avatar);
@@ -328,6 +346,11 @@ public class TextAreaController {
     }
   }
 
+  /**
+   * This method displays the target character in the text area
+   * 
+   * @param character the character that the player is talking to
+   */
   public void displayTarget(Characters character) {
     String prompt;
     if (character == Characters.GUARD) {
@@ -361,6 +384,12 @@ public class TextAreaController {
     }
   }
 
+  /**
+   * This method filters any words in parentheses out of the message
+   * 
+   * @param input the message to be displayed
+   * @return the message without the words in parentheses
+   */
   public static String parenthesesFilter(String input) {
     // Filtering partheses out of the message
     String result = "";
