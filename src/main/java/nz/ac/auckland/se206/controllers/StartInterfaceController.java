@@ -34,7 +34,7 @@ public class StartInterfaceController {
   @FXML private CheckBox fourMin;
   @FXML private CheckBox sixMin;
   @FXML private MenuButton difficulty;
-  @FXML private VBox playHistoryVBox;
+  @FXML private VBox playHistoryVbox;
   @FXML private TextField playerName;
   @FXML private ImageView easyTick;
   @FXML private ImageView mediumTick;
@@ -105,13 +105,13 @@ public class StartInterfaceController {
       // load the play history
       PlayHistory playHistory = (PlayHistory) ois.readObject();
       List<List<Object>> playHistoryList = playHistory.getFullList();
-      playHistoryVBox.getChildren().clear();
+      playHistoryVbox.getChildren().clear();
 
       for (int i = 0; i < playHistoryList.size(); i++) {
-        HBox playHistoryHBox = new HBox();
-        List<Object> playHistoryHBoxList = playHistoryList.get(i);
-        String result = (String) playHistoryHBoxList.get(0);
-        Integer avatarNumber = (Integer) playHistoryHBoxList.get(1);
+        HBox playHistoryHbox = new HBox();
+        List<Object> playHistoryHboxList = playHistoryList.get(i);
+        String result = (String) playHistoryHboxList.get(0);
+        Integer avatarNumber = (Integer) playHistoryHboxList.get(1);
         Image image = playerAvatarOne;
 
         // set the avatar image to the correct one
@@ -131,14 +131,14 @@ public class StartInterfaceController {
         text.setWrappingWidth(150);
         avatar.setFitHeight(70);
         avatar.setFitWidth(70);
-        playHistoryHBox.getChildren().add(avatar);
-        playHistoryHBox.getChildren().add(text);
-        playHistoryVBox.getChildren().add(playHistoryHBox);
+        playHistoryHbox.getChildren().add(avatar);
+        playHistoryHbox.getChildren().add(text);
+        playHistoryVbox.getChildren().add(playHistoryHbox);
       }
 
     } catch (IOException | ClassNotFoundException e) {
       Text text = new Text("No play history found");
-      playHistoryVBox.getChildren().add(text);
+      playHistoryVbox.getChildren().add(text);
     }
   }
 
@@ -326,7 +326,7 @@ public class StartInterfaceController {
     System.out.println("Difficulty change: hard");
   }
 
-  // This method is invoked when the user clicks any of the play time checkboxes. 
+  // This method is invoked when the user clicks any of the play time checkboxes.
   @FXML
   private void onSetPlayTime(Event event) {
     CheckBox checkBox = (CheckBox) event.getSource();
