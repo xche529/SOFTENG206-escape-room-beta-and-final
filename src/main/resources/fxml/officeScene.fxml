@@ -15,6 +15,31 @@
    <children>
       <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="605.0" prefWidth="1113.0">
          <children>
+            <ImageView fx:id="speechBubbleTwo" fitHeight="103.0" fitWidth="117.0" layoutX="442.0" layoutY="248.0" onMouseClicked="#onSpeechBubbleTwoClicked" onMouseEntered="#onSetSpeechBubbleTwoUp" onMouseExited="#onSetSpeechBubbleTwoDown" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../images/speechBubble.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="speechBubbleOne" fitHeight="102.0" fitWidth="126.0" layoutX="280.0" layoutY="249.0" onMouseClicked="#onSpeechBubbleOneClicked" onMouseEntered="#onSetSpeechBubbleOneUp" onMouseExited="#onSetSpeechBubbleOneDown" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../images/speechBubble.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="thinkingOne" fitHeight="49.0" fitWidth="52.0" layoutX="312.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/thinking.gif" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="thinkingTwo" fitHeight="49.0" fitWidth="58.0" layoutX="475.0" layoutY="266.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/thinking.gif" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="cog" fitHeight="109.0" fitWidth="93.0" onMouseClicked="#onClickCog" onMouseEntered="#cogMouseEntered" onMouseExited="#cogMouseExited" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/cog.png" />
+               </image>
+            </ImageView>
             <ImageView fitHeight="605.0" fitWidth="1113.0" pickOnBounds="true">
                <image>
                   <Image url="@../images/wardensOffice.jpg" />
@@ -103,7 +128,8 @@
                   <Image url="@../images/newArrow.png" />
                </image>
             </ImageView>
-            <Pane fx:id="phonePane" layoutX="37.0" layoutY="37.0" prefHeight="531.0" prefWidth="1035.0" style="-fx-background-color: white;" visible="false">
+            <Pane fx:id="blurringPane" opacity="0.74" prefHeight="615.0" prefWidth="1132.0" style="-fx-background-color: white;" visible="false" />
+            <Pane fx:id="phonePane" layoutX="-1.0" layoutY="-1.0" onMouseClicked="#onClickPhonePane" prefHeight="604.0" prefWidth="1115.0" style="-fx-background-color: none;" visible="false">
                <children>
                   <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="194.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" />
                   <Label fx:id="digitOne" layoutX="87.0" layoutY="33.0" prefHeight="71.0" prefWidth="33.0" text="_">
@@ -166,9 +192,9 @@
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="23.0" layoutX="528.0" layoutY="361.0" onMouseClicked="#onClickEight" onMouseEntered="#eightMouseEntered" onMouseExited="#eightMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="24.0" x="-150.0" />
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="23.0" layoutX="562.0" layoutY="357.0" onMouseClicked="#onClickNine" onMouseEntered="#nineMouseEntered" onMouseExited="#nineMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="24.0" x="-150.0" />
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="593.0" layoutY="338.0" onMouseClicked="#onClickZero" onMouseEntered="#zeroMouseEntered" onMouseExited="#zeroMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="24.0" x="-150.0" />
-                  <Button layoutX="762.0" layoutY="22.0" mnemonicParsing="false" onMouseClicked="#onClickClear" text="Clear" />
-                  <Button layoutX="728.0" layoutY="57.0" mnemonicParsing="false" onMouseClicked="#onClickCall" text="Call For Helicopter" />
-                  <Button layoutX="733.0" layoutY="89.0" mnemonicParsing="false" onMouseClicked="#onClickDelete" text="Delete Last Digit" />
+                  <Button layoutX="253.0" layoutY="466.0" mnemonicParsing="false" onMouseClicked="#onClickClear" text="Clear" />
+                  <Button layoutX="335.0" layoutY="468.0" mnemonicParsing="false" onMouseClicked="#onClickCall" text="Call For Helicopter" />
+                  <Button layoutX="474.0" layoutY="468.0" mnemonicParsing="false" onMouseClicked="#onClickDelete" text="Delete Last Digit" />
                   <Text layoutX="725.0" layoutY="283.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You have no phone number yet!" textAlignment="CENTER" wrappingWidth="227.0621337890625">
                      <font>
                         <Font size="28.0" />
@@ -198,14 +224,8 @@
                         <Image url="@../images/Cross.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="57.0" fitWidth="68.0" layoutX="952.0" layoutY="16.0" onMouseClicked="#onClickCross" onMouseEntered="#crossMouseEntered" onMouseExited="#crossMouseExited" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/Cross.png" />
-                     </image>
-                  </ImageView>
                </children>
             </Pane>
-            <Pane fx:id="blurringPane" onMouseClicked="#onClickInspectingBinPane" opacity="0.74" prefHeight="615.0" prefWidth="1132.0" style="-fx-background-color: white;" visible="false" />
             <Pane fx:id="inspectingBinPane" onMouseClicked="#onClickInspectingBinPane" prefHeight="612.0" prefWidth="1117.0" visible="false">
                <children>
                   <ImageView fx:id="inspectingBin" fitHeight="470.0" fitWidth="465.0" layoutX="349.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
@@ -262,31 +282,6 @@
                   </Text>
                </children>
             </Pane>
-            <ImageView fx:id="speechBubbleTwo" fitHeight="103.0" fitWidth="117.0" layoutX="442.0" layoutY="248.0" onMouseClicked="#onSpeechBubbleTwoClicked" onMouseEntered="#onSetSpeechBubbleTwoUp" onMouseExited="#onSetSpeechBubbleTwoDown" pickOnBounds="true" preserveRatio="true" visible="false">
-               <image>
-                  <Image url="@../images/speechBubble.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="speechBubbleOne" fitHeight="102.0" fitWidth="126.0" layoutX="280.0" layoutY="249.0" onMouseClicked="#onSpeechBubbleOneClicked" onMouseEntered="#onSetSpeechBubbleOneUp" onMouseExited="#onSetSpeechBubbleOneDown" pickOnBounds="true" preserveRatio="true" visible="false">
-               <image>
-                  <Image url="@../images/speechBubble.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="thinkingOne" fitHeight="49.0" fitWidth="52.0" layoutX="312.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/thinking.gif" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="thinkingTwo" fitHeight="49.0" fitWidth="58.0" layoutX="475.0" layoutY="266.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/thinking.gif" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="cog" fitHeight="109.0" fitWidth="93.0" onMouseClicked="#onClickCog" onMouseEntered="#cogMouseEntered" onMouseExited="#cogMouseExited" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/cog.png" />
-               </image>
-            </ImageView>
          </children>
       </Pane>
    </children>
