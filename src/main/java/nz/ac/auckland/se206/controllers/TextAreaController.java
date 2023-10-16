@@ -19,13 +19,20 @@ import javafx.util.Duration;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GptAndTextAreaManager;
 import nz.ac.auckland.se206.GptAndTextAreaManager.Characters;
-import nz.ac.auckland.se206.SFX;
+import nz.ac.auckland.se206.SoundEffect;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 
 public class TextAreaController {
+  private Timeline timelineTwo;
+  private Timeline timeline;
+  private Image guardAvatar;
+  private Image playerAvatar;
+  private Image prisonerOneAvatar;
+  private Image prisonerTwoAvatar;
+  private SoundEffect writingSfx = new SoundEffect("src/main/resources/sounds/pencil.mp3");
   @FXML private Button responseSubmitButton;
   @FXML private TextArea inputBox;
   @FXML private TextArea chatDisplayBoard;
@@ -34,21 +41,12 @@ public class TextAreaController {
   @FXML private Text hintsLeftText;
   @FXML private TextField inputText;
   @FXML private VBox chatVbox;
-
   @FXML private Text riddleSolvedObjective;
   @FXML private Text codewordFoundObjective;
   @FXML private Text converterFoundObjective;
   @FXML private Text phoneLocatedObjective;
   @FXML private Text safeLocatedObjective;
   @FXML private Text guardTalkedObjective;
-  private Timeline timelineTwo;
-
-  private Timeline timeline;
-  public Image guardAvatar;
-  public Image playerAvatar;
-  public Image prisonerOneAvatar;
-  public Image prisonerTwoAvatar;
-  public SFX writingSfx = new SFX("src/main/resources/sounds/pencil.mp3");
 
   @FXML
   private void initialize() {

@@ -154,13 +154,13 @@ public class GptAndTextAreaManager {
     displayTarget(currentCharacter);
     if (ifSpeak) {
       if (currentCharacter == Characters.GUARD) { // plays the sound effect for the corresponding character
-        SFX guardNoise = new SFX("src/main/resources/sounds/HmmSoundEffect1.mp3");
+        SoundEffect guardNoise = new SoundEffect("src/main/resources/sounds/HmmSoundEffect1.mp3");
         guardNoise.playSFX();
       } else if (currentCharacter == Characters.PRISONER_ONE) {
-        SFX prisonerOneNoise = new SFX("src/main/resources/sounds/HmmSoundEffect2.mp3");
+        SoundEffect prisonerOneNoise = new SoundEffect("src/main/resources/sounds/HmmSoundEffect2.mp3");
         prisonerOneNoise.playSFX();
       } else {
-        SFX prisonerTwoNoise = new SFX("src/main/resources/sounds/HmmSoundEffect3.mp3");
+        SoundEffect prisonerTwoNoise = new SoundEffect("src/main/resources/sounds/HmmSoundEffect3.mp3");
         prisonerTwoNoise.playSFX();
       }
     }

@@ -6,11 +6,11 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
-public class SFX {
+public class SoundEffect {
 
   private String path;
 
-  public SFX(String path) {
+  public SoundEffect(String path) {
     this.path = path;
   }
 

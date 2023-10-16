@@ -19,7 +19,7 @@ import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GptAndTextAreaManager;
 import nz.ac.auckland.se206.GptAndTextAreaManager.Characters;
 import nz.ac.auckland.se206.MovementControl;
-import nz.ac.auckland.se206.SFX;
+import nz.ac.auckland.se206.SoundEffect;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.reseters.RandomizationGenerator;
@@ -84,7 +84,7 @@ public class CafeteriaController {
   @FXML private Rectangle safeRectangle;
 
   private ImageView[] animationItems;
-  private SFX safeOpeningNoise;
+  private SoundEffect safeOpeningNoise;
   private Timeline timeline;
 
   /**
@@ -122,7 +122,7 @@ public class CafeteriaController {
     animateArrows(vendingMachineArrow);
 
     // plays the sound of the safe opening
-    safeOpeningNoise = new SFX("src/main/resources/sounds/door-opening-and-closing-18398.mp3");
+    safeOpeningNoise = new SoundEffect("src/main/resources/sounds/door-opening-and-closing-18398.mp3");
   }
 
   /**
