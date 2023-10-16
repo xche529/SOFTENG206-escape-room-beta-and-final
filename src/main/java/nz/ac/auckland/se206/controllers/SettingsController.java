@@ -81,6 +81,7 @@ public class SettingsController {
               GameState.sfxVolume = sfxVolume;
             });
 
+    // shows the settings box when the settings button is clicked
     GameState.isSettingsVisableProperty()
         .addListener(
             (observable, oldValue, newValue) -> {

@@ -7,7 +7,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class PlayHistory implements Serializable {
   private double score;
   private int timeTook;
@@ -17,7 +16,6 @@ public class PlayHistory implements Serializable {
   private PlayHistory parentPlayHistory = null;
   private int playerAvatar;
 
-  // Compare this snippet from src/main/java/nz/ac/auckland/se206/PlayHistory.java:
   public PlayHistory(int time, int difficulty, String name, int playerAvatar) {
     this.name = name;
     this.score = time / difficulty;
@@ -26,10 +24,7 @@ public class PlayHistory implements Serializable {
     this.playerAvatar = playerAvatar;
   }
 
-  // Compare this snippet from src/main/java/nz/ac/auckland/se206/PlayHistory.java:
-  // you can Add a play history to the play history using this method with any given play history
-  // node
-  // it finds the correct place to add the play history
+  // adds the most recent score to the player history
   public void addHistory(PlayHistory playHistory) {
     // if the score is greater than the current score,, then it is added to the parent
     if (playHistory.getScore() > this.score) {
@@ -70,8 +65,8 @@ public class PlayHistory implements Serializable {
     }
   }
 
-  // This is the function that creates a string to display the play history
-  // It dis plays the name, time and difficulty of the player
+  // This is the function that creates a string to display the play history It dis plays the name,
+  // time and difficulty of the player
   public List<List<Object>> getFullList() {
     // setting up the variables
     List<List<Object>> playHistoryList = new ArrayList<>();
@@ -83,45 +78,21 @@ public class PlayHistory implements Serializable {
       do {
         List<Object> playHistoryHBox = new ArrayList<>();
 
-        // HBox playHistoryHBox = new HBox();
         // get past results and format in the right way
-         String result =
+        String result =
             ("Rank "
                 + rank
-                + ":\n "
+                + ":\n\tName: "
                 + playHistory.getName()
-                + "\n"
-                + " Time: "
+                + "\n\tTime: "
                 + playHistory.getTimeTook()
-                + "\n Difficulty: "
+                + "\n\tDifficulty: "
                 + playHistory.getDifficulty()
                 + "\n\n");
         playHistoryHBox.add(result);
         Integer avatarNumber = playHistory.getPlayerAvatar();
         playHistoryHBox.add(avatarNumber);
         playHistoryList.add(playHistoryHBox);
-        // Text text = new Text(result);
-        // Image image = playerAvatarOne;
-        // int avatarNumber = playHistory.getPlayerAvatar();
-        // avatarNumber++;
-        // if(avatarNumber == 1){
-        //   image = playerAvatarOne;
-        // }else if(avatarNumber == 2){
-        //   image = playerAvatarTwo;
-        // }else if(avatarNumber == 3){
-        //   image = playerAvatarThree;
-        // }else if(avatarNumber == 4){
-        //   image = playerAvatarFour;
-        // }else if(avatarNumber == 5){
-        //   image = playerAvatarFive;
-        // }
-        // ImageView avatar = new ImageView(image);
-        // text.setWrappingWidth(150);
-        // avatar.setFitHeight(70);
-        // avatar.setFitWidth(70);
-        // playHistoryHBox.getChildren().add(avatar);
-        // playHistoryHBox.getChildren().add(text);
-        // playHistoryVBox.getChildren().add(playHistoryHBox);
         playHistory = playHistory.getParentPlayHistory();
         rank++;
       } while (playHistory != null);

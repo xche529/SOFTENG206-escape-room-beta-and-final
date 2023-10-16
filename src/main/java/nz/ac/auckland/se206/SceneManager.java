@@ -39,25 +39,25 @@ public class SceneManager {
 
   private static HashMap<AppUi, Parent> sceneMap = new HashMap<AppUi, Parent>();
 
-  /*
+  /**
    * Switches the scene to the next room
    *
-   * @param isToLeft true if the player is moving to the left, false if the player
-   * is moving to the right
-   *
+   * @param isToLeft true if the player is moving to the left, false if the player is moving to the
+   *     right
    * @param scene the scene to switch
    */
   public static void switchRoom(boolean isToLeft, Scene scene) {
     VBox roomToSwitch;
 
     if (currentUi == AppUi.START_INTERFACE) {
-      // switching room sto the left
+      // goes to the starting room
       roomToSwitch = (VBox) getUiRoot(AppUi.CAFETERIA);
-
       currentUi = AppUi.CAFETERIA;
+      // starts the characters animations
       cafeteriaController.resetAnimation();
       cafeteriaController.walkInAnimation();
     } else {
+      // prints the action being taken in the terminal for debugging purposes
       if (isToLeft) {
         System.out.println("Moving to left");
       } else {
@@ -78,8 +78,7 @@ public class SceneManager {
       } else {
         index++;
       }
-      if (index == 0) {
-        // creating a playing walk animations
+      if (index == 0) { // creating a playing walk animation in the new room
         roomController.resetAnimation();
         roomController.walkInAnimation();
       } else if (index == 1) {
@@ -93,24 +92,29 @@ public class SceneManager {
       currentUi = appUis[index];
       roomToSwitch = (VBox) getUiRoot(appUis[index]);
     }
+    // stacks the settings directly above the current room
     StackPane newRoomStack = new StackPane(roomToSwitch, settings);
     StackPane.setAlignment(settings, javafx.geometry.Pos.TOP_LEFT);
     HBox hbox = new HBox(newRoomStack, getUiRoot(AppUi.SIDE_CONVERSATION));
     VBox vbox = new VBox(hbox, getUiRoot(AppUi.TEXT_AREA));
 
     // setting up the vbox
-
     vbox.getTransforms().add(App.scale);
     vbox.setLayoutX(App.centerX);
     vbox.setLayoutY(App.centerY);
 
+    // switches to the new room
     scene.setRoot(vbox);
   }
 
+  /**
+   * Switches the scene to the start interface
+   *
+   * @param scene the scene that we are currently on
+   */
   public static void switchToStart(Scene scene) {
     VBox endLost = (VBox) getUiRoot(AppUi.START_INTERFACE);
     GameState.setUpdatePlayHistory(true);
-    // settings.getTransforms().add(App.scale);
     StackPane endLostStack = new StackPane(endLost, settings);
     StackPane.setAlignment(getUiRoot(AppUi.SETTINGS), javafx.geometry.Pos.TOP_LEFT);
     VBox vbox = new VBox(endLostStack);
@@ -120,6 +124,11 @@ public class SceneManager {
     currentUi = AppUi.END_LOST;
   }
 
+  /**
+   * Switches the scene to the end won interface
+   *
+   * @param scene the scene that we are currently on
+   */
   public static void switchToEndWon(Scene scene) {
     VBox endWon = (VBox) getUiRoot(AppUi.END_WON);
     StackPane endWonStack = new StackPane(endWon, settings);
@@ -132,6 +141,11 @@ public class SceneManager {
     currentUi = AppUi.END_WON;
   }
 
+  /**
+   * Switches the scene to the end lost interface
+   *
+   * @param scene the scene that we are currently on
+   */
   public static void switchToEndLost(Scene scene) {
     VBox endLost = (VBox) getUiRoot(AppUi.END_LOST);
     settings.getTransforms().add(App.scale);
@@ -144,11 +158,17 @@ public class SceneManager {
     currentUi = AppUi.END_LOST;
   }
 
+  /**
+   * Switches the scene to the office
+   *
+   * @param scene the scene that we are currently on
+   */
   public static void switchToFirstRoom(Scene scene) {
     VBox room = (VBox) getUiRoot(AppUi.CAFETERIA);
     if (isFirstRound) {
       isFirstRound = false;
-    } else {
+    } else { // This code is used to scale the room to the correct size, as it shrinks on every
+      // round without it
       Scale settingsScale = new Scale(1.39, 1.39);
       settings.getTransforms().add(settingsScale);
     }

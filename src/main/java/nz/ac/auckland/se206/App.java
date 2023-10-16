@@ -22,7 +22,7 @@ import nz.ac.auckland.se206.controllers.SideConversationController;
 import nz.ac.auckland.se206.controllers.StartInterfaceController;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
-/**
+/*
  * This is the entry point of the JavaFX application, while you can change this class, it should
  * remain as the class that runs the JavaFX application.
  */
@@ -62,6 +62,7 @@ public class App extends Application {
    */
   @Override
   public void start(final Stage stage) throws IOException, ApiProxyException {
+
     // set up the scene
     stage.setTitle("Prison Escape");
     stage.setMaximized(true);
@@ -69,6 +70,7 @@ public class App extends Application {
     double width = screen.getBounds().getWidth();
     double height = screen.getBounds().getHeight();
     double ratio = width / height;
+
     // make it so that it fits the screen
     if (ratio < 1413.0 / 800.0) {
       overallScale = (width / 1413.0);
@@ -81,6 +83,7 @@ public class App extends Application {
     centerX = (width - 1413 * overallScale) / 2;
     centerY = (height - 800 * overallScale) / 5;
     scale = new Scale(overallScale, overallScale);
+
     // creating loaders for all fxml files
     FXMLLoader roomLoader = loadFxml("room");
     FXMLLoader endScreenWonLoader = loadFxml("endScreenWon");
@@ -95,15 +98,18 @@ public class App extends Application {
     // creating vboxes for the scenes
     VBox settings = settingsLoader.load();
     SceneManager.settings = settings;
-    StackPane startInterfaceStack = new StackPane(startInterfaceLoader.load(), settings);
-    StackPane.setAlignment(settings, javafx.geometry.Pos.TOP_LEFT);
-    VBox startInterfaceVBox = new VBox(startInterfaceStack);
     VBox cafeteria = cafeteriaLoader.load();
     VBox office = officeSceneLoader.load();
     VBox room = roomLoader.load();
     VBox textArea = textAreaLoader.load();
     VBox sideConversation = sideConversationLoader.load();
 
+    // stacks the settings page over the start interface
+    StackPane startInterfaceStack = new StackPane(startInterfaceLoader.load(), settings);
+    StackPane.setAlignment(settings, javafx.geometry.Pos.TOP_LEFT);
+    VBox startInterfaceVBox = new VBox(startInterfaceStack);
+
+    // creating hboxes for the scenes too add the side coverstaion
     HBox officeHbox = new HBox(office, sideConversation);
     VBox officeVbox = new VBox(officeHbox, textArea);
 
@@ -145,7 +151,6 @@ public class App extends Application {
 
     // setting up the scene and getting the random code
     Safe.getRandomCode();
-    // VBox root = (VBox) SceneManager.getUiRoot(AppUi.START_INTERFACE);
     startInterfaceVBox.setLayoutX(centerX);
     startInterfaceVBox.setLayoutY(centerY);
     // make it fill the screen
@@ -157,8 +162,6 @@ public class App extends Application {
         () -> {
           stage.setOnCloseRequest(
               event -> {
-                // timeline.stop();
-                // textToSpeech.terminate();
                 Platform.exit();
                 GameState.setGameClosed(true);
               });

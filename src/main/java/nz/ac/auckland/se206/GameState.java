@@ -37,7 +37,7 @@ public class GameState {
   private static final BooleanProperty updatePlayHistory = new SimpleBooleanProperty(false);
 
   private static int playerAvatar;
-  
+
   private static final BooleanProperty isSafeClosed = new SimpleBooleanProperty(false);
 
   public static boolean isWon = false;
@@ -201,11 +201,11 @@ public class GameState {
   }
 
   public static void setGameClosed(boolean value) {
-  isGameClosed.set(value);
+    isGameClosed.set(value);
   }
 
   public static BooleanProperty isGameClosed() {
-  return isGameClosed;
+    return isGameClosed;
   }
 
   public static void setPlayerAvatar(int image) {

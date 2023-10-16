@@ -24,7 +24,6 @@ public class MovementControl {
             () -> {
               for (int i = 0; i < timesToMove; i++) {
                 try {
-                  
                   Thread.sleep(50 / 3);
                   if (isToLeft == true) {
                     imageView.setX(imageView.getX() - distanceToMovePerIteration);
