@@ -128,7 +128,7 @@
                   <Image url="@../images/newArrow.png" />
                </image>
             </ImageView>
-            <Pane fx:id="blurringPane" opacity="0.74" prefHeight="615.0" prefWidth="1132.0" style="-fx-background-color: white;" />
+            <Pane fx:id="blurringPane" opacity="0.74" prefHeight="615.0" prefWidth="1132.0" style="-fx-background-color: white;" visible="false" />
             <Pane fx:id="phonePane" layoutX="-1.0" layoutY="-1.0" onMouseClicked="#onClickPhonePane" prefHeight="604.0" prefWidth="1115.0" style="-fx-background-color: none;" visible="false">
                <children>
                   <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="194.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" />
