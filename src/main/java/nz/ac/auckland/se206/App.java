@@ -104,14 +104,14 @@ public class App extends Application {
     VBox textArea = textAreaLoader.load();
     VBox sideConversation = sideConversationLoader.load();
 
-    HBox cafeteriaHbox = new HBox(cafeteria, sideConversation);
-    VBox cafeteriaVbox = new VBox(cafeteriaHbox, textArea);
-
     HBox officeHbox = new HBox(office, sideConversation);
     VBox officeVbox = new VBox(officeHbox, textArea);
 
     HBox roomHbox = new HBox(room, sideConversation);
     VBox roomVbox = new VBox(roomHbox, textArea);
+
+    HBox cafeteriaHbox = new HBox(cafeteria, sideConversation);
+    VBox cafeteriaVbox = new VBox(cafeteriaHbox, textArea);
 
     // adding all the scenes to the scene manager
     SceneManager.addUi(AppUi.ROOM, roomVbox);

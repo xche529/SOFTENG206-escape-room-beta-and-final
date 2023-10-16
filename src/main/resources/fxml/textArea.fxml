@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
@@ -12,16 +11,16 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.TextAreaController">
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.TextAreaController">
    <children>
-      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="195.0" prefWidth="1113.0">
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="195.0" prefWidth="1414.0">
          <children>
-            <ImageView fitHeight="195.0" fitWidth="1113.0" pickOnBounds="true" smooth="false">
+            <ImageView fitHeight="195.0" fitWidth="1414.0" pickOnBounds="true" smooth="false">
                <image>
                   <Image url="@../images/textAreaBackground2.jpg" />
                </image>
             </ImageView>
-            <TextArea fx:id="inputBox" blendMode="MULTIPLY" onKeyTyped="#onSetPromptTextFalse" prefHeight="156.0" prefWidth="324.0" wrapText="true">
+            <TextArea fx:id="inputBox" blendMode="MULTIPLY" onKeyTyped="#onSetPromptTextFalse" prefHeight="156.0" prefWidth="335.0" wrapText="true">
                <font>
                   <Font size="19.0" />
                </font>
@@ -38,38 +37,44 @@
                <font>
                   <Font name="Century" size="12.0" />
                </font></Text>
-            <Button fx:id="responseSubmitButton" blendMode="MULTIPLY" layoutY="154.0" mnemonicParsing="false" onAction="#onSubmitMessage" prefHeight="40.0" prefWidth="324.0" text="Submit" textOverrun="CLIP">
+            <Button fx:id="responseSubmitButton" blendMode="MULTIPLY" layoutY="154.0" mnemonicParsing="false" onAction="#onSubmitMessage" prefHeight="41.0" prefWidth="335.0" text="Submit" textOverrun="CLIP">
                <font>
                   <Font name="Century" size="20.0" />
                </font>
             </Button>
-            <Pane layoutX="886.0" layoutY="45.0" prefHeight="143.0" prefWidth="226.0">
+            <Pane layoutX="886.0" layoutY="54.0" prefHeight="143.0" prefWidth="512.0">
                <children>
-                  <CheckBox fx:id="riddleSolvedObjective" blendMode="DARKEN" layoutX="47.0" layoutY="35.0" mnemonicParsing="false" text="Solve riddle">
+                  <Pane layoutX="110.0" layoutY="-43.0" prefHeight="195.0" prefWidth="436.0" visible="false" />
+                  <Text fx:id="guardTalkedObjective" layoutX="143.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Talk to guard!">
                      <font>
-                        <Font name="Century" size="12.0" />
-                     </font></CheckBox>
-                  <CheckBox fx:id="codewordFoundObjective" blendMode="DARKEN" layoutX="47.0" layoutY="57.0" mnemonicParsing="false" text="Locate codeword">
+                        <Font name="Constantia" size="25.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="codewordFoundObjective" layoutX="143.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Locate codeword">
                      <font>
-                        <Font name="Century" size="12.0" />
-                     </font></CheckBox>
-                  <CheckBox fx:id="converterFoundObjective" blendMode="DARKEN" layoutX="47.0" layoutY="77.0" mnemonicParsing="false" text="Locate cypher">
+                        <Font name="Constantia" size="25.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="safeLocatedObjective" layoutX="366.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Find safe">
                      <font>
-                        <Font name="Century" size="12.0" />
-                     </font></CheckBox>
-                  <CheckBox fx:id="phoneLocatedObjective" blendMode="DARKEN" layoutX="47.0" layoutY="119.0" mnemonicParsing="false" text="Find phone">
+                        <Font name="Constantia" size="25.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="riddleSolvedObjective" layoutX="366.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Solve riddle">
                      <font>
-                        <Font name="Century" size="12.0" />
-                     </font></CheckBox>
-                  <CheckBox fx:id="safeLocatedObjective" blendMode="DARKEN" layoutX="47.0" layoutY="99.0" mnemonicParsing="false" text="Find safe">
+                        <Font name="Constantia" size="25.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="converterFoundObjective" layoutX="143.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Locate cypher">
                      <font>
-                        <Font name="Century" size="12.0" />
-                     </font></CheckBox>
-                  <Pane layoutX="-1.0" prefHeight="134.0" prefWidth="225.0" visible="false" />
-                  <CheckBox fx:id="guardTalkedObjective" blendMode="DARKEN" layoutX="47.0" layoutY="11.0" mnemonicParsing="false" text="Talk to guard!">
+                        <Font name="Constantia" size="25.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="phoneLocatedObjective" layoutX="367.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Find phone">
                      <font>
-                        <Font name="Century" size="12.0" />
-                     </font></CheckBox>
+                        <Font name="Constantia" size="25.0" />
+                     </font>
+                  </Text>
                </children>
             </Pane>
             <Text layoutX="3.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hints left:">
@@ -81,14 +86,14 @@
                <font>
                   <Font size="19.0" />
                </font></Text>
-            <Text layoutX="917.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Objectives:">
+            <Text layoutX="1011.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Objectives:">
                <font>
-                  <Font name="Century" size="29.0" />
+                  <Font name="Constantia Bold" size="29.0" />
                </font>
             </Text>
-            <ScrollPane blendMode="DARKEN" hbarPolicy="NEVER" layoutX="324.0" layoutY="-2.0" prefHeight="195.0" prefWidth="562.0">
+            <ScrollPane blendMode="DARKEN" hbarPolicy="NEVER" layoutX="335.0" layoutY="-2.0" prefHeight="195.0" prefWidth="662.0">
                <content>
-                  <VBox fx:id="chatVbox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="176.0" prefWidth="531.0" translateX="10.0" translateY="10.0" />
+                  <VBox fx:id="chatVbox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="176.0" prefWidth="665.0" translateX="10.0" translateY="10.0" />
                </content>
             </ScrollPane>
          </children>

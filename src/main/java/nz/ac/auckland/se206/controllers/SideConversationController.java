@@ -37,24 +37,19 @@ public class SideConversationController {
   private void runGpt(ChatCompletionRequest chatCompletionRequest, boolean isRecursion)
       throws ApiProxyException {
     // run the GPT model in a background thread
-    Task<Void> backgroundTask =
-        new Task<Void>() {
-          @Override
-          protected Void call() throws Exception {
-            try {
-              if (isRecursion) {
+    if (isRecursion) {
+      Task<Void> backgroundTask =
+          new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+              try {
                 GptAndTextAreaManager.setPrisonerOneThinkUp();
-              } else {
-                GptAndTextAreaManager.setPrisonerTwoThinkUp();
-              }
                 System.out.println("GPT for conversation running");
-              ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
-              Choice result = chatCompletionResult.getChoices().iterator().next();
-              chatCompletionRequest.addMessage(result.getChatMessage());
-              List<ChatMessage> messages = chatCompletionRequest.getMessages();
-              int size = messages.size();
-
-              if (isRecursion) {
+                ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
+                Choice result = chatCompletionResult.getChoices().iterator().next();
+                chatCompletionRequest.addMessage(result.getChatMessage());
+                List<ChatMessage> messages = chatCompletionRequest.getMessages();
+                int size = messages.size();
                 ChatMessage message = messages.get(size - 1);
                 prisonerOneText = message.getContent();
                 displayPrisonerOneMessage();
@@ -62,24 +57,30 @@ public class SideConversationController {
                 chatCompletionRequest.addMessage(
                     new ChatMessage("user", GptPromptEngineering.getConversationRespond()));
                 runGpt(chatCompletionRequest, false);
-              }else{
-                ChatMessage message = messages.get(size - 1);
-                prisonerTwoText = message.getContent();
-                displayPrisonerTwoMessage();
-                GptAndTextAreaManager.setPrisonerTwoThinkDown();
+                return null;
+              } catch (ApiProxyException e) {
+                ChatMessage error = new ChatMessage("assistant", "Error: \n" + "GPT not working");
+                chatCompletionRequest.addMessage(error);
+                e.printStackTrace();
+                return null;
               }
-
-              return null;
-            } catch (ApiProxyException e) {
-              ChatMessage error = new ChatMessage("assistant", "Error: \n" + "GPT not working");
-              chatCompletionRequest.addMessage(error);
-              e.printStackTrace();
-              return null;
             }
-          }
-        };
-    Thread gptThread = new Thread(null, backgroundTask);
-    gptThread.start();
+          };
+      Thread gptThread = new Thread(null, backgroundTask);
+      gptThread.start();
+    } else {
+      GptAndTextAreaManager.setPrisonerTwoThinkUp();
+      System.out.println("GPT for conversation running");
+      ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
+      Choice result = chatCompletionResult.getChoices().iterator().next();
+      chatCompletionRequest.addMessage(result.getChatMessage());
+      List<ChatMessage> messages = chatCompletionRequest.getMessages();
+      int size = messages.size();
+      ChatMessage message = messages.get(size - 1);
+      prisonerTwoText = message.getContent();
+      displayPrisonerTwoMessage();
+      GptAndTextAreaManager.setPrisonerTwoThinkDown();
+    }
   }
 
   private void displayPrisonerOneMessage() {

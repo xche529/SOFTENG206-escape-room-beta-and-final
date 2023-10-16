@@ -7,7 +7,6 @@ import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -20,6 +19,7 @@ import javafx.util.Duration;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GptAndTextAreaManager;
 import nz.ac.auckland.se206.GptAndTextAreaManager.Characters;
+import nz.ac.auckland.se206.SFX;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
@@ -35,12 +35,12 @@ public class TextAreaController {
   @FXML private TextField inputText;
   @FXML private VBox chatVbox;
 
-  @FXML private CheckBox riddleSolvedObjective;
-  @FXML private CheckBox codewordFoundObjective;
-  @FXML private CheckBox converterFoundObjective;
-  @FXML private CheckBox phoneLocatedObjective;
-  @FXML private CheckBox safeLocatedObjective;
-  @FXML private CheckBox guardTalkedObjective;
+  @FXML private Text riddleSolvedObjective;
+  @FXML private Text codewordFoundObjective;
+  @FXML private Text converterFoundObjective;
+  @FXML private Text phoneLocatedObjective;
+  @FXML private Text safeLocatedObjective;
+  @FXML private Text guardTalkedObjective;
   private Timeline timelineTwo;
 
   private Timeline timeline;
@@ -48,6 +48,7 @@ public class TextAreaController {
   public Image playerAvatar;
   public Image prisonerOneAvatar;
   public Image prisonerTwoAvatar;
+  public SFX writingSfx = new SFX("src/main/resources/sounds/pencil.mp3");
 
   @FXML
   private void initialize() {
@@ -76,7 +77,8 @@ public class TextAreaController {
         .addListener(
             (observable, oldValue, newValue) -> {
               if (newValue) {
-                riddleSolvedObjective.setSelected(true);
+                riddleSolvedObjective.setStrikethrough(true);
+                writingSfx.playSFX();
                 try {
                   GptAndTextAreaManager.sendMessage(GptPromptEngineering.solvedRaddleGuardPrompt());
                   GptAndTextAreaManager.sideConversationController.refreshMessages(
@@ -91,14 +93,17 @@ public class TextAreaController {
         .addListener(
             (observable, oldValue, newValue) -> {
               if (newValue) {
-                codewordFoundObjective.setSelected(true);
+                codewordFoundObjective.setStrikethrough(true);
+                writingSfx.playSFX();
               }
             });
     GameState.isConverterFoundProperty()
         .addListener(
             (observable, oldValue, newValue) -> {
               if (newValue) {
-                converterFoundObjective.setSelected(true);
+                converterFoundObjective.setStrikethrough(true);
+                writingSfx.playSFX();
+
                 GptAndTextAreaManager.sideConversationController.refreshMessages(
                     GptPromptEngineering.converterFindPrisonerPrompt());
               }
@@ -107,7 +112,9 @@ public class TextAreaController {
         .addListener(
             (observable, oldValue, newValue) -> {
               if (newValue) {
-                phoneLocatedObjective.setSelected(true);
+                phoneLocatedObjective.setStrikethrough(true);
+                writingSfx.playSFX();
+
                 GptAndTextAreaManager.sideConversationController.refreshMessages(
                     GptPromptEngineering.phoneFindPrisonerPrompt());
               }
@@ -116,7 +123,9 @@ public class TextAreaController {
         .addListener(
             (observable, oldValue, newValue) -> {
               if (newValue) {
-                safeLocatedObjective.setSelected(true);
+                safeLocatedObjective.setStrikethrough(true);
+                writingSfx.playSFX();
+
                 GptAndTextAreaManager.currentCharacter = Characters.GUARD;
                 try {
                   GptAndTextAreaManager.sendMessage(GptPromptEngineering.findSafeGuardPrompt());
@@ -132,7 +141,9 @@ public class TextAreaController {
         .addListener(
             (observable, oldValue, newValue) -> {
               if (newValue) {
-                guardTalkedObjective.setSelected(true);
+                guardTalkedObjective.setStrikethrough(true);
+                writingSfx.playSFX();
+
                 try {
                   GptAndTextAreaManager.sideConversationController.refreshMessages(
                       GptPromptEngineering.findGuardConversationRepond());
@@ -209,12 +220,12 @@ public class TextAreaController {
     GameState.setGuardTalked(false);
 
     // resets the checkboxes
-    riddleSolvedObjective.setSelected(false);
-    codewordFoundObjective.setSelected(false);
-    converterFoundObjective.setSelected(false);
-    phoneLocatedObjective.setSelected(false);
-    safeLocatedObjective.setSelected(false);
-    guardTalkedObjective.setSelected(false);
+    riddleSolvedObjective.setStrikethrough(false);
+    codewordFoundObjective.setStrikethrough(false);
+    converterFoundObjective.setStrikethrough(false);
+    phoneLocatedObjective.setStrikethrough(false);
+    safeLocatedObjective.setStrikethrough(false);
+    guardTalkedObjective.setStrikethrough(false);
   }
 
   public void setMessageHistory(ChatCompletionRequest chat) {
