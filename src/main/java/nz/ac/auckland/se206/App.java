@@ -107,7 +107,7 @@ public class App extends Application {
     // stacks the settings page over the start interface
     StackPane startInterfaceStack = new StackPane(startInterfaceLoader.load(), settings);
     StackPane.setAlignment(settings, javafx.geometry.Pos.TOP_LEFT);
-    VBox startInterfaceVBox = new VBox(startInterfaceStack);
+    VBox startInterfaceVbox = new VBox(startInterfaceStack);
 
     // creating hboxes for the scenes too add the side coverstaion
     HBox officeHbox = new HBox(office, sideConversation);
@@ -123,7 +123,7 @@ public class App extends Application {
     SceneManager.addUi(AppUi.ROOM, roomVbox);
     SceneManager.addUi(AppUi.END_WON, endScreenWonLoader.load());
     SceneManager.addUi(AppUi.END_LOST, endScreenLostLoader.load());
-    SceneManager.addUi(AppUi.START_INTERFACE, startInterfaceVBox);
+    SceneManager.addUi(AppUi.START_INTERFACE, startInterfaceVbox);
     SceneManager.addUi(AppUi.OFFICE, officeVbox);
     SceneManager.addUi(AppUi.CAFETERIA, cafeteriaVbox);
     SceneManager.addUi(AppUi.SETTINGS, settings);
@@ -151,10 +151,10 @@ public class App extends Application {
 
     // setting up the scene and getting the random code
     Safe.getRandomCode();
-    startInterfaceVBox.setLayoutX(centerX);
-    startInterfaceVBox.setLayoutY(centerY);
+    startInterfaceVbox.setLayoutX(centerX);
+    startInterfaceVbox.setLayoutY(centerY);
     // make it fill the screen
-    scene = new Scene(startInterfaceVBox, 1413 * overallScale, 605 * overallScale);
+    scene = new Scene(startInterfaceVbox, 1413 * overallScale, 605 * overallScale);
     scene.setFill(Color.rgb(244, 244, 244, 1));
     stage.setScene(scene);
 
