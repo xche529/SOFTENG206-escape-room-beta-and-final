@@ -1,5 +1,6 @@
 package nz.ac.auckland.se206;
 
+import java.util.List;
 import javafx.concurrent.Task;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
@@ -98,7 +99,8 @@ public class GptAndTextAreaManager {
   //       String check = messages.get(i).getContent();
   //       if (check.charAt(0) == ('(') && check.charAt(check.length() - 1) == (')')) {
   //         System.out.println(
-  //             messages.get(i).getRole() + ": " + chat.getMessages().get(i).getContent() + "\n\n");
+  //             messages.get(i).getRole() + ": " + chat.getMessages().get(i).getContent() +
+  // "\n\n");
   //         continue;
   //       }
   //       if (currentCharacter == Characters.GUARD) {
@@ -108,7 +110,9 @@ public class GptAndTextAreaManager {
   //         }
   //         if (isHintRunning && GameState.difficulty == GameState.Difficulty.MEDIUM) {
   //           if (messages.get(i).getRole().equals("assistant")
-  //               && (messages.get(i).getContent().contains("HINT") || messages.get(i).getContent().contains("Hint:") || messages.get(i).getContent().contains("hint:")) && i != 1) {
+  //               && (messages.get(i).getContent().contains("HINT") ||
+  // messages.get(i).getContent().contains("Hint:") ||
+  // messages.get(i).getContent().contains("hint:")) && i != 1) {
   //             hintLeft--;
   //           }
   //           if (hintLeft == 0) {
@@ -147,7 +151,6 @@ public class GptAndTextAreaManager {
   //   return result;
   // }
 
-
   /*
    * this method is called when the user switches the target character or the
    * message needs to be update
@@ -158,24 +161,30 @@ public class GptAndTextAreaManager {
     textAreaInputBox.getParent().requestFocus();
   }
 
-  public static void displayTarget(){
+  public static void displayTarget() {
     textAreaController.displayTarget(currentCharacter);
   }
 
-  public static void displayTarget(Characters character){
+  public static void displayTarget(Characters character) {
     textAreaController.displayTarget(character);
   }
 
-  public static void setMessageHistory(ChatCompletionRequest chatCompletionRequest){
+  public static void setMessageHistory(ChatCompletionRequest chatCompletionRequest) {
     textAreaController.setMessageHistory(chatCompletionRequest);
   }
-  public static void onSubmitMessage() throws ApiProxyException{
+
+  public static void onSubmitMessage() throws ApiProxyException {
     textAreaController.onSubmitMessage();
   }
-  public static void setPlayerAvatar(Image image){
+
+  public static void setPlayerAvatar(Image image) {
     textAreaController.setPlayerAvatar(image);
   }
 
+  public static String getRiddle() throws ApiProxyException {
+    List<ChatMessage> messages = guardChatCompletionRequest.getMessages();
+    return messages.get(1).getContent();
+  }
 
   public static void sendMessage(String message) throws ApiProxyException {
 
@@ -183,17 +192,17 @@ public class GptAndTextAreaManager {
 
     if (currentCharacter == Characters.GUARD) {
       // append message depending on where the player is in the game
-      if (GameState.isRiddleResolved() == false) {
-        message = message + "(riddle unsolved)";
-      } else if (GameState.wordFound == false) {
-        message = message + "(riddle solved)";
-      } else if (GameState.cypherFound == false) {
-        message = message + "(word found)";
-      } else if (GameState.safeFound == false) {
-        message = message + "(cypher found)";
-      } else if (GameState.safeUnlocked == false) {
-        message = message + "(safe found)";
-      }
+      // if (GameState.isRiddleResolved() == false) {
+      //   message = message + "(riddle unsolved)";
+      // } else if (GameState.wordFound == false) {
+      //   message = message + "(riddle solved)";
+      // } else if (GameState.cypherFound == false) {
+      //   message = message + "(word found)";
+      // } else if (GameState.safeFound == false) {
+      //   message = message + "(cypher found)";
+      // } else if (GameState.safeUnlocked == false) {
+      //   message = message + "(safe found)";
+      // }
       // make new message and append
       guardChatCompletionRequest.addMessage(new ChatMessage("user", message));
       runGpt(guardChatCompletionRequest);
@@ -218,17 +227,17 @@ public class GptAndTextAreaManager {
     displayTarget(currentCharacter);
     if (ifSpeak) {
       // play sound effect, hmm sound
-      //String soundEffect;
+      // String soundEffect;
       if (currentCharacter == Characters.GUARD) {
-        //soundEffect = "src/main/resources/sounds/HmmSoundEffect1.mp3";
+        // soundEffect = "src/main/resources/sounds/HmmSoundEffect1.mp3";
         SFX guardNoise = new SFX("src/main/resources/sounds/HmmSoundEffect1.mp3");
         guardNoise.playSFX();
       } else if (currentCharacter == Characters.PRISONER_ONE) {
-        //soundEffect = "src/main/resources/sounds/HmmSoundEffect2.mp3";
+        // soundEffect = "src/main/resources/sounds/HmmSoundEffect2.mp3";
         SFX prisonerOneNoise = new SFX("src/main/resources/sounds/HmmSoundEffect2.mp3");
         prisonerOneNoise.playSFX();
       } else {
-        //soundEffect = "src/main/resources/sounds/HmmSoundEffect3.mp3";
+        // soundEffect = "src/main/resources/sounds/HmmSoundEffect3.mp3";
         SFX prisonerTwoNoise = new SFX("src/main/resources/sounds/HmmSoundEffect3.mp3");
         prisonerTwoNoise.playSFX();
       }
@@ -243,7 +252,7 @@ public class GptAndTextAreaManager {
       //         mediaPlayer.play();
       //         return null;
       //       }
-      //     };      
+      //     };
       // Thread thread = new Thread(task);
       // thread.start();
     }
@@ -257,29 +266,19 @@ public class GptAndTextAreaManager {
           protected Void call() throws Exception {
             if (currentCharacter == Characters.GUARD) {
               // make guard thinking animation go
-              cafeteriaController.setThinkingThreeUp();
+              setGuardThinkUp();
             } else if (currentCharacter == Characters.PRISONER_ONE) {
               // make prisoner one thinking animation start
-              roomController.setThinkingOneUp();
-              cafeteriaController.setThinkingOneUp();
-              officeController.setThinkingOneUp();
+              setPrisonerOneThinkUp();
             } else if (currentCharacter == Characters.PRISONER_TWO) {
               // make prisoner two thinking animation start
-              roomController.setThinkingTwoUp();
-              cafeteriaController.setThinkingTwoUp();
-              officeController.setThinkingTwoUp();
+              setPrisonerTwoThinkUp();
             }
             try {
               ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
               Choice result = chatCompletionResult.getChoices().iterator().next();
               chatCompletionRequest.addMessage(result.getChatMessage());
-              roomController.setThinkingTwoDown();
-              cafeteriaController.setThinkingTwoDown();
-              officeController.setThinkingTwoDown();
-              roomController.setThinkingOneDown();
-              cafeteriaController.setThinkingOneDown();
-              officeController.setThinkingOneDown();
-              cafeteriaController.setThinkingThreeDown();
+              setAllThinkDown();
               isNewMessage = true;
               // setting the thinking animations in all of the scenes
               return null;
@@ -289,13 +288,7 @@ public class GptAndTextAreaManager {
               displayTarget(currentCharacter);
               e.printStackTrace();
               // setting the thinking animations in all of the scenes
-              roomController.setThinkingTwoDown();
-              cafeteriaController.setThinkingTwoDown();
-              officeController.setThinkingTwoDown();
-              roomController.setThinkingOneDown();
-              cafeteriaController.setThinkingOneDown();
-              officeController.setThinkingOneDown();
-              cafeteriaController.setThinkingThreeDown();
+              setAllThinkDown();
               isNewMessage = true;
               return null;
             }
@@ -303,5 +296,43 @@ public class GptAndTextAreaManager {
         };
     Thread gptThread = new Thread(null, backgroundTask);
     gptThread.start();
+  }
+
+  public static void setPrisonerOneThinkUp() {
+    roomController.setThinkingOneUp();
+    cafeteriaController.setThinkingOneUp();
+    officeController.setThinkingOneUp();
+  }
+
+  public static void setPrisonerOneThinkDown() {
+    roomController.setThinkingOneDown();
+    cafeteriaController.setThinkingOneDown();
+    officeController.setThinkingOneDown();
+  }
+
+  public static void setPrisonerTwoThinkUp() {
+    roomController.setThinkingTwoUp();
+    cafeteriaController.setThinkingTwoUp();
+    officeController.setThinkingTwoUp();
+  }
+
+  public static void setPrisonerTwoThinkDown() {
+    roomController.setThinkingTwoDown();
+    cafeteriaController.setThinkingTwoDown();
+    officeController.setThinkingTwoDown();
+  }
+
+  public static void setGuardThinkUp() {
+    cafeteriaController.setThinkingThreeUp();
+  }
+
+  public static void setGuardThinkDown() {
+    cafeteriaController.setThinkingThreeDown();
+  }
+
+  public static void setAllThinkDown() {
+    setGuardThinkDown();
+    setPrisonerOneThinkDown();
+    setPrisonerTwoThinkDown();
   }
 }

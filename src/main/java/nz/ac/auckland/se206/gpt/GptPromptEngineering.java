@@ -2,6 +2,8 @@ package nz.ac.auckland.se206.gpt;
 
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GameState.Difficulty;
+import nz.ac.auckland.se206.GptAndTextAreaManager;
+import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 /** Utility class for generating GPT prompt engineering strings. */
 public class GptPromptEngineering {
@@ -12,6 +14,10 @@ public class GptPromptEngineering {
    * @param wordToGuess the word to be guessed in the riddle
    * @return the generated prompt engineering string
    */
+  public static String riddle = "";
+
+  public static String name = "";
+
   public static String answer = "";
 
   public static String getRiddleWithGivenWord(String wordToGuess) {
@@ -44,37 +50,38 @@ public class GptPromptEngineering {
     if (GameState.difficulty == Difficulty.HARD) {
       // get the guards story if the difficulty is hard
       return "(You are a guard with strong personality who is helping a prisoner escape an prison"
-          + " You should give the prisoner a riddle with the answer of:"
+          + " You should give the prisoner a riddle with the answer of: "
           // append riddle answer
           + wordToGuess
-          + " in your first message. The riddle can go up to 3 or 4 lines. and easy to answer You"
-          + " cannot reveal the answer even if the player asks for it. Do not give any hints. Keep"
-          + " your messages as concise as possible. Only reply from the guard point of view.  When"
-          + " the Riddle is guessed correctly you must return only 'Correct')";
+          + " in your first message. The riddle can go up to 3 or 4 lines and easy to answer. You"
+          + " cannot give the answer even if the player give up. Do not give any hints. Keep your"
+          + " messages as concise as possible. Only reply from the guard point of view.  When the"
+          + " Riddle is guessed correctly or answer is given by player you must return only"
+          + " 'Correct')";
 
     } else if (GameState.difficulty == Difficulty.MEDIUM) {
       // get the guards story if the difficulty is medium
       return "(You are a guard with strong personality who is helping a prisoner escape an prison"
-          + " You should give the prisoner a riddle with the answer of:"
+          + " You should give the prisoner a riddle with the answer of: "
           // append riddle answer
           + wordToGuess
-          + " in your first message. The riddle can go up to 3 or 4 lines. and easy to answer You"
+          + " in your first message. The riddle can go up to 3 or 4 lines and easy to answer You"
           + " can only give the prisoner 5 hints, do not give hint easily. after 5 no more hints,"
-          + " when you give hint,put (HINT) at the end of your response. Do not reveal the answer"
-          + " even if the player asks for it. Keep your messages as concise as possible. Only reply"
-          + " from the guard point of view. When the Riddle is guessed correctly you must return"
-          + " only 'Correct')";
+          + " when you give hint,put (HINT) at the end of your response. Do not give the answer"
+          + " even if the player give up. Keep your messages as concise as possible. Only reply"
+          + " from the guard point of view. When the Riddle is guessed correctly or answer is given"
+          + " you must return only 'Correct')";
     }
     // get the guards story if the difficulty is easy
     return "(You are a guard with strong personality who is helping a prisoner escape an prison You"
-        + " should give the prisoner a riddle with the answer of:"
+        + " should give the prisoner a riddle with the answer of: "
         // append riddle answer
         + wordToGuess
         + " in your first message. The riddle can go up to 3 or 4 lines. and easy to answer You can"
-        + " only give the prisoner as much hint as you want but You cannot reveal the answer even"
-        + " if the player asks for it. Keep your messages as concise as possible. Only reply from"
-        + " the guard point of view. When the Riddle is guessed correctly you must return only"
-        + " 'Correct')";
+        + " give the prisoner as much hint as you want but You cannot give the answer even if the"
+        + " player give up. Keep your messages as concise as possible. Only reply from the guard"
+        + " point of view. When the Riddle is guessed correctly or answer is given by the player"
+        + " you must return only 'Correct')";
   }
 
   public static String getPrisonerOneSetUp() {
@@ -117,11 +124,12 @@ public class GptPromptEngineering {
   }
 
   public static String groupConversationPrompt(String playerName) {
+    name = playerName;
     return "(Try to speak like real prisoner with clear persionality. Start the reply by"
         + " saying the guard is looking for the a prisoner with a name of"
         + playerName
-        + " you are a good friend of him. Do not reply as another person. Keep all messages"
-        + " concise.)";
+        + " you are a good friend of him and he is next to you now. Do not reply as another person."
+        + " Do not reply as another person. Keep all messages concise.)";
   }
 
   public static String getConversationRespond() {
@@ -130,12 +138,53 @@ public class GptPromptEngineering {
         + " as a second prisoner)";
   }
 
-  public static String findGuardConversationRepond() {
-    return "(You the first persioner reached to the guard, he gived you a riddle to solve with the"
-        + " answer of:"
-        + answer
-        + " Reply like you have no idea what the answer is and try to guess a wrong answer. Do not"
+  public static String findGuardConversationRepond() throws ApiProxyException {
+    riddle = GptAndTextAreaManager.getRiddle();
+    return "(You the first persioner reached to the guard, he said:"
+        + riddle
+        + " In your reply try to guess a very wrong answer. Do not"
         + " reply as another person. Do not give the answer or contain the answer in your reply."
         + " Keep message concise.)";
+  }
+
+  public static String solvedRiddlePrisonerPrompt() {
+    return name
+        + "( have solved the riddle, tell him well done and try to guess what it means. Keep"
+        + " all messages concise.";
+  }
+
+  public static String safeFindPrisonerPrompt() {
+    return "(You found a safe, Say that it need for digit code to open it and you know there's a"
+        + " safe with a phone number of your gang inside, this might be it. Try to guess where to"
+        + " find the code. Keep all messages concise.)";
+  }
+
+  public static String converterFindPrisonerPrompt() {
+    return "(You found a cipher. Try to guess what it is. Keep all messages concise.)";
+  }
+
+  public static String phoneFindPrisonerPrompt() {
+    if (GameState.isSafeFound()) {
+      return name
+          + "( just found a phone. Say that try to call the number you found in the safe. Keep all"
+          + " messages concise.)";
+    } else {
+      return name
+          + "( just found a phone. Say that there's a safe in the prison with a number inside you"
+          + " can call for a helicopter from the gang to pick you up but you cannot find the safe."
+          + " Keep all messages concise.)";
+    }
+  }
+
+  public static String codeWordFindPrisonerPrompt() {
+    return "(You have found a codeword on the object "
+        + answer
+        + "Try to guess what it is used for. Keep all messages concise.)";
+  }
+
+  public static String noTimeLeftPrisonerPrompt() {
+    return "(You don't have much time left. Tell "
+        + name
+        + " to hurry up and you don't want to be caught. Keep all messages concise.)";
   }
 }

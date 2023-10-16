@@ -3,6 +3,7 @@ package nz.ac.auckland.se206;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
+import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 
 public class GameTimer {
@@ -25,6 +26,7 @@ public class GameTimer {
                   // uses test to spech to tell the player how long they have left
                   if (GameState.secondsRemaining == 90 && GameState.isWon == false) {
                     textToSpeech.speak("a minute and a half remaining");
+                    GptAndTextAreaManager.sideConversationController.refreshMessages(GptPromptEngineering.noTimeLeftPrisonerPrompt());
                   } else if (GameState.secondsRemaining == 60 && GameState.isWon == false) {
                     textToSpeech.speak("one minute remaining");
                   } else if (GameState.secondsRemaining == 30 && GameState.isWon == false) {

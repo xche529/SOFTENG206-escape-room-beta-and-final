@@ -4,6 +4,7 @@ import java.util.List;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
+import nz.ac.auckland.se206.GptAndTextAreaManager;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
@@ -41,6 +42,11 @@ public class SideConversationController {
           @Override
           protected Void call() throws Exception {
             try {
+              if (isRecursion) {
+                GptAndTextAreaManager.setPrisonerOneThinkUp();
+              } else {
+                GptAndTextAreaManager.setPrisonerTwoThinkUp();
+              }
                 System.out.println("GPT for conversation running");
               ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
               Choice result = chatCompletionResult.getChoices().iterator().next();
@@ -52,6 +58,7 @@ public class SideConversationController {
                 ChatMessage message = messages.get(size - 1);
                 prisonerOneText = message.getContent();
                 displayPrisonerOneMessage();
+                GptAndTextAreaManager.setPrisonerOneThinkDown();
                 chatCompletionRequest.addMessage(
                     new ChatMessage("user", GptPromptEngineering.getConversationRespond()));
                 runGpt(chatCompletionRequest, false);
@@ -59,6 +66,7 @@ public class SideConversationController {
                 ChatMessage message = messages.get(size - 1);
                 prisonerTwoText = message.getContent();
                 displayPrisonerTwoMessage();
+                GptAndTextAreaManager.setPrisonerTwoThinkDown();
               }
 
               return null;

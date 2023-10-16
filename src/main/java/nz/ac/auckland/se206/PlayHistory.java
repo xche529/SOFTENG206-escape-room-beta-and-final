@@ -98,7 +98,6 @@ public class PlayHistory implements Serializable {
                 + "\n\n");
         playHistoryHBox.add(result);
         Integer avatarNumber = playHistory.getPlayerAvatar();
-        avatarNumber++;
         playHistoryHBox.add(avatarNumber);
         playHistoryList.add(playHistoryHBox);
         // Text text = new Text(result);
