@@ -25,6 +25,7 @@ import nz.ac.auckland.se206.GptAndTextAreaManager.Characters;
 import nz.ac.auckland.se206.MovementControl;
 import nz.ac.auckland.se206.PlayHistory;
 import nz.ac.auckland.se206.SceneManager;
+import nz.ac.auckland.se206.SoundEffect;
 import nz.ac.auckland.se206.reseters.GameEnd;
 import nz.ac.auckland.se206.reseters.RandomizationGenerator;
 
@@ -88,6 +89,7 @@ public class OfficeController {
   private Label[] digits;
   private int currentDigit = 0;
   private Rectangle[] items;
+  private SoundEffect winningSound = new SoundEffect("Win.mp3");
 
   /**
    * This method is called by the FXMLLoader when initialization is complete
@@ -820,6 +822,7 @@ public class OfficeController {
 
         // switches to the end screen
         SceneManager.switchToEndWon(scene);
+        winningSound.playSFX();
       } else {
         // do nothing if the phone number is wrong
         System.out.println("Wrong number");
