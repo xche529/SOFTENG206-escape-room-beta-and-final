@@ -167,6 +167,7 @@
                   <Image url="@../images/thinking.gif" />
                </image>
             </ImageView>
+            <Pane fx:id="blurredPane" onMouseClicked="#onBlurredPaneClicked" opacity="0.74" prefHeight="615.0" prefWidth="1132.0" style="-fx-background-color: white;" visible="false" />
             <Pane fx:id="paperPane" layoutX="130.0" layoutY="65.0" prefHeight="486.0" prefWidth="852.0" visible="false">
                <children>
                   <ImageView fitHeight="510.0" fitWidth="888.0" pickOnBounds="true" preserveRatio="true">
@@ -196,82 +197,76 @@
                   <Image url="@../images/background.png" />
                </image>
             </ImageView>
-            <Pane fx:id="padlockPane" layoutX="250.0" layoutY="104.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="360.0" prefWidth="684.0" style="-fx-background-color: white;" visible="false">
+            <Pane fx:id="padlockPane" layoutX="250.0" layoutY="104.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="298.0" prefWidth="686.0" style="-fx-background-color: white;" visible="false">
                <children>
-                  <Label fx:id="digitOne" layoutX="175.0" layoutY="175.0" prefHeight="42.0" prefWidth="33.0" text="0">
+                  <ImageView fitHeight="315.0" fitWidth="686.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/NumberCounter.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="digitTwo" layoutX="216.0" layoutY="96.0" prefHeight="42.0" prefWidth="33.0" text="0" textFill="WHITE">
                      <font>
-                        <Font size="42.0" />
+                        <Font name="PT Mono Bold" size="96.0" />
                      </font>
                   </Label>
-                  <Label fx:id="digitTwo" layoutX="241.0" layoutY="175.0" prefHeight="42.0" prefWidth="33.0" text="0">
+                  <Label fx:id="digitThree" layoutX="340.0" layoutY="96.0" prefHeight="42.0" prefWidth="33.0" text="0" textAlignment="CENTER" textFill="WHITE">
                      <font>
-                        <Font size="42.0" />
+                        <Font name="PT Mono Bold" size="96.0" />
                      </font>
                   </Label>
-                  <Label fx:id="digitThree" layoutX="310.0" layoutY="175.0" prefHeight="42.0" prefWidth="33.0" text="0" textAlignment="CENTER">
+                  <Label fx:id="digitFour" layoutX="464.0" layoutY="95.0" prefHeight="42.0" prefWidth="33.0" text="0" textAlignment="CENTER" textFill="WHITE">
                      <font>
-                        <Font size="42.0" />
+                        <Font name="PT Mono Bold" size="96.0" />
                      </font>
                   </Label>
-                  <Label fx:id="digitFour" layoutX="380.0" layoutY="175.0" prefHeight="42.0" prefWidth="33.0" text="0" textAlignment="CENTER">
+                  <Button fx:id="openButton" layoutX="578.0" layoutY="144.0" mnemonicParsing="false" onAction="#onClickOpenPadlock" text="OPEN" />
+                  <ImageView fx:id="digitOnePlus" fitHeight="37.0" fitWidth="40.0" layoutX="112.0" layoutY="44.0" onMouseClicked="#digitOneIncrement">
+                     <image>
+                        <Image url="@../images/incrementer.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="digitTwoPlus" fitHeight="37.0" fitWidth="40.0" layoutX="222.0" layoutY="45.0" onMouseClicked="#digitTwoIncrement">
+                     <image>
+                        <Image url="@../images/incrementer.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="digitThreePlus" fitHeight="37.0" fitWidth="40.0" layoutX="349.0" layoutY="45.0" onMouseClicked="#digitThreeIncrement">
+                     <image>
+                        <Image url="@../images/incrementer.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="digitFourPlus" fitHeight="37.0" fitWidth="40.0" layoutX="479.0" layoutY="45.0" onMouseClicked="#digitFourIncrement">
+                     <image>
+                        <Image url="@../images/incrementer.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="digitOneMinus" fitHeight="37.0" fitWidth="40.0" layoutX="95.0" layoutY="214.0" onMouseClicked="#digitOneDecrease" rotate="180.0">
+                     <image>
+                        <Image url="@../images/incrementer.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="digitTwoMinus" fitHeight="37.0" fitWidth="40.0" layoutX="225.0" layoutY="215.0" onMouseClicked="#digitTwoDecrease" rotate="180.0">
+                     <image>
+                        <Image url="@../images/incrementer.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="digitThreeMinus" fitHeight="37.0" fitWidth="40.0" layoutX="349.0" layoutY="215.0" onMouseClicked="#digitThreeDecrease" rotate="180.0">
+                     <image>
+                        <Image url="@../images/incrementer.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="digitFourMinus" fitHeight="37.0" fitWidth="40.0" layoutX="476.0" layoutY="225.0" onMouseClicked="#digitFourDecrease" rotate="180.0">
+                     <image>
+                        <Image url="@../images/incrementer.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="digitOne" layoutX="94.0" layoutY="96.0" prefHeight="42.0" prefWidth="33.0" text="0" textFill="WHITE">
                      <font>
-                        <Font size="42.0" />
+                        <Font name="PT Mono Bold" size="96.0" />
                      </font>
                   </Label>
-                  <Label layoutX="205.0" layoutY="36.0" prefHeight="53.0" prefWidth="283.0" text="Enter the pin below:">
-                     <font>
-                        <Font size="29.0" />
-                     </font>
-                  </Label>
-                  <Button fx:id="openButton" layoutX="487.0" layoutY="188.0" mnemonicParsing="false" onAction="#onClickOpenPadlock" text="OPEN" />
-                  <ImageView fx:id="digitOnePlus" fitHeight="37.0" fitWidth="40.0" layoutX="168.0" layoutY="138.0" onMouseClicked="#digitOneIncrement">
-                     <image>
-                        <Image url="@../images/incrementer.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="digitTwoPlus" fitHeight="37.0" fitWidth="40.0" layoutX="238.0" layoutY="138.0" onMouseClicked="#digitTwoIncrement">
-                     <image>
-                        <Image url="@../images/incrementer.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="digitThreePlus" fitHeight="37.0" fitWidth="40.0" layoutX="307.0" layoutY="138.0" onMouseClicked="#digitThreeIncrement">
-                     <image>
-                        <Image url="@../images/incrementer.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="digitFourPlus" fitHeight="37.0" fitWidth="40.0" layoutX="373.0" layoutY="138.0" onMouseClicked="#digitFourIncrement">
-                     <image>
-                        <Image url="@../images/incrementer.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="digitOneMinus" fitHeight="37.0" fitWidth="40.0" layoutX="168.0" layoutY="233.0" onMouseClicked="#digitOneDecrease" rotate="180.0">
-                     <image>
-                        <Image url="@../images/incrementer.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="digitTwoMinus" fitHeight="37.0" fitWidth="40.0" layoutX="234.0" layoutY="233.0" onMouseClicked="#digitTwoDecrease" rotate="180.0">
-                     <image>
-                        <Image url="@../images/incrementer.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="digitThreeMinus" fitHeight="37.0" fitWidth="40.0" layoutX="307.0" layoutY="233.0" onMouseClicked="#digitThreeDecrease" rotate="180.0">
-                     <image>
-                        <Image url="@../images/incrementer.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="digitFourMinus" fitHeight="37.0" fitWidth="40.0" layoutX="373.0" layoutY="233.0" onMouseClicked="#digitFourDecrease" rotate="180.0">
-                     <image>
-                        <Image url="@../images/incrementer.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="cross" fitHeight="150.0" fitWidth="48.0" layoutX="618.0" layoutY="29.0" onMouseClicked="#onClickExitPadlock" onMouseEntered="#crossMouseEntered" onMouseExited="#crossMouseExited" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/Cross.png" />
-                     </image>
-                  </ImageView>
                </children>
             </Pane>
-            <Pane fx:id="blurredPane" opacity="0.74" prefHeight="615.0" prefWidth="1132.0" style="-fx-background-color: white;" visible="false" />
             <Pane fx:id="inspectingVendingPane" onMouseClicked="#onClickInspectingVendingPane" prefHeight="612.0" prefWidth="1117.0" visible="false">
                <children>
                   <ImageView fx:id="inspectingBin1" fitHeight="518.0" fitWidth="392.0" layoutX="438.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">

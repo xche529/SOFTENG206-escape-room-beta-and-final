@@ -185,8 +185,18 @@ public class CafeteriaController {
   @FXML
   private void onSafeClick(MouseEvent event) {
     // Shows the safe pane
+    blurredPane.setVisible(true);
     padlockPane.setVisible(true);
     safeBig.setVisible(false);
+  }
+
+  @FXML
+  private void onBlurredPaneClicked() {
+    blurredPane.setVisible(false);
+    padlockPane.setVisible(false);
+    inspectingVendingPane.setVisible(false);
+    inspectingPaintingPane.setVisible(false);
+    thoughtBubblePane.setVisible(false);
   }
 
   @FXML
