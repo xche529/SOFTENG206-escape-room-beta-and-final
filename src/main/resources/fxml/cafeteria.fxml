@@ -197,7 +197,7 @@
                   <Image url="@../images/background.png" />
                </image>
             </ImageView>
-            <Pane fx:id="padlockPane" layoutX="250.0" layoutY="104.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="298.0" prefWidth="686.0" style="-fx-background-color: white;" visible="false">
+            <Pane fx:id="padlockPane" layoutX="250.0" layoutY="104.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="298.0" prefWidth="686.0" style="-fx-background-color: white;">
                <children>
                   <ImageView fitHeight="315.0" fitWidth="686.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -220,7 +220,7 @@
                      </font>
                   </Label>
                   <Button fx:id="openButton" layoutX="578.0" layoutY="144.0" mnemonicParsing="false" onAction="#onClickOpenPadlock" text="OPEN" />
-                  <ImageView fx:id="digitOnePlus" fitHeight="37.0" fitWidth="40.0" layoutX="112.0" layoutY="44.0" onMouseClicked="#digitOneIncrement">
+                  <ImageView fx:id="digitOnePlus" fitHeight="37.0" fitWidth="40.0" layoutX="105.0" layoutY="44.0" onMouseClicked="#digitOneIncrement">
                      <image>
                         <Image url="@../images/incrementer.png" />
                      </image>
@@ -240,7 +240,7 @@
                         <Image url="@../images/incrementer.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="digitOneMinus" fitHeight="37.0" fitWidth="40.0" layoutX="95.0" layoutY="214.0" onMouseClicked="#digitOneDecrease" rotate="180.0">
+                  <ImageView fx:id="digitOneMinus" fitHeight="37.0" fitWidth="40.0" layoutX="98.0" layoutY="214.0" onMouseClicked="#digitOneDecrease" rotate="180.0">
                      <image>
                         <Image url="@../images/incrementer.png" />
                      </image>
