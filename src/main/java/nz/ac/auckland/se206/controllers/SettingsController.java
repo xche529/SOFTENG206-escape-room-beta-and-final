@@ -15,6 +15,7 @@ import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.reseters.GameEnd;
 
+/** settings class for the settings pane, to change audio and other tweaks. */
 public class SettingsController {
 
   @FXML private Slider audioSlider;
