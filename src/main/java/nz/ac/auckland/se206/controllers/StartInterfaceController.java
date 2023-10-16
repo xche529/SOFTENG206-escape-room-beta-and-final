@@ -64,11 +64,12 @@ public class StartInterfaceController {
   public Image playerAvatarThree;
   public Image playerAvatarFour;
   public Image playerAvatarFive;
-  public Image currentAvatarImage = new Image(new File("src/main/resources/images/PlayerAvatarOne.png").toURI().toString());
-
+  public Image currentAvatarImage =
+      new Image(new File("src/main/resources/images/PlayerAvatarOne.png").toURI().toString());
 
   @FXML
   private void initialize() {
+    // load the player avatar images
     playerAvatarOne =
         new Image(new File("src/main/resources/images/PlayerAvatarOne.png").toURI().toString());
     playerAvatarTwo =
@@ -79,6 +80,8 @@ public class StartInterfaceController {
         new Image(new File("src/main/resources/images/PlayerAvatarFour.png").toURI().toString());
     playerAvatarFive =
         new Image(new File("src/main/resources/images/PlayerAvatarFive.png").toURI().toString());
+
+    // set the default avatar to the first one
     avatarImageView.setImage(playerAvatarOne);
     avatarImageView.setFitHeight(100);
     avatarImageView.setFitWidth(100);
@@ -86,6 +89,7 @@ public class StartInterfaceController {
     // load play history
     loadPlayHistory();
 
+    // set the play history to update when the game state is updated
     GameState.updatePlayHistory()
         .addListener(
             (observable, oldValue, newValue) -> {
@@ -109,6 +113,8 @@ public class StartInterfaceController {
         String result = (String) playHistoryHBoxList.get(0);
         Integer avatarNumber = (Integer) playHistoryHBoxList.get(1);
         Image image = playerAvatarOne;
+
+        // set the avatar image to the correct one
         if (avatarNumber == 1) {
           image = playerAvatarOne;
         } else if (avatarNumber == 2) {
@@ -136,11 +142,6 @@ public class StartInterfaceController {
     }
   }
 
-  /*
-   * This method is invoked when the user clicks the "Start" button. It starts the
-   * game.
-   * It loads the room scene with user selected difficulty and play time.
-   */
   public void setRoomController(RoomController roomController) {
     this.roomController = roomController;
   }
@@ -151,26 +152,24 @@ public class StartInterfaceController {
 
   @FXML
   private void onStartGame(Event event) throws IOException, ApiProxyException {
+    // check if the user has selected a difficulty and time limit
     if (!twoMin.isSelected() && !fourMin.isSelected() && !sixMin.isSelected()) {
       showDialog("Invaild Inputs", "Please select a difficulty and time limit", "");
       return;
     }
+    // locks the player avatar and name in
     GptAndTextAreaManager.setPlayerAvatar(currentAvatarImage);
     GameState.setPlayerAvatar(currentAvatar);
     GameState.playerName = playerName.getText();
+    // changes to the first room
     Scene sceneButtonIsIn = twoTick.getScene();
     sideConversationController.setPlayerName(playerName.getText());
     sideConversationController.start();
     SceneManager.switchToFirstRoom(sceneButtonIsIn);
     new GameTimer();
     roomController.start();
+    // initializes a new gpt and text area manager
     GptAndTextAreaManager.initialize();
-    System.out.println(
-        "Game started with difficulty "
-            + GameState.difficulty
-            + " and play time "
-            + GameState.secondsRemaining
-            + " seconds");
     // unselects all of the choices
     twoMin.setSelected(false);
     fourMin.setSelected(false);
@@ -254,11 +253,7 @@ public class StartInterfaceController {
     avatarImageView.setFitWidth(100);
   }
 
-  /**
-   * This method is invoked when the user clicks any of the difficulty checkboxes.
-   *
-   * @param event
-   */
+  // This method is invoked when the user clicks any of the difficulty checkboxes.
   @FXML
   private void onSwitchDifficulty(Event event) {
     CheckBox checkBox = (CheckBox) event.getSource();
@@ -331,10 +326,7 @@ public class StartInterfaceController {
     System.out.println("Difficulty change: hard");
   }
 
-  /*
-   * This method is invoked when the user clicks any of the play time
-   * checkboxes.
-   */
+  // This method is invoked when the user clicks any of the play time checkboxes. 
   @FXML
   private void onSetPlayTime(Event event) {
     CheckBox checkBox = (CheckBox) event.getSource();

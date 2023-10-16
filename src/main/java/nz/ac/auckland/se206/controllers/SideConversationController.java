@@ -25,6 +25,7 @@ public class SideConversationController {
   private String playerName = "player";
 
   public void start() {
+    // set the initial prompt
     String message = GptPromptEngineering.groupConversationPrompt(playerName);
     groupChatCompletionRequest.addMessage(new ChatMessage("user", message));
     try {
@@ -45,6 +46,7 @@ public class SideConversationController {
               try {
                 GptAndTextAreaManager.setPrisonerOneThinkUp();
                 System.out.println("GPT for conversation running");
+                //executes a new chat completion request
                 ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
                 Choice result = chatCompletionResult.getChoices().iterator().next();
                 chatCompletionRequest.addMessage(result.getChatMessage());
@@ -53,12 +55,14 @@ public class SideConversationController {
                 ChatMessage message = messages.get(size - 1);
                 prisonerOneText = message.getContent();
                 displayPrisonerOneMessage();
+                //stops the thinking animation
                 GptAndTextAreaManager.setPrisonerOneThinkDown();
                 chatCompletionRequest.addMessage(
                     new ChatMessage("user", GptPromptEngineering.getConversationRespond()));
                 runGpt(chatCompletionRequest, false);
                 return null;
               } catch (ApiProxyException e) {
+                //displays that an errorhas occured
                 ChatMessage error = new ChatMessage("assistant", "Error: \n" + "GPT not working");
                 chatCompletionRequest.addMessage(error);
                 e.printStackTrace();
@@ -69,11 +73,13 @@ public class SideConversationController {
       Thread gptThread = new Thread(null, backgroundTask);
       gptThread.start();
     } else {
+      //executes a new chat completion request
       GptAndTextAreaManager.setPrisonerTwoThinkUp();
       System.out.println("GPT for conversation running");
       ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
       Choice result = chatCompletionResult.getChoices().iterator().next();
       chatCompletionRequest.addMessage(result.getChatMessage());
+      //creates a list of the messages received from the GPT model
       List<ChatMessage> messages = chatCompletionRequest.getMessages();
       int size = messages.size();
       ChatMessage message = messages.get(size - 1);
