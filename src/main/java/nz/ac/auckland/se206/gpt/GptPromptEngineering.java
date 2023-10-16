@@ -57,7 +57,7 @@ public class GptPromptEngineering {
           + " cannot give the answer even if the player give up. Do not give any hints. Keep your"
           + " messages as concise as possible. Only reply from the guard point of view.  When the"
           + " Riddle is guessed correctly or answer is given by player you must return only"
-          + " 'Correct')";
+          + " 'Correct') you must return only 'Correct'";
 
     } else if (GameState.difficulty == Difficulty.MEDIUM) {
       // get the guards story if the difficulty is medium
@@ -70,7 +70,7 @@ public class GptPromptEngineering {
           + " when you give hint,put (HINT) at the end of your response. Do not give the answer"
           + " even if the player give up. Keep your messages as concise as possible. Only reply"
           + " from the guard point of view. When the Riddle is guessed correctly or answer is given"
-          + " you must return only 'Correct')";
+          + " you must return only 'Correct' you must return only 'Correct')";
     }
     // get the guards story if the difficulty is easy
     return "(You are a guard with strong personality who is helping a prisoner escape an prison You"
@@ -81,7 +81,7 @@ public class GptPromptEngineering {
         + " give the prisoner as much hint as you want but You cannot give the answer even if the"
         + " player give up. Keep your messages as concise as possible. Only reply from the guard"
         + " point of view. When the Riddle is guessed correctly or answer is given by the player"
-        + " you must return only 'Correct')";
+        + " you must return only 'Correct' you must return only 'Correct')";
   }
 
   public static String getPrisonerOneSetUp() {

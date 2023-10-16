@@ -35,12 +35,12 @@ public class TextAreaController {
   @FXML private TextField inputText;
   @FXML private VBox chatVbox;
 
-  @FXML private CheckBox riddleSolvedObjective;
-  @FXML private CheckBox codewordFoundObjective;
-  @FXML private CheckBox converterFoundObjective;
-  @FXML private CheckBox phoneLocatedObjective;
-  @FXML private CheckBox safeLocatedObjective;
-  @FXML private CheckBox guardTalkedObjective;
+  @FXML private Text riddleSolvedObjective;
+  @FXML private Text codewordFoundObjective;
+  @FXML private Text converterFoundObjective;
+  @FXML private Text phoneLocatedObjective;
+  @FXML private Text safeLocatedObjective;
+  @FXML private Text guardTalkedObjective;
   private Timeline timelineTwo;
 
   private Timeline timeline;
@@ -76,7 +76,7 @@ public class TextAreaController {
         .addListener(
             (observable, oldValue, newValue) -> {
               if (newValue) {
-                riddleSolvedObjective.setSelected(true);
+                riddleSolvedObjective.setStrikethrough(true);
                 try {
                   GptAndTextAreaManager.sendMessage(GptPromptEngineering.solvedRaddleGuardPrompt());
                   GptAndTextAreaManager.sideConversationController.refreshMessages(
@@ -91,14 +91,14 @@ public class TextAreaController {
         .addListener(
             (observable, oldValue, newValue) -> {
               if (newValue) {
-                codewordFoundObjective.setSelected(true);
+                codewordFoundObjective.setStrikethrough(true);
               }
             });
     GameState.isConverterFoundProperty()
         .addListener(
             (observable, oldValue, newValue) -> {
               if (newValue) {
-                converterFoundObjective.setSelected(true);
+                converterFoundObjective.setStrikethrough(true);
                 GptAndTextAreaManager.sideConversationController.refreshMessages(
                     GptPromptEngineering.converterFindPrisonerPrompt());
               }
@@ -107,7 +107,7 @@ public class TextAreaController {
         .addListener(
             (observable, oldValue, newValue) -> {
               if (newValue) {
-                phoneLocatedObjective.setSelected(true);
+                phoneLocatedObjective.setStrikethrough(true);
                 GptAndTextAreaManager.sideConversationController.refreshMessages(
                     GptPromptEngineering.phoneFindPrisonerPrompt());
               }
@@ -116,7 +116,7 @@ public class TextAreaController {
         .addListener(
             (observable, oldValue, newValue) -> {
               if (newValue) {
-                safeLocatedObjective.setSelected(true);
+                safeLocatedObjective.setStrikethrough(true);
                 GptAndTextAreaManager.currentCharacter = Characters.GUARD;
                 try {
                   GptAndTextAreaManager.sendMessage(GptPromptEngineering.findSafeGuardPrompt());
@@ -132,7 +132,7 @@ public class TextAreaController {
         .addListener(
             (observable, oldValue, newValue) -> {
               if (newValue) {
-                guardTalkedObjective.setSelected(true);
+                guardTalkedObjective.setStrikethrough(true);
                 try {
                   GptAndTextAreaManager.sideConversationController.refreshMessages(
                       GptPromptEngineering.findGuardConversationRepond());
@@ -209,12 +209,12 @@ public class TextAreaController {
     GameState.setGuardTalked(false);
 
     // resets the checkboxes
-    riddleSolvedObjective.setSelected(false);
-    codewordFoundObjective.setSelected(false);
-    converterFoundObjective.setSelected(false);
-    phoneLocatedObjective.setSelected(false);
-    safeLocatedObjective.setSelected(false);
-    guardTalkedObjective.setSelected(false);
+    riddleSolvedObjective.setStrikethrough(false);
+    codewordFoundObjective.setStrikethrough(false);
+    converterFoundObjective.setStrikethrough(false);
+    phoneLocatedObjective.setStrikethrough(false);
+    safeLocatedObjective.setStrikethrough(false);
+    guardTalkedObjective.setStrikethrough(false);
   }
 
   public void setMessageHistory(ChatCompletionRequest chat) {
