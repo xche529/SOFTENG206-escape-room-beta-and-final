@@ -84,6 +84,12 @@ public class GptPromptEngineering {
         + " you must return only 'Correct' you must return only 'Correct')";
   }
 
+  /**
+   * Generates prompt engineering string for the first prisoner. This includes his backstory and how
+   * he should respond.
+   *
+   * @return the generated prompt
+   */
   public static String getPrisonerOneSetUp() {
     // get the first prisoners story
     return "(You are playing the part of an bored prisoner who was arrested for stealing art from "
@@ -93,6 +99,12 @@ public class GptPromptEngineering {
         + " perspective. Never write from the perspective of anyone but yourself)";
   }
 
+  /**
+   * Generates prompt engineering string for the second prisoner. This includes his backstory and
+   * how he should respond.
+   *
+   * @return the generated prompt
+   */
   public static String getPrisonerTwoSetUp() {
     // get the second prisoners story
     return "(You are playing the part of an bored prisoner who was arrested for assault.  You got"
@@ -108,21 +120,45 @@ public class GptPromptEngineering {
         + " send one message at a time)";
   }
 
+  /**
+   * Generates prompt engineering string for when the guard needs to stop giving hints to the
+   * player. This will be used when the player has used up all available hints.
+   *
+   * @return the generated prompt
+   */
   public static String stopGivingHint() {
     return "(the player have used up all the hints, you should not give any more hints after this."
         + "now inform the player that you have no more hints to give as the guard.)";
   }
 
+  /**
+   * Generates prompt engineering string for when the player solves the riddle, and the guard tells
+   * them to take a closer look at the object.
+   *
+   * @return the generated prompt
+   */
   public static String solvedRaddleGuardPrompt() {
     return "(the player have solved the riddle, tell the player that the next step is to find the"
         + " object and look closely for message on it)";
   }
 
+  /**
+   * Generates prompt engineering string for when the player finds the safe, and the guard tells
+   * them to look for a code.
+   *
+   * @return the generated prompt
+   */
   public static String findSafeGuardPrompt() {
     return "(the player have found the safe, say some thing to act like you did not witness it so"
         + " you will not be punished as a guard)";
   }
 
+  /**
+   * Generates prompt engineering string for the group conversation at the start, when the guard
+   * asks where the player is.
+   *
+   * @return the generated prompt
+   */
   public static String groupConversationPrompt(String playerName) {
     name = playerName;
     return "(Try to speak like real prisoner with clear persionality. Start the reply by"
@@ -132,12 +168,24 @@ public class GptPromptEngineering {
         + " Do not reply as another person. Keep all messages concise in 30 words.)";
   }
 
+  /**
+   * Generates prompt engineering string for the group conversation at the start, in particular the
+   * response from the prisoners themselves.
+   *
+   * @return the generated prompt
+   */
   public static String getConversationRespond() {
     return "(Now respond to your previous message as a second prisoner. Try your best and keep all"
         + " messages concise in 30 words. Do not reply as another person. Don't say you"
         + " can't respond as a second prisoner)";
   }
 
+  /**
+   * Generates prompt engineering string for the group conversation at the start, in particular the
+   * response from the guard.
+   *
+   * @return the generated prompt
+   */
   public static String findGuardConversationRepond() throws ApiProxyException {
     riddle = GptAndTextAreaManager.getRiddle();
     return "(You the first persioner reached to the guard, he said:"
@@ -147,22 +195,46 @@ public class GptPromptEngineering {
         + " Keep message concise.)";
   }
 
+  /**
+   * Generates prompt engineering string for the prisoners to talk to the player and give them
+   * recommendations when the riddle is solved.
+   *
+   * @return the generated prompt
+   */
   public static String solvedRiddlePrisonerPrompt() {
     return name
         + "( have solved the riddle, tell him well done and try to guess what it means. Keep"
         + " all messages concise.";
   }
 
+  /**
+   * Generates prompt engineering string for the prisoners to talk to the player and give them
+   * recommendations when the safe is found.
+   *
+   * @return the generated prompt
+   */
   public static String safeFindPrisonerPrompt() {
     return "(You found a safe, Say that it need for digit code to open it and you know there's a"
         + " safe with a phone number of your gang inside, this might be it. Try to guess where to"
         + " find the code. Keep all messages concise.)";
   }
 
+  /**
+   * Generates prompt engineering string for the prisoners to talk to the player and give them
+   * recommendations when the converter is found.
+   *
+   * @return the generated prompt
+   */
   public static String converterFindPrisonerPrompt() {
     return "(You found a cipher. Try to guess what it is. Keep all messages concise.)";
   }
 
+  /**
+   * Generates prompt engineering string for the prisoners to talk to the player and give them
+   * recommendations when the phone is found.
+   *
+   * @return the generated prompt
+   */
   public static String phoneFindPrisonerPrompt() {
     // if the safe is found and the phone has previously been found, then say this prompt
     if (GameState.isSafeFound()) {
@@ -178,12 +250,24 @@ public class GptPromptEngineering {
     }
   }
 
+  /**
+   * Generates prompt engineering string for the prisoners to talk to the player and give them
+   * recommendations when the code word is found.
+   *
+   * @return the generated prompt
+   */
   public static String codeWordFindPrisonerPrompt() {
     return "(You have found a codeword on the object "
         + answer
         + "Try to guess what it is used for. Keep all messages concise.)";
   }
 
+  /**
+   * Generates prompt engineering string for the prisoners to tell the player that they're running
+   * out of time.
+   *
+   * @return the generated prompt
+   */
   public static String noTimeLeftPrisonerPrompt() {
     return "(You don't have much time left. Tell "
         + name
