@@ -18,6 +18,7 @@ public class Safe {
     "rope", "open", "flow", "rich", "poor"
   };
 
+  /** This method generates a random codeword and sets it to the GameState */
   public static void getRandomCode() {
 
     // getting a random string and turning into code
@@ -29,6 +30,13 @@ public class Safe {
     GameState.codeWord = fourLetterWords[randomIndex];
   }
 
+  /**
+   * This method converts the codeword into to a string of integers coresponding to the numbers on
+   * the cypher
+   *
+   * @param string
+   * @return a 4 didgit string of integers
+   */
   private static String getCodeFromWord(String string) {
     // getting code from word
     String[] converterValues = {"jt", "aku", "bvl", "cmw", "dnx", "eoy", "fpz", "gq", "hr", "is"};
