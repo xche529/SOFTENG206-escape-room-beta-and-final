@@ -113,11 +113,14 @@ public class SceneManager {
    * @param scene the scene that we are currently on
    */
   public static void switchToStart(Scene scene) {
+    // get the start interface
     VBox endLost = (VBox) getUiRoot(AppUi.START_INTERFACE);
     GameState.setUpdatePlayHistory(true);
+    // get the end lost pane
     StackPane endLostStack = new StackPane(endLost, settings);
     StackPane.setAlignment(getUiRoot(AppUi.SETTINGS), javafx.geometry.Pos.TOP_LEFT);
     VBox vbox = new VBox(endLostStack);
+    // get the position of the vbox
     vbox.setLayoutX(App.centerX);
     vbox.setLayoutY(App.centerY);
     scene.setRoot(vbox);
@@ -130,14 +133,19 @@ public class SceneManager {
    * @param scene the scene that we are currently on
    */
   public static void switchToEndWon(Scene scene) {
+    // get the end won interface
     VBox endWon = (VBox) getUiRoot(AppUi.END_WON);
     StackPane endWonStack = new StackPane(endWon, settings);
+    // add the scale
     settings.getTransforms().add(App.scale);
     StackPane.setAlignment(getUiRoot(AppUi.SETTINGS), javafx.geometry.Pos.TOP_LEFT);
+    // add the vbox
     VBox vbox = new VBox(endWonStack);
+    // set the layout
     vbox.setLayoutX(App.centerX);
     vbox.setLayoutY(App.centerY);
     scene.setRoot(vbox);
+    // set the current ui
     currentUi = AppUi.END_WON;
   }
 
@@ -147,14 +155,19 @@ public class SceneManager {
    * @param scene the scene that we are currently on
    */
   public static void switchToEndLost(Scene scene) {
+    // get the end lost interface
     VBox endLost = (VBox) getUiRoot(AppUi.END_LOST);
+    // add the scale
     settings.getTransforms().add(App.scale);
     StackPane endLostStack = new StackPane(endLost, settings);
+    // set the alignment of the stackpane
     StackPane.setAlignment(getUiRoot(AppUi.SETTINGS), javafx.geometry.Pos.TOP_LEFT);
     VBox vbox = new VBox(endLostStack);
+    // set the layout
     vbox.setLayoutX(App.centerX);
     vbox.setLayoutY(App.centerY);
     scene.setRoot(vbox);
+    // set the current ui
     currentUi = AppUi.END_LOST;
   }
 

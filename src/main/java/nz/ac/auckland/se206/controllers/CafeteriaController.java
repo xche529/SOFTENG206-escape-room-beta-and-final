@@ -147,10 +147,12 @@ public class CafeteriaController {
    */
   @FXML
   private void onClickPaintingWithSafe(MouseEvent event) {
+    // set all relevant nodes to visible
     safeRectangle.setVisible(true);
     safe.setVisible(true);
     paintingWithSafe.setVisible(false);
     paintingWithSafeArrow.setVisible(false);
+    // set the safe to found
     GameState.isSafeFoundProperty().set(true);
     GameState.safeFound = true;
   }

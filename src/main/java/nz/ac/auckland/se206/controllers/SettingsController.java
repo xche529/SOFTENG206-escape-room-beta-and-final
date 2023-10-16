@@ -97,9 +97,12 @@ public class SettingsController {
         new Task<Void>() {
           @Override
           protected Void call() throws Exception {
+            // get the song from the resources folder
             Media song = new Media(App.class.getResource("/sounds/Song.mp3").toString());
+            // play the song
             mediaPlayer = new MediaPlayer(song);
             mediaPlayer.setVolume(GameState.musicVolume);
+            // loops the song
             mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
             mediaPlayer.play();
             return null;

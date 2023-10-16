@@ -330,10 +330,13 @@ public class OfficeController {
    */
   @FXML
   private void clickPhone(MouseEvent event) {
+    // set the gamestate property to true
     GameState.isPhoneFoundProperty().set(true);
+    // make relevant panes visible
     phoneArrow.setVisible(false);
     phonePane.setVisible(true);
     blurringPane.setVisible(true);
+    // if the user has the paper, the phone number will be displayed
     if (GameState.hasPaperProperty().get()) {
       paperPane.setVisible(true);
       numberLabel.setText(GameState.phoneNumber);

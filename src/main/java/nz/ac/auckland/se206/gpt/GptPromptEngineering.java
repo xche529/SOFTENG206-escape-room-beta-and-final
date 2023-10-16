@@ -134,8 +134,8 @@ public class GptPromptEngineering {
 
   public static String getConversationRespond() {
     return "(Now respond to your previous message as a second prisoner. Try your best and keep all"
-               + " messages concise in 30 words. Do not reply as another person. Don't say you"
-               + " can't respond as a second prisoner)";
+        + " messages concise in 30 words. Do not reply as another person. Don't say you"
+        + " can't respond as a second prisoner)";
   }
 
   public static String findGuardConversationRepond() throws ApiProxyException {
@@ -164,11 +164,13 @@ public class GptPromptEngineering {
   }
 
   public static String phoneFindPrisonerPrompt() {
+    // if the safe is found and the phone has previously been found, then say this prompt
     if (GameState.isSafeFound()) {
       return name
           + "( just found a phone. Say that try to call the number you found in the safe. Keep all"
           + " messages concise.)";
     } else {
+      // if the safe is found and the phone has not previously been found, then say this prompt
       return name
           + "( just found a phone. Say that there's a safe in the prison with a number inside you"
           + " can call for a helicopter from the gang to pick you up but you cannot find the safe."

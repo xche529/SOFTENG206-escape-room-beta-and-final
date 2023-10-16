@@ -86,7 +86,7 @@ public class StartInterfaceController {
     avatarImageView.setFitHeight(100);
     avatarImageView.setFitWidth(100);
     System.out.println("StartInterfaceController initialized");
-    // load play history
+    // call the function to load the history
     loadPlayHistory();
 
     // set the play history to update when the game state is updated
@@ -231,7 +231,9 @@ public class StartInterfaceController {
 
   @FXML
   private void onSwitchAvatar(Event e) {
+    // switch the avatar image
     currentAvatar++;
+    // set the current avatar image to the correct one
     if (currentAvatar == 1) {
       currentAvatarImage = playerAvatarOne;
     }
@@ -248,7 +250,9 @@ public class StartInterfaceController {
       currentAvatarImage = playerAvatarFive;
       currentAvatar = 0;
     }
+    // set the avatar image
     avatarImageView.setImage(currentAvatarImage);
+    // set the size of the avatar image
     avatarImageView.setFitHeight(100);
     avatarImageView.setFitWidth(100);
   }
