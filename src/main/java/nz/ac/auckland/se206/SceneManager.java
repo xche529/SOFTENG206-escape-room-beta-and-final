@@ -52,11 +52,11 @@ public class SceneManager {
 
     if (currentUi == AppUi.START_INTERFACE) {
       // switching room sto the left
-      roomToSwitch = (VBox) getUiRoot(AppUi.ROOM);
+      roomToSwitch = (VBox) getUiRoot(AppUi.CAFETERIA);
 
-      currentUi = AppUi.ROOM;
-      roomController.resetAnimation();
-      roomController.walkInAnimation();
+      currentUi = AppUi.CAFETERIA;
+      cafeteriaController.resetAnimation();
+      cafeteriaController.walkInAnimation();
     } else {
       if (isToLeft) {
         System.out.println("Moving to left");
@@ -145,15 +145,15 @@ public class SceneManager {
   }
 
   public static void switchToFirstRoom(Scene scene) {
-    VBox room = (VBox) getUiRoot(AppUi.ROOM);
+    VBox room = (VBox) getUiRoot(AppUi.CAFETERIA);
     if (isFirstRound) {
       isFirstRound = false;
     } else {
       Scale settingsScale = new Scale(1.39, 1.39);
       settings.getTransforms().add(settingsScale);
     }
-    roomController.resetAnimation();
-    roomController.walkInAnimation();
+    cafeteriaController.resetAnimation();
+    cafeteriaController.walkInAnimation();
     StackPane endLostStack = new StackPane(room, settings);
     StackPane.setAlignment(getUiRoot(AppUi.SETTINGS), javafx.geometry.Pos.TOP_LEFT);
     VBox vbox = new VBox(endLostStack, getUiRoot(AppUi.TEXT_AREA));
@@ -161,7 +161,7 @@ public class SceneManager {
     vbox.setLayoutX(App.centerX);
     vbox.setLayoutY(App.centerY);
     scene.setRoot(vbox);
-    currentUi = AppUi.ROOM;
+    currentUi = AppUi.CAFETERIA;
   }
 
   public static void addUi(AppUi ui, VBox uiRoot) {
