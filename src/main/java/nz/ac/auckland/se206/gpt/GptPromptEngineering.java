@@ -129,12 +129,12 @@ public class GptPromptEngineering {
         + " saying the guard is looking for the a prisoner with a name of"
         + playerName
         + " you are a good friend of him and he is next to you now. Do not reply as another person."
-        + " Do not reply as another person. Keep all messages concise.)";
+        + " Do not reply as another person. Keep all messages concise in 30 words.)";
   }
 
   public static String getConversationRespond() {
     return "(Now respond to your previous message as a second prisoner. Try your best and keep all"
-        + " messages concise. Do not reply as another person. Don't say you can't respond"
+        + " messages concise in 30 words. Do not reply as another person. Don't say you can't respond"
         + " as a second prisoner)";
   }
 

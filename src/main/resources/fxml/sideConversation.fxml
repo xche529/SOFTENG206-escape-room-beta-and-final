@@ -36,6 +36,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </TextArea>
+            <Pane prefHeight="605.0" prefWidth="301.0" />
          </children>
       </Pane>
    </children>

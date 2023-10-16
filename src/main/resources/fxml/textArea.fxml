@@ -65,11 +65,11 @@
                      <font>
                         <Font name="Constantia" size="20.0" />
                      </font></CheckBox>
-                  <Pane layoutX="-1.0" prefHeight="134.0" prefWidth="225.0" visible="false" />
                   <CheckBox fx:id="guardTalkedObjective" blendMode="DARKEN" layoutX="134.0" layoutY="19.0" mnemonicParsing="false" text="Talk to guard!">
                      <font>
                         <Font name="Constantia" size="20.0" />
                      </font></CheckBox>
+                  <Pane layoutX="110.0" layoutY="-43.0" prefHeight="195.0" prefWidth="436.0" />
                </children>
             </Pane>
             <Text layoutX="3.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hints left:">
