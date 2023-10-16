@@ -134,8 +134,8 @@ public class GptPromptEngineering {
 
   public static String getConversationRespond() {
     return "(Now respond to your previous message as a second prisoner. Try your best and keep all"
-        + " messages concise in 30 words. Do not reply as another person. Don't say you can't respond"
-        + " as a second prisoner)";
+               + " messages concise in 30 words. Do not reply as another person. Don't say you"
+               + " can't respond as a second prisoner)";
   }
 
   public static String findGuardConversationRepond() throws ApiProxyException {

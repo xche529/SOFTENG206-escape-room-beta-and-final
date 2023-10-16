@@ -188,7 +188,7 @@ public class TextAreaController {
 
   /**
    * This method submits the message to the GPT
-   * 
+   *
    * @throws ApiProxyException - if the message cannot be sent
    */
   @FXML
@@ -281,7 +281,7 @@ public class TextAreaController {
                     || messages.get(i).getContent().contains("Hint:")
                     || messages.get(i).getContent().contains("hint:"))
                 && i != 1) {
-                  // if the hint is the first message, then it is a hint
+              // if the hint is the first message, then it is a hint
               GptAndTextAreaManager.hintLeft--;
             }
             if (GptAndTextAreaManager.hintLeft == 0) {
@@ -348,7 +348,7 @@ public class TextAreaController {
 
   /**
    * This method displays the target character in the text area
-   * 
+   *
    * @param character the character that the player is talking to
    */
   public void displayTarget(Characters character) {
@@ -386,7 +386,7 @@ public class TextAreaController {
 
   /**
    * This method filters any words in parentheses out of the message
-   * 
+   *
    * @param input the message to be displayed
    * @return the message without the words in parentheses
    */
