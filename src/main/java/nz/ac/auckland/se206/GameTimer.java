@@ -23,7 +23,7 @@ public class GameTimer {
                   }
                   GameState.secondsRemaining--;
 
-                  // uses test to spech to tell the player how long they have left
+                  // uses text to spech to tell the player how long they have left
                   if (GameState.secondsRemaining == 90 && GameState.isWon == false) {
                     textToSpeech.speak("a minute and a half remaining");
                     GptAndTextAreaManager.sideConversationController.refreshMessages(GptPromptEngineering.noTimeLeftPrisonerPrompt());
@@ -32,6 +32,7 @@ public class GameTimer {
                   } else if (GameState.secondsRemaining == 30 && GameState.isWon == false) {
                     textToSpeech.speak("thirty seconds remaining");
                   }
+                  // displays the message sender if there is a new message
                   if (GptAndTextAreaManager.isNewMessage) {
                     GptAndTextAreaManager.displayTarget();
                     GptAndTextAreaManager.isNewMessage = false;

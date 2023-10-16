@@ -83,73 +83,6 @@ public class GptAndTextAreaManager {
     }
   }
 
-  // private static String getMessageHistory(ChatCompletionRequest chat) {
-  //   String result = "";
-  //   List<ChatMessage> messages = chat.getMessages();
-  //   // IMPORTANT: increase i here to filtout the prompt Engineering content
-
-  //   if (messages.size() > 1) {
-  //     if (isHintRunning) {
-  //       hintLeft = GameState.hints;
-  //     } else {
-  //       hintLeft = 0;
-  //     }
-  //     // filter parentheses out so we can send messages without player seeing
-  //     for (int i = messages.size() - 1; i >= 0; i--) {
-  //       String check = messages.get(i).getContent();
-  //       if (check.charAt(0) == ('(') && check.charAt(check.length() - 1) == (')')) {
-  //         System.out.println(
-  //             messages.get(i).getRole() + ": " + chat.getMessages().get(i).getContent() +
-  // "\n\n");
-  //         continue;
-  //       }
-  //       if (currentCharacter == Characters.GUARD) {
-  //         if (messages.get(i).getRole().equals("assistant")
-  //             && messages.get(i).getContent().contains("Correct")) {
-  //           GameState.setRiddleResolved(true);
-  //         }
-  //         if (isHintRunning && GameState.difficulty == GameState.Difficulty.MEDIUM) {
-  //           if (messages.get(i).getRole().equals("assistant")
-  //               && (messages.get(i).getContent().contains("HINT") ||
-  // messages.get(i).getContent().contains("Hint:") ||
-  // messages.get(i).getContent().contains("hint:")) && i != 1) {
-  //             hintLeft--;
-  //           }
-  //           if (hintLeft == 0) {
-  //             isHintRunning = false;
-  //             try {
-  //               sendMessage(GptPromptEngineering.stopGivingHint());
-  //             } catch (ApiProxyException e) {
-  //               System.err.println("Error sending message: " + e.getMessage());
-  //             }
-  //           }
-  //         }
-  //       }
-  //       // replace "assistant" with "Guard:" for immersion
-  //       String name = messages.get(i).getRole();
-  //       if (name.trim().equals("assistant")) {
-  //         if (currentCharacter == Characters.GUARD) {
-  //           name = "Guard: ";
-  //         } else if (currentCharacter == Characters.PRISONER_ONE) {
-  //           name = "Prisoner1: ";
-  //         } else {
-  //           name = "Prisoner2: ";
-  //         }
-  //       } else if (name.trim().equals("user")) {
-  //         name = GameState.playerName + ": ";
-  //       }
-  //       // get filtered messages for display
-  //       String content = chat.getMessages().get(i).getContent();
-  //       result += name + parenthesesFilter(content) + "\n\n";
-  //       System.out.println("parenthesesFilter passed");
-  //       System.out.println(
-  //           messages.get(i).getRole() + ": " + chat.getMessages().get(i).getContent() + "\n\n");
-  //     }
-  //     GameState.hintsLeft = hintLeft;
-  //     System.out.println("Hints left: " + hintLeft);
-  //   }
-  //   return result;
-  // }
 
   /*
    * this method is called when the user switches the target character or the
@@ -186,23 +119,17 @@ public class GptAndTextAreaManager {
     return messages.get(1).getContent();
   }
 
+  /**
+   * This method sends a message to the GPT model and plays the sound effect
+   * @param message
+   * @throws ApiProxyException
+   */
   public static void sendMessage(String message) throws ApiProxyException {
 
     boolean ifSpeak = false;
 
     if (currentCharacter == Characters.GUARD) {
-      // append message depending on where the player is in the game
-      // if (GameState.isRiddleResolved() == false) {
-      //   message = message + "(riddle unsolved)";
-      // } else if (GameState.wordFound == false) {
-      //   message = message + "(riddle solved)";
-      // } else if (GameState.cypherFound == false) {
-      //   message = message + "(word found)";
-      // } else if (GameState.safeFound == false) {
-      //   message = message + "(cypher found)";
-      // } else if (GameState.safeUnlocked == false) {
-      //   message = message + "(safe found)";
-      // }
+
       // make new message and append
       guardChatCompletionRequest.addMessage(new ChatMessage("user", message));
       runGpt(guardChatCompletionRequest);
@@ -226,35 +153,16 @@ public class GptAndTextAreaManager {
     }
     displayTarget(currentCharacter);
     if (ifSpeak) {
-      // play sound effect, hmm sound
-      // String soundEffect;
-      if (currentCharacter == Characters.GUARD) {
-        // soundEffect = "src/main/resources/sounds/HmmSoundEffect1.mp3";
+      if (currentCharacter == Characters.GUARD) { // plays the sound effect for the corresponding character
         SFX guardNoise = new SFX("src/main/resources/sounds/HmmSoundEffect1.mp3");
         guardNoise.playSFX();
       } else if (currentCharacter == Characters.PRISONER_ONE) {
-        // soundEffect = "src/main/resources/sounds/HmmSoundEffect2.mp3";
         SFX prisonerOneNoise = new SFX("src/main/resources/sounds/HmmSoundEffect2.mp3");
         prisonerOneNoise.playSFX();
       } else {
-        // soundEffect = "src/main/resources/sounds/HmmSoundEffect3.mp3";
         SFX prisonerTwoNoise = new SFX("src/main/resources/sounds/HmmSoundEffect3.mp3");
         prisonerTwoNoise.playSFX();
       }
-      // sound effect configuration
-      // Media media = new Media(new File(soundEffect).toURI().toString());
-      // MediaPlayer mediaPlayer = new MediaPlayer(media);
-      // mediaPlayer.setVolume(GameState.sfxVolume);
-      // Task<Void> task =
-      //     new Task<Void>() {
-      //       @Override
-      //       protected Void call() throws Exception {
-      //         mediaPlayer.play();
-      //         return null;
-      //       }
-      //     };
-      // Thread thread = new Thread(task);
-      // thread.start();
     }
   }
 
