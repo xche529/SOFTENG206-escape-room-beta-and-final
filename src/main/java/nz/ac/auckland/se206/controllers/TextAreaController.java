@@ -7,7 +7,6 @@ import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -20,6 +19,7 @@ import javafx.util.Duration;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GptAndTextAreaManager;
 import nz.ac.auckland.se206.GptAndTextAreaManager.Characters;
+import nz.ac.auckland.se206.SFX;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
@@ -48,6 +48,7 @@ public class TextAreaController {
   public Image playerAvatar;
   public Image prisonerOneAvatar;
   public Image prisonerTwoAvatar;
+  public SFX writingSfx = new SFX("src/main/resources/sounds/pencil.mp3");
 
   @FXML
   private void initialize() {
@@ -77,6 +78,7 @@ public class TextAreaController {
             (observable, oldValue, newValue) -> {
               if (newValue) {
                 riddleSolvedObjective.setStrikethrough(true);
+                writingSfx.playSFX();
                 try {
                   GptAndTextAreaManager.sendMessage(GptPromptEngineering.solvedRaddleGuardPrompt());
                   GptAndTextAreaManager.sideConversationController.refreshMessages(
@@ -92,6 +94,7 @@ public class TextAreaController {
             (observable, oldValue, newValue) -> {
               if (newValue) {
                 codewordFoundObjective.setStrikethrough(true);
+                writingSfx.playSFX();
               }
             });
     GameState.isConverterFoundProperty()
@@ -99,6 +102,8 @@ public class TextAreaController {
             (observable, oldValue, newValue) -> {
               if (newValue) {
                 converterFoundObjective.setStrikethrough(true);
+                writingSfx.playSFX();
+
                 GptAndTextAreaManager.sideConversationController.refreshMessages(
                     GptPromptEngineering.converterFindPrisonerPrompt());
               }
@@ -108,6 +113,8 @@ public class TextAreaController {
             (observable, oldValue, newValue) -> {
               if (newValue) {
                 phoneLocatedObjective.setStrikethrough(true);
+                writingSfx.playSFX();
+
                 GptAndTextAreaManager.sideConversationController.refreshMessages(
                     GptPromptEngineering.phoneFindPrisonerPrompt());
               }
@@ -117,6 +124,8 @@ public class TextAreaController {
             (observable, oldValue, newValue) -> {
               if (newValue) {
                 safeLocatedObjective.setStrikethrough(true);
+                writingSfx.playSFX();
+
                 GptAndTextAreaManager.currentCharacter = Characters.GUARD;
                 try {
                   GptAndTextAreaManager.sendMessage(GptPromptEngineering.findSafeGuardPrompt());
@@ -133,6 +142,8 @@ public class TextAreaController {
             (observable, oldValue, newValue) -> {
               if (newValue) {
                 guardTalkedObjective.setStrikethrough(true);
+                writingSfx.playSFX();
+
                 try {
                   GptAndTextAreaManager.sideConversationController.refreshMessages(
                       GptPromptEngineering.findGuardConversationRepond());
