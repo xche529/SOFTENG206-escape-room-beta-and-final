@@ -14,7 +14,7 @@ public class SoundEffect {
     this.path = path;
   }
 
-  /** Plays the sound effect */
+  // Plays the sound effect
   public void playSFX() {
     Media media = new Media(new File(path).toURI().toString());
     MediaPlayer mediaPlayer = new MediaPlayer(media);

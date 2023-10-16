@@ -22,7 +22,7 @@ import nz.ac.auckland.se206.controllers.SideConversationController;
 import nz.ac.auckland.se206.controllers.StartInterfaceController;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
-/**
+/*
  * This is the entry point of the JavaFX application, while you can change this class, it should
  * remain as the class that runs the JavaFX application.
  */
@@ -104,11 +104,11 @@ public class App extends Application {
     VBox textArea = textAreaLoader.load();
     VBox sideConversation = sideConversationLoader.load();
 
-    //stacks the settings page over the start interface
+    // stacks the settings page over the start interface
     StackPane startInterfaceStack = new StackPane(startInterfaceLoader.load(), settings);
     StackPane.setAlignment(settings, javafx.geometry.Pos.TOP_LEFT);
     VBox startInterfaceVBox = new VBox(startInterfaceStack);
-    
+
     // creating hboxes for the scenes too add the side coverstaion
     HBox officeHbox = new HBox(office, sideConversation);
     VBox officeVbox = new VBox(officeHbox, textArea);

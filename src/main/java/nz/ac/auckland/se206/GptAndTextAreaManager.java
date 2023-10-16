@@ -51,9 +51,8 @@ public class GptAndTextAreaManager {
   public static boolean isNewMessage = false;
   public static int hintLeft;
 
-  /*
-   * this method outputs MessageHistory as a string which can be put into display
-   * board
+  /**
+   * this method outputs MessageHistory as a string which can be put into display board
    *
    * @param chat the ChatCompletionRequest for the chat history
    */
@@ -67,6 +66,11 @@ public class GptAndTextAreaManager {
     displayTarget(Characters.PRISONER_TWO);
   }
 
+  /**
+   * this method is called a new game is started
+   *
+   * @throws ApiProxyException if the GPT model is not working
+   */
   public static void reset() throws ApiProxyException {
     isHintRunning = true;
     // function for replayability and resetting conversations
@@ -83,10 +87,9 @@ public class GptAndTextAreaManager {
     }
   }
 
-
-  /*
-   * this method is called when the user switches the target character or the
-   * message needs to be update
+  /**
+   * this method is called when the user switches the target character or the message needs to be
+   * update
    *
    * @param character the character to display
    */
@@ -121,8 +124,9 @@ public class GptAndTextAreaManager {
 
   /**
    * This method sends a message to the GPT model and plays the sound effect
-   * @param message
-   * @throws ApiProxyException
+   *
+   * @param message the message to send to GPT
+   * @throws ApiProxyException if the GPT model is not working
    */
   public static void sendMessage(String message) throws ApiProxyException {
 
@@ -153,19 +157,28 @@ public class GptAndTextAreaManager {
     }
     displayTarget(currentCharacter);
     if (ifSpeak) {
-      if (currentCharacter == Characters.GUARD) { // plays the sound effect for the corresponding character
+      if (currentCharacter
+          == Characters.GUARD) { // plays the sound effect for the corresponding character
         SoundEffect guardNoise = new SoundEffect("src/main/resources/sounds/HmmSoundEffect1.mp3");
         guardNoise.playSFX();
       } else if (currentCharacter == Characters.PRISONER_ONE) {
-        SoundEffect prisonerOneNoise = new SoundEffect("src/main/resources/sounds/HmmSoundEffect2.mp3");
+        SoundEffect prisonerOneNoise =
+            new SoundEffect("src/main/resources/sounds/HmmSoundEffect2.mp3");
         prisonerOneNoise.playSFX();
       } else {
-        SoundEffect prisonerTwoNoise = new SoundEffect("src/main/resources/sounds/HmmSoundEffect3.mp3");
+        SoundEffect prisonerTwoNoise =
+            new SoundEffect("src/main/resources/sounds/HmmSoundEffect3.mp3");
         prisonerTwoNoise.playSFX();
       }
     }
   }
 
+  /**
+   * This method runs the GPT model in a background thread
+   *
+   * @param chatCompletionRequest the ChatCompletionRequest for the chat history
+   * @throws ApiProxyException if the GPT model is not working
+   */
   private static void runGpt(ChatCompletionRequest chatCompletionRequest) throws ApiProxyException {
     // run the GPT model in a background thread
     Task<Void> backgroundTask =
@@ -239,6 +252,7 @@ public class GptAndTextAreaManager {
   }
 
   public static void setAllThinkDown() {
+    // setting the thinking animations in all of the scenes
     setGuardThinkDown();
     setPrisonerOneThinkDown();
     setPrisonerTwoThinkDown();

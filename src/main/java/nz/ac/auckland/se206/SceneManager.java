@@ -168,7 +168,7 @@ public class SceneManager {
     if (isFirstRound) {
       isFirstRound = false;
     } else { // This code is used to scale the room to the correct size, as it shrinks on every
-             // round without it
+      // round without it
       Scale settingsScale = new Scale(1.39, 1.39);
       settings.getTransforms().add(settingsScale);
     }

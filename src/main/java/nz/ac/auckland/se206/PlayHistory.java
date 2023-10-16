@@ -16,7 +16,6 @@ public class PlayHistory implements Serializable {
   private PlayHistory parentPlayHistory = null;
   private int playerAvatar;
 
-  /** Compare this snippet from src/main/java/nz/ac/auckland/se206/PlayHistory.java: */
   public PlayHistory(int time, int difficulty, String name, int playerAvatar) {
     this.name = name;
     this.score = time / difficulty;
@@ -25,11 +24,7 @@ public class PlayHistory implements Serializable {
     this.playerAvatar = playerAvatar;
   }
 
-  /**
-   * Compare this snippet from src/main/java/nz/ac/auckland/se206/PlayHistory.java: you can Add a
-   * play history to the play history using this method with any given play history node it finds
-   * the correct place to add the play history
-   */
+  // adds the most recent score to the player history
   public void addHistory(PlayHistory playHistory) {
     // if the score is greater than the current score,, then it is added to the parent
     if (playHistory.getScore() > this.score) {
@@ -70,10 +65,8 @@ public class PlayHistory implements Serializable {
     }
   }
 
-  /**
-   * This is the function that creates a string to display the play history It dis plays the name,
-   * time and difficulty of the player
-   */
+  // This is the function that creates a string to display the play history It dis plays the name,
+  // time and difficulty of the player
   public List<List<Object>> getFullList() {
     // setting up the variables
     List<List<Object>> playHistoryList = new ArrayList<>();
