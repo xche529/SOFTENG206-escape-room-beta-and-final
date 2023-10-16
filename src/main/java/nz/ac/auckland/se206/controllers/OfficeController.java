@@ -333,6 +333,7 @@ public class OfficeController {
     GameState.isPhoneFoundProperty().set(true);
     phoneArrow.setVisible(false);
     phonePane.setVisible(true);
+    blurringPane.setVisible(true);
     if (GameState.hasPaperProperty().get()) {
       paperPane.setVisible(true);
       numberLabel.setText(GameState.phoneNumber);
@@ -906,6 +907,13 @@ public class OfficeController {
     int minutes = (GameState.secondsRemaining) / 60;
     int seconds = (GameState.secondsRemaining) % 60;
     timerLabel.setText(String.format("%d:%02d", minutes, seconds));
+  }
+
+  @FXML
+  private void onClickPhonePane() {
+    phonePane.setVisible(false);
+    blurringPane.setVisible(false);
+    thoughtBubblePane.setVisible(false);
   }
 
   /** restores the office to its original state */
