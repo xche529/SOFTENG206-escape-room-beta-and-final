@@ -110,11 +110,11 @@ public class RoomController {
 
     // initialize fields in the GptAndTextAreaManager class
     GptAndTextAreaManager.roomController = this;
-    
+
     // initializes all the animation items into an array
-    
+
     animationItems =
-    new ImageView[] {
+        new ImageView[] {
           prisonerOne,
           prisonerTwo,
           speechBubbleOne,
@@ -124,28 +124,27 @@ public class RoomController {
           thinkingOne,
           thinkingTwo
         };
-        
-        // moves the prisoners to their starting point
-        resetAnimation();
-        
-        // runs a thread that is always checking if the room needs to be reset
-        resetchecker();
-        doorArrow.setVisible(false);
 
-        // animates all the arrows if the riddle is resolved
-        GameState.isRiddleResolvedProperty()
-            .addListener(
-                (observable, oldValue, newValue) -> {
-                  if (newValue) {
-                    animateAllArrows();
-                  }
-                });
+    // moves the prisoners to their starting point
+    resetAnimation();
 
-      }
-      
-      /**
-       * This method starts a thread that checks if the room needs to be reset.
-       *
+    // runs a thread that is always checking if the room needs to be reset
+    resetchecker();
+    doorArrow.setVisible(false);
+
+    // animates all the arrows if the riddle is resolved
+    GameState.isRiddleResolvedProperty()
+        .addListener(
+            (observable, oldValue, newValue) -> {
+              if (newValue) {
+                animateAllArrows();
+              }
+            });
+  }
+
+  /**
+   * This method starts a thread that checks if the room needs to be reset.
+   *
    * @throws IOException
    */
   public void start() throws IOException {
@@ -153,7 +152,6 @@ public class RoomController {
     updateTimerLabel();
 
     animateArrows(doorArrow);
-
   }
 
   /**
@@ -228,7 +226,7 @@ public class RoomController {
     System.out.println("room reseted");
   }
 
-  /** This method animates all of the arrows in the scene */
+  /* This method animates all of the arrows in the scene */
   public void animateAllArrows() {
     animateArrows(toiletArrow);
     animateArrows(toiletPaperArrow);
@@ -238,7 +236,7 @@ public class RoomController {
     animateArrows(towelArrow);
   }
 
-  /** This method animates the arrows */
+  /* This method animates the arrows */
   public void animateArrows(ImageView arrow) {
     arrow.setOpacity(1);
     // sets the starting position of the arrow
@@ -253,19 +251,19 @@ public class RoomController {
     translateTransition.play();
   }
 
-  /** This method updates the timer label */
+  /* This method updates the timer label */
   private void updateTimerLabel() {
     int minutes = GameState.secondsRemaining / 60;
     int seconds = GameState.secondsRemaining % 60;
     timerLabel.setText(String.format("%d:%02d", minutes, seconds));
   }
 
-  /** This methos animates the prioners walking into the room */
+  /* This methos animates the prioners walking into the room */
   public void walkInAnimation() {
     MovementControl.moveToLeft(true, 1, 500, animationItems);
   }
 
-  /** Moves the prisoners to their starting position. */
+  /* Moves the prisoners to their starting position. */
   public void resetAnimation() {
     for (ImageView item : animationItems) {
       item.setTranslateX(500);
@@ -404,7 +402,7 @@ public class RoomController {
     bubbleBig.setVisible(false);
   }
 
-  /** This method lets the user exit the blown up view of the toilet */
+  /* This method lets the user exit the blown up view of the toilet */
   @FXML
   public void onClickInspectingToiletPane() {
     // hides a blown up view of the toilet
@@ -416,7 +414,7 @@ public class RoomController {
   /**
    * This method shows the user a blown up view of the toilet when it is clicked on
    *
-   * @param event
+   * @param event the mouse event
    */
   @FXML
   public void clickToilet(MouseEvent event) {
@@ -440,7 +438,7 @@ public class RoomController {
     }
   }
 
-  /** This methao allows the user to exit the blown up view of the toilet paper */
+  /* This methao allows the user to exit the blown up view of the toilet paper */
   @FXML
   public void onClickInspectingToiletPaperPane() {
     // sets the pane and its features to invisible
@@ -452,7 +450,7 @@ public class RoomController {
   /**
    * This method shows the user a blown up view of the toilet paper when it is clicked on
    *
-   * @param event
+   * @param event the mouse event
    */
   @FXML
   public void clickToiletPaper(MouseEvent event) {
@@ -476,7 +474,7 @@ public class RoomController {
     }
   }
 
-  /** This method allows the user to exit the blown up view of the vent */
+  /* This method allows the user to exit the blown up view of the vent */
   @FXML
   public void onClickInspectingVentPane() {
     blurredPane.setVisible(false);
@@ -487,7 +485,7 @@ public class RoomController {
   /**
    * This method shows the user a blown up view of the vent when it is clicked on
    *
-   * @param event
+   * @param event the mouse event
    */
   @FXML
   public void clickVent(MouseEvent event) {
@@ -514,7 +512,7 @@ public class RoomController {
     }
   }
 
-  /** This method allows the user to exit the blown up view of the sink */
+  /* This method allows the user to exit the blown up view of the sink */
   @FXML
   public void onClickInspectingSinkPane() {
     blurredPane.setVisible(false);
@@ -525,7 +523,7 @@ public class RoomController {
   /**
    * This method shows the user a blown up view of the sink when it is clicked on
    *
-   * @param event
+   * @param event the mouse event
    */
   @FXML
   public void clickSink(MouseEvent event) {
@@ -550,7 +548,7 @@ public class RoomController {
     }
   }
 
-  /** This method allows the user to exit the blown up view of the mirror */
+  /* This method allows the user to exit the blown up view of the mirror */
   @FXML
   public void onClickInspectingMirrorPane() {
     blurredPane.setVisible(false);
@@ -561,7 +559,7 @@ public class RoomController {
   /**
    * This method shows the user a blown up view of the mirror when it is clicked on
    *
-   * @param event
+   * @param event the mouse event
    */
   @FXML
   public void clickMirror(MouseEvent event) {
@@ -586,7 +584,7 @@ public class RoomController {
     }
   }
 
-  /** This method allows the user to exit the blown up view of the towel */
+  /* This method allows the user to exit the blown up view of the towel */
   @FXML
   public void onClickInspectingTowelPane() {
     blurredPane.setVisible(false);
@@ -597,7 +595,7 @@ public class RoomController {
   /**
    * This method shows the user a blown up view of the towel when it is clicked on
    *
-   * @param event
+   * @param event the mouse event
    */
   @FXML
   public void clickTowel(MouseEvent event) {
@@ -622,39 +620,39 @@ public class RoomController {
     }
   }
 
-  /** This methos allows the user to speak to prisoner one */
+  /* This methos allows the user to speak to prisoner one */
   @FXML
   private void onSpeechBubbleOneClicked() {
     GptAndTextAreaManager.displayTarget(Characters.PRISONER_ONE);
     System.out.println("Speech bubble one clicked");
   }
 
-  /** This method allows the user to speak to prisoner two */
+  /* This method allows the user to speak to prisoner two */
   @FXML
   private void onSpeechBubbleTwoClicked() {
     GptAndTextAreaManager.displayTarget(Characters.PRISONER_TWO);
     System.out.println("Speech bubble two clicked");
   }
 
-  /** This method enlarges the prisoner one's speech bubble */
+  /* This method enlarges the prisoner one's speech bubble */
   @FXML
   private void onSetSpeechBubbleOneUp() {
     speechBubbleOne.setVisible(true);
   }
 
-  /** This method shrinks the prisoner one's speech bubble */
+  /* This method shrinks the prisoner one's speech bubble */
   @FXML
   private void onSetSpeechBubbleOneDown() {
     speechBubbleOne.setVisible(false);
   }
 
-  /** This method enlarges the prisoner two's speech bubble */
+  /* This method enlarges the prisoner two's speech bubble */
   @FXML
   private void onSetSpeechBubbleTwoUp() {
     speechBubbleTwo.setVisible(true);
   }
 
-  /** This method shrinks the prisoner two's speech bubble */
+  /* This method shrinks the prisoner two's speech bubble */
   @FXML
   private void onSetSpeechBubbleTwoDown() {
     speechBubbleTwo.setVisible(false);
