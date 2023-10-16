@@ -80,7 +80,7 @@ public class TextAreaController {
               if (newValue) {
                 // sets the objective to be strikethrough
                 riddleSolvedObjective.setStrikethrough(true);
-                writingSfx.playSFX();
+                writingSfx.playSfx();
                 try {
                   // gives the guard the next hint
                   GptAndTextAreaManager.sendMessage(GptPromptEngineering.solvedRaddleGuardPrompt());
@@ -98,7 +98,7 @@ public class TextAreaController {
               if (newValue) {
                 // sets the objective to be strikethrough
                 codewordFoundObjective.setStrikethrough(true);
-                writingSfx.playSFX();
+                writingSfx.playSfx();
               }
             });
     // observes the property of the converter being found
@@ -108,7 +108,7 @@ public class TextAreaController {
               if (newValue) {
                 // sets the objective to be strikethrough
                 converterFoundObjective.setStrikethrough(true);
-                writingSfx.playSFX();
+                writingSfx.playSfx();
 
                 GptAndTextAreaManager.sideConversationController.refreshMessages(
                     GptPromptEngineering.converterFindPrisonerPrompt());
@@ -122,7 +122,7 @@ public class TextAreaController {
                 // sets the objective to be strikethrough
                 phoneLocatedObjective.setStrikethrough(true);
                 // plays the writing sound effect
-                writingSfx.playSFX();
+                writingSfx.playSfx();
                 // sets the current character to be the guard
                 GptAndTextAreaManager.sideConversationController.refreshMessages(
                     GptPromptEngineering.phoneFindPrisonerPrompt());
@@ -135,7 +135,7 @@ public class TextAreaController {
               if (newValue) {
                 // sets the objective to be strikethrough
                 safeLocatedObjective.setStrikethrough(true);
-                writingSfx.playSFX();
+                writingSfx.playSfx();
 
                 GptAndTextAreaManager.currentCharacter = Characters.GUARD;
                 try {
@@ -155,7 +155,7 @@ public class TextAreaController {
               if (newValue) {
                 // sets the objective to be strikethrough
                 guardTalkedObjective.setStrikethrough(true);
-                writingSfx.playSFX();
+                writingSfx.playSfx();
 
                 try {
                   GptAndTextAreaManager.sideConversationController.refreshMessages(

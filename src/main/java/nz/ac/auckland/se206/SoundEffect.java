@@ -15,7 +15,7 @@ public class SoundEffect {
   }
 
   // Plays the sound effect
-  public void playSFX() {
+  public void playSfx() {
     Media media = new Media(new File(path).toURI().toString());
     MediaPlayer mediaPlayer = new MediaPlayer(media);
     mediaPlayer.setVolume(GameState.sfxVolume);

@@ -370,7 +370,7 @@ public class CafeteriaController {
       GameState.safeUnlocked = true;
 
       // plays the sound of the safe opening
-      safeOpeningNoise.playSFX();
+      safeOpeningNoise.playSfx();
 
     } else {
       thoughtBubblePane.setVisible(true);
