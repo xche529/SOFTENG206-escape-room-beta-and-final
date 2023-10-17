@@ -492,6 +492,8 @@ public class CafeteriaController {
     inspectingPaintingPane.setVisible(false);
     blurredPane.setVisible(false);
     inspectingVendingPane.setVisible(false);
+    thoughtBubblePane.setVisible(false);
+    paperPane.setVisible(false);
     safe.setVisible(false);
     paintingWithSafe.setVisible(true);
     paintingWithoutSafe.setVisible(true);
