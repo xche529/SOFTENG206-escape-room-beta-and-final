@@ -311,7 +311,7 @@ public class TextAreaController {
       }
       // filter parentheses out so we can send messages without player seeing
 
-      for (int i = messages.size() - 1; i >= 0; i--) {
+      for (int i = messages.size() - 1; i > 0; i--) {
 
         String result = "";
         String check = messages.get(i).getContent();

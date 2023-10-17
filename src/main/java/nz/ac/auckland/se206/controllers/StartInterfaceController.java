@@ -8,7 +8,6 @@ import java.util.List;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
@@ -129,7 +128,7 @@ public class StartInterfaceController {
         }
         ImageView avatar = new ImageView(image);
         Text text = new Text(result);
-        text.setWrappingWidth(150);
+        text.setWrappingWidth(200);
         avatar.setFitHeight(70);
         avatar.setFitWidth(70);
         playHistoryHbox.getChildren().add(avatar);
