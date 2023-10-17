@@ -15,6 +15,7 @@ import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.reseters.GameEnd;
 
+/** settings class for the settings pane, to change audio and other tweaks. */
 public class SettingsController {
 
   @FXML private Slider audioSlider;
@@ -32,6 +33,10 @@ public class SettingsController {
 
   private MediaPlayer mediaPlayer;
 
+  /**
+   * This method is called when the scene is loaded. It sets the initial values of the sliders and
+   * adds listeners to the sliders.
+   */
   public void initialize() {
 
     // set the initial values of the sliders
@@ -97,9 +102,12 @@ public class SettingsController {
         new Task<Void>() {
           @Override
           protected Void call() throws Exception {
+            // get the song from the resources folder
             Media song = new Media(App.class.getResource("/sounds/Song.mp3").toString());
+            // play the song
             mediaPlayer = new MediaPlayer(song);
             mediaPlayer.setVolume(GameState.musicVolume);
+            // loops the song
             mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
             mediaPlayer.play();
             return null;

@@ -17,7 +17,10 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 
+/** This class is used to manage the GPT model and the text area */
 public class GptAndTextAreaManager {
+
+  /** This enum is used to keep track of the current character */
   public enum Characters {
     PRISONER_ONE,
     PRISONER_TWO,
@@ -51,11 +54,7 @@ public class GptAndTextAreaManager {
   public static boolean isNewMessage = false;
   public static int hintLeft;
 
-  /**
-   * this method outputs MessageHistory as a string which can be put into display board
-   *
-   * @param chat the ChatCompletionRequest for the chat history
-   */
+  /** this method outputs MessageHistory as a string which can be put into display board. */
   public static void initialize() throws ApiProxyException {
     // send initial messages to GPT
     sendMessage(GptPromptEngineering.getGuardSetUp(GameState.itemToChoose.getId()));
@@ -67,7 +66,7 @@ public class GptAndTextAreaManager {
   }
 
   /**
-   * this method is called a new game is started
+   * this method is called a new game is started.
    *
    * @throws ApiProxyException if the GPT model is not working
    */
@@ -89,9 +88,7 @@ public class GptAndTextAreaManager {
 
   /**
    * this method is called when the user switches the target character or the message needs to be
-   * update
-   *
-   * @param character the character to display
+   * updated.
    */
   public static void removeInputTextAreaFocus() {
     textAreaInputBox.getParent().requestFocus();
@@ -123,7 +120,7 @@ public class GptAndTextAreaManager {
   }
 
   /**
-   * This method sends a message to the GPT model and plays the sound effect
+   * This method sends a message to the GPT model and plays the sound effect.
    *
    * @param message the message to send to GPT
    * @throws ApiProxyException if the GPT model is not working
@@ -160,21 +157,21 @@ public class GptAndTextAreaManager {
       if (currentCharacter
           == Characters.GUARD) { // plays the sound effect for the corresponding character
         SoundEffect guardNoise = new SoundEffect("src/main/resources/sounds/HmmSoundEffect1.mp3");
-        guardNoise.playSFX();
+        guardNoise.playSfx();
       } else if (currentCharacter == Characters.PRISONER_ONE) {
         SoundEffect prisonerOneNoise =
             new SoundEffect("src/main/resources/sounds/HmmSoundEffect2.mp3");
-        prisonerOneNoise.playSFX();
+        prisonerOneNoise.playSfx();
       } else {
         SoundEffect prisonerTwoNoise =
             new SoundEffect("src/main/resources/sounds/HmmSoundEffect3.mp3");
-        prisonerTwoNoise.playSFX();
+        prisonerTwoNoise.playSfx();
       }
     }
   }
 
   /**
-   * This method runs the GPT model in a background thread
+   * This method runs the GPT model in a background thread.
    *
    * @param chatCompletionRequest the ChatCompletionRequest for the chat history
    * @throws ApiProxyException if the GPT model is not working
@@ -219,24 +216,28 @@ public class GptAndTextAreaManager {
     gptThread.start();
   }
 
+  /** This method sets the thinking animations for prisoner one in all of the scenes to up */
   public static void setPrisonerOneThinkUp() {
     roomController.setThinkingOneUp();
     cafeteriaController.setThinkingOneUp();
     officeController.setThinkingOneUp();
   }
 
+  /** This method sets the thinking animations for prisoner one in all of the scenes to down */
   public static void setPrisonerOneThinkDown() {
     roomController.setThinkingOneDown();
     cafeteriaController.setThinkingOneDown();
     officeController.setThinkingOneDown();
   }
 
+  /** This method sets the thinking animations for prisoner two in all of the scenes to up */
   public static void setPrisonerTwoThinkUp() {
     roomController.setThinkingTwoUp();
     cafeteriaController.setThinkingTwoUp();
     officeController.setThinkingTwoUp();
   }
 
+  /** This method sets the thinking animations for prisoner two in all of the scenes to down */
   public static void setPrisonerTwoThinkDown() {
     roomController.setThinkingTwoDown();
     cafeteriaController.setThinkingTwoDown();
@@ -251,6 +252,7 @@ public class GptAndTextAreaManager {
     cafeteriaController.setThinkingThreeDown();
   }
 
+  /** This method sets the thinking animations in all of the scenes to down */
   public static void setAllThinkDown() {
     // setting the thinking animations in all of the scenes
     setGuardThinkDown();

@@ -101,8 +101,8 @@ public class RoomController {
   /**
    * Initializes the room view, it is called when the room loads.
    *
-   * @throws ApiProxyException
-   * @throws IOException
+   * @throws ApiProxyException if there is an error with the GPT model
+   * @throws IOException if there is an error loading the start view
    */
   public void initialize() throws ApiProxyException, IOException {
 
@@ -147,7 +147,7 @@ public class RoomController {
   /**
    * This method starts a thread that checks if the room needs to be reset.
    *
-   * @throws IOException
+   * @throws IOException if there is an error loading the start view
    */
   public void start() throws IOException {
 
@@ -159,7 +159,7 @@ public class RoomController {
   /**
    * This method resets the room if the player has lost.
    *
-   * @throws IOException
+   * @throws IOException if there is an error loading the start view
    */
   private void resetchecker() throws IOException {
     timeline =
@@ -183,6 +183,7 @@ public class RoomController {
                         lostSound.playSFX();
 
                       } catch (NullPointerException e) {
+                        System.out.println("Scene is null");
                       }
                     }
                   }
@@ -231,7 +232,7 @@ public class RoomController {
     System.out.println("room reseted");
   }
 
-  /* This method animates all of the arrows in the scene */
+  /** This method animates all of the arrows in the scene */
   public void animateAllArrows() {
     animateArrows(toiletArrow);
     animateArrows(toiletPaperArrow);
@@ -241,7 +242,11 @@ public class RoomController {
     animateArrows(towelArrow);
   }
 
-  /* This method animates the arrows */
+  /**
+   * This method animates the arrows, making them bounce slightly up and down.
+   *
+   * @param arrow the arrow to animate
+   */
   public void animateArrows(ImageView arrow) {
     arrow.setOpacity(1);
     // sets the starting position of the arrow
@@ -256,19 +261,19 @@ public class RoomController {
     translateTransition.play();
   }
 
-  /* This method updates the timer label */
+  /** This method updates the timer label */
   private void updateTimerLabel() {
     int minutes = GameState.secondsRemaining / 60;
     int seconds = GameState.secondsRemaining % 60;
     timerLabel.setText(String.format("%d:%02d", minutes, seconds));
   }
 
-  /* This methos animates the prioners walking into the room */
+  /** This methos animates the prioners walking into the room */
   public void walkInAnimation() {
     MovementControl.moveToLeft(true, 1, 500, animationItems);
   }
 
-  /* Moves the prisoners to their starting position. */
+  /** Moves the prisoners to their starting position. */
   public void resetAnimation() {
     for (ImageView item : animationItems) {
       item.setTranslateX(500);

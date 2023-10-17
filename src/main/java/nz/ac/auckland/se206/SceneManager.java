@@ -12,8 +12,10 @@ import nz.ac.auckland.se206.controllers.OfficeController;
 import nz.ac.auckland.se206.controllers.RoomController;
 import nz.ac.auckland.se206.controllers.SettingsController;
 
+/** This class is used to switch between the different scenes in the game. */
 public class SceneManager {
 
+  /** This enum is used to keep track of the scenes */
   public enum AppUi {
     ROOM,
     OFFICE,
@@ -42,7 +44,7 @@ public class SceneManager {
   private static HashMap<AppUi, Parent> sceneMap = new HashMap<AppUi, Parent>();
 
   /**
-   * Switches the scene to the next room
+   * Switches the scene to the next room.
    *
    * @param isToLeft true if the player is moving to the left, false if the player is moving to the
    *     right
@@ -113,16 +115,19 @@ public class SceneManager {
   }
 
   /**
-   * Switches the scene to the start interface
+   * Switches the scene to the start interface.
    *
    * @param scene the scene that we are currently on
    */
   public static void switchToStart(Scene scene) {
+    // get the start interface
     VBox endLost = (VBox) getUiRoot(AppUi.START_INTERFACE);
     GameState.setUpdatePlayHistory(true);
+    // get the end lost pane
     StackPane endLostStack = new StackPane(endLost, settings);
     StackPane.setAlignment(getUiRoot(AppUi.SETTINGS), javafx.geometry.Pos.TOP_LEFT);
     VBox vbox = new VBox(endLostStack);
+    // get the position of the vbox
     vbox.setLayoutX(App.centerX);
     vbox.setLayoutY(App.centerY);
     scene.setRoot(vbox);
@@ -130,41 +135,51 @@ public class SceneManager {
   }
 
   /**
-   * Switches the scene to the end won interface
+   * Switches the scene to the end won interface.
    *
    * @param scene the scene that we are currently on
    */
   public static void switchToEndWon(Scene scene) {
+    // get the end won interface
     VBox endWon = (VBox) getUiRoot(AppUi.END_WON);
     StackPane endWonStack = new StackPane(endWon, settings);
+    // add the scale
     settings.getTransforms().add(App.scale);
     StackPane.setAlignment(getUiRoot(AppUi.SETTINGS), javafx.geometry.Pos.TOP_LEFT);
+    // add the vbox
     VBox vbox = new VBox(endWonStack);
+    // set the layout
     vbox.setLayoutX(App.centerX);
     vbox.setLayoutY(App.centerY);
     scene.setRoot(vbox);
+    // set the current ui
     currentUi = AppUi.END_WON;
   }
 
   /**
-   * Switches the scene to the end lost interface
+   * Switches the scene to the end lost interface.
    *
    * @param scene the scene that we are currently on
    */
   public static void switchToEndLost(Scene scene) {
+    // get the end lost interface
     VBox endLost = (VBox) getUiRoot(AppUi.END_LOST);
     settings.getTransforms().add(App.startScale);
+    // add the scale
     StackPane endLostStack = new StackPane(endLost, settings);
+    // set the alignment of the stackpane
     StackPane.setAlignment(getUiRoot(AppUi.SETTINGS), javafx.geometry.Pos.TOP_LEFT);
     VBox vbox = new VBox(endLostStack);
+    // set the layout
     vbox.setLayoutX(App.centerX);
     vbox.setLayoutY(App.centerY);
     scene.setRoot(vbox);
+    // set the current ui
     currentUi = AppUi.END_LOST;
   }
 
   /**
-   * Switches the scene to the office
+   * Switches the scene to the office.
    *
    * @param scene the scene that we are currently on
    */

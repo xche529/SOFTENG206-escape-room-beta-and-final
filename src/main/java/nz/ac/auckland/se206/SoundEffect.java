@@ -6,6 +6,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
+/** This class plays the sound effects in the game */
 public class SoundEffect {
 
   private String path;
@@ -14,8 +15,8 @@ public class SoundEffect {
     this.path = path;
   }
 
-  // Plays the sound effect
-  public void playSFX() {
+  /** Plays the sound effect in a separate thread to avoid lag */
+  public void playSfx() {
     Media media = new Media(new File(path).toURI().toString());
     MediaPlayer mediaPlayer = new MediaPlayer(media);
     mediaPlayer.setVolume(GameState.sfxVolume);
@@ -34,10 +35,10 @@ public class SoundEffect {
   }
 
   /**
-   * Pauses the safe opening sound effect after 3 seconds and resumes it when the safe is closed
+   * Pauses the safe opening sound effect after 3 seconds and resumes it when the safe is closed.
    *
    * @param mediaPlayer the media player that plays the sound effect
-   * @throws InterruptedException
+   * @throws InterruptedException if the thread is interrupted
    */
   private void pauseSafeNoise(MediaPlayer mediaPlayer) throws InterruptedException {
     if (path == "src/main/resources/sounds/door-opening-and-closing-18398.mp3") {

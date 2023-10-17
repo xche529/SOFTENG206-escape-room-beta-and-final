@@ -8,15 +8,16 @@ import javafx.scene.input.MouseEvent;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 
+/** Controller for the end lost interface. */
 public class EndLostController {
 
   @FXML private Button restartButton;
   @FXML private ImageView cog;
 
   /**
-   * Switches the scene to the start interface
+   * Switches the scene to the start interface.
    *
-   * @param event
+   * @param event when the try again button is pressed
    */
   @FXML
   private void onTryAgain(MouseEvent event) {
