@@ -6,7 +6,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.transform.Scale;
 import nz.ac.auckland.se206.controllers.CafeteriaController;
 import nz.ac.auckland.se206.controllers.OfficeController;
 import nz.ac.auckland.se206.controllers.RoomController;
@@ -34,7 +33,8 @@ public class SceneManager {
   public static CafeteriaController cafeteriaController;
   public static SettingsController settingsController;
   private static boolean isFirstRound = true;
-  private static SoundEffect runningSound = new SoundEffect("src/main/resources/sounds/Running.mp3");
+  private static SoundEffect runningSound =
+      new SoundEffect("src/main/resources/sounds/Running.mp3");
   public static VBox settings;
 
   static AppUi[] appUis = {
@@ -61,41 +61,41 @@ public class SceneManager {
     //   cafeteriaController.resetAnimation();
     //   cafeteriaController.walkInAnimation();
     // } else {
-      runningSound.playSFX();
-      // prints the action being taken in the terminal for debugging purposes
-      if (isToLeft) {
-        System.out.println("Moving to left");
-      } else {
-        System.out.println("Moving to right");
+    runningSound.playSfx();
+    // prints the action being taken in the terminal for debugging purposes
+    if (isToLeft) {
+      System.out.println("Moving to left");
+    } else {
+      System.out.println("Moving to right");
+    }
+    int index = 0;
+    for (int i = 0; i < appUis.length; i++) {
+      if (currentUi == appUis[i]) {
+        index = i;
       }
-      int index = 0;
-      for (int i = 0; i < appUis.length; i++) {
-        if (currentUi == appUis[i]) {
-          index = i;
-        }
-      }
-      if (index == 0 && isToLeft) {
-        index = appUis.length - 1;
-      } else if (isToLeft) {
-        index--;
-      } else if (index == appUis.length - 1) {
-        index = 0;
-      } else {
-        index++;
-      }
-      if (index == 0) { // creating a playing walk animation in the new room
-        roomController.resetAnimation();
-        roomController.walkInAnimation();
-      } else if (index == 1) {
-        officeController.resetAnimation();
-        officeController.walkInAnimation();
-      } else {
-        cafeteriaController.resetAnimation();
-        cafeteriaController.walkInAnimation();
-      }
-      System.out.println("Index: " + index);
-      currentUi = appUis[index];
-      roomToSwitch = (VBox) getUiRoot(appUis[index]);
+    }
+    if (index == 0 && isToLeft) {
+      index = appUis.length - 1;
+    } else if (isToLeft) {
+      index--;
+    } else if (index == appUis.length - 1) {
+      index = 0;
+    } else {
+      index++;
+    }
+    if (index == 0) { // creating a playing walk animation in the new room
+      roomController.resetAnimation();
+      roomController.walkInAnimation();
+    } else if (index == 1) {
+      officeController.resetAnimation();
+      officeController.walkInAnimation();
+    } else {
+      cafeteriaController.resetAnimation();
+      cafeteriaController.walkInAnimation();
+    }
+    System.out.println("Index: " + index);
+    currentUi = appUis[index];
+    roomToSwitch = (VBox) getUiRoot(appUis[index]);
     // }
     // stacks the settings directly above the current room
     settings.getTransforms().clear();
@@ -189,9 +189,9 @@ public class SceneManager {
       isFirstRound = false;
     } else { // This code is used to scale the room to the correct size, as it shrinks on every
       // round without it
-     // Scale settingsScale = new Scale(1.39, 1.39);
-     // settings.getTransforms().add(settingsScale);
-     settings.getTransforms().clear();
+      // Scale settingsScale = new Scale(1.39, 1.39);
+      // settings.getTransforms().add(settingsScale);
+      settings.getTransforms().clear();
     }
     cafeteriaController.resetAnimation();
     cafeteriaController.walkInAnimation();
