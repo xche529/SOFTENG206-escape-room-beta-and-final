@@ -33,7 +33,11 @@ public class PlayHistory implements Serializable {
     this.playerAvatar = playerAvatar;
   }
 
-  // adds the most recent score to the player history
+  /**
+   * This method adds the play history to the list of play history.
+   *
+   * @param playHistory - the play history to be added
+   */
   public void addHistory(PlayHistory playHistory) {
     // if the score is greater than the current score,, then it is added to the parent
     if (playHistory.getScore() > this.score) {
@@ -74,7 +78,11 @@ public class PlayHistory implements Serializable {
     }
   }
 
-  /** This method returns the full list of the play history. */
+  /**
+   * This method returns the full list of the play history.
+   *
+   * @return the full list of the play history
+   */
   public List<List<Object>> getFullList() {
     // setting up the variables
     List<List<Object>> playHistoryList = new ArrayList<>();

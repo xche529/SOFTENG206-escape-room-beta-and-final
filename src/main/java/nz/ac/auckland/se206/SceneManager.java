@@ -14,7 +14,7 @@ import nz.ac.auckland.se206.controllers.SettingsController;
 /** This class is used to switch between the different scenes in the game. */
 public class SceneManager {
 
-  /** This enum is used to keep track of the scenes */
+  /** This enum is used to keep track of the scenes. */
   public enum AppUi {
     ROOM,
     OFFICE,

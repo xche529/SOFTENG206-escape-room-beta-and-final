@@ -96,6 +96,7 @@ public class SettingsController {
             });
   }
 
+  /** This method plays the music in a separate thread to avoid lag. */
   public void playMusic() {
     // plays the music
     Task<Void> task =
@@ -142,7 +143,7 @@ public class SettingsController {
   }
 
   @FXML
-  private void onClickAbandonGame(MouseEvent Event) {
+  private void onClickAbandonGame() {
     if (SceneManager.currentUi == SceneManager.AppUi.ROOM
         || SceneManager.currentUi == SceneManager.AppUi.OFFICE
         || SceneManager.currentUi == SceneManager.AppUi.CAFETERIA) {
@@ -170,7 +171,7 @@ public class SettingsController {
   }
 
   @FXML
-  private void onClickHelp(MouseEvent Event) {
+  private void onClickHelp() {
     // opens the help window
     helpPane.setVisible(true);
   }
@@ -190,7 +191,7 @@ public class SettingsController {
   }
 
   @FXML
-  private void onClickHelpCross(MouseEvent Event) {
+  private void onClickHelpCross() {
     // closes the help window
     helpPane.setVisible(false);
   }
