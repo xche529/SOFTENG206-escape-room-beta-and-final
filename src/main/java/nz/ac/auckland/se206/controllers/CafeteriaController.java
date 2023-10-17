@@ -419,6 +419,7 @@ public class CafeteriaController {
   private void onClickCollectPaper() {
     GameState.hasPaperProperty().set(true);
     GameState.setSafeClosed(true);
+    blurredPane.setVisible(false);
     paperPane.setVisible(false);
   }
 
