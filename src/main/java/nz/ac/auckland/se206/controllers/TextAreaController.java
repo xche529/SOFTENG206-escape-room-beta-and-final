@@ -328,6 +328,11 @@ public class TextAreaController {
     timeline.play();
   }
 
+  /**
+   * This method resets the ticks. It resets all components.
+   *
+   * @throws ApiProxyException - if the message cannot be sent
+   */
   public void resetTicks() throws ApiProxyException {
     // resets the booleans
     GameState.setRiddleResolved(false);
