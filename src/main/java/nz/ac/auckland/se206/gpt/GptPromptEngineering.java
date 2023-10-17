@@ -56,8 +56,9 @@ public class GptPromptEngineering {
           + " Riddle is guessed correctly or answer is given by player you must return only"
           + " 'Correct') you must return only 'Correct'";
 
-    } else if (GameState.difficulty == Difficulty.MEDIUM) {
-      // get the guards story if the difficulty is medium
+    } else if (GameState.difficulty == Difficulty.MEDIUM
+        || GameState.difficulty == Difficulty.EASY) {
+      // get the guards story if the difficulty is medium or easy
       return "(You are a guard with strong personality who is helping a prisoner escape an prison"
           + " You should give the prisoner a riddle with the answer of: "
           // append riddle answer
@@ -272,8 +273,8 @@ public class GptPromptEngineering {
   }
 
   public static String getRiddleHint() {
-    return "(The hint button has been pressed! Give the player a hint about the riddle. DO NOT SAY"
-               + " THE ANSWER IN YOUR MESSAGE.)";
+    return "(The hint button has been pressed! You must give the player a hint about the riddle. Do not give"
+               + " the answer of the riddle.)";
   }
 
   public static String getObjectHint() {
