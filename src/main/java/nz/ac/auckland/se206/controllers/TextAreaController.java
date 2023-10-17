@@ -181,9 +181,9 @@ public class TextAreaController {
                 writingSfx.playSfx();
 
                 GptAndTextAreaManager.currentCharacter = Characters.GUARD;
-                  // sends the guard the next hint
-                  GptAndTextAreaManager.sideConversationController.refreshMessages(
-                      GptPromptEngineering.safeFindPrisonerPrompt());
+                // sends the guard the next hint
+                GptAndTextAreaManager.sideConversationController.refreshMessages(
+                    GptPromptEngineering.safeFindPrisonerPrompt());
               }
             });
     // observes the property of the guard being talked to
@@ -226,30 +226,43 @@ public class TextAreaController {
 
   @FXML
   private void onClickGiveHint() throws ApiProxyException {
+
+    // decrement the number of hints remaining
     GameState.hintsLeft--;
     if (GameState.difficulty == GameState.Difficulty.MEDIUM) {
+      // if its zero, disable the button
       if (GameState.hintsLeft == 0) {
         GameState.setIsHintsAllowed(false);
       }
+      // update the text
       hintsLeftText.setText(Integer.toString(GameState.hintsLeft));
     }
 
+    // if the riddle is not solved, give the riddle hint
     if (GameState.isRiddleResolvedProperty().get() == false) {
       GptAndTextAreaManager.sendMessage(GptPromptEngineering.getRiddleHint());
       return;
     }
+
+    // if the code word is not found, give the code word hint
     if (GameState.isCodeWordFoundProperty().get() == false) {
       GptAndTextAreaManager.sendMessage(GptPromptEngineering.getObjectHint());
       return;
     }
+
+    // if the converter is not found, give the converter hint
     if (GameState.isConverterFoundProperty().get() == false) {
       GptAndTextAreaManager.sendMessage(GptPromptEngineering.getCypherHint());
       return;
     }
-    if (GameState.safeFound) {
+
+    // if the phone is not found, give the phone hint
+    if (!GameState.safeFound) {
       GptAndTextAreaManager.sendMessage(GptPromptEngineering.getSafeHint());
       return;
     }
+
+    // if the phone is not found, give the phone hint
     if (GameState.isPhoneFoundProperty().get() == false) {
       GptAndTextAreaManager.sendMessage(GptPromptEngineering.getPhoneHint());
       return;
