@@ -18,6 +18,7 @@ import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.controllers.CafeteriaController;
 import nz.ac.auckland.se206.controllers.OfficeController;
 import nz.ac.auckland.se206.controllers.RoomController;
+import nz.ac.auckland.se206.controllers.SettingsController;
 import nz.ac.auckland.se206.controllers.SideConversationController;
 import nz.ac.auckland.se206.controllers.StartInterfaceController;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
@@ -28,6 +29,7 @@ import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
  */
 public class App extends Application {
   public static Scale scale;
+  public static Scale startScale;
   public static double overallScale = 1;
   public static double centerX = 1;
   public static double centerY = 1;
@@ -83,6 +85,7 @@ public class App extends Application {
     centerX = (width - 1413 * overallScale) / 2;
     centerY = (height - 800 * overallScale) / 5;
     scale = new Scale(overallScale, overallScale);
+    startScale = new Scale(overallScale * 1.27, overallScale  * 1.27);
 
     // creating loaders for all fxml files
     FXMLLoader roomLoader = loadFxml("room");
@@ -130,9 +133,9 @@ public class App extends Application {
     SceneManager.addUi(AppUi.TEXT_AREA, textArea);
     SceneManager.addUi(AppUi.SIDE_CONVERSATION, sideConversation);
 
-    SceneManager.getUiRoot(AppUi.START_INTERFACE).getTransforms().add(scale);
-    SceneManager.getUiRoot(AppUi.END_WON).getTransforms().add(scale);
-    SceneManager.getUiRoot(AppUi.END_LOST).getTransforms().add(scale);
+    SceneManager.getUiRoot(AppUi.START_INTERFACE).getTransforms().add(startScale);
+    SceneManager.getUiRoot(AppUi.END_WON).getTransforms().add(startScale);
+    SceneManager.getUiRoot(AppUi.END_LOST).getTransforms().add(startScale);
 
     // setting up the controllers
     CafeteriaController cafeteriaController = cafeteriaLoader.getController();
@@ -140,11 +143,13 @@ public class App extends Application {
     StartInterfaceController startInterfaceController = startInterfaceLoader.getController();
     RoomController roomController = roomLoader.getController();
     SideConversationController sideConversationController = sideConversationLoader.getController();
+    SettingsController settingsController = settingsLoader.getController();
 
     // setting up the controllers
     SceneManager.cafeteriaController = cafeteriaController;
     SceneManager.officeController = officeController;
     SceneManager.roomController = roomController;
+    SceneManager.settingsController = settingsController;
     GptAndTextAreaManager.sideConversationController = sideConversationController;
     startInterfaceController.setRoomController(roomController);
     startInterfaceController.setSideConversationController(sideConversationController);

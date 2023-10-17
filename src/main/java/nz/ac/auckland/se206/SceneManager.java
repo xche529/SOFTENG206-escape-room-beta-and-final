@@ -10,6 +10,7 @@ import javafx.scene.transform.Scale;
 import nz.ac.auckland.se206.controllers.CafeteriaController;
 import nz.ac.auckland.se206.controllers.OfficeController;
 import nz.ac.auckland.se206.controllers.RoomController;
+import nz.ac.auckland.se206.controllers.SettingsController;
 
 /** This class is used to switch between the different scenes in the game. */
 public class SceneManager {
@@ -31,8 +32,9 @@ public class SceneManager {
   public static RoomController roomController;
   public static OfficeController officeController;
   public static CafeteriaController cafeteriaController;
+  public static SettingsController settingsController;
   private static boolean isFirstRound = true;
-
+  private static SoundEffect runningSound = new SoundEffect("src/main/resources/sounds/Running.mp3");
   public static VBox settings;
 
   static AppUi[] appUis = {
@@ -51,14 +53,15 @@ public class SceneManager {
   public static void switchRoom(boolean isToLeft, Scene scene) {
     VBox roomToSwitch;
 
-    if (currentUi == AppUi.START_INTERFACE) {
-      // goes to the starting room
-      roomToSwitch = (VBox) getUiRoot(AppUi.CAFETERIA);
-      currentUi = AppUi.CAFETERIA;
-      // starts the characters animations
-      cafeteriaController.resetAnimation();
-      cafeteriaController.walkInAnimation();
-    } else {
+    // if (currentUi == AppUi.START_INTERFACE) {
+    //   // goes to the starting room
+    //   roomToSwitch = (VBox) getUiRoot(AppUi.CAFETERIA);
+    //   currentUi = AppUi.CAFETERIA;
+    //   // starts the characters animations
+    //   cafeteriaController.resetAnimation();
+    //   cafeteriaController.walkInAnimation();
+    // } else {
+      runningSound.playSFX();
       // prints the action being taken in the terminal for debugging purposes
       if (isToLeft) {
         System.out.println("Moving to left");
@@ -93,8 +96,10 @@ public class SceneManager {
       System.out.println("Index: " + index);
       currentUi = appUis[index];
       roomToSwitch = (VBox) getUiRoot(appUis[index]);
-    }
+    // }
     // stacks the settings directly above the current room
+    settings.getTransforms().clear();
+    settings.getTransforms().add(App.startScale);
     StackPane newRoomStack = new StackPane(roomToSwitch, settings);
     StackPane.setAlignment(settings, javafx.geometry.Pos.TOP_LEFT);
     HBox hbox = new HBox(newRoomStack, getUiRoot(AppUi.SIDE_CONVERSATION));
@@ -159,8 +164,8 @@ public class SceneManager {
   public static void switchToEndLost(Scene scene) {
     // get the end lost interface
     VBox endLost = (VBox) getUiRoot(AppUi.END_LOST);
+    settings.getTransforms().add(App.startScale);
     // add the scale
-    settings.getTransforms().add(App.scale);
     StackPane endLostStack = new StackPane(endLost, settings);
     // set the alignment of the stackpane
     StackPane.setAlignment(getUiRoot(AppUi.SETTINGS), javafx.geometry.Pos.TOP_LEFT);
@@ -184,8 +189,9 @@ public class SceneManager {
       isFirstRound = false;
     } else { // This code is used to scale the room to the correct size, as it shrinks on every
       // round without it
-      Scale settingsScale = new Scale(1.39, 1.39);
-      settings.getTransforms().add(settingsScale);
+     // Scale settingsScale = new Scale(1.39, 1.39);
+     // settings.getTransforms().add(settingsScale);
+     settings.getTransforms().clear();
     }
     cafeteriaController.resetAnimation();
     cafeteriaController.walkInAnimation();

@@ -25,6 +25,7 @@ import nz.ac.auckland.se206.GptAndTextAreaManager.Characters;
 import nz.ac.auckland.se206.MovementControl;
 import nz.ac.auckland.se206.Safe;
 import nz.ac.auckland.se206.SceneManager;
+import nz.ac.auckland.se206.SoundEffect;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.reseters.GameEnd;
 import nz.ac.auckland.se206.reseters.RandomizationGenerator;
@@ -95,6 +96,7 @@ public class RoomController {
   private Timeline timeline;
   private ImageView[] animationItems = null;
   private Rectangle[] items;
+  private SoundEffect lostSound = new SoundEffect("src/main/resources/sounds/Lost.mp3");
 
   /**
    * Initializes the room view, it is called when the room loads.
@@ -177,6 +179,9 @@ public class RoomController {
                         // switches to the lost screen
                         Scene scene = sink.getScene();
                         SceneManager.switchToEndLost(scene);
+                        SceneManager.settingsController.stopMusic();
+                        lostSound.playSFX();
+
                       } catch (NullPointerException e) {
                         System.out.println("Scene is null");
                       }

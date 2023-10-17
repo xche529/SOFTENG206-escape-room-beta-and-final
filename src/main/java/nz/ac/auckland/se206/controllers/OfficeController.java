@@ -25,6 +25,7 @@ import nz.ac.auckland.se206.GptAndTextAreaManager.Characters;
 import nz.ac.auckland.se206.MovementControl;
 import nz.ac.auckland.se206.PlayHistory;
 import nz.ac.auckland.se206.SceneManager;
+import nz.ac.auckland.se206.SoundEffect;
 import nz.ac.auckland.se206.reseters.GameEnd;
 import nz.ac.auckland.se206.reseters.RandomizationGenerator;
 
@@ -89,6 +90,9 @@ public class OfficeController {
   private Label[] digits;
   private int currentDigit = 0;
   private Rectangle[] items;
+  private SoundEffect winningSound = new SoundEffect("src/main/resources/sounds/Win.mp3");
+  private SoundEffect lostSound = new SoundEffect("src/main/resources/sounds/Lost.mp3");
+
 
   /**
    * This method is called by the FXMLLoader when initialization is complete.
@@ -824,6 +828,8 @@ public class OfficeController {
 
         // switches to the end screen
         SceneManager.switchToEndWon(scene);
+        SceneManager.settingsController.stopMusic();
+        winningSound.playSFX();
       } else {
         // do nothing if the phone number is wrong
         System.out.println("Wrong number");
@@ -895,6 +901,9 @@ public class OfficeController {
                         // changes to the end screen
                         Scene scene = phone.getScene();
                         SceneManager.switchToEndLost(scene);
+                        SceneManager.settingsController.stopMusic();
+                        lostSound.playSFX();
+
                       } catch (NullPointerException e) {
                         System.out.println("Scene not found");
                       }

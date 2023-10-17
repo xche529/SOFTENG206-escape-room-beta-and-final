@@ -85,6 +85,8 @@ public class CafeteriaController {
   private ImageView[] animationItems;
   private SoundEffect safeOpeningNoise;
   private Timeline timeline;
+  private SoundEffect lostSound = new SoundEffect("src/main/resources/sounds/Lost.mp3");
+
 
   /** Initializes the cafeteria view, it is called when the room loads. */
   @FXML
@@ -560,6 +562,9 @@ public class CafeteriaController {
                         // switches to the lost screen
                         Scene scene = cross.getScene();
                         SceneManager.switchToEndLost(scene);
+                        SceneManager.settingsController.stopMusic();
+                        lostSound.playSFX();
+                        
                       } catch (NullPointerException e) {
                         System.out.println("Scene is null");
                       }

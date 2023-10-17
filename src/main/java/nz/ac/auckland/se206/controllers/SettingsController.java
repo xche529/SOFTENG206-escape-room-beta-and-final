@@ -96,7 +96,7 @@ public class SettingsController {
             });
   }
 
-  private void playMusic() {
+  public void playMusic() {
     // plays the music
     Task<Void> task =
         new Task<Void>() {
@@ -116,6 +116,11 @@ public class SettingsController {
 
     Thread thread = new Thread(task);
     thread.start();
+  }
+
+  public void stopMusic() {
+    // stops the music
+    mediaPlayer.stop();
   }
 
   @FXML
