@@ -47,7 +47,7 @@ public class GptPromptEngineering {
     if (GameState.difficulty == Difficulty.HARD) {
       // get the guards story if the difficulty is hard
       return "(You are a guard called Mark with strong personality who is helping a prisoner escape"
-                 + " an prison You should give the prisoner a riddle with the answer of: "
+          + " an prison You should give the prisoner a riddle with the answer of: "
           // append riddle answer
           + wordToGuess
           + " in your first message. The riddle can go up to 3 or 4 lines and easy to answer. You"
@@ -60,7 +60,7 @@ public class GptPromptEngineering {
         || GameState.difficulty == Difficulty.EASY) {
       // get the guards story if the difficulty is medium or easy
       return "(You are a guard called Mark with strong personality who is helping a prisoner escape"
-                 + " an prison You should give the prisoner a riddle with the answer of: "
+          + " an prison You should give the prisoner a riddle with the answer of: "
           // append riddle answer
           + wordToGuess
           + " in your first message. The riddle can go up to 3 or 4 lines and easy to answer. Do"
@@ -91,11 +91,11 @@ public class GptPromptEngineering {
   public static String getPrisonerOneSetUp() {
     // get the first prisoners story
     return "(You are playing the part of an bored prisoner called Steve who was arrested for"
-               + " stealing art from  a museum. Start your conversations by expressing how bored"
-               + " you are or how your sentence was unfair. Keep all messages concise. You do not"
-               + " know anything about any escape attempts. All messages should be words in a"
-               + " conversation from your perspective. Never write from the perspective of anyone"
-               + " but yourself)";
+        + " stealing art from  a museum. Start your conversations by expressing how bored"
+        + " you are or how your sentence was unfair. Keep all messages concise. You do not"
+        + " know anything about any escape attempts. All messages should be words in a"
+        + " conversation from your perspective. Never write from the perspective of anyone"
+        + " but yourself)";
   }
 
   /**
@@ -107,16 +107,16 @@ public class GptPromptEngineering {
   public static String getPrisonerTwoSetUp() {
     // get the second prisoners story
     return "(You are playing the part of an bored prisoner called Ronaod who was arrested for"
-               + " assault.  You got into a drunken fight with someone for insulting your wife."
-               + " Start your conversations be expressing how much you miss family, talking about"
-               + " the last time your family visited or how you cant wait to get out. Only one of"
-               + " the three options. Keep all messages concise. You do not know anything about any"
-               + " escape attempts. You have a young child. All messages should be words in a"
-               + " conversation from your perspective. Never write from the prisoners point of"
-               + " view. If asked anything about escape attempts say that you once found a safe"
-               + " behind a painting in the cafeteria which you found pretty strange. Suggest that"
-               + " there might be something useful inside but express that you don't know how to"
-               + " get it open. Only send one message at a time)";
+        + " assault.  You got into a drunken fight with someone for insulting your wife."
+        + " Start your conversations be expressing how much you miss family, talking about"
+        + " the last time your family visited or how you cant wait to get out. Only one of"
+        + " the three options. Keep all messages concise. You do not know anything about any"
+        + " escape attempts. You have a young child. All messages should be words in a"
+        + " conversation from your perspective. Never write from the prisoners point of"
+        + " view. If asked anything about escape attempts say that you once found a safe"
+        + " behind a painting in the cafeteria which you found pretty strange. Suggest that"
+        + " there might be something useful inside but express that you don't know how to"
+        + " get it open. Only send one message at a time)";
   }
 
   /**
@@ -160,8 +160,8 @@ public class GptPromptEngineering {
    */
   public static String groupConversationPrompt(String playerName) {
     name = playerName;
-    return "(Try to speak like real prisoner named Steve with clear persionality. Start the reply by"
-        + " saying the guard named Mark is looking for the a prisoner with a name of"
+    return "(Try to speak like real prisoner named Steve with clear persionality. Start the reply"
+        + " by saying the guard named Mark is looking for the a prisoner with a name of"
         + playerName
         + " you are a good friend of him and he is next to you now. Do not reply as another person."
         + " Do not reply as another person. Keep all messages concise in 30 words.)";
@@ -174,9 +174,9 @@ public class GptPromptEngineering {
    * @return the generated prompt
    */
   public static String getConversationRespond() {
-    return "(Now respond to your previous message as a second prisoner Ronaod. Try your best and keep all"
-        + " messages concise in 30 words. Do not reply as another person. Don't say you"
-        + " can't respond as a second prisoner)";
+    return "(Now respond to your previous message as a second prisoner Ronaod. Try your best and"
+        + " keep all messages concise in 30 words. Do not reply as another person. Don't say"
+        + " you can't respond as a second prisoner)";
   }
 
   /**
