@@ -88,6 +88,16 @@ public class TextAreaController {
     chatVbox.setMaxWidth(562);
     chatVbox.setMaxHeight(195);
 
+    GameState.isHintsAllowed()
+        .addListener(
+            (observable, oldValue, newValue) -> {
+              if (newValue) {
+                hintButton.setDisable(false);
+              } else {
+                hintButton.setDisable(true);
+              }
+            });
+
     // setting up the text area manager
     GptAndTextAreaManager.textAreaController = this;
     GptAndTextAreaManager.textAreaChatDisplayBoard = chatDisplayBoard;
@@ -316,6 +326,8 @@ public class TextAreaController {
     phoneLocatedObjective.setStrikethrough(false);
     safeLocatedObjective.setStrikethrough(false);
     guardTalkedObjective.setStrikethrough(false);
+
+    hintButton.setVisible(true);
   }
 
   /**
