@@ -100,11 +100,10 @@ public class PlayHistory implements Serializable {
                 + rank
                 + ":\n\tName: "
                 + playHistory.getName()
-                + "\n\tTime took: "
+                + "\n\tTime: "
                 + playHistory.getTimeTook() / 60
-                + " Min "
+                + ":"
                 + playHistory.getTimeTook() % 60
-                + " S"
                 + "\n\tDifficulty: "
                 + playHistory.getDifficultyString()
                 + "\n\n");
