@@ -828,8 +828,6 @@ public class OfficeController {
 
         // switches to the end screen
         SceneManager.switchToEndWon(scene);
-        SceneManager.settingsController.stopMusic();
-        SceneManager.currentUi = SceneManager.AppUi.END_WON;
         winningSound.playSfx();
       } else {
         // do nothing if the phone number is wrong
