@@ -2,6 +2,7 @@ package nz.ac.auckland.se206;
 
 import java.util.Random;
 
+/** This class is used to generate a random code for the safe. */
 public class Safe {
 
   // defining list of random words to use
@@ -18,7 +19,7 @@ public class Safe {
     "rope", "open", "flow", "rich", "poor"
   };
 
-  // This method generates a random codeword and sets it to the GameState
+  /** This method generates a random code for the safe. */
   public static void getRandomCode() {
 
     // getting a random string and turning into code
@@ -32,7 +33,7 @@ public class Safe {
 
   /**
    * This method converts the codeword into to a string of integers coresponding to the numbers on
-   * the cypher
+   * the cypher.
    *
    * @param string the 4 letter codeword
    * @return a 4 didgit string of integers

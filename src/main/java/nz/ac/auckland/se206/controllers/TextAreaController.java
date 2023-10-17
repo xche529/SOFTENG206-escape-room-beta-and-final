@@ -25,14 +25,11 @@ import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 
+/**
+ * Controller for the text area view. This view is used to display the conversation between the
+ * player and the guard.
+ */
 public class TextAreaController {
-  private Timeline timelineTwo;
-  private Timeline timeline;
-  private Image guardAvatar;
-  private Image playerAvatar;
-  private Image prisonerOneAvatar;
-  private Image prisonerTwoAvatar;
-  private SoundEffect writingSfx = new SoundEffect("src/main/resources/sounds/pencil.mp3");
   @FXML private Button responseSubmitButton;
   @FXML private TextArea inputBox;
   @FXML private TextArea chatDisplayBoard;
@@ -47,6 +44,14 @@ public class TextAreaController {
   @FXML private Text phoneLocatedObjective;
   @FXML private Text safeLocatedObjective;
   @FXML private Text guardTalkedObjective;
+
+  private Timeline timelineTwo;
+  private Timeline timeline;
+  private Image guardAvatar;
+  private Image playerAvatar;
+  private Image prisonerOneAvatar;
+  private Image prisonerTwoAvatar;
+  private SoundEffect writingSfx = new SoundEffect("src/main/resources/sounds/pencil.mp3");
 
   @FXML
   private void initialize() {
@@ -80,7 +85,7 @@ public class TextAreaController {
               if (newValue) {
                 // sets the objective to be strikethrough
                 riddleSolvedObjective.setStrikethrough(true);
-                writingSfx.playSFX();
+                writingSfx.playSfx();
                 try {
                   // gives the guard the next hint
                   GptAndTextAreaManager.sendMessage(GptPromptEngineering.solvedRaddleGuardPrompt());
@@ -98,7 +103,7 @@ public class TextAreaController {
               if (newValue) {
                 // sets the objective to be strikethrough
                 codewordFoundObjective.setStrikethrough(true);
-                writingSfx.playSFX();
+                writingSfx.playSfx();
               }
             });
     // observes the property of the converter being found
@@ -108,7 +113,7 @@ public class TextAreaController {
               if (newValue) {
                 // sets the objective to be strikethrough
                 converterFoundObjective.setStrikethrough(true);
-                writingSfx.playSFX();
+                writingSfx.playSfx();
 
                 GptAndTextAreaManager.sideConversationController.refreshMessages(
                     GptPromptEngineering.converterFindPrisonerPrompt());
@@ -122,7 +127,7 @@ public class TextAreaController {
                 // sets the objective to be strikethrough
                 phoneLocatedObjective.setStrikethrough(true);
                 // plays the writing sound effect
-                writingSfx.playSFX();
+                writingSfx.playSfx();
                 // sets the current character to be the guard
                 GptAndTextAreaManager.sideConversationController.refreshMessages(
                     GptPromptEngineering.phoneFindPrisonerPrompt());
@@ -135,7 +140,7 @@ public class TextAreaController {
               if (newValue) {
                 // sets the objective to be strikethrough
                 safeLocatedObjective.setStrikethrough(true);
-                writingSfx.playSFX();
+                writingSfx.playSfx();
 
                 GptAndTextAreaManager.currentCharacter = Characters.GUARD;
                 try {
@@ -155,7 +160,7 @@ public class TextAreaController {
               if (newValue) {
                 // sets the objective to be strikethrough
                 guardTalkedObjective.setStrikethrough(true);
-                writingSfx.playSFX();
+                writingSfx.playSfx();
 
                 try {
                   GptAndTextAreaManager.sideConversationController.refreshMessages(
@@ -187,8 +192,8 @@ public class TextAreaController {
   }
 
   /**
-   * This method submits the message to the GPT
-   * 
+   * This method submits the message to the GPT.
+   *
    * @throws ApiProxyException - if the message cannot be sent
    */
   @FXML
@@ -242,6 +247,11 @@ public class TextAreaController {
     guardTalkedObjective.setStrikethrough(false);
   }
 
+  /**
+   * This method displays the message in the text area.
+   *
+   * @param chat the message to be displayed
+   */
   public void setMessageHistory(ChatCompletionRequest chat) {
     chatVbox.getChildren().clear();
     System.out.println("Vbox cleared");
@@ -281,7 +291,7 @@ public class TextAreaController {
                     || messages.get(i).getContent().contains("Hint:")
                     || messages.get(i).getContent().contains("hint:"))
                 && i != 1) {
-                  // if the hint is the first message, then it is a hint
+              // if the hint is the first message, then it is a hint
               GptAndTextAreaManager.hintLeft--;
             }
             if (GptAndTextAreaManager.hintLeft == 0) {
@@ -347,8 +357,8 @@ public class TextAreaController {
   }
 
   /**
-   * This method displays the target character in the text area
-   * 
+   * This method displays the target character in the text area.
+   *
    * @param character the character that the player is talking to
    */
   public void displayTarget(Characters character) {
@@ -385,8 +395,8 @@ public class TextAreaController {
   }
 
   /**
-   * This method filters any words in parentheses out of the message
-   * 
+   * This method filters any words in parentheses out of the message.
+   *
    * @param input the message to be displayed
    * @return the message without the words in parentheses
    */

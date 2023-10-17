@@ -28,6 +28,7 @@ import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.reseters.GameEnd;
 import nz.ac.auckland.se206.reseters.RandomizationGenerator;
 
+/** Controller for the office scene. */
 public class OfficeController {
 
   @FXML private Rectangle deskDrawers;
@@ -90,9 +91,9 @@ public class OfficeController {
   private Rectangle[] items;
 
   /**
-   * This method is called by the FXMLLoader when initialization is complete
+   * This method is called by the FXMLLoader when initialization is complete.
    *
-   * @throws IOException
+   * @throws IOException for the reset checker
    */
   @FXML
   private void initialize() throws IOException {
@@ -156,7 +157,7 @@ public class OfficeController {
   }
 
   /**
-   * animates the arrow so that it bounces up and down
+   * animates the arrow so that it bounces up and down.
    *
    * @param arrow the arrow to be animates
    */
@@ -179,29 +180,29 @@ public class OfficeController {
     MovementControl.moveToLeft(false, 1, 500, animationItems);
   }
 
-  /** this method resets the loction of the prisoner and the speech bubble */
+  /** this method resets the loction of the prisoner and the speech bubble. */
   public void resetAnimation() {
     for (ImageView item : animationItems) {
       item.setTranslateX(-500);
     }
   }
 
-  /** shows the enlarged speech bubble for the prisoner one */
+  /** shows the enlarged speech bubble for the prisoner one. */
   public void setThinkingOneUp() {
     thinkingOne.setVisible(true);
   }
 
-  /** hides the enlarged speech bubble for the prisoner one */
+  /** hides the enlarged speech bubble for the prisoner one. */
   public void setThinkingOneDown() {
     thinkingOne.setVisible(false);
   }
 
-  /** shows the enlarged speech bubble for the prisoner two */
+  /** shows the enlarged speech bubble for the prisoner two. */
   public void setThinkingTwoUp() {
     thinkingTwo.setVisible(true);
   }
 
-  /** hides the enlarged speech bubble for the prisoner two */
+  /** hides the enlarged speech bubble for the prisoner two. */
   public void setThinkingTwoDown() {
     thinkingTwo.setVisible(false);
   }
@@ -209,7 +210,7 @@ public class OfficeController {
   /**
    * exits the veiw of the drawer
    *
-   * @param event the mouse event wher the character clicks anywhare on the screen
+   * @param event the mouse event where the character clicks anywhare on the screen.
    */
   @FXML
   void onClickInspectingDrawerPane(MouseEvent event) {
@@ -219,9 +220,9 @@ public class OfficeController {
   }
 
   /**
-   * shows the blown up drawer and if it has the cypher
+   * shows the blown up drawer and if it has the cypher.
    *
-   * @param event
+   * @param event when the drawer is clicked
    */
   @FXML
   private void clickDeskDrawers(MouseEvent event) {
@@ -247,7 +248,7 @@ public class OfficeController {
   }
 
   /**
-   * exits the veiw of the bin
+   * exits the veiw of the bin.
    *
    * @param event the mouse event wher the character clicks anywhare on the screen
    */
@@ -260,9 +261,9 @@ public class OfficeController {
   }
 
   /**
-   * shows the blown up bin and if it has the cypher
+   * shows the blown up bin and if it has the cypher.
    *
-   * @param event
+   * @param event when the bin is clicked
    */
   @FXML
   private void clickBin(MouseEvent event) {
@@ -286,7 +287,7 @@ public class OfficeController {
   }
 
   /**
-   * exits the veiw of the blackboard
+   * exits the view of the blackboard.
    *
    * @param event the mouse event wher the character clicks anywhare on the screen
    */
@@ -298,9 +299,9 @@ public class OfficeController {
   }
 
   /**
-   * shows the blown up blackboard and if it has the cypher
+   * shows the blown up blackboard and if it has the cypher.
    *
-   * @param event
+   * @param event when the blackboard is clicked
    */
   @FXML
   private void clickBlackboard(MouseEvent event) {
@@ -324,72 +325,75 @@ public class OfficeController {
   }
 
   /**
-   * enters the veiw of the phone
+   * enters the veiw of the phone.
    *
    * @param event the mouse event wher the character clicks on the phone
    */
   @FXML
   private void clickPhone(MouseEvent event) {
+    // set the gamestate property to true
     GameState.isPhoneFoundProperty().set(true);
+    // make relevant panes visible
     phoneArrow.setVisible(false);
     phonePane.setVisible(true);
     blurringPane.setVisible(true);
+    // if the user has the paper, the phone number will be displayed
     if (GameState.hasPaperProperty().get()) {
       paperPane.setVisible(true);
       numberLabel.setText(GameState.phoneNumber);
     }
   }
 
-  /** shows the enlarged desk drawer */
+  /** shows the enlarged desk drawer. */
   @FXML
   private void deskDrawersMouseEntered() {
     deskDrawersBig.setVisible(true);
   }
 
-  /** hides the enlarged desk drawer */
+  /** hides the enlarged desk drawer. */
   @FXML
   private void deskDrawersMouseExited() {
     deskDrawersBig.setVisible(false);
   }
 
-  /** shows the enlarged bin */
+  /** shows the enlarged bin. */
   @FXML
   private void binMouseEntered() {
     binBig.setVisible(true);
   }
 
-  /** hides the enlarged bin */
+  /** hides the enlarged bin. */
   @FXML
   private void binMouseExited() {
     binBig.setVisible(false);
   }
 
-  /** shows the enlarged blackboard */
+  /** shows the enlarged blackboard when the mouse enters the blackboard. */
   @FXML
   private void blackBoardMouseEntered() {
     blackBoardBig.setVisible(true);
   }
 
-  /** hides the enlarged blackboard */
+  /** hides the enlarged blackboard when the mouse exits the blackboard. */
   @FXML
   private void blackBoardMouseExited() {
     blackBoardBig.setVisible(false);
   }
 
-  /** shows the enlarged phone */
+  /** shows the enlarged phone when the mouse enters the phone. */
   @FXML
   private void phoneMouseEntered() {
     phoneBig.setVisible(true);
   }
 
-  /** hides the enlarged phone */
+  /** hides the enlarged phone when the mouse exits the phone. */
   @FXML
   private void phoneMouseExited() {
     phoneBig.setVisible(false);
   }
 
   /**
-   * changes the text in the text area to the prisoner ones conversation
+   * changes the text in the text area to the prisoner ones conversation.
    *
    * @param event the mouse event where the character clicks on the prisoner
    */
@@ -400,7 +404,7 @@ public class OfficeController {
   }
 
   /**
-   * changes the text in the text area to the prisoner twos conversation
+   * changes the text in the text area to the prisoner twos conversation.
    *
    * @param event the mouse event where the character clicks on the prisoner
    */
@@ -451,9 +455,9 @@ public class OfficeController {
   }
 
   /**
-   * sets the image of the number one in the next digit slot
+   * sets the image of the number one in the next digit slot.
    *
-   * @param event
+   * @param event the mouse event where the character clicks on the number one
    */
   @FXML
   private void onClickOne(MouseEvent event) {
@@ -481,9 +485,9 @@ public class OfficeController {
   }
 
   /**
-   * sets the image of the number two in the next digit slot
+   * sets the image of the number two in the next digit slot.
    *
-   * @param event
+   * @param event the mouse event where the character clicks on the number two
    */
   @FXML
   private void onClickTwo(MouseEvent event) {
@@ -511,9 +515,9 @@ public class OfficeController {
   }
 
   /**
-   * sets the image of the number three in the next digit slot
+   * sets the image of the number three in the next digit slot.
    *
-   * @param event
+   * @param event the mouse event where the character clicks on the number three
    */
   @FXML
   private void onClickThree(MouseEvent event) {
@@ -541,9 +545,9 @@ public class OfficeController {
   }
 
   /**
-   * sets the image of the number four in the next digit slot
+   * sets the image of the number four in the next digit slot.
    *
-   * @param event
+   * @param event the mouse event where the character clicks on the number four
    */
   @FXML
   private void onClickFour(MouseEvent event) {
@@ -571,9 +575,9 @@ public class OfficeController {
   }
 
   /**
-   * sets the image of the number five in the next digit slot
+   * sets the image of the number five in the next digit slot.
    *
-   * @param event
+   * @param event the mouse event where the character clicks on the number five
    */
   @FXML
   private void onClickFive(MouseEvent event) {
@@ -601,9 +605,9 @@ public class OfficeController {
   }
 
   /**
-   * sets the image of the number six in the next digit slot
+   * sets the image of the number six in the next digit slot.
    *
-   * @param event
+   * @param event the mouse event where the character clicks on the number six
    */
   @FXML
   private void onClickSix(MouseEvent event) {
@@ -631,9 +635,9 @@ public class OfficeController {
   }
 
   /**
-   * sets the image of the number seven in the next digit slot
+   * sets the image of the number seven in the next digit slot.
    *
-   * @param event
+   * @param event the mouse event where the character clicks on the number seven
    */
   @FXML
   private void onClickSeven(MouseEvent event) {
@@ -661,9 +665,9 @@ public class OfficeController {
   }
 
   /**
-   * sets the image of the number eight in the next digit slot
+   * sets the image of the number eight in the next digit slot.
    *
-   * @param event
+   * @param event the mouse event where the character clicks on the number eight
    */
   @FXML
   private void onClickEight(MouseEvent event) {
@@ -691,9 +695,9 @@ public class OfficeController {
   }
 
   /**
-   * sets the image of the number nine in the next digit slot
+   * sets the image of the number nine in the next digit slot.
    *
-   * @param event
+   * @param event the mouse event where the character clicks on the number nine
    */
   @FXML
   private void onClickNine(MouseEvent event) {
@@ -721,9 +725,9 @@ public class OfficeController {
   }
 
   /**
-   * sets the image of the number zero in the next digit slot
+   * sets the image of the number zero in the next digit slot.
    *
-   * @param event
+   * @param event the mouse event where the character clicks on the number zero
    */
   @FXML
   private void onClickZero(MouseEvent event) {
@@ -735,7 +739,7 @@ public class OfficeController {
   }
 
   /**
-   * clears all the digits
+   * clears all the digits.
    *
    * @param event the mouse event where the character clicks on the clear button
    */
@@ -762,7 +766,7 @@ public class OfficeController {
   /**
    * deletes the last digit
    *
-   * @param event
+   * @param event the mouse event where the character clicks on the delete button
    */
   @FXML
   private void onClickDelete(MouseEvent event) {
@@ -773,9 +777,9 @@ public class OfficeController {
   }
 
   /**
-   * checks if the number is correct and declares the game won if it is
+   * checks if the number is correct and declares the game won if it is.
    *
-   * @param event
+   * @param event the mouse event where the character clicks on the call button
    */
   @FXML
   private void onClickCall(MouseEvent event) {
@@ -831,9 +835,9 @@ public class OfficeController {
   }
 
   /**
-   * exits the veiw of the phone
+   * exits the veiw of the phone.
    *
-   * @param event
+   * @param event the mouse event where the character clicks on the exit button
    */
   @FXML
   private void onClickCross(MouseEvent event) {
@@ -892,6 +896,7 @@ public class OfficeController {
                         Scene scene = phone.getScene();
                         SceneManager.switchToEndLost(scene);
                       } catch (NullPointerException e) {
+                        System.out.println("Scene not found");
                       }
                     }
                   }
@@ -912,7 +917,7 @@ public class OfficeController {
     timerLabel.setText(String.format("%d:%02d", minutes, seconds));
   }
 
-  /** restores the office to its original state */
+  /** restores the office to its original state. */
   private void resetOffice() {
 
     // Getting random item to be used to hide the cypher
