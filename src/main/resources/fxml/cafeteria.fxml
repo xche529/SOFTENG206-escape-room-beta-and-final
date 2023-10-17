@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.CafeteriaController">
+<VBox  xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.CafeteriaController">
    <children>
       <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="605.0" prefWidth="1113.0">
          <children>
@@ -65,7 +65,7 @@
                         <Font name="American Typewriter" size="47.0" />
                      </font>
                   </Label>
-                  <Label fx:id="collectPaperLabel" layoutX="320.0" layoutY="363.0" onMouseClicked="#onClickCollectPaper" onMouseEntered="#collectPaperMouseEntered" onMouseExited="#collectPaperMouseExited" prefHeight="49.0" prefWidth="199.0" text="Collect Paper">
+                  <Label fx:id="collectPaperLabel" layoutX="320.0" layoutY="363.0" onMouseClicked="#onClickCollectPaper" onMouseEntered="#collectPaperMouseEntered" onMouseExited="#collectPaperMouseExited" prefHeight="49.0" prefWidth="302.0" text="Collect Paper">
                      <font>
                         <Font size="34.0" />
                      </font>
@@ -179,9 +179,9 @@
                         <Font name="American Typewriter" size="47.0" />
                      </font>
                   </Label>
-                  <Label fx:id="collectPaperLabel" layoutX="320.0" layoutY="363.0" onMouseClicked="#onClickCollectPaper" onMouseEntered="#collectPaperMouseEntered" onMouseExited="#collectPaperMouseExited" prefHeight="49.0" prefWidth="199.0" text="Collect Paper">
+                  <Label fx:id="collectPaperLabel" layoutX="320.0" layoutY="363.0" onMouseClicked="#onClickCollectPaper" onMouseEntered="#collectPaperMouseEntered" onMouseExited="#collectPaperMouseExited" prefHeight="78.0" prefWidth="243.0" text="Collect Paper">
                      <font>
-                        <Font size="34.0" />
+                        <Font size="30.0" />
                      </font>
                   </Label>
                   <Label fx:id="numberLabel" layoutX="255.0" layoutY="177.0" prefHeight="142.0" prefWidth="424.0" textAlignment="CENTER">

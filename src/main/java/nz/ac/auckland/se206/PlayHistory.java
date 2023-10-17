@@ -100,10 +100,13 @@ public class PlayHistory implements Serializable {
                 + rank
                 + ":\n\tName: "
                 + playHistory.getName()
-                + "\n\tTime: "
-                + playHistory.getTimeTook()
+                + "\n\tTime took: "
+                + playHistory.getTimeTook() / 60
+                + " Min "
+                + playHistory.getTimeTook() % 60
+                + " S"
                 + "\n\tDifficulty: "
-                + playHistory.getDifficulty()
+                + playHistory.getDifficultyString()
                 + "\n\n");
         playHistoryHbox.add(result);
         Integer avatarNumber = playHistory.getPlayerAvatar();
@@ -137,6 +140,16 @@ public class PlayHistory implements Serializable {
 
   public int getDifficulty() {
     return difficulty;
+  }
+
+  public String getDifficultyString() {
+    if (difficulty == 1) {
+      return "Easy";
+    } else if (difficulty == 2) {
+      return "Medium";
+    } else {
+      return "Hard";
+    }
   }
 
   public String getName() {
