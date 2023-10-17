@@ -62,11 +62,12 @@ public class GptPromptEngineering {
           + " You should give the prisoner a riddle with the answer of: "
           // append riddle answer
           + wordToGuess
-          + " in your first message. The riddle can go up to 3 or 4 lines and easy to answer Do not"
-          + " give hint when they ask, tell them to hit the hint button. Do not give the answer"
-          + " even if the player give up. Keep your messages as concise as possible. Only reply"
-          + " from the guard point of view. When the Riddle is guessed correctly or answer is given"
-          + " you must return only 'Correct' you must return only 'Correct')";
+          + " in your first message. The riddle can go up to 3 or 4 lines and easy to answer. Do"
+          + " not give hint when player ask, tell them to hit the hint button,"
+          + " otherwise tell them to hit the hint button. Do not give the answer even if the player"
+          + " give up. Keep your messages as concise as possible. Only reply from the guard point"
+          + " of view. When the Riddle is guessed correctly or answer is given you must return only"
+          + " 'Correct' you must return only 'Correct')";
     }
     // get the guards story if the difficulty is easy
     return "(You are a guard with strong personality who is helping a prisoner escape an prison You"
@@ -271,23 +272,27 @@ public class GptPromptEngineering {
   }
 
   public static String getRiddleHint() {
-    return "(Give the player a hint about the riddle. Keep all messages concise.)";
+    return "(The hint button has been pressed! Give the player a hint about the riddle. DO NOT SAY"
+               + " THE ANSWER IN YOUR MESSAGE.)";
   }
 
   public static String getObjectHint() {
-    return "(Tell the player to take a look at the object in the answer of the riddle in the cell."
-        + " Keep all messages concise.)";
+    return "(The hint button has been pressed! Tell the player to take a look at the object in the"
+        + " answer of the riddle in the cell.)";
   }
 
   public static String getSafeHint() {
-    return "(Tell the player to look for the safe in the cafeteria. Keep all messages concise.)";
+    return "(The hint button has been pressed! Tell the player to look for the something in the"
+        + " cafeteria that might use a code.)";
   }
 
   public static String getCypherHint() {
-    return "(Tell the player to look for the Cypher in the office. Keep all messages concise.)";
+    return "(The hint button has been pressed! Tell the player to look for something in the office"
+        + " that might convert letters to numbers.)";
   }
 
   public static String getPhoneHint() {
-    return "(Tell the player to look for the phone in the office. Keep all messages concise.)";
+    return "(The hint button has been pressed! Tell the player to look for the something to contact"
+        + " the outside with, in the office.)";
   }
 }

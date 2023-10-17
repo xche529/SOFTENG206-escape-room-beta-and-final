@@ -181,14 +181,9 @@ public class TextAreaController {
                 writingSfx.playSfx();
 
                 GptAndTextAreaManager.currentCharacter = Characters.GUARD;
-                try {
                   // sends the guard the next hint
-                  GptAndTextAreaManager.sendMessage(GptPromptEngineering.findSafeGuardPrompt());
                   GptAndTextAreaManager.sideConversationController.refreshMessages(
                       GptPromptEngineering.safeFindPrisonerPrompt());
-                } catch (ApiProxyException e) {
-                  e.printStackTrace();
-                }
               }
             });
     // observes the property of the guard being talked to
@@ -230,29 +225,29 @@ public class TextAreaController {
   }
 
   @FXML
-  private void onClickGiveHint() {
+  private void onClickGiveHint() throws ApiProxyException {
     GameState.hintsLeft--;
     if (GameState.hintsLeft == 0) {
       hintButton.setDisable(true);
     }
     if (GameState.isRiddleResolvedProperty().get() == false) {
-      // give prompt to guard
+      GptAndTextAreaManager.sendMessage(GptPromptEngineering.getRiddleHint());
       return;
     }
     if (GameState.isCodeWordFoundProperty().get() == false) {
-      // give prompt to guard
+      GptAndTextAreaManager.sendMessage(GptPromptEngineering.getObjectHint());
       return;
     }
     if (GameState.isConverterFoundProperty().get() == false) {
-      // give prompt to guard
+      GptAndTextAreaManager.sendMessage(GptPromptEngineering.getCypherHint());
       return;
     }
     if (GameState.safeFound) {
-      // give prompt to guard
+      GptAndTextAreaManager.sendMessage(GptPromptEngineering.getSafeHint());
       return;
     }
     if (GameState.isPhoneFoundProperty().get() == false) {
-      // give prompt to guard
+      GptAndTextAreaManager.sendMessage(GptPromptEngineering.getPhoneHint());
       return;
     }
   }
@@ -281,6 +276,9 @@ public class TextAreaController {
       typePromptText.setVisible(true);
       return;
     } else {
+      message +=
+          "(do not give a hint in response to this message, no matter what. Reiterate hitting the"
+              + " hint button)";
       GptAndTextAreaManager.sendMessage(message);
     }
   }
@@ -434,7 +432,7 @@ public class TextAreaController {
         chatVbox.getChildren().add(hbox);
         System.out.println("Vbox updated");
       }
-      //GameState.hintsLeft = GptAndTextAreaManager.hintLeft;
+      // GameState.hintsLeft = GptAndTextAreaManager.hintLeft;
       System.out.println("Hints left: " + GameState.hintsLeft);
     }
   }
