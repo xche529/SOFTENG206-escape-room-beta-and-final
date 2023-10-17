@@ -197,7 +197,8 @@ public class SceneManager {
     cafeteriaController.walkInAnimation();
     StackPane endLostStack = new StackPane(room, settings);
     StackPane.setAlignment(getUiRoot(AppUi.SETTINGS), javafx.geometry.Pos.TOP_LEFT);
-    VBox vbox = new VBox(endLostStack, getUiRoot(AppUi.TEXT_AREA));
+    HBox hbox = new HBox(endLostStack, getUiRoot(AppUi.SIDE_CONVERSATION));
+    VBox vbox = new VBox(hbox, getUiRoot(AppUi.TEXT_AREA));
     vbox.getTransforms().add(App.scale);
     vbox.setLayoutX(App.centerX);
     vbox.setLayoutY(App.centerY);
