@@ -270,4 +270,27 @@ public class GptPromptEngineering {
         + name
         + " to hurry up and you don't want to be caught. Keep all messages concise.)";
   }
+
+
+
+  public static String getRiddleHint(){
+    return"(Give the player a hint about the riddle. Keep all messages concise.)";
+  }
+
+  public static String getObjectHint(){
+    return"(Tell the player to take a look at the object in the answer of the riddle in the cell. Keep all messages concise.)";
+  }
+
+  public static String getSafeHint(){
+    return"(Tell the player to look for the safe in the cafeteria. Keep all messages concise.)";
+  }
+
+  public static String getCypherHint(){
+    return"(Tell the player to look for the Cypher in the office. Keep all messages concise.)";
+  }
+
+  public static String getPhoneHint(){
+    return"(Tell the player to look for the phone in the office. Keep all messages concise.)";
+  }
+
 }
