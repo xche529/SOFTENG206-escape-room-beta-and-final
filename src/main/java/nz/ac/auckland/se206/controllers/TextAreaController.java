@@ -257,7 +257,7 @@ public class TextAreaController {
     }
 
     // if the phone is not found, give the phone hint
-    if (GameState.safeFound) {
+    if (!GameState.safeFound) {
       GptAndTextAreaManager.sendMessage(GptPromptEngineering.getSafeHint());
       return;
     }
