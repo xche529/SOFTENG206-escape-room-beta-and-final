@@ -273,8 +273,8 @@ public class GptPromptEngineering {
   }
 
   public static String getRiddleHint() {
-    return "(The hint button has been pressed! You must give the player a hint about the riddle. Do not give"
-               + " the answer of the riddle.)";
+    return "(The hint button has been pressed! You must give the player a hint about the riddle. Do"
+               + " not give the answer of the riddle.)";
   }
 
   public static String getObjectHint() {
