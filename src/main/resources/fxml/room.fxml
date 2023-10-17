@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
+<VBox  xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
    <children>
       <Pane fx:id="room" focusTraversable="true" maxHeight="800.0" maxWidth="1113.0" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="605.0" prefWidth="1113.0">
          <children>
@@ -85,7 +85,7 @@
                         <Image url="@../images/newArrow.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="ventArrow" fitHeight="20.0" fitWidth="19.0" layoutX="52.0" layoutY="63.0" opacity="0.0">
+                  <ImageView fx:id="ventArrow" fitHeight="20.0" fitWidth="19.0" layoutX="52.0" layoutY="85.0" opacity="0.0">
                      <image>
                         <Image url="@../images/newArrow.png" />
                      </image>
@@ -204,9 +204,9 @@
                         <Image url="@../images/Vent.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="ventWordLabel" layoutX="633.0" layoutY="186.0" prefHeight="34.0" prefWidth="65.0" textAlignment="CENTER" textFill="#5a5b49">
+                  <Label fx:id="ventWordLabel" layoutX="633.0" layoutY="186.0" prefHeight="34.0" prefWidth="93.0" textAlignment="CENTER" textFill="#5a5b49">
                      <font>
-                        <Font size="25.0" />
+                        <Font size="23.0" />
                      </font>
                   </Label>
                </children>
