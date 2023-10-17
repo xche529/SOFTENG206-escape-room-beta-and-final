@@ -71,6 +71,7 @@ public class TextAreaController {
   @FXML private Text phoneLocatedObjective;
   @FXML private Text safeLocatedObjective;
   @FXML private Text guardTalkedObjective;
+  @FXML private Button hintButton;
 
   private Timeline timelineTwo;
   private Timeline timeline;
@@ -216,6 +217,34 @@ public class TextAreaController {
   @FXML
   public void onSetPromptTextFalse() {
     typePromptText.setVisible(false);
+  }
+
+  @FXML
+  private void onClickGiveHint() {
+    GameState.hintsLeft--;
+    if (GameState.hintsLeft == 0) {
+      hintButton.setDisable(true);
+    }
+    if (GameState.isRiddleResolvedProperty().get() == false) {
+      // give prompt to guard
+      return;
+    }
+    if (GameState.isCodeWordFoundProperty().get() == false) {
+      // give prompt to guard
+      return;
+    }
+    if (GameState.isConverterFoundProperty().get() == false) {
+      // give prompt to guard
+      return;
+    }
+    if (GameState.safeFound) {
+      // give prompt to guard
+      return;
+    }
+    if (GameState.isPhoneFoundProperty().get() == false) {
+      // give prompt to guard
+      return;
+    }
   }
 
   /**
