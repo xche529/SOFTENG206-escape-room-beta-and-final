@@ -257,7 +257,12 @@ public class TextAreaController {
                 Duration.seconds(1),
                 event -> {
                   if (GameState.secondsRemaining == 0) {
-                    resetTicks();
+                    try {
+                      resetTicks();
+                    } catch (ApiProxyException e) {
+                      // TODO Auto-generated catch block
+                      e.printStackTrace();
+                    }
                   }
                 }));
     // runs the thread
@@ -265,7 +270,7 @@ public class TextAreaController {
     timeline.play();
   }
 
-  private void resetTicks() {
+  private void resetTicks() throws ApiProxyException {
     // resets the booleans
     GameState.setRiddleResolved(false);
     GameState.setCodeWordFound(false);
@@ -273,6 +278,7 @@ public class TextAreaController {
     GameState.setPhoneFound(false);
     GameState.setSafeFound(false);
     GameState.setGuardTalked(false);
+    GptAndTextAreaManager.reset();
 
     // resets the checkboxes
     riddleSolvedObjective.setStrikethrough(false);
