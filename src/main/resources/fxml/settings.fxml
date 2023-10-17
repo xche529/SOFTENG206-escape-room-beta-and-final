@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="settingsBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="605.0" prefWidth="1113.0" visible="false" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.SettingsController">
+<VBox fx:id="settingsBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="605.0" prefWidth="1113.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.SettingsController">
    <children>
       <Pane prefHeight="605.0" prefWidth="1113.0">
          <children>
@@ -20,7 +20,7 @@
                <children>
                   <ImageView fitHeight="543.0" fitWidth="882.0" pickOnBounds="true">
                      <image>
-                        <Image url="@../images/SettingsBackground.png" />
+                        <Image url="@../images/MENU%20_screen.jpg" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="111.0" fitWidth="300.0" layoutX="290.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
@@ -37,12 +37,17 @@
                      <children>
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <ImageView fitHeight="86.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/AUDIO.png" />
-                                 </image>
-                              </ImageView>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="91.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="80.0" />
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="200.0" />
+                                    <ImageView fitHeight="123.0" fitWidth="249.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/DIALOG.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </VBox>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="91.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="33.0" />
                               <Slider fx:id="audioSlider" prefHeight="100.0" prefWidth="305.0" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="93.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="63.0" />
                               <Label fx:id="audioValue" prefHeight="103.0" prefWidth="149.0" text="100" textFill="WHITE">
@@ -88,13 +93,12 @@
                         </HBox>
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <ImageView fx:id="abandonGame" fitHeight="109.0" fitWidth="363.0" onMouseClicked="#onClickAbandonGame" onMouseEntered="#abandonGameMouseEntered" onMouseExited="#abandonGameMouseExited" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="abandonGame" fitHeight="108.0" fitWidth="517.0" onMouseClicked="#onClickAbandonGame" onMouseEntered="#abandonGameMouseEntered" onMouseExited="#abandonGameMouseExited" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../images/ABANDON%20GAME.png" />
                                  </image>
                               </ImageView>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="45.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="169.0" />
-                              <ImageView fx:id="help" fitHeight="79.0" fitWidth="137.0" onMouseClicked="#onClickHelp" onMouseEntered="#helpMouseEntered" onMouseExited="#helpMouseExited" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="help" fitHeight="144.0" fitWidth="194.0" onMouseClicked="#onClickHelp" onMouseEntered="#helpMouseEntered" onMouseExited="#helpMouseExited" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../images/HELP.png" />
                                  </image>
