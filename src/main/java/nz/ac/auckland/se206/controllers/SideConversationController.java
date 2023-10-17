@@ -25,7 +25,7 @@ public class SideConversationController {
   private String prisonerTwoText = "";
 
   private ChatCompletionRequest groupChatCompletionRequest =
-      new ChatCompletionRequest().setN(1).setTemperature(0.1).setTopP(0.8).setMaxTokens(100);
+      new ChatCompletionRequest().setN(1).setTemperature(0.1).setTopP(1).setMaxTokens(100);
   private String playerName = "player";
 
   /**

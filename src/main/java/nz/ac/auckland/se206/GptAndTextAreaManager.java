@@ -56,6 +56,7 @@ public class GptAndTextAreaManager {
 
   /** this method outputs MessageHistory as a string which can be put into display board. */
   public static void initialize() throws ApiProxyException {
+    reset();
     // send initial messages to GPT
     sendMessage(GptPromptEngineering.getGuardSetUp(GameState.itemToChoose.getId()));
     currentCharacter = Characters.PRISONER_ONE;

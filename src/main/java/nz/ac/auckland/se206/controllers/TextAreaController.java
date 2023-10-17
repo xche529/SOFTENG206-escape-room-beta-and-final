@@ -124,9 +124,9 @@ public class TextAreaController {
                 // sets the objective to be strikethrough
                 riddleSolvedObjective.setStrikethrough(true);
                 writingSfx.playSfx();
-                  // gives the guard the next hint
-                  GptAndTextAreaManager.sideConversationController.refreshMessages(
-                      GptPromptEngineering.solvedRiddlePrisonerPrompt());
+                // gives the guard the next hint
+                GptAndTextAreaManager.sideConversationController.refreshMessages(
+                    GptPromptEngineering.solvedRiddlePrisonerPrompt());
               }
             });
     // observes the property of the code word being found
@@ -404,13 +404,13 @@ public class TextAreaController {
         ImageView avatar = null;
         if (name.trim().equals("assistant")) {
           if (GptAndTextAreaManager.currentCharacter == Characters.GUARD) {
-            name = "Guard: ";
+            name = "Guard Mark: ";
             avatar = new ImageView(guardAvatar);
           } else if (GptAndTextAreaManager.currentCharacter == Characters.PRISONER_ONE) {
-            name = "Prisoner1: ";
+            name = "Steve: ";
             avatar = new ImageView(prisonerOneAvatar);
           } else {
-            name = "Prisoner2: ";
+            name = "Ronaod: ";
             avatar = new ImageView(prisonerTwoAvatar);
           }
         } else if (name.trim().equals("user")) {
@@ -459,19 +459,19 @@ public class TextAreaController {
     if (character == Characters.GUARD) {
       // set different recommended text depending on who they want to talk to
       GptAndTextAreaManager.currentCharacter = Characters.GUARD;
-      prompt = "Type here to talk to the guard";
+      prompt = "Type here to talk to the Guard Mark";
       setMessageHistory(GptAndTextAreaManager.guardChatCompletionRequest);
       System.out.println("display Guard history");
     } else if (character == Characters.PRISONER_ONE) {
       // logic for talking to prisoner
       GptAndTextAreaManager.currentCharacter = Characters.PRISONER_ONE;
-      prompt = "Type here to talk to prisoner1";
+      prompt = "Type here to talk to Steve";
       setMessageHistory(GptAndTextAreaManager.prisonerOneCompletionRequest);
       System.out.println("display Prisoner1 history");
     } else {
       GptAndTextAreaManager.currentCharacter = Characters.PRISONER_TWO;
       // logic for chatting to prisoner 2
-      prompt = "Type here to talk to prisoner2";
+      prompt = "Type here to talk to Ronaod";
       setMessageHistory(GptAndTextAreaManager.prisonerTwoCompletionRequest);
       System.out.println("display Prisoner2 history");
     }
