@@ -153,10 +153,17 @@ public class StartInterfaceController {
 
   @FXML
   private void onStartGame(Event event) throws IOException, ApiProxyException {
-    // check if the user has selected a difficulty and time limit
-    if (!twoMin.isSelected() && !fourMin.isSelected() && !sixMin.isSelected()) {
-      showDialog("Invaild Inputs", "Please select a difficulty and time limit", "");
-      return;
+ 
+    //sets the time on the timer
+    if (twoTick.isVisible()) {
+      GameState.secondsRemaining = 120;
+      GameState.totalSeconds = 120;
+    } else if (fourTick.isVisible()) {
+      GameState.secondsRemaining = 240;
+      GameState.totalSeconds = 240;
+    } else if (sixTick.isVisible()) {
+      GameState.secondsRemaining = 360;
+      GameState.totalSeconds = 360;
     }
     // locks the player avatar and name in
     GptAndTextAreaManager.setPlayerAvatar(currentAvatarImage);
@@ -171,19 +178,7 @@ public class StartInterfaceController {
     roomController.start();
     // initializes a new gpt and text area manager
     GptAndTextAreaManager.initialize();
-    // unselects all of the choices
-    twoMin.setSelected(false);
-    fourMin.setSelected(false);
-    sixMin.setSelected(false);
-    easy.setSelected(false);
-    medium.setSelected(false);
-    hard.setSelected(false);
-    easyTick.setVisible(false);
-    mediumTick.setVisible(false);
-    hardTick.setVisible(false);
-    twoTick.setVisible(false);
-    fourTick.setVisible(false);
-    sixTick.setVisible(false);
+
   }
 
   /*
@@ -194,21 +189,6 @@ public class StartInterfaceController {
   private void onExitGame(Event event) {
     System.out.println("Goodbye!");
     System.exit(0);
-  }
-
-  /**
-   * Displays a dialog box with the given title, header text, and message.
-   *
-   * @param title the title of the dialog box
-   * @param headerText the header text of the dialog box
-   * @param message the message content of the dialog box
-   */
-  private void showDialog(String title, String headerText, String message) {
-    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-    alert.setTitle(title);
-    alert.setHeaderText(headerText);
-    alert.setContentText(message);
-    alert.showAndWait();
   }
 
   @FXML
