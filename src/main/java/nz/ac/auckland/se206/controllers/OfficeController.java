@@ -829,7 +829,7 @@ public class OfficeController {
         // switches to the end screen
         SceneManager.switchToEndWon(scene);
         SceneManager.settingsController.stopMusic();
-        winningSound.playSFX();
+        winningSound.playSfx();
       } else {
         // do nothing if the phone number is wrong
         System.out.println("Wrong number");
@@ -902,7 +902,7 @@ public class OfficeController {
                         Scene scene = phone.getScene();
                         SceneManager.switchToEndLost(scene);
                         SceneManager.settingsController.stopMusic();
-                        lostSound.playSFX();
+                        lostSound.playSfx();
 
                       } catch (NullPointerException e) {
                         System.out.println("Scene not found");

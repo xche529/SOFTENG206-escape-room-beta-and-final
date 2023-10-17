@@ -180,7 +180,7 @@ public class RoomController {
                         Scene scene = sink.getScene();
                         SceneManager.switchToEndLost(scene);
                         SceneManager.settingsController.stopMusic();
-                        lostSound.playSFX();
+                        lostSound.playSfx();
 
                       } catch (NullPointerException e) {
                         System.out.println("Scene is null");
