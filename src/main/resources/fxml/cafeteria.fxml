@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox  xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.CafeteriaController">
+<VBox xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/20.0.1" fx:controller="nz.ac.auckland.se206.controllers.CafeteriaController">
    <children>
       <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="605.0" prefWidth="1113.0">
          <children>
@@ -166,6 +166,11 @@
                   <Image url="@../images/thinking.gif" />
                </image>
             </ImageView>
+            <ImageView fx:id="cog" fitHeight="109.0" fitWidth="93.0" onMouseClicked="#onClickCog" onMouseEntered="#cogMouseEntered" onMouseExited="#cogMouseExited" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/cog.png" />
+               </image>
+            </ImageView>
             <Pane fx:id="blurredPane" onMouseClicked="#onBlurredPaneClicked" opacity="0.74" prefHeight="615.0" prefWidth="1132.0" style="-fx-background-color: white;" visible="false" />
             <Pane fx:id="paperPane" layoutX="130.0" layoutY="65.0" prefHeight="486.0" prefWidth="852.0" visible="false">
                <children>
@@ -288,9 +293,9 @@
                   </ImageView>
                </children>
             </Pane>
-            <Pane fx:id="thoughtBubblePane" prefHeight="219.0" prefWidth="360.0" visible="false">
+            <Pane fx:id="thoughtBubblePane" prefHeight="219.0" prefWidth="360.0">
                <children>
-                  <ImageView fitHeight="242.0" fitWidth="334.0" layoutX="24.0" layoutY="-15.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="242.0" fitWidth="334.0" layoutX="24.0" layoutY="-15.0" pickOnBounds="true" preserveRatio="true" visible="false">
                      <image>
                         <Image url="@../images/ThoughtBubble.png" />
                      </image>
@@ -302,11 +307,6 @@
                   </Text>
                </children>
             </Pane>
-            <ImageView fx:id="cog" fitHeight="109.0" fitWidth="93.0" onMouseClicked="#onClickCog" onMouseEntered="#cogMouseEntered" onMouseExited="#cogMouseExited" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/cog.png" />
-               </image>
-            </ImageView>
          </children>
       </Pane>
    </children>
