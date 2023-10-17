@@ -233,6 +233,16 @@ public class RoomController {
     // resets the text area
     GptAndTextAreaManager.reset();
     System.out.println("room reseted");
+
+    // sets anything that was visible to invisible
+    blurredPane.setVisible(false);
+    inspectingMirrorPane.setVisible(false);
+    inspectingSinkPane.setVisible(false);
+    inspectingTowelPane.setVisible(false);
+    inspectingToiletPane.setVisible(false);
+    inspectingToiletPaperPane.setVisible(false);
+    inspectingVentPane.setVisible(false);
+    thoughtBubblePane.setVisible(false);
   }
 
   /** This method animates all of the arrows in the scene. */

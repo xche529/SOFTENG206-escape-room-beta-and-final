@@ -44,10 +44,10 @@ public class SettingsController {
     audioSlider.setMax(100);
     audioValue.setText("100");
 
-    musicSlider.setValue(20);
+    musicSlider.setValue(50);
     musicSlider.setMin(0);
     musicSlider.setMax(100);
-    musicValue.setText("20");
+    musicValue.setText("50");
 
     sfxSlider.setValue(100);
     sfxSlider.setMin(0);
@@ -62,7 +62,7 @@ public class SettingsController {
         .addListener(
             (observable, oldValue, newValue) -> {
               audioValue.setText(String.valueOf(newValue.intValue()));
-              float audioVolume = newValue.intValue() / 100f;
+              float audioVolume = newValue.intValue() / 250f;
               GameState.audioVolume = audioVolume;
             });
 
