@@ -26,6 +26,7 @@ public class GameTimer {
                   }
                   GameState.secondsRemaining--;
 
+
                   // uses text to spech to tell the player how long they have left
                   if (GameState.secondsRemaining == 90 && GameState.isWon == false) {
                     textToSpeech.speak("a minute and a half remaining");
@@ -40,6 +41,10 @@ public class GameTimer {
                   if (GptAndTextAreaManager.isNewMessage) {
                     GptAndTextAreaManager.displayTarget();
                     GptAndTextAreaManager.isNewMessage = false;
+                  }
+                  if (GameState.secondsRemaining == 0) {
+                    timeline.stop();
+                    handleTimerExpired();
                   }
                 }));
 
@@ -59,6 +64,7 @@ public class GameTimer {
                 textToSpeech.terminate();
               }
             });
+
   }
 
   /* This method handles the event where timer reaches 0 */
