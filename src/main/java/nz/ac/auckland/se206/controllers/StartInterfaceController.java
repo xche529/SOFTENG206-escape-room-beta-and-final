@@ -170,6 +170,8 @@ public class StartInterfaceController {
       GameState.secondsRemaining = 360;
       GameState.totalSeconds = 360;
     }
+
+    GameState.hintsLeft = 5;
     // locks the player avatar and name in
     GptAndTextAreaManager.setPlayerAvatar(currentAvatarImage);
     GameState.setPlayerAvatar(currentAvatar);

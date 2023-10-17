@@ -227,9 +227,13 @@ public class TextAreaController {
   @FXML
   private void onClickGiveHint() throws ApiProxyException {
     GameState.hintsLeft--;
-    if (GameState.hintsLeft == 0) {
-      hintButton.setDisable(true);
+    if (GameState.difficulty == GameState.Difficulty.MEDIUM) {
+      if (GameState.hintsLeft == 0) {
+        GameState.setIsHintsAllowed(false);
+      }
+      hintsLeftText.setText(Integer.toString(GameState.hintsLeft));
     }
+
     if (GameState.isRiddleResolvedProperty().get() == false) {
       GptAndTextAreaManager.sendMessage(GptPromptEngineering.getRiddleHint());
       return;
