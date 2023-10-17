@@ -4,6 +4,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
+import nz.ac.auckland.se206.reseters.GameEnd;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 
 /** This class is used to create a timer for the game. */
@@ -64,6 +65,7 @@ public class GameTimer {
   private void handleTimerExpired() {
     if (!GameState.isWon) {
       GameState.secondsRemaining = 0;
+      GameEnd.triggerResters();
     }
   }
 }

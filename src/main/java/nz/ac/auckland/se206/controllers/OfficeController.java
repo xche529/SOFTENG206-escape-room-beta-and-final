@@ -803,6 +803,7 @@ public class OfficeController {
       if (phoneNumber.equals(GameState.phoneNumber)) {
         // if the strings match, the game is won
         GameState.isWon = true;
+        GameState.stopTimer = true;
         Scene scene = phonePane.getScene();
         int timeTook = GameState.totalSeconds - GameState.secondsRemaining;
         // updates the play history

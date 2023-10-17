@@ -85,7 +85,7 @@ public class App extends Application {
     centerX = (width - 1413 * overallScale) / 2;
     centerY = (height - 800 * overallScale) / 5;
     scale = new Scale(overallScale, overallScale);
-    startScale = new Scale(overallScale * 1.27, overallScale  * 1.27);
+    startScale = new Scale(overallScale * 1.27, overallScale * 1.27);
 
     // creating loaders for all fxml files
     FXMLLoader roomLoader = loadFxml("room");
@@ -175,7 +175,9 @@ public class App extends Application {
     scene.addEventFilter(
         javafx.scene.input.KeyEvent.KEY_PRESSED,
         event -> {
-          if (SceneManager.currentUi == AppUi.START_INTERFACE) {
+          if (SceneManager.currentUi == AppUi.START_INTERFACE
+              || SceneManager.currentUi == AppUi.END_LOST
+              || SceneManager.currentUi == AppUi.END_WON) {
             return;
           }
           VBox up = null;

@@ -1,6 +1,8 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import java.util.Random;
+
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -108,7 +110,9 @@ public class RoomController {
 
     items = new Rectangle[] {vent, toiletPaper, toilet, sink, tap, mirror, towel};
 
-    RandomizationGenerator.randomiseWord(items);
+    Random randomChoose = new Random();
+    int randomIndexChoose = randomChoose.nextInt(items.length);
+    GameState.itemToChoose = items[randomIndexChoose];
 
     // initialize fields in the GptAndTextAreaManager class
     GptAndTextAreaManager.roomController = this;
