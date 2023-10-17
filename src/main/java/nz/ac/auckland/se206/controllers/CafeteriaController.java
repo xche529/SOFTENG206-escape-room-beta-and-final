@@ -562,8 +562,6 @@ public class CafeteriaController {
                         // switches to the lost screen
                         Scene scene = cross.getScene();
                         SceneManager.switchToEndLost(scene);
-                        SceneManager.settingsController.stopMusic();
-                        lostSound.playSfx();
                         
                       } catch (NullPointerException e) {
                         System.out.println("Scene is null");

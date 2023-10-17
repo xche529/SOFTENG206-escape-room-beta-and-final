@@ -24,7 +24,7 @@ public class EndLostController {
     // Switch to start interface
     Scene scene = restartButton.getScene();
     SceneManager.switchToStart(scene);
-    SceneManager.settingsController.playMusic();
+    //SceneManager.settingsController.playMusic();
     SceneManager.currentUi = SceneManager.AppUi.START_INTERFACE;
   }
 
