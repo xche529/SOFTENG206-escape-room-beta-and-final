@@ -937,6 +937,20 @@ public class OfficeController {
     GameState.isConverterFoundProperty().set(false);
     System.out.println("office reseted");
 
+    //sets any panes to be invisable when the game finishes
+    blurringPane.setVisible(false);
+    inspectingBinPane.setVisible(false);
+    drawerConverter.setVisible(false);
+    binConverter.setVisible(false);
+    inspectingBlackBoardConverter.setVisible(false);
+    inspectingBlackBoardEmpty.setVisible(false);
+    inspectingBlackBoardPane.setVisible(false);
+    inspectingDrawerPane.setVisible(false);
+    thoughtBubblePane.setVisible(false);
+    phonePane.setVisible(false);
+    paperPane.setVisible(false);
+
+
     // resets the visability of the items
     binArrow.setVisible(true);
     blackBoardArrow.setVisible(true);
