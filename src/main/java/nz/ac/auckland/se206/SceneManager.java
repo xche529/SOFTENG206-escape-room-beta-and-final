@@ -11,8 +11,10 @@ import nz.ac.auckland.se206.controllers.CafeteriaController;
 import nz.ac.auckland.se206.controllers.OfficeController;
 import nz.ac.auckland.se206.controllers.RoomController;
 
+/** This class is used to switch between the different scenes in the game. */
 public class SceneManager {
 
+  /** This enum is used to keep track of the scenes */
   public enum AppUi {
     ROOM,
     OFFICE,
@@ -40,7 +42,7 @@ public class SceneManager {
   private static HashMap<AppUi, Parent> sceneMap = new HashMap<AppUi, Parent>();
 
   /**
-   * Switches the scene to the next room
+   * Switches the scene to the next room.
    *
    * @param isToLeft true if the player is moving to the left, false if the player is moving to the
    *     right
@@ -108,7 +110,7 @@ public class SceneManager {
   }
 
   /**
-   * Switches the scene to the start interface
+   * Switches the scene to the start interface.
    *
    * @param scene the scene that we are currently on
    */
@@ -128,7 +130,7 @@ public class SceneManager {
   }
 
   /**
-   * Switches the scene to the end won interface
+   * Switches the scene to the end won interface.
    *
    * @param scene the scene that we are currently on
    */
@@ -150,7 +152,7 @@ public class SceneManager {
   }
 
   /**
-   * Switches the scene to the end lost interface
+   * Switches the scene to the end lost interface.
    *
    * @param scene the scene that we are currently on
    */
@@ -172,7 +174,7 @@ public class SceneManager {
   }
 
   /**
-   * Switches the scene to the office
+   * Switches the scene to the office.
    *
    * @param scene the scene that we are currently on
    */
