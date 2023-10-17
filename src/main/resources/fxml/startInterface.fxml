@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fillWidth="false" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.StartInterfaceController">
+<VBox fillWidth="false" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.StartInterfaceController">
    <children>
       <Pane layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1113.0">
          <children>
@@ -134,7 +134,7 @@
                   </ImageView>
                   <ScrollPane blendMode="MULTIPLY" hbarPolicy="NEVER" layoutX="26.0" layoutY="73.0" prefHeight="268.0" prefWidth="315.0">
                      <content>
-                        <VBox fx:id="playHistoryVBox" prefHeight="267.0" prefWidth="311.0" />
+                        <VBox fx:id="playHistoryVbox" prefHeight="267.0" prefWidth="311.0" />
                      </content>
                   </ScrollPane>
                   <Text layoutX="74.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ranking List" wrappingWidth="259.623046875">
