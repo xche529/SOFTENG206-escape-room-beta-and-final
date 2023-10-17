@@ -51,14 +51,14 @@ public class SceneManager {
   public static void switchRoom(boolean isToLeft, Scene scene) {
     VBox roomToSwitch;
 
-    if (currentUi == AppUi.START_INTERFACE) {
-      // goes to the starting room
-      roomToSwitch = (VBox) getUiRoot(AppUi.CAFETERIA);
-      currentUi = AppUi.CAFETERIA;
-      // starts the characters animations
-      cafeteriaController.resetAnimation();
-      cafeteriaController.walkInAnimation();
-    } else {
+    // if (currentUi == AppUi.START_INTERFACE) {
+    //   // goes to the starting room
+    //   roomToSwitch = (VBox) getUiRoot(AppUi.CAFETERIA);
+    //   currentUi = AppUi.CAFETERIA;
+    //   // starts the characters animations
+    //   cafeteriaController.resetAnimation();
+    //   cafeteriaController.walkInAnimation();
+    // } else {
       runningSound.playSFX();
       // prints the action being taken in the terminal for debugging purposes
       if (isToLeft) {
@@ -94,8 +94,10 @@ public class SceneManager {
       System.out.println("Index: " + index);
       currentUi = appUis[index];
       roomToSwitch = (VBox) getUiRoot(appUis[index]);
-    }
+    // }
     // stacks the settings directly above the current room
+    settings.getTransforms().clear();
+    settings.getTransforms().add(App.startScale);
     StackPane newRoomStack = new StackPane(roomToSwitch, settings);
     StackPane.setAlignment(settings, javafx.geometry.Pos.TOP_LEFT);
     HBox hbox = new HBox(newRoomStack, getUiRoot(AppUi.SIDE_CONVERSATION));
@@ -151,7 +153,7 @@ public class SceneManager {
    */
   public static void switchToEndLost(Scene scene) {
     VBox endLost = (VBox) getUiRoot(AppUi.END_LOST);
-    settings.getTransforms().add(App.scale);
+    settings.getTransforms().add(App.startScale);
     StackPane endLostStack = new StackPane(endLost, settings);
     StackPane.setAlignment(getUiRoot(AppUi.SETTINGS), javafx.geometry.Pos.TOP_LEFT);
     VBox vbox = new VBox(endLostStack);
@@ -172,8 +174,9 @@ public class SceneManager {
       isFirstRound = false;
     } else { // This code is used to scale the room to the correct size, as it shrinks on every
       // round without it
-      Scale settingsScale = new Scale(1.39, 1.39);
-      settings.getTransforms().add(settingsScale);
+     // Scale settingsScale = new Scale(1.39, 1.39);
+     // settings.getTransforms().add(settingsScale);
+     settings.getTransforms().clear();
     }
     cafeteriaController.resetAnimation();
     cafeteriaController.walkInAnimation();

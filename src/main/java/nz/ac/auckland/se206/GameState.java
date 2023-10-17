@@ -48,7 +48,7 @@ public class GameState {
 
   public static String codeWord;
 
-  public static int secondsRemaining = 110;
+  public static int secondsRemaining = 120;
 
   public static boolean wordFound = false;
 

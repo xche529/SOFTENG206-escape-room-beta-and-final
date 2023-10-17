@@ -26,6 +26,7 @@ public class EndWonController {
     Scene scene = restartButton.getScene();
     SceneManager.switchToStart(scene);
     SceneManager.settingsController.playMusic();
+    SceneManager.currentUi = SceneManager.AppUi.START_INTERFACE;
   }
 
   @FXML

@@ -29,6 +29,7 @@ import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
  */
 public class App extends Application {
   public static Scale scale;
+  public static Scale startScale;
   public static double overallScale = 1;
   public static double centerX = 1;
   public static double centerY = 1;
@@ -84,6 +85,7 @@ public class App extends Application {
     centerX = (width - 1413 * overallScale) / 2;
     centerY = (height - 800 * overallScale) / 5;
     scale = new Scale(overallScale, overallScale);
+    startScale = new Scale(overallScale * 1.27, overallScale  * 1.27);
 
     // creating loaders for all fxml files
     FXMLLoader roomLoader = loadFxml("room");
@@ -131,9 +133,9 @@ public class App extends Application {
     SceneManager.addUi(AppUi.TEXT_AREA, textArea);
     SceneManager.addUi(AppUi.SIDE_CONVERSATION, sideConversation);
 
-    SceneManager.getUiRoot(AppUi.START_INTERFACE).getTransforms().add(scale);
-    SceneManager.getUiRoot(AppUi.END_WON).getTransforms().add(scale);
-    SceneManager.getUiRoot(AppUi.END_LOST).getTransforms().add(scale);
+    SceneManager.getUiRoot(AppUi.START_INTERFACE).getTransforms().add(startScale);
+    SceneManager.getUiRoot(AppUi.END_WON).getTransforms().add(startScale);
+    SceneManager.getUiRoot(AppUi.END_LOST).getTransforms().add(startScale);
 
     // setting up the controllers
     CafeteriaController cafeteriaController = cafeteriaLoader.getController();
