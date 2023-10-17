@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="settingsBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="605.0" prefWidth="1113.0" visible="false"  xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.SettingsController">
+<VBox fx:id="settingsBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="605.0" prefWidth="1113.0" visible="false" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.SettingsController">
    <children>
       <Pane prefHeight="605.0" prefWidth="1113.0">
          <children>
@@ -20,7 +20,7 @@
                <children>
                   <ImageView fitHeight="543.0" fitWidth="882.0" pickOnBounds="true">
                      <image>
-                        <Image url="@../images/MENU%20_screen.jpg" />
+                        <Image url="@../images/SettingsBackground.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="111.0" fitWidth="300.0" layoutX="290.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
@@ -33,7 +33,7 @@
                         <Image url="@../images/Cross.png" />
                      </image>
                   </ImageView>
-                  <VBox layoutX="76.0" layoutY="118.0" prefHeight="373.0" prefWidth="682.0">
+                  <VBox layoutX="76.0" layoutY="118.0" prefHeight="303.0" prefWidth="682.0">
                      <children>
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
@@ -91,27 +91,23 @@
                               </Label>
                            </children>
                         </HBox>
-                        <HBox prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <ImageView fx:id="abandonGame" fitHeight="108.0" fitWidth="517.0" onMouseClicked="#onClickAbandonGame" onMouseEntered="#abandonGameMouseEntered" onMouseExited="#abandonGameMouseExited" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/ABANDON%20GAME.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView fx:id="help" fitHeight="144.0" fitWidth="194.0" onMouseClicked="#onClickHelp" onMouseEntered="#helpMouseEntered" onMouseExited="#helpMouseExited" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/HELP.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </HBox>
                      </children>
                   </VBox>
+                  <ImageView fx:id="help" fitHeight="76.0" fitWidth="113.0" layoutX="592.0" layoutY="413.0" onMouseClicked="#onClickHelp" onMouseEntered="#helpMouseEntered" onMouseExited="#helpMouseExited" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/HELP.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="abandonGame" fitHeight="72.0" fitWidth="313.0" layoutX="141.0" layoutY="412.0" onMouseClicked="#onClickAbandonGame" onMouseEntered="#abandonGameMouseEntered" onMouseExited="#abandonGameMouseExited" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/ABANDON%20GAME.png" />
+                     </image>
+                  </ImageView>
                   <Pane fx:id="helpPane" prefHeight="532.0" prefWidth="878.0" visible="false">
                      <children>
-                        <ImageView fitHeight="532.0" fitWidth="878.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="536.0" fitWidth="878.0" pickOnBounds="true">
                            <image>
-                              <Image url="@../images/MENU%20_screen.jpg" />
+                              <Image url="@../images/SettingsBackground.png" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="helpCross" fitHeight="73.0" fitWidth="100.0" layoutX="790.0" layoutY="8.0" onMouseClicked="#onClickHelpCross" onMouseEntered="#helpCrossMouseEntered" onMouseExited="#helpCrossMouseExited" pickOnBounds="true" preserveRatio="true">
