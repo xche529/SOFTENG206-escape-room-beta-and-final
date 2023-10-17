@@ -7,6 +7,7 @@ import javafx.scene.shape.Rectangle;
 /** Represents the state of the game. */
 public class GameState {
 
+  /** Represents the difficulty of the game. */
   public static enum Difficulty {
     EASY,
     MEDIUM,

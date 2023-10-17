@@ -25,6 +25,10 @@ import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 
+/**
+ * Controller for the text area view. This view is used to display the conversation between the
+ * player and the guard.
+ */
 public class TextAreaController {
   private Timeline timelineTwo;
   private Timeline timeline;
@@ -187,7 +191,7 @@ public class TextAreaController {
   }
 
   /**
-   * This method submits the message to the GPT
+   * This method submits the message to the GPT.
    *
    * @throws ApiProxyException - if the message cannot be sent
    */
@@ -242,6 +246,11 @@ public class TextAreaController {
     guardTalkedObjective.setStrikethrough(false);
   }
 
+  /**
+   * This method displays the message in the text area.
+   *
+   * @param chat the message to be displayed
+   */
   public void setMessageHistory(ChatCompletionRequest chat) {
     chatVbox.getChildren().clear();
     System.out.println("Vbox cleared");
@@ -347,7 +356,7 @@ public class TextAreaController {
   }
 
   /**
-   * This method displays the target character in the text area
+   * This method displays the target character in the text area.
    *
    * @param character the character that the player is talking to
    */
@@ -385,7 +394,7 @@ public class TextAreaController {
   }
 
   /**
-   * This method filters any words in parentheses out of the message
+   * This method filters any words in parentheses out of the message.
    *
    * @param input the message to be displayed
    * @return the message without the words in parentheses
