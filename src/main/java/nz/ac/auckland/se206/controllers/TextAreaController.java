@@ -30,13 +30,6 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
  * player and the guard.
  */
 public class TextAreaController {
-  private Timeline timelineTwo;
-  private Timeline timeline;
-  private Image guardAvatar;
-  private Image playerAvatar;
-  private Image prisonerOneAvatar;
-  private Image prisonerTwoAvatar;
-  private SoundEffect writingSfx = new SoundEffect("src/main/resources/sounds/pencil.mp3");
   @FXML private Button responseSubmitButton;
   @FXML private TextArea inputBox;
   @FXML private TextArea chatDisplayBoard;
@@ -51,6 +44,14 @@ public class TextAreaController {
   @FXML private Text phoneLocatedObjective;
   @FXML private Text safeLocatedObjective;
   @FXML private Text guardTalkedObjective;
+
+  private Timeline timelineTwo;
+  private Timeline timeline;
+  private Image guardAvatar;
+  private Image playerAvatar;
+  private Image prisonerOneAvatar;
+  private Image prisonerTwoAvatar;
+  private SoundEffect writingSfx = new SoundEffect("src/main/resources/sounds/pencil.mp3");
 
   @FXML
   private void initialize() {
