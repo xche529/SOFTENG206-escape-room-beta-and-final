@@ -178,6 +178,7 @@ public class RoomController {
                         Scene scene = sink.getScene();
                         SceneManager.switchToEndLost(scene);
                       } catch (NullPointerException e) {
+                        System.out.println("Scene is null");
                       }
                     }
                   }

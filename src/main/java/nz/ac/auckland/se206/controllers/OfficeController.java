@@ -896,6 +896,7 @@ public class OfficeController {
                         Scene scene = phone.getScene();
                         SceneManager.switchToEndLost(scene);
                       } catch (NullPointerException e) {
+                        System.out.println("Scene not found");
                       }
                     }
                   }

@@ -566,6 +566,7 @@ public class CafeteriaController {
                         Scene scene = cross.getScene();
                         SceneManager.switchToEndLost(scene);
                       } catch (NullPointerException e) {
+                        System.out.println("Scene is null");
                       }
                     }
                   }
