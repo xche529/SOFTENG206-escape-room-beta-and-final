@@ -87,7 +87,6 @@ public class CafeteriaController {
   private Timeline timeline;
   private SoundEffect lostSound = new SoundEffect("src/main/resources/sounds/Lost.mp3");
 
-
   /** Initializes the cafeteria view, it is called when the room loads. */
   @FXML
   private void initialize() {
@@ -248,13 +247,9 @@ public class CafeteriaController {
     digitOne.setText(Integer.toString(digit));
   }
 
-  /**
-   * When the user clicks on the minus down of the first digit, the digit is decremented by one.
-   *
-   * @param event the mouse event from when the user clicks on the minus down of the first digit
-   */
+  /** When the user clicks on the minus down of the first digit, the digit is decremented by one. */
   @FXML
-  private void digitOneDecrease(MouseEvent Event) {
+  private void digitOneDecrease() {
     thoughtBubblePane.setVisible(false);
     int digit = Integer.parseInt(digitOne.getText());
     digit = (digit - 1 + 10) % 10;
@@ -564,7 +559,7 @@ public class CafeteriaController {
                         SceneManager.switchToEndLost(scene);
                         SceneManager.settingsController.stopMusic();
                         lostSound.playSfx();
-                        
+
                       } catch (NullPointerException e) {
                         e.printStackTrace();
                       }

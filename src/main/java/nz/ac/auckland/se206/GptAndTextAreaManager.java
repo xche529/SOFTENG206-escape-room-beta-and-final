@@ -107,7 +107,7 @@ public class GptAndTextAreaManager {
   }
 
   public static void onSubmitMessage() throws ApiProxyException {
-    textAreaController.onSubmitMessage();
+    textAreaController.submitMessage();
   }
 
   public static void setPlayerAvatar(Image image) {

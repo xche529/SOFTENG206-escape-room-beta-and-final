@@ -40,7 +40,6 @@ public class GptPromptEngineering {
    * guard.
    *
    * @param wordToGuess the word to be guessed in the riddle
-   * @param numHints the number of hints the guard can give
    * @return the generated prompt engineering string
    */
   public static String getGuardSetUp(String wordToGuess) {
