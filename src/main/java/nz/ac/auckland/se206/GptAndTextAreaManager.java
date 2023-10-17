@@ -17,10 +17,10 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 
-/** This class is used to manage the GPT model and the text area */
+/** This class is used to manage the GPT model and the text area. */
 public class GptAndTextAreaManager {
 
-  /** This enum is used to keep track of the current character */
+  /** This enum is used to keep track of the current character. */
   public enum Characters {
     PRISONER_ONE,
     PRISONER_TWO,
@@ -216,28 +216,28 @@ public class GptAndTextAreaManager {
     gptThread.start();
   }
 
-  /** This method sets the thinking animations for prisoner one in all of the scenes to up */
+  /** This method sets the thinking animations for prisoner one in all of the scenes to up. */
   public static void setPrisonerOneThinkUp() {
     roomController.setThinkingOneUp();
     cafeteriaController.setThinkingOneUp();
     officeController.setThinkingOneUp();
   }
 
-  /** This method sets the thinking animations for prisoner one in all of the scenes to down */
+  /** This method sets the thinking animations for prisoner one in all of the scenes to down. */
   public static void setPrisonerOneThinkDown() {
     roomController.setThinkingOneDown();
     cafeteriaController.setThinkingOneDown();
     officeController.setThinkingOneDown();
   }
 
-  /** This method sets the thinking animations for prisoner two in all of the scenes to up */
+  /** This method sets the thinking animations for prisoner two in all of the scenes to up. */
   public static void setPrisonerTwoThinkUp() {
     roomController.setThinkingTwoUp();
     cafeteriaController.setThinkingTwoUp();
     officeController.setThinkingTwoUp();
   }
 
-  /** This method sets the thinking animations for prisoner two in all of the scenes to down */
+  /** This method sets the thinking animations for prisoner two in all of the scenes to down. */
   public static void setPrisonerTwoThinkDown() {
     roomController.setThinkingTwoDown();
     cafeteriaController.setThinkingTwoDown();
@@ -252,7 +252,7 @@ public class GptAndTextAreaManager {
     cafeteriaController.setThinkingThreeDown();
   }
 
-  /** This method sets the thinking animations in all of the scenes to down */
+  /** This method sets the thinking animations in all of the scenes to down. */
   public static void setAllThinkDown() {
     // setting the thinking animations in all of the scenes
     setGuardThinkDown();

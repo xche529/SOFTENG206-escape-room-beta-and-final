@@ -74,7 +74,7 @@ public class PlayHistory implements Serializable {
     }
   }
 
-  /** This method returns the full list of the play history */
+  /** This method returns the full list of the play history. */
   public List<List<Object>> getFullList() {
     // setting up the variables
     List<List<Object>> playHistoryList = new ArrayList<>();

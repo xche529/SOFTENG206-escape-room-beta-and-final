@@ -6,7 +6,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
-/** This class plays the sound effects in the game */
+/** This class plays the sound effects in the game. */
 public class SoundEffect {
 
   private String path;
@@ -15,7 +15,7 @@ public class SoundEffect {
     this.path = path;
   }
 
-  /** Plays the sound effect in a separate thread to avoid lag */
+  /** Plays the sound effect in a separate thread to avoid lag. */
   public void playSfx() {
     Media media = new Media(new File(path).toURI().toString());
     MediaPlayer mediaPlayer = new MediaPlayer(media);

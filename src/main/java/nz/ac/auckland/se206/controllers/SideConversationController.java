@@ -113,7 +113,7 @@ public class SideConversationController {
    * This method is invoked when the user clicks the send button. It sends the user's message to the
    * GPT model and displays the response.
    *
-   * @param message The message to send to the GPT model.
+   * @param prompt The message to send to the GPT model.
    */
   public void refreshMessages(String prompt) {
     groupChatCompletionRequest.addMessage(new ChatMessage("user", prompt));

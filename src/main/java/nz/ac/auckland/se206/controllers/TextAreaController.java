@@ -30,6 +30,33 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
  * player and the guard.
  */
 public class TextAreaController {
+
+  /**
+   * This method filters any words in parentheses out of the message.
+   *
+   * @param input the message to be displayed
+   * @return the message without the words in parentheses
+   */
+  public static String parenthesesFilter(String input) {
+    // Filtering partheses out of the message
+    String result = "";
+    if (input.contains("(") && input.contains(")")) {
+      System.out.println("parenthesesFilter Stage 1 passed");
+      result += input.substring(0, input.indexOf("("));
+      if (!(input.indexOf(")") + 1 < input.length() - 1)) {
+        result += input.substring(input.indexOf(")") + 1);
+      }
+      // check if passed
+      System.out.println("parenthesesFilter Stage 2 passed");
+      System.out.println("parenthesesFilter result: " + result);
+    } else {
+      result = input;
+    }
+
+    // return the filtered message
+    return result;
+  }
+
   @FXML private Button responseSubmitButton;
   @FXML private TextArea inputBox;
   @FXML private TextArea chatDisplayBoard;
@@ -392,31 +419,5 @@ public class TextAreaController {
     } else {
       hintsLeftText.setText("Unlimited");
     }
-  }
-
-  /**
-   * This method filters any words in parentheses out of the message.
-   *
-   * @param input the message to be displayed
-   * @return the message without the words in parentheses
-   */
-  public static String parenthesesFilter(String input) {
-    // Filtering partheses out of the message
-    String result = "";
-    if (input.contains("(") && input.contains(")")) {
-      System.out.println("parenthesesFilter Stage 1 passed");
-      result += input.substring(0, input.indexOf("("));
-      if (!(input.indexOf(")") + 1 < input.length() - 1)) {
-        result += input.substring(input.indexOf(")") + 1);
-      }
-      // check if passed
-      System.out.println("parenthesesFilter Stage 2 passed");
-      System.out.println("parenthesesFilter result: " + result);
-    } else {
-      result = input;
-    }
-
-    // return the filtered message
-    return result;
   }
 }
