@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox  xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.EndWonController">
+<VBox xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/20.0.1" fx:controller="nz.ac.auckland.se206.controllers.EndWonController">
    <children>
       <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="605.0" prefWidth="1113.0">
          <children>
@@ -17,12 +17,12 @@
                   <Image url="@../images/outdoors.jpg" />
                </image>
             </ImageView>
-            <Label alignment="CENTER" layoutX="309.0" layoutY="53.0" prefHeight="120.0" prefWidth="498.0" text="You Won!!" textAlignment="CENTER">
+            <Label alignment="CENTER" layoutX="273.0" layoutY="53.0" prefHeight="141.0" prefWidth="581.0" text="You Won!!" textAlignment="CENTER">
                <font>
                   <Font size="96.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" layoutX="344.0" layoutY="177.0" prefHeight="124.0" prefWidth="431.0" text="You escaped!! Congratulations!">
+            <Label alignment="CENTER" layoutX="254.0" layoutY="177.0" prefHeight="124.0" prefWidth="604.0" text="You escaped!! Congratulations!">
                <font>
                   <Font size="30.0" />
                </font>

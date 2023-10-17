@@ -313,13 +313,22 @@ public class TextAreaController {
                       e.printStackTrace();
                     }
                   }
+
+                  if (GameState.resetTextArea) {
+                    try {
+                      resetTicks();
+                    } catch (ApiProxyException e) {
+                      e.printStackTrace();
+                    }
+                    GameState.resetTextArea = false;
+                  }
                 }));
     // runs the thread
     timeline.setCycleCount(Timeline.INDEFINITE);
     timeline.play();
   }
 
-  private void resetTicks() throws ApiProxyException {
+  public void resetTicks() throws ApiProxyException {
     // resets the booleans
     GameState.setRiddleResolved(false);
     GameState.setCodeWordFound(false);
@@ -336,6 +345,7 @@ public class TextAreaController {
     phoneLocatedObjective.setStrikethrough(false);
     safeLocatedObjective.setStrikethrough(false);
     guardTalkedObjective.setStrikethrough(false);
+    System.out.println("reset ticks called");
 
     hintButton.setVisible(true);
   }
