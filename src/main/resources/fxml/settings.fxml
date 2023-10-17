@@ -33,7 +33,7 @@
                         <Image url="@../images/Cross.png" />
                      </image>
                   </ImageView>
-                  <VBox layoutX="76.0" layoutY="118.0" prefHeight="303.0" prefWidth="682.0">
+                  <VBox layoutX="57.0" layoutY="118.0" prefHeight="303.0" prefWidth="765.0">
                      <children>
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
