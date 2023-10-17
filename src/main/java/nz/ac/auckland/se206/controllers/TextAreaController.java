@@ -124,14 +124,9 @@ public class TextAreaController {
                 // sets the objective to be strikethrough
                 riddleSolvedObjective.setStrikethrough(true);
                 writingSfx.playSfx();
-                try {
                   // gives the guard the next hint
-                  GptAndTextAreaManager.sendMessage(GptPromptEngineering.solvedRaddleGuardPrompt());
                   GptAndTextAreaManager.sideConversationController.refreshMessages(
                       GptPromptEngineering.solvedRiddlePrisonerPrompt());
-                } catch (ApiProxyException e) {
-                  e.printStackTrace();
-                }
               }
             });
     // observes the property of the code word being found
