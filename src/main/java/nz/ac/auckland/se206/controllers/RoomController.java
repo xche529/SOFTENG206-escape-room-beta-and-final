@@ -107,7 +107,7 @@ public class RoomController {
    */
   public void initialize() throws ApiProxyException, IOException {
 
-    items = new Rectangle[] {vent, toiletPaper, toilet, sink, tap, mirror, towel};
+    items = new Rectangle[] {vent, toiletPaper, toilet, sink, mirror, towel};
 
     Random randomChoose = new Random();
     int randomIndexChoose = randomChoose.nextInt(items.length);
