@@ -18,7 +18,7 @@ public class RandomizationGenerator {
     GameState.itemWithCypher = cypherItems[randomIndexChoose];
   }
 
-  /* This method creates a random phone number. */
+  /** This method creates a random phone number. */
   public static void createPhoneNunber() {
     Random random = new Random();
 

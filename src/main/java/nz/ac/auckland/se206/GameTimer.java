@@ -12,7 +12,7 @@ public class GameTimer {
   private Timeline timeline;
   private TextToSpeech textToSpeech;
 
-  /** This method creates a timer that runs the timer in the game by updating every second */
+  /** This method creates a timer that runs the timer in the game by updating every second. */
   public GameTimer() {
     timeline =
         new Timeline(

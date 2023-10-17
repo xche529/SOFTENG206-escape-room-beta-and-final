@@ -93,7 +93,6 @@ public class OfficeController {
   private SoundEffect winningSound = new SoundEffect("src/main/resources/sounds/Win.mp3");
   private SoundEffect lostSound = new SoundEffect("src/main/resources/sounds/Lost.mp3");
 
-
   /**
    * This method is called by the FXMLLoader when initialization is complete.
    *
@@ -212,7 +211,7 @@ public class OfficeController {
   }
 
   /**
-   * exits the veiw of the drawer
+   * exits the view of the drawer.
    *
    * @param event the mouse event where the character clicks anywhare on the screen.
    */
@@ -846,7 +845,7 @@ public class OfficeController {
    * @param event the mouse event where the character clicks on the exit button
    */
   @FXML
-  private void onClickCross(MouseEvent event) {
+  private void onClickCross() {
     phonePane.setVisible(false);
     blurringPane.setVisible(false);
   }

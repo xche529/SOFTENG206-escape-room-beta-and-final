@@ -261,14 +261,14 @@ public class RoomController {
     translateTransition.play();
   }
 
-  /** This method updates the timer label */
+  /** This method updates the timer label. */
   private void updateTimerLabel() {
     int minutes = GameState.secondsRemaining / 60;
     int seconds = GameState.secondsRemaining % 60;
     timerLabel.setText(String.format("%d:%02d", minutes, seconds));
   }
 
-  /** This methos animates the prioners walking into the room */
+  /** This method animates the prioners walking into the room. */
   public void walkInAnimation() {
     MovementControl.moveToLeft(true, 1, 500, animationItems);
   }
