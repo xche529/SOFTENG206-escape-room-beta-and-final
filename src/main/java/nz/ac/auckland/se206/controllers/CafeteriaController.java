@@ -489,6 +489,9 @@ public class CafeteriaController {
   private void resetCafeteria() {
     // sets visablity of the images
     padlockPane.setVisible(false);
+    inspectingPaintingPane.setVisible(false);
+    blurredPane.setVisible(false);
+    inspectingVendingPane.setVisible(false);
     safe.setVisible(false);
     paintingWithSafe.setVisible(true);
     paintingWithoutSafe.setVisible(true);
@@ -558,7 +561,7 @@ public class CafeteriaController {
                         // switches to the lost screen
                         Scene scene = cog.getScene();
                         SceneManager.switchToEndLost(scene);
-                        
+
                       } catch (NullPointerException e) {
                         e.printStackTrace();
                       }
