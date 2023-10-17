@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="605.0" prefWidth="300.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.SideConversationController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="605.0" prefWidth="300.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/20.0.1" fx:controller="nz.ac.auckland.se206.controllers.SideConversationController">
    <children>
       <Pane prefHeight="622.0" prefWidth="300.0">
          <children>
@@ -31,7 +31,7 @@
                   <Image url="@../images/prisonerOneAvatar.png" />
                </image>
             </ImageView>
-            <TextArea fx:id="prisonerTwoTextArea" blendMode="DARKEN" editable="false" layoutX="22.0" layoutY="303.0" prefHeight="231.0" prefWidth="192.0" wrapText="true">
+            <TextArea fx:id="prisonerTwoTextArea" blendMode="DARKEN" editable="false" layoutX="22.0" layoutY="305.0" prefHeight="235.0" prefWidth="192.0" wrapText="true">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -43,7 +43,7 @@
                         <Image url="@../images/Bubble_stretched.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="273.0" fitWidth="192.0" layoutX="-3.0" layoutY="303.0" pickOnBounds="true" preserveRatio="true" x="25.0">
+                  <ImageView fitHeight="254.0" fitWidth="192.0" layoutX="-3.0" layoutY="303.0" pickOnBounds="true" preserveRatio="true" x="25.0">
                      <image>
                         <Image url="@../images/Bubble_stretched.png" />
                      </image>
