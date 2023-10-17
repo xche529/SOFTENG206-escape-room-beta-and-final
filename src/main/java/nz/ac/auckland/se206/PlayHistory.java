@@ -142,6 +142,11 @@ public class PlayHistory implements Serializable {
     return difficulty;
   }
 
+  /**
+   * Gets the currently difficulty depending on the string.
+   *
+   * @return the difficulty string
+   */
   public String getDifficultyString() {
     if (difficulty == 1) {
       return "Easy";
