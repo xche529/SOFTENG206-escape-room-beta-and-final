@@ -26,6 +26,7 @@ import nz.ac.auckland.se206.PlayHistory;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
+/** This class is used to control the start interface. */
 public class StartInterfaceController {
   @FXML private CheckBox hard;
   @FXML private CheckBox medium;

@@ -33,6 +33,10 @@ public class SettingsController {
 
   private MediaPlayer mediaPlayer;
 
+  /**
+   * This method is called when the scene is loaded. It sets the initial values of the sliders and
+   * adds listeners to the sliders.
+   */
   public void initialize() {
 
     // set the initial values of the sliders

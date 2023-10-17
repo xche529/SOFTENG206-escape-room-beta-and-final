@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/** This class is used to store the play history of the player. */
 public class PlayHistory implements Serializable {
   private double score;
   private int timeTook;
@@ -16,6 +17,14 @@ public class PlayHistory implements Serializable {
   private PlayHistory parentPlayHistory = null;
   private int playerAvatar;
 
+  /**
+   * This is the constructor for the play history.
+   *
+   * @param time - the time that the player took to complete the game
+   * @param difficulty - the difficulty that the player played on
+   * @param name - the name of the player
+   * @param playerAvatar - the avatar that the player chose
+   */
   public PlayHistory(int time, int difficulty, String name, int playerAvatar) {
     this.name = name;
     this.score = time / difficulty;
@@ -65,8 +74,7 @@ public class PlayHistory implements Serializable {
     }
   }
 
-  // This is the function that creates a string to display the play history It dis plays the name,
-  // time and difficulty of the player
+  /** This method returns the full list of the play history */
   public List<List<Object>> getFullList() {
     // setting up the variables
     List<List<Object>> playHistoryList = new ArrayList<>();
@@ -100,7 +108,7 @@ public class PlayHistory implements Serializable {
     }
   }
 
-  // This is the method for saving the play history
+  /** This method saves the play history to a file. */
   public void saveHistory() {
     try (ObjectOutputStream oos =
         new ObjectOutputStream(new FileOutputStream("player_history.dat"))) {

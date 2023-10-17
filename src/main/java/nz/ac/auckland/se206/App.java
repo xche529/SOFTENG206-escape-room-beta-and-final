@@ -58,7 +58,7 @@ public class App extends Application {
    *
    * @param stage The primary stage of the application.
    * @throws IOException If "src/main/resources/fxml/canvas.fxml" is not found.
-   * @throws ApiProxyException
+   * @throws ApiProxyException If the GPT API is not available.
    */
   @Override
   public void start(final Stage stage) throws IOException, ApiProxyException {

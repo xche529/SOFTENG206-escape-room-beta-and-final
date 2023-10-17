@@ -9,6 +9,7 @@ import javafx.scene.input.MouseEvent;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 
+/** Controller for the end won interface. */
 public class EndWonController {
 
   @FXML private Label resultLabel;
@@ -16,9 +17,9 @@ public class EndWonController {
   @FXML private ImageView cog;
 
   /**
-   * Switches the scene to the start interface
-   * 
-   * @param event
+   * Switches the scene to the start interface.
+   *
+   * @param event when the restart button is clicked
    */
   @FXML
   private void goToStart(MouseEvent event) {

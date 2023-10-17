@@ -2,13 +2,12 @@ package nz.ac.auckland.se206.speech;
 
 import java.beans.PropertyVetoException;
 import javafx.concurrent.Task;
-import nz.ac.auckland.se206.GameState;
-
 import javax.speech.AudioException;
 import javax.speech.Central;
 import javax.speech.EngineException;
 import javax.speech.synthesis.Synthesizer;
 import javax.speech.synthesis.SynthesizerModeDesc;
+import nz.ac.auckland.se206.GameState;
 
 /** Text-to-speech API using the JavaX speech library. */
 public class TextToSpeech {
@@ -135,7 +134,7 @@ public class TextToSpeech {
    * Sets the volume of the speech synthesizer.
    *
    * @param volume The volume level (0.0 to 1.0, where 0.0 is silent and 1.0 is full volume).
-   * @throws PropertyVetoException
+   * @throws PropertyVetoException If the requested volume is not in the range 0.0 to 1.0.
    */
   public void setVolume(float volume) throws PropertyVetoException {
     if (volume < 0.0f || volume > 1.0f) {
