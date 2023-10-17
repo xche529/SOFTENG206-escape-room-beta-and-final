@@ -1,6 +1,5 @@
 package nz.ac.auckland.se206.controllers;
 
-import java.io.IOException;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -24,6 +23,7 @@ import nz.ac.auckland.se206.SoundEffect;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.reseters.RandomizationGenerator;
 
+/** This class controls the cafeteria view. */
 public class CafeteriaController {
 
   @FXML private Rectangle paintingWithSafe;
@@ -87,12 +87,7 @@ public class CafeteriaController {
   private SoundEffect safeOpeningNoise;
   private Timeline timeline;
 
-  /**
-   * Initializes the cafeteria view, it is called when the room loads.
-   *
-   * @throws IOException
-   * @throws ApiProxyException
-   */
+  /** Initializes the cafeteria view, it is called when the room loads. */
   @FXML
   private void initialize() {
 
@@ -126,11 +121,7 @@ public class CafeteriaController {
         new SoundEffect("src/main/resources/sounds/door-opening-and-closing-18398.mp3");
   }
 
-  /**
-   * This method is called when the user clicks on the vending machine.
-   *
-   * @throws ApiProxyException
-   */
+  /** This method is called when the user clicks on the vending machine. */
   @FXML
   private void onClickVendingMachine(MouseEvent event) {
     blurredPane.setVisible(true);
@@ -157,11 +148,7 @@ public class CafeteriaController {
     GameState.safeFound = true;
   }
 
-  /**
-   * This method is called when the user clicks on the picture without a safe.
-   *
-   * @throws ApiProxyException
-   */
+  /** This method is called when the user clicks on the picture without a safe. */
   @FXML
   private void onClickPaintingWithoutSafe(MouseEvent event) {
     blurredPane.setVisible(true);
@@ -397,7 +384,7 @@ public class CafeteriaController {
     speechBubbleOne.setVisible(false);
   }
 
-  /** This method enlarges the speech bubble for prisoner two when the mouse enters the speech */
+  /** This method enlarges the speech bubble for prisoner two when the mouse enters the speech. */
   @FXML
   private void onSetSpeechBubbleTwoUp() {
     speechBubbleTwo.setVisible(true);
@@ -457,7 +444,7 @@ public class CafeteriaController {
 
   /**
    * This method switchs the conversation to the prisoner one when the player clicks on the speech
-   * bubble
+   * bubble.
    *
    * @param event the mouse event from when the user clicks on the speech bubble
    */
@@ -469,7 +456,7 @@ public class CafeteriaController {
 
   /**
    * This method switchs the conversation to the prisoner two when the player clicks on the speech
-   * bubble
+   * bubble.
    *
    * @param event the mouse event from when the user clicks on the speech bubble
    */
@@ -480,7 +467,7 @@ public class CafeteriaController {
   }
 
   /**
-   * This method switchs the conversation to the guard when the player clicks on the speech bubble
+   * This method switchs the conversation to the guard when the player clicks on the speech bubble.
    *
    * @param event the mouse event from when the user clicks on the speech bubble
    */
