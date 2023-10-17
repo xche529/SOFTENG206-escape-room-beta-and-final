@@ -219,7 +219,7 @@ public class TextAreaController {
   }
 
   /**
-   * This method calls the submit message method
+   * This method calls the submit message method.
    *
    * @throws ApiProxyException - if the message cannot be sent
    */

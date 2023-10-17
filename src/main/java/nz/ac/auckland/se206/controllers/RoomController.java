@@ -2,7 +2,6 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
 import java.util.Random;
-
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -234,6 +233,16 @@ public class RoomController {
     // resets the text area
     GptAndTextAreaManager.reset();
     System.out.println("room reseted");
+
+    // sets anything that was visible to invisible
+    blurredPane.setVisible(false);
+    inspectingMirrorPane.setVisible(false);
+    inspectingSinkPane.setVisible(false);
+    inspectingTowelPane.setVisible(false);
+    inspectingToiletPane.setVisible(false);
+    inspectingToiletPaperPane.setVisible(false);
+    inspectingVentPane.setVisible(false);
+    thoughtBubblePane.setVisible(false);
   }
 
   /** This method animates all of the arrows in the scene. */

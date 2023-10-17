@@ -8,6 +8,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -28,7 +29,7 @@
                   <Insets />
                </opaqueInsets>
             </TextArea>
-            <TextArea fx:id="chatDisplayBoard" blendMode="MULTIPLY" editable="false" layoutX="324.0" prefHeight="195.0" prefWidth="562.0" text="454545454545" visible="false" wrapText="true">
+            <TextArea fx:id="chatDisplayBoard" blendMode="MULTIPLY" editable="false" layoutX="324.0" prefHeight="195.0" prefWidth="562.0" visible="false" wrapText="true">
                <font>
                   <Font size="16.0" />
                </font>
@@ -47,32 +48,32 @@
                   <Pane layoutX="110.0" layoutY="-43.0" prefHeight="195.0" prefWidth="436.0" visible="false" />
                   <Text fx:id="guardTalkedObjective" layoutX="143.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Talk to guard!">
                      <font>
-                        <Font name="Constantia" size="25.0" />
+                        <Font size="22.0" />
                      </font>
                   </Text>
                   <Text fx:id="codewordFoundObjective" layoutX="143.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Locate codeword">
                      <font>
-                        <Font name="Constantia" size="25.0" />
+                        <Font size="22.0" />
                      </font>
                   </Text>
                   <Text fx:id="safeLocatedObjective" layoutX="366.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Find safe">
                      <font>
-                        <Font name="Constantia" size="25.0" />
+                        <Font size="22.0" />
                      </font>
                   </Text>
                   <Text fx:id="riddleSolvedObjective" layoutX="366.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Solve riddle">
                      <font>
-                        <Font name="Constantia" size="25.0" />
+                        <Font size="22.0" />
                      </font>
                   </Text>
                   <Text fx:id="converterFoundObjective" layoutX="143.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Locate cypher">
                      <font>
-                        <Font name="Constantia" size="25.0" />
+                        <Font size="22.0" />
                      </font>
                   </Text>
                   <Text fx:id="phoneLocatedObjective" layoutX="367.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Find phone">
                      <font>
-                        <Font name="Constantia" size="25.0" />
+                        <Font size="22.0" />
                      </font>
                   </Text>
                </children>
@@ -86,9 +87,9 @@
                <font>
                   <Font size="19.0" />
                </font></Text>
-            <Text layoutX="1011.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Objectives:">
+            <Text layoutX="1135.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Objectives:">
                <font>
-                  <Font name="Constantia Bold" size="29.0" />
+                  <Font size="29.0" />
                </font>
             </Text>
             <ScrollPane blendMode="DARKEN" hbarPolicy="NEVER" layoutX="335.0" layoutY="-2.0" prefHeight="195.0" prefWidth="662.0">
@@ -96,6 +97,8 @@
                   <VBox fx:id="chatVbox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="176.0" prefWidth="665.0" translateX="10.0" translateY="10.0" />
                </content>
             </ScrollPane>
+            <Line endY="99.00003051757812" layoutX="335.0" layoutY="96.0" startY="-96.00001525878906" />
+            <Line endY="99.00003051757812" layoutX="1000.0" layoutY="95.0" startY="-96.00001525878906" />
          </children>
       </Pane>
    </children>
