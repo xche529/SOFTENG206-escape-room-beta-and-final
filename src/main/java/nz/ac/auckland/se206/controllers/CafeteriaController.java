@@ -560,13 +560,13 @@ public class CafeteriaController {
                       GameState.resetCafeteria = true;
                       try {
                         // switches to the lost screen
-                        Scene scene = cross.getScene();
+                        Scene scene = cog.getScene();
                         SceneManager.switchToEndLost(scene);
                         SceneManager.settingsController.stopMusic();
                         lostSound.playSfx();
                         
                       } catch (NullPointerException e) {
-                        System.out.println("Scene is null");
+                        e.printStackTrace();
                       }
                     }
                   }
