@@ -175,7 +175,7 @@ public class OfficeController {
     translateTransition.play();
   }
 
-  /** animates the prisoner and the speech bubble */
+  /** animates the prisoner and the speech bubble. */
   public void walkInAnimation() {
     MovementControl.moveToLeft(false, 1, 500, animationItems);
   }
@@ -344,25 +344,25 @@ public class OfficeController {
     }
   }
 
-  /** shows the enlarged desk drawer. */
+  /** shows the enlarged desk drawer when the mouse hovers. */
   @FXML
   private void deskDrawersMouseEntered() {
     deskDrawersBig.setVisible(true);
   }
 
-  /** hides the enlarged desk drawer. */
+  /** hides the enlarged desk drawer when the mouse leaves. */
   @FXML
   private void deskDrawersMouseExited() {
     deskDrawersBig.setVisible(false);
   }
 
-  /** shows the enlarged bin. */
+  /** shows the enlarged bin when the mouse hovers. */
   @FXML
   private void binMouseEntered() {
     binBig.setVisible(true);
   }
 
-  /** hides the enlarged bin. */
+  /** hides the enlarged bin when the mouse leaves. */
   @FXML
   private void binMouseExited() {
     binBig.setVisible(false);
@@ -739,7 +739,7 @@ public class OfficeController {
   }
 
   /**
-   * clears all the digits.
+   * clears all the digits from the phone number.
    *
    * @param event the mouse event where the character clicks on the clear button
    */
@@ -764,7 +764,7 @@ public class OfficeController {
   }
 
   /**
-   * deletes the last digit
+   * deletes the last digit from the phone number.
    *
    * @param event the mouse event where the character clicks on the delete button
    */

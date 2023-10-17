@@ -28,7 +28,7 @@
                         <Image url="@../images/SETTINGS.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="cross" fitHeight="73.0" fitWidth="100.0" layoutX="792.0" layoutY="11.0" onMouseClicked="#onCrossClicked" onMouseEntered="#crossMouseEntered" onMouseExited="#crossMouseExited" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="cross" fitHeight="73.0" fitWidth="100.0" layoutX="792.0" layoutY="11.0" onMouseClicked="#onClickCross" onMouseEntered="#crossMouseEntered" onMouseExited="#crossMouseExited" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/Cross.png" />
                      </image>

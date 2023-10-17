@@ -119,7 +119,7 @@ public class SettingsController {
   }
 
   @FXML
-  private void onCrossClicked(MouseEvent Event) {
+  private void onClickCross(MouseEvent Event) {
     settingsBox.setVisible(false);
     GameState.setSettingsVisable(false);
   }

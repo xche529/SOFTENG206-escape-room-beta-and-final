@@ -227,7 +227,7 @@ public class RoomController {
     System.out.println("room reseted");
   }
 
-  /** This method animates all of the arrows in the scene */
+  /** This method animates all of the arrows in the scene. */
   public void animateAllArrows() {
     animateArrows(toiletArrow);
     animateArrows(toiletPaperArrow);

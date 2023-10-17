@@ -20,7 +20,6 @@ import nz.ac.auckland.se206.GptAndTextAreaManager.Characters;
 import nz.ac.auckland.se206.MovementControl;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SoundEffect;
-import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.reseters.RandomizationGenerator;
 
 /** This class controls the cafeteria view. */
@@ -131,11 +130,7 @@ public class CafeteriaController {
     vendingMachineArrow.setVisible(false);
   }
 
-  /**
-   * This method is called when the user clicks on the picture with a safe.
-   *
-   * @throws ApiProxyException
-   */
+  /** This method is called when the user clicks on the picture with a safe. */
   @FXML
   private void onClickPaintingWithSafe(MouseEvent event) {
     // set all relevant nodes to visible
