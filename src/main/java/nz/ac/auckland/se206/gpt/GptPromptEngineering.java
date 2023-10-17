@@ -62,9 +62,8 @@ public class GptPromptEngineering {
           + " You should give the prisoner a riddle with the answer of: "
           // append riddle answer
           + wordToGuess
-          + " in your first message. The riddle can go up to 3 or 4 lines and easy to answer You"
-          + " can only give the prisoner 5 hints, do not give hint easily. after 5 no more hints,"
-          + " when you give hint,put (HINT) at the end of your response. Do not give the answer"
+          + " in your first message. The riddle can go up to 3 or 4 lines and easy to answer Do not"
+          + " give hint when they ask, tell them to hit the hint button. Do not give the answer"
           + " even if the player give up. Keep your messages as concise as possible. Only reply"
           + " from the guard point of view. When the Riddle is guessed correctly or answer is given"
           + " you must return only 'Correct' you must return only 'Correct')";
@@ -74,11 +73,11 @@ public class GptPromptEngineering {
         + " should give the prisoner a riddle with the answer of: "
         // append riddle answer
         + wordToGuess
-        + " in your first message. The riddle can go up to 3 or 4 lines. and easy to answer You can"
-        + " give the prisoner as much hint as you want but You cannot give the answer even if the"
-        + " player give up. Keep your messages as concise as possible. Only reply from the guard"
-        + " point of view. When the Riddle is guessed correctly or answer is given by the player"
-        + " you must return only 'Correct' you must return only 'Correct')";
+        + " in your first message. The riddle can go up to 3 or 4 lines. and easy to answer Do not"
+        + " give hint when player ask, tell them to hit the hint button. But You cannot give the"
+        + " answer even if the player give up. Keep your messages as concise as possible. Only"
+        + " reply from the guard point of view. When the Riddle is guessed correctly or answer is"
+        + " given by the player you must return only 'Correct' you must return only 'Correct')";
   }
 
   /**
@@ -271,26 +270,24 @@ public class GptPromptEngineering {
         + " to hurry up and you don't want to be caught. Keep all messages concise.)";
   }
 
-
-
-  public static String getRiddleHint(){
-    return"(Give the player a hint about the riddle. Keep all messages concise.)";
+  public static String getRiddleHint() {
+    return "(Give the player a hint about the riddle. Keep all messages concise.)";
   }
 
-  public static String getObjectHint(){
-    return"(Tell the player to take a look at the object in the answer of the riddle in the cell. Keep all messages concise.)";
+  public static String getObjectHint() {
+    return "(Tell the player to take a look at the object in the answer of the riddle in the cell."
+        + " Keep all messages concise.)";
   }
 
-  public static String getSafeHint(){
-    return"(Tell the player to look for the safe in the cafeteria. Keep all messages concise.)";
+  public static String getSafeHint() {
+    return "(Tell the player to look for the safe in the cafeteria. Keep all messages concise.)";
   }
 
-  public static String getCypherHint(){
-    return"(Tell the player to look for the Cypher in the office. Keep all messages concise.)";
+  public static String getCypherHint() {
+    return "(Tell the player to look for the Cypher in the office. Keep all messages concise.)";
   }
 
-  public static String getPhoneHint(){
-    return"(Tell the player to look for the phone in the office. Keep all messages concise.)";
+  public static String getPhoneHint() {
+    return "(Tell the player to look for the phone in the office. Keep all messages concise.)";
   }
-
 }

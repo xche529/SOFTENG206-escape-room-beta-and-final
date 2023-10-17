@@ -393,8 +393,8 @@ public class TextAreaController {
         chatVbox.getChildren().add(hbox);
         System.out.println("Vbox updated");
       }
-      GameState.hintsLeft = GptAndTextAreaManager.hintLeft;
-      System.out.println("Hints left: " + GptAndTextAreaManager.hintLeft);
+      //GameState.hintsLeft = GptAndTextAreaManager.hintLeft;
+      System.out.println("Hints left: " + GameState.hintsLeft);
     }
   }
 
