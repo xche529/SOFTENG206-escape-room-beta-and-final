@@ -37,6 +37,8 @@ public class GameState {
 
   private static final BooleanProperty updatePlayHistory = new SimpleBooleanProperty(false);
 
+  private static final BooleanProperty isHintsAllowed = new SimpleBooleanProperty(true);
+
   private static int playerAvatar;
 
   private static final BooleanProperty isSafeClosed = new SimpleBooleanProperty(false);
@@ -93,6 +95,10 @@ public class GameState {
     return updatePlayHistory;
   }
 
+  public static void setIsHintsAllowed(boolean value) {
+    isHintsAllowed.set(value);
+  }
+
   public static void setUpdatePlayHistory(boolean value) {
     updatePlayHistory.set(value);
   }
@@ -143,6 +149,10 @@ public class GameState {
 
   public static boolean isCodeWordFound() {
     return isCodeWordFound.get();
+  }
+
+  public static BooleanProperty isHintsAllowed() {
+    return isHintsAllowed;
   }
 
   public static void setCodeWordFound(boolean value) {

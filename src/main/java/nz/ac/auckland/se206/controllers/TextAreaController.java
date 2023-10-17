@@ -71,6 +71,7 @@ public class TextAreaController {
   @FXML private Text phoneLocatedObjective;
   @FXML private Text safeLocatedObjective;
   @FXML private Text guardTalkedObjective;
+  @FXML private Button hintButton;
 
   private Timeline timelineTwo;
   private Timeline timeline;
@@ -86,6 +87,16 @@ public class TextAreaController {
     // setting up the text area manager
     chatVbox.setMaxWidth(562);
     chatVbox.setMaxHeight(195);
+
+    GameState.isHintsAllowed()
+        .addListener(
+            (observable, oldValue, newValue) -> {
+              if (newValue) {
+                hintButton.setDisable(false);
+              } else {
+                hintButton.setDisable(true);
+              }
+            });
 
     // setting up the text area manager
     GptAndTextAreaManager.textAreaController = this;
@@ -218,6 +229,34 @@ public class TextAreaController {
     typePromptText.setVisible(false);
   }
 
+  @FXML
+  private void onClickGiveHint() {
+    GameState.hintsLeft--;
+    if (GameState.hintsLeft == 0) {
+      hintButton.setDisable(true);
+    }
+    if (GameState.isRiddleResolvedProperty().get() == false) {
+      // give prompt to guard
+      return;
+    }
+    if (GameState.isCodeWordFoundProperty().get() == false) {
+      // give prompt to guard
+      return;
+    }
+    if (GameState.isConverterFoundProperty().get() == false) {
+      // give prompt to guard
+      return;
+    }
+    if (GameState.safeFound) {
+      // give prompt to guard
+      return;
+    }
+    if (GameState.isPhoneFoundProperty().get() == false) {
+      // give prompt to guard
+      return;
+    }
+  }
+
   /**
    * This method calls the submit message method.
    *
@@ -287,6 +326,8 @@ public class TextAreaController {
     phoneLocatedObjective.setStrikethrough(false);
     safeLocatedObjective.setStrikethrough(false);
     guardTalkedObjective.setStrikethrough(false);
+
+    hintButton.setVisible(true);
   }
 
   /**

@@ -19,6 +19,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.GameState.Difficulty;
 import nz.ac.auckland.se206.GameTimer;
 import nz.ac.auckland.se206.GptAndTextAreaManager;
 import nz.ac.auckland.se206.PlayHistory;
@@ -152,8 +153,13 @@ public class StartInterfaceController {
 
   @FXML
   private void onStartGame(Event event) throws IOException, ApiProxyException {
- 
-    //sets the time on the timer
+
+    if (GameState.difficulty == Difficulty.HARD) {
+      GameState.setIsHintsAllowed(false);
+    } else {
+      GameState.setIsHintsAllowed(true);
+    }
+    // sets the time on the timer
     if (twoTick.isVisible()) {
       GameState.secondsRemaining = 120;
       GameState.totalSeconds = 120;
@@ -177,7 +183,6 @@ public class StartInterfaceController {
     roomController.start();
     // initializes a new gpt and text area manager
     GptAndTextAreaManager.initialize();
-
   }
 
   /*
