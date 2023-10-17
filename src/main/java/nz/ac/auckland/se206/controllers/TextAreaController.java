@@ -232,9 +232,13 @@ public class TextAreaController {
   @FXML
   private void onClickGiveHint() {
     GameState.hintsLeft--;
-    if (GameState.hintsLeft == 0 && GameState.difficulty != GameState.Difficulty.EASY) {
-      hintButton.setDisable(true);
+    if (GameState.difficulty == GameState.Difficulty.MEDIUM) {
+      if (GameState.hintsLeft == 0) {
+        GameState.setIsHintsAllowed(false);
+      }
+      hintsLeftText.setText(Integer.toString(GameState.hintsLeft));
     }
+
     if (GameState.isRiddleResolvedProperty().get() == false) {
       // give prompt to guard
       return;
@@ -434,7 +438,7 @@ public class TextAreaController {
         chatVbox.getChildren().add(hbox);
         System.out.println("Vbox updated");
       }
-      //GameState.hintsLeft = GptAndTextAreaManager.hintLeft;
+      // GameState.hintsLeft = GptAndTextAreaManager.hintLeft;
       System.out.println("Hints left: " + GameState.hintsLeft);
     }
   }
