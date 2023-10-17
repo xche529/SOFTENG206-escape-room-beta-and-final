@@ -46,7 +46,7 @@ public class GptPromptEngineering {
     answer = wordToGuess;
     if (GameState.difficulty == Difficulty.HARD) {
       // get the guards story if the difficulty is hard
-      return "(You are a guard called Mark with strong personality who is helping a prisoner escape"
+      return "(You are a guard with strong personality who is helping a prisoner escape"
           + " an prison You should give the prisoner a riddle with the answer of: "
           // append riddle answer
           + wordToGuess
@@ -59,7 +59,7 @@ public class GptPromptEngineering {
     } else if (GameState.difficulty == Difficulty.MEDIUM
         || GameState.difficulty == Difficulty.EASY) {
       // get the guards story if the difficulty is medium or easy
-      return "(You are a guard called Mark with strong personality who is helping a prisoner escape"
+      return "(You are a guard with strong personality who is helping a prisoner escape"
           + " an prison You should give the prisoner a riddle with the answer of: "
           // append riddle answer
           + wordToGuess
