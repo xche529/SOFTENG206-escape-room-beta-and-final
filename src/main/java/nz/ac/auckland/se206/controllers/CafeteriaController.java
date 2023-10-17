@@ -579,7 +579,7 @@ public class CafeteriaController {
                         SceneManager.switchToEndLost(scene);
                         SceneManager.settingsController.stopMusic();
                         lostSound.playSFX();
-
+                        
                       } catch (NullPointerException e) {
                       }
                     }

@@ -32,7 +32,7 @@ public class SceneManager {
   public static CafeteriaController cafeteriaController;
   public static SettingsController settingsController;
   private static boolean isFirstRound = true;
-
+  private static SoundEffect runningSound = new SoundEffect("src/main/resources/sounds/Running.mp3");
   public static VBox settings;
 
   static AppUi[] appUis = {
@@ -59,6 +59,7 @@ public class SceneManager {
       cafeteriaController.resetAnimation();
       cafeteriaController.walkInAnimation();
     } else {
+      runningSound.playSFX();
       // prints the action being taken in the terminal for debugging purposes
       if (isToLeft) {
         System.out.println("Moving to left");
