@@ -224,7 +224,11 @@ public class TextAreaController {
    * @throws ApiProxyException - if the message cannot be sent
    */
   @FXML
-  public void onSubmitMessage() throws ApiProxyException {
+  private void onSubmitMessage() throws ApiProxyException {
+    submitMessage();
+  }
+
+  public void submitMessage() throws ApiProxyException {
     // submit message to GPT
     String message = inputBox.getText();
     inputBox.clear();

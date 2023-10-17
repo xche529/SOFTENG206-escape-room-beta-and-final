@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
@@ -125,7 +124,7 @@ public class SettingsController {
   }
 
   @FXML
-  private void onClickCross(MouseEvent Event) {
+  private void onClickCross() {
     settingsBox.setVisible(false);
     GameState.setSettingsVisable(false);
   }

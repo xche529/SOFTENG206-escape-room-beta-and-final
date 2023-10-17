@@ -79,7 +79,7 @@ public class PlayHistory implements Serializable {
   }
 
   /**
-   * This method returns the full list of the play history.
+   * Retrieves the full list of play history records.
    *
    * @return the full list of the play history
    */
