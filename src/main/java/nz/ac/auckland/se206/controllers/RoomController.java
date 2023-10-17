@@ -179,7 +179,9 @@ public class RoomController {
                         // switches to the lost screen
                         Scene scene = sink.getScene();
                         SceneManager.switchToEndLost(scene);
+                        SceneManager.settingsController.stopMusic();
                         lostSound.playSFX();
+
                       } catch (NullPointerException e) {
                       }
                     }

@@ -18,6 +18,7 @@ import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.controllers.CafeteriaController;
 import nz.ac.auckland.se206.controllers.OfficeController;
 import nz.ac.auckland.se206.controllers.RoomController;
+import nz.ac.auckland.se206.controllers.SettingsController;
 import nz.ac.auckland.se206.controllers.SideConversationController;
 import nz.ac.auckland.se206.controllers.StartInterfaceController;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
@@ -140,11 +141,13 @@ public class App extends Application {
     StartInterfaceController startInterfaceController = startInterfaceLoader.getController();
     RoomController roomController = roomLoader.getController();
     SideConversationController sideConversationController = sideConversationLoader.getController();
+    SettingsController settingsController = settingsLoader.getController();
 
     // setting up the controllers
     SceneManager.cafeteriaController = cafeteriaController;
     SceneManager.officeController = officeController;
     SceneManager.roomController = roomController;
+    SceneManager.settingsController = settingsController;
     GptAndTextAreaManager.sideConversationController = sideConversationController;
     startInterfaceController.setRoomController(roomController);
     startInterfaceController.setSideConversationController(sideConversationController);

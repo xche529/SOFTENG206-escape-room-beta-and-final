@@ -10,6 +10,7 @@ import javafx.scene.transform.Scale;
 import nz.ac.auckland.se206.controllers.CafeteriaController;
 import nz.ac.auckland.se206.controllers.OfficeController;
 import nz.ac.auckland.se206.controllers.RoomController;
+import nz.ac.auckland.se206.controllers.SettingsController;
 
 public class SceneManager {
 
@@ -29,6 +30,7 @@ public class SceneManager {
   public static RoomController roomController;
   public static OfficeController officeController;
   public static CafeteriaController cafeteriaController;
+  public static SettingsController settingsController;
   private static boolean isFirstRound = true;
 
   public static VBox settings;
