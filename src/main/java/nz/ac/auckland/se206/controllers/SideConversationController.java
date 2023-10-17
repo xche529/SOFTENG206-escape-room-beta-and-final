@@ -21,10 +21,10 @@ public class SideConversationController {
   @FXML private TextArea prisonerOneTextArea;
   @FXML private TextArea prisonerTwoTextArea;
 
-  public String prisonerOneText = "";
-  public String prisonerTwoText = "";
+  private String prisonerOneText = "";
+  private String prisonerTwoText = "";
 
-  public ChatCompletionRequest groupChatCompletionRequest =
+  private ChatCompletionRequest groupChatCompletionRequest =
       new ChatCompletionRequest().setN(1).setTemperature(0.1).setTopP(0.8).setMaxTokens(100);
   private String playerName = "player";
 

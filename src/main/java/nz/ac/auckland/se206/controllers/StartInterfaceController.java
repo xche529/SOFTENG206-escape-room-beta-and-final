@@ -60,12 +60,12 @@ public class StartInterfaceController {
   private SideConversationController sideConversationController;
   private int currentAvatar = 1;
 
-  public Image playerAvatarOne;
-  public Image playerAvatarTwo;
-  public Image playerAvatarThree;
-  public Image playerAvatarFour;
-  public Image playerAvatarFive;
-  public Image currentAvatarImage =
+  private Image playerAvatarOne;
+  private Image playerAvatarTwo;
+  private Image playerAvatarThree;
+  private Image playerAvatarFour;
+  private Image playerAvatarFive;
+  private Image currentAvatarImage =
       new Image(new File("src/main/resources/images/PlayerAvatarOne.png").toURI().toString());
 
   @FXML
