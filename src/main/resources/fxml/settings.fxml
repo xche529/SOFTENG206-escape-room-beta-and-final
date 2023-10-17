@@ -20,7 +20,7 @@
                <children>
                   <ImageView fitHeight="543.0" fitWidth="882.0" pickOnBounds="true">
                      <image>
-                        <Image url="@../images/MENU%20_screen.jpg" />
+                        <Image url="@../images/SettingsBackground.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="111.0" fitWidth="300.0" layoutX="290.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
@@ -88,12 +88,13 @@
                         </HBox>
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <ImageView fx:id="abandonGame" fitHeight="108.0" fitWidth="517.0" onMouseClicked="#onClickAbandonGame" onMouseEntered="#abandonGameMouseEntered" onMouseExited="#abandonGameMouseExited" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="abandonGame" fitHeight="109.0" fitWidth="363.0" onMouseClicked="#onClickAbandonGame" onMouseEntered="#abandonGameMouseEntered" onMouseExited="#abandonGameMouseExited" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../images/ABANDON%20GAME.png" />
                                  </image>
                               </ImageView>
-                              <ImageView fx:id="help" fitHeight="144.0" fitWidth="194.0" onMouseClicked="#onClickHelp" onMouseEntered="#helpMouseEntered" onMouseExited="#helpMouseExited" pickOnBounds="true" preserveRatio="true">
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="45.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="169.0" />
+                              <ImageView fx:id="help" fitHeight="79.0" fitWidth="137.0" onMouseClicked="#onClickHelp" onMouseEntered="#helpMouseEntered" onMouseExited="#helpMouseExited" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../images/HELP.png" />
                                  </image>
