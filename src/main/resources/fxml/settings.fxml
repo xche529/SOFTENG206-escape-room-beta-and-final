@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="settingsBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="605.0" prefWidth="1113.0" visible="false" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.SettingsController">
+<VBox fx:id="settingsBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="605.0" prefWidth="1113.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.SettingsController">
    <children>
       <Pane prefHeight="605.0" prefWidth="1113.0">
          <children>
@@ -33,7 +33,7 @@
                         <Image url="@../images/Cross.png" />
                      </image>
                   </ImageView>
-                  <VBox layoutX="76.0" layoutY="118.0" prefHeight="303.0" prefWidth="682.0">
+                  <VBox layoutX="57.0" layoutY="118.0" prefHeight="303.0" prefWidth="765.0">
                      <children>
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
