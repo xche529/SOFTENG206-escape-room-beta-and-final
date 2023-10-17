@@ -232,7 +232,7 @@ public class TextAreaController {
   @FXML
   private void onClickGiveHint() {
     GameState.hintsLeft--;
-    if (GameState.hintsLeft == 0) {
+    if (GameState.hintsLeft == 0 && GameState.difficulty != GameState.Difficulty.EASY) {
       hintButton.setDisable(true);
     }
     if (GameState.isRiddleResolvedProperty().get() == false) {
