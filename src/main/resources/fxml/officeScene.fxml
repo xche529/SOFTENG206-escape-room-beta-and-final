@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox  xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.OfficeController">
+<VBox xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/20.0.1" fx:controller="nz.ac.auckland.se206.controllers.OfficeController">
    <children>
       <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="605.0" prefWidth="1113.0">
          <children>
@@ -195,9 +195,9 @@
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="23.0" layoutX="528.0" layoutY="361.0" onMouseClicked="#onClickEight" onMouseEntered="#eightMouseEntered" onMouseExited="#eightMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="24.0" x="-150.0" />
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="23.0" layoutX="562.0" layoutY="357.0" onMouseClicked="#onClickNine" onMouseEntered="#nineMouseEntered" onMouseExited="#nineMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="24.0" x="-150.0" />
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="593.0" layoutY="338.0" onMouseClicked="#onClickZero" onMouseEntered="#zeroMouseEntered" onMouseExited="#zeroMouseExited" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="24.0" x="-150.0" />
-                  <Button layoutX="253.0" layoutY="466.0" mnemonicParsing="false" onMouseClicked="#onClickClear" text="Clear" />
-                  <Button layoutX="335.0" layoutY="468.0" mnemonicParsing="false" onMouseClicked="#onClickCall" text="Call For Helicopter" />
-                  <Button layoutX="474.0" layoutY="468.0" mnemonicParsing="false" onMouseClicked="#onClickDelete" text="Delete Last Digit" />
+                  <Button layoutX="253.0" layoutY="466.0" mnemonicParsing="false" onMouseClicked="#onClickClear" style="-fx-background-color: #086c34; -fx-text-fill: white;" text="Clear" />
+                  <Button layoutX="332.0" layoutY="466.0" mnemonicParsing="false" onMouseClicked="#onClickCall" style="-fx-background-color: #086c34; -fx-text-fill: white;" text="Call For Helicopter" />
+                  <Button layoutX="474.0" layoutY="465.0" mnemonicParsing="false" onMouseClicked="#onClickDelete" style="-fx-background-color: #086c34; -fx-text-fill: white;" text="Delete Last Digit" />
                   <Text layoutX="725.0" layoutY="283.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You have no phone number yet!" textAlignment="CENTER" wrappingWidth="227.0621337890625">
                      <font>
                         <Font size="28.0" />
